@@ -1,0 +1,42 @@
+{
+  "root": true,
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "node": true,
+    "es6": true
+  },
+  "globals" : {
+    __DEV_TOOLS__: true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "no-console": 2,
+    "new-cap": 0,
+    "no-underscore-dangle": 0,
+    "no-warning-comments": [2, { "terms": ["todo", "fixme", "xxx", "to do", "to-do", "to fix"], "location": "anywhere" }],
+    "valid-jsdoc": 2,
+    "max-len": [2, 120, 2, {"ignoreUrls": true}],
+    "prefer-template": 0,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2,
+    "comma-dangle": [2, "never"],
+    "id-length": 0,
+    "no-param-reassign": [2, {"props": false}],
+    "arrow-body-style": 0,
+    "react/prefer-stateless-function": 0,
+    "react/prefer-es6-class": 0,
+    "react/jsx-no-bind": [2,
+      {
+        "ignoreRefs": true,
+        "allowArrowFunctions": true,
+        "allowBind": true // Should be changed to false after moving to ES7 decorator approach
+      }
+    ]
+  },
+  "plugins": [
+    "react"
+  ]
+}

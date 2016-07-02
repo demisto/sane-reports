@@ -1,0 +1,55 @@
+{
+  "section1": {
+    "type": "text",
+    "pos": 2,
+    "data": "This is a text .... wowo....."
+  },
+  "section2": {
+    "type": "header",
+    "pos": 1,
+    "data": "This is header!!!"
+  },
+  "section3": {
+    "type": "table",
+    "pos": 3,
+    "data": {
+      "colorsArray": [
+        {
+          "colorName":"red",
+          "hexValue":"#f00",
+          "total": 210
+        },
+        {
+          "colorName":"green",
+          "hexValue":"#0f0",
+          "total": 610
+        },
+        {
+          "colorName":"blue",
+          "hexValue":"#00f",
+          "total": 550
+        },
+        {
+          "colorName":"cyan",
+          "hexValue":"#0ff",
+          "total": 532
+        },
+        {
+          "colorName":"magenta",
+          "hexValue":"#f0f",
+          "total": 515
+        },
+        {
+          "colorName":"yellow",
+          "hexValue":"#ff0",
+          "total": 441
+        },
+        {
+          "colorName":"black",
+          "hexValue":"#000",
+          "total": 327
+        }
+      ]
+    }
+  }
+}

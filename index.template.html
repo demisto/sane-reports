@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <% for(var css in htmlWebpackPlugin.files.css) { %>
+    <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+    <% }; %>
+  </head>
+  <script>
+    var reportData = '{report-data-to-replace}';
+  </script>
+  <body>
+    <div id="app"></div>
+    <% for(var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% }; %>
+  </body>
+</html>
