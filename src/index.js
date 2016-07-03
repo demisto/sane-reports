@@ -13,7 +13,6 @@ if (data === REPORT_DATA_TOKEN) {
 ReactDOM.render(
   <div>
     <ReportContainer data={data} />
-    {__DEV_TOOLS__}
   </div>,
   document.getElementById('app')
 );
