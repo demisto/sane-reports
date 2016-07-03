@@ -1,0 +1,15 @@
+machine:
+  node:
+    version: v6.2.1
+dependencies:
+#  pre:
+#    - npm install -g npm
+#  override:
+#    - npm install
+  post:
+    - npm run build
+test:
+  override:
+    - npm run lint
+    - npm run check-versions
+    - npm run coverage
