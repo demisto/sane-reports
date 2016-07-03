@@ -22,6 +22,7 @@
     "lint": "eslint src tests",
     "test": "NODE_ENV=test istanbul cover ./node_modules/.bin/_mocha -- tests -R spec --compilers js:babel-core/register,css:null-compiler.js --require ./tests/helpers/helper.js --recursive --check-leaks",
     "test-no-cover": "NODE_ENV=test mocha tests -R spec --compilers js:babel-core/register,css:null-compiler.js --require ./tests/helpers/helper.js --recursive --check-leaks",
+    "coverage": "NODE_ENV=test istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- tests -R spec --compilers js:babel-core/register,css:null-compiler.js --require ./tests/helpers/helper.js --recursive --check-leaks && cat ./coverage/lcov.info | COVERALLS_SERVICE_NAME=circle-ci COVERALLS_REPO_TOKEN=BpaCDz1aFLckIylCx4YIG6uiu1xXU0r66 ./node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test-no-cover -- -w",
     "check": "npm run lint && npm run test",
     "check-versions": "ncu"
@@ -66,6 +67,7 @@
     "less-loader": "^2.2.3",
     "lodash": "^4.13.1",
     "mocha": "^2.5.3",
+    "mocha-lcov-reporter": "^1.2.0",
     "node-libs-browser": "^1.0.0",
     "normalize.css": "^4.0.0",
     "npm-check-updates": "^2.6.8",
