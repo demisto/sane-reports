@@ -12,4 +12,4 @@ test:
   override:
     - npm run lint
     - npm run check-versions
-    - npm run coverage
+    - npm run test
