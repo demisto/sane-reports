@@ -5,7 +5,7 @@ const ReportContainer = ({ data }) =>
   <ReportLayout data={data} />
 ;
 ReportContainer.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.array
 };
 
 export default ReportContainer;

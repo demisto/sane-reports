@@ -3,20 +3,30 @@ import React, { PropTypes } from 'react';
 
 const ReportLayout = ({ data }) =>
   <div className="report-layout">
-    {Object
-      .keys(data)
-      .sort((sec1, sec2) => data[sec1].pos > data[sec2].pos)
-      .map((section) =>
-        <div key={data[section].pos} className="section">
-          <div>Type: {data[section].type}</div>
-          <div>Position: {data[section].pos}</div>
-          <div>Data: {JSON.stringify(data[section].data)}</div>
-        </div>
-    )}
+    {
+      data
+        .sort((row1, row2) => row1.pos > row2.pos) // sort by row position
+        .map((row) =>
+          <div className="report-row" key={row.pos}>
+            <span>Row: {row.pos}</span>
+            {
+              row.columns
+              .sort((sec1, sec2) => sec1.pos > sec2.pos) // sort by section position inside a row
+              .map((section) =>
+                <div key={section.pos} className="report-section">
+                  <div>Type: {section.type}</div>
+                  <div>Position: {section.pos}</div>
+                  <div>Data: {JSON.stringify(section.data)}</div>
+                </div>
+              )
+            }
+          </div>
+        )
+    }
   </div>
 ;
 ReportLayout.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.array
 };
 
 export default ReportLayout;
