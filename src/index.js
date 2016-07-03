@@ -1,7 +1,6 @@
 import './css/Index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DevTools from './components/DevTools';
 import ReportContainer from './containers/ReportContainer';
 import * as TemplateProvider from '../templates/templateProvider';
 import { REPORT_DATA_TOKEN } from './constants/Constants';
@@ -14,7 +13,7 @@ if (data === REPORT_DATA_TOKEN) {
 ReactDOM.render(
   <div>
     <ReportContainer data={data} />
-    {__DEV_TOOLS__ && <DevTools />}
+    {__DEV_TOOLS__}
   </div>,
   document.getElementById('app')
 );
