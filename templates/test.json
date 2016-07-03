@@ -1,59 +1,79 @@
 [
   {
+    "pos": 2,
     "columns": [
-      { "type": "text", "pos": 1, "data": "This is a text.", "style": { "align": "left", "fontSize": 14 } },
-      { "type": "text", "pos": 2, "data": "This is another text.", "style": { "align": "right", "fontSize": 14 } }
-    ],
-    "pos": 2
+      {
+        "type": "text",
+        "pos": 1,
+        "style": { "textAlign": "left", "fontSize": 14, "color": "#1f8f51" },
+        "data": "This is a text."
+      },
+      {
+        "type": "text",
+        "pos": 2,
+        "style": { "textAlign": "right", "fontSize": 14 },
+        "data": "This is another text."
+      }
+    ]
   },
   {
+    "pos": 1,
     "columns": [
-      { "type": "header", "pos": 1, "data": "This is header!!!", "style": { "align": "right", "fontSize": 18 } }
-    ],
-    "pos": 1
+      {
+        "type": "header",
+        "pos": 1,
+        "style": { "textAlign": "center", "fontSize": 22 },
+        "data": "This is header!!!"
+      }
+    ]
   },
   {
+    "pos": 3,
     "columns": [
-      { "type": "table", "pos": 1, "data": {
-        "colorsArray": [
-          {
-            "colorName":"red",
-            "hexValue":"#f00",
-            "total": 210
-          },
-          {
-            "colorName":"green",
-            "hexValue":"#0f0",
-            "total": 610
-          },
-          {
-            "colorName":"blue",
-            "hexValue":"#00f",
-            "total": 550
-          },
-          {
-            "colorName":"cyan",
-            "hexValue":"#0ff",
-            "total": 532
-          },
-          {
-            "colorName":"magenta",
-            "hexValue":"#f0f",
-            "total": 515
-          },
-          {
-            "colorName":"yellow",
-            "hexValue":"#ff0",
-            "total": 441
-          },
-          {
-            "colorName":"black",
-            "hexValue":"#000",
-            "total": 327
-          }
-        ]
-      }, "style": { "align": "right", "fontSize": 14 } }
-    ],
-    "pos": 3
+      {
+        "type": "table",
+        "pos": 1,
+        "style": { "textAlign": "left", "fontSize": 14 },
+        "data": {
+          "colorsArray": [
+            {
+              "colorName":"red",
+              "hexValue":"#f00",
+              "total": 210
+            },
+            {
+              "colorName":"green",
+              "hexValue":"#0f0",
+              "total": 610
+            },
+            {
+              "colorName":"blue",
+              "hexValue":"#00f",
+              "total": 550
+            },
+            {
+              "colorName":"cyan",
+              "hexValue":"#0ff",
+              "total": 532
+            },
+            {
+              "colorName":"magenta",
+              "hexValue":"#f0f",
+              "total": 515
+            },
+            {
+              "colorName":"yellow",
+              "hexValue":"#ff0",
+              "total": 441
+            },
+            {
+              "colorName":"black",
+              "hexValue":"#000",
+              "total": 327
+            }
+          ]
+        }
+      }
+    ]
   }
 ]

@@ -32,7 +32,7 @@ describe('Report Container', () => {
     expect(
         rows.contains([
           <span>Row: {row1.pos}</span>,
-          <div className="report-section">
+          <div className="report-section" style={row1.columns[0].style}>
             <div>Type: {row1.columns[0].type}</div>
             <div>Position: {row1.columns[0].pos}</div>
             <div>Data: {JSON.stringify(row1.columns[0].data)}</div>
@@ -43,12 +43,12 @@ describe('Report Container', () => {
     expect(
         rows.contains([
           <span>Row: {row2.pos}</span>,
-          <div className="report-section">
+          <div className="report-section" style={row2.columns[0].style}>
             <div>Type: {row2.columns[0].type}</div>
             <div>Position: {row2.columns[0].pos}</div>
             <div>Data: {JSON.stringify(row2.columns[0].data)}</div>
           </div>,
-          <div className="report-section">
+          <div className="report-section" style={row2.columns[1].style}>
             <div>Type: {row2.columns[1].type}</div>
             <div>Position: {row2.columns[1].pos}</div>
             <div>Data: {JSON.stringify(row2.columns[1].data)}</div>
@@ -59,7 +59,7 @@ describe('Report Container', () => {
     expect(
         rows.contains([
           <span>Row: {row3.pos}</span>,
-          <div className="report-section">
+          <div className="report-section" style={row3.columns[0].style}>
             <div>Type: {row3.columns[0].type}</div>
             <div>Position: {row3.columns[0].pos}</div>
             <div>Data: {JSON.stringify(row3.columns[0].data)}</div>
