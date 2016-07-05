@@ -14,8 +14,13 @@ body {
   margin: @content-margin-top @content-margin-right @content-margin-bottom @content-margin-left;
 
   .report-row {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 10px;
   }
 
   .report-section {
+    display: table-cell;
   }
 }
