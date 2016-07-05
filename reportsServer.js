@@ -24,6 +24,15 @@ fs.write(distReportsFolder + '/' + tmpReportName, html, 'w');
 page.open('http://127.0.0.1:8083/' + reportPath + '/' + tmpReportName, function(status) {
   console.log("Read report page status: " + status);
 
+  page.paperSize = {
+    format: 'letter', // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
+    orientation: 'portrait', // portrait / landscape
+    margin: {
+      top: "1cm",
+      bottom: "1cm"
+    }
+  };
+
   if (status === "success") {
     setTimeout(function() {
       if (page.render(distReportsFolder + '/report-' + date + '.pdf', { quality: 100 })) {

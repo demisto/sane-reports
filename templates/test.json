@@ -1,5 +1,16 @@
 [
   {
+    "pos": 1,
+    "columns": [
+      {
+        "type": "header",
+        "pos": 1,
+        "style": { "textAlign": "center", "fontSize": 32 },
+        "data": "Sane Reports!!!"
+      }
+    ]
+  },
+  {
     "pos": 2,
     "columns": [
       {
@@ -17,18 +28,18 @@
     ]
   },
   {
-    "pos": 1,
+    "pos": 3,
     "columns": [
       {
         "type": "header",
         "pos": 1,
-        "style": { "textAlign": "center", "fontSize": 30 },
-        "data": "This is header!!!"
+        "style": { "textAlign": "left", "fontSize": 28 },
+        "data": "Charts!"
       }
     ]
   },
   {
-    "pos": 3,
+    "pos": 4,
     "columns": [
       {
         "type": "chart",
@@ -36,8 +47,8 @@
         "pos": 1,
         "style": { "textAlign": "left", "fontSize": 14 },
         "dimensions": {
-          "width": 800,
-          "height": 400
+          "width": 600,
+          "height": 200
         },
         "data": [
           { "name": "Page A", "uv": 4000, "pv": 2400, "amt": 2400 },
@@ -52,7 +63,7 @@
     ]
   },
   {
-    "pos": 4,
+    "pos": 5,
     "columns": [
       {
         "type": "chart",
@@ -69,6 +80,55 @@
           { "name": "Group D", "value": 9800, "fill": "#ff8042" },
           { "name": "Group E", "value": 3908, "fill": "#0088fe" },
           { "name": "Group F", "value": 4800, "fill": "#8884d8" }
+        ]
+      }
+    ]
+  },
+  {
+    "pos": 6,
+    "columns": [
+      {
+        "type": "header",
+        "pos": 1,
+        "style": { "textAlign": "left", "fontSize": 28 },
+        "data": "Tables"
+      }
+    ]
+  },
+  {
+    "pos": 7,
+    "columns": [
+      {
+        "type": "table",
+        "pos": 1,
+        "tableColumns": [ "name", "value", "fill", "bla"],
+        "classes": "collapsing selectable unstackable",
+        "data": [
+          { "name": "Page A", "uv": 4000, "pv": 2400, "amt": 2400 },
+          { "name": "Page B", "uv": 3000, "pv": 1398, "amt": 2210 },
+          { "name": "Page C", "uv": 2000, "pv": 9800, "amt": 2290 },
+          { "name": "Page D", "uv": 2780, "pv": 3908, "amt": 2000 },
+          { "name": "Page E", "uv": 1890, "pv": 4800, "amt": 2181 },
+          { "name": "Page F", "uv": 2390, "pv": 3800, "amt": 2500 },
+          { "name": "Page G", "uv": 3490, "pv": 4300, "amt": 2100 }
+        ]
+      }
+    ]
+  },
+  {
+    "pos": 8,
+    "columns": [
+      {
+        "type": "table",
+        "pos": 1,
+        "tableColumns": [ "name", "value", "fill", "bla"],
+        "classes": "striped stackable",
+        "data": [
+          { "name": "Group B", "value": 4567, "fill": "#82ca9d", "bla": 1, "hidden": "hidden" },
+          { "name": "Group C", "value": 1398, "fill": "#ffbb28", "bla": 2, "hidden": "hidden" },
+          { "name": "Group D", "value": 9800, "fill": "#ff8042", "bla": 3, "hidden": "hidden" },
+          { "name": "Group E", "value": 3908, "fill": "#0088fe", "bla": 4, "hidden": "hidden" },
+          { "name": "Group F", "value": 4800, "fill": "#8884d8", "bla": 5, "hidden": "hidden" }
         ]
       }
     ]
