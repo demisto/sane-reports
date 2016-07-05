@@ -15,8 +15,11 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack",
+    "production": "NODE_ENV=production npm run build -- --config webpack.production.config.js --progress",
     "start": "webpack-dev-server --content-base ./dist --port 8082 --no-info --colors",
+    "start-prod": "NODE_ENV=production webpack-dev-server --content-base ./dist --port 8082 --no-info --colors --config webpack.production.config.js",
     "start-reports-server": "npm run clean && (webpack --progress --colors --watch & watch-http-server ./dist -p 8083)",
+    "start-reports-server-prod": "npm run clean && (NODE_ENV=production webpack --config webpack.production.config.js --progress --colors --watch & watch-http-server ./dist -p 8083)",
     "generate-report": "phantomjs reportsServer.js templates/test.json",
     "devtools": "DEV_TOOLS=1 npm start",
     "lint": "eslint src tests",
@@ -30,15 +33,19 @@
   "dependencies": {
     "babel-runtime": "^6.6.1",
     "classnames": "^2.2.3",
+    "jquery": "^3.0.0",
     "less": "^2.7.1",
     "parse-link-header": "^0.4.1",
     "postcss-reporter": "^1.3.3",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
     "react-pure-render": "^1.0.2",
+    "recharts": "^0.12.3",
+    "semantic-ui": "^2.2.1",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
+    "assets-webpack-plugin": "^3.4.0",
     "babel-core": "^6.7.6",
     "babel-eslint": "^6.1.0",
     "babel-loader": "^6.2.4",

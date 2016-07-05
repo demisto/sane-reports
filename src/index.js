@@ -1,4 +1,8 @@
+import $ from 'jquery';
+window.jQuery = $; // Assure it's available globally.
+require('semantic-ui/dist/semantic.min.js'); // eslint-disable-line
 import './css/Index.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReportContainer from './containers/ReportContainer';

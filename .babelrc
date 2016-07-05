@@ -15,8 +15,7 @@
               "transform": "react-transform-catch-errors",
               "imports": [
                 "react",
-                "redbox-react",
-                "reporterOptions"
+                "redbox-react"
               ]
             }
           ]

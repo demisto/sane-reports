@@ -31,48 +31,45 @@
     "pos": 3,
     "columns": [
       {
-        "type": "table",
+        "type": "chart",
+        "chartType": "bar",
         "pos": 1,
         "style": { "textAlign": "left", "fontSize": 14 },
-        "data": {
-          "colorsArray": [
-            {
-              "colorName":"red",
-              "hexValue":"#f00",
-              "total": 210
-            },
-            {
-              "colorName":"green",
-              "hexValue":"#0f0",
-              "total": 610
-            },
-            {
-              "colorName":"blue",
-              "hexValue":"#00f",
-              "total": 550
-            },
-            {
-              "colorName":"cyan",
-              "hexValue":"#0ff",
-              "total": 532
-            },
-            {
-              "colorName":"magenta",
-              "hexValue":"#f0f",
-              "total": 515
-            },
-            {
-              "colorName":"yellow",
-              "hexValue":"#ff0",
-              "total": 441
-            },
-            {
-              "colorName":"black",
-              "hexValue":"#000",
-              "total": 327
-            }
-          ]
-        }
+        "dimensions": {
+          "width": 800,
+          "height": 400
+        },
+        "data": [
+          { "name": "Page A", "uv": 4000, "pv": 2400, "amt": 2400 },
+          { "name": "Page B", "uv": 3000, "pv": 1398, "amt": 2210 },
+          { "name": "Page C", "uv": 2000, "pv": 9800, "amt": 2290 },
+          { "name": "Page D", "uv": 2780, "pv": 3908, "amt": 2000 },
+          { "name": "Page E", "uv": 1890, "pv": 4800, "amt": 2181 },
+          { "name": "Page F", "uv": 2390, "pv": 3800, "amt": 2500 },
+          { "name": "Page G", "uv": 3490, "pv": 4300, "amt": 2100 }
+        ]
+      }
+    ]
+  },
+  {
+    "pos": 4,
+    "columns": [
+      {
+        "type": "chart",
+        "chartType": "pie",
+        "pos": 1,
+        "style": { "textAlign": "left", "fontSize": 14, "pageBreakAfter": "always" },
+        "dimensions": {
+          "width": 600,
+          "height": 350
+        },
+        "data": [
+          { "name": "Group B", "value": 4567, "fill": "#82ca9d" },
+          { "name": "Group C", "value": 1398, "fill": "#ffbb28" },
+          { "name": "Group D", "value": 9800, "fill": "#ff8042" },
+          { "name": "Group E", "value": 3908, "fill": "#0088fe" },
+          { "name": "Group F", "value": 4800, "fill": "#8884d8" }
+        ]
       }
     ]
   }

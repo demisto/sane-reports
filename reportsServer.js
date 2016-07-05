@@ -25,12 +25,16 @@ page.open('http://127.0.0.1:8083/' + reportPath + '/' + tmpReportName, function(
   console.log("Read report page status: " + status);
 
   if (status === "success") {
-    if (page.render(distReportsFolder + '/report-' + date + '.pdf', { quality: 100 })) {
-      console.log("Report was generated successfully.");
-    } else {
-      console.log("Failed to generate report.");
-    }
+    setTimeout(function() {
+      if (page.render(distReportsFolder + '/report-' + date + '.pdf', { quality: 100 })) {
+        console.log("Report was generated successfully.");
+      } else {
+        console.log("Failed to generate report.");
+      }
+      phantom.exit();
+    }, 5000);
+  } else {
+    console.log("Cannot open report page.");
+    phantom.exit();
   }
-
-  phantom.exit();
 });
