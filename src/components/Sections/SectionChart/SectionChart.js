@@ -1,4 +1,3 @@
-import './SectionChart.less';
 import React, { PropTypes } from 'react';
 import SectionBarChart from './SectionBarChart';
 import SectionPieChart from './SectionPieChart';

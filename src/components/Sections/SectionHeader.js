@@ -1,4 +1,3 @@
-import './SectionHeader.less';
 import React, { PropTypes } from 'react';
 
 const SectionHeader = ({ header, style }) =>

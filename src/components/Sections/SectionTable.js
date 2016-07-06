@@ -1,4 +1,3 @@
-import './SectionTable.less';
 import React, { PropTypes } from 'react';
 
 const SectionTable = ({ columns, data, classes }) => {

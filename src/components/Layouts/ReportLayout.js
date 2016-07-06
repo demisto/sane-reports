@@ -1,6 +1,6 @@
 import './ReportLayout.less';
 import React, { PropTypes } from 'react';
-import { SectionHeader, SectionText, SectionChart, SectionTable } from '../Sections';
+import { SectionHeader, SectionText, SectionChart, SectionTable, SectionImage } from '../Sections';
 import { SECTION_TYPES } from '../../constants/Constants';
 
 const ReportLayout = ({ data }) =>
@@ -26,6 +26,16 @@ const ReportLayout = ({ data }) =>
                         case SECTION_TYPES.text:
                           sectionToRender =
                             <SectionText text={section.data} style={section.style} />;
+                          break;
+                        case SECTION_TYPES.image:
+                          sectionToRender = (
+                            <SectionImage
+                              src={section.src}
+                              style={section.style}
+                              alt={section.alt}
+                              classes={section.classes}
+                            />
+                          );
                           break;
                         case SECTION_TYPES.chart:
                           sectionToRender = (

@@ -1,4 +1,3 @@
-import './SectionText.less';
 import React, { PropTypes } from 'react';
 
 const SectionText = ({ text, style }) =>

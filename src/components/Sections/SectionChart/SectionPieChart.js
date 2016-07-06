@@ -1,4 +1,3 @@
-import './SectionPieChart.less';
 import React, { PropTypes } from 'react';
 import { PieChart, Pie, Legend, Tooltip } from 'recharts';
 

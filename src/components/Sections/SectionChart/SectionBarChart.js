@@ -1,4 +1,3 @@
-import './SectionBarChart.less';
 import React, { PropTypes } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 
