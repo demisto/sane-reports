@@ -3,73 +3,118 @@ import React, { PropTypes } from 'react';
 import { SectionHeader, SectionText, SectionChart, SectionTable, SectionImage } from '../Sections';
 import { SECTION_TYPES } from '../../constants/Constants';
 
-const ReportLayout = ({ data }) =>
-  <div className="report-layout">
-    {
-      data
-        .sort((row1, row2) => (row1.pos >= row2.pos ? 1 : -1)) // sort by row position
-        .map((row) =>
-          <div className="report-row" key={row.pos}>
-            {
-              row.columns
-              .sort((sec1, sec2) => (sec1.pos >= sec2.pos ? 1 : -1)) // sort by section position inside a row
-              .map((section) =>
-                <div key={section.pos} className="report-section" style={section.style}>
-                  {
-                    (() => {
-                      let sectionToRender;
-                      switch (section.type) {
-                        case SECTION_TYPES.header:
-                          sectionToRender =
-                            <SectionHeader header={section.data} style={section.style} />;
-                          break;
-                        case SECTION_TYPES.text:
-                          sectionToRender =
-                            <SectionText text={section.data} style={section.style} />;
-                          break;
-                        case SECTION_TYPES.image:
-                          sectionToRender = (
-                            <SectionImage
-                              src={section.src}
-                              style={section.style}
-                              alt={section.alt}
-                              classes={section.classes}
-                            />
-                          );
-                          break;
-                        case SECTION_TYPES.chart:
-                          sectionToRender = (
-                            <SectionChart
-                              type={section.chartType}
-                              data={section.data}
-                              style={section.style}
-                              dimensions={section.dimensions}
-                            />
-                          );
-                          break;
-                        case SECTION_TYPES.table:
-                          sectionToRender = (
-                            <SectionTable
-                              columns={section.tableColumns}
-                              data={section.data}
-                              classes={section.classes}
-                            />
-                          );
-                          break;
-                        default:
-                          // Ignored
+function sortReportSections(sec1, sec2) {
+  const sec1RowPos = sec1.layout.rowPos;
+  const sec2RowPos = sec2.layout.rowPos;
+  const sec1ColumnPos = sec1.layout.columnPos;
+  const sec2ColumnPos = sec2.layout.columnPos;
+
+  let result;
+  if (sec1RowPos === sec2RowPos) {
+    result = (sec1ColumnPos < sec2ColumnPos) ? -1 : (sec1ColumnPos > sec2ColumnPos) ? 1 : 0; // eslint-disable-line
+  } else {
+    result = (sec1RowPos < sec2RowPos) ? -1 : 1;
+  }
+
+  return result;
+}
+
+function prepareSections(data) {
+  data.sort(sortReportSections);
+
+  const rows = {};
+
+  if (data) {
+    data.forEach((section) => {
+      if (rows[section.layout.rowPos]) {
+        rows[section.layout.rowPos].push(section);
+      } else {
+        rows[section.layout.rowPos] = [section];
+      }
+    });
+  }
+
+  return rows;
+}
+
+const ReportLayout = ({ data }) => {
+  const sections = prepareSections(data);
+
+  return (
+    <div className="report-layout">
+      {
+        Object
+          .keys(sections)
+          .map((rowPos) =>
+            <div className="report-row" key={rowPos}>
+              {
+                sections[rowPos]
+                  .map((section) =>
+                    <div key={section.layout.rowPos + section.layout.columnPos} className="report-section">
+                      {
+                        (() => {
+                          let sectionToRender;
+                          switch (section.type) {
+                            case SECTION_TYPES.header:
+                              sectionToRender = (
+                                <SectionHeader
+                                  header={section.data}
+                                  style={section.layout.style}
+                                />
+                              );
+                              break;
+                            case SECTION_TYPES.text:
+                              sectionToRender = (
+                                <SectionText
+                                  text={section.data}
+                                  style={section.layout.style}
+                                />
+                              );
+                              break;
+                            case SECTION_TYPES.image:
+                              sectionToRender = (
+                                <SectionImage
+                                  src={section.data}
+                                  style={section.layout.style}
+                                  alt={section.layout.alt}
+                                  classes={section.layout.classes}
+                                />
+                              );
+                              break;
+                            case SECTION_TYPES.chart:
+                              sectionToRender = (
+                                <SectionChart
+                                  data={section.data}
+                                  type={section.layout.chartType}
+                                  style={section.layout.style}
+                                  dimensions={section.layout.dimensions}
+                                />
+                              );
+                              break;
+                            case SECTION_TYPES.table:
+                              sectionToRender = (
+                                <SectionTable
+                                  data={section.data}
+                                  columns={section.layout.tableColumns}
+                                  classes={section.layout.classes}
+                                />
+                              );
+                              break;
+                            default:
+                              // Ignored
+                          }
+                          return sectionToRender;
+                        })()
                       }
-                      return sectionToRender;
-                    })()
-                  }
-                </div>
-              )
-            }
-          </div>
-        )
-    }
-  </div>
-;
+                    </div>
+                  )
+              }
+            </div>
+          )
+      }
+    </div>
+  );
+};
 ReportLayout.propTypes = {
   data: PropTypes.array
 };
