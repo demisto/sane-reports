@@ -88,6 +88,7 @@ const ReportLayout = ({ data }) => {
                                   type={section.layout.chartType}
                                   style={section.layout.style}
                                   dimensions={section.layout.dimensions}
+                                  legend={section.layout.legend}
                                 />
                               );
                               break;

@@ -102,7 +102,7 @@ describe('Report Container', () => {
 
     expect(pieChart.props().width).to.equal(sec6.layout.dimensions.width);
     expect(pieChart.props().height).to.equal(sec6.layout.dimensions.height);
-    expect(pie.props().data).to.equal(sec6.data);
+    expect(pie.props().data).to.deep.equal(sec6.data);
 
     // Tables
     const sectionTable = reportContainer.find(SectionTable);

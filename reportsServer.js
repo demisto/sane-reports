@@ -8,11 +8,12 @@ const reportPath = 'reports';
 const distReportsFolder = distFolder + '/' + reportPath;
 
 if (system.args.length < 2) {
-  console.log('Usage: reportServer.js <data file>');
+  console.log('Usage: reportServer.js <data file> [<outout file>]');
   phantom.exit();
 }
 
 var dataFile = system.args[1];
+var outputFile = system.args[2];
 
 const loaded = fs.read(dataFile);
 const html = fs.read(distFolder + '/index.html').replace('\'{report-data-to-replace}\'', loaded);
@@ -35,7 +36,7 @@ page.open('http://127.0.0.1:8083/' + reportPath + '/' + tmpReportName, function(
 
   if (status === "success") {
     setTimeout(function() {
-      if (page.render(distReportsFolder + '/report-' + date + '.pdf', { quality: 100 })) {
+      if (page.render(outputFile || distReportsFolder + '/report-' + date + '.pdf', { quality: 100 })) {
         console.log("Report was generated successfully.");
       } else {
         console.log("Failed to generate report.");
