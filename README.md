@@ -11,4 +11,4 @@ Reports library that will keep you sane and not pulling your hair out
 - [ ] Write this README
   - [ ] How to use as user 
   - [ ] How to use as developer
-- [ ] Completley support DSL
+- [x] Completley support DSL
