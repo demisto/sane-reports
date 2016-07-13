@@ -14,8 +14,8 @@ describe('Report Container', () => {
     const rows = reportContainer.find('.report-row');
     const sections = reportContainer.find('.report-section');
     expect(reportLayouts).to.have.length(1);
-    expect(rows).to.have.length(15);
-    expect(sections).to.have.length(16);
+    expect(rows).to.have.length(16);
+    expect(sections).to.have.length(17);
 
     const sec1 = testTemplate[0];
     const sec2 = testTemplate[1];
@@ -33,6 +33,7 @@ describe('Report Container', () => {
     const sec14 = testTemplate[13];
     const sec15 = testTemplate[14];
     const sec16 = testTemplate[15];
+    const sec17 = testTemplate[16];
 
     // Do the same as .textContent - keep it for future reference
     expect(rows.at(0).text()).to.contains(sec1.data);
@@ -44,18 +45,21 @@ describe('Report Container', () => {
 
     // Headers
     const sectionHeader = reportContainer.find(SectionHeader);
-    expect(sectionHeader).to.have.length(4);
+    expect(sectionHeader).to.have.length(5);
     expect(sectionHeader.at(0).props().header).to.equal(sec1.data);
     expect(sectionHeader.at(0).props().style).to.equal(sec1.layout.style);
 
     expect(sectionHeader.at(1).props().header).to.equal(sec4.data);
     expect(sectionHeader.at(1).props().style).to.equal(sec4.layout.style);
 
-    expect(sectionHeader.at(2).props().header).to.equal(sec7.data);
-    expect(sectionHeader.at(2).props().style).to.equal(sec7.layout.style);
+    expect(sectionHeader.at(2).props().header).to.equal(sec6.data);
+    expect(sectionHeader.at(2).props().style).to.equal(sec6.layout.style);
 
-    expect(sectionHeader.at(3).props().header).to.equal(sec10.data);
-    expect(sectionHeader.at(3).props().style).to.equal(sec10.layout.style);
+    expect(sectionHeader.at(3).props().header).to.equal(sec8.data);
+    expect(sectionHeader.at(3).props().style).to.equal(sec8.layout.style);
+
+    expect(sectionHeader.at(4).props().header).to.equal(sec11.data);
+    expect(sectionHeader.at(4).props().style).to.equal(sec11.layout.style);
 
     // Text
     const sectionText = reportContainer.find(SectionText);
@@ -66,14 +70,14 @@ describe('Report Container', () => {
     expect(sectionText.at(1).props().text).to.equal(sec3.data);
     expect(sectionText.at(1).props().style).to.equal(sec3.layout.style);
 
-    expect(sectionText.at(2).props().text).to.equal(sec11.data);
-    expect(sectionText.at(2).props().style).to.equal(sec11.layout.style);
+    expect(sectionText.at(2).props().text).to.equal(sec12.data);
+    expect(sectionText.at(2).props().style).to.equal(sec12.layout.style);
 
-    expect(sectionText.at(3).props().text).to.equal(sec13.data);
-    expect(sectionText.at(3).props().style).to.equal(sec13.layout.style);
+    expect(sectionText.at(3).props().text).to.equal(sec14.data);
+    expect(sectionText.at(3).props().style).to.equal(sec14.layout.style);
 
-    expect(sectionText.at(4).props().text).to.equal(sec15.data);
-    expect(sectionText.at(4).props().style).to.equal(sec15.layout.style);
+    expect(sectionText.at(4).props().text).to.equal(sec16.data);
+    expect(sectionText.at(4).props().style).to.equal(sec16.layout.style);
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
@@ -83,10 +87,10 @@ describe('Report Container', () => {
     expect(sectionChart.at(0).props().type).to.equal(sec5.layout.chartType);
     expect(sectionChart.at(0).props().dimensions).to.equal(sec5.layout.dimensions);
 
-    expect(sectionChart.at(1).props().data).to.equal(sec6.data);
-    expect(sectionChart.at(1).props().style).to.equal(sec6.layout.style);
-    expect(sectionChart.at(1).props().type).to.equal(sec6.layout.chartType);
-    expect(sectionChart.at(1).props().dimensions).to.equal(sec6.layout.dimensions);
+    expect(sectionChart.at(1).props().data).to.equal(sec7.data);
+    expect(sectionChart.at(1).props().style).to.equal(sec7.layout.style);
+    expect(sectionChart.at(1).props().type).to.equal(sec7.layout.chartType);
+    expect(sectionChart.at(1).props().dimensions).to.equal(sec7.layout.dimensions);
 
     const barChart = reportContainer.find(BarChart);
     const pieChart = reportContainer.find(PieChart);
@@ -98,50 +102,51 @@ describe('Report Container', () => {
 
     expect(barChart.props().width).to.equal(sec5.layout.dimensions.width);
     expect(barChart.props().height).to.equal(sec5.layout.dimensions.height);
-    expect(barChart.props().data).to.equal(sec5.data);
+    expect(barChart.props().data).to.deep.equal(sec5.data);
 
-    expect(pieChart.props().width).to.equal(sec6.layout.dimensions.width);
-    expect(pieChart.props().height).to.equal(sec6.layout.dimensions.height);
-    expect(pie.props().data).to.deep.equal(sec6.data);
+    expect(pieChart.props().width).to.equal(sec7.layout.dimensions.width);
+    expect(pieChart.props().height).to.equal(sec7.layout.dimensions.height);
+    expect(pie.props().data).to.deep.equal(sec7.data);
 
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
     expect(sectionTable).to.have.length(2);
-    expect(sectionTable.at(0).props().columns).to.equal(sec8.layout.tableColumns);
-    expect(sectionTable.at(0).props().data).to.equal(sec8.data);
-    expect(sectionTable.at(0).props().classes).to.equal(sec8.layout.classes);
+    expect(sectionTable.at(0).props().columns).to.equal(sec9.layout.tableColumns);
+    expect(sectionTable.at(0).props().data).to.equal(sec9.data);
+    expect(sectionTable.at(0).props().classes).to.equal(sec9.layout.classes);
 
-    expect(sectionTable.at(1).props().columns).to.equal(sec9.layout.tableColumns);
-    expect(sectionTable.at(1).props().data).to.equal(sec9.data);
-    expect(sectionTable.at(1).props().classes).to.equal(sec9.layout.classes);
+    expect(sectionTable.at(1).props().columns).to.equal(sec10.layout.tableColumns);
+    expect(sectionTable.at(1).props().data).to.equal(sec10.data);
+    expect(sectionTable.at(1).props().classes).to.equal(sec10.layout.classes);
 
     const tableEl = reportContainer.find('table');
     const tableHeader = reportContainer.find('th');
     expect(tableEl).to.have.length(2);
     expect(tableHeader).to.have.length(8);
-    expect(tableHeader.at(0).text()).to.equal(sec8.layout.tableColumns[0]);
-    expect(tableHeader.at(1).text()).to.equal(sec8.layout.tableColumns[1]);
-    expect(tableHeader.at(2).text()).to.equal(sec8.layout.tableColumns[2]);
-    expect(tableHeader.at(3).text()).to.equal(sec8.layout.tableColumns[3]);
     expect(tableHeader.at(0).text()).to.equal(sec9.layout.tableColumns[0]);
     expect(tableHeader.at(1).text()).to.equal(sec9.layout.tableColumns[1]);
     expect(tableHeader.at(2).text()).to.equal(sec9.layout.tableColumns[2]);
     expect(tableHeader.at(3).text()).to.equal(sec9.layout.tableColumns[3]);
 
+    expect(tableHeader.at(0).text()).to.equal(sec10.layout.tableColumns[0]);
+    expect(tableHeader.at(1).text()).to.equal(sec10.layout.tableColumns[1]);
+    expect(tableHeader.at(2).text()).to.equal(sec10.layout.tableColumns[2]);
+    expect(tableHeader.at(3).text()).to.equal(sec10.layout.tableColumns[3]);
+
     // Images
     const sectionImage = reportContainer.find(SectionImage);
     expect(sectionImage).to.have.length(3);
-    expect(sectionImage.at(0).props().src).to.equal(sec12.data);
-    expect(sectionImage.at(0).props().alt).to.equal(sec12.layout.alt);
-    expect(sectionImage.at(0).props().classes).to.equal(sec12.layout.classes);
+    expect(sectionImage.at(0).props().src).to.equal(sec13.data);
+    expect(sectionImage.at(0).props().alt).to.equal(sec13.layout.alt);
+    expect(sectionImage.at(0).props().classes).to.equal(sec13.layout.classes);
 
-    expect(sectionImage.at(1).props().src).to.equal(sec14.data);
-    expect(sectionImage.at(1).props().alt).to.equal(sec14.layout.alt);
-    expect(sectionImage.at(1).props().classes).to.equal(sec14.layout.classes);
+    expect(sectionImage.at(1).props().src).to.equal(sec15.data);
+    expect(sectionImage.at(1).props().alt).to.equal(sec15.layout.alt);
+    expect(sectionImage.at(1).props().classes).to.equal(sec15.layout.classes);
 
-    expect(sectionImage.at(2).props().src).to.equal(sec16.data);
-    expect(sectionImage.at(2).props().alt).to.equal(sec16.layout.alt);
-    expect(sectionImage.at(2).props().classes).to.equal(sec16.layout.classes);
+    expect(sectionImage.at(2).props().src).to.equal(sec17.data);
+    expect(sectionImage.at(2).props().alt).to.equal(sec17.layout.alt);
+    expect(sectionImage.at(2).props().classes).to.equal(sec17.layout.classes);
 
     const imgEl = reportContainer.find('img');
     const mediumCircularImage = reportContainer.find('.ui.image.medium.circular');
