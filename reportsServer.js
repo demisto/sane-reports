@@ -3,18 +3,18 @@ const page = require('webpage').create();
 const system = require('system');
 const fs = require('fs');
 
-const dirname = fs.absolute(".")
-const distFolder = dirname + '/dist';
-const reportPath = 'reports';
-const distReportsFolder = distFolder + '/' + reportPath;
-
 if (system.args.length < 2) {
-  console.log('Usage: reportServer.js <data file> <outout file>');
+  console.log('Usage: reportServer.js <data file> [<output file> <dist folder>]');
   phantom.exit();
 }
 
 var dataFile = system.args[1];
 var outputFile = system.args[2];
+var distDir = system.args[3];
+
+const dirname = distDir || (fs.absolute(".") + '/dist');
+const distFolder = dirname;
+const distReportsFolder = distFolder;
 
 const loaded = fs.read(dataFile);
 const html = fs.read(distFolder + '/index.html').replace('\'{report-data-to-replace}\'', loaded);

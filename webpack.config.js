@@ -8,22 +8,20 @@ const postcssImport = require('postcss-import');
 const postcssCssnext = require('postcss-cssnext');
 const postcssReporter = require('postcss-reporter');
 
-const assets = 'assets';
-
 module.exports = {
   entry: {
     app: './src/index'
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: assets + '/[name].js',
+    filename: '[name].js',
     publicPath: '/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new LiveReloadPlugin({ port: 35831, appendScriptTag: true }),
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin(assets + '/[name].css', { allChunks: true }),
+    new ExtractTextPlugin('[name].css', { allChunks: true }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.template.html'
@@ -47,13 +45,13 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          'file?digest=hex&name=' + assets + '/[name].[ext]',
+          'file?digest=hex&name=[name].[ext]',
           'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
         ]
       },
       {
         test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file?name=' + assets + '/fonts/[name]-[hash].[ext]'
+        loader: 'file?name=fonts/[name]-[hash].[ext]'
       },
       {
         test: /\.json$/,

@@ -13,5 +13,5 @@ test:
     - npm run lint
     - npm run coverage
   post:
-      - tar -cvf sane-report.tar dist
+      - tar -cvf sane-report.tar dist reportsServer.js
       - cp sane-report.tar $CIRCLE_ARTIFACTS/sane-report.tar
