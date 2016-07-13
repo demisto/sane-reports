@@ -18,8 +18,6 @@
     "production": "NODE_ENV=production npm run build -- --config webpack.production.config.js --progress",
     "start": "webpack-dev-server --content-base ./dist --port 8082 --no-info --colors",
     "start-prod": "NODE_ENV=production webpack-dev-server --content-base ./dist --port 8082 --no-info --colors --config webpack.production.config.js",
-    "start-reports-server": "npm run clean && (webpack --progress --colors --watch & watch-http-server ./dist -p 8083)",
-    "start-reports-server-prod": "npm run clean && (NODE_ENV=production webpack --config webpack.production.config.js --progress --colors --watch & watch-http-server ./dist -p 8083)",
     "generate-report": "./node_modules/.bin/phantomjs reportsServer.js templates/test.json",
     "devtools": "DEV_TOOLS=1 npm start",
     "lint": "eslint src tests",
