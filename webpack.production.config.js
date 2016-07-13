@@ -7,19 +7,31 @@ const postcssImport = require('postcss-import');
 const postcssCssnext = require('postcss-cssnext');
 const postcssReporter = require('postcss-reporter');
 const AssetsPlugin = require('assets-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const assets = 'assets';
+const dist = 'dist';
+const assetsFolderName = 'assets';
+const assets = __dirname + '/' + dist + '/' + assetsFolderName;
 
 module.exports = {
   entry: {
     app: './src/index'
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, dist),
     filename: assets + '/[name].js',
-    publicPath: '/'
+    publicPath: ''
   },
   plugins: [
+    new WebpackShellPlugin({
+      onBuildExit: [
+        'mv '
+        + __dirname + '/' + dist + '/' + __dirname + '/' + dist + '/' + assetsFolderName +
+        ' '
+        + __dirname + '/' + dist + '/' + assetsFolderName
+      ]
+    }),
     new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin(assets + '/[name].css', { allChunks: true }),
     new webpack.DefinePlugin({
@@ -33,10 +45,10 @@ module.exports = {
       template: 'index.template.html'
     }),
     new AssetsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
-      mangle: false
-    })
+    new CopyWebpackPlugin(
+      [{ from: __dirname + '/reportsServer.js', force: true }],
+      { copyUnmodified: true }
+    )
   ],
   module: {
     loaders: [

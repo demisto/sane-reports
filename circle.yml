@@ -7,8 +7,11 @@ dependencies:
   override:
     - npm install
   post:
-    - npm run build
+    - npm run production
 test:
   override:
     - npm run lint
     - npm run coverage
+  post:
+      - tar -cvf sane-report.tar dist
+      - cp sane-report.tar $CIRCLE_ARTIFACTS/sane-report.tar

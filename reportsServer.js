@@ -3,12 +3,13 @@ const page = require('webpage').create();
 const system = require('system');
 const fs = require('fs');
 
-const distFolder = './dist';
+const dirname = fs.absolute(".")
+const distFolder = dirname + '/dist';
 const reportPath = 'reports';
 const distReportsFolder = distFolder + '/' + reportPath;
 
 if (system.args.length < 2) {
-  console.log('Usage: reportServer.js <data file> [<outout file>]');
+  console.log('Usage: reportServer.js <data file> <outout file>');
   phantom.exit();
 }
 
@@ -22,7 +23,7 @@ const date = Date.now();
 const tmpReportName = 'reportTmp-' + date + '.html';
 fs.write(distReportsFolder + '/' + tmpReportName, html, 'w');
 
-page.open('http://127.0.0.1:8083/' + reportPath + '/' + tmpReportName, function(status) {
+page.open('file://' + distReportsFolder + '/' + tmpReportName, function(status) {
   console.log("Read report page status: " + status);
 
   page.paperSize = {
