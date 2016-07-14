@@ -139,7 +139,7 @@
     "layout": {
       "rowPos": 8,
       "columnPos": 1,
-      "tableColumns": [ "name", "value", "fill", "bla"],
+      "tableColumns": [ "name", "fill", "value", "bla"],
       "classes": "collapsing selectable unstackable"
     }
   },
