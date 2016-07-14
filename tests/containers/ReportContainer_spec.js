@@ -133,8 +133,8 @@ describe('Report Container', () => {
     expect(tableHeader.at(3).text()).to.equal(sec9.layout.tableColumns[3]);
 
     expect(tableHeader.at(0).text()).to.equal(sec10.layout.tableColumns[0]);
-    expect(tableHeader.at(1).text()).to.equal(sec10.layout.tableColumns[1]);
-    expect(tableHeader.at(2).text()).to.equal(sec10.layout.tableColumns[2]);
+    expect(tableHeader.at(1).text()).to.equal(sec10.layout.tableColumns[2]);
+    expect(tableHeader.at(2).text()).to.equal(sec10.layout.tableColumns[1]);
     expect(tableHeader.at(3).text()).to.equal(sec10.layout.tableColumns[3]);
 
     // Images
