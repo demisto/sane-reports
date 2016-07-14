@@ -240,7 +240,7 @@
   {
     "type": "date",
     "layout": {
-      "rowPos": 18,
+      "rowPos": 17,
       "columnPos": 1,
       "style": {
         "textAlign": "left",
@@ -255,7 +255,7 @@
     "type": "date",
     "data": "2016-01-01",
     "layout": {
-      "rowPos": 19,
+      "rowPos": 18,
       "columnPos": 1,
       "style": {
         "textAlign": "left",
