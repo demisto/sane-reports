@@ -3,17 +3,33 @@ import SectionBarChart from './SectionBarChart';
 import SectionPieChart from './SectionPieChart';
 import { CHART_TYPES } from '../../../constants/Constants';
 
-const SectionChart = ({ type, data, style, dimensions, legend }) =>
+const SectionChart = ({ type, data, style, dimensions, legend, chartProperties = {} }) =>
   <div className="section-chart" style={style}>
     {
       (() => {
         let chartToRender;
         switch (type) {
           case CHART_TYPES.bar:
-            chartToRender = <SectionBarChart data={data} style={style} dimensions={dimensions} legend={legend} />;
+            chartToRender = (
+              <SectionBarChart
+                data={data}
+                style={style}
+                dimensions={dimensions}
+                legend={legend}
+                chartProperties={chartProperties}
+              />
+            );
             break;
           case CHART_TYPES.pie:
-            chartToRender = <SectionPieChart data={data} style={style} dimensions={dimensions} legend={legend} />;
+            chartToRender = (
+              <SectionPieChart
+                data={data}
+                style={style}
+                dimensions={dimensions}
+                legend={legend}
+                chartProperties={chartProperties}
+              />
+            );
             break;
           default:
             // Ignored
@@ -31,6 +47,7 @@ SectionChart.propTypes = {
   ]),
   style: PropTypes.object,
   dimensions: PropTypes.object,
+  chartProperties: PropTypes.object,
   legend: PropTypes.array
 };
 

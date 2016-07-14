@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { PieChart, Pie, Legend, Tooltip } from 'recharts';
 import merge from 'lodash/merge';
 
-const SectionPieChart = ({ data, style, dimensions, legend }) => {
+const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {} }) => {
   const preparedData = data.map((item) => {
     for (let i = 0; i < legend.length; i++) {
       if (legend[i].name === item.name) {
@@ -17,7 +17,16 @@ const SectionPieChart = ({ data, style, dimensions, legend }) => {
       <PieChart width={dimensions.width} height={dimensions.height}>
         <Tooltip />
         <Legend />
-        <Pie data={preparedData} cx={200} cy={200} startAngle={90} endAngle={-270} outerRadius={80} label />
+        <Pie
+          data={preparedData}
+          cx={chartProperties.cx || 200}
+          cy={chartProperties.cy || 200}
+          startAngle={chartProperties.startAngle || 90}
+          endAngle={chartProperties.endAngle || -270}
+          outerRadius={chartProperties.outerRadius || 80}
+          innerRadius={chartProperties.innerRadius || 30}
+          label
+        />
       </PieChart>
     </div>
   );
@@ -29,6 +38,7 @@ SectionPieChart.propTypes = {
   ]),
   style: PropTypes.object,
   dimensions: PropTypes.object,
+  chartProperties: PropTypes.object,
   legend: PropTypes.array
 };
 

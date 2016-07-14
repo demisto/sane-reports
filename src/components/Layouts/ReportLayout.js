@@ -97,6 +97,7 @@ const ReportLayout = ({ data }) => {
                                   type={section.layout.chartType}
                                   style={section.layout.style}
                                   dimensions={section.layout.dimensions}
+                                  chartProperties={section.layout.chartProperties}
                                   legend={section.layout.legend}
                                 />
                               );

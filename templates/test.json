@@ -106,6 +106,14 @@
         "width": 600,
         "height": 350
       },
+      "chartProperties" : {
+        "cx": 200,
+        "cy": 200,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 80,
+        "innerRadius": 40
+      },
       "legend": [
         { "name": "Malware", "fill": "#82ca9d" },
         { "name": "Virus", "fill": "#ffbb28" },
