@@ -3,7 +3,7 @@ import moment from 'moment';
 
 const SectionDate = ({ date, style, format }) =>
   <div className="section-date" style={style}>
-    {moment(date).format(format)}
+    {date ? moment(date).format(format) : moment().format(format)}
   </div>
 ;
 SectionDate.propTypes = {
