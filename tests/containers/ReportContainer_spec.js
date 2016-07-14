@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-expressions */
 import { React, mount, expect, TemplateProvider } from '../helpers/test_helper';
 import ReportContainer from '../../src/containers/ReportContainer';
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
-import { SectionHeader, SectionText, SectionChart, SectionTable, SectionImage } from '../../src/components/Sections';
+import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage }
+    from '../../src/components/Sections';
 import { BarChart, PieChart, Pie } from 'recharts';
 
 describe('Report Container', () => {
@@ -14,8 +16,8 @@ describe('Report Container', () => {
     const rows = reportContainer.find('.report-row');
     const sections = reportContainer.find('.report-section');
     expect(reportLayouts).to.have.length(1);
-    expect(rows).to.have.length(16);
-    expect(sections).to.have.length(17);
+    expect(rows).to.have.length(18);
+    expect(sections).to.have.length(19);
 
     const sec1 = testTemplate[0];
     const sec2 = testTemplate[1];
@@ -34,6 +36,8 @@ describe('Report Container', () => {
     const sec15 = testTemplate[14];
     const sec16 = testTemplate[15];
     const sec17 = testTemplate[16];
+    const sec18 = testTemplate[17];
+    const sec19 = testTemplate[18];
 
     // Do the same as .textContent - keep it for future reference
     expect(rows.at(0).text()).to.contains(sec1.data);
@@ -154,5 +158,20 @@ describe('Report Container', () => {
     expect(imgEl).to.have.length(3);
     expect(mediumCircularImage).to.have.length(1);
     expect(smallImage).to.have.length(1);
+
+    // Dates
+    const sectionDate = reportContainer.find(SectionDate);
+    expect(sectionDate).to.have.length(2);
+    expect(sectionDate.at(0).props().date).to.equal(sec18.data);
+    expect(sectionDate.at(0).props().style).to.equal(sec18.layout.style);
+    expect(sectionDate.at(0).props().format).to.equal(sec18.layout.format);
+    expect(sectionDate.at(1).props().date).to.equal(sec19.data);
+    expect(sectionDate.at(1).props().style).to.equal(sec19.layout.style);
+    expect(sectionDate.at(1).props().format).to.equal(sec19.layout.format);
+
+    const dateEl = reportContainer.find('.section-date');
+    expect(dateEl).to.have.length(2);
+    expect(dateEl.get(0).textContent).to.not.be.empty;
+    expect(dateEl.get(1).textContent).to.equal('Jan 1st 16');
   });
 });

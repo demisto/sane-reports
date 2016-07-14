@@ -236,5 +236,32 @@
       "classes": "small",
       "alt": "Small Image..."
     }
+  },
+  {
+    "type": "date",
+    "layout": {
+      "rowPos": 18,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "color": "gray",
+        "fontSize": 14,
+        "fontStyle": "italic"
+      },
+      "format": "MMMM Do YYYY, h:mm:ss a"
+    }
+  },
+  {
+    "type": "date",
+    "data": "2016-01-01",
+    "layout": {
+      "rowPos": 19,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 14
+      },
+      "format": "MMM Do YY"
+    }
   }
 ]

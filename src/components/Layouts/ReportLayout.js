@@ -1,6 +1,6 @@
 import './ReportLayout.less';
 import React, { PropTypes } from 'react';
-import { SectionHeader, SectionText, SectionChart, SectionTable, SectionImage } from '../Sections';
+import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage } from '../Sections';
 import { SECTION_TYPES } from '../../constants/Constants';
 
 function sortReportSections(sec1, sec2) {
@@ -68,6 +68,15 @@ const ReportLayout = ({ data }) => {
                                 <SectionText
                                   text={section.data}
                                   style={section.layout.style}
+                                />
+                              );
+                              break;
+                            case SECTION_TYPES.date:
+                              sectionToRender = (
+                                <SectionDate
+                                  date={section.data}
+                                  style={section.layout.style}
+                                  format={section.layout.format}
                                 />
                               );
                               break;
