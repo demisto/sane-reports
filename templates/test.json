@@ -90,8 +90,9 @@
     "data": [
       { "name": "Malware",  "relatedTo": 1,  "value": 5 },
       { "name": "Virus", "relatedTo": 1, "value": 5 },
-      { "name": "chacha1", "relatedTo": 1, "value": 5 },
-      { "name": "chacha", "relatedTo": 1, "value": 1 }
+      { "name": "Phishing", "relatedTo": 1, "value": 5 },
+      { "name": "Ransomewhere", "relatedTo": 1, "value": 5 },
+      { "name": "Device Lost", "relatedTo": 1, "value": 5 }
     ],
     "layout": {
       "rowPos": 6,
