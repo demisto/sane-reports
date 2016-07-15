@@ -64,11 +64,11 @@
   {
     "type": "chart",
     "data": [
-      { "name": "Unknown",  "relatedTo": 1,  "value": 3 },
-      { "name": "Low", "relatedTo": 1, "value": 6 },
-      { "name": "Medium", "relatedTo": 1, "value": 3 },
-      { "name": "High", "relatedTo": 1, "value": 4 },
-      { "name": "Critical", "relatedTo": 1, "value": 9 }
+      { "name": "Unknown", "value": 3 },
+      { "name": "Low", "value": 6 },
+      { "name": "Medium", "value": 3 },
+      { "name": "High", "value": 4 },
+      { "name": "Critical", "value": 9 }
     ],
     "layout": {
       "rowPos": 5,
@@ -109,13 +109,14 @@
   {
     "type": "chart",
     "data": [
-      { "name": "C2Communication",  "relatedTo": 1,  "value": 3 },
-      { "name": "Default", "relatedTo": 1, "value": 6 },
-      { "name": "DeviceLost", "relatedTo": 1, "value": 3 },
-      { "name": "Malware", "relatedTo": 1, "value": 4 },
-      { "name": "Phishing", "relatedTo": 1, "value": 9 },
-      { "name": "Ransomewhere", "relatedTo": 1, "value": 32 },
-      { "name": "UnknownBinary", "relatedTo": 1, "value": 2 }
+      { "name": "C2Communication", "value": 3 },
+      { "name": "Default", "value": 6 },
+      { "name": "DeviceLost", "value": 3 },
+      { "name": "Malware", "value": 4 },
+      { "name": "Phishing", "value": 9 },
+      { "name": "wow", "value": 8 },
+      { "name": "Ransomewhere", "value": 32 },
+      { "name": "UnknownBinary", "value": 2 }
     ],
     "layout": {
       "rowPos": 5,
@@ -158,9 +159,9 @@
   {
     "type": "chart",
     "data": [
-      { "name": "Late",  "relatedTo": 1,  "value": 3 },
-      { "name": "About To End", "relatedTo": 1, "value": 6 },
-      { "name": "OK", "relatedTo": 1, "value": 18 }
+      { "name": "Late", "value": 3 },
+      { "name": "About To End", "value": 6 },
+      { "name": "OK", "value": 18 }
     ],
     "layout": {
       "rowPos": 6,
