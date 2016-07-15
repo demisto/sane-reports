@@ -5,6 +5,7 @@ function getTestTemplate() {
   return testTemplate;
 }
 
+/* istanbul ignore next */
 function getIncidentDailyReportTemplate() {
   return incidentDailyReportTempalte;
 }
