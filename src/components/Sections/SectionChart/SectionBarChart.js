@@ -18,6 +18,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         height={dimensions.height}
         data={preparedData}
         layout={chartProperties.layout}
+        barSize={chartProperties.barSize || 13}
       >
         {chartProperties.layout === 'vertical' && <YAxis tick dataKey="name" type="category" />}
         {chartProperties.layout === 'vertical' && <XAxis type="number" />}

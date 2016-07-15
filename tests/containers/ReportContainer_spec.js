@@ -5,6 +5,7 @@ import ReportLayout from '../../src/components/Layouts/ReportLayout';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider }
     from '../../src/components/Sections';
 import { BarChart, PieChart, Pie } from 'recharts';
+import merge from 'lodash/merge';
 
 describe('Report Container', () => {
   it('Generate test template report', () => {
@@ -111,7 +112,15 @@ describe('Report Container', () => {
 
     expect(pieChart.props().width).to.equal(sec7.layout.dimensions.width);
     expect(pieChart.props().height).to.equal(sec7.layout.dimensions.height);
-    expect(pie.props().data).to.deep.equal(sec7.data);
+    const preparedData = sec7.layout.legend.map((item) => {
+      for (let i = 0; i < sec7.data.length; i++) {
+        if (sec7.data[i].name.toLowerCase() === item.name.toLowerCase()) {
+          return merge(item, sec7.data[i]);
+        }
+      }
+      return item;
+    });
+    expect(pie.props().data).to.deep.equal(preparedData);
 
     // Tables
     const sectionTable = reportContainer.find(SectionTable);

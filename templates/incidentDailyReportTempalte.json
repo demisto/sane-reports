@@ -210,15 +210,16 @@
       "chartType": "bar",
       "style": {
         "textAlign": "left",
-        "fontSize": 14,
-        "marginLeft": -10
+        "fontSize": 10,
+        "marginLeft": -15
       },
       "chartProperties" : {
         "layout": "vertical",
-        "strokeDasharray": "3 300"
+        "strokeDasharray": "3 300",
+        "barSize": 13
       },
       "dimensions": {
-        "width": 450,
+        "width": 300,
         "height": 200
       },
       "legend": [
@@ -231,6 +232,7 @@
     "layout": {
       "rowPos": 7,
       "style": {
+        "pageBreakBefore": "always"
       }
     }
   },
