@@ -51,7 +51,11 @@ const ReportLayout = ({ data }) => {
               {
                 sections[rowPos]
                   .map((section) =>
-                    <div key={section.layout.rowPos + section.layout.columnPos} className="report-section">
+                    <div
+                      key={section.layout.rowPos + section.layout.columnPos}
+                      className="report-section"
+                      style={section.layout.sectionStyle}
+                    >
                       {
                         (() => {
                           let sectionToRender;
@@ -100,6 +104,7 @@ const ReportLayout = ({ data }) => {
                                   dimensions={section.layout.dimensions}
                                   chartProperties={section.layout.chartProperties}
                                   legend={section.layout.legend}
+                                  legendStyle={section.layout.legendStyle}
                                 />
                               );
                               break;

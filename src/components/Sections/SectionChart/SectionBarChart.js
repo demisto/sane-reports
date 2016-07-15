@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 
-const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {} }) => {
+const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {} }) => {
   const preparedData = data.map((item) => {
     for (let i = 0; i < legend.length; i++) {
       if (item.relatedTo === legend[i].bar) {
@@ -18,7 +18,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         <YAxis />
         <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
         <Tooltip />
-        <Legend />
+        <Legend {...legendStyle} />
         {legend.map((item) => <Bar key={item.name} dataKey={item.name} fill={item.fill} />)}
       </BarChart>
     </div>
@@ -32,7 +32,8 @@ SectionBarChart.propTypes = {
   style: PropTypes.object,
   dimensions: PropTypes.object,
   chartProperties: PropTypes.object,
-  legend: PropTypes.array
+  legend: PropTypes.array,
+  legendStyle: PropTypes.object
 };
 
 export default SectionBarChart;

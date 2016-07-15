@@ -3,13 +3,13 @@
     "type": "header",
     "data": "Sane Reports!!!",
     "layout": {
-        "rowPos": 1,
-        "columnPos": 1,
-        "style": {
-          "textAlign": "center",
-          "fontSize": 32
-        }
+      "rowPos": 1,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "center",
+        "fontSize": 32
       }
+    }
   },
   {
     "type": "text",

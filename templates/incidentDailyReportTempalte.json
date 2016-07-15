@@ -1,0 +1,664 @@
+[
+  {
+    "type": "header",
+    "data": "Daily Incident Report",
+    "layout": {
+      "rowPos": 1,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 28
+      }
+    }
+  },
+  {
+    "type": "date",
+    "layout": {
+      "rowPos": 2,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "color": "gray",
+        "fontSize": 13,
+        "fontStyle": "italic",
+        "marginBottom:": 12
+      },
+      "format": "MMMM Do YYYY, h:mm:ss a"
+    }
+  },
+  {
+    "type": "text",
+    "data": "Total incidents: 24",
+    "layout": {
+      "rowPos": 3,
+      "columnPos": 1,
+      "sectionStyle": {
+        "width": 200
+      },
+      "style": {
+        "textAlign": "left",
+        "fontSize": 18
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Open incidents: 12",
+    "layout": {
+      "rowPos": 3,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 18
+      }
+    }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 4,
+      "style": {
+      }
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "Malware",  "relatedTo": 1,  "value": 5 },
+      { "name": "Virus", "relatedTo": 1, "value": 5 },
+      { "name": "chacha1", "relatedTo": 1, "value": 5 },
+      { "name": "chacha", "relatedTo": 1, "value": 1 }
+    ],
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 1,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Malware", "fill": "#82ca9d" },
+        { "name": "Virus", "fill": "#ffbb28" },
+        { "name": "Phishing", "fill": "#ff8042" },
+        { "name": "Ransomewhere", "fill": "#0088fe" },
+        { "name": "Device Lost", "fill": "#8884d8" }
+      ]
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "Malware",  "relatedTo": 1,  "value": 5 },
+      { "name": "Virus", "relatedTo": 1, "value": 5 },
+      { "name": "chacha1", "relatedTo": 1, "value": 5 },
+      { "name": "chacha", "relatedTo": 1, "value": 1 }
+    ],
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 2,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Malware", "fill": "#82ca9d" },
+        { "name": "Virus", "fill": "#ffbb28" },
+        { "name": "Phishing", "fill": "#ff8042" },
+        { "name": "Ransomewhere", "fill": "#0088fe" },
+        { "name": "Device Lost", "fill": "#8884d8" }
+      ]
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "Malware",  "relatedTo": 1,  "value": 5 },
+      { "name": "Virus", "relatedTo": 1, "value": 5 },
+      { "name": "chacha1", "relatedTo": 1, "value": 5 },
+      { "name": "chacha", "relatedTo": 1, "value": 1 }
+    ],
+    "layout": {
+      "rowPos": 6,
+      "columnPos": 1,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Malware", "fill": "#82ca9d" },
+        { "name": "Virus", "fill": "#ffbb28" },
+        { "name": "Phishing", "fill": "#ff8042" },
+        { "name": "Ransomewhere", "fill": "#0088fe" },
+        { "name": "Device Lost", "fill": "#8884d8" }
+      ]
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "Malware",  "relatedTo": 1,  "value": 5 },
+      { "name": "Virus", "relatedTo": 1, "value": 5 },
+      { "name": "chacha1", "relatedTo": 1, "value": 5 },
+      { "name": "chacha", "relatedTo": 1, "value": 1 }
+    ],
+    "layout": {
+      "rowPos": 6,
+      "columnPos": 2,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Malware", "fill": "#82ca9d" },
+        { "name": "Virus", "fill": "#ffbb28" },
+        { "name": "Phishing", "fill": "#ff8042" },
+        { "name": "Ransomewhere", "fill": "#0088fe" },
+        { "name": "Device Lost", "fill": "#8884d8" }
+      ]
+    }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 7,
+      "style": {
+      }
+    }
+  },
+  {
+    "type": "table",
+    "data": [
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "1",
+        "investigationId": "1",
+        "modified": "2016-07-13T23:38:23.141255639+03:00",
+        "name": "sfsdf",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "dorsha",
+        "playbookId": "playbook0",
+        "rawName": "sfsdf",
+        "rawType": "Default",
+        "reason": "",
+        "reminder": "",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": [],
+        "type": "Default",
+        "version": 3
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "10",
+        "investigationId": "",
+        "modified": "2016-07-14T18:29:58.803090921+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "Virus",
+        "reason": "",
+        "reminder": "",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Virus",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "100",
+        "investigationId": "",
+        "modified": "2016-07-14T21:54:17.789327997+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "Virus",
+        "reason": "",
+        "reminder": "",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Virus",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "101",
+        "investigationId": "",
+        "modified": "2016-07-14T21:54:17.813155608+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "102",
+        "investigationId": "",
+        "modified": "2016-07-14T21:58:28.840979291+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Guy",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "103",
+        "investigationId": "",
+        "modified": "2016-07-14T21:58:28.879871912+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Slavik",
+        "playbookId": "",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "104",
+        "investigationId": "",
+        "modified": "2016-07-14T21:58:28.904766734+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Slavik",
+        "playbookId": "",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "105",
+        "investigationId": "",
+        "modified": "2016-07-14T21:58:28.923838007+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "chacha",
+        "reason": "",
+        "reminder": "",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "106",
+        "investigationId": "",
+        "modified": "2016-07-14T21:58:28.949163806+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "Ransomewhere",
+        "reason": "",
+        "reminder": "",
+        "severity": "Critical",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Ransomewhere",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "107",
+        "investigationId": "",
+        "modified": "2016-07-14T21:58:28.978129734+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "Ransomewhere",
+        "reason": "",
+        "reminder": "",
+        "severity": "Low",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Ransomewhere",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "108",
+        "investigationId": "",
+        "modified": "2016-07-14T21:58:28.998485371+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Slavik",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "109",
+        "investigationId": "",
+        "modified": "2016-07-14T21:58:29.030671519+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "chacha",
+        "reason": "",
+        "reminder": "",
+        "severity": "High",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "11",
+        "investigationId": "",
+        "modified": "2016-07-14T18:29:58.807982548+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Guy",
+        "playbookId": "",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "110",
+        "investigationId": "",
+        "modified": "2016-07-14T21:58:29.059650534+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
+      },
+      {
+        "activated": "",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "",
+        "closingUserId": "",
+        "created": "",
+        "details": "",
+        "dueDate": "",
+        "id": "111",
+        "investigationId": "",
+        "modified": "2016-07-14T21:58:29.084687678+03:00",
+        "name": "some incident with long long long long long long long long long name",
+        "occurred": "",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long long long long long long long long long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
+      }
+    ],
+    "layout": {
+      "rowPos": 8,
+      "columnPos": 1,
+      "tableColumns": ["name", "type", "status", "occurred", "severity", "owner", "playbookId"],
+      "classes": "striped stackable small very compact"
+    }
+  }
+]

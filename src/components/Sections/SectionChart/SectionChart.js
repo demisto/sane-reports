@@ -3,7 +3,7 @@ import SectionBarChart from './SectionBarChart';
 import SectionPieChart from './SectionPieChart';
 import { CHART_TYPES } from '../../../constants/Constants';
 
-const SectionChart = ({ type, data, style, dimensions, legend, chartProperties = {} }) =>
+const SectionChart = ({ type, data, style, dimensions, legend, chartProperties = {}, legendStyle = {} }) =>
   <div className="section-chart" style={style}>
     {
       (() => {
@@ -17,6 +17,7 @@ const SectionChart = ({ type, data, style, dimensions, legend, chartProperties =
                 dimensions={dimensions}
                 legend={legend}
                 chartProperties={chartProperties}
+                legendStyle={legendStyle}
               />
             );
             break;
@@ -28,6 +29,7 @@ const SectionChart = ({ type, data, style, dimensions, legend, chartProperties =
                 dimensions={dimensions}
                 legend={legend}
                 chartProperties={chartProperties}
+                legendStyle={legendStyle}
               />
             );
             break;
@@ -48,7 +50,8 @@ SectionChart.propTypes = {
   style: PropTypes.object,
   dimensions: PropTypes.object,
   chartProperties: PropTypes.object,
-  legend: PropTypes.array
+  legend: PropTypes.array,
+  legendStyle: PropTypes.object
 };
 
 export default SectionChart;
