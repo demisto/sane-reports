@@ -13,9 +13,16 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
 
   return (
     <div className="section-bar-chart" style={style}>
-      <BarChart width={dimensions.width} height={dimensions.height} data={preparedData}>
-        <XAxis dataKey="name" />
-        <YAxis />
+      <BarChart
+        width={dimensions.width}
+        height={dimensions.height}
+        data={preparedData}
+        layout={chartProperties.layout}
+      >
+        {chartProperties.layout === 'vertical' && <YAxis tick dataKey="name" type="category" />}
+        {chartProperties.layout === 'vertical' && <XAxis type="number" />}
+        {chartProperties.layout === 'horizontal' && <YAxis type="number" />}
+        {chartProperties.layout === 'horizontal' && <XAxis tick dataKey="name" type="category" />}
         <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
         <Tooltip />
         <Legend {...legendStyle} />

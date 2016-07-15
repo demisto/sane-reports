@@ -3,10 +3,10 @@ import { PieChart, Pie, Legend, Tooltip } from 'recharts';
 import merge from 'lodash/merge';
 
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {} }) => {
-  const preparedData = data.map((item) => {
-    for (let i = 0; i < legend.length; i++) {
-      if (legend[i].name === item.name) {
-        return merge(item, legend[i]);
+  const preparedData = legend.map((item) => {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].name.toLowerCase() === item.name.toLowerCase()) {
+        return merge(item, data[i]);
       }
     }
     return item;

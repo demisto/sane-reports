@@ -64,10 +64,11 @@
   {
     "type": "chart",
     "data": [
-      { "name": "Malware",  "relatedTo": 1,  "value": 5 },
-      { "name": "Virus", "relatedTo": 1, "value": 5 },
-      { "name": "chacha1", "relatedTo": 1, "value": 5 },
-      { "name": "chacha", "relatedTo": 1, "value": 1 }
+      { "name": "Unknown",  "relatedTo": 1,  "value": 3 },
+      { "name": "Low", "relatedTo": 1, "value": 6 },
+      { "name": "Medium", "relatedTo": 1, "value": 3 },
+      { "name": "High", "relatedTo": 1, "value": 4 },
+      { "name": "Critical", "relatedTo": 1, "value": 9 }
     ],
     "layout": {
       "rowPos": 5,
@@ -97,21 +98,24 @@
         "iconSize": 10
       },
       "legend": [
-        { "name": "Malware", "fill": "#82ca9d" },
-        { "name": "Virus", "fill": "#ffbb28" },
-        { "name": "Phishing", "fill": "#ff8042" },
-        { "name": "Ransomewhere", "fill": "#0088fe" },
-        { "name": "Device Lost", "fill": "#8884d8" }
+        { "name": "Critical", "fill": "#8d070a" },
+        { "name": "High", "fill": "#D00a00" },
+        { "name": "Medium", "fill": "#cb4a00" },
+        { "name": "Low", "fill": "#267634" },
+        { "name": "Unknown", "fill": "#999999" }
       ]
     }
   },
   {
     "type": "chart",
     "data": [
-      { "name": "Malware",  "relatedTo": 1,  "value": 5 },
-      { "name": "Virus", "relatedTo": 1, "value": 5 },
-      { "name": "chacha1", "relatedTo": 1, "value": 5 },
-      { "name": "chacha", "relatedTo": 1, "value": 1 }
+      { "name": "C2Communication",  "relatedTo": 1,  "value": 3 },
+      { "name": "Default", "relatedTo": 1, "value": 6 },
+      { "name": "DeviceLost", "relatedTo": 1, "value": 3 },
+      { "name": "Malware", "relatedTo": 1, "value": 4 },
+      { "name": "Phishing", "relatedTo": 1, "value": 9 },
+      { "name": "Ransomewhere", "relatedTo": 1, "value": 32 },
+      { "name": "UnknownBinary", "relatedTo": 1, "value": 2 }
     ],
     "layout": {
       "rowPos": 5,
@@ -141,21 +145,22 @@
         "iconSize": 10
       },
       "legend": [
-        { "name": "Malware", "fill": "#82ca9d" },
-        { "name": "Virus", "fill": "#ffbb28" },
-        { "name": "Phishing", "fill": "#ff8042" },
-        { "name": "Ransomewhere", "fill": "#0088fe" },
-        { "name": "Device Lost", "fill": "#8884d8" }
+        { "name": "C2Communication", "fill": "#853732" },
+        { "name": "Default", "fill": "#3aabe8" },
+        { "name": "DeviceLost", "fill": "#5fa54a" },
+        { "name": "Malware", "fill": "#4f8aab" },
+        { "name": "Phishing", "fill": "#4f854a" },
+        { "name": "Ransomewhere", "fill": "#5b4185" },
+        { "name": "UnknownBinary", "fill": "#4faa5b" }
       ]
     }
   },
   {
     "type": "chart",
     "data": [
-      { "name": "Malware",  "relatedTo": 1,  "value": 5 },
-      { "name": "Virus", "relatedTo": 1, "value": 5 },
-      { "name": "chacha1", "relatedTo": 1, "value": 5 },
-      { "name": "chacha", "relatedTo": 1, "value": 1 }
+      { "name": "Late",  "relatedTo": 1,  "value": 3 },
+      { "name": "About To End", "relatedTo": 1, "value": 6 },
+      { "name": "OK", "relatedTo": 1, "value": 18 }
     ],
     "layout": {
       "rowPos": 6,
@@ -185,55 +190,39 @@
         "iconSize": 10
       },
       "legend": [
-        { "name": "Malware", "fill": "#82ca9d" },
-        { "name": "Virus", "fill": "#ffbb28" },
-        { "name": "Phishing", "fill": "#ff8042" },
-        { "name": "Ransomewhere", "fill": "#0088fe" },
-        { "name": "Device Lost", "fill": "#8884d8" }
+        { "name": "late", "fill": "red" },
+        { "name": "about to end", "fill": "orange" },
+        { "name": "ok", "fill": "green" }
       ]
     }
   },
   {
     "type": "chart",
     "data": [
-      { "name": "Malware",  "relatedTo": 1,  "value": 5 },
-      { "name": "Virus", "relatedTo": 1, "value": 5 },
-      { "name": "chacha1", "relatedTo": 1, "value": 5 },
-      { "name": "chacha", "relatedTo": 1, "value": 1 }
+      { "name": "Slavik", "relatedTo": 1, "value": 8 },
+      { "name": "Guy", "relatedTo": 1, "value": 3 },
+      { "name": "Meir", "relatedTo": 1, "value": 3 },
+      { "name": "Aviad", "relatedTo": 1, "value": 2 }
     ],
     "layout": {
       "rowPos": 6,
       "columnPos": 2,
-      "chartType": "pie",
+      "chartType": "bar",
       "style": {
         "textAlign": "left",
-        "fontSize": 12
-      },
-      "dimensions": {
-        "width": 300,
-        "height": 220
+        "fontSize": 14,
+        "marginLeft": -10
       },
       "chartProperties" : {
-        "cy": 75,
-        "startAngle": 90,
-        "endAngle": -270,
-        "outerRadius": 60,
-        "innerRadius": 40,
-        "labelLine": false,
-        "label": { "offsetRadius": 10 }
-      },
-      "legendStyle": {
-        "align": "left",
         "layout": "vertical",
-        "verticalAlign": "top",
-        "iconSize": 10
+        "strokeDasharray": "3 300"
+      },
+      "dimensions": {
+        "width": 450,
+        "height": 200
       },
       "legend": [
-        { "name": "Malware", "fill": "#82ca9d" },
-        { "name": "Virus", "fill": "#ffbb28" },
-        { "name": "Phishing", "fill": "#ff8042" },
-        { "name": "Ransomewhere", "fill": "#0088fe" },
-        { "name": "Device Lost", "fill": "#8884d8" }
+        { "name": "Busy Analyst", "fill": "#2884d1", "bar": 1 }
       ]
     }
   },
