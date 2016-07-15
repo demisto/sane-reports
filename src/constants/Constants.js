@@ -6,7 +6,8 @@ export const SECTION_TYPES = {
   date: 'date',
   image: 'image',
   chart: 'chart',
-  table: 'table'
+  table: 'table',
+  divider: 'divider'
 };
 
 export const CHART_TYPES = {

@@ -2,7 +2,7 @@
 import { React, mount, expect, TemplateProvider } from '../helpers/test_helper';
 import ReportContainer from '../../src/containers/ReportContainer';
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
-import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage }
+import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider }
     from '../../src/components/Sections';
 import { BarChart, PieChart, Pie } from 'recharts';
 
@@ -16,8 +16,8 @@ describe('Report Container', () => {
     const rows = reportContainer.find('.report-row');
     const sections = reportContainer.find('.report-section');
     expect(reportLayouts).to.have.length(1);
-    expect(rows).to.have.length(18);
-    expect(sections).to.have.length(19);
+    expect(rows).to.have.length(19);
+    expect(sections).to.have.length(20);
 
     const sec1 = testTemplate[0];
     const sec2 = testTemplate[1];
@@ -38,6 +38,7 @@ describe('Report Container', () => {
     const sec17 = testTemplate[16];
     const sec18 = testTemplate[17];
     const sec19 = testTemplate[18];
+    const sec20 = testTemplate[19];
 
     // Do the same as .textContent - keep it for future reference
     expect(rows.at(0).text()).to.contains(sec1.data);
@@ -173,5 +174,13 @@ describe('Report Container', () => {
     expect(dateEl).to.have.length(2);
     expect(dateEl.get(0).textContent).to.not.be.empty;
     expect(dateEl.get(1).textContent).to.equal('Jan 1st 16');
+
+    // Divider
+    const sectionDivider = reportContainer.find(SectionDivider);
+    expect(sectionDivider).to.have.length(1);
+    expect(sectionDivider.at(0).props().style).to.equal(sec20.layout.style);
+
+    const dividerEl = reportContainer.find('.section-divider');
+    expect(dividerEl).to.have.length(1);
   });
 });

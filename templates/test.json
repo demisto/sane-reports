@@ -271,5 +271,13 @@
       },
       "format": "MMM Do YY"
     }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 19,
+      "style": {
+      }
+    }
   }
 ]
