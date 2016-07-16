@@ -115,7 +115,7 @@
       { "name": "Malware", "value": 4 },
       { "name": "Phishing", "value": 8 },
       { "name": "wow", "value": 7 },
-      { "name": "Ransomewhere", "value": 8 },
+      { "name": "Ransomware", "value": 8 },
       { "name": "UnknownBinary", "value": 4 }
     ],
     "layout": {

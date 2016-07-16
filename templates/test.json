@@ -91,7 +91,7 @@
       { "name": "Malware",  "relatedTo": 1,  "value": 5 },
       { "name": "Virus", "relatedTo": 1, "value": 5 },
       { "name": "Phishing", "relatedTo": 1, "value": 5 },
-      { "name": "Ransomewhere", "relatedTo": 1, "value": 5 },
+      { "name": "Ransomware", "relatedTo": 1, "value": 5 },
       { "name": "Device Lost", "relatedTo": 1, "value": 5 }
     ],
     "layout": {
@@ -123,7 +123,7 @@
         { "name": "Malware", "fill": "#82ca9d" },
         { "name": "Virus", "fill": "#ffbb28" },
         { "name": "Phishing", "fill": "#ff8042" },
-        { "name": "Ransomewhere", "fill": "#0088fe" },
+        { "name": "Ransomware", "fill": "#0088fe" },
         { "name": "Device Lost", "fill": "#8884d8" }
       ]
     }
