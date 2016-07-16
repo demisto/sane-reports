@@ -6,6 +6,7 @@ import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, Se
     from '../../src/components/Sections';
 import { BarChart, PieChart, Pie } from 'recharts';
 import merge from 'lodash/merge';
+import orderBy from 'lodash/orderBy';
 
 describe('Report Container', () => {
   it('Generate test template report', () => {
@@ -112,7 +113,7 @@ describe('Report Container', () => {
 
     expect(pieChart.props().width).to.equal(sec7.layout.dimensions.width);
     expect(pieChart.props().height).to.equal(sec7.layout.dimensions.height);
-    const preparedData = sec7.layout.legend.map((item) => {
+    let preparedData = sec7.layout.legend.map((item) => {
       for (let i = 0; i < sec7.data.length; i++) {
         if (sec7.data[i].name.toLowerCase() === item.name.toLowerCase()) {
           return merge(item, sec7.data[i]);
@@ -120,6 +121,7 @@ describe('Report Container', () => {
       }
       return item;
     });
+    preparedData = orderBy(preparedData, sec7.layout.sortBy.values, sec7.layout.sortBy.orders);
     expect(pie.props().data).to.deep.equal(preparedData);
 
     // Tables

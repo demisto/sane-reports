@@ -145,6 +145,10 @@
         "verticalAlign": "top",
         "iconSize": 10
       },
+      "sortBy": {
+        "values": ["value", "name"],
+        "orders": ["desc", "asc"]
+      },
       "legend": [
         { "name": "C2Communication", "fill": "#853732" },
         { "name": "Default", "fill": "#3aabe8" },

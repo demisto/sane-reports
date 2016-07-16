@@ -105,6 +105,7 @@ const ReportLayout = ({ data }) => {
                                   chartProperties={section.layout.chartProperties}
                                   legend={section.layout.legend}
                                   legendStyle={section.layout.legendStyle}
+                                  sortBy={section.layout.sortBy}
                                 />
                               );
                               break;

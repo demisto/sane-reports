@@ -115,6 +115,10 @@
         "outerRadius": 80,
         "innerRadius": 40
       },
+      "sortBy": {
+        "values": ["value", "name"],
+        "orders": ["desc", "asc"]
+      },
       "legend": [
         { "name": "Malware", "fill": "#82ca9d" },
         { "name": "Virus", "fill": "#ffbb28" },

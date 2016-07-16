@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import { PieChart, Pie, Legend, Tooltip } from 'recharts';
 import merge from 'lodash/merge';
+import orderBy from 'lodash/orderBy';
 
-const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {} }) => {
+const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
   const dataMap = {};
   data.forEach((item) => (dataMap[item.name.toLowerCase()] = item));
-  const preparedData = [];
+  let preparedData = [];
   legend.forEach((legendItem) => {
     const key = legendItem.name.toLowerCase();
     if (dataMap[key]) {
@@ -14,6 +15,10 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
     }
   });
   Object.keys(dataMap).forEach((key) => preparedData.push(dataMap[key]));
+
+  if (sortBy) {
+    preparedData = orderBy(preparedData, sortBy.values, sortBy.orders);
+  }
 
   return (
     <div className="section-pie-chart" style={style}>
@@ -44,7 +49,8 @@ SectionPieChart.propTypes = {
   dimensions: PropTypes.object,
   chartProperties: PropTypes.object,
   legend: PropTypes.array,
-  legendStyle: PropTypes.object
+  legendStyle: PropTypes.object,
+  sortBy: PropTypes.object
 };
 
 export default SectionPieChart;

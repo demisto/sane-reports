@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
+import orderBy from 'lodash/orderBy';
 
-const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {} }) => {
-  const preparedData = data.map((item) => {
+const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
+  let preparedData = data.map((item) => {
     for (let i = 0; i < legend.length; i++) {
       if (item.relatedTo === legend[i].bar) {
         item[legend[i].name] = item.value;
@@ -10,6 +11,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     }
     return item;
   });
+
+  if (sortBy) {
+    preparedData = orderBy(preparedData, sortBy.values, sortBy.orders);
+  }
 
   return (
     <div className="section-bar-chart" style={style}>
@@ -41,7 +46,8 @@ SectionBarChart.propTypes = {
   dimensions: PropTypes.object,
   chartProperties: PropTypes.object,
   legend: PropTypes.array,
-  legendStyle: PropTypes.object
+  legendStyle: PropTypes.object,
+  sortBy: PropTypes.object
 };
 
 export default SectionBarChart;
