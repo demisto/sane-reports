@@ -155,7 +155,7 @@
         { "name": "DeviceLost", "fill": "#5fa54a" },
         { "name": "Malware", "fill": "#4f8aab" },
         { "name": "Phishing", "fill": "#4f854a" },
-        { "name": "Ransomewhere", "fill": "#5b4185" },
+        { "name": "Ransomware", "fill": "#5b4185" },
         { "name": "UnknownBinary", "fill": "#4faa5b" }
       ]
     }
