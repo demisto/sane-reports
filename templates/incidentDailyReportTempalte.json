@@ -291,7 +291,6 @@
     "layout": {
       "rowPos": 9,
       "style": {
-        "pageBreakBefore": "always"
       }
     }
   },
