@@ -11,7 +11,7 @@ import { REPORT_DATA_TOKEN } from './constants/Constants';
 
 let data = reportData; // eslint-disable-line no-undef
 if (data === REPORT_DATA_TOKEN) {
-  data = TemplateProvider.getIncidentDailyReportTemplate();
+  data = TemplateProvider.getTestTemplate();
 }
 
 ReactDOM.render(

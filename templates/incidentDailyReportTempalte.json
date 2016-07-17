@@ -43,7 +43,7 @@
   },
   {
     "type": "text",
-    "data": "Open incidents: 39",
+    "data": "Last day incidents: 39",
     "layout": {
       "rowPos": 3,
       "columnPos": 2,
@@ -62,6 +62,32 @@
     }
   },
   {
+    "type": "text",
+    "data": "Severity",
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Type",
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
     "type": "chart",
     "data": [
       { "name": "Unknown", "value": 5 },
@@ -71,7 +97,7 @@
       { "name": "Critical", "value": 9 }
     ],
     "layout": {
-      "rowPos": 5,
+      "rowPos": 6,
       "columnPos": 1,
       "chartType": "pie",
       "style": {
@@ -80,10 +106,11 @@
       },
       "dimensions": {
         "width": 300,
-        "height": 220
+        "height": 180
       },
       "chartProperties" : {
         "cy": 75,
+        "cx": 155,
         "startAngle": 90,
         "endAngle": -270,
         "outerRadius": 60,
@@ -119,7 +146,7 @@
       { "name": "UnknownBinary", "value": 4 }
     ],
     "layout": {
-      "rowPos": 5,
+      "rowPos": 6,
       "columnPos": 2,
       "chartType": "pie",
       "style": {
@@ -161,6 +188,32 @@
     }
   },
   {
+    "type": "text",
+    "data": "SLA",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Analyst",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
     "type": "chart",
     "data": [
       { "name": "late", "value": 5 },
@@ -168,7 +221,7 @@
       { "name": "ok", "value": 23 }
     ],
     "layout": {
-      "rowPos": 6,
+      "rowPos": 8,
       "columnPos": 1,
       "chartType": "pie",
       "style": {
@@ -181,6 +234,7 @@
       },
       "chartProperties" : {
         "cy": 75,
+        "cx": 155,
         "startAngle": 90,
         "endAngle": -270,
         "outerRadius": 60,
@@ -210,7 +264,7 @@
       { "name": "Aviad", "relatedTo": 1, "value": 4 }
     ],
     "layout": {
-      "rowPos": 6,
+      "rowPos": 8,
       "columnPos": 2,
       "chartType": "bar",
       "style": {
@@ -235,7 +289,7 @@
   {
     "type": "divider",
     "layout": {
-      "rowPos": 7,
+      "rowPos": 9,
       "style": {
         "pageBreakBefore": "always"
       }
@@ -516,7 +570,7 @@
       }
     ],
     "layout": {
-      "rowPos": 8,
+      "rowPos": 10,
       "columnPos": 1,
       "tableColumns": ["name", "type", "status", "occurred", "severity", "owner", "playbookId"],
       "classes": "striped stackable small very compact"
