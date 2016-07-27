@@ -3,6 +3,8 @@ const page = require('webpage').create();
 const system = require('system');
 const fs = require('fs');
 
+console.log('Starting report server');
+
 if (system.args.length < 2) {
   console.log('Usage: reportServer.js <data file> [<output file> <dist folder> <portrait/landscape>]');
   phantom.exit();
@@ -21,6 +23,8 @@ const date = Date.now();
 
 const tmpReportName = outputFile ? (outputFile.substring(outputFile.lastIndexOf('/'), outputFile.lastIndexOf('.')) + '.html') : 'reportTmp-' + date + '.html';
 fs.write(distFolder + '/' + tmpReportName, html, 'w');
+
+console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
 var baseUrl = distFolder.indexOf('/') === 0 ? distFolder : fs.absolute(".") + '/' + distFolder;
 page.open('file://' + baseUrl + '/' + tmpReportName, function(status) {
