@@ -3,6 +3,21 @@ const page = require('webpage').create();
 const system = require('system');
 const fs = require('fs');
 
+page.settings.resourceTimeout = 50000;
+
+phantom.onError = function(msg, trace) {
+  var msgStack = ['PHANTOMJS ERROR: ' + msg];
+  if (trace && trace.length) {
+    msgStack.push('TRACE:');
+    trace.forEach(function(t) {
+      msgStack.push(' -> ' + (t.file || t.sourceURL) + ': ' + t.line + (t.function ? ' (in function ' + t.function +')' : ''));
+    });
+  }
+  console.error(msgStack.join('\n'));
+  phantom.exit(1);
+};
+
+
 console.log('Starting report server');
 console.log('Using PhantomJS version ' +
     phantom.version.major + '.' +
@@ -12,7 +27,7 @@ console.log('Using PhantomJS version ' +
 
 if (system.args.length < 2) {
   console.log('Usage: reportServer.js <data file> [<output file> <dist folder> <portrait/landscape>]');
-  phantom.exit();
+  phantom.exit(1);
 }
 
 var dataFile = system.args[1];
@@ -32,29 +47,35 @@ fs.write(distFolder + '/' + tmpReportName, html, 'w');
 console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
 var baseUrl = distFolder.indexOf('/') === 0 ? distFolder : fs.absolute(".") + '/' + distFolder;
-page.open('file://' + baseUrl + '/' + tmpReportName, function(status) {
-  console.log("Read report page status: " + status);
 
-  page.paperSize = {
-    format: 'letter', // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
-    orientation: orientation || 'portrait', // portrait / landscape
-    margin: {
-      top: "1cm",
-      bottom: "1cm"
-    }
-  };
+try {
+  page.open('file://' + baseUrl + '/' + tmpReportName, function (status) {
+    console.log("Read report page status: " + status);
 
-  if (status === "success") {
-    setTimeout(function() {
-      if (page.render(outputFile || distFolder + '/report-' + date + '.pdf', { quality: 100 })) {
-        console.log("Report was generated successfully.");
-      } else {
-        console.log("Failed to generate report.");
+    page.paperSize = {
+      format: 'letter', // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
+      orientation: orientation || 'portrait', // portrait / landscape
+      margin: {
+        top: "1cm",
+        bottom: "1cm"
       }
-      phantom.exit();
-    }, 5000);
-  } else {
-    console.log("Cannot open report page.");
-    phantom.exit();
-  }
-});
+    };
+
+    if (status === "success") {
+      setTimeout(function () {
+        if (page.render(outputFile || distFolder + '/report-' + date + '.pdf', {quality: 100})) {
+          console.log("Report was generated successfully.");
+        } else {
+          console.log("Failed to generate report.");
+        }
+        phantom.exit();
+      }, 5000);
+    } else {
+      console.log("Cannot open report page.");
+      phantom.exit(1);
+    }
+  });
+} catch (ex) {
+  console.log("Error when opening html report: " + ex);
+  phantom.exit(1);
+}
