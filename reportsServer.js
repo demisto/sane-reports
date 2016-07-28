@@ -3,7 +3,7 @@ const page = require('webpage').create();
 const system = require('system');
 const fs = require('fs');
 
-page.settings.resourceTimeout = 50000;
+page.settings.resourceTimeout = 50;
 
 phantom.onError = function(msg, trace) {
   var msgStack = ['PHANTOMJS ERROR: ' + msg];
