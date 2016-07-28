@@ -3,8 +3,6 @@ const page = require('webpage').create();
 const system = require('system');
 const fs = require('fs');
 
-page.settings.resourceTimeout = 50;
-
 phantom.onError = function(msg, trace) {
   var msgStack = ['PHANTOMJS ERROR: ' + msg];
   if (trace && trace.length) {
@@ -26,7 +24,7 @@ console.log('Using PhantomJS version ' +
 );
 
 if (system.args.length < 2) {
-  console.log('Usage: reportServer.js <data file> [<output file> <dist folder> <portrait/landscape>]');
+  console.log('Usage: reportServer.js <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout>]');
   phantom.exit(1);
 }
 
@@ -34,6 +32,9 @@ var dataFile = system.args[1];
 var outputFile = system.args[2];
 var distDir = system.args[3];
 var orientation = system.args[4];
+var resourceTimeout = system.args[5];
+
+page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 50;
 
 const distFolder = distDir || (fs.absolute(".") + '/dist');
 
