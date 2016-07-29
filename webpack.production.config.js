@@ -7,6 +7,7 @@ const postcssImport = require('postcss-import');
 const postcssCssnext = require('postcss-cssnext');
 const postcssReporter = require('postcss-reporter');
 const AssetsPlugin = require('assets-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 module.exports = {
   entry: {
@@ -30,7 +31,13 @@ module.exports = {
       filename: 'index.html',
       template: 'index.template.html'
     }),
-    new AssetsPlugin()
+    new AssetsPlugin(),
+    new WebpackShellPlugin({
+      onBuildEnd: [
+        'sed -i -e \'s/@import url(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin);//g\' node_modules/semantic-ui/dist/components/site.min.css && ' +  // eslint-disable-line
+        'sed -i -e \'s/@import url(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin);//g\' node_modules/semantic-ui/dist/semantic.min.css'  // eslint-disable-line
+      ]
+    })
   ],
   module: {
     loaders: [

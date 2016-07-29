@@ -7,6 +7,7 @@ const postcssUrl = require('postcss-url');
 const postcssImport = require('postcss-import');
 const postcssCssnext = require('postcss-cssnext');
 const postcssReporter = require('postcss-reporter');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 module.exports = {
   entry: {
@@ -25,6 +26,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.template.html'
+    }),
+    new WebpackShellPlugin({
+      onBuildEnd: [
+        'sed -i -e \'s/@import url(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin);//g\' node_modules/semantic-ui/dist/components/site.min.css && ' +  // eslint-disable-line
+        'sed -i -e \'s/@import url(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin);//g\' node_modules/semantic-ui/dist/semantic.min.css'  // eslint-disable-line
+      ]
     })
   ],
   module: {
