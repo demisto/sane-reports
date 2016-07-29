@@ -2,19 +2,30 @@ import React, { PropTypes } from 'react';
 import { PieChart, Pie, Legend, Tooltip } from 'recharts';
 import merge from 'lodash/merge';
 import orderBy from 'lodash/orderBy';
+import { getGraphColorByName } from '../../../utils/colors';
 
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
   const dataMap = {};
+  const existingColors = {};
   data.forEach((item) => (dataMap[item.name.toLowerCase()] = item));
   let preparedData = [];
   legend.forEach((legendItem) => {
     const key = legendItem.name.toLowerCase();
     if (dataMap[key]) {
+      if (!legendItem.fill) {
+        legendItem.fill = getGraphColorByName(dataMap[key].name);
+      }
+      existingColors[legendItem.fill] = true;
       preparedData.push(merge(dataMap[key], legendItem));
       delete dataMap[key];
     }
   });
-  Object.keys(dataMap).forEach((key) => preparedData.push(dataMap[key]));
+  Object.keys(dataMap).forEach((key) => {
+    const graphItem = dataMap[key];
+    graphItem.fill = getGraphColorByName(graphItem.name, existingColors);
+    existingColors[graphItem.fill] = true;
+    return preparedData.push(graphItem);
+  });
 
   if (sortBy) {
     preparedData = orderBy(preparedData, sortBy.values, sortBy.orders);

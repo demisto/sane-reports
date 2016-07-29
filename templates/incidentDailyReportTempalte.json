@@ -143,7 +143,10 @@
       { "name": "Phishing", "value": 8 },
       { "name": "wow", "value": 7 },
       { "name": "Ransomware", "value": 8 },
-      { "name": "UnknownBinary", "value": 4 }
+      { "name": "UnknownBinary", "value": 4 },
+      { "name": "Type 1", "value": 4 },
+      { "name": "Type 2", "value": 2 },
+      { "name": "type 3", "value": 7 }
     ],
     "layout": {
       "rowPos": 6,

@@ -1,10 +1,14 @@
 import React, { PropTypes } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import orderBy from 'lodash/orderBy';
+import { getGraphColorByName } from '../../../utils/colors';
 
-const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
+const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null, sortBy }) => {
+  const existingColors = {};
   let preparedData = data.map((item) => {
     for (let i = 0; i < legend.length; i++) {
+      item.fill = item.fill || getGraphColorByName(item.name, existingColors);
+      existingColors[item.fill] = true;
       if (item.relatedTo === legend[i].bar) {
         item[legend[i].name] = item.value;
       }
@@ -31,7 +35,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         {chartProperties.layout === 'horizontal' && <XAxis tick dataKey="name" type="category" />}
         <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
         <Tooltip />
-        <Legend {...legendStyle} />
+        {legendStyle && Object.keys(legendStyle) > 0 && <Legend {...legendStyle} />}
         {legend.map((item) => <Bar key={item.name} dataKey={item.name} fill={item.fill} />)}
       </BarChart>
     </div>
