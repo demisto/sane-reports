@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react';
 import { ReportLayout } from '../components';
 
-const ReportContainer = ({ data }) =>
-  <ReportLayout data={data} />
-;
+const ReportContainer = ({ sections }) => {
+  return (
+    <ReportLayout sections={sections} />
+  );
+};
 ReportContainer.propTypes = {
-  data: PropTypes.array
+  sections: PropTypes.object
 };
 
 export default ReportContainer;

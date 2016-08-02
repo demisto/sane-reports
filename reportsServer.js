@@ -24,7 +24,7 @@ console.log('Using PhantomJS version ' +
 );
 
 if (system.args.length < 2) {
-  console.log('Usage: reportServer.js <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout>]');
+  console.log('Usage: reportServer.js <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout> <type>]');
   phantom.exit(1);
 }
 
@@ -33,13 +33,16 @@ var outputFile = system.args[2];
 var distDir = system.args[3];
 var orientation = system.args[4];
 var resourceTimeout = system.args[5];
+var reportType = system.args[6] || 'pdf';
 
 page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 50;
 
 const distFolder = distDir || (fs.absolute(".") + '/dist');
 
 const loaded = fs.read(dataFile);
-const html = fs.read(distFolder + '/index.html').replace('\'{report-data-to-replace}\'', loaded);
+const html = fs.read(distFolder + '/index.html')
+    .replace('\'{report-data-to-replace}\'', loaded)
+    .replace('\'{report-type}\'', JSON.stringify(reportType));
 const date = Date.now();
 
 const tmpReportName = outputFile ? (outputFile.substring(outputFile.lastIndexOf('/'), outputFile.lastIndexOf('.')) + '.html') : 'reportTmp-' + date + '.html';
@@ -53,24 +56,41 @@ try {
   page.open('file://' + baseUrl + '/' + tmpReportName, function (status) {
     console.log("Read report page status: " + status);
 
-    page.paperSize = {
-      format: 'letter', // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
-      orientation: orientation || 'portrait', // portrait / landscape
-      margin: {
-        top: "1cm",
-        bottom: "1cm"
-      }
-    };
-
     if (status === "success") {
-      setTimeout(function () {
-        if (page.render(outputFile || distFolder + '/report-' + date + '.pdf', {quality: 100})) {
-          console.log("Report was generated successfully.");
-        } else {
-          console.log("Failed to generate report.");
-        }
-        phantom.exit();
-      }, 5000);
+      switch (reportType) {
+        case 'pdf':
+          page.paperSize = {
+            format: 'letter', // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
+            orientation: orientation || 'portrait', // portrait / landscape
+            margin: {
+              top: "1cm",
+              bottom: "1cm"
+            }
+          };
+
+          setTimeout(function () {
+            if (page.render(outputFile || distFolder + '/report-' + date + '.pdf', { quality: 100 })) {
+              console.log("PDF report was generated successfully.");
+            } else {
+              console.log("Failed to generate PDF report.");
+            }
+            phantom.exit();
+          }, 5000);
+
+          break;
+        case 'csv':
+          var csvData = page.evaluate(function() {
+            return document.csvData;
+          });
+          if (csvData) {
+            fs.write(outputFile || distFolder + '/report-' + date + '.csv', csvData, 'w');
+            console.log("CSV report was generated successfully.");
+          } else {
+            console.log("Failed to generate CSV report.");
+          }
+          phantom.exit();
+          break;
+      }
     } else {
       console.log("Cannot open report page.");
       phantom.exit(1);

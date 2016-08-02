@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import { React, mount, expect, TemplateProvider } from '../helpers/test_helper';
+import { prepareSections } from '../../src/utils/reports';
 import ReportContainer from '../../src/containers/ReportContainer';
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider }
@@ -9,7 +10,7 @@ import { BarChart, PieChart, Pie } from 'recharts';
 describe('Report Container', () => {
   it('Generate test template report', () => {
     const testTemplate = TemplateProvider.getTestTemplate();
-    const toRender = <ReportContainer data={testTemplate} />;
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
 
     const reportLayouts = reportContainer.find(ReportLayout);

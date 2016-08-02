@@ -4,43 +4,7 @@ import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, Se
     from '../Sections';
 import { SECTION_TYPES } from '../../constants/Constants';
 
-function sortReportSections(sec1, sec2) {
-  const sec1RowPos = sec1.layout.rowPos;
-  const sec2RowPos = sec2.layout.rowPos;
-  const sec1ColumnPos = sec1.layout.columnPos;
-  const sec2ColumnPos = sec2.layout.columnPos;
-
-  let result;
-  if (sec1RowPos === sec2RowPos) {
-    result = (sec1ColumnPos < sec2ColumnPos) ? -1 : (sec1ColumnPos > sec2ColumnPos) ? 1 : 0; // eslint-disable-line
-  } else {
-    result = (sec1RowPos < sec2RowPos) ? -1 : 1;
-  }
-
-  return result;
-}
-
-function prepareSections(data) {
-  data.sort(sortReportSections);
-
-  const rows = {};
-
-  if (data) {
-    data.forEach((section) => {
-      if (rows[section.layout.rowPos]) {
-        rows[section.layout.rowPos].push(section);
-      } else {
-        rows[section.layout.rowPos] = [section];
-      }
-    });
-  }
-
-  return rows;
-}
-
-const ReportLayout = ({ data }) => {
-  const sections = prepareSections(data);
-
+const ReportLayout = ({ sections }) => {
   return (
     <div className="report-layout">
       {
@@ -141,7 +105,7 @@ const ReportLayout = ({ data }) => {
   );
 };
 ReportLayout.propTypes = {
-  data: PropTypes.array
+  sections: PropTypes.object
 };
 
 export default ReportLayout;
