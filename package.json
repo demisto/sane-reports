@@ -28,6 +28,9 @@
     "check": "npm run lint && npm run test",
     "check-versions": "ncu"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "dependencies": {
     "babel-runtime": "^6.6.1",
     "classnames": "^2.2.3",
