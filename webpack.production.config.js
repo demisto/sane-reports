@@ -32,9 +32,6 @@ module.exports = {
       template: 'index.template.html'
     }),
     new AssetsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    }),
     new WebpackShellPlugin({
       onBuildEnd: [
         'sed -i -e \'s/@import url(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin);//g\' node_modules/semantic-ui/dist/components/site.min.css && ' +  // eslint-disable-line
