@@ -39,14 +39,16 @@ page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 50;
 
 const distFolder = distDir || (fs.absolute(".") + '/dist');
 
-const loaded = fs.read(dataFile);
-const html = fs.read(distFolder + '/index.html')
-    .replace('\'{report-data-to-replace}\'', loaded)
-    .replace('\'{report-type}\'', JSON.stringify(reportType));
+const indexHtml = fs.read(distFolder + '/index.html');
+const afterTypeReplace = indexHtml.replace('\'{report-type}\'', JSON.stringify(reportType));
+
+const loadedData = fs.read(dataFile);
+const finalHtmlData = afterTypeReplace.replace('\'{report-data-to-replace}\'', loadedData);
+
 const date = Date.now();
 
 const tmpReportName = outputFile ? (outputFile.substring(outputFile.lastIndexOf('/'), outputFile.lastIndexOf('.')) + '.html') : 'reportTmp-' + date + '.html';
-fs.write(distFolder + '/' + tmpReportName, html, 'w');
+fs.write(distFolder + '/' + tmpReportName, finalHtmlData, 'w');
 
 console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
