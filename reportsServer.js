@@ -22,6 +22,9 @@ console.log('Using PhantomJS version ' +
     phantom.version.minor + '.' +
     phantom.version.patch
 );
+console.log('Agent details: ' +
+    page.settings.userAgent
+);
 
 if (system.args.length < 2) {
   console.log('Usage: reportServer.js <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout> <type>]');
