@@ -46,7 +46,9 @@ const indexHtml = fs.read(distFolder + '/index.html');
 const afterTypeReplace = indexHtml.replace('\'{report-type}\'', JSON.stringify(reportType));
 
 const loadedData = fs.read(dataFile);
-const finalHtmlData = afterTypeReplace.replace('\'{report-data-to-replace}\'', loadedData);
+
+// $ is a special character in string replace, see here: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter
+const finalHtmlData = afterTypeReplace.replace('\'{report-data-to-replace}\'', loadedData.replace('$', '$$$$'));
 
 const date = Date.now();
 
