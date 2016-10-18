@@ -48,7 +48,7 @@ const afterTypeReplace = indexHtml.replace('\'{report-type}\'', JSON.stringify(r
 const loadedData = fs.read(dataFile);
 
 // $ is a special character in string replace, see here: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter
-const finalHtmlData = afterTypeReplace.replace('\'{report-data-to-replace}\'', loadedData.replace('$', '$$$$'));
+const finalHtmlData = afterTypeReplace.replace('\'{report-data-to-replace}\'', loadedData.replace(/\$/g, '$$$$'));
 
 const date = Date.now();
 
@@ -78,6 +78,11 @@ try {
           setTimeout(function () {
             if (page.render(outputFile || distFolder + '/report-' + date + '.pdf', { quality: 100 })) {
               console.log("PDF report was generated successfully.");
+              try {
+                fs.remove(distFolder + '/' + tmpReportName);
+              } catch (ignored) {
+                // do nothing
+              }
             } else {
               console.log("Failed to generate PDF report.");
             }
