@@ -5,7 +5,7 @@ import { getGraphColorByName } from '../../../utils/colors';
 const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null,
     referenceLineX, referenceLineY }) => {
   const existingColors = {};
-  let preparedData = data.map((item) => {
+  const preparedData = data.map((item) => {
     item.stroke = item.stroke || getGraphColorByName(item.name, existingColors);
     existingColors[item.stroke] = true;
     return item;
