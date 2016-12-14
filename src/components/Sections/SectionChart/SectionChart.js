@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import SectionBarChart from './SectionBarChart';
 import SectionPieChart from './SectionPieChart';
+import SectionLineChart from './SectionLineChart';
 import { CHART_TYPES } from '../../../constants/Constants';
 
-const SectionChart = ({ type, data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) =>
+const SectionChart = ({ type, data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
+        referenceLineX, referenceLineY }) =>
   <div className="section-chart" style={style}>
     {
       (() => {
@@ -35,6 +37,21 @@ const SectionChart = ({ type, data, style, dimensions, legend, chartProperties =
               />
             );
             break;
+          case CHART_TYPES.line:
+            chartToRender = (
+              <SectionLineChart
+                data={data}
+                style={style}
+                dimensions={dimensions}
+                legend={legend}
+                chartProperties={chartProperties}
+                legendStyle={legendStyle}
+                sortBy={sortBy}
+                referenceLineX={referenceLineX}
+                referenceLineY={referenceLineY}
+              />
+            );
+            break;
           default:
             // Ignored
         }
@@ -54,7 +71,9 @@ SectionChart.propTypes = {
   chartProperties: PropTypes.object,
   legend: PropTypes.array,
   legendStyle: PropTypes.object,
-  sortBy: PropTypes.object
+  sortBy: PropTypes.object,
+  referenceLineX: PropTypes.object,
+  referenceLineY: PropTypes.object
 };
 
 export default SectionChart;

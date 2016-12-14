@@ -1,0 +1,19 @@
+@import (reference) "../../css/variables";
+
+.section-markdown {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+
+  .hljs {
+    display: inline-block !important;
+  }
+
+  .markdown {
+    &.blockquote {
+      padding: 0 15px;
+      margin-left: 0;
+      color: #777;
+      border-left: 4px solid @brand-color;
+    }
+  }
+}

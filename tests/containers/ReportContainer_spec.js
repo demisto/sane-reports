@@ -3,8 +3,8 @@ import { React, mount, expect, TemplateProvider } from '../helpers/test_helper';
 import { prepareSections } from '../../src/utils/reports';
 import ReportContainer from '../../src/containers/ReportContainer';
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
-import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider }
-    from '../../src/components/Sections';
+import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
+  SectionMarkdown, SectionJson } from '../../src/components/Sections';
 import { BarChart, PieChart, Pie } from 'recharts';
 
 describe('Report Container', () => {
@@ -17,8 +17,8 @@ describe('Report Container', () => {
     const rows = reportContainer.find('.report-row');
     const sections = reportContainer.find('.report-section');
     expect(reportLayouts).to.have.length(1);
-    expect(rows).to.have.length(19);
-    expect(sections).to.have.length(20);
+    expect(rows).to.have.length(22);
+    expect(sections).to.have.length(23);
 
     const sec1 = testTemplate[0];
     const sec2 = testTemplate[1];
@@ -40,6 +40,9 @@ describe('Report Container', () => {
     const sec18 = testTemplate[17];
     const sec19 = testTemplate[18];
     const sec20 = testTemplate[19];
+    const sec21 = testTemplate[20];
+    const sec22 = testTemplate[21];
+    const sec23 = testTemplate[22];
 
     // Do the same as .textContent - keep it for future reference
     expect(rows.at(0).text()).to.contains(sec1.data);
@@ -116,7 +119,7 @@ describe('Report Container', () => {
 
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
-    expect(sectionTable).to.have.length(2);
+    expect(sectionTable).to.have.length(3);
     expect(sectionTable.at(0).props().columns).to.equal(sec9.layout.tableColumns);
     expect(sectionTable.at(0).props().data).to.equal(sec9.data);
     expect(sectionTable.at(0).props().classes).to.equal(sec9.layout.classes);
@@ -125,19 +128,30 @@ describe('Report Container', () => {
     expect(sectionTable.at(1).props().data).to.equal(sec10.data);
     expect(sectionTable.at(1).props().classes).to.equal(sec10.layout.classes);
 
+    expect(sectionTable.at(2).props().columns).to.equal(sec21.layout.tableColumns);
+    expect(sectionTable.at(2).props().data).to.equal(sec21.data);
+    expect(sectionTable.at(2).props().classes).to.equal(sec21.layout.classes);
+
     const tableEl = reportContainer.find('table');
     const tableHeader = reportContainer.find('th');
-    expect(tableEl).to.have.length(2);
-    expect(tableHeader).to.have.length(8);
+    expect(tableEl).to.have.length(4);
+    expect(tableHeader).to.have.length(13);
     expect(tableHeader.at(0).text()).to.equal(sec9.layout.tableColumns[0]);
     expect(tableHeader.at(1).text()).to.equal(sec9.layout.tableColumns[1]);
     expect(tableHeader.at(2).text()).to.equal(sec9.layout.tableColumns[2]);
     expect(tableHeader.at(3).text()).to.equal(sec9.layout.tableColumns[3]);
 
-    expect(tableHeader.at(0).text()).to.equal(sec10.layout.tableColumns[0]);
-    expect(tableHeader.at(1).text()).to.equal(sec10.layout.tableColumns[2]);
-    expect(tableHeader.at(2).text()).to.equal(sec10.layout.tableColumns[1]);
-    expect(tableHeader.at(3).text()).to.equal(sec10.layout.tableColumns[3]);
+    expect(tableHeader.at(4).text()).to.equal(sec10.layout.tableColumns[0]);
+    expect(tableHeader.at(5).text()).to.equal(sec10.layout.tableColumns[1]);
+    expect(tableHeader.at(6).text()).to.equal(sec10.layout.tableColumns[2]);
+    expect(tableHeader.at(7).text()).to.equal(sec10.layout.tableColumns[3]);
+
+    expect(tableHeader.at(8).text()).to.equal(sec21.layout.tableColumns[0]);
+    expect(tableHeader.at(9).text()).to.equal(sec21.layout.tableColumns[1]);
+    expect(tableHeader.at(10).text()).to.equal(sec21.layout.tableColumns[2]);
+
+    expect(tableHeader.at(11).text()).to.equal('Field');
+    expect(tableHeader.at(12).text()).to.equal('Data');
 
     // Images
     const sectionImage = reportContainer.find(SectionImage);
@@ -183,5 +197,26 @@ describe('Report Container', () => {
 
     const dividerEl = reportContainer.find('.section-divider');
     expect(dividerEl).to.have.length(1);
+
+    // Markdown
+    const sectionMarkdown = reportContainer.find(SectionMarkdown);
+    expect(sectionMarkdown).to.have.length(1);
+    expect(sectionMarkdown.at(0).props().text).to.equal(sec22.data);
+    expect(sectionMarkdown.at(0).props().style).to.equal(sec22.layout.style);
+
+    // JSON
+    const sectionJSON = reportContainer.find(SectionJson);
+    expect(sectionJSON).to.have.length(1);
+    expect(sectionJSON.at(0).props().data).to.equal(sec23.data);
+    expect(sectionJSON.at(0).props().style).to.equal(sec23.layout.style);
+    const jsonInspectorKey = reportContainer.find('.json-inspector__key');
+    const jsonInspectorValue = reportContainer.find('.json-inspector__value_string');
+    expect(jsonInspectorKey).to.have.length(4);
+    expect(jsonInspectorValue).to.have.length(1);
+    expect(jsonInspectorKey.at(0).text()).to.equal('root:');
+    expect(jsonInspectorKey.at(1).text()).to.equal('hello:');
+    expect(jsonInspectorKey.at(2).text()).to.equal('how:');
+    expect(jsonInspectorKey.at(3).text()).to.equal('are:');
+    expect(jsonInspectorValue.at(0).text()).to.equal('you?');
   });
 });

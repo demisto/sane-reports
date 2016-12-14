@@ -4,7 +4,7 @@ const system = require('system');
 const fs = require('fs');
 
 phantom.onError = function(msg, trace) {
-  var msgStack = ['PHANTOMJS ERROR: ' + msg];
+  const msgStack = ['PHANTOMJS ERROR: ' + msg];
   if (trace && trace.length) {
     msgStack.push('TRACE:');
     trace.forEach(function(t) {
@@ -31,14 +31,14 @@ if (system.args.length < 2) {
   phantom.exit(1);
 }
 
-var dataFile = system.args[1];
-var outputFile = system.args[2];
-var distDir = system.args[3];
-var orientation = system.args[4];
-var resourceTimeout = system.args[5];
-var reportType = system.args[6] || 'pdf';
+const dataFile = system.args[1];
+const outputFile = system.args[2];
+const distDir = system.args[3];
+const orientation = system.args[4];
+const resourceTimeout = system.args[5];
+const reportType = system.args[6] || 'pdf';
 
-page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 50;
+page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 1000;
 
 const distFolder = distDir || (fs.absolute(".") + '/dist');
 
@@ -57,41 +57,49 @@ fs.write(distFolder + '/' + tmpReportName, finalHtmlData, 'w');
 
 console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
-var baseUrl = distFolder.indexOf('/') === 0 ? distFolder : fs.absolute(".") + '/' + distFolder;
+const baseUrl = distFolder.indexOf('/') === 0 ? distFolder : fs.absolute(".") + '/' + distFolder;
 
 try {
+  page.paperSize = {
+    format: 'letter', // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
+    orientation: orientation || 'portrait', // portrait / landscape
+    margin: {
+      top: "1cm",
+      bottom: "1cm"
+    }
+  };
+
+  page.onLoadFinished = function (status) {
+    if (status !== "success") {
+      console.log("Page was not loaded.");
+      phantom.exit(1);
+    }
+
+    if (reportType === 'pdf') {
+      setTimeout(function () {
+        if (page.render(outputFile || distFolder + '/report-' + date + '.pdf', {quality: 100})) {
+          console.log("PDF report was generated successfully.");
+          try {
+            page.close();
+            fs.remove(distFolder + '/' + tmpReportName);
+          } catch (ignored) {
+            // do nothing
+          }
+        } else {
+          console.log("Failed to generate PDF report.");
+        }
+        phantom.exit();
+      }, 3000); // time out is needed for all animation to be finished
+    }
+  };
+
   page.open('file://' + baseUrl + '/' + tmpReportName, function (status) {
     console.log("Read report page status: " + status);
 
     if (status === "success") {
       switch (reportType) {
-        case 'pdf':
-          page.paperSize = {
-            format: 'letter', // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
-            orientation: orientation || 'portrait', // portrait / landscape
-            margin: {
-              top: "1cm",
-              bottom: "1cm"
-            }
-          };
-
-          setTimeout(function () {
-            if (page.render(outputFile || distFolder + '/report-' + date + '.pdf', { quality: 100 })) {
-              console.log("PDF report was generated successfully.");
-              try {
-                fs.remove(distFolder + '/' + tmpReportName);
-              } catch (ignored) {
-                // do nothing
-              }
-            } else {
-              console.log("Failed to generate PDF report.");
-            }
-            phantom.exit();
-          }, 5000);
-
-          break;
         case 'csv':
-          var csvData = page.evaluate(function() {
+          const csvData = page.evaluate(function() {
             return document.csvData;
           });
           if (csvData) {

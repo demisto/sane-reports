@@ -28,6 +28,9 @@ function filterSectionsAccordingToReportType(reportData, reportType) {
           shouldShow = true;
         }
         break;
+      case REPORT_TYPES.pdf:
+        shouldShow = section.type !== SECTION_TYPES.globalSection;
+        break;
       default:
         shouldShow = true;
     }
@@ -36,16 +39,23 @@ function filterSectionsAccordingToReportType(reportData, reportType) {
 }
 
 export function prepareSections(reportData, reportType) {
-  const rows = {};
+  let rows = {};
 
   if (reportData) {
     reportData.sort(sortReportSections);
-    const filteredData = filterSectionsAccordingToReportType(reportData, reportType);
-    filteredData.forEach((section) => {
+
+    reportData.forEach((section) => {
+      if (section.type === SECTION_TYPES.globalSection) {
+        rows = prepareSections(section.data, reportType);
+      }
+    });
+
+    filterSectionsAccordingToReportType(reportData, reportType).forEach((section) => {
       if (rows[section.layout.rowPos]) {
         rows[section.layout.rowPos].push(section);
       } else {
         rows[section.layout.rowPos] = [section];
+        rows[section.layout.rowPos].style = section.layout.rowStyle || {};
       }
     });
   }

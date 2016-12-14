@@ -1,6 +1,7 @@
 import './ReportLayout.less';
 import React, { PropTypes } from 'react';
-import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider }
+import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
+  SectionMarkdown, SectionJson }
     from '../Sections';
 import { SECTION_TYPES } from '../../constants/Constants';
 
@@ -11,7 +12,7 @@ const ReportLayout = ({ sections }) => {
         Object
           .keys(sections)
           .map((rowPos) =>
-            <div className="report-row" key={rowPos}>
+            <div className="report-row" key={rowPos} style={sections[rowPos].style}>
               {
                 sections[rowPos]
                   .map((section) =>
@@ -35,6 +36,14 @@ const ReportLayout = ({ sections }) => {
                             case SECTION_TYPES.text:
                               sectionToRender = (
                                 <SectionText
+                                  text={section.data}
+                                  style={section.layout.style}
+                                />
+                              );
+                              break;
+                            case SECTION_TYPES.markdown:
+                              sectionToRender = (
+                                <SectionMarkdown
                                   text={section.data}
                                   style={section.layout.style}
                                 />
@@ -70,6 +79,8 @@ const ReportLayout = ({ sections }) => {
                                   legend={section.layout.legend}
                                   legendStyle={section.layout.legendStyle}
                                   sortBy={section.layout.sortBy}
+                                  referenceLineX={section.layout.referenceLineX}
+                                  referenceLineY={section.layout.referenceLineY}
                                 />
                               );
                               break;
@@ -79,6 +90,15 @@ const ReportLayout = ({ sections }) => {
                                   data={section.data}
                                   columns={section.layout.tableColumns}
                                   classes={section.layout.classes}
+                                  style={section.layout.style}
+                                />
+                              );
+                              break;
+                            case SECTION_TYPES.json:
+                              sectionToRender = (
+                                <SectionJson
+                                  data={section.data}
+                                  style={section.layout.style}
                                 />
                               );
                               break;

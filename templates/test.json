@@ -51,7 +51,7 @@
   {
     "type": "chart",
     "data": [
-      { "name": "Slavik", "relatedTo": 1, "value": 8 },
+      { "name": "Slavik", "relatedTo": 1, "value": 8, "details": "some$'" },
       { "name": "Guy", "relatedTo": 1, "value": 3 },
       { "name": "Meir", "relatedTo": 1, "value": 3 },
       { "name": "Aviad", "relatedTo": 1, "value": 2 }
@@ -285,6 +285,59 @@
     "layout": {
       "rowPos": 19,
       "style": {
+      }
+    }
+  },
+  {
+    "type": "table",
+    "data": [
+      {
+        "Name": "Gregg Salkovitch",
+        "Email": "gregg@othercomapny.com",
+        "Phone Number": "+650-254-6494"
+      },
+      {
+        "Name": "Omer Lennon",
+        "Email": "omer@othercomapny.com",
+        "Phone Number": "+650-254-6495"
+      }
+    ],
+    "layout": {
+      "rowPos": 8100,
+      "columnPos": 100,
+      "tableColumns": ["Name", "Email", "Phone Number"],
+      "classes": "collapsing selectable unstackable"
+    }
+  },
+  {
+    "type": "markdown",
+    "data": "|Field|Data|\n|-|-|\n|boolean|true|\n|date|Tue, 13 Dec 2016 15:35:29 IST|\n|longtext|sdasdfjkasdlfj sdasdfjkasdlfj sdasdfjkasdlfj sdasdfjkasdlfj sdasdfjkasdlfj|\n|multiselect|world, hello|\n|shorttext|world, hello|\n",
+    "layout": {
+      "rowPos": 8200,
+      "columnPos": 100,
+      "style": {
+        "color": "#555555",
+        "fontSize": 14,
+        "backgroundColor": "#ffffff",
+        "padding": 6,
+        "border": "1px solid #d4d4d4",
+        "marginTop": -9
+      }
+    }
+  },
+  {
+    "type": "json",
+    "data": "{\"hello\":{\"how\":{\"are\":\"you?\"}}}",
+    "layout": {
+      "rowPos": 8300,
+      "columnPos": 100,
+      "style": {
+        "color": "#555555",
+        "fontSize": 14,
+        "backgroundColor": "#ffffff",
+        "padding": 6,
+        "border": "1px solid #d4d4d4",
+        "marginTop": -9
       }
     }
   }
