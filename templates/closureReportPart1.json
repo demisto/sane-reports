@@ -1008,95 +1008,107 @@
     }
   },
   {
-    "type": "text",
-    "data": "Generate IOC for malicious URL from SIEM Threat Feed  #30  (skipped)",
+    "type": "globalSection",
     "layout": {
       "rowPos": 7200,
-      "columnPos": 100,
-      "style": {
-        "textAlign": "left",
-        "fontSize": 20,
-        "color": "red"
-      }
-    }
-  },
-  {
-    "type": "text",
-    "data": "1. Get the list of flagged URLs/hashes from the Investigation Step\n2. Check the URL against threat feed (virustotal, IBM Xforce).\n3. Check your SIEM for threat feeds and see if there are IOC related to the URLs\n4. Subscribe to the feed in SIEM. This will install the relevant IoCs into our SIEM automatically.\n5. If none of the IoCs are on the TI feed, you need to generate IoCs manually in next step",
-    "layout": {
-      "rowPos": 7300,
-      "columnPos": 100,
-      "style": {
-        "textAlign": "left",
-        "fontSize": 16
-      }
-    }
-  },
-  {
-    "type": "text",
-    "data": "",
-    "layout": {
-      "rowPos": 7400,
       "columnPos": 100
-    }
-  },
-  {
-    "type": "text",
-    "data": "Generate IOC for malicious URL manually  #31 (skipped)",
-    "layout": {
-      "rowPos": 7500,
-      "columnPos": 100,
-      "style": {
-        "textAlign": "left",
-        "fontSize": 20,
-        "color": "red"
+    },
+    "data": [
+      {
+        "type": "text",
+        "data": "Generate IOC for malicious URL from SIEM Threat Feed  #30  (skipped)",
+        "layout": {
+          "rowPos": 7201,
+          "columnPos": 100,
+          "style": {
+            "textAlign": "left",
+            "fontSize": 20,
+            "color": "red"
+          }
+        }
+      },
+      {
+        "type": "text",
+        "data": "1. Get the list of flagged URLs/hashes from the Investigation Step\n2. Check the URL against threat feed (virustotal, IBM Xforce).\n3. Check your SIEM for threat feeds and see if there are IOC related to the URLs\n4. Subscribe to the feed in SIEM. This will install the relevant IoCs into our SIEM automatically.\n5. If none of the IoCs are on the TI feed, you need to generate IoCs manually in next step",
+        "layout": {
+          "rowPos": 7300,
+          "columnPos": 100,
+          "style": {
+            "textAlign": "left",
+            "fontSize": 16,
+            "marginTop": -10
+          }
+        }
+      },
+      {
+        "type": "text",
+        "data": "",
+        "layout": {
+          "rowPos": 7400,
+          "columnPos": 100
+        }
+      },
+      {
+        "type": "text",
+        "data": "Generate IOC for malicious URL manually  #31 (skipped)",
+        "layout": {
+          "rowPos": 7500,
+          "columnPos": 100,
+          "style": {
+            "textAlign": "left",
+            "fontSize": 20,
+            "color": "red"
+          }
+        }
+      },
+      {
+        "type": "text",
+        "data": "1. Go to the proxy logs again\n2. Find 2-3 properties associated with the flagged URL, such as:\n     The request is POST\n     The User-Agent field is dodgy (Java, Python, IE6 etc.)\n     URL contains more than 128 random characters\n     URL contains .php\n     URL contains lots of slashes (/)\n     URL contains WordPress related things (wp-content)\n     URL contains dodgy TLDs (for instance .tk, .ru)\n\n3. Test your assumption on the proxy logs in the SIEM. Use your pattern and check how many false positives and true positives it produces.\n4. If the pattern is good enough, append your results to the investigation. ",
+        "layout": {
+          "rowPos": 7600,
+          "columnPos": 100,
+          "style": {
+            "textAlign": "left",
+            "fontSize": 16,
+            "marginTop": -10
+          }
+        }
+      },
+      {
+        "type": "text",
+        "data": "",
+        "layout": {
+          "rowPos": 7601,
+          "columnPos": 100
+        }
+      },
+      {
+        "type": "text",
+        "data": "Generate IOC from phishing emails  #32 (skipped)",
+        "layout": {
+          "rowPos": 7700,
+          "columnPos": 100,
+          "style": {
+            "textAlign": "left",
+            "fontSize": 20,
+            "color": "red"
+          }
+        }
+      },
+      {
+        "type": "text",
+        "data": "If you find in previous steps that source was phishing email - \n1. Find all the URLs in the email and go through the URL IOC generation steps.",
+        "layout": {
+          "rowPos": 7800,
+          "columnPos": 100,
+          "style": {
+            "textAlign": "left",
+            "fontSize": 16,
+            "marginTop": -10
+          }
+        }
       }
-    }
-  },
-  {
-    "type": "text",
-    "data": "1. Go to the proxy logs again\n2. Find 2-3 properties associated with the flagged URL, such as:\n     The request is POST\n     The User-Agent field is dodgy (Java, Python, IE6 etc.)\n     URL contains more than 128 random characters\n     URL contains .php\n     URL contains lots of slashes (/)\n     URL contains WordPress related things (wp-content)\n     URL contains dodgy TLDs (for instance .tk, .ru)\n\n3. Test your assumption on the proxy logs in the SIEM. Use your pattern and check how many false positives and true positives it produces.\n4. If the pattern is good enough, append your results to the investigation. ",
-    "layout": {
-      "rowPos": 7600,
-      "columnPos": 100,
-      "style": {
-        "textAlign": "left",
-        "fontSize": 16
-      }
-    }
-  },
-  {
-    "type": "text",
-    "data": "",
-    "layout": {
-      "rowPos": 7601,
-      "columnPos": 100
-    }
-  },
-  {
-    "type": "text",
-    "data": "Generate IOC from phishing emails  #32 (skipped)",
-    "layout": {
-      "rowPos": 7700,
-      "columnPos": 100,
-      "style": {
-        "textAlign": "left",
-        "fontSize": 20,
-        "color": "red"
-      }
-    }
-  },
-  {
-    "type": "text",
-    "data": "If you find in previous steps that source was phishing email - \n1. Find all the URLs in the email and go through the URL IOC generation steps.",
-    "layout": {
-      "rowPos": 7800,
-      "columnPos": 100,
-      "style": {
-        "textAlign": "left",
-        "fontSize": 16
-      }
-    }
+    ]
   },
   {
     "type": "text",
