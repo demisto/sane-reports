@@ -25,9 +25,20 @@ function handleIterate(Tag, props, children) {
     case 'hr':
       res = (<hr {...props} />);
       break;
-    case 'img':
+    case 'img': {
+      const srcArr = props.src.split('=size=');
+      props.src = srcArr[0];
+      if (srcArr.length > 1) {
+        const sizeArr = srcArr[1].split('x');
+        props.height = sizeArr[0];
+        if (sizeArr.length > 1) {
+          props.width = sizeArr[1];
+        }
+      }
+
       res = (<img {...props} />); // eslint-disable-line jsx-a11y/img-has-alt
       break;
+    }
     case 'mark': {
       props.className = 'highlight-result';
       break;
