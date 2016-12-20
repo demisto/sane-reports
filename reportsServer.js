@@ -101,7 +101,8 @@ try {
             "background-color: #fcfcfc;" +
             "font-size: 10px;" +
             "text-align: center;" +
-            "border-top: 1px solid #7c7c7c;" +
+            "border-top: 1px solid #d6d6d6;" +
+            "color: #8e8e8e;" +
             "margin-top: -7px;" +
             "margin-bottom: 10px;" +
             "padding-top: 7px;'" +
