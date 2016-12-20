@@ -5,9 +5,13 @@ import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, Se
     from '../Sections';
 import { SECTION_TYPES } from '../../constants/Constants';
 
-const ReportLayout = ({ sections }) => {
+const ReportLayout = ({ sections, headerLeftImage, headerRightImage }) => {
   return (
     <div className="report-layout">
+      <span className="hidden-header" style={{ display: 'none' }}>
+        <img src={headerLeftImage} style={{ display: 'none' }} alt="hidden" />
+        <img src={headerRightImage} style={{ display: 'none' }} alt="hidden" />
+      </span>
       {
         Object
           .keys(sections)
@@ -125,7 +129,9 @@ const ReportLayout = ({ sections }) => {
   );
 };
 ReportLayout.propTypes = {
-  sections: PropTypes.object
+  sections: PropTypes.object,
+  headerLeftImage: PropTypes.string,
+  headerRightImage: PropTypes.string
 };
 
 export default ReportLayout;

@@ -13,6 +13,10 @@ describe('Report Container', () => {
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
 
+    const hiddenHeader = reportContainer.find('.hidden-header');
+    expect(hiddenHeader).to.have.length(1);
+    expect(hiddenHeader.get(0).style._values).to.deep.equal({ display: 'none' });
+
     const reportLayouts = reportContainer.find(ReportLayout);
     const rows = reportContainer.find('.report-row');
     const sections = reportContainer.find('.report-section');

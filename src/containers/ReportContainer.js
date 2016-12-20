@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react';
 import { ReportLayout } from '../components';
 
-const ReportContainer = ({ sections }) => {
+const ReportContainer = ({ sections, headerLeftImage, headerRightImage }) => {
   return (
-    <ReportLayout sections={sections} />
+    <ReportLayout sections={sections} headerLeftImage={headerLeftImage} headerRightImage={headerRightImage} />
   );
 };
 ReportContainer.propTypes = {
-  sections: PropTypes.object
+  sections: PropTypes.object,
+  headerLeftImage: PropTypes.string,
+  headerRightImage: PropTypes.string
 };
 
 export default ReportContainer;

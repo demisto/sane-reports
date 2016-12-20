@@ -23,7 +23,7 @@ const sections = prepareSections(data, type);
 if (type === REPORT_TYPES.pdf) {
   ReactDOM.render(
     <div>
-      <ReportContainer sections={sections} />
+      <ReportContainer sections={sections} headerLeftImage={headerLeftImage} headerRightImage={headerRightImage} />
     </div>,
     document.getElementById('app')
   );
