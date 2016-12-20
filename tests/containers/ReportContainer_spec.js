@@ -175,9 +175,15 @@ describe('Report Container', () => {
     const imgEl = reportContainer.find('img');
     const mediumCircularImage = reportContainer.find('.ui.image.medium.circular');
     const smallImage = reportContainer.find('.ui.image.small');
-    expect(imgEl).to.have.length(3);
+    expect(imgEl).to.have.length(5);
     expect(mediumCircularImage).to.have.length(1);
     expect(smallImage).to.have.length(1);
+
+    expect(imgEl.get(0).style._values).to.deep.equal({ display: 'none' });
+    expect(imgEl.get(1).style._values).to.deep.equal({ display: 'none' });
+    expect(imgEl.get(2).style._values).to.not.equal({ display: 'none' });
+    expect(imgEl.get(3).style._values).to.not.equal({ display: 'none' });
+    expect(imgEl.get(4).style._values).to.not.equal({ display: 'none' });
 
     // Dates
     const sectionDate = reportContainer.find(SectionDate);
