@@ -1,5 +1,6 @@
 import { REPORT_TYPE_TOKEN, SECTION_TYPES, REPORT_TYPES } from '../constants/Constants';
 import merge from 'lodash/merge';
+import extend from 'lodash/extend';
 
 function sortReportSections(sec1, sec2) {
   const sec1RowPos = sec1.layout.rowPos;
@@ -47,7 +48,7 @@ export function prepareSections(reportData, reportType) {
 
     reportData.forEach((section) => {
       if (section.type === SECTION_TYPES.globalSection) {
-        rows = merge(rows, prepareSections(section.data, reportType));
+        rows = merge(extend(prepareSections(section.data, reportType), rows), rows);
       }
     });
 

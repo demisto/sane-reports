@@ -1,5 +1,7 @@
 export const REPORT_DATA_TOKEN = '{report-data-to-replace}';
-export const REPORT_TYPE_TOKEN = '{report-type}';
+export const REPORT_HEADER_IMAGE_RIGHT_TOKEN = '{report-header-image-right}';
+export const REPORT_HEADER_IMAGE_LEFT_TOKEN = '{report-header-image-left}';
+
 
 export const SECTION_TYPES = {
   globalSection: 'globalSection',

@@ -3,14 +3,22 @@ import React, { PropTypes } from 'react';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
   SectionMarkdown, SectionJson }
     from '../Sections';
-import { SECTION_TYPES } from '../../constants/Constants';
+import {
+  SECTION_TYPES,
+  REPORT_HEADER_IMAGE_LEFT_TOKEN,
+  REPORT_HEADER_IMAGE_RIGHT_TOKEN
+} from '../../constants/Constants';
 
 const ReportLayout = ({ sections, headerLeftImage, headerRightImage }) => {
   return (
     <div className="report-layout">
       <span className="hidden-header" style={{ display: 'none' }}>
-        <img src={headerLeftImage} style={{ display: 'none' }} alt="hidden" />
-        <img src={headerRightImage} style={{ display: 'none' }} alt="hidden" />
+        {headerLeftImage !== REPORT_HEADER_IMAGE_LEFT_TOKEN &&
+          <img src={headerLeftImage} style={{ display: 'none' }} alt="hidden" />
+        }
+        {headerRightImage !== REPORT_HEADER_IMAGE_RIGHT_TOKEN &&
+          <img src={headerRightImage} style={{ display: 'none' }} alt="hidden" />
+        }
       </span>
       {
         Object

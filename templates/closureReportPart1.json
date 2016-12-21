@@ -60,6 +60,7 @@
     "layout": {
       "rowPos": 400,
       "columnPos": 100,
+      "rowStyle": { "marginTop": -17, "marginBottom": -27 },
       "sectionStyle": {
         "width": 280
       },
@@ -96,6 +97,7 @@
     "layout": {
       "rowPos": 600,
       "columnPos": 100,
+      "rowStyle": { "marginTop": -20 },
       "style": {
         "color": "#4e6767",
         "textAlign": "left",
@@ -172,7 +174,8 @@
     "data": "",
     "layout": {
       "rowPos": 800,
-      "columnPos": 100
+      "columnPos": 100,
+      "rowStyle": { "marginTop": -17 }
     }
   },
   {
@@ -257,7 +260,8 @@
     "data": "",
     "layout": {
       "rowPos": 1100,
-      "columnPos": 100
+      "columnPos": 100,
+      "rowStyle": { "marginTop": -17 }
     }
   },
   {
@@ -640,6 +644,7 @@
         "layout": {
           "rowPos": 4020,
           "columnPos": 100,
+          "rowStyle": { "borderSpacing": "initial", "marginLeft": 10, "paddingRight": 20, "marginBottom": -2 },
           "style": {
             "textAlign": "left",
             "color": "#555555",
@@ -669,26 +674,10 @@
       },
       {
         "type": "text",
-        "data": "Incident Created",
-        "layout": {
-          "rowPos": 4020,
-          "columnPos": 300,
-          "style": {
-            "textAlign": "left",
-            "color": "#555555",
-            "fontSize": 14,
-            "backgroundColor": "#ffffff",
-            "padding": 6,
-            "border": "1px solid #d4d4d4"
-          }
-        }
-      },
-      {
-        "type": "text",
         "data": "DBot",
         "layout": {
           "rowPos": 4020,
-          "columnPos": 400,
+          "columnPos": 300,
           "style": {
             "textAlign": "left",
             "color": "#555555",
@@ -730,6 +719,7 @@
         "layout": {
           "rowPos": 4040,
           "columnPos": 100,
+          "rowStyle": { "borderSpacing": "initial", "marginLeft": 10, "paddingRight": 20, "marginBottom": -2 },
           "style": {
             "textAlign": "left",
             "color": "#555555",
@@ -759,26 +749,10 @@
       },
       {
         "type": "text",
-        "data": "Task Completed",
-        "layout": {
-          "rowPos": 4040,
-          "columnPos": 300,
-          "style": {
-            "textAlign": "left",
-            "color": "#555555",
-            "fontSize": 14,
-            "backgroundColor": "#ffffff",
-            "padding": 6,
-            "border": "1px solid #d4d4d4"
-          }
-        }
-      },
-      {
-        "type": "text",
         "data": "ronda",
         "layout": {
           "rowPos": 4040,
-          "columnPos": 400,
+          "columnPos": 300,
           "style": {
             "textAlign": "left",
             "color": "#555555",
@@ -819,6 +793,7 @@
         "layout": {
           "rowPos": 4060,
           "columnPos": 100,
+          "rowStyle": { "borderSpacing": "initial", "marginLeft": 10, "paddingRight": 20, "marginBottom": -2 },
           "style": {
             "textAlign": "left",
             "color": "#555555",
@@ -848,26 +823,10 @@
       },
       {
         "type": "text",
-        "data": "Incident Modified",
-        "layout": {
-          "rowPos": 4060,
-          "columnPos": 300,
-          "style": {
-            "textAlign": "left",
-            "color": "#555555",
-            "fontSize": 14,
-            "backgroundColor": "#ffffff",
-            "padding": 6,
-            "border": "1px solid #d4d4d4"
-          }
-        }
-      },
-      {
-        "type": "text",
         "data": "john",
         "layout": {
           "rowPos": 4060,
-          "columnPos": 400,
+          "columnPos": 300,
           "style": {
             "textAlign": "left",
             "color": "#555555",
@@ -908,6 +867,7 @@
         "layout": {
           "rowPos": 4080,
           "columnPos": 100,
+          "rowStyle": { "borderSpacing": "initial", "marginLeft": 10, "paddingRight": 20, "marginBottom": -2 },
           "style": {
             "textAlign": "left",
             "color": "#555555",
@@ -937,26 +897,10 @@
       },
       {
         "type": "text",
-        "data": "Incident Modified",
-        "layout": {
-          "rowPos": 4080,
-          "columnPos": 300,
-          "style": {
-            "textAlign": "left",
-            "color": "#555555",
-            "fontSize": 14,
-            "backgroundColor": "#ffffff",
-            "padding": 6,
-            "border": "1px solid #d4d4d4"
-          }
-        }
-      },
-      {
-        "type": "text",
         "data": "john",
         "layout": {
           "rowPos": 4080,
-          "columnPos": 400,
+          "columnPos": 300,
           "style": {
             "textAlign": "left",
             "color": "#555555",

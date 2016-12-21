@@ -80,7 +80,7 @@ try {
             "margin-top: -7px;" +
             "margin-right: -10px;" +
             "margin-left: -10px;" +
-            "padding-top: 4px;" +
+            "padding-top: 13px;" +
             "padding-right: 20px;" +
             "padding-left: 20px;'" +
           ">" +
