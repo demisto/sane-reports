@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import './SectionMarkdown.less';
 import '../../../assets/styles/railscasts.css';
 import React, { PropTypes } from 'react';
 import { mdReact } from 'react-markdown-js';
 import Highlight from 'react-highlight';
+
 
 // plugins for react markdown component
 import abbr from 'markdown-it-abbr';
@@ -43,9 +45,55 @@ function handleIterate(Tag, props, children) {
       props.className = 'highlight-result';
       break;
     }
-    case 'table':
-      props.className = 'ui very compact table celled fixed selectable';
+    case 'table': {
+      const thead = children[0];
+      const tbody = children[1];
+
+      const headerRows = thead.props.children;
+      const headerCells = headerRows[0].props.children;
+
+      const bodyRows = tbody.props.children;
+      const headersValues = headerCells.map(cell => cell.props.children[0]);
+      const tableContent = [];
+      if (headersValues && bodyRows) {
+        bodyRows.forEach((row) => {
+          const newRow = {};
+          const cells = row.props.children;
+          const cellValue = cells.map(cell => cell.props.children[0]);
+          headersValues.forEach((headerValue, i) => {
+            newRow[i] = cellValue[i] ? cellValue[i].replace(/<br>/g, '\n') : cellValue[i];
+          });
+          tableContent.push(newRow);
+        });
+      }
+
+      res = (
+        <table
+          className="ui very compact table celled fixed selectable"
+          style={{ tableLayout: 'fixed' }}
+          key={Math.random()}
+        >
+          <thead>
+            <tr>
+              {headersValues.map((col, i) => {
+                return <th key={i}>{col}</th>;
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {tableContent.map((row, i) => {
+              return (
+                <tr key={i}>
+                  {Object.keys(row).map((key, j) =>
+                    <td key={j + '.' + i} style={{ wordBreak: 'break-word' }}>{row[key]}</td>)}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      );
       break;
+    }
     case 'blockquote':
       props.className = 'markdown blockquote';
       break;

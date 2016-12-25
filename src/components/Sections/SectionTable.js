@@ -59,7 +59,7 @@ const SectionTable = ({ columns, data, classes, style }) => {
     );
   } else {
     tableBody = (
-      <table className={'ui compact table ' + classes} style={{ tableLayout: 'fixed' }}>
+      <table className={'ui compact table ' + classes}>
         <tbody>
           {map(tableData, (val, key) => (
             <tr key={key}>

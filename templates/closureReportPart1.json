@@ -690,18 +690,16 @@
       },
       {
         "type": "table",
-        "data": { "a": "1", "b": "2", "c": "3" },
+        "data": { "Another Close Reason !!!!!!!!!!!!!!!!!!!!!": "Yeah!!!!", "b": "I think we solve this... lets pray...", "Duration": "6m40s" },
         "layout": {
           "rowPos": 4030,
           "columnPos": 100,
-          "classes": "very celled selectable",
           "style": {
             "color": "#555555",
             "fontSize": 14,
             "backgroundColor": "#ffffff",
             "padding": 6,
-            "border": "1px solid #d4d4d4",
-            "marginTop": -9
+            "border": "1px solid #d4d4d4"
           }
         }
       },
@@ -839,7 +837,7 @@
       },
       {
         "type": "markdown",
-        "data": "|Field|Old Value|New Value|New Value|New Value|New Value|\n|--|--|--|--|--|--|\n|TypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeType|Unclassified|General Hunt|General Hunt|General Hunt|General Hunt|\n|Severity|Unknown|Low|General Hunt|General Hunt|General Hunt|\n",
+        "data": "|Field|Data|\n|-|-|\n|Another Close Reason|Yeah!!!!|\n|Incident Field #2|BONUS: $ 50 Macy's Gift Card Opportunity<br>sd<br>asd<br>ad|\n|Some Incident Field|BONUS: $ 50 Macy's Gift Card Opportunity|",
         "layout": {
           "rowPos": 4070,
           "columnPos": 100,
