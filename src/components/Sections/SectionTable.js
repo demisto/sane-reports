@@ -16,13 +16,28 @@ const SectionTable = ({ columns, data, classes, style }) => {
     }
   }
 
+  let readyColumns = columns;
+  if (!isArray(columns) && isArray(tableData)) {
+    const headerKeys = {};
+    tableData.forEach((val, i) => {
+      for (const key in tableData[i]) { // eslint-disable-line no-restricted-syntax
+        if (headerKeys[key] !== key) {
+          headerKeys[key] = key;
+        }
+      }
+    });
+
+    readyColumns = Object.keys(headerKeys);
+  }
+
+
   let tableBody;
-  if (isArray(columns)) {
+  if (isArray(readyColumns)) {
     tableBody = (
       <table className={'ui compact table ' + classes} style={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
-            {columns.map((col) => {
+            {readyColumns.map((col) => {
               return <th key={col.key || col}>{!col.hidden && col}</th>;
             })}
           </tr>
@@ -30,7 +45,7 @@ const SectionTable = ({ columns, data, classes, style }) => {
         <tbody>
         {tableData.map((row, i) =>
           <tr key={i}>
-            {columns.map((col, j) =>
+            {readyColumns.map((col, j) =>
               (() => {
                 const key = col.key || col;
                 const cell = row[key];

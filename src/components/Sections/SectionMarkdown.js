@@ -97,6 +97,9 @@ function handleIterate(Tag, props, children) {
     case 'blockquote':
       props.className = 'markdown blockquote';
       break;
+    case 'br':
+      res = <span {...props}><br /><br /></span>;
+      break;
     case 'code': {
       const clzz = props['data-language'] || '';
       res = (
