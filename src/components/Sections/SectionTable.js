@@ -49,20 +49,23 @@ const SectionTable = ({ columns, data, classes, style }) => {
               (() => {
                 const key = col.key || col;
                 const cell = row[key];
-                let cellToRender;
-                switch (cell.type) {
-                  case TABLE_CELL_TYPE.image:
-                    cellToRender = (
-                      <img
-                        src={cell.data}
-                        alt={cell.alt}
-                        className={'ui image ' + cell.classes}
-                        style={cell.style}
-                      />
-                    );
-                    break;
-                  default:
-                    cellToRender = cell;
+
+                let cellToRender = '';
+                if (cell) {
+                  switch (cell.type) {
+                    case TABLE_CELL_TYPE.image:
+                      cellToRender = (
+                        <img
+                          src={cell.data}
+                          alt={cell.alt}
+                          className={'ui image ' + cell.classes}
+                          style={cell.style}
+                        />
+                      );
+                      break;
+                    default:
+                      cellToRender = cell;
+                  }
                 }
                 return <td key={j} style={{ wordBreak: 'break-word' }}>{cellToRender}</td>;
               })()
