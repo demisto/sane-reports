@@ -30,3 +30,5 @@ export const REPORT_TYPES = {
 export const TABLE_CELL_TYPE = {
   image: 'image'
 };
+
+export const DEFAULT_MAX_LENGTH = 300;
