@@ -3,7 +3,7 @@ import { TABLE_CELL_TYPE, DEFAULT_MAX_LENGTH } from '../../constants/Constants';
 import isArray from 'lodash/isArray';
 import map from 'lodash/map';
 import isString from 'lodash/isString';
-import truncate from 'lodash/truncate'
+import truncate from 'lodash/truncate';
 
 
 const SectionTable = ({ columns, data, classes, style }) => {
@@ -65,7 +65,7 @@ const SectionTable = ({ columns, data, classes, style }) => {
                       );
                       break;
                     default:
-                      cellToRender = truncate(cell, {length: DEFAULT_MAX_LENGTH});
+                      cellToRender = truncate(cell, { length: DEFAULT_MAX_LENGTH });
                   }
                 }
                 return <td key={j} style={{ wordBreak: 'break-word' }}>{cellToRender}</td>;
@@ -85,7 +85,7 @@ const SectionTable = ({ columns, data, classes, style }) => {
               <td style={{ background: 'rgb(249, 250, 251)', width: '20%', whiteSpace: 'nowrap' }}>
                 {key}
               </td>
-              <td>{truncate(val, {length: DEFAULT_MAX_LENGTH})}</td>
+              <td>{truncate(val, { length: DEFAULT_MAX_LENGTH })}</td>
             </tr>
           ))}
         </tbody>
