@@ -27,7 +27,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           <ReferenceLine x={referenceLineX.x} stroke={referenceLineX.stroke} label={referenceLineX.label} />}
         {referenceLineY &&
           <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke} label={referenceLineY.label} />}
-        {legendStyle && Object.keys(legendStyle) > 0 && <Legend {...legendStyle} />}
+        {legendStyle && <Legend {...legendStyle} />}
         {preparedLegend.map((item) =>
           <Line key={item.name} dataKey={item.name} stroke={item.stroke} type={item.type} />)}
       </LineChart>
