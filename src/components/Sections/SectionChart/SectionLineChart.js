@@ -5,7 +5,7 @@ import { getGraphColorByName } from '../../../utils/colors';
 const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null,
     referenceLineX, referenceLineY }) => {
   const existingColors = {};
-  const preparedData = data.map((item) => {
+  const preparedLegend = legend.map((item) => {
     item.stroke = item.stroke || getGraphColorByName(item.name, existingColors);
     existingColors[item.stroke] = true;
     return item;
@@ -16,7 +16,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
       <LineChart
         width={dimensions.width}
         height={dimensions.height}
-        data={preparedData}
+        data={data}
         margin={chartProperties.margin}
       >
         {(referenceLineX || chartProperties.layout === 'vertical') && <XAxis dataKey="name" />}
@@ -28,7 +28,8 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         {referenceLineY &&
           <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke} label={referenceLineY.label} />}
         {legendStyle && Object.keys(legendStyle) > 0 && <Legend {...legendStyle} />}
-        {legend.map((item) => <Line key={item.name} dataKey={item.name} stroke={item.stroke} type={item.type} />)}
+        {preparedLegend.map((item) =>
+          <Line key={item.name} dataKey={item.name} stroke={item.stroke} type={item.type} />)}
       </LineChart>
     </div>
   );
