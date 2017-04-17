@@ -1,11 +1,16 @@
 import React, { PropTypes } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import orderBy from 'lodash/orderBy';
+import isArray from 'lodash/isArray';
 import { getGraphColorByName } from '../../../utils/colors';
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null, sortBy }) => {
   const existingColors = {};
   let preparedData = data.map((item) => {
+    if (isArray(item.value) && item.value.length > 0) {
+      item.value = item.value[0];
+    }
+
     for (let i = 0; i < legend.length; i++) {
       item.fill = item.fill || getGraphColorByName(item.name, existingColors);
       existingColors[item.fill] = true;
