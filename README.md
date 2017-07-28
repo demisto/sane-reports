@@ -48,6 +48,8 @@ phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <o
 `phantomjs reportsServer.js templates/testCSV.json dist/test.csv dist portrait 4000 csv`
 
 
-Reports templates (JSON) example can be found in the [templates](https://github.com/demisto/sane-reports/blob/master/templates/incidentDailyReportTempalte.json) folder.
+Reports templates (JSON) example can be found in the [templates](https://github.com/demisto/sane-reports/blob/master/templates) folder.
+
+Example reports outputs can be found in the [examples](https://github.com/demisto/sane-reports/blob/master/examples) folder.
 
 You can edit and create your own template according to this doc.
