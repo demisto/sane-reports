@@ -6,72 +6,130 @@ const LiveReloadPlugin = require('webpack-livereload-plugin');
 const postcssUrl = require('postcss-url');
 const postcssImport = require('postcss-import');
 const postcssCssnext = require('postcss-cssnext');
-const postcssReporter = require('postcss-reporter');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 
-module.exports = {
-  entry: {
-    app: './src/index'
-  },
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].js',
-    publicPath: '/'
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new LiveReloadPlugin({ port: 35831, appendScriptTag: true }),
-    new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('[name].css', { allChunks: true }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.template.html'
-    }),
-    new WebpackShellPlugin({
-      onBuildEnd: [
-        'sed -i -e \'s/@import url(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin);//g\' node_modules/semantic-ui/dist/components/site.min.css && ' +  // eslint-disable-line
-        'sed -i -e \'s/@import url(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin);//g\' node_modules/semantic-ui/dist/semantic.min.css'  // eslint-disable-line
-      ]
-    })
-  ],
-  module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss')
-      },
-      {
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
-      },
-      {
-        test: /\.js$/,
-        loaders: ['babel'],
-        exclude: /(node_modules|bower_components)/
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'file?digest=hex&name=[name].[ext]',
-          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-        ]
-      },
-      {
-        test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file?name=fonts/[name]-[hash].[ext]'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
-      }
-    ]
-  },
-  postcss: (wp) => {
-    return [
-      postcssImport({ addDependencyTo: wp }),
-      postcssUrl(),
-      postcssCssnext(),
-      postcssReporter()
-    ];
+function createConfig(isProduction) {
+  const plugins = [];
+  if (!isProduction) {
+    plugins.push(new webpack.HotModuleReplacementPlugin());
+    plugins.push(new LiveReloadPlugin({ port: 35729, appendScriptTag: true }));
   }
+
+  const postcssLoader = {
+    loader: 'postcss-loader',
+    options: {
+      plugins: [
+        postcssImport(),
+        postcssUrl(),
+        postcssCssnext()
+      ]
+    }
+  };
+
+  return {
+    devtool: isProduction ? '' : '#cheap-source-map',
+    entry: {
+      app: './src/index'
+    },
+    output: {
+      path: path.join(__dirname, 'dist'),
+      filename: '[name].js',
+      publicPath: isProduction ? '' : '/'
+    },
+    plugins: plugins.concat([
+      new webpack.NoEmitOnErrorsPlugin(),
+      new ExtractTextPlugin({
+        filename: '[name].css',
+        allChunks: true
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'index.template.html'
+      }),
+      new WebpackShellPlugin({
+        onBuildStart: [
+          'sed -i -e s/@import[[:space:]]url\(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin\);//g node_modules/semantic-ui/dist/components/site.min.css',  // eslint-disable-line
+          'sed -i -e s/@import[[:space:]]url\(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin\);//g node_modules/semantic-ui/dist/semantic.min.css'  // eslint-disable-line
+        ]
+      })
+    ]),
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              'css-loader',
+              postcssLoader
+            ]
+          })
+        },
+        {
+          test: /\.less$/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              'css-loader',
+              postcssLoader,
+              {
+                loader: 'less-loader'
+              }
+            ]
+          })
+        },
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          options: { compact: false, cacheDirectory: true },
+          include: path.join(__dirname, 'src')
+        },
+        {
+          test: /\.(jpe?g|png|gif|svg)$/i,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                digest: 'hex',
+                name: '[name].[ext]'
+              }
+            },
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                query: {
+                  optipng: {
+                    optimizationLevel: 7
+                  },
+                  gifsicle: {
+                    interlaced: false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'file-loader',
+          options: {
+            name: 'fonts/[name]-[hash].[ext]'
+          }
+        }
+      ],
+      noParse: [
+        /^jquery(-.*)?$/,
+        /^semantic(-.*)?$/,
+        /^lodash$/,
+        /^react(-.*)?$/,
+        /^redux(-.*)?$/,
+        /aws-sdk/
+      ]
+    }
+  };
+}
+
+module.exports = (env) => {
+  const isProduction = env && env.production;
+  return createConfig(isProduction);
 };

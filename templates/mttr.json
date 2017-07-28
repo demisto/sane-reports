@@ -1,0 +1,176 @@
+[
+  {
+    "type": "header",
+    "data": "MTTR by Incident type (last 2 Quarters)",
+    "layout": {
+      "columnPos": 1,
+      "rowPos": 1,
+      "style": {
+        "fontSize": 24,
+        "textAlign": "left"
+      }
+    }
+  },
+  {
+    "type": "date",
+    "data": null,
+    "layout": {
+      "columnPos": 1,
+      "format": "MMMM Do YYYY, h:mm:ss a",
+      "rowPos": 2,
+      "style": {
+        "color": "gray",
+        "fontSize": 13,
+        "fontStyle": "italic",
+        "marginBottom:": 12,
+        "textAlign": "left"
+      }
+    }
+  },
+  {
+    "type": "divider",
+    "data": null,
+    "layout": {
+      "rowPos": 3,
+      "style": {}
+    }
+  },
+  {
+    "type": "text",
+    "data": "MTTR Time: 0 hours for 6 incidents",
+    "layout": {
+      "columnPos": 1,
+      "rowPos": 4,
+      "style": {
+        "fontSize": 16,
+        "textAlign": "left"
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      {
+        "Access": 3,
+        "Defacement": 4,
+        "DeviceLost": 2,
+        "Unclassified": 8,
+        "name": "2017-07"
+      },
+      {
+        "Access": 1,
+        "Defacement": 8,
+        "DeviceLost": 4,
+        "Unclassified": 4,
+        "name": "2017-08"
+      },
+      {
+        "Access": 3,
+        "Defacement": 5,
+        "DeviceLost": 4,
+        "Unclassified": 4,
+        "name": "2017-10"
+      },
+      {
+        "Access": 5,
+        "Defacement": 6,
+        "DeviceLost": 1,
+        "Unclassified": 9,
+        "name": "2017-11"
+      }
+    ],
+    "layout": {
+      "chartType": "line",
+      "columnPos": 1,
+      "dimensions": {
+        "height": 300,
+        "width": 500
+      },
+      "legend": [
+        {
+          "name": "Access",
+          "type": "basis"
+        },
+        {
+          "name": "Unclassified",
+          "type": "basis"
+        },
+        {
+          "name": "DeviceLost",
+          "type": "basis"
+        },
+        {
+          "name": "Defacement",
+          "type": "basis"
+        }
+      ],
+      "legendStyle": {},
+      "referenceLineX": {
+        "stroke": "green"
+      },
+      "referenceLineY": {
+        "stroke": "green"
+      },
+      "rowPos": 6,
+      "style": {
+        "fontSize": 12,
+        "marginTop": -10,
+        "textAlign": "left"
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    }
+  },
+  {
+    "type": "table",
+    "data": [
+      {
+        "# Incidents": 2,
+        "Mean time to close (days)": 3,
+        "Month closed": "2017-07",
+        "Type": "Access"
+      },
+      {
+        "# Incidents": 1,
+        "Mean time to close (days)": 4,
+        "Month closed": "2017-07",
+        "Type": "Defacement"
+      },
+      {
+        "# Incidents": 1,
+        "Mean time to close (days)": 2,
+        "Month closed": "2017-07",
+        "Type": "DeviceLost"
+      },
+      {
+        "# Incidents": 2,
+        "Mean time to close (days)": 8,
+        "Month closed": "2017-07",
+        "Type": "Unclassified"
+      }
+    ],
+    "layout": {
+      "classes": "striped stackable small very compact",
+      "columnPos": 1,
+      "readableHeaders": {
+        "avg|openDuration / (3600*24)": "Mean time to close (days)",
+        "closed(m)": "Month closed",
+        "count|1": "# Incidents",
+        "type": "Type"
+      },
+      "rowPos": 7,
+      "tableColumns": [
+        "Month closed",
+        "Type",
+        "# Incidents",
+        "Mean time to close (days)"
+      ]
+    }
+  }
+]

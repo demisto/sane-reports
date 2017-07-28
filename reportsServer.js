@@ -27,7 +27,7 @@ console.log('Agent details: ' +
 );
 
 if (system.args.length < 2) {
-  console.log('Usage: reportServer.js <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout> <type><headerLeftImage><headerRightImage>]');
+  console.log('Usage: reportServer.js <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout> <type> <headerLeftImage> <headerRightImage>]');
   phantom.exit(1);
 }
 
@@ -150,6 +150,7 @@ try {
           });
           if (csvData) {
             fs.write(outputFile || distFolder + '/report-' + date + '.csv', csvData, 'w');
+            fs.remove(distFolder + '/' + tmpReportName);
             console.log("CSV report was generated successfully.");
           } else {
             console.log("Failed to generate CSV report.");

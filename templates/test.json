@@ -26,7 +26,7 @@
   },
   {
     "type": "text",
-    "data": "This is right biggest text.",
+    "data": "This is right text.",
     "layout": {
       "rowPos": 2,
       "columnPos": 2,
@@ -92,10 +92,7 @@
       { "name": "Virus", "relatedTo": 1, "value": 5 },
       { "name": "Phishing", "relatedTo": 1, "value": 5 },
       { "name": "Ransomware", "relatedTo": 1, "value": 5 },
-      { "name": "Device Lost", "relatedTo": 1, "value": 5 },
-      { "name": "Type 1", "value": 4 },
-      { "name": "Type 2", "value": 2 },
-      { "name": "type 3", "value": 7 }
+      { "name": "Device Lost", "relatedTo": 1, "value": 5 }
     ],
     "layout": {
       "rowPos": 6,

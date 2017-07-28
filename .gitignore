@@ -21,3 +21,4 @@ node_modules/
 /coverage
 
 webpack-assets.json
+package-lock.json

@@ -7,7 +7,12 @@ import { getGraphColorByName } from '../../../utils/colors';
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
   const dataMap = {};
   const existingColors = {};
-  data.forEach((item) => (dataMap[item.name.toLowerCase()] = item));
+  data.forEach((item) => {
+    if (Array.isArray(item.value)) {
+      item.value = item.value[0];
+    }
+    dataMap[item.name.toLowerCase()] = item;
+  });
   let preparedData = [];
   legend.forEach((legendItem) => {
     const key = legendItem.name.toLowerCase();
