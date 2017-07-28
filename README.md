@@ -47,9 +47,19 @@ phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <o
 ### CSV Example:
 `phantomjs reportsServer.js templates/testCSV.json dist/test.csv dist portrait 4000 csv`
 
-
-Reports templates (JSON) example can be found in the [templates](https://github.com/demisto/sane-reports/blob/master/templates) folder.
+### Demo
+Reports templates (JSON) examples can be found in the [templates](https://github.com/demisto/sane-reports/blob/master/templates) folder.
 
 Example reports outputs can be found in the [examples](https://github.com/demisto/sane-reports/blob/master/examples) folder.
 
-You can edit and create your own template according to this doc.
+### Create your own report template
+You can edit existing report templates or create your own template.
+Report templates are created in JSON format and includes sections.
+Sections are ordered according to their row and column positions. 
+
+**Section types**
+Header, Divider, Date, Image, JSON, Markdown, Table, Text, Bar Chart, Line Chart, Pie Chart 
+
+Each section can have its own style (camled case css style: font-size -> fontSize).
+
+
