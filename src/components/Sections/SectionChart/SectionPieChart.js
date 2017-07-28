@@ -2,13 +2,14 @@ import React, { PropTypes } from 'react';
 import { PieChart, Pie, Legend, Tooltip } from 'recharts';
 import merge from 'lodash/merge';
 import orderBy from 'lodash/orderBy';
+import isArray from 'lodash/isArray';
 import { getGraphColorByName } from '../../../utils/colors';
 
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
   const dataMap = {};
   const existingColors = {};
   data.forEach((item) => {
-    if (Array.isArray(item.value)) {
+    if (isArray(item.value) && item.value.length > 0) {
       item.value = item.value[0];
     }
     dataMap[item.name.toLowerCase()] = item;
