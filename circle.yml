@@ -1,6 +1,6 @@
 machine:
   node:
-    version: v6.2.1
+    version: v8.1.2
 dependencies:
   pre:
     - npm install -g npm
@@ -25,11 +25,11 @@ deployment:
       - npm run production
       - mkdir sane-reports
       - cp -avR dist sane-reports
+      - cp -avR templates sane-reports
       - cp package.json sane-reports
       - cp LICENSE sane-reports
       - cp README.md sane-reports
       - cp reportsServer.js sane-reports
       - cd sane-reports
-      - npm pack
       - echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
-      - npm publish sane-reports-*.tgz
+      - npm publish sane-reports
