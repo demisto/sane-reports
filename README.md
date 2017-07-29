@@ -4,9 +4,15 @@
 
 Reports library that will keep you sane and not pulling your hair out
 
-## Quick start (dashboard mode - browser)
+## Quick start
+```sh
+$ npm install sane-reports
+$ cd sane-reports
+$ phantomjs reportsServer.js templates/test.json dist/test.pdf
+```
+Report will be generated in: `dist/test.pdf`
 
-#### Install Node.js and then:
+## Generating dashboard mode (browser) report
 ```sh
 $ git clone git@github.com:demisto/sane-reports.git
 $ cd sane-reports
