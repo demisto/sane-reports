@@ -57,8 +57,7 @@ You can edit existing report templates or create your own template.
 Report templates are created in JSON format and includes sections.
 Sections are ordered according to their row and column positions. 
 
-##### Section types
-Header, Divider, Date, Image, JSON, Markdown, Table, Text, Bar Chart, Line Chart, Pie Chart 
+**Section types**: Header, Divider, Date, Image, JSON, Markdown, Table, Text, Bar Chart, Line Chart, Pie Chart 
 
 Each section can have its own style (camled case css style: font-size -> fontSize).
 
