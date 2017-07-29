@@ -19,9 +19,6 @@ deployment:
   release:
     tag: /release-.*/
     commands:
-      - npm install
-      - npm run lint
-      - npm run coverage
       - npm run production
       - mkdir sane-reports
       - cp -avR dist sane-reports
