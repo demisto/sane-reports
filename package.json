@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "description": "sane-report is a library that helps you to generate headless reports according to simple language.",
   "homepage": "https://www.demisto.com",
-  "author": "Doron Sharon",
+  "author": "Demisto (Doron Sharon)",
   "repository": {
     "type": "git",
     "url": "https://github.com/demisto/sane-reports"
   },
-  "license": "MIT",
+  "license": "Apache License Version 2.0",
   "bugs": {
     "url": "https://github.com/demisto/sane-reports"
   },
