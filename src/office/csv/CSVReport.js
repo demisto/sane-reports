@@ -6,8 +6,12 @@ function storeCsvInDocument(csvData) {
 }
 
 function csvEscape(data) {
-  data.replace(/"/g, '""');
-  return '"' + data + '"';
+  let readyData = data.replace(/"/g, '""');
+
+  // max number of characters that a cell can contain
+  readyData = readyData.substring(0, Math.min(readyData.length, 32767) - 1);
+
+  return '"' + readyData + '"';
 }
 
 export function generateCSVReport(sections) {
