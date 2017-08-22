@@ -18,7 +18,7 @@ import deflist from 'markdown-it-deflist';
 import ins from 'markdown-it-ins';
 // end of import plugin
 
-function handleIterate(Tag, props, children) {
+function handleIterate(tableClasses, Tag, props, children) {
   let res = '';
   switch (Tag) {
     case 'p':
@@ -69,7 +69,7 @@ function handleIterate(Tag, props, children) {
 
       res = (
         <table
-          className="ui very compact table celled fixed selectable"
+          className={`ui very compact table celled fixed selectable ${tableClasses}`}
           style={{ tableLayout: 'fixed' }}
           key={Math.random()}
         >
@@ -118,12 +118,12 @@ function handleIterate(Tag, props, children) {
   return res;
 }
 
-const SectionMarkdown = ({ text, style }) => {
+const SectionMarkdown = ({ text, style, tableClasses }) => {
   let res = text;
   try {
     const mdData = mdReact(
       {
-        onIterate: handleIterate,
+        onIterate: handleIterate.bind(this, tableClasses),
         markdownOptions: { typographer: true },
         plugins: [
           emoji,
@@ -154,7 +154,8 @@ const SectionMarkdown = ({ text, style }) => {
 };
 SectionMarkdown.propTypes = {
   text: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  tableClasses: PropTypes.object
 };
 
 export default SectionMarkdown;
