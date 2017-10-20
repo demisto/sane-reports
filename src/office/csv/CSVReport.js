@@ -9,7 +9,7 @@ function csvEscape(data) {
   let readyData = data.replace(/"/g, '""');
 
   // max number of characters that a cell can contain
-  readyData = readyData.substring(0, Math.min(readyData.length, 32767) - 1);
+  readyData = readyData.substring(0, Math.min(readyData.length, 32767));
 
   return '"' + readyData + '"';
 }
