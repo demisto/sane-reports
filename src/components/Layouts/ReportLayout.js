@@ -58,6 +58,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage }) => {
                                 <SectionMarkdown
                                   text={section.data}
                                   style={section.layout.style}
+                                  tableClasses={section.layout.tableClasses}
                                 />
                               );
                               break;
