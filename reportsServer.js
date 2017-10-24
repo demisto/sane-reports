@@ -157,6 +157,9 @@ try {
           }
           phantom.exit();
           break;
+        case 'html':
+          console.log("HTML report was generated successfully.");
+          phantom.exit();
       }
     } else {
       console.log("Cannot open report page.");
