@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { PieChart, Pie, Legend, Tooltip } from 'recharts';
+import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
 import merge from 'lodash/merge';
 import orderBy from 'lodash/orderBy';
 import isArray from 'lodash/isArray';
@@ -52,7 +52,19 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
           innerRadius={chartProperties.innerRadius || 30}
           labelLine={chartProperties.labelLine}
           label={chartProperties.label || { offsetRadius: 10 }}
-        />
+        >
+          // creating links to urls according the 'url' filed in the data
+            {preparedData.map((entry) => {
+              const url = entry.url;
+              return (
+                  <Cell
+                    key={'${entry.name}-cell-${index}'}
+                    onClick={(e) => { if (entry.url) { window.open(url, '_blank'); } }}
+                  />
+                );
+            })}
+
+        </Pie>
       </PieChart>
     </div>
   );
