@@ -13,9 +13,11 @@
   },
   {
     "type": "date",
+    "class": "row-class",
     "layout": {
       "rowPos": 2,
       "columnPos": 1,
+      "class": "cell-class",
       "style": {
         "textAlign": "left",
         "color": "gray",

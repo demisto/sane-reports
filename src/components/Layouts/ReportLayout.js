@@ -24,13 +24,17 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage }) => {
         Object
           .keys(sections)
           .map((rowPos) =>
-            <div className="report-row" key={rowPos} style={sections[rowPos].style}>
+            <div
+              className={ sections[rowPos][0].class ? 'report-row ' +sections[rowPos][0].class : 'report-row'}
+              key={rowPos}
+              style={sections[rowPos].style}
+            >
               {
                 sections[rowPos]
                   .map((section) =>
                     <div
                       key={section.layout.rowPos + section.layout.columnPos}
-                      className="report-section"
+                      className={ section.layout.class ? 'report-section ' +section.layout.class : 'report-section'}
                       style={section.layout.sectionStyle}
                     >
                       {
