@@ -90,11 +90,11 @@
   {
     "type": "chart",
     "data": [
-      { "name": "Unknown", "value": 5 },
-      { "name": "Low", "value": 7 },
-      { "name": "Medium", "value": 11 },
-      { "name": "High", "value": 7 },
-      { "name": "Critical", "value": 9 }
+      { "name": "Unknown", "value": 5, "url": "" },
+      { "name": "Low", "value": 7, "url": "" },
+      { "name": "Medium", "value": 11, "url": "" },
+      { "name": "High", "value": 7, "url": "" },
+      { "name": "Critical", "value": 9 , "url": ""}
     ],
     "layout": {
       "rowPos": 6,
