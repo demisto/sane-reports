@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
+import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
 import merge from 'lodash/merge';
 import orderBy from 'lodash/orderBy';
 import isArray from 'lodash/isArray';
