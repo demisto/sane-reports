@@ -13,9 +13,11 @@
   },
   {
     "type": "date",
+    "class": "row-class",
     "layout": {
       "rowPos": 2,
       "columnPos": 1,
+      "class": "cell-class",
       "style": {
         "textAlign": "left",
         "color": "gray",
@@ -258,7 +260,7 @@
   {
     "type": "chart",
     "data": [
-      { "name": "Slavik", "relatedTo": 1, "value": 15 },
+      { "name": "Slavik", "relatedTo": 1, "value": 15, "url": "" },
       { "name": "Guy", "relatedTo": 1, "value": 11 },
       { "name": "Meir", "relatedTo": 1, "value": 9 },
       { "name": "Aviad", "relatedTo": 1, "value": 4 }
