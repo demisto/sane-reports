@@ -53,17 +53,16 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
           labelLine={chartProperties.labelLine}
           label={chartProperties.label || { offsetRadius: 10 }}
         >
-          // creating links to urls according the 'url' filed in the data
-            {preparedData.map((entry) => {
-              const url = entry.url;
-              return (
-                  <Cell
-                    key={'${entry.name}-cell-${index}'}
-                    onClick={(e) => { if (entry.url) { window.open(url, '_blank'); } }}
-                  />
-                );
-            })}
-
+          {/* // creating links to urls according the 'url' filed in the data */}
+          {preparedData.map((entry) => {
+            const url = entry.url;
+            return (
+              <Cell
+                key={'${entry.name}-cell-${index}'}
+                onClick={() => { if (entry.url) { window.open(url, '_blank'); } }}
+              />
+            );
+          })}
         </Pie>
       </PieChart>
     </div>

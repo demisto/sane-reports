@@ -25,7 +25,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage }) => {
           .keys(sections)
           .map((rowPos) =>
             <div
-              className={ sections[rowPos][0].class ? 'report-row ' +sections[rowPos][0].class : 'report-row'}
+              className={sections[rowPos][0].class ? 'report-row ' + sections[rowPos][0].class : 'report-row'}
               key={rowPos}
               style={sections[rowPos].style}
             >
@@ -34,7 +34,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage }) => {
                   .map((section) =>
                     <div
                       key={section.layout.rowPos + section.layout.columnPos}
-                      className={ section.layout.class ? 'report-section ' +section.layout.class : 'report-section'}
+                      className={section.layout.class ? 'report-section ' + section.layout.class : 'report-section'}
                       style={section.layout.sectionStyle}
                     >
                       {
