@@ -28,5 +28,5 @@ deployment:
       - cp README.md sane-reports
       - cp reportsServer.js sane-reports
       - cd sane-reports
-      - echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
+      - npm set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
       - npm publish sane-reports
