@@ -1,6 +1,6 @@
 {
   "name": "sane-reports",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Reports library that will keep you sane and not pulling your hair out. sane-report is a library that helps you to generate headless reports according to simple language.",
   "homepage": "https://www.demisto.com",
   "author": "Demisto (Doron Sharon)",
