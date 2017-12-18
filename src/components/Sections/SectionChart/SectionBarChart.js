@@ -41,22 +41,13 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
         <Tooltip />
         {legendStyle && Object.keys(legendStyle) > 0 && <Legend {...legendStyle} />}
-        {legend.map((item) => chartProperties.label ?
-          <Bar
-            key={item.name}
-            dataKey={item.name}
-            fill={item.fill}
-            onClick={(e) => { if (e.url) { window.open(e.url, '_blank'); } }}
-            label
-          /> :
-          <Bar
-            key={item.name}
-            dataKey={item.name}
-            fill={item.fill}
-            onClick={(e) => { if (e.url) { window.open(e.url, '_blank'); } }}
-
-          />
-        )}
+        {legend.map((item) => <Bar
+          key={item.name}
+          dataKey={item.name}
+          fill={item.fill}
+          onClick={(e) => { if (e.url) { window.open(e.url, '_blank'); } }}
+          label={!!chartProperties.label}
+        />)}
       </BarChart>
     </div>
   );
