@@ -46,6 +46,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           dataKey={item.name}
           fill={item.fill}
           onClick={(e) => { if (e.url) { window.open(e.url, '_blank'); } }}
+          label={!!chartProperties.label}
         />)}
       </BarChart>
     </div>
