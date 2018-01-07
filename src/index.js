@@ -25,13 +25,18 @@ if (sections) {
   isLayout = true;
   Object
     .keys(sections)
-    .map((rowPos) => isLayout = isLayout && sections[rowPos].every(section => section.layout.i));
+    .forEach((rowPos) => { isLayout = isLayout && sections[rowPos].every(section => section.layout.i) });
 }
 
 if (type === REPORT_TYPES.pdf) {
   ReactDOM.render(
     <div>
-      <ReportContainer isLayout={isLayout} sections={sections} headerLeftImage={headerLeftImage} headerRightImage={headerRightImage} />
+      <ReportContainer
+        isLayout={isLayout}
+        sections={sections}
+        headerLeftImage={headerLeftImage}
+        headerRightImage={headerRightImage}
+      />
     </div>,
     document.getElementById('app')
   );

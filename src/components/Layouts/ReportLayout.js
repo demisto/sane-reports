@@ -9,7 +9,7 @@ import {
   REPORT_HEADER_IMAGE_RIGHT_TOKEN
 } from '../../constants/Constants';
 import { isNumber } from 'lodash';
-import ReactGridLayout, {WidthProvider} from 'react-grid-layout';
+import ReactGridLayout, { WidthProvider } from 'react-grid-layout';
 const DecoratedReactGridLayout = WidthProvider(ReactGridLayout);
 const ROW_PIXEL_HEIGHT = 110;
 let overflowRows = 0;
@@ -222,7 +222,8 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
 ReportLayout.propTypes = {
   sections: PropTypes.object,
   headerLeftImage: PropTypes.string,
-  headerRightImage: PropTypes.string
+  headerRightImage: PropTypes.string,
+  isLayout: PropTypes.bool
 };
 
 export default ReportLayout;

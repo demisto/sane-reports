@@ -9,6 +9,7 @@ const TREND_NUMBER_LIMIT = 999;
 const SectionNumber = ({ data, layout, style, currencySign, title }) => {
   const isTrend = !!data.prevSum;
   let percentage = 0;
+  const curr = data.currSum || 0;
   if (isTrend) {
     const prev = data.prevSum || 0;
     const divider = prev === 0 ? 1 : prev;
@@ -48,7 +49,7 @@ const SectionNumber = ({ data, layout, style, currencySign, title }) => {
           className="trend-num-text"
           style={{ color }}
         >
-          <span className="currency-sign">{currencySign}{numberToShortString(data ? data.currSum || 0 : 0)}</span>
+          <span className="currency-sign">{currencySign}{numberToShortString(curr)}</span>
         </div>
         {layout === CHART_LAYOUT_TYPE.horizontal && isTrend &&
         trendContainer
@@ -68,7 +69,7 @@ SectionNumber.propTypes = {
   style: PropTypes.object,
   title: PropTypes.string,
   layout: PropTypes.oneOf(values(CHART_LAYOUT_TYPE)),
-  currencySign: PropTypes.string,
+  currencySign: PropTypes.string
 };
 
 export default SectionNumber;

@@ -19,11 +19,9 @@ function styleByFieldName(fieldName, currentData) {
       const now = moment(moment.now());
       const dueDate = moment(currentData);
       const msDiffSla = dueDate.diff(now);
-      const suffixKey = `dashboard.${msDiffSla > 0 ? 'aboutToEnd' : 'late'}.investigations.suffix`;
       return (
         <div className="sla-container">
-          <span>{moment.duration(msDiffSla).humanize()}</span>
-          <FormattedMessage id={suffixKey} />
+          <span>{msDiffSla > 0 ? '+' : '-'}{moment.duration(msDiffSla).humanize()}</span>
         </div>
       );
     }
@@ -43,9 +41,9 @@ const SectionList = ({ columns, data, classes, style }) => {
       return <div>Error parsing table</div>;
     }
   }
-
+  const mainClass = `section-list ui list ${classes}`;
   return (
-    <div className="section-list ui list" style={style}>
+    <div className={mainClass} style={style}>
       {tableData.map((item) => {
         const leftName = columns[0] ? columns[0].key : 'name';
         const mainKeyValue = getFieldValue(leftName, item);

@@ -10,11 +10,12 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     referenceLineX, referenceLineY, fromDate, toDate }) => {
   const existingColors = {};
   let preparedLegend = [];
+  let preparedData = data;
   if (fromDate && toDate) {
     const timeFrame = 'days';
     const lineTypes = {};
     const from = moment(fromDate);
-    data = compact(data.sort((a, b) => sortStrings(a.name, b.name)).map((mainGroup) => {
+    preparedData = compact(preparedData.sort((a, b) => sortStrings(a.name, b.name)).map((mainGroup) => {
       let name = mainGroup.name;
       if (chartProperties.isDatesChart) {
         if (!name) {
@@ -51,7 +52,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     const frames = toDate.diff(from, timeFrame);
     const currentDate = moment(from);
     for (let i = 0; i <= frames; i++) {
-      const mainGroup = data.find(item => currentDate.format(QUERIES_TIME_FORMAT) === item.name);
+      const mainGroup = preparedData.find(item => currentDate.format(QUERIES_TIME_FORMAT) === item.name);
       if (!mainGroup) {
         const dataObj = {
           name: currentDate.format(QUERIES_TIME_FORMAT)
@@ -74,7 +75,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     }
 
     preparedLegend = values(lineTypes);
-    data = retData;
+    preparedData = retData;
   }
   if (legend) {
     preparedLegend = legend.map((item) => {
@@ -89,7 +90,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
       <LineChart
         width={dimensions.width}
         height={dimensions.height}
-        data={data}
+        data={preparedData}
         margin={chartProperties.margin}
       >
         {(referenceLineX || chartProperties.layout === 'vertical') && <XAxis dataKey="name" />}
@@ -111,7 +112,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
             key={item.name}
             dataKey={item.name}
             stroke={item.stroke}
-            type={item.type || "monotone"}
+            type={item.type || 'monotone'}
             animationDuration={0}
             activeDot={{ strokeWidth: 0 }}
             strokeWidth={3}

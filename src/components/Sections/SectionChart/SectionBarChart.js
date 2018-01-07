@@ -5,7 +5,8 @@ import { isArray, orderBy, unionBy } from 'lodash';
 import { sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
 
-const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null, sortBy, stacked }) => {
+const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
+  legendStyle = null, sortBy, stacked }) => {
   const existingColors = {};
   let dataItems = [];
   let preparedData;
@@ -26,7 +27,6 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
       .map(group => ({ name: group.name, fill: getGraphColorByName(group.name, existingColors) }))
       .sort((a, b) => sortStrings(a.name, b.name));
-
   } else {
     preparedData = data.map((item) => {
       let val = item.value || item.data;

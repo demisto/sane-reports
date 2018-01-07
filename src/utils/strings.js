@@ -1,3 +1,7 @@
+function insertStringAt(originString, stringToInsert, position) {
+  return [originString.slice(0, position), stringToInsert, originString.slice(position)].join('');
+}
+
 export function numberToShortString(num) {
   let shortenNum = num + '';
 
