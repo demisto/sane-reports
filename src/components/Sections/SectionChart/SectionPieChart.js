@@ -9,23 +9,26 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
   const dataMap = {};
   const existingColors = {};
   data.forEach((item) => {
+    item.value = item.value || item.data;
     if (isArray(item.value) && item.value.length > 0) {
       item.value = item.value[0];
     }
     dataMap[item.name.toLowerCase()] = item;
   });
   let preparedData = [];
-  legend.forEach((legendItem) => {
-    const key = legendItem.name.toLowerCase();
-    if (dataMap[key]) {
-      if (!legendItem.fill) {
-        legendItem.fill = getGraphColorByName(dataMap[key].name);
+  if (legend) {
+    legend.forEach((legendItem) => {
+      const key = legendItem.name.toLowerCase();
+      if (dataMap[key]) {
+        if (!legendItem.fill) {
+          legendItem.fill = getGraphColorByName(dataMap[key].name);
+        }
+        existingColors[legendItem.fill] = true;
+        preparedData.push(merge(dataMap[key], legendItem));
+        delete dataMap[key];
       }
-      existingColors[legendItem.fill] = true;
-      preparedData.push(merge(dataMap[key], legendItem));
-      delete dataMap[key];
-    }
-  });
+    });
+  }
   Object.keys(dataMap).forEach((key) => {
     const graphItem = dataMap[key];
     graphItem.fill = getGraphColorByName(graphItem.name, existingColors);
@@ -39,13 +42,22 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
 
   return (
     <div className="section-pie-chart" style={style}>
-      <PieChart width={dimensions.width} height={dimensions.height}>
+      <PieChart
+        width={dimensions.width}
+        height={dimensions.height}
+      >
         <Tooltip />
-        <Legend {...legendStyle} />
+        <Legend
+          iconType="circle"
+          {...legendStyle}
+        />
         <Pie
+          iconSize={8}
+          paddingAngle={0}
           data={preparedData}
           cx={chartProperties.cx || 200}
           cy={chartProperties.cy || 200}
+          maxRadius={chartProperties.maxRadius}
           startAngle={chartProperties.startAngle || 90}
           endAngle={chartProperties.endAngle || -270}
           outerRadius={chartProperties.outerRadius || 80}

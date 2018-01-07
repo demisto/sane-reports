@@ -1,16 +1,20 @@
+import './SectionChart.less';
 import React, { PropTypes } from 'react';
 import SectionBarChart from './SectionBarChart';
 import SectionPieChart from './SectionPieChart';
 import SectionLineChart from './SectionLineChart';
 import { CHART_TYPES } from '../../../constants/Constants';
+import moment from 'moment';
 
 const SectionChart = ({ type, data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
-        referenceLineX, referenceLineY }) =>
+        referenceLineX, referenceLineY, title, stacked, fromDate, toDate }) =>
   <div className="section-chart" style={style}>
+    {title && <div className="section-title">{title}</div>}
     {
       (() => {
         let chartToRender;
         switch (type) {
+          case CHART_TYPES.column:
           case CHART_TYPES.bar:
             chartToRender = (
               <SectionBarChart
@@ -21,6 +25,7 @@ const SectionChart = ({ type, data, style, dimensions, legend, chartProperties =
                 chartProperties={chartProperties}
                 legendStyle={legendStyle}
                 sortBy={sortBy}
+                stacked={stacked}
               />
             );
             break;
@@ -49,6 +54,8 @@ const SectionChart = ({ type, data, style, dimensions, legend, chartProperties =
                 sortBy={sortBy}
                 referenceLineX={referenceLineX}
                 referenceLineY={referenceLineY}
+                fromDate={fromDate && moment(fromDate)}
+                toDate={toDate && moment(toDate)}
               />
             );
             break;
@@ -72,8 +79,12 @@ SectionChart.propTypes = {
   legend: PropTypes.array,
   legendStyle: PropTypes.object,
   sortBy: PropTypes.object,
+  title: PropTypes.string,
   referenceLineX: PropTypes.object,
-  referenceLineY: PropTypes.object
+  referenceLineY: PropTypes.object,
+  stacked: PropTypes.bool,
+  fromDate: PropTypes.string,
+  toDate: PropTypes.string
 };
 
 export default SectionChart;

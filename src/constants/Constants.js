@@ -7,6 +7,8 @@ export const SECTION_TYPES = {
   globalSection: 'globalSection',
   header: 'header',
   text: 'text',
+  list: 'list',
+  number: 'number',
   markdown: 'markdown',
   date: 'date',
   image: 'image',
@@ -18,6 +20,7 @@ export const SECTION_TYPES = {
 
 export const CHART_TYPES = {
   bar: 'bar',
+  column: 'column',
   pie: 'pie',
   line: 'line'
 };
@@ -32,3 +35,10 @@ export const TABLE_CELL_TYPE = {
 };
 
 export const DEFAULT_MAX_LENGTH = 300;
+
+export const CHART_LAYOUT_TYPE = {
+  horizontal: 'horizontal',
+  vertical: 'vertical'
+};
+
+export const QUERIES_TIME_FORMAT = 'DD MMM Y';
