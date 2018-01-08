@@ -65,10 +65,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         {chartProperties.layout === 'vertical' && <YAxis tick interval={0} dataKey="name" type="category" />}
         {chartProperties.layout === 'vertical' && <XAxis type="number" hide />}
         {chartProperties.layout === 'horizontal' && <YAxis type="number" />}
-        {chartProperties.layout === 'horizontal' && <XAxis interval={0} tick dataKey="name" type="category" />}
+        {chartProperties.layout === 'horizontal' && <XAxis tick dataKey="name" type="category" />}
         <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
         <Tooltip />
-        {legendStyle && Object.keys(legendStyle) > 0 && <Legend {...legendStyle} />}
+        {legendStyle && Object.keys(legendStyle) > 0 && !legendStyle.hideLegend && <Legend {...legendStyle} />}
         {(legend || dataItems).map((item) => <Bar
           key={item.name}
           dataKey={item.name}

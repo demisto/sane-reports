@@ -1,0 +1,30 @@
+.customized-legend {
+  padding-left: 0;
+  margin: 0 !important;
+  list-style: none !important;
+  &.horizontal {
+    text-align: center;
+  }
+  .recharts-legend-item {
+    vertical-align: middle;
+    &.horizontal {
+      display: inline-block;
+    }
+    .recharts-legend-icon-container {
+      display: inline-block;
+      .chart-legend-icon {
+        font-size: 10px;
+        text-align: center;
+        vertical-align: top;
+      }
+    }
+    .recharts-legend-item-text {
+      vertical-align: middle;
+      display: inline-block;
+    }
+    .recharts-legend-item-value {
+      float: right;
+      margin-left: 10px;
+    }
+  }
+}

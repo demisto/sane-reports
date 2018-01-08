@@ -8,6 +8,7 @@ export const SECTION_TYPES = {
   header: 'header',
   text: 'text',
   list: 'list',
+  trend: 'trend',
   number: 'number',
   markdown: 'markdown',
   date: 'date',
@@ -42,3 +43,5 @@ export const CHART_LAYOUT_TYPE = {
 };
 
 export const QUERIES_TIME_FORMAT = 'DD MMM Y';
+
+export const CHART_LEGEND_ITEM_HEIGHT = 26;

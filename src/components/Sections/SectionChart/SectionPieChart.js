@@ -1,9 +1,12 @@
+import './SectionPieChart.less';
 import React, { PropTypes } from 'react';
 import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
+import ChartLegend from './ChartLegend';
 import merge from 'lodash/merge';
 import orderBy from 'lodash/orderBy';
 import isArray from 'lodash/isArray';
 import { getGraphColorByName } from '../../../utils/colors';
+import { CHART_LAYOUT_TYPE } from "../../../constants/Constants";
 
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
   const dataMap = {};
@@ -40,17 +43,18 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
     preparedData = orderBy(preparedData, sortBy.values, sortBy.orders);
   }
 
+  let legendHeight = dimensions.height;
+  if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical) {
+    legendHeight = dimensions.height / 2;
+  }
+
   return (
     <div className="section-pie-chart" style={style}>
       <PieChart
         width={dimensions.width}
         height={dimensions.height}
+        margin={{ left: 20, right: 20, bottom: 10, top: 10 }}
       >
-        <Tooltip />
-        <Legend
-          iconType="circle"
-          {...legendStyle}
-        />
         <Pie
           iconSize={8}
           paddingAngle={0}
@@ -76,6 +80,17 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
             );
           })}
         </Pie>
+        <Tooltip />
+        <Legend
+          content={
+            <ChartLegend
+              iconType="circle"
+              data={preparedData}
+              height={legendHeight}
+            />
+          }
+          {...legendStyle}
+        />
       </PieChart>
     </div>
   );

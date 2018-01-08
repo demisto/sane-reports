@@ -47,6 +47,7 @@ function getElementBySection(section) {
         />
       );
       break;
+    case SECTION_TYPES.trend:
     case SECTION_TYPES.number: {
       let numberData;
       if (isNumber(section.data)) {
