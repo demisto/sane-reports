@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
-import moment from 'moment';
+import moment from 'moment-timezone';
+
 
 const SectionDate = ({ date, style, format }) =>
   <div className="section-date" style={style}>
-    {date ? moment(date).format(format) : moment().format(format)}
+    {date ? moment(date).tz(moment.tz.guess()).format(format) : moment().tz(moment.tz.guess()).format(format)}
   </div>
 ;
 SectionDate.propTypes = {
