@@ -31,7 +31,7 @@ function styleByFieldName(fieldName, currentData) {
   }
 }
 
-const SectionList = ({ columns, data, classes, style }) => {
+const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
   let tableData = data;
 
   if (isString(data)) {
@@ -44,6 +44,7 @@ const SectionList = ({ columns, data, classes, style }) => {
   const mainClass = `section-list ui list ${classes}`;
   return (
     <div className={mainClass} style={style}>
+      {title && <div className="section-title" style={titleStyle}>{title}</div>}
       {tableData.map((item) => {
         const leftName = columns[0] ? columns[0].key : 'name';
         const mainKeyValue = getFieldValue(leftName, item);
@@ -78,7 +79,9 @@ SectionList.propTypes = {
     PropTypes.string
   ]),
   classes: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  title: PropTypes.string,
+  titleStyle: PropTypes.object
 };
 
 export default SectionList;

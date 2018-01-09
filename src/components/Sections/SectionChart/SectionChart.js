@@ -7,9 +7,9 @@ import { CHART_TYPES } from '../../../constants/Constants';
 import moment from 'moment';
 
 const SectionChart = ({ type, data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
-        referenceLineX, referenceLineY, title, stacked, fromDate, toDate }) =>
+        referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle }) =>
   <div className="section-chart" style={style}>
-    {title && <div className="section-title">{title}</div>}
+    {title && <div className="section-title" style={titleStyle}>{title}</div>}
     {
       (() => {
         let chartToRender;
@@ -80,6 +80,7 @@ SectionChart.propTypes = {
   legendStyle: PropTypes.object,
   sortBy: PropTypes.object,
   title: PropTypes.string,
+  titleStyle: PropTypes.object,
   referenceLineX: PropTypes.object,
   referenceLineY: PropTypes.object,
   stacked: PropTypes.bool,

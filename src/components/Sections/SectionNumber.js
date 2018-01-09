@@ -6,7 +6,7 @@ import { CHART_LAYOUT_TYPE } from '../../constants/Constants';
 import { numberToShortString } from '../../utils/strings';
 
 const TREND_NUMBER_LIMIT = 999;
-const SectionNumber = ({ data, layout, style, currencySign, title }) => {
+const SectionNumber = ({ data, layout, style, currencySign, title, titleStyle }) => {
   const isTrend = !!data.prevSum;
   let percentage = 0;
   const curr = data.currSum || 0;
@@ -54,7 +54,7 @@ const SectionNumber = ({ data, layout, style, currencySign, title }) => {
         {layout === CHART_LAYOUT_TYPE.horizontal && isTrend &&
         trendContainer
         }
-        <div className="trend-message">
+        <div className="trend-message" style={titleStyle}>
           {title}
         </div>
         {layout === CHART_LAYOUT_TYPE.vertical && isTrend &&
@@ -68,6 +68,7 @@ SectionNumber.propTypes = {
   data: PropTypes.object,
   style: PropTypes.object,
   title: PropTypes.string,
+  titleStyle: PropTypes.object,
   layout: PropTypes.oneOf(values(CHART_LAYOUT_TYPE)),
   currencySign: PropTypes.string
 };

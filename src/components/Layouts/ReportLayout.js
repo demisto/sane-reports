@@ -59,6 +59,7 @@ function getElementBySection(section) {
         <SectionNumber
           layout={section.layout.layout}
           title={section.title}
+          titleStyle={section.titleStyle}
           data={numberData}
           currencySign={section.layout.currencySign}
           text={section.data}
@@ -74,6 +75,8 @@ function getElementBySection(section) {
           columns={section.layout.tableColumns}
           classes={section.layout.classes}
           style={section.layout.style}
+          titleStyle={section.titleStyle}
+          title={section.title}
         />
       );
       break;
@@ -111,6 +114,7 @@ function getElementBySection(section) {
           data={section.data}
           type={section.layout.chartType}
           style={section.layout.style}
+          titleStyle={section.titleStyle}
           dimensions={section.layout.dimensions}
           chartProperties={section.layout.chartProperties}
           legend={section.layout.legend}
@@ -132,6 +136,8 @@ function getElementBySection(section) {
           columns={section.layout.tableColumns}
           classes={section.layout.classes}
           style={section.layout.style}
+          titleStyle={section.titleStyle}
+          title={section.title}
         />
       );
       break;

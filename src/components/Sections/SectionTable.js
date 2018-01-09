@@ -6,7 +6,7 @@ import isString from 'lodash/isString';
 import truncate from 'lodash/truncate';
 
 
-const SectionTable = ({ columns, data, classes, style }) => {
+const SectionTable = ({ columns, data, classes, style, title, titleStyle }) => {
   let tableData = data;
 
   if (isString(data)) {
@@ -95,6 +95,7 @@ const SectionTable = ({ columns, data, classes, style }) => {
 
   return (
     <div className="section-table" style={style}>
+      {title && <div className="section-title" style={titleStyle}>{title}</div>}
       {tableBody}
     </div>
   );
@@ -107,7 +108,9 @@ SectionTable.propTypes = {
     PropTypes.string
   ]),
   classes: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  title: PropTypes.string,
+  titleStyle: PropTypes.object
 };
 
 export default SectionTable;
