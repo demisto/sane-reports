@@ -28,31 +28,22 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           name = moment(name).format(timeFormat);
         }
 
-        const dateObject = { name };
-        if (mainGroup.groups) {
-          mainGroup.groups.forEach((group) => {
-            const groupName = group.name;
-            dateObject[groupName] = group.data[0];
-            lineTypes[groupName] = { name: groupName, stroke: getGraphColorByName(group.name) };
-          });
-        } else {
-          const groupName = 'sum';
-          dateObject.sum = mainGroup.data[0];
-          lineTypes.sum = { name: groupName, stroke: getGraphColorByName(groupName) };
-        }
 
-        return dateObject;
+        Object.keys(mainGroup).filter(key => key !== 'name').forEach(groupKey => {
+          lineTypes[groupKey] = { name: groupKey, stroke: getGraphColorByName(groupKey) };
+        });
+
+        return mainGroup;
       }
-      const dataValue = { name, stroke: mainGroup.color };
-      dataValue[name] = mainGroup.data[0];
-      return dataValue;
+      return mainGroup;
     }));
 
     const retData = [];
     const frames = toDate.diff(from, timeFrame);
     const currentDate = moment(from);
     for (let i = 0; i <= frames; i++) {
-      const mainGroup = preparedData.find(item => currentDate.format(QUERIES_TIME_FORMAT) === item.name);
+      const mainGroup = preparedData.find(item =>
+        currentDate.format(QUERIES_TIME_FORMAT) === moment(item.name).format(QUERIES_TIME_FORMAT));
       if (!mainGroup) {
         const dataObj = {
           name: currentDate.format(QUERIES_TIME_FORMAT)

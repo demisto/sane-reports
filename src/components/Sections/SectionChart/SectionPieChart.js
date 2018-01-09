@@ -67,7 +67,8 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
           outerRadius={chartProperties.outerRadius || 80}
           innerRadius={chartProperties.innerRadius || 30}
           labelLine={chartProperties.labelLine}
-          label={chartProperties.label || { offsetRadius: 10 }}
+          dataKey="value"
+          label={chartProperties.label || { offsetRadius: 7 }}
         >
           {/* // creating links to urls according the 'url' filed in the data */}
           {preparedData.map((entry) => {
