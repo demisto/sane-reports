@@ -16,7 +16,7 @@
     "data": null,
     "layout": {
       "columnPos": 1,
-      "format": "MMMM Do YYYY, h:mm:ss a",
+      "format": "MMMM Do YYYY, h:mm:ss a z",
       "rowPos": 2,
       "style": {
         "color": "gray",
