@@ -1,5 +1,7 @@
+import './SectionLineChart.less';
 import React, { PropTypes } from 'react';
 import { LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip, Legend } from 'recharts';
+import ChartLegend from './ChartLegend';
 import { compact, values } from 'lodash';
 import moment from 'moment';
 import { QUERIES_TIME_FORMAT } from '../../../constants/Constants';
@@ -97,7 +99,14 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           <ReferenceLine x={referenceLineX.x} stroke={referenceLineX.stroke} label={referenceLineX.label} />}
         {referenceLineY &&
           <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke} label={referenceLineY.label} />}
-        {legendStyle && <Legend {...legendStyle} />}
+        {legendStyle && !legendStyle.hideLegend &&
+        <Legend
+          content={<ChartLegend
+            icon="square"
+            data={preparedLegend}
+          />}
+          {...legendStyle}
+        />}
         {preparedLegend.map((item) =>
           <Line
             key={item.name}

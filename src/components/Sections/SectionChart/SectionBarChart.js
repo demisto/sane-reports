@@ -1,9 +1,11 @@
 import './SectionBarChart.less';
 import React, { PropTypes } from 'react';
+import ChartLegend from './ChartLegend';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import { isArray, orderBy, unionBy } from 'lodash';
 import { sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
+import { CHART_LAYOUT_TYPE } from "../../../constants/Constants";
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
   legendStyle = null, sortBy, stacked }) => {
@@ -53,8 +55,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     preparedData = orderBy(preparedData, sortBy.values, sortBy.orders);
   }
 
+  const mainClass =
+    chartProperties.layout === CHART_LAYOUT_TYPE.horizontal ? 'section-column-chart' : 'section-bar-chart';
   return (
-    <div className="section-bar-chart" style={style}>
+    <div className={mainClass} style={style}>
       <BarChart
         width={dimensions.width}
         height={dimensions.height}
@@ -62,13 +66,22 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         layout={chartProperties.layout}
         barSize={chartProperties.barSize || 13}
       >
-        {chartProperties.layout === 'vertical' && <YAxis tick interval={0} dataKey="name" type="category" />}
-        {chartProperties.layout === 'vertical' && <XAxis type="number" hide />}
-        {chartProperties.layout === 'horizontal' && <YAxis type="number" />}
-        {chartProperties.layout === 'horizontal' && <XAxis tick dataKey="name" type="category" />}
+        {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
+        <YAxis tick interval={0} dataKey="name" type="category" />}
+        {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" hide />}
+        {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
+        {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
         <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
         <Tooltip />
-        {legendStyle && Object.keys(legendStyle) > 0 && !legendStyle.hideLegend && <Legend {...legendStyle} />}
+        {legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend &&
+        <Legend
+          content={<ChartLegend
+            data={dataItems}
+            icon={legendStyle.iconType}
+            layout={legendStyle.layout}
+          />}
+          {...legendStyle}
+        />}
         {(legend || dataItems).map((item) => <Bar
           key={item.name}
           dataKey={item.name}

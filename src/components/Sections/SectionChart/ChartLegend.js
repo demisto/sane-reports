@@ -10,7 +10,7 @@ import { values } from 'lodash';
 const ChartLegend = ({data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertical, height, onClick}) => {
   let legendData = data || [];
   if (legendData.length === 0) {
-    return '';
+    return <div />;
   }
   let numOfElements = legendData.length;
   if (height) {
@@ -27,7 +27,7 @@ const ChartLegend = ({data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertical
     return (
       <li key={groupName} className={mainClass}>
         <div className="recharts-legend-icon-container">
-          <i className={legendIconClass} style={{ color: group.fill || group.color }} />
+          <i className={legendIconClass} style={{ color: group.fill || group.color || group.stroke }} />
         </div>
         <span className="recharts-legend-item-text" onClick={onClick}>
           {group.name}
