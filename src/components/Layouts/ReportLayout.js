@@ -1,5 +1,6 @@
 import './ReportLayout.less';
 import React, { PropTypes } from 'react';
+import { AutoSizer } from 'react-virtualized';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
   SectionMarkdown, SectionJson, SectionNumber, SectionList }
     from '../Sections';
@@ -9,8 +10,7 @@ import {
   REPORT_HEADER_IMAGE_RIGHT_TOKEN
 } from '../../constants/Constants';
 import { isNumber } from 'lodash';
-import ReactGridLayout, { WidthProvider } from 'react-grid-layout';
-const DecoratedReactGridLayout = WidthProvider(ReactGridLayout);
+import ReactGridLayout from 'react-grid-layout';
 const ROW_PIXEL_HEIGHT = 110;
 let overflowRows = 0;
 
@@ -202,26 +202,32 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
               </div>
           )
           :
-          <DecoratedReactGridLayout isResizable={false} isDraggable={false} rowHeight={ROW_PIXEL_HEIGHT}>
-            {
-              Object
-                .keys(sections)
-                .map((rowPos) =>
-                  sections[rowPos]
-                    .map((section) =>
-                      <div
-                        key={section.layout.i}
-                        className={section.layout.class ? 'report-section ' + section.layout.class : 'report-section'}
-                        style={section.layout.sectionStyle}
-                        data-grid={getGridItemFromSection(section)}
-                      >
-                        {getElementBySection(section)}
-                      </div>
-                    )
-                )
+          <AutoSizer disableHeight>
+            {({ width }) => {
+              return (
+                <ReactGridLayout width={width} isResizable={false} isDraggable={false} rowHeight={ROW_PIXEL_HEIGHT}>
+                  {
+                    Object
+                      .keys(sections)
+                      .map((rowPos) =>
+                        sections[rowPos]
+                          .map((section) =>
+                            <div
+                              key={section.layout.i}
+                              className={section.layout.class}
+                              style={section.layout.sectionStyle}
+                              data-grid={getGridItemFromSection(section)}
+                            >
+                              {getElementBySection(section)}
+                            </div>
+                          )
+                      )
+                  }
+                </ReactGridLayout>
+              );
             }
-          </DecoratedReactGridLayout>
-
+            }
+          </AutoSizer>
       }
     </div>
   );
