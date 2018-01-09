@@ -47,6 +47,7 @@
     "markdown-it-sub": "1.0.0",
     "markdown-it-sup": "1.0.0",
     "moment": "2.18.1",
+    "moment-timezone": "0.5.14",
     "parse-link-header": "0.4.1",
     "postcss-reporter": "1.4.1",
     "react": "15.6.1",

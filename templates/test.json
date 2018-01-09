@@ -261,7 +261,7 @@
         "fontSize": 14,
         "fontStyle": "italic"
       },
-      "format": "MMMM Do YYYY, h:mm:ss a"
+      "format": "MMMM Do YYYY, h:mm:ss a z"
     }
   },
   {
