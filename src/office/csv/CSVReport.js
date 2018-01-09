@@ -1,5 +1,5 @@
 import { SECTION_TYPES } from '../../constants/Constants';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 function storeCsvInDocument(csvData) {
   document.csvData = csvData;
@@ -31,7 +31,8 @@ export function generateCSVReport(sections) {
             case SECTION_TYPES.date: {
               const format = section.layout.format;
               const date = section.data;
-              const formattedDate = date ? moment(date).format(format) : moment().format(format);
+              const formattedDate = date ? moment(date).tz(moment.tz.guess()).format(format) :
+                moment().tz(moment.tz.guess()).format(format);
               csv += csvEscape(formattedDate);
               break;
             }
