@@ -90,7 +90,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 })
                 }
               </Pie>
-              <Tooltip/>
+              <Tooltip />
               <Legend
                 content={
                   <ChartLegend

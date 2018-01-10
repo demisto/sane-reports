@@ -21,7 +21,7 @@ const SectionNumber = ({ data, layout, style, currencySign, title, titleStyle })
     'down green': percentage < 0
   });
   const trendIcon = percentage === 0 ?
-    (<span className="trend-icon trend-equal">=</span>) : (<i className={caretClass}/>);
+    (<span className="trend-icon trend-equal">=</span>) : (<i className={caretClass} />);
 
   let shortPercentage = Math.abs(percentage) + '';
   if (isTrend && percentage > TREND_NUMBER_LIMIT) {
