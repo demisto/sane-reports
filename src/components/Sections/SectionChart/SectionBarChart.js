@@ -12,24 +12,16 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   const existingColors = {};
   let dataItems = [];
   let preparedData;
-  if (stacked) {
-    preparedData = data.map((group) => {
-      const result = { name: group.name };
-      group.groups.forEach((subGroup) => {
-        let val = subGroup.value || subGroup.data;
-        if (isArray(val) && val.length > 0) {
-          val = val[0];
-        }
-        result[subGroup.name] = val;
-      });
-      return result;
+  if (legend) {
+    legend.map(item => {
+      item.fill = item.fill || getGraphColorByName(item.name, existingColors);
     });
 
-    dataItems = data
-      .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
-      .map(group => ({ name: group.name, fill: getGraphColorByName(group.name, existingColors) }))
-      .sort((a, b) => sortStrings(a.name, b.name));
-  } else {
+    dataItems = legend;
+    preparedData = data;
+  }
+
+  if (!stacked) {
     preparedData = data.map((item) => {
       let val = item.value || item.data;
       if (isArray(val) && val.length > 0) {
@@ -38,13 +30,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
 
       item.fill = item.fill || getGraphColorByName(item.name, existingColors);
       existingColors[item.fill] = true;
-      if (legend) {
-        for (let i = 0; i < legend.length; i++) {
-          if (item.relatedTo === legend[i].bar) {
-            item[legend[i].name] = val;
-          }
-        }
-      } else {
+      if (!legend) {
         item[item.name] = val;
         dataItems.push({ name: item.name, fill: item.fill });
       }
@@ -83,7 +69,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
             {...legendStyle}
           />
         }
-        {(legend || dataItems).map((item) => <Bar
+        {dataItems.map((item) => <Bar
           key={item.name}
           dataKey={item.name}
           stackId="stack"

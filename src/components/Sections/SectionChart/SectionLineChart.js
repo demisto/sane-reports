@@ -30,8 +30,8 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           name = moment(name).format(timeFormat);
         }
 
-
-        Object.keys(mainGroup).filter(key => key !== 'name').forEach(groupKey => {
+        mainGroup.name = name;
+        Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach(groupKey => {
           lineTypes[groupKey] = { name: groupKey, stroke: getGraphColorByName(groupKey) };
         });
 
