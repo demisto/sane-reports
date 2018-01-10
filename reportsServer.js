@@ -59,7 +59,7 @@ const resourceTimeout = system.args[5];
 const reportType = system.args[6] || 'pdf';
 const headerLeftImage = system.args[7] || '';
 const headerRightImage = system.args[8] || '';
-const pageSize = system.args[9] || PAGE_SIZES.A4;
+const pageSize = system.args[9] || PAGE_SIZES.Letter;
 
 page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 4000;
 
