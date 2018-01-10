@@ -7,7 +7,7 @@ import {
 } from '../../../constants/Constants';
 import { values } from 'lodash';
 
-const ChartLegend = ({data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertical, height, onClick}) => {
+const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertical, height, onClick }) => {
   let legendData = data || [];
   if (legendData.length === 0) {
     return <div />;

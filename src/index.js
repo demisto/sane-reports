@@ -25,7 +25,7 @@ if (sections) {
   isLayout = true;
   Object
     .keys(sections)
-    .forEach((rowPos) => { isLayout = isLayout && sections[rowPos].every(section => section.layout.i) });
+    .forEach((rowPos) => { isLayout = isLayout && sections[rowPos].every(section => section.layout.i); });
 }
 
 if (type === REPORT_TYPES.pdf) {

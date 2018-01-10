@@ -100,13 +100,14 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         {referenceLineY &&
           <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke} label={referenceLineY.label} />}
         {legendStyle && !legendStyle.hideLegend &&
-        <Legend
-          content={<ChartLegend
-            icon="square"
-            data={preparedLegend}
-          />}
-          {...legendStyle}
-        />}
+          <Legend
+            content={<ChartLegend
+              icon="square"
+              data={preparedLegend}
+            />}
+            {...legendStyle}
+          />
+        }
         {preparedLegend.map((item) =>
           <Line
             key={item.name}

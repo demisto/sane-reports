@@ -5,7 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'rec
 import { isArray, orderBy, unionBy } from 'lodash';
 import { sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
-import { CHART_LAYOUT_TYPE } from "../../../constants/Constants";
+import { CHART_LAYOUT_TYPE } from '../../../constants/Constants';
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
   legendStyle = null, sortBy, stacked }) => {
@@ -67,21 +67,22 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         barSize={chartProperties.barSize || 13}
       >
         {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
-        <YAxis tick interval={0} dataKey="name" type="category" />}
+          <YAxis tick interval={0} dataKey="name" type="category" />}
         {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" hide />}
         {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
         {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
         <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
         <Tooltip />
         {legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend &&
-        <Legend
-          content={<ChartLegend
-            data={dataItems}
-            icon={legendStyle.iconType}
-            layout={legendStyle.layout}
-          />}
-          {...legendStyle}
-        />}
+          <Legend
+            content={<ChartLegend
+              data={dataItems}
+              icon={legendStyle.iconType}
+              layout={legendStyle.layout}
+            />}
+            {...legendStyle}
+          />
+        }
         {(legend || dataItems).map((item) => <Bar
           key={item.name}
           dataKey={item.name}

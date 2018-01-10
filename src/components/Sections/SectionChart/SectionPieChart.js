@@ -7,7 +7,7 @@ import merge from 'lodash/merge';
 import orderBy from 'lodash/orderBy';
 import isArray from 'lodash/isArray';
 import { getGraphColorByName } from '../../../utils/colors';
-import { CHART_LAYOUT_TYPE } from "../../../constants/Constants";
+import { CHART_LAYOUT_TYPE } from '../../../constants/Constants';
 
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
   const dataMap = {};
@@ -87,7 +87,8 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                       }}
                     />
                   );
-                })}
+                })
+                }
               </Pie>
               <Tooltip/>
               <Legend
