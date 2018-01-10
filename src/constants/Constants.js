@@ -43,5 +43,5 @@ export const CHART_LAYOUT_TYPE = {
 };
 
 export const QUERIES_TIME_FORMAT = 'DD MMM Y';
-
+export const GRID_LAYOUT_COLUMNS = 12;
 export const CHART_LEGEND_ITEM_HEIGHT = 26;

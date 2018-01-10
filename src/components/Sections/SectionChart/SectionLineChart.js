@@ -45,11 +45,13 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     const frames = finalToDate.diff(from, timeFrame);
     const currentDate = moment(from);
     for (let i = 0; i <= frames; i++) {
-      const mainGroup = preparedData.find(item =>
-        currentDate.format(timeFormat) === item.name);
-      if (!mainGroup) {
+      const formattedDate = currentDate.format(timeFormat);
+      const mainGroup = preparedData.filter(item =>
+        formattedDate === item.name);
+      const group = mainGroup && mainGroup.length > 0 && mainGroup[0];
+      if (!group) {
         const dataObj = {
-          name: currentDate.format(QUERIES_TIME_FORMAT)
+          name: formattedDate
         };
         Object.keys(lineTypes).forEach((groupName) => {
           dataObj[groupName] = 0;
@@ -58,11 +60,11 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
       } else {
         // complete missing subgroups for the graph to show complete lines.
         Object.keys(lineTypes).forEach((groupName) => {
-          if (!(groupName in mainGroup)) {
-            mainGroup[groupName] = 0;
+          if (!(groupName in group)) {
+            group[groupName] = 0;
           }
         });
-        retData.push(mainGroup);
+        retData.push(group);
       }
 
       currentDate.add(1, timeFrame);

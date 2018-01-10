@@ -7,7 +7,8 @@ import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, Se
 import {
   SECTION_TYPES,
   REPORT_HEADER_IMAGE_LEFT_TOKEN,
-  REPORT_HEADER_IMAGE_RIGHT_TOKEN
+  REPORT_HEADER_IMAGE_RIGHT_TOKEN,
+  GRID_LAYOUT_COLUMNS
 } from '../../constants/Constants';
 import { isNumber } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
@@ -17,7 +18,7 @@ let overflowRows = 0;
 function getGridItemFromSection(section) {
   const rows = section.layout.rowPos + overflowRows;
   let height = section.layout.h;
-  if (section.type === SECTION_TYPES.table && section.layout.w === 12) {
+  if (section.type === SECTION_TYPES.table && section.layout.w === GRID_LAYOUT_COLUMNS) {
     const numOfRows = Math.ceil(((section.data || []).length * 30 + 40) / ROW_PIXEL_HEIGHT);
     if (numOfRows > section.layout.h) {
       height = numOfRows - 1;
@@ -205,7 +206,13 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
           <AutoSizer disableHeight>
             {({ width }) => {
               return (
-                <ReactGridLayout width={width} isResizable={false} isDraggable={false} rowHeight={ROW_PIXEL_HEIGHT}>
+                <ReactGridLayout
+                  cols={GRID_LAYOUT_COLUMNS}
+                  width={width}
+                  isResizable={false}
+                  isDraggable={false}
+                  rowHeight={ROW_PIXEL_HEIGHT}
+                >
                   {
                     Object
                       .keys(sections)
