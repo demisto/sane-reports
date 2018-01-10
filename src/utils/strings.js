@@ -32,6 +32,12 @@ export function numberToShortString(num) {
 }
 
 export function sortStrings(s1In, s2In, asc = true) {
+  if (!isNaN(s1In) && !isNaN(s2In)) {
+    const s1 = parseInt(s1In, 10);
+    const s2 = parseInt(s2In, 10);
+    return s1 - s2;
+  }
+
   // make sure empty strings are in the end
   const s1 = s1In || '|||';
   const s2 = s2In || '|||';

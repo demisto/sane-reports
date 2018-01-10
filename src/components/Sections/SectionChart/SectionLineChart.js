@@ -17,14 +17,14 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   if (fromDate && finalToDate) {
     const timeFrame = 'days';
     const lineTypes = {};
-    const from = moment(fromDate);
+    const from = moment(fromDate).utc();
+    const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
     preparedData = compact(preparedData.sort((a, b) => sortStrings(a.name, b.name)).map((mainGroup) => {
       let name = mainGroup.name;
       if (chartProperties.isDatesChart) {
         if (!name) {
           return null;
         }
-        const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
         if (!isNaN(name)) {
           name = moment(from).add(Number(name), timeFrame).format(timeFormat);
         } else if (name) {
@@ -46,7 +46,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     const currentDate = moment(from);
     for (let i = 0; i <= frames; i++) {
       const mainGroup = preparedData.find(item =>
-        currentDate.format(QUERIES_TIME_FORMAT) === moment(item.name).format(QUERIES_TIME_FORMAT));
+        currentDate.format(timeFormat) === item.name);
       if (!mainGroup) {
         const dataObj = {
           name: currentDate.format(QUERIES_TIME_FORMAT)
