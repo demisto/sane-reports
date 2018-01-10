@@ -2,8 +2,7 @@ import './SectionBarChart.less';
 import React, { PropTypes } from 'react';
 import ChartLegend from './ChartLegend';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
-import { isArray, orderBy, unionBy } from 'lodash';
-import { sortStrings } from '../../../utils/strings';
+import { isArray, orderBy } from 'lodash';
 import { getGraphColorByName } from '../../../utils/colors';
 import { CHART_LAYOUT_TYPE } from '../../../constants/Constants';
 
@@ -15,6 +14,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   if (legend) {
     legend.map(item => {
       item.fill = item.fill || getGraphColorByName(item.name, existingColors);
+      return item;
     });
 
     dataItems = legend;
