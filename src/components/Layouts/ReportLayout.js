@@ -214,7 +214,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
                           .map((section) =>
                             <div
                               key={section.layout.i}
-                              className={section.layout.class}
+                              className={'report-item' + section.layout.class || ''}
                               style={section.layout.sectionStyle}
                               data-grid={getGridItemFromSection(section)}
                             >

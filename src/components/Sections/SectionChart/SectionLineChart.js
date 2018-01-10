@@ -13,7 +13,8 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   const existingColors = {};
   let preparedLegend = [];
   let preparedData = data;
-  if (fromDate && toDate) {
+  const finalToDate = toDate || moment().utc();
+  if (fromDate && finalToDate) {
     const timeFrame = 'days';
     const lineTypes = {};
     const from = moment(fromDate);
@@ -41,7 +42,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     }));
 
     const retData = [];
-    const frames = toDate.diff(from, timeFrame);
+    const frames = finalToDate.diff(from, timeFrame);
     const currentDate = moment(from);
     for (let i = 0; i <= frames; i++) {
       const mainGroup = preparedData.find(item =>
