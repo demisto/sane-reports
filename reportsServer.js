@@ -2,6 +2,26 @@
 const page = require('webpage').create();
 const system = require('system');
 const fs = require('fs');
+const PAGE_SIZES = {
+  A4: 'A4',
+  A3: 'A3',
+  Letter: 'letter',
+  A5: 'A5'
+};
+
+function getPageSize(pageSize) {
+  switch (pageSize) {
+    case PAGE_SIZES.A3:
+      return { width: '297mm', height: '420mm' };
+    case PAGE_SIZES.A5:
+      return { width: '148mm', height: '210' };
+    case PAGE_SIZES.Letter:
+      return { width: '216mm', height: '279mm' };
+    case PAGE_SIZES.A4:
+    default:
+      return { width: '210mm', height: '297mm' };
+  }
+}
 
 phantom.onError = function(msg, trace) {
   const msgStack = ['PHANTOMJS ERROR: ' + msg];
@@ -39,6 +59,7 @@ const resourceTimeout = system.args[5];
 const reportType = system.args[6] || 'pdf';
 const headerLeftImage = system.args[7] || '';
 const headerRightImage = system.args[8] || '';
+const pageSize = system.args[9] || PAGE_SIZES.Letter;
 
 page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 4000;
 
@@ -67,7 +88,7 @@ const baseUrl = distFolder.indexOf('/') === 0 ? distFolder : fs.absolute(".") + 
 
 try {
   page.paperSize = {
-    format: 'letter', // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
+    format: pageSize, // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
     orientation: orientation || 'portrait', // portrait / landscape
     header: {
       height: "1.3cm",
@@ -143,6 +164,15 @@ try {
     console.log("Read report page status: " + status);
 
     if (status === "success") {
+      const dimensions = getPageSize(pageSize);
+      page.evaluate(function(dimensions) {
+        // fix phantomJS bug (https://github.com/marcbachmann/node-html-pdf/issues/198)
+        if (reportType === 'pdf') {
+          document.querySelector('html').style.zoom = 0.75;
+          document.querySelector('body').style.width = 'calc(' + dimensions.width + ')';
+          document.querySelector('body').style.height = 'calc(' + dimensions.height + ')';
+        }
+      }, dimensions);
       switch (reportType) {
         case 'csv':
           const csvData = page.evaluate(function() {

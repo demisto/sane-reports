@@ -4,8 +4,8 @@ import { prepareSections } from '../../src/utils/reports';
 import ReportContainer from '../../src/containers/ReportContainer';
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
-  SectionMarkdown, SectionJson } from '../../src/components/Sections';
-import { BarChart, PieChart, Pie } from 'recharts';
+  SectionMarkdown, SectionJson, SectionNumber } from '../../src/components/Sections';
+import { BarChart, PieChart, Pie, LineChart } from 'recharts';
 
 describe('Report Container', () => {
   it('Generate test template report', () => {
@@ -228,5 +228,90 @@ describe('Report Container', () => {
     expect(jsonInspectorKey.at(2).text()).to.equal('how:');
     expect(jsonInspectorKey.at(3).text()).to.equal('are:');
     expect(jsonInspectorValue.at(0).text()).to.equal('you?');
+  });
+
+  it('Generate test template layout report', () => {
+    const testTemplate = TemplateProvider.getTestLayoutTemplate();
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+
+    const hiddenHeader = reportContainer.find('.hidden-header');
+    expect(hiddenHeader).to.have.length(1);
+    expect(hiddenHeader.get(0).style._values).to.deep.equal({ display: 'none' });
+
+    const reportLayouts = reportContainer.find(ReportLayout);
+    expect(reportLayouts).to.have.length(1);
+
+    const sec1 = testTemplate[0];
+    const sec2 = testTemplate[1];
+    const sec3 = testTemplate[2];
+    const sec4 = testTemplate[3];
+    const sec5 = testTemplate[4];
+    const sec6 = testTemplate[5];
+    const sec7 = testTemplate[6];
+
+    // Charts
+    const sectionChart = reportContainer.find(SectionChart);
+    expect(sectionChart).to.have.length(5);
+    expect(sectionChart.at(0).props().data).to.equal(sec1.data);
+    expect(sectionChart.at(0).props().style).to.equal(sec1.layout.style);
+    expect(sectionChart.at(0).props().type).to.equal(sec1.layout.chartType);
+    expect(sectionChart.at(0).props().dimensions).to.equal(sec1.layout.dimensions);
+
+    expect(sectionChart.at(1).props().data).to.equal(sec3.data);
+    expect(sectionChart.at(1).props().style).to.equal(sec3.layout.style);
+    expect(sectionChart.at(1).props().type).to.equal(sec3.layout.chartType);
+    expect(sectionChart.at(1).props().dimensions).to.equal(sec3.layout.dimensions);
+    expect(sectionChart.at(0).props().title).to.equal(sec1.title);
+    expect(sectionChart.at(1).props().title).to.equal(sec3.title);
+    expect(sectionChart.at(2).props().title).to.equal(sec4.title);
+    expect(sectionChart.at(3).props().title).to.equal(sec5.title);
+    expect(sectionChart.at(4).props().title).to.equal(sec6.title);
+
+    const barChart = reportContainer.find(BarChart);
+    const pieChart = reportContainer.find(PieChart);
+    const lineChart = reportContainer.find(LineChart);
+    const pie = reportContainer.find(Pie);
+
+    expect(barChart).to.have.length(3);
+    expect(pieChart).to.have.length(1);
+    expect(lineChart).to.have.length(1);
+    expect(pie).to.have.length(1);
+
+    expect(pieChart.props().width).to.equal(sec5.layout.dimensions.width);
+    expect(pie.props().data.length).to.equal(sec5.data.length);
+
+    expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
+    expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);
+    expect(barChart.at(1).props().width).to.equal(sec4.layout.dimensions.width);
+    expect(barChart.at(1).props().height).to.equal(sec4.layout.dimensions.height);
+    expect(barChart.at(2).props().width).to.equal(sec5.layout.dimensions.width);
+    expect(barChart.at(2).props().height).to.equal(sec5.layout.dimensions.height);
+
+    expect(lineChart.at(0).props().width).to.equal(sec6.layout.dimensions.width);
+    expect(lineChart.at(0).props().height).to.equal(sec6.layout.dimensions.height);
+
+    // Trend
+    const trendNumber = reportContainer.find(SectionNumber);
+    expect(trendNumber).to.have.length(1);
+    expect(trendNumber.at(0).props().title).to.equal(sec2.title);
+    expect(trendNumber.at(0).props().data).to.equal(sec2.data);
+    expect(trendNumber.at(0).props().layout).to.equal(sec2.layout.layout);
+    const trendBox = trendNumber.at(0).find('.trend-box');
+    expect(trendBox).to.have.length(1);
+
+    // Tables
+    const sectionTable = reportContainer.find(SectionTable);
+    expect(sectionTable).to.have.length(1);
+    expect(sectionTable.at(0).props().columns).to.equal(sec7.layout.tableColumns);
+    expect(sectionTable.at(0).props().data).to.equal(sec7.data);
+    expect(sectionTable.at(0).props().classes).to.equal(sec7.layout.classes);
+
+    const tableEl = reportContainer.find('table');
+    const tableHeader = reportContainer.find('th');
+    expect(tableEl).to.have.length(1);
+    expect(tableHeader).to.have.length(2);
+    expect(tableHeader.at(0).text()).to.equal(sec7.layout.tableColumns[0]);
+    expect(tableHeader.at(1).text()).to.equal(sec7.layout.tableColumns[1]);
   });
 });

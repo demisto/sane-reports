@@ -1,8 +1,13 @@
 import testTemplate from './test.json';
+import testLayoutTemplate from './testLayout.json';
 import incidentDailyReportTempalte from './incidentDailyReportTempalte.json';
 
 function getTestTemplate() {
   return testTemplate;
+}
+
+function getTestLayoutTemplate() {
+  return testLayoutTemplate;
 }
 
 /* istanbul ignore next */
@@ -12,5 +17,6 @@ function getIncidentDailyReportTemplate() {
 
 export {
   getTestTemplate,
-  getIncidentDailyReportTemplate
+  getIncidentDailyReportTemplate,
+  getTestLayoutTemplate
 };

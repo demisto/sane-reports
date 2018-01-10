@@ -52,10 +52,12 @@
     "postcss-reporter": "1.4.1",
     "react": "15.6.1",
     "react-dom": "15.6.1",
+    "react-grid-layout": "0.16.2",
     "react-highlight": "0.10.0",
     "react-markdown-js": "0.5.0",
     "react-pure-render": "1.0.2",
-    "recharts": "0.12.4",
+    "react-virtualized": "9.16.1",
+    "recharts": "1.0.0-beta.5",
     "seedrandom": "2.4.3",
     "semantic-ui": "2.2.11",
     "whatwg-fetch": "1.0.0"
