@@ -7,3 +7,5 @@ export { default as SectionImage } from './SectionImage';
 export { default as SectionDivider } from './SectionDivider';
 export { default as SectionMarkdown } from './SectionMarkdown';
 export { default as SectionJson } from './SectionJson';
+export { default as SectionNumber } from './SectionNumber';
+export { default as SectionList } from './SectionList';

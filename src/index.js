@@ -20,10 +20,23 @@ if (data === REPORT_DATA_TOKEN) {
 const type = getReportType(reportType);
 const sections = prepareSections(data, type);
 
+let isLayout = false;
+if (sections) {
+  isLayout = true;
+  Object
+    .keys(sections)
+    .forEach((rowPos) => { isLayout = isLayout && sections[rowPos].every(section => section.layout.i); });
+}
+
 if (type === REPORT_TYPES.pdf) {
   ReactDOM.render(
     <div>
-      <ReportContainer sections={sections} headerLeftImage={headerLeftImage} headerRightImage={headerRightImage} />
+      <ReportContainer
+        isLayout={isLayout}
+        sections={sections}
+        headerLeftImage={headerLeftImage}
+        headerRightImage={headerRightImage}
+      />
     </div>,
     document.getElementById('app')
   );

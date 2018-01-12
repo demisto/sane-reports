@@ -13,9 +13,11 @@
   },
   {
     "type": "date",
+    "class": "row-class",
     "layout": {
       "rowPos": 2,
       "columnPos": 1,
+      "class": "cell-class",
       "style": {
         "textAlign": "left",
         "color": "gray",
@@ -23,7 +25,7 @@
         "fontStyle": "italic",
         "marginBottom:": 12
       },
-      "format": "MMMM Do YYYY, h:mm:ss a"
+      "format": "MMMM Do YYYY, h:mm:ss a z"
     }
   },
   {
@@ -90,11 +92,11 @@
   {
     "type": "chart",
     "data": [
-      { "name": "Unknown", "value": 5 },
-      { "name": "Low", "value": 7 },
-      { "name": "Medium", "value": 11 },
-      { "name": "High", "value": 7 },
-      { "name": "Critical", "value": 9 }
+      { "name": "Unknown", "value": 5, "url": "" },
+      { "name": "Low", "value": 7, "url": "" },
+      { "name": "Medium", "value": 11, "url": "" },
+      { "name": "High", "value": 7, "url": "" },
+      { "name": "Critical", "value": 9 , "url": ""}
     ],
     "layout": {
       "rowPos": 6,
@@ -258,7 +260,7 @@
   {
     "type": "chart",
     "data": [
-      { "name": "Slavik", "relatedTo": 1, "value": 15 },
+      { "name": "Slavik", "relatedTo": 1, "value": 15, "url": "" },
       { "name": "Guy", "relatedTo": 1, "value": 11 },
       { "name": "Meir", "relatedTo": 1, "value": 9 },
       { "name": "Aviad", "relatedTo": 1, "value": 4 }

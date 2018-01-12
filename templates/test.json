@@ -261,7 +261,7 @@
         "fontSize": 14,
         "fontStyle": "italic"
       },
-      "format": "MMMM Do YYYY, h:mm:ss a"
+      "format": "MMMM Do YYYY, h:mm:ss a z"
     }
   },
   {
@@ -312,6 +312,7 @@
     "layout": {
       "rowPos": 8200,
       "columnPos": 100,
+      "tableClasses": "right aligned",
       "style": {
         "color": "#555555",
         "fontSize": 14,

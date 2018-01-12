@@ -1,0 +1,616 @@
+[
+  {
+    "type": "chart",
+    "data": [
+      {
+        "name": "AAA",
+        "relatedTo": 1,
+        "value": [
+          2
+        ]
+      },
+      {
+        "name": "BBB",
+        "relatedTo": 1,
+        "value": [
+          2
+        ]
+      },
+      {
+        "name": "CCC",
+        "relatedTo": 1,
+        "value": [
+          1
+        ]
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "barSize": 15,
+        "layout": "vertical"
+      },
+      "chartType": "bar",
+      "columnPos": 0,
+      "dimensions": {
+        "height": 312,
+        "width": 119
+      },
+      "h": 3,
+      "i": "05b92970-f5eb-11e7-92ea-eb1e1a874380",
+      "legendStyle": {
+        "align": "center",
+        "hideLegend": false,
+        "iconType": "square",
+        "layout": "horizontal",
+        "verticalAlign": "top"
+      },
+      "rowPos": 0,
+      "w": 2
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "fromDate": "2017-12-11T12:07:50+02:00",
+    "title": "aaa"
+  },
+  {
+    "type": "trend",
+    "data": {
+      "currSum": 5,
+      "prevSum": 49
+    },
+    "layout": {
+      "columnPos": 2,
+      "currencySign": "",
+      "h": 1,
+      "i": "0c22b3d0-f5eb-11e7-92ea-eb1e1a874380",
+      "layout": "horizontal",
+      "rowPos": 0,
+      "style": {
+        "backgroundColor": null
+      },
+      "w": 3
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "title": "Trend Chart"
+  },
+  {
+    "type": "chart",
+    "data": [
+      {
+        "name": "0",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "1",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "2",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "3",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "4",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "5",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "6",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "7",
+        "relatedTo": 1,
+        "value": [
+          2
+        ]
+      },
+      {
+        "name": "8",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "9",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "10",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "11",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "12",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "13",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "14",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "15",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "16",
+        "relatedTo": 1,
+        "value": [
+          1
+        ]
+      },
+      {
+        "name": "17",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "18",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "19",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "20",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "21",
+        "relatedTo": 1,
+        "value": [
+          1
+        ]
+      },
+      {
+        "name": "22",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "23",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "24",
+        "relatedTo": 1,
+        "value": [
+          1
+        ]
+      },
+      {
+        "name": "25",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "26",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "27",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "28",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "29",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      },
+      {
+        "name": "30",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "format": "DD MMM Y",
+        "isDatesChart": true,
+        "layout": "vertical",
+        "margin": {
+          "bottom": 5,
+          "left": -20,
+          "right": 25,
+          "top": 5
+        }
+      },
+      "chartType": "line",
+      "columnPos": 0,
+      "dimensions": {
+        "height": 192,
+        "width": 772
+      },
+      "h": 2,
+      "i": "0f0cdb70-f5eb-11e7-92ea-eb1e1a874380",
+      "legendStyle": {
+        "align": "center",
+        "iconSize": 8,
+        "iconType": "square",
+        "verticalAlign": "top",
+        "width": 772,
+        "wrapperStyle": {
+          "maxHeight": 48
+        }
+      },
+      "rowPos": 3,
+      "w": 12
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "fromDate": "2017-12-11T12:07:50+02:00",
+    "fromDate": "2018-01-10T12:07:50+02:00",
+    "title": "my owner lol 2331"
+  },
+  {
+    "type": "chart",
+    "data": [
+      {
+        "AA": 1,
+        "name": "A",
+        "BB": 1
+      },
+      {
+        "AA": 1,
+        "name": "B",
+        "CC": 1
+      },
+      {
+        "AA": 1,
+        "name": "C"
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "barSize": 15,
+        "layout": "vertical"
+      },
+      "chartType": "bar",
+      "columnPos": 2,
+      "dimensions": {
+        "height": 192,
+        "width": 184
+      },
+      "h": 2,
+      "i": "12764530-f5eb-11e7-92ea-eb1e1a874380",
+      "legend": [
+        {
+          "name": "AA",
+          "type": "basis"
+        },
+        {
+          "name": "BB",
+          "type": "basis"
+        },
+        {
+          "name": "CC",
+          "type": "basis"
+        }
+      ],
+      "legendStyle": {
+        "align": "center",
+        "hideLegend": false,
+        "iconType": "square",
+        "layout": "horizontal",
+        "verticalAlign": "top"
+      },
+      "rowPos": 1,
+      "w": 3
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "fromDate": "2017-12-11T12:07:50+02:00",
+    "title": "Load and SLA"
+  },
+  {
+    "type": "chart",
+    "data": [
+      {
+        "name": "CCC",
+        "relatedTo": 1,
+        "value": [
+          3
+        ]
+      },
+      {
+        "name": "BBB",
+        "relatedTo": 1,
+        "value": [
+          1
+        ]
+      },
+      {
+        "name": "CCC",
+        "relatedTo": 1,
+        "value": [
+          1
+        ]
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "barSize": 35,
+        "layout": "horizontal"
+      },
+      "chartType": "column",
+      "columnPos": 8,
+      "dimensions": {
+        "height": 312,
+        "width": 249
+      },
+      "h": 3,
+      "i": "17fdacf0-f5eb-11e7-92ea-eb1e1a874380",
+      "legendStyle": {
+        "align": "right",
+        "hideLegend": true,
+        "iconType": "circle",
+        "layout": "vertical",
+        "verticalAlign": "top"
+      },
+      "rowPos": 0,
+      "w": 4
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "fromDate": "2017-12-11T12:07:50+02:00",
+    "title": "Test test 1"
+  },
+  {
+    "type": "chart",
+    "data": [
+      {
+        "name": "AA",
+        "relatedTo": 1,
+        "value": [
+          2
+        ]
+      },
+      {
+        "name": "BB",
+        "relatedTo": 1,
+        "value": [
+          2
+        ]
+      },
+      {
+        "name": "CC",
+        "relatedTo": 1,
+        "value": [
+          1
+        ]
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "cx": "50%",
+        "cy": "50%",
+        "innerRadius": "75%",
+        "layout": "vertical",
+        "maxRadius": 0,
+        "outerRadius": "100%"
+      },
+      "chartType": "pie",
+      "columnPos": 5,
+      "dimensions": {
+        "height": 312,
+        "width": 184
+      },
+      "h": 3,
+      "i": "1a834660-f5eb-11e7-92ea-eb1e1a874380",
+      "legendStyle": {
+        "align": "center",
+        "iconType": "circle",
+        "layout": "vertical",
+        "verticalAlign": "bottom",
+        "width": 0
+      },
+      "rowPos": 0,
+      "w": 3
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "fromDate": "2017-12-11T12:07:50+02:00",
+    "title": "Test test"
+  },
+  {
+    "type": "table",
+    "data": [
+      {
+        "aaa": "aaaa",
+        "bbb": "bbb",
+        "ccc": "ccc"
+      }
+    ],
+    "layout": {
+      "classes": "striped stackable small very compact",
+      "columnPos": 0,
+      "h": 2,
+      "i": "3ebd9120-f5eb-11e7-92ea-eb1e1a874380",
+      "rowPos": 5,
+      "tableColumns": [
+        "aaa",
+        "bbb"
+      ],
+      "w": 12
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "title": "table"
+  }
+]
