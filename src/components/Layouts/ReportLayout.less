@@ -29,6 +29,11 @@ h1 {
   .report-section {
     display: table-cell;
   }
+  .react-grid-item {
+    overflow: hidden;
+    transition: none;
+    z-index: 1;
+  }
   @media screen and (max-width: 630px) {
     .report-row {
       display: block !important;
@@ -36,36 +41,6 @@ h1 {
     .report-section {
       width: 100%;
       display: inline-block !important;
-    }
-
-  .grid-layout {
-    position: relative;
-    .react-grid-layout {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      transition: none;
-      height: 100% !important;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-    .react-grid-item {
-      transition: none;
-      color: @font-color-base !important;
-      z-index: 1;
-      &.active {
-        z-index: 2 !important;
-      }
-    }
-    .report-row {
-      report-row: block;
-    }
-
-    .report-section {
-      display: block;
-    }
     }
   }
 }
