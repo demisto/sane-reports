@@ -12,23 +12,6 @@ const graphColors = ['#E57373', '#FF1D1E', '#FF5000', '#E55100', '#D74315', '#F0
   '#8BC34A', '#69A636', '#EDFE41', '#FFEA00', '#FFD740', '#F9A825', '#FB8C00', '#FF7500', '#DBDBDB', '#CFD8DC',
   '#9EB6C3', '#B2B7B9', '#989898', '#90A4AE'];
 
-export function getGraphColorByName(value, existingColors = {}) {
-  if (!value) {
-    return DEFAULT_BAR_COLOR;
-  }
-
-  const index = hash(value) % graphColors.length;
-  const candidate = graphColors[index];
-  if (!existingColors[candidate]) {
-    return candidate;
-  } else {
-    const rnd = seedrandom(name);
-    const randomOpacity = rnd() + 0.01;
-    const result = hexToRgb(candidate);
-    return `rgba(${result.r}, ${result.g}, ${result.b}, ${randomOpacity})`;
-  }
-}
-
 export function hexToRgb(hex) {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
@@ -42,4 +25,21 @@ export function hexToRgb(hex) {
     g: parseInt(result[2], 16),
     b: parseInt(result[3], 16)
   } : null;
+}
+
+export function getGraphColorByName(value, existingColors = {}) {
+  if (!value) {
+    return DEFAULT_BAR_COLOR;
+  }
+
+  const index = hash(value) % graphColors.length;
+  const candidate = graphColors[index];
+  if (!existingColors[candidate]) {
+    return candidate;
+  }
+
+  const rnd = seedrandom(name);
+  const randomOpacity = rnd() + 0.01;
+  const result = hexToRgb(candidate);
+  return `rgba(${result.r}, ${result.g}, ${result.b}, ${randomOpacity})`;
 }

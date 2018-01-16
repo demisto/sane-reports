@@ -90,10 +90,10 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         margin={chartProperties.margin}
       >
         {(referenceLineX || chartProperties.layout === 'vertical') &&
-        <XAxis
-          dataKey="name"
-          interval="preserveStartEnd"
-        />
+          <XAxis
+            dataKey="name"
+            interval="preserveStartEnd"
+          />
         }
         {(referenceLineY || chartProperties.layout === 'horizontal') && <YAxis dataKey="name" />}
         <CartesianGrid
