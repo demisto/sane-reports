@@ -9,18 +9,33 @@ const PAGE_SIZES = {
   A5: 'A5'
 };
 
+const PAGE_ORIENTATION = {
+  portrait: 'portrait',
+  landscape: 'landscape'
+};
+
 function getPageSize(pageSize) {
   switch (pageSize) {
     case PAGE_SIZES.A3:
       return { width: '297mm', height: '420mm' };
     case PAGE_SIZES.A5:
-      return { width: '148mm', height: '210' };
+      return { width: '148mm', height: '210mm' };
     case PAGE_SIZES.Letter:
       return { width: '216mm', height: '279mm' };
     case PAGE_SIZES.A4:
     default:
       return { width: '210mm', height: '297mm' };
   }
+}
+
+function getPageSizeByOrientation(pageSize, orientation) {
+  const size = getPageSize(pageSize);
+  if (orientation && orientation === PAGE_ORIENTATION.landscape) {
+    const h = size.height;
+    const w = size.width;
+    return { width: h, height: w };
+  }
+  return size;
 }
 
 phantom.onError = function(msg, trace) {
@@ -54,12 +69,12 @@ if (system.args.length < 2) {
 const dataFile = system.args[1];
 const outputFile = system.args[2];
 const distDir = system.args[3];
-const orientation = system.args[4];
+const orientation = system.args[4] || PAGE_ORIENTATION.portrait;
 const resourceTimeout = system.args[5];
 const reportType = system.args[6] || 'pdf';
 const headerLeftImage = system.args[7] || '';
 const headerRightImage = system.args[8] || '';
-const pageSize = system.args[9] || PAGE_SIZES.Letter;
+const pageSize = system.args[10] || PAGE_SIZES.Letter;
 
 page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 4000;
 
@@ -89,7 +104,7 @@ const baseUrl = distFolder.indexOf('/') === 0 ? distFolder : fs.absolute(".") + 
 try {
   page.paperSize = {
     format: pageSize, // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
-    orientation: orientation || 'portrait', // portrait / landscape
+    orientation: orientation, // portrait / landscape
     header: {
       height: "1.3cm",
       contents: phantom.callback(function() {
@@ -164,7 +179,7 @@ try {
     console.log("Read report page status: " + status);
 
     if (status === "success") {
-      const dimensions = getPageSize(pageSize);
+      const dimensions = getPageSizeByOrientation(pageSize, orientation);
       page.evaluate(function(dimensions) {
         // fix phantomJS bug (https://github.com/marcbachmann/node-html-pdf/issues/198)
         if (reportType === 'pdf') {
