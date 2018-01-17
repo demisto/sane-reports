@@ -319,6 +319,6 @@ describe('Report Container', () => {
 
     const chartLegend = reportContainer.find(ChartLegend);
     expect(chartLegend).to.have.length(4);
-    expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style)
+    expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style);
   });
 });
