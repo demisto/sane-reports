@@ -89,7 +89,12 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         data={preparedData}
         margin={chartProperties.margin}
       >
-        {(referenceLineX || chartProperties.layout === 'vertical') && <XAxis dataKey="name" />}
+        {(referenceLineX || chartProperties.layout === 'vertical') &&
+          <XAxis
+            dataKey="name"
+            interval="preserveStartEnd"
+          />
+        }
         {(referenceLineY || chartProperties.layout === 'horizontal') && <YAxis dataKey="name" />}
         <CartesianGrid
           strokeDasharray={chartProperties.strokeDasharray || '4 4'}
@@ -107,6 +112,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
             content={<ChartLegend
               icon="square"
               data={preparedLegend}
+              style={legendStyle && legendStyle.style}
             />}
             {...legendStyle}
           />

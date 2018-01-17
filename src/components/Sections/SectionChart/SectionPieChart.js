@@ -97,6 +97,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                     iconType="circle"
                     data={preparedData}
                     height={legendHeight}
+                    style={legendStyle && legendStyle.style}
                   />
                 }
                 {...legendStyle}

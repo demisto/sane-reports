@@ -65,6 +65,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
               data={dataItems}
               icon={legendStyle.iconType}
               layout={legendStyle.layout}
+              style={legendStyle && legendStyle.style}
             />}
             {...legendStyle}
           />

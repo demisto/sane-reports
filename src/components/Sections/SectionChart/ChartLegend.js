@@ -7,7 +7,7 @@ import {
 } from '../../../constants/Constants';
 import { values } from 'lodash';
 
-const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertical, height, onClick }) => {
+const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertical, height, onClick, style }) => {
   let legendData = data || [];
   if (legendData.length === 0) {
     return <div />;
@@ -41,7 +41,7 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
     horizontal: layout === CHART_LAYOUT_TYPE.horizontal
   });
   return (
-    <ul className={mainClass}>
+    <ul className={mainClass} style={style}>
       {groups}
     </ul>
   );
@@ -51,7 +51,8 @@ ChartLegend.propTypes = {
   data: PropTypes.array,
   icon: PropTypes.string,
   layout: PropTypes.oneOf(values(CHART_LAYOUT_TYPE)),
-  height: PropTypes.number
+  height: PropTypes.number,
+  style: PropTypes.object
 };
 
 export default ChartLegend;

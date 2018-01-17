@@ -17,8 +17,10 @@ const SectionNumber = ({ data, layout, style, currencySign, title, titleStyle })
   }
 
   const caretClass = classNames('trend-icon caret icon', {
-    'up red': percentage > 0,
-    'down green': percentage < 0
+    up: percentage > 0,
+    red: percentage > 0 && style.backgroundColor,
+    down: percentage < 0,
+    green: percentage < 0 && style.backgroundColor
   });
   const trendIcon = percentage === 0 ?
     (<span className="trend-icon trend-equal">=</span>) : (<i className={caretClass} />);
@@ -30,9 +32,14 @@ const SectionNumber = ({ data, layout, style, currencySign, title, titleStyle })
 
   let trendContainer = '';
   if (isTrend) {
+    const boxClass = classNames('trend-box', {
+      red: !style.backgroundColor && percentage > 0,
+      green: !style.backgroundColor && percentage < 0,
+      grey: !style.backgroundColor && percentage === 0
+    });
     trendContainer = (
       <div className="trend-container">
-        <div className="trend-box">
+        <div className={boxClass}>
           {trendIcon}
           {shortPercentage}%
         </div>
