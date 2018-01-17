@@ -32,17 +32,6 @@ const SectionNumber = ({ data, layout, style, currencySign, title, titleStyle })
 
   let trendContainer = '';
   if (isTrend) {
-    trendContainer = (
-      <div className="trend-container">
-        <div className="trend-box">
-          {trendIcon}
-          {shortPercentage}%
-        </div>
-      </div>
-    );
-  }
-
-  if (isTrend) {
     const boxClass = classNames('trend-box', {
       red: !style.backgroundColor && percentage > 0,
       green: !style.backgroundColor && percentage < 0,
