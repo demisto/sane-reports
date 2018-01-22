@@ -37,7 +37,7 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
           {group.name}
         </span>
         {showValue && value &&
-        <span className={`recharts-legend-item-value ${valueDisplay}`}>
+          <span className={`recharts-legend-item-value ${valueDisplay}`}>
             {valueDisplay === VALUE_FORMAT_TYPES.stretch ? value : `(${value})`}
           </span>
         }
