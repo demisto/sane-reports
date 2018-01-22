@@ -4,7 +4,7 @@ import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import { isArray, orderBy } from 'lodash';
 import { getGraphColorByName } from '../../../utils/colors';
-import { CHART_LAYOUT_TYPE } from '../../../constants/Constants';
+import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME } from '../../../constants/Constants';
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
   legendStyle = null, sortBy, stacked }) => {
@@ -30,7 +30,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       }
 
       if (!item.name) {
-        item.name = chartProperties.emptyValueName || 'None';
+        item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
       }
 
       item.fill = item.fill || getGraphColorByName(item.name, existingColors);
