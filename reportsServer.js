@@ -57,16 +57,17 @@ const distDir = system.args[3];
 const orientation = system.args[4];
 const resourceTimeout = system.args[5];
 const reportType = system.args[6] || 'pdf';
-const headerLeftImagePath = system.args[7] || '';
+var headerLeftImage = system.args[7] || '';
 const headerRightImage = system.args[8] || '';
 const pageSize = system.args[9] || PAGE_SIZES.Letter;
 
 page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 4000;
 
-var headerLeftImage = '';
-if (headerLeftImagePath) {
-  const headerLeftImageContent = fs.read(headerLeftImagePath);
+try {
+  const headerLeftImageContent = fs.read(headerLeftImage);
   headerLeftImage = headerLeftImageContent;
+} catch (ex) {
+  // ignored
 }
 const distFolder = distDir || (fs.absolute(".") + '/dist');
 
