@@ -63,12 +63,15 @@ const pageSize = system.args[9] || PAGE_SIZES.Letter;
 
 page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 4000;
 
-try {
-  const headerLeftImageContent = fs.read(headerLeftImage);
-  headerLeftImage = headerLeftImageContent;
-} catch (ex) {
-  // ignored
+if (headerLeftImage) {
+  try {
+    const headerLeftImageContent = fs.read(headerLeftImage);
+    headerLeftImage = headerLeftImageContent;
+  } catch (ex) {
+    // ignored
+  }
 }
+
 const distFolder = distDir || (fs.absolute(".") + '/dist');
 
 const indexHtml = fs.read(distFolder + '/index.html');
