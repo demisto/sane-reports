@@ -6,8 +6,11 @@ import {
   CHART_LAYOUT_TYPE
 } from '../../../constants/Constants';
 import { values } from 'lodash';
+import { numberToShortString } from '../../../utils/strings';
 
-const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertical, height, onClick, style }) => {
+export const VALUE_FORMAT_TYPES = { minimal: 'minimal', stretch: 'stretch' };
+const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertical, height,
+                       onClick, style, showValue = true, valueDisplay = VALUE_FORMAT_TYPES.stretch }) => {
   let legendData = data || [];
   if (legendData.length === 0) {
     return <div />;
@@ -24,6 +27,7 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
     const groupName = group.key || group.name;
     const mainClass = `recharts-legend-item legend-item-${i} ${layout}`;
     const legendIconClass = `${icon} icon chart-legend-icon`;
+    const value = group.value ? numberToShortString(group.value) : null;
     return (
       <li key={groupName} className={mainClass}>
         <div className="recharts-legend-icon-container">
@@ -32,9 +36,11 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
         <span className="recharts-legend-item-text" onClick={onClick}>
           {group.name}
         </span>
-        <span className="recharts-legend-item-value">
-          {group.value}
-        </span>
+        {showValue && value &&
+          <span className={`recharts-legend-item-value ${valueDisplay}`}>
+            {valueDisplay === VALUE_FORMAT_TYPES.stretch ? value : `(${value})`}
+          </span>
+        }
       </li>);
   });
   const mainClass = classNames('customized-legend recharts-default-legend', {
@@ -50,6 +56,8 @@ ChartLegend.propTypes = {
   onClick: PropTypes.func,
   data: PropTypes.array,
   icon: PropTypes.string,
+  showValue: PropTypes.bool,
+  valueDisplay: PropTypes.oneOf(values(VALUE_FORMAT_TYPES)),
   layout: PropTypes.oneOf(values(CHART_LAYOUT_TYPE)),
   height: PropTypes.number,
   style: PropTypes.object
