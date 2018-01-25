@@ -13,16 +13,14 @@ import {
 import { isNumber } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
 const ROW_PIXEL_HEIGHT = 110;
-let overflowRows = 0;
 
-function getGridItemFromSection(section) {
+function getGridItemFromSection(section, overflowRows) {
   const rows = section.layout.rowPos + overflowRows;
   let height = section.layout.h;
-  if (section.type === SECTION_TYPES.table && section.layout.w === GRID_LAYOUT_COLUMNS) {
-    const numOfRows = Math.ceil(((section.data || []).length * 30 + 40) / ROW_PIXEL_HEIGHT);
-    if (numOfRows > section.layout.h) {
-      height = numOfRows - 1;
-      overflowRows += height - section.layout.h;
+  if (section.type === SECTION_TYPES.table && section.layout.w >= GRID_LAYOUT_COLUMNS) {
+    const numOfRows = section.data.length + 1;
+    if (section.data.length > section.layout.h) {
+      height = numOfRows;
     }
   }
 
@@ -205,6 +203,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
           :
           <AutoSizer disableHeight>
             {({ width }) => {
+              let overflowRows = 0;
               return (
                 <ReactGridLayout
                   cols={GRID_LAYOUT_COLUMNS}
@@ -218,16 +217,21 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
                       .keys(sections)
                       .map((rowPos) =>
                         sections[rowPos]
-                          .map((section) =>
-                            <div
-                              key={section.layout.i}
-                              className={section.layout.class}
-                              style={section.layout.sectionStyle}
-                              data-grid={getGridItemFromSection(section)}
-                            >
-                              {getElementBySection(section)}
-                            </div>
-                          )
+                          .map((section) => {
+                            const gridItem = getGridItemFromSection(section, overflowRows);
+                            overflowRows += gridItem.h - section.layout.h;
+                            return (
+                              <div
+                                key={section.layout.i}
+                                className={section.layout.class}
+                                style={section.layout.sectionStyle}
+                                data-grid={gridItem}
+                              >
+                                {getElementBySection(section)}
+                              </div>
+                            );
+                          }
+                        )
                       )
                   }
                 </ReactGridLayout>
