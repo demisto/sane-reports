@@ -18,10 +18,10 @@ let overflowRows = 0;
 function getGridItemFromSection(section) {
   const rows = section.layout.rowPos + overflowRows;
   let height = section.layout.h;
-  if (section.type === SECTION_TYPES.table && section.layout.w === GRID_LAYOUT_COLUMNS) {
-    const numOfRows = Math.ceil(((section.data || []).length * 30 + 40) / ROW_PIXEL_HEIGHT);
-    if (numOfRows > section.layout.h) {
-      height = numOfRows - 1;
+  if (section.type === SECTION_TYPES.table && section.layout.w >= GRID_LAYOUT_COLUMNS) {
+    const numOfRows = section.data.length + 1;
+    if (section.data.length > section.layout.h) {
+      height = numOfRows;
       overflowRows += height - section.layout.h;
     }
   }
