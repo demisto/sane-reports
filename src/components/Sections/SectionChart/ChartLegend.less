@@ -13,6 +13,7 @@
     }
     .recharts-legend-icon-container {
       display: inline-block;
+      vertical-align: top;
       .chart-legend-icon {
         font-size: 10px;
         text-align: center;
@@ -20,8 +21,10 @@
       }
     }
     .recharts-legend-item-text {
-      vertical-align: middle;
       display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
     .recharts-legend-item-value {
       float: right;

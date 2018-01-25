@@ -9,6 +9,8 @@ import { values } from 'lodash';
 import { numberToShortString } from '../../../utils/strings';
 
 export const VALUE_FORMAT_TYPES = { minimal: 'minimal', stretch: 'stretch' };
+const DIGIT_PIXEL_SIZE = 8;
+const ICON_CONTAINER_PIXEL_SIZE = 25;
 const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertical, height,
                        onClick, style, showValue = true, valueDisplay = VALUE_FORMAT_TYPES.stretch }) => {
   let legendData = data || [];
@@ -27,13 +29,19 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
     const groupName = group.key || group.name;
     const mainClass = `recharts-legend-item legend-item-${i} ${layout}`;
     const legendIconClass = `${icon} icon chart-legend-icon`;
+    let width = 'auto';
     const value = group.value ? numberToShortString(group.value) : null;
+    // decrease width of name (if value exists) to allow for ellipsis.
+    if (value && valueDisplay === VALUE_FORMAT_TYPES.stretch && showValue) {
+      width =
+        `calc(100% - ${(value + '').replace('.', '').length * DIGIT_PIXEL_SIZE + ICON_CONTAINER_PIXEL_SIZE}px)`;
+    }
     return (
       <li key={groupName} className={mainClass}>
         <div className="recharts-legend-icon-container">
           <i className={legendIconClass} style={{ color: group.fill || group.color || group.stroke }} />
         </div>
-        <span className="recharts-legend-item-text" onClick={onClick}>
+        <span className="recharts-legend-item-text" style={{ width }} onClick={onClick}>
           {group.name}
         </span>
         {showValue && value &&
