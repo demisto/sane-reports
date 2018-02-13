@@ -60,7 +60,8 @@ function getElementBySection(section) {
           title={section.title}
           titleStyle={section.titleStyle}
           data={numberData}
-          currencySign={section.layout.currencySign}
+          sign={section.layout.currencySign || section.layout.sign}
+          signAlignment={section.layout.signAlignment}
           text={section.data}
           style={section.layout.style}
         />

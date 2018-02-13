@@ -30,18 +30,24 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
     const mainClass = `recharts-legend-item legend-item-${i} ${layout}`;
     const legendIconClass = `${icon} icon chart-legend-icon`;
     let width = 'auto';
+    let maxWidth;
     const value = group.value ? numberToShortString(group.value) : null;
     // decrease width of name (if value exists) to allow for ellipsis.
-    if (value && valueDisplay === VALUE_FORMAT_TYPES.stretch && showValue) {
-      width =
-        `calc(100% - ${(value + '').replace('.', '').length * DIGIT_PIXEL_SIZE + ICON_CONTAINER_PIXEL_SIZE}px)`;
+    if (value && showValue) {
+      let valueInPixels = (value + '').replace('.', '').length * DIGIT_PIXEL_SIZE + ICON_CONTAINER_PIXEL_SIZE;
+      if (valueDisplay === VALUE_FORMAT_TYPES.stretch) {
+        width = `calc(100% - ${valueInPixels}px)`;
+      } else if (valueDisplay === VALUE_FORMAT_TYPES.minimal) {
+        valueInPixels += 9; // add () width in pixels.
+        maxWidth = `calc(100% - ${valueInPixels}px)`;
+      }
     }
     return (
       <li key={groupName} className={mainClass}>
         <div className="recharts-legend-icon-container">
           <i className={legendIconClass} style={{ color: group.fill || group.color || group.stroke }} />
         </div>
-        <span className="recharts-legend-item-text" style={{ width }} onClick={onClick}>
+        <span className="recharts-legend-item-text" style={{ width, maxWidth }} onClick={onClick}>
           {group.name}
         </span>
         {showValue && value &&
