@@ -1,0 +1,85 @@
+@import (reference) "../../css/variables";
+
+@left-padding: 7px;
+@right-padding: 7px;
+
+.next-task {
+  background-color: #fff;
+  box-shadow: 0 2px 2px #e4e2e2;
+  border: #e4e2e2 solid 1px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  .ui.form {
+    padding: 14px 3px 0 3px;
+  }
+
+  .task-id {
+    font-size: @font-size-h4;
+    color: fade(#555555, 70%);
+    padding-left: @left-padding;
+    padding-bottom: 8px;
+  }
+
+  .task-name {
+    font-size: 18px;
+    padding-bottom: 8px;
+  }
+
+  .task-header {
+    cursor: pointer;
+  }
+
+  .task-data {
+    font-size: @font-size-h5;
+    padding-right: 14px;
+    padding-left: 14px;
+    margin: 3px !important;
+
+    &:last-of-type {
+      margin-bottom: 0 !important;
+      padding-bottom: 12px;
+    }
+  }
+
+  .task-content {
+    margin-bottom: 0 !important;
+  }
+
+  .task-right-side {
+    display: inherit;
+    margin-left: 8px;
+    float: right;
+    .task-circular-icon {
+      margin-right: 6px;
+    }
+  }
+
+  .error-header {
+    border-left: 3px solid #d0011b;
+  }
+
+  .overdue-header {
+    border-left: 3px solid #e47418;
+  }
+
+  .waiting-header {
+    border-left: 3px solid #fff000;
+  }
+
+  .error-text {
+    color: #e64d45;
+  }
+
+  .overdue-text {
+    color: #f3ad1a;
+  }
+
+  .separator {
+    padding: 0 1px;
+    vertical-align: middle;
+    display: block;
+    margin: 0 7px;
+    opacity: 0.5;
+    background-color: @font-color-base;
+  }
+}
