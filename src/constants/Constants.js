@@ -19,6 +19,31 @@ export const SECTION_TYPES = {
   divider: 'divider'
 };
 
+export const TASK_STATE = {
+  NotStarted: '',
+  Running: 'inprogress',
+  Completed: 'Completed',
+  WillNotBeExecuted: 'WillNotBeExecuted',
+  Error: 'Error',
+  LoopEvaluation: 'LoopEvaluation',
+  LoopError: 'LoopError',
+  LoopWait: 'LoopWait',
+  Waiting: 'Waiting'
+};
+
+export const TASK_TYPES = {
+  TitleTask: 'title',
+  ConditionTask: 'condition',
+  Regular: 'regular',
+  Start: 'start',
+  Playbook: 'playbook'
+};
+
+export const SECTION_DATA_TYPES = {
+  tasks: 'tasks',
+  messages: 'messages'
+};
+
 export const CHART_TYPES = {
   bar: 'bar',
   column: 'column',

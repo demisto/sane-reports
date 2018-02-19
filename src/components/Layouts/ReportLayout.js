@@ -2,12 +2,13 @@ import './ReportLayout.less';
 import React, { PropTypes } from 'react';
 import { AutoSizer } from 'react-virtualized';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
-  SectionMarkdown, SectionJson, SectionNumber, SectionList }
+  SectionMarkdown, SectionJson, SectionNumber, SectionList, SectionTasksList, SectionMessageList }
     from '../Sections';
 import {
   SECTION_TYPES,
   REPORT_HEADER_IMAGE_LEFT_TOKEN,
   REPORT_HEADER_IMAGE_RIGHT_TOKEN,
+  SECTION_DATA_TYPES,
   GRID_LAYOUT_COLUMNS
 } from '../../constants/Constants';
 import { isNumber } from 'lodash';
@@ -69,16 +70,43 @@ function getElementBySection(section) {
       break;
     }
     case SECTION_TYPES.list:
-      sectionToRender = (
-        <SectionList
-          data={section.data}
-          columns={section.layout.tableColumns}
-          classes={section.layout.classes}
-          style={section.layout.style}
-          titleStyle={section.titleStyle}
-          title={section.title}
-        />
-      );
+      if (section.query) {
+        switch (section.query.type) {
+          case SECTION_DATA_TYPES.tasks:
+            sectionToRender = (
+              <SectionTasksList
+                tasks={section.data ? section.data.data : undefined}
+                classes={section.layout.classes}
+                style={section.layout.style}
+                titleStyle={section.titleStyle}
+                title={section.title}
+              />
+            );
+            break;
+          case SECTION_DATA_TYPES.messages:
+            sectionToRender = (
+              <SectionMessageList
+                messages={section.data ? section.data.messages : undefined}
+                classes={section.layout.classes}
+                style={section.layout.style}
+                titleStyle={section.titleStyle}
+                title={section.title}
+              />
+            );
+            break;
+          default:
+            sectionToRender = (
+              <SectionList
+                data={section.data}
+                columns={section.layout.tableColumns}
+                classes={section.layout.classes}
+                style={section.layout.style}
+                titleStyle={section.titleStyle}
+                title={section.title}
+              />
+            );
+        }
+      }
       break;
     case SECTION_TYPES.markdown:
       sectionToRender = (
