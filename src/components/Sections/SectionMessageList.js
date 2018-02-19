@@ -29,7 +29,7 @@ function buildMessages(messages) {
               <div className="ui padded grid">
                 <div className="fourteen wide column mention-text">
                   <div className="ui padded two column grid">
-                    <div className="column">
+                    <div className="column" style={{ paddingLeft: 0 }}>
                       <span className="user" style={{ marginRight: '5px' }}>{user}</span>
                       <span className="time">{time}</span>
                     </div>

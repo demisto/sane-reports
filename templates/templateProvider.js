@@ -1,6 +1,6 @@
 import testTemplate from './test.json';
 import testLayoutTemplate from './testLayout.json';
-import incidentDailyReportTempalte from './incidentDailyReportTempalte1.json';
+import incidentDailyReportTempalte from './incidentDailyReportTempalte.json';
 
 function getTestTemplate() {
   return testTemplate;
