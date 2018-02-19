@@ -40,9 +40,9 @@ const TaskItem = ({ playbookTask }) => {
           </div>
           <div className="task-right-side">
             {playbookTask.type === TASK_TYPES.ConditionTask &&
-            <span className="task-circular-icon">
-              <i className="ui icon mini circular fork dark" />
-            </span>
+              <span className="task-circular-icon">
+                <i className="ui icon mini circular fork dark" />
+              </span>
             }
           </div>
         </div>
@@ -50,8 +50,10 @@ const TaskItem = ({ playbookTask }) => {
           {playbookTask.assignee}
           <div className="separator" />
             {isDateSet &&
-            [<span key="date" style={{ marginRight: '5px' }}>{moment(playbookTask.dueDate).format('MM/DD/YYYY')}</span>,
-            <span key="time">{moment(playbookTask.dueDate).format('HH:mm')}</span>]
+            [
+              <span key="date" style={{ marginRight: '5px' }}>{moment(playbookTask.dueDate).format('MM/DD/YYYY')}</span>,
+              <span key="time">{moment(playbookTask.dueDate).format('HH:mm')}</span>
+            ]
           }
         </div>
       </div>

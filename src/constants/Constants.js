@@ -41,7 +41,7 @@ export const TASK_TYPES = {
 
 export const SECTION_DATA_TYPES = {
   tasks: 'tasks',
-  messages: 'messages',
+  messages: 'messages'
 };
 
 export const CHART_TYPES = {

@@ -24,7 +24,7 @@ function buildTasks(tasks) {
 
 const SectionTasksList = ({ tasks, title, titleStyle }) => {
   const isEmpty = !tasks || tasks.length === 0;
-  let tasksEl = buildTasks(tasks);
+  const tasksEl = buildTasks(tasks);
   return (
     <div className="tasks-list">
       {title && <div className="section-title" style={titleStyle}>{title}</div>}

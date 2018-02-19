@@ -35,12 +35,12 @@ function buildMessages(messages) {
                     </div>
                     <div className="right aligned column">
                       {investigationId &&
-                      <div
-                        title={investigationLongName}
-                        className="war-room-link ellipsis"
-                      >
-                        {investigationLongName}
-                      </div>
+                        <div
+                          title={investigationLongName}
+                          className="war-room-link ellipsis"
+                        >
+                          {investigationLongName}
+                        </div>
                       }
                     </div>
                   </div>
