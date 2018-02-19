@@ -11,6 +11,16 @@ function csvEscape(data) {
   // max number of characters that a cell can contain
   readyData = readyData.substring(0, Math.min(readyData.length, 32767));
 
+  switch (readyData[0]) {
+    case '=':
+    case '+':
+    case '-':
+    case '@':
+      readyData = '("' + readyData[0] + '")' + readyData.substring(1);
+      break;
+    default:
+  }
+
   return '"' + readyData + '"';
 }
 
