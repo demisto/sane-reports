@@ -51,7 +51,9 @@ const TaskItem = ({ playbookTask }) => {
           <div className="separator" />
             {isDateSet &&
             [
-              <span key="date" style={{ marginRight: '5px' }}>{moment(playbookTask.dueDate).format('MM/DD/YYYY')}</span>,
+              <span key="date" style={{ marginRight: '5px' }}>
+                {moment(playbookTask.dueDate).format('MM/DD/YYYY')}
+              </span>,
               <span key="time">{moment(playbookTask.dueDate).format('HH:mm')}</span>
             ]
           }
