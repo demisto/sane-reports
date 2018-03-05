@@ -3,15 +3,20 @@
   margin: 0 !important;
   list-style: none !important;
   &.horizontal {
-    text-align: center;
+    text-align: left;
   }
   .recharts-legend-item {
     vertical-align: middle;
     &.horizontal {
       display: inline-block;
+      padding-right: 5px;
+      white-space: nowrap;
+      max-width: 100%;
+      height: 23px;
     }
     .recharts-legend-icon-container {
       display: inline-block;
+      vertical-align: top;
       .chart-legend-icon {
         font-size: 10px;
         text-align: center;
@@ -19,12 +24,21 @@
       }
     }
     .recharts-legend-item-text {
-      vertical-align: middle;
       display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
     .recharts-legend-item-value {
       float: right;
       margin-left: 10px;
+      &.minimal {
+        margin-left: 6px;
+        opacity: 0.7;
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+      }
     }
   }
 }

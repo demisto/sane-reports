@@ -2,6 +2,7 @@
 import { React, mount, expect, TemplateProvider } from '../helpers/test_helper';
 import { prepareSections } from '../../src/utils/reports';
 import ReportContainer from '../../src/containers/ReportContainer';
+import ChartLegend from '../../src/components/Sections/SectionChart/ChartLegend';
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
   SectionMarkdown, SectionJson, SectionNumber } from '../../src/components/Sections';
@@ -285,8 +286,10 @@ describe('Report Container', () => {
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);
     expect(barChart.at(1).props().width).to.equal(sec4.layout.dimensions.width);
     expect(barChart.at(1).props().height).to.equal(sec4.layout.dimensions.height);
+    expect(barChart.at(1).props().data).to.deep.equal(sec4.data);
     expect(barChart.at(2).props().width).to.equal(sec5.layout.dimensions.width);
     expect(barChart.at(2).props().height).to.equal(sec5.layout.dimensions.height);
+    expect(barChart.at(2).props().data).to.deep.equal(sec5.data);
 
     expect(lineChart.at(0).props().width).to.equal(sec6.layout.dimensions.width);
     expect(lineChart.at(0).props().height).to.equal(sec6.layout.dimensions.height);
@@ -297,7 +300,7 @@ describe('Report Container', () => {
     expect(trendNumber.at(0).props().title).to.equal(sec2.title);
     expect(trendNumber.at(0).props().data).to.equal(sec2.data);
     expect(trendNumber.at(0).props().layout).to.equal(sec2.layout.layout);
-    const trendBox = trendNumber.at(0).find('.trend-box');
+    const trendBox = trendNumber.at(0).find('.trend-box.green');
     expect(trendBox).to.have.length(1);
 
     // Tables
@@ -313,5 +316,9 @@ describe('Report Container', () => {
     expect(tableHeader).to.have.length(2);
     expect(tableHeader.at(0).text()).to.equal(sec7.layout.tableColumns[0]);
     expect(tableHeader.at(1).text()).to.equal(sec7.layout.tableColumns[1]);
+
+    const chartLegend = reportContainer.find(ChartLegend);
+    expect(chartLegend).to.have.length(4);
+    expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style);
   });
 });

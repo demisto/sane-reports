@@ -6,7 +6,7 @@ import { CHART_LAYOUT_TYPE } from '../../constants/Constants';
 import { numberToShortString } from '../../utils/strings';
 
 const TREND_NUMBER_LIMIT = 999;
-const SectionNumber = ({ data, layout, style, currencySign, title, titleStyle }) => {
+const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleStyle }) => {
   const isTrend = !!data.prevSum;
   let percentage = 0;
   const curr = data.currSum || 0;
@@ -17,8 +17,10 @@ const SectionNumber = ({ data, layout, style, currencySign, title, titleStyle })
   }
 
   const caretClass = classNames('trend-icon caret icon', {
-    'up red': percentage > 0,
-    'down green': percentage < 0
+    up: percentage > 0,
+    red: percentage > 0 && style.backgroundColor,
+    down: percentage < 0,
+    green: percentage < 0 && style.backgroundColor
   });
   const trendIcon = percentage === 0 ?
     (<span className="trend-icon trend-equal">=</span>) : (<i className={caretClass} />);
@@ -30,9 +32,14 @@ const SectionNumber = ({ data, layout, style, currencySign, title, titleStyle })
 
   let trendContainer = '';
   if (isTrend) {
+    const boxClass = classNames('trend-box', {
+      red: !style.backgroundColor && percentage > 0,
+      green: !style.backgroundColor && percentage < 0,
+      grey: !style.backgroundColor && percentage === 0
+    });
     trendContainer = (
       <div className="trend-container">
-        <div className="trend-box">
+        <div className={boxClass}>
           {trendIcon}
           {shortPercentage}%
         </div>
@@ -41,7 +48,7 @@ const SectionNumber = ({ data, layout, style, currencySign, title, titleStyle })
   }
 
   const color = style && style.backgroundColor ? '#FFF' : undefined;
-
+  const signElement = <span className="sign">{sign}</span>;
   return (
     <div className="section-number" style={style}>
       <div className="number-container">
@@ -49,7 +56,9 @@ const SectionNumber = ({ data, layout, style, currencySign, title, titleStyle })
           className="trend-num-text"
           style={{ color }}
         >
-          <span className="currency-sign">{currencySign}{numberToShortString(curr)}</span>
+          {signAlignment === 'left' && signElement}
+          {numberToShortString(curr)}
+          {signAlignment === 'right' && signElement}
         </div>
         {layout === CHART_LAYOUT_TYPE.horizontal && isTrend &&
         trendContainer
@@ -70,7 +79,8 @@ SectionNumber.propTypes = {
   title: PropTypes.string,
   titleStyle: PropTypes.object,
   layout: PropTypes.oneOf(values(CHART_LAYOUT_TYPE)),
-  currencySign: PropTypes.string
+  sign: PropTypes.string,
+  signAlignment: PropTypes.string
 };
 
 export default SectionNumber;

@@ -63,7 +63,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 iconSize={8}
                 paddingAngle={0}
                 data={preparedData}
-                cx={chartProperties.cx || 200}
+                cx={(chartProperties.cx || 200) + 5}
                 cy={chartProperties.cy || 200}
                 maxRadius={chartProperties.maxRadius}
                 startAngle={chartProperties.startAngle || 90}
@@ -97,6 +97,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                     iconType="circle"
                     data={preparedData}
                     height={legendHeight}
+                    style={legendStyle && legendStyle.style}
                   />
                 }
                 {...legendStyle}
