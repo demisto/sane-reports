@@ -13,6 +13,8 @@ test:
     - npm run lint
     - npm run coverage
   post:
+      - npm install pkg -g
+      - pkg -t mac,linux reportsServer.js
       - tar -cvf sane-report.tar dist reportsServer-linux reportsServer-macos
       - cp sane-report.tar $CIRCLE_ARTIFACTS/sane-report.tar
 deployment:
@@ -27,8 +29,6 @@ deployment:
       - cp LICENSE sane-reports
       - cp README.md sane-reports
       - cp reportsServer.js sane-reports
-      - npm install pkg -g
-      - pkg -t mac,linux reportsServer.js
       - cd sane-reports
       - npm set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
       - npm publish sane-reports
