@@ -27,8 +27,8 @@ deployment:
       - cp LICENSE sane-reports
       - cp README.md sane-reports
       - cp reportsServer.js sane-reports
+      - npm i pkg -g
+      - pkg -t mac,linux reportsServer.js
       - cd sane-reports
       - npm set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
       - npm publish sane-reports
-      - npm i pkg -g
-      - pkg -t mac,linux reportsServer.js
