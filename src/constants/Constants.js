@@ -11,6 +11,7 @@ export const SECTION_TYPES = {
   trend: 'trend',
   number: 'number',
   markdown: 'markdown',
+  placeholder: 'placeholder',
   date: 'date',
   image: 'image',
   chart: 'chart',
