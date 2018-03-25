@@ -38,11 +38,23 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         }
 
         mainGroup.name = name;
-        Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach(groupKey => {
-          lineTypes[groupKey] = { name: groupKey, stroke: getGraphColorByName(groupKey) };
-        });
+        const mainObject = { name };
+        if (mainGroup.groups && mainGroup.data) {
+          // add all sub groups to main object.
+          mainGroup.groups.forEach((group) => {
+            const groupName = group.name;
+            const id = group.name;
+            mainObject[groupName] = group.data[0];
+            lineTypes[groupName] = { name: groupName, stroke: getGraphColorByName(groupName), id };
+          });
+        } else {
+          Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach(groupKey => {
+            lineTypes[groupKey] = { name: groupKey, stroke: getGraphColorByName(groupKey) };
+            mainObject[groupKey] = mainGroup[groupKey];
+          });
+        }
 
-        return mainGroup;
+        return mainObject;
       }
       return mainGroup;
     }));

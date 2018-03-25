@@ -4,10 +4,11 @@ import isArray from 'lodash/isArray';
 import map from 'lodash/map';
 import isString from 'lodash/isString';
 import truncate from 'lodash/truncate';
+import isObjectLike from 'lodash/isObjectLike';
 
 
 const SectionTable = ({ columns, data, classes, style, title, titleStyle }) => {
-  let tableData = data;
+  let tableData = data || [];
 
   if (isString(data)) {
     try {
@@ -15,6 +16,10 @@ const SectionTable = ({ columns, data, classes, style, title, titleStyle }) => {
     } catch (ignored) {
       return <div>Error parsing table</div>;
     }
+  }
+
+  if (!isArray(tableData) && isObjectLike(tableData)) {
+    tableData = tableData.data || tableData.iocs || tableData.messages;
   }
 
   let readyColumns = columns;

@@ -10,7 +10,7 @@ import {
   REPORT_HEADER_IMAGE_RIGHT_TOKEN,
   GRID_LAYOUT_COLUMNS
 } from '../../constants/Constants';
-import { isNumber } from 'lodash';
+import { isNumber, isObjectLike } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
 const ROW_PIXEL_HEIGHT = 110;
 
@@ -41,7 +41,7 @@ function getElementBySection(section) {
     case SECTION_TYPES.text:
       sectionToRender = (
         <SectionText
-          text={section.data}
+          text={isObjectLike(section.data) ? section.data.text : section.data}
           style={section.layout.style}
         />
       );
@@ -81,9 +81,10 @@ function getElementBySection(section) {
       );
       break;
     case SECTION_TYPES.markdown:
+    case SECTION_TYPES.placeholder:
       sectionToRender = (
         <SectionMarkdown
-          text={section.data}
+          text={isObjectLike(section.data) ? section.data.text : section.data}
           style={section.layout.style}
           tableClasses={section.layout.tableClasses}
         />
