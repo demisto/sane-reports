@@ -4,7 +4,7 @@ import isArray from 'lodash/isArray';
 import map from 'lodash/map';
 import isString from 'lodash/isString';
 import truncate from 'lodash/truncate';
-import isObjectLike from 'lodash/isObjectLike'
+import isObjectLike from 'lodash/isObjectLike';
 
 
 const SectionTable = ({ columns, data, classes, style, title, titleStyle }) => {

@@ -33,8 +33,8 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
     const value = group.value ? numberToShortString(group.value) : null;
     // decrease width of name (if value exists) to allow for ellipsis.
     if (value && showValue) {
-      let valueInPixels = (value + '').replace('.', '').length * DIGIT_PIXEL_SIZE + ICON_CONTAINER_PIXEL_SIZE;
       if (valueDisplay === VALUE_FORMAT_TYPES.stretch) {
+        const valueInPixels = (value + '').replace('.', '').length * DIGIT_PIXEL_SIZE + ICON_CONTAINER_PIXEL_SIZE;
         width = `calc(100% - ${valueInPixels}px)`;
       }
     }
