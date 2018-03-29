@@ -2,7 +2,7 @@ import './ReportLayout.less';
 import React, { PropTypes } from 'react';
 import { AutoSizer } from 'react-virtualized';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
-  SectionMarkdown, SectionJson, SectionNumber, SectionList }
+  SectionMarkdown, SectionJson, SectionNumber, SectionList, SectionDuration }
     from '../Sections';
 import {
   SECTION_TYPES,
@@ -68,6 +68,17 @@ function getElementBySection(section) {
       );
       break;
     }
+    case SECTION_TYPES.duration:
+      sectionToRender = (
+        <SectionDuration
+          data={section.data}
+          chartProperties={section.layout.chartProperties}
+          style={section.layout.style}
+          titleStyle={section.titleStyle}
+          title={section.title}
+        />
+      );
+      break;
     case SECTION_TYPES.list:
       sectionToRender = (
         <SectionList

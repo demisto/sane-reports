@@ -16,6 +16,7 @@ export const SECTION_TYPES = {
   image: 'image',
   chart: 'chart',
   table: 'table',
+  duration: 'duration',
   json: 'json',
   divider: 'divider'
 };
