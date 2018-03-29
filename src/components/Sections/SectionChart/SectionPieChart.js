@@ -92,6 +92,9 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
               </Pie>
               <Tooltip />
               <Legend
+                wrapperStyle={chartProperties.layout === CHART_LAYOUT_TYPE.vertical ? {
+                  width: '90%'
+                } : { top: 10 }}
                 content={
                   <ChartLegend
                     iconType="circle"
