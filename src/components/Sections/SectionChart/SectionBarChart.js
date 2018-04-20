@@ -19,11 +19,11 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     });
 
     dataItems = legend;
-    preparedData = data;
+    preparedData = data || [];
   }
 
   if (!stacked) {
-    preparedData = data.map((item) => {
+    preparedData = (data || []).map((item) => {
       let val = item.value || item.data;
       if (isArray(val) && val.length > 0) {
         val = val[0];
