@@ -12,7 +12,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     referenceLineX, referenceLineY, fromDate, toDate }) => {
   const existingColors = {};
   let preparedLegend = [];
-  let preparedData = data;
+  let preparedData = data || [];
   const finalToDate = toDate || moment().utc();
   if (fromDate && finalToDate) {
     const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;

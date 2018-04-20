@@ -12,7 +12,7 @@ import { CHART_LAYOUT_TYPE } from '../../../constants/Constants';
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
   const dataMap = {};
   const existingColors = {};
-  data.forEach((item) => {
+  (data || []).forEach((item) => {
     item.value = item.value || item.data;
     if (isArray(item.value) && item.value.length > 0) {
       item.value = item.value[0];
