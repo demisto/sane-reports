@@ -46,12 +46,12 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
             const id = group.name;
             mainObject[groupName] = group.data[0];
             lineTypes[groupName] =
-              {
-                name: groupName,
-                color: groupName.color || getGraphColorByName(groupName),
-                id,
-                value: mainObject[groupName]
-              };
+            {
+              name: groupName,
+              color: groupName.color || getGraphColorByName(groupName),
+              id,
+              value: mainObject[groupName]
+            };
           });
         } else {
           Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach(groupKey => {
