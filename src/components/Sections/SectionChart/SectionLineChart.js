@@ -45,11 +45,18 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
             const groupName = group.name;
             const id = group.name;
             mainObject[groupName] = group.data[0];
-            lineTypes[groupName] = { name: groupName, stroke: getGraphColorByName(groupName), id };
+            lineTypes[groupName] =
+            {
+              name: groupName,
+              color: groupName.color || getGraphColorByName(groupName),
+              id,
+              value: mainObject[groupName]
+            };
           });
         } else {
           Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach(groupKey => {
-            lineTypes[groupKey] = { name: groupKey, stroke: getGraphColorByName(groupKey) };
+            lineTypes[groupKey] =
+              { name: groupKey, color: mainGroup.color || getGraphColorByName(groupKey), value: mainGroup[groupKey] };
             mainObject[groupKey] = mainGroup[groupKey];
           });
         }
@@ -93,8 +100,8 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   }
   if (legend) {
     preparedLegend = legend.map((item) => {
-      item.stroke = item.stroke || getGraphColorByName(item.name, existingColors);
-      existingColors[item.stroke] = true;
+      item.color = item.color || item.stroke || getGraphColorByName(item.name, existingColors);
+      existingColors[item.color] = true;
       return item;
     });
   }
@@ -142,7 +149,8 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           <Line
             key={item.name}
             dataKey={item.name}
-            stroke={item.stroke}
+            type="monotone"
+            stroke={item.color}
             animationDuration={0}
             activeDot={{ strokeWidth: 0 }}
             strokeWidth={3}

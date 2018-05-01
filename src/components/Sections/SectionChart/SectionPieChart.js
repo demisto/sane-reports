@@ -24,6 +24,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
     legend.forEach((legendItem) => {
       const key = legendItem.name.toLowerCase();
       if (dataMap[key]) {
+        legendItem.fill = legendItem.fill || legendItem.color;
         if (!legendItem.fill) {
           legendItem.fill = getGraphColorByName(dataMap[key].name);
         }
@@ -53,6 +54,8 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
     <div className="section-pie-chart" style={style}>
       <AutoSizer disableHeight>
         {({ width }) => {
+          const outerRadius = chartProperties.outerRadius || 80;
+          const innerRadius = chartProperties.innerRadius || 30;
           return (
             <PieChart
               width={width || dimensions.width}
@@ -68,11 +71,11 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 maxRadius={chartProperties.maxRadius}
                 startAngle={chartProperties.startAngle || 90}
                 endAngle={chartProperties.endAngle || -270}
-                outerRadius={chartProperties.outerRadius || 80}
-                innerRadius={chartProperties.innerRadius || 30}
+                outerRadius={outerRadius > 10 ? outerRadius - 5 : outerRadius}
+                innerRadius={innerRadius > 10 ? innerRadius - 5 : innerRadius}
                 labelLine={chartProperties.labelLine}
                 dataKey="value"
-                label={chartProperties.label || { offsetRadius: 10 }}
+                label={chartProperties.label || { offsetRadius: 1 }}
               >
                 {/* // creating links to urls according the 'url' filed in the data */}
                 {preparedData.map((entry) => {

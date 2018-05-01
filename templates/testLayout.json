@@ -432,7 +432,10 @@
         },
         "fromDate": "2017-12-10T22:00:00Z",
         "toDate": null
-      }
+      },
+      "groupBy": [
+        "A", "B"
+      ]
     },
     "automation": {
       "name": "",

@@ -6,7 +6,6 @@ import {
   CHART_LAYOUT_TYPE
 } from '../../../constants/Constants';
 import { values } from 'lodash';
-import { numberToShortString } from '../../../utils/strings';
 
 export const VALUE_FORMAT_TYPES = { minimal: 'minimal', stretch: 'stretch' };
 const DIGIT_PIXEL_SIZE = 8;
@@ -30,7 +29,7 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
     const mainClass = `recharts-legend-item legend-item-${i} ${layout}`;
     const legendIconClass = `${icon} icon chart-legend-icon`;
     let width = 'auto';
-    const value = group.value ? numberToShortString(group.value) : null;
+    const value = group.value;
     // decrease width of name (if value exists) to allow for ellipsis.
     if (value && showValue) {
       if (valueDisplay === VALUE_FORMAT_TYPES.stretch) {

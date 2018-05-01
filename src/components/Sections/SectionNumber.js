@@ -7,7 +7,7 @@ import { numberToShortString } from '../../utils/strings';
 
 const TREND_NUMBER_LIMIT = 999;
 const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleStyle }) => {
-  const isTrend = !!data.prevSum;
+  const isTrend = !!data.prevSum || data.prevSum === 0;
   let percentage = 0;
   const curr = data.currSum || 0;
   if (isTrend) {
