@@ -2,7 +2,8 @@ import './SectionBarChart.less';
 import React, { PropTypes } from 'react';
 import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
-import { isArray, orderBy } from 'lodash';
+import { isArray, orderBy, unionBy } from 'lodash';
+import { sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
 import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME } from '../../../constants/Constants';
 
@@ -11,33 +12,24 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   const existingColors = {};
   const isColumnChart = chartProperties.layout === CHART_LAYOUT_TYPE.horizontal;
   let dataItems = [];
-  let preparedData;
-  if (legend) {
-    legend.map(item => {
-      item.fill = item.fill || getGraphColorByName(item.name, existingColors);
-      return item;
-    });
-
-    dataItems = legend;
-    preparedData = data || [];
-  }
+  let preparedData = data || [];
 
   if (!stacked) {
-    preparedData = (data || []).map((item) => {
+    preparedData = preparedData.map((item) => {
       let val = item.value || item.data;
       if (isArray(val) && val.length > 0) {
         val = val[0];
       }
-
+      item.color = item.fill || item.color || getGraphColorByName(item.name, existingColors);
       if (!item.name) {
         item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
       }
-
-      item.fill = item.fill || getGraphColorByName(item.name, existingColors);
-      existingColors[item.fill] = true;
+      existingColors[item.color] = true;
       if (!legend) {
         item[item.name] = val;
-        dataItems.push({ name: item.name, fill: item.fill, value: val });
+        dataItems.push({ name: item.name, color: item.color, value: val });
+      } else if (dataItems[item.name]) {
+        dataItems[item.name].value = val;
       }
       return item;
     });
@@ -63,13 +55,37 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           name = names.sort((a, b) => b.length - a.length)[0];
         }
         let spaceNeeded = name.length * 5;
-        if (spaceNeeded > maxLabelSize) {
+        if (spaceNeeded > maxLabelSize)   {
           spaceNeeded = maxLabelSize;
         }
         leftMargin = Math.max(leftMargin, spaceNeeded);
+
+        // iterate inner groups
+        (item.groups || []).forEach((innerItem => {
+          innerItem.color = innerItem.fill || innerItem.color || getGraphColorByName(innerItem.name, existingColors);
+          if (!innerItem.name) {
+            innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+          }
+          existingColors[innerItem.color] = true;
+
+          item[innerItem.name] = innerItem.data[0];
+        }));
       });
+
+      dataItems = preparedData
+        .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
+        .map(group => ({ name: group.name, color: group.fill || group.color }))
+        .sort((a, b) => sortStrings(a.name, b.name));
+
       margin.left = leftMargin;
     }
+  }
+  if (legend) {
+    dataItems = dataItems.map(item => {
+      const legendItem = legend.filter(l => l.name === item.name);
+      item.color = legendItem.length > 0 ? legendItem[0].color || legendItem[0].fill : item.color;
+      return item;
+    });
   }
 
   return (
@@ -84,7 +100,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       >
         {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
           <YAxis hide={!stacked} tick={{ fontSize: '15px' }} interval={0} dataKey="name" type="category" />}
-        {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" hide />}
+        {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && stacked && <XAxis type="number" />}
         {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
         {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
         <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
@@ -106,7 +122,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           key={item.name}
           dataKey={item.name}
           stackId="stack"
-          fill={item.fill}
+          fill={item.color}
           onClick={(e) => { if (e.url) { window.open(e.url, '_blank'); } }}
           label={!!chartProperties.label}
         />)}
