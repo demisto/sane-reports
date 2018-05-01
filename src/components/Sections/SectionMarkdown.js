@@ -158,7 +158,7 @@ SectionMarkdown.propTypes = {
   tableClasses: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string
-  ]),
+  ])
 };
 
 export default SectionMarkdown;

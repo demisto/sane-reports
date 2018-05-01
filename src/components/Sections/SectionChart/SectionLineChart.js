@@ -45,11 +45,18 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
             const groupName = group.name;
             const id = group.name;
             mainObject[groupName] = group.data[0];
-            lineTypes[groupName] = { name: groupName, color: groupName.color || getGraphColorByName(groupName), id, value: mainObject[groupName] };
+            lineTypes[groupName] =
+              {
+                name: groupName,
+                color: groupName.color || getGraphColorByName(groupName),
+                id,
+                value: mainObject[groupName]
+              };
           });
         } else {
           Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach(groupKey => {
-            lineTypes[groupKey] = { name: groupKey, color: mainGroup.color || getGraphColorByName(groupKey), value: mainGroup[groupKey] };
+            lineTypes[groupKey] =
+              { name: groupKey, color: mainGroup.color || getGraphColorByName(groupKey), value: mainGroup[groupKey] };
             mainObject[groupKey] = mainGroup[groupKey];
           });
         }

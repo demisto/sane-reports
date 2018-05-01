@@ -55,7 +55,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           name = names.sort((a, b) => b.length - a.length)[0];
         }
         let spaceNeeded = name.length * 5;
-        if (spaceNeeded > maxLabelSize)   {
+        if (spaceNeeded > maxLabelSize) {
           spaceNeeded = maxLabelSize;
         }
         leftMargin = Math.max(leftMargin, spaceNeeded);
@@ -84,7 +84,8 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                 color: getGraphColorByName(groupKey),
                 value: item[groupKey]
               };
-          });
+            }
+          );
         }
       });
 
