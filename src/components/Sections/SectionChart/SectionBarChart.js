@@ -27,7 +27,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       existingColors[item.color] = true;
       if (!legend) {
         item[item.name] = val;
-        dataItems.push({ name: item.name, color: item.color, value: val });
+        dataItems[item.name] = { name: item.name, color: item.color, value: val };
       } else if (dataItems[item.name]) {
         dataItems[item.name].value = val;
       }
@@ -60,30 +60,43 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         }
         leftMargin = Math.max(leftMargin, spaceNeeded);
 
-        // iterate inner groups
-        (item.groups || []).forEach((innerItem => {
-          innerItem.color = innerItem.fill || innerItem.color || getGraphColorByName(innerItem.name, existingColors);
-          if (!innerItem.name) {
-            innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
-          }
-          existingColors[innerItem.color] = true;
+        if (item.groups) {
+          // iterate inner groups
+          (item.groups || []).forEach((innerItem => {
+            innerItem.color = innerItem.fill || innerItem.color || getGraphColorByName(innerItem.name, existingColors);
+            if (!innerItem.name) {
+              innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+            }
+            existingColors[innerItem.color] = true;
 
-          item[innerItem.name] = innerItem.data[0];
-        }));
+            item[innerItem.name] = innerItem.data[0];
+          }));
+
+          dataItems = preparedData
+            .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
+            .map(group => ({ name: group.name, color: group.fill || group.color }))
+            .sort((a, b) => sortStrings(a.name, b.name));
+        } else {
+          Object.keys(item).filter(key => key !== 'name' && key !== 'relatedTo' && key !== 'value').forEach(
+            groupKey => {
+              dataItems[groupKey] = {
+                name: groupKey,
+                color: getGraphColorByName(groupKey),
+                value: item[groupKey]
+              };
+          });
+        }
       });
-
-      dataItems = preparedData
-        .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
-        .map(group => ({ name: group.name, color: group.fill || group.color }))
-        .sort((a, b) => sortStrings(a.name, b.name));
 
       margin.left = leftMargin;
     }
   }
+
+  dataItems = Object.values(dataItems);
   if (legend) {
     dataItems = dataItems.map(item => {
       const legendItem = legend.filter(l => l.name === item.name);
-      item.color = legendItem.length > 0 ? legendItem[0].color || legendItem[0].fill : item.color;
+      item.color = legendItem.length > 0 ? legendItem[0].color || legendItem[0].fill || item.color : item.color;
       return item;
     });
   }
