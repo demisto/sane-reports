@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9.11
+      - image: circleci/node:8.11.0
     resource_class: large
     working_directory: ~/work
     environment:
@@ -17,7 +17,6 @@ jobs:
               sudo mkdir -p -m 777 $CIRCLE_ARTIFACTS
               sudo npm install -g npm
               sudo npm install
-          no_output_timeout: 3600
       - save_cache:
           key: npm-sane-reports-{{ checksum "package.json" }}
           paths:
