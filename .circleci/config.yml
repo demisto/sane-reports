@@ -4,9 +4,6 @@ jobs:
     docker:
       - image: circleci/node:8.11.0
     resource_class: large
-    working_directory: ~/work
-    environment:
-      CIRCLE_ARTIFACTS: "~/work/artifacts"
     steps:
       - checkout
       - restore_cache:
