@@ -54,7 +54,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
             {readyColumns.map((col, j) =>
               (() => {
                 const key = col.key || col;
-                const cell = row[key];
+                const cell = row[key] || readableHeaders && row[readableHeaders[key]];
 
                 let cellToRender = '';
                 if (cell) {
