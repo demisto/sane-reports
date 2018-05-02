@@ -15,7 +15,7 @@ jobs:
           name: Install dependencies
           command: |
               sudo mkdir -p -m 777 $CIRCLE_ARTIFACTS
-              sudo npm install -g npm
+              sudo npm install npm@4 -g
               sudo npm install
       - save_cache:
           key: npm-sane-reports-{{ checksum "package.json" }}
