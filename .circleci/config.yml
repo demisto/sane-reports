@@ -12,8 +12,8 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-              npm install -g npm
-              npm install
+              sudo npm install -g npm
+              sudo npm install
       - save_cache:
           key: npm-sane-reports-{{ checksum "package.json" }}
           paths:
@@ -43,5 +43,5 @@ jobs:
               cp README.md sane-reports
               cp reportsServer.js sane-reports
               cd sane-reports
-              npm set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
-              npm publish sane-reports
+              sudo npm set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
+              sudo npm publish sane-reports
