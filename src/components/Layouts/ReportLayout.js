@@ -146,6 +146,7 @@ function getElementBySection(section) {
         <SectionTable
           data={section.data}
           columns={section.layout.tableColumns}
+          readableHeaders={section.layout.readableHeaders}
           classes={section.layout.classes}
           style={section.layout.style}
           titleStyle={section.titleStyle}

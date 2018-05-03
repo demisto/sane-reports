@@ -155,7 +155,10 @@ const SectionMarkdown = ({ text, style, tableClasses }) => {
 SectionMarkdown.propTypes = {
   text: PropTypes.string,
   style: PropTypes.object,
-  tableClasses: PropTypes.object
+  tableClasses: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ])
 };
 
 export default SectionMarkdown;
