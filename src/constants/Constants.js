@@ -11,10 +11,12 @@ export const SECTION_TYPES = {
   trend: 'trend',
   number: 'number',
   markdown: 'markdown',
+  placeholder: 'placeholder',
   date: 'date',
   image: 'image',
   chart: 'chart',
   table: 'table',
+  duration: 'duration',
   json: 'json',
   divider: 'divider'
 };
@@ -43,6 +45,14 @@ export const CHART_LAYOUT_TYPE = {
 };
 
 export const QUERIES_TIME_FORMAT = 'DD MMM Y';
+export const SUPPORTED_TIME_FRAMES = {
+  days: 'days',
+  hours: 'hours',
+  minutes: 'minutes',
+  years: 'years',
+  quarters: 'quarters',
+  months: 'months'
+};
 export const GRID_LAYOUT_COLUMNS = 12;
 export const CHART_LEGEND_ITEM_HEIGHT = 26;
 

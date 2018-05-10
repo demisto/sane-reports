@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip, L
 import ChartLegend from './ChartLegend';
 import { compact, values } from 'lodash';
 import moment from 'moment';
-import { QUERIES_TIME_FORMAT } from '../../../constants/Constants';
+import { QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/Constants';
 import { sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
 
@@ -12,31 +12,56 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     referenceLineX, referenceLineY, fromDate, toDate }) => {
   const existingColors = {};
   let preparedLegend = [];
-  let preparedData = data;
+  let preparedData = data || [];
   const finalToDate = toDate || moment().utc();
   if (fromDate && finalToDate) {
-    const timeFrame = 'days';
+    const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
     const lineTypes = {};
-    const from = moment(fromDate).utc();
+    let from = moment(fromDate).utc();
     const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
     preparedData = compact(preparedData.sort((a, b) => sortStrings(a.name, b.name)).map((mainGroup) => {
       let name = mainGroup.name;
-      if (chartProperties.isDatesChart) {
+      if (chartProperties.isDatesChart || chartProperties.isDatesChart === undefined) {
         if (!name) {
           return null;
         }
         if (!isNaN(name)) {
+          if (!from || !from.isValid()) {
+            from = moment().add(-data.length, timeFrame);
+          }
           name = moment(from).add(Number(name), timeFrame).format(timeFormat);
         } else if (name) {
+          if (!from || !from.isValid()) {
+            from = moment(name);
+          }
           name = moment(name).format(timeFormat);
         }
 
         mainGroup.name = name;
-        Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach(groupKey => {
-          lineTypes[groupKey] = { name: groupKey, stroke: getGraphColorByName(groupKey) };
-        });
+        const mainObject = { name };
+        if (mainGroup.groups && mainGroup.data) {
+          // add all sub groups to main object.
+          mainGroup.groups.forEach((group) => {
+            const groupName = group.name;
+            const id = group.name;
+            mainObject[groupName] = group.data[0];
+            lineTypes[groupName] =
+            {
+              name: groupName,
+              color: groupName.color || getGraphColorByName(groupName),
+              id,
+              value: mainObject[groupName]
+            };
+          });
+        } else {
+          Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach(groupKey => {
+            lineTypes[groupKey] =
+              { name: groupKey, color: mainGroup.color || getGraphColorByName(groupKey), value: mainGroup[groupKey] };
+            mainObject[groupKey] = mainGroup[groupKey];
+          });
+        }
 
-        return mainGroup;
+        return mainObject;
       }
       return mainGroup;
     }));
@@ -75,8 +100,8 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   }
   if (legend) {
     preparedLegend = legend.map((item) => {
-      item.stroke = item.stroke || getGraphColorByName(item.name, existingColors);
-      existingColors[item.stroke] = true;
+      item.color = item.color || item.stroke || getGraphColorByName(item.name, existingColors);
+      existingColors[item.color] = true;
       return item;
     });
   }
@@ -124,8 +149,8 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           <Line
             key={item.name}
             dataKey={item.name}
-            stroke={item.stroke}
-            type={item.type || 'monotone'}
+            type="monotone"
+            stroke={item.color}
             animationDuration={0}
             activeDot={{ strokeWidth: 0 }}
             strokeWidth={3}

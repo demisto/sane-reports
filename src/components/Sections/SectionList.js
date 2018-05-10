@@ -32,7 +32,7 @@ function styleByFieldName(fieldName, currentData) {
 }
 
 const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
-  let tableData = data;
+  let tableData = data || [];
 
   if (isString(data)) {
     try {

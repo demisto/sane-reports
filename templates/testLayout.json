@@ -432,7 +432,10 @@
         },
         "fromDate": "2017-12-10T22:00:00Z",
         "toDate": null
-      }
+      },
+      "groupBy": [
+        "A", "B"
+      ]
     },
     "automation": {
       "name": "",
@@ -576,6 +579,32 @@
     "title": "Test test"
   },
   {
+    "type": "duration",
+    "data": [
+      {
+        "name": "",
+        "data": [
+          515,
+          22
+        ],
+        "groups": null
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "daysLabel": "DAYS",
+        "hoursLabel": "HOURS",
+        "minutesLabel": "MIN"
+      },
+      "columnPos": 0,
+      "h": 1,
+      "i": "50581960-333e-11e8-8c3c-57387b30abc2",
+      "rowPos": 5,
+      "w": 12
+    },
+    "title": "Duration"
+  },
+  {
     "type": "table",
     "data": [
       {
@@ -589,7 +618,7 @@
       "columnPos": 0,
       "h": 2,
       "i": "3ebd9120-f5eb-11e7-92ea-eb1e1a874380",
-      "rowPos": 5,
+      "rowPos": 6,
       "tableColumns": [
         "aaa",
         "bbb"

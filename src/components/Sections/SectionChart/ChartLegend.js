@@ -6,7 +6,6 @@ import {
   CHART_LAYOUT_TYPE
 } from '../../../constants/Constants';
 import { values } from 'lodash';
-import { numberToShortString } from '../../../utils/strings';
 
 export const VALUE_FORMAT_TYPES = { minimal: 'minimal', stretch: 'stretch' };
 const DIGIT_PIXEL_SIZE = 8;
@@ -30,16 +29,12 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
     const mainClass = `recharts-legend-item legend-item-${i} ${layout}`;
     const legendIconClass = `${icon} icon chart-legend-icon`;
     let width = 'auto';
-    let maxWidth;
-    const value = group.value ? numberToShortString(group.value) : null;
+    const value = group.value;
     // decrease width of name (if value exists) to allow for ellipsis.
     if (value && showValue) {
-      let valueInPixels = (value + '').replace('.', '').length * DIGIT_PIXEL_SIZE + ICON_CONTAINER_PIXEL_SIZE;
       if (valueDisplay === VALUE_FORMAT_TYPES.stretch) {
+        const valueInPixels = (value + '').replace('.', '').length * DIGIT_PIXEL_SIZE + ICON_CONTAINER_PIXEL_SIZE;
         width = `calc(100% - ${valueInPixels}px)`;
-      } else if (valueDisplay === VALUE_FORMAT_TYPES.minimal) {
-        valueInPixels += 9; // add () width in pixels.
-        maxWidth = `calc(100% - ${valueInPixels}px)`;
       }
     }
     return (
@@ -47,7 +42,7 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
         <div className="recharts-legend-icon-container">
           <i className={legendIconClass} style={{ color: group.fill || group.color || group.stroke }} />
         </div>
-        <span className="recharts-legend-item-text" style={{ width, maxWidth }} onClick={onClick}>
+        <span className="recharts-legend-item-text" style={{ width }} onClick={onClick}>
           {group.name}
         </span>
         {showValue && value &&

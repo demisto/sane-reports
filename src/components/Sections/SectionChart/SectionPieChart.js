@@ -12,7 +12,7 @@ import { CHART_LAYOUT_TYPE } from '../../../constants/Constants';
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
   const dataMap = {};
   const existingColors = {};
-  data.forEach((item) => {
+  (data || []).forEach((item) => {
     item.value = item.value || item.data;
     if (isArray(item.value) && item.value.length > 0) {
       item.value = item.value[0];
@@ -24,6 +24,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
     legend.forEach((legendItem) => {
       const key = legendItem.name.toLowerCase();
       if (dataMap[key]) {
+        legendItem.fill = legendItem.fill || legendItem.color;
         if (!legendItem.fill) {
           legendItem.fill = getGraphColorByName(dataMap[key].name);
         }
@@ -53,6 +54,8 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
     <div className="section-pie-chart" style={style}>
       <AutoSizer disableHeight>
         {({ width }) => {
+          const outerRadius = chartProperties.outerRadius || 80;
+          const innerRadius = chartProperties.innerRadius || 30;
           return (
             <PieChart
               width={width || dimensions.width}
@@ -68,11 +71,11 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 maxRadius={chartProperties.maxRadius}
                 startAngle={chartProperties.startAngle || 90}
                 endAngle={chartProperties.endAngle || -270}
-                outerRadius={chartProperties.outerRadius || 80}
-                innerRadius={chartProperties.innerRadius || 30}
+                outerRadius={outerRadius > 10 ? outerRadius - 5 : outerRadius}
+                innerRadius={innerRadius > 10 ? innerRadius - 5 : innerRadius}
                 labelLine={chartProperties.labelLine}
                 dataKey="value"
-                label={chartProperties.label || { offsetRadius: 7 }}
+                label={chartProperties.label || { offsetRadius: 1 }}
               >
                 {/* // creating links to urls according the 'url' filed in the data */}
                 {preparedData.map((entry) => {
@@ -92,6 +95,9 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
               </Pie>
               <Tooltip />
               <Legend
+                wrapperStyle={chartProperties.layout === CHART_LAYOUT_TYPE.vertical ? {
+                  width: '90%'
+                } : { top: 10 }}
                 content={
                   <ChartLegend
                     iconType="circle"

@@ -4,10 +4,11 @@ import isArray from 'lodash/isArray';
 import map from 'lodash/map';
 import isString from 'lodash/isString';
 import truncate from 'lodash/truncate';
+import isObjectLike from 'lodash/isObjectLike';
 
 
-const SectionTable = ({ columns, data, classes, style, title, titleStyle }) => {
-  let tableData = data;
+const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle }) => {
+  let tableData = data || [];
 
   if (isString(data)) {
     try {
@@ -15,6 +16,10 @@ const SectionTable = ({ columns, data, classes, style, title, titleStyle }) => {
     } catch (ignored) {
       return <div>Error parsing table</div>;
     }
+  }
+
+  if (!isArray(tableData) && isObjectLike(tableData)) {
+    tableData = tableData.data || tableData.iocs || tableData.messages;
   }
 
   let readyColumns = columns;
@@ -39,7 +44,7 @@ const SectionTable = ({ columns, data, classes, style, title, titleStyle }) => {
         <thead>
           <tr>
             {readyColumns.map((col) => {
-              return <th key={col.key || col}>{!col.hidden && col}</th>;
+              return <th key={col.key || col}>{!col.hidden && ((readableHeaders && readableHeaders[col]) || col)}</th>;
             })}
           </tr>
         </thead>
@@ -49,7 +54,7 @@ const SectionTable = ({ columns, data, classes, style, title, titleStyle }) => {
             {readyColumns.map((col, j) =>
               (() => {
                 const key = col.key || col;
-                const cell = row[key];
+                const cell = row[key] || readableHeaders && row[readableHeaders[key]];
 
                 let cellToRender = '';
                 if (cell) {
@@ -102,6 +107,7 @@ const SectionTable = ({ columns, data, classes, style, title, titleStyle }) => {
 };
 SectionTable.propTypes = {
   columns: PropTypes.array,
+  readableHeaders: PropTypes.object,
   data: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.object,

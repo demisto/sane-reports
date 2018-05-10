@@ -5,7 +5,7 @@ import ReportContainer from '../../src/containers/ReportContainer';
 import ChartLegend from '../../src/components/Sections/SectionChart/ChartLegend';
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
-  SectionMarkdown, SectionJson, SectionNumber } from '../../src/components/Sections';
+  SectionMarkdown, SectionJson, SectionNumber, SectionDuration } from '../../src/components/Sections';
 import { BarChart, PieChart, Pie, LineChart } from 'recharts';
 
 describe('Report Container', () => {
@@ -198,7 +198,7 @@ describe('Report Container', () => {
 
     const dateEl = reportContainer.find('.section-date');
     expect(dateEl).to.have.length(2);
-    expect(dateEl.get(0).textContent).to.have.length.above(sec18.layout.format.length + 3);
+    expect(dateEl.get(0).textContent).to.have.length.above(sec18.layout.format.length + 2);
     expect(dateEl.get(1).textContent).to.equal('Jan 1st 16');
 
     // Divider
@@ -250,6 +250,7 @@ describe('Report Container', () => {
     const sec5 = testTemplate[4];
     const sec6 = testTemplate[5];
     const sec7 = testTemplate[6];
+    const sec8 = testTemplate[7];
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
@@ -303,19 +304,28 @@ describe('Report Container', () => {
     const trendBox = trendNumber.at(0).find('.trend-box.green');
     expect(trendBox).to.have.length(1);
 
+    // Duration
+    const duration = reportContainer.find(SectionDuration);
+    expect(duration).to.have.length(1);
+    expect(duration.at(0).props().title).to.equal(sec7.title);
+    expect(duration.at(0).props().data).to.equal(sec7.data);
+    expect(duration.at(0).props().chartProperties).to.equal(sec7.layout.chartProperties);
+    const timeUnit = duration.at(0).find('.time-unit');
+    expect(timeUnit).to.have.length(3);
+
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
     expect(sectionTable).to.have.length(1);
-    expect(sectionTable.at(0).props().columns).to.equal(sec7.layout.tableColumns);
-    expect(sectionTable.at(0).props().data).to.equal(sec7.data);
-    expect(sectionTable.at(0).props().classes).to.equal(sec7.layout.classes);
+    expect(sectionTable.at(0).props().columns).to.equal(sec8.layout.tableColumns);
+    expect(sectionTable.at(0).props().data).to.equal(sec8.data);
+    expect(sectionTable.at(0).props().classes).to.equal(sec8.layout.classes);
 
     const tableEl = reportContainer.find('table');
     const tableHeader = reportContainer.find('th');
-    expect(tableEl).to.have.length(1);
+    expect(tableEl).to.have.length(2); // there is a table in duration display.
     expect(tableHeader).to.have.length(2);
-    expect(tableHeader.at(0).text()).to.equal(sec7.layout.tableColumns[0]);
-    expect(tableHeader.at(1).text()).to.equal(sec7.layout.tableColumns[1]);
+    expect(tableHeader.at(0).text()).to.equal(sec8.layout.tableColumns[0]);
+    expect(tableHeader.at(1).text()).to.equal(sec8.layout.tableColumns[1]);
 
     const chartLegend = reportContainer.find(ChartLegend);
     expect(chartLegend).to.have.length(4);
