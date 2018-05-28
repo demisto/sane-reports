@@ -11,7 +11,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   legendStyle = null, sortBy, stacked }) => {
   const existingColors = {};
   const isColumnChart = chartProperties.layout === CHART_LAYOUT_TYPE.horizontal;
-  let dataItems = [];
+  let dataItems = {};
   let preparedData = data || [];
 
   if (!stacked) {
@@ -25,10 +25,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
       }
       existingColors[item.color] = true;
-      if (!legend) {
+      if (!legend || !dataItems[item.name]) {
         item[item.name] = val;
         dataItems[item.name] = { name: item.name, color: item.color, value: val };
-      } else if (dataItems[item.name]) {
+      } else {
         dataItems[item.name].value = val;
       }
       return item;
@@ -40,7 +40,6 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
 
   const mainClass =
     isColumnChart ? 'section-column-chart' : 'section-bar-chart';
-
   const maxLabelSize = dimensions.width / 3 - 20;
   const margin = chartProperties.margin || {};
   let leftMargin = -5;
@@ -93,7 +92,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     }
   }
 
-  dataItems = Object.values(dataItems);
+  dataItems = Object.keys(dataItems).map((key) => {
+    return dataItems[key];
+  });
   if (legend) {
     dataItems = dataItems.map(item => {
       const legendItem = legend.filter(l => l.name === item.name);
