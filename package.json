@@ -21,6 +21,7 @@
     "generate-report": "./reportsServer-macos templates/test.json",
     "devtools": "DEV_TOOLS=1 npm start",
     "lint": "eslint src tests",
+    "make": "cd reportService && npm run build",
     "test": "NODE_ENV=test istanbul cover ./node_modules/.bin/_mocha -- tests -R spec --compilers js:babel-core/register,css:null-compiler.js --require ./tests/helpers/helper.js --recursive --check-leaks",
     "test-no-cover": "NODE_ENV=test mocha tests -R spec --compilers js:babel-core/register,css:null-compiler.js --require ./tests/helpers/helper.js --recursive --check-leaks",
     "coverage": "NODE_ENV=test istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- tests -R spec --compilers js:babel-core/register,css:null-compiler.js --require ./tests/helpers/helper.js --recursive --check-leaks && cat ./coverage/lcov.info | COVERALLS_SERVICE_NAME=circle-ci COVERALLS_REPO_TOKEN=BpaCDz1aFLckIylCx4YIG6uiu1xXU0r66 ./node_modules/coveralls/bin/coveralls.js",

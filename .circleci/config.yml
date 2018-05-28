@@ -28,7 +28,9 @@ jobs:
               npm run coverage
       - run:
           name: Create Artifact
-          command:  tar -cvf sane-report.tar dist reportsServer.js
+          command:  |
+              cd reportService && npm install && npm run build
+              tar -cvf sane-report.tar dist reportsServer.js reportsServer
       - store_artifacts:
           path: sane-report.tar
           destination: sane-report

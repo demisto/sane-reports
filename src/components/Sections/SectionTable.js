@@ -40,7 +40,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
   let tableBody;
   if (isArray(readyColumns)) {
     tableBody = (
-      <table className={'ui compact table ' + classes} style={{ tableLayout: 'fixed' }}>
+      <table className={'ui compact table unstackable ' + classes} style={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
             {readyColumns.map((col) => {
@@ -83,7 +83,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
     );
   } else {
     tableBody = (
-      <table className={'ui compact table ' + classes}>
+      <table className={'ui compact table unstackable ' + classes}>
         <tbody>
           {map(tableData, (val, key) => (
             <tr key={key}>
