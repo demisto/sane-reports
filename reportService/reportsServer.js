@@ -87,7 +87,7 @@ const mmPixelSize = 3.779527559055;
   var headerLeftImage = process.argv[8] || '';
   const headerRightImage = process.argv[9] || '';
   const pageSize = process.argv[11] || PAGE_SIZES.Letter;
-  const chromeExecution = process.argv[12] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || 'chrome';
+  const chromeExecution = process.argv[12] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
 
   if (headerLeftImage) {
     try {
