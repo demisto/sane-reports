@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Create Artifact
           command:  |
-              cd reportService && npm install && npm run build
+              cd reportService && npm install && npm run build && cd ..
               tar -cvf sane-report.tar dist reportsServer.js reportsServer
       - store_artifacts:
           path: sane-report.tar
