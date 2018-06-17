@@ -88,6 +88,7 @@ const mmPixelSize = 3.779527559055;
   const headerRightImage = process.argv[9] || '';
   const pageSize = process.argv[11] || PAGE_SIZES.Letter;
   const chromeExecution = process.argv[12] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
+  let browser;
 
   if (headerLeftImage) {
     try {
@@ -98,99 +99,106 @@ const mmPixelSize = 3.779527559055;
     }
   }
 
-  const distFolder = distDir || (fs.absolute(".") + '/dist');
+  try {
+    const distFolder = distDir || (fs.absolute(".") + '/dist');
 
-  console.log('now open: ' + distFolder + '/index.html');
-  const indexHtml = fs.readFileSync(distFolder + '/index.html').toString();
-  const afterTypeReplace =
-    indexHtml
-      .replace('\'{report-type}\'', JSON.stringify(reportType))
-      .replace('{report-header-image-left}', headerLeftImage)
-      .replace('{report-header-image-right}', headerRightImage);
+    console.log('now open: ' + distFolder + '/index.html');
+    const indexHtml = fs.readFileSync(distFolder + '/index.html').toString();
+    const afterTypeReplace =
+      indexHtml
+        .replace('\'{report-type}\'', JSON.stringify(reportType))
+        .replace('{report-header-image-left}', headerLeftImage)
+        .replace('{report-header-image-right}', headerRightImage);
 
-  const loadedData = fs.readFileSync(dataFile).toString();
+    const loadedData = fs.readFileSync(dataFile).toString();
 
-  // $ is a special character in string replace, see here: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter
-  const finalHtmlData = afterTypeReplace.replace('\'{report-data-to-replace}\'', loadedData.replace(/\$/g, '$$$$'));
+    // $ is a special character in string replace, see here: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter
+    const finalHtmlData = afterTypeReplace.replace('\'{report-data-to-replace}\'', loadedData.replace(/\$/g, '$$$$'));
 
-  const date = Date.now();
+    const date = Date.now();
 
-  const tmpReportName = outputFile ? (outputFile.substring(outputFile.lastIndexOf('/'), outputFile.lastIndexOf('.')) + '.html') : 'reportTmp-' + date + '.html';
-  fs.writeFileSync(distFolder + '/' + tmpReportName, finalHtmlData);
+    const tmpReportName = outputFile ? (outputFile.substring(outputFile.lastIndexOf('/'), outputFile.lastIndexOf('.')) + '.html') : 'reportTmp-' + date + '.html';
+    fs.writeFileSync(distFolder + '/' + tmpReportName, finalHtmlData);
 
-  console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
+    console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
-  const dimensions = getPageSizeByOrientation(pageSize, orientation);
-  const baseUrl = distDir.startsWith('/') ? distDir : path.join(process.cwd(), distDir);
-  console.log(`Using "${chromeExecution}" execution.`);
+    const dimensions = getPageSizeByOrientation(pageSize, orientation);
+    const baseUrl = distDir.startsWith('/') ? distDir : path.join(process.cwd(), distDir);
+    console.log(`Using "${chromeExecution}" execution.`);
 
-  const args = ['--no-sandbox'];
-  const chrome = { x: 0, y: 74 };   // comes from config in reality
-  args.push(`--window-size=${dimensions.width+chrome.x},${dimensions.height+chrome.y}`);
-  const browser = await puppeteer.launch({
-    executablePath: chromeExecution,
-    headless: true,
-    timeout: resourceTimeout,
-    args
-  });
-  const page = await browser.newPage();
-  console.log('go to ' + baseUrl + '/' + tmpReportName);
-  const outputFinal = outputFile || distFolder + '/report-' + date + '.' + reportType;
+    const args = ['--no-sandbox'];
+    const chrome = { x: 0, y: 74 };   // comes from config in reality
+    args.push(`--window-size=${dimensions.width+chrome.x},${dimensions.height+chrome.y}`);
+    browser = await puppeteer.launch({
+      executablePath: chromeExecution,
+      headless: true,
+      timeout: resourceTimeout,
+      args
+    });
+    const page = await browser.newPage();
+    console.log('go to ' + baseUrl + '/' + tmpReportName);
+    const outputFinal = outputFile || distFolder + '/report-' + date + '.' + reportType;
 
-  console.log('output ' + outputFinal);
-  await page.setViewport({ width: dimensions.width, height: dimensions.height });
-  await page.goto('file://' + baseUrl + '/' + tmpReportName, {waitUntil: 'networkidle2'});
-  await page.emulateMedia('screen');
+    console.log('output ' + outputFinal);
+    await page.setViewport({width: dimensions.width, height: dimensions.height});
+    await page.goto('file://' + baseUrl + '/' + tmpReportName, {waitUntil: 'networkidle2'});
+    await page.emulateMedia('screen');
 
-  switch (reportType) {
+    switch (reportType) {
       case 'pdf': {
-          await page.pdf({
-              path: outputFinal,
-              format: pageSize,
-              printBackground: true,
-              scale: 1,
-              margin: {top: headerLeftImage || headerRightImage ? 60 : 0, bottom: 60},
-              displayHeaderFooter: true,
-              headerTemplate: "" + "<div style='" +
-              "height: 200px;" +
-              "font-size: 10px;" +
-              "margin-top: -7px;" +
-              "margin-right: -10px;" +
-              "margin-left: -10px;" +
-              "padding-top: 13px;" +
-              "padding-right: 20px;" +
-              "padding-left: 20px;'" +
-              ">" +
-              "<div style='text-align: left; float: left'>" +
-              "<img src=\""+headerLeftImage+"\" height='20px'/>" +
-              "</div>" +
-              "<div style='text-align: right; float: right'>" +
-              "<img src=\""+headerRightImage+"\" height='20px'/>" +
-              "</div>" +
-              "</div>",
-              footerTemplate: `
+        await page.pdf({
+          path: outputFinal,
+          format: pageSize,
+          printBackground: true,
+          scale: 1,
+          margin: {top: headerLeftImage || headerRightImage ? 60 : 0, bottom: 60},
+          displayHeaderFooter: true,
+          headerTemplate: "" + "<div style='" +
+          "height: 200px;" +
+          "font-size: 10px;" +
+          "margin-top: -7px;" +
+          "margin-right: -10px;" +
+          "margin-left: -10px;" +
+          "padding-top: 13px;" +
+          "padding-right: 20px;" +
+          "padding-left: 20px;'" +
+          ">" +
+          "<div style='text-align: left; float: left'>" +
+          "<img src=\"" + headerLeftImage + "\" height='20px'/>" +
+          "</div>" +
+          "<div style='text-align: right; float: right'>" +
+          "<img src=\"" + headerRightImage + "\" height='20px'/>" +
+          "</div>" +
+          "</div>",
+          footerTemplate: `
       <div style="font-size:12px!important;width:100%;margin: 0 auto;color:grey!important;background-color: yellow;padding-left:10px;text-align:center;" class="pdfheader">
 <span class="pageNumber"></span>/<span class="totalPages"></span>
 </div>
   `,
-              landscape: orientation === PAGE_ORIENTATION.landscape
-          });
-          break;
+          landscape: orientation === PAGE_ORIENTATION.landscape
+        });
+        break;
       }
       case 'csv': {
-          const csvData = await page.evaluate(evalsFunctions.getCSVData);
-          if (csvData) {
-              fs.write(outputFinal, csvData, 'w');
-              fs.remove(distFolder + '/' + tmpReportName);
-              console.log("CSV report was generated successfully.");
-          } else {
-              console.log("Failed to generate CSV report.");
-          }
-          break;
+        const csvData = await page.evaluate(evalsFunctions.getCSVData);
+        if (csvData) {
+          fs.write(outputFinal, csvData, 'w');
+          fs.remove(distFolder + '/' + tmpReportName);
+          console.log("CSV report was generated successfully.");
+        } else {
+          console.log("Failed to generate CSV report.");
+        }
+        break;
       }
       case 'html':
-          console.log("HTML report was generated successfully.");
+        console.log("HTML report was generated successfully.");
+    }
+  } catch (e) {
+    console.log("Error while executing report", e);
+    process.exitCode = 1;
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
   }
-
-  await browser.close();
-})();
+})().catch(console.error);
