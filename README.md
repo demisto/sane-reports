@@ -14,9 +14,7 @@ $ phantomjs reportsServer.js templates/test.json dist/test.pdf
 **Chromium/Chrome**
 ```sh
 $ npm install sane-reports
-$ cd sane-reports/reportService
-$ npm run build
-$ cd ..
+$ npm run make
 $ ./reportsServer templates/test.json dist/test.pdf # for linux users.
 $ ./reportsServer-macos templates/test.json dist/test.pdf # for macOS users.
 ```
