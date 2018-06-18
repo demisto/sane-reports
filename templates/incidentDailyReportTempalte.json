@@ -1,480 +1,580 @@
 [
   {
-    "type": "placeholder",
-    "data": {
-      "text": "# Daily Incidents\n\nWed, 13 Jun 2018 12:54:59 UTC\n\n---",
-      "groups": [
-        {
-          "name": "",
-          "data": [
-            1
-          ],
-          "groups": null
-        }
-      ]
-    },
+    "type": "header",
+    "data": "Daily Incident Report",
     "layout": {
-      "columnPos": 0,
-      "h": 1,
-      "i": "0c403c80-00e4-11e8-9b6f-436025e19450",
-      "rowPos": 0,
-      "w": 12
-    },
-    "query": {
-      "type": "incident",
-      "filter": {
-        "query": "-status:closed",
-        "period": {
-          "byFrom": "days",
-          "fromValue": null,
-          "by": "day"
-        },
-        "fromDate": null,
-        "toDate": null
+      "rowPos": 1,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 28
       }
-    },
-    "automation": {
-      "name": "",
-      "args": null
-    },
-    "title": "dailyIncidentRepor Headline"
+    }
   },
   {
-    "type": "placeholder",
-    "data": {
-      "text": "# **Last day incidents: 1**",
-      "groups": [
-        {
-          "name": "",
-          "data": [
-            1
-          ],
-          "groups": null
-        }
-      ]
-    },
+    "type": "date",
+    "class": "row-class",
     "layout": {
-      "columnPos": 6,
-      "h": 1,
-      "i": "9fdd8b00-00e4-11e8-9b6f-436025e19450",
-      "rowPos": 1,
-      "w": 6
-    },
-    "query": {
-      "type": "incident",
-      "filter": {
-        "query": "-status:closed",
-        "fromDate": "0001-01-01T00:00:00Z",
-        "toDate": "0001-01-01T00:00:00Z",
-        "period": {
-          "byTo": "days",
-          "byFrom": "hours",
-          "toValue": 0,
-          "fromValue": 24,
-          "field": "",
-          "by": "hour"
-        },
-        "fromDateLicense": "0001-01-01T00:00:00Z"
+      "rowPos": 2,
+      "columnPos": 1,
+      "class": "cell-class",
+      "style": {
+        "textAlign": "left",
+        "color": "gray",
+        "fontSize": 13,
+        "fontStyle": "italic",
+        "marginBottom:": 12
+      },
+      "format": "MMMM Do YYYY, h:mm:ss a z"
+    }
+  },
+  {
+    "type": "text",
+    "data": "Total incidents: 54",
+    "layout": {
+      "rowPos": 3,
+      "columnPos": 1,
+      "sectionStyle": {
+        "width": 200
+      },
+      "style": {
+        "textAlign": "left",
+        "fontSize": 18
       }
-    },
-    "automation": {
-      "name": "",
-      "args": null
-    },
-    "fromDate": "2018-06-12T12:54:59Z",
-    "title": "dailyIncidentRepor Headline2"
+    }
+  },
+  {
+    "type": "text",
+    "data": "Last day incidents: 39",
+    "layout": {
+      "rowPos": 3,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 18
+      }
+    }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 4,
+      "style": {
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Severity",
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Type",
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "Unknown", "value": 5, "url": "" },
+      { "name": "Low", "value": 7, "url": "" },
+      { "name": "Medium", "value": 11, "url": "" },
+      { "name": "High", "value": 7, "url": "" },
+      { "name": "Critical", "value": 9 , "url": ""}
+    ],
+    "layout": {
+      "rowPos": 6,
+      "columnPos": 1,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 330,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "cx": 155,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Critical", "fill": "#8d070a" },
+        { "name": "High", "fill": "#D00a00" },
+        { "name": "Medium", "fill": "#cb4a00" },
+        { "name": "Low", "fill": "#267634" },
+        { "name": "Unknown", "fill": "#999999" }
+      ]
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "C2Communication", "value": 3 },
+      { "name": "Default", "value": 2 },
+      { "name": "DeviceLost", "value": 3 },
+      { "name": "Malware", "value": 4 },
+      { "name": "Phishing", "value": 8 },
+      { "name": "wow", "value": 7 },
+      { "name": "Ransomware", "value": 8 },
+      { "name": "UnknownBinary", "value": 4 }
+    ],
+    "layout": {
+      "rowPos": 6,
+      "columnPos": 2,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "sortBy": {
+        "values": ["value", "name"],
+        "orders": ["desc", "asc"]
+      },
+      "legend": [
+        { "name": "C2Communication", "fill": "#853732" },
+        { "name": "Default", "fill": "#3aabe8" },
+        { "name": "DeviceLost", "fill": "#5fa54a" },
+        { "name": "Malware", "fill": "#4f8aab" },
+        { "name": "Phishing", "fill": "#4f854a" },
+        { "name": "Ransomware", "fill": "#5b4185" },
+        { "name": "UnknownBinary", "fill": "#4faa5b" }
+      ]
+    }
+  },
+  {
+    "type": "text",
+    "data": "SLA",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Analyst",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "late", "value": 5 },
+      { "name": "about to end", "value": 11 },
+      { "name": "ok", "value": 23 }
+    ],
+    "layout": {
+      "rowPos": 8,
+      "columnPos": 1,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 180
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "cx": 155,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Late", "fill": "red" },
+        { "name": "About To End", "fill": "orange" },
+        { "name": "OK", "fill": "green" }
+      ]
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "Slavik", "relatedTo": 1, "value": 15, "url": "" },
+      { "name": "Guy", "relatedTo": 1, "value": 11 },
+      { "name": "Meir", "relatedTo": 1, "value": 9 },
+      { "name": "Aviad", "relatedTo": 1, "value": 4 }
+    ],
+    "layout": {
+      "rowPos": 8,
+      "columnPos": 2,
+      "chartType": "bar",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 10,
+        "marginLeft": -15
+      },
+      "chartProperties" : {
+        "layout": "vertical",
+        "strokeDasharray": "3 300",
+        "barSize": 13
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 200
+      },
+      "legend": [
+        { "name": "Busy Analyst", "fill": "#2884d1", "bar": 1 }
+      ]
+    }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 9,
+      "style": {
+      }
+    }
   },
   {
     "type": "table",
     "data": [
       {
-        "CustomFields": "N/A",
-        "account": "N/A",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "N/A",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "N/A",
-        "closeReason": "N/A",
-        "closed": "N/A",
-        "closingUserId": "N/A",
-        "created": "Wed, 13 Jun 2018 11:51:34 UTC",
-        "details": "123213",
-        "dueDate": "Sat, 23 Jun 2018 11:51:34 UTC",
-        "hasRole": "N/A",
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 15:58:45 UTC",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 15:58:45 UTC",
         "id": "1",
         "investigationId": "1",
-        "isPlayground": "N/A",
-        "labels": [
-          {
-            "type": "Instance",
-            "value": "admin"
-          },
-          {
-            "type": "Brand",
-            "value": "Manual"
-          }
-        ],
-        "lastOpen": "0001-01-01T00:00:00Z",
-        "linkedIncidents": "N/A",
-        "modified": "2018-06-13T11:52:00.870449886Z",
-        "name": "test",
-        "occurred": "13 Jun 2018",
-        "openDuration": "0h 0m 0s",
-        "owner": "admin",
-        "parent": "N/A",
-        "phase": "N/A",
-        "playbookId": "Default",
-        "previousRoles": "N/A",
-        "rawCategory": "N/A",
-        "rawCloseReason": "N/A",
-        "rawJSON": "N/A",
-        "rawName": "test",
-        "rawPhase": "N/A",
-        "rawType": "Unclassified",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "N/A",
-        "runStatus": "waiting",
-        "severity": "Medium",
-        "sla": 0,
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
+        "modified": "2016-07-15T18:58:48.572316679+03:00",
+        "name": "tes1",
+        "occurred": "Fri, 15 Jul 2016 15:58:45 UTC",
+        "openDuration": 0,
+        "owner": "dorsha",
+        "playbookId": "playbook0",
+        "rawName": "tes1",
+        "rawType": "Default",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
         "status": "Assigned",
-        "type": "Unclassified",
-        "version": 6
-      }
-    ],
-    "layout": {
-      "classes": "striped stackable small very compact",
-      "columnPos": 0,
-      "h": 2,
-      "i": "d0816860-00e6-11e8-9b6f-436025e19450",
-      "rowPos": 6,
-      "tableColumns": [
-        "name",
-        "occurred",
-        "type",
-        "owner",
-        "severity",
-        "status",
-        "dueDate"
-      ],
-      "w": 12
-    },
-    "query": {
-      "type": "incident",
-      "filter": {
-        "query": "-status:closed",
-        "period": {
-          "byFrom": "days",
-          "fromValue": null,
-          "by": "day"
-        },
-        "fromDate": null,
-        "toDate": null
-      }
-    },
-    "automation": {
-      "name": "",
-      "args": null
-    },
-    "title": "Open Incidents"
-  },
-  {
-    "type": "placeholder",
-    "data": {
-      "text": "# **Total incidents: 1**",
-      "groups": [
-        {
-          "name": "",
-          "data": [
-            1
-          ],
-          "groups": null
-        }
-      ]
-    },
-    "layout": {
-      "columnPos": 0,
-      "h": 1,
-      "i": "0388a590-01b7-11e8-9918-2d303bb12520",
-      "rowPos": 1,
-      "w": 6
-    },
-    "query": {
-      "type": "incident",
-      "filter": {
-        "query": "",
-        "period": {
-          "byFrom": "days",
-          "fromValue": null,
-          "by": "day"
-        },
-        "fromDate": null,
-        "toDate": null
-      }
-    },
-    "automation": {
-      "name": "",
-      "args": null
-    },
-    "title": "dailyIncidentReport Severity"
-  },
-  {
-    "type": "chart",
-    "data": [
+        "targets": [],
+        "type": "Default",
+        "version": 3
+      },
       {
-        "name": "Medium",
-        "data": [
-          1
-        ],
-        "groups": null
-      }
-    ],
-    "layout": {
-      "chartProperties": {
-        "cx": 103.9,
-        "cy": 75,
-        "innerRadius": 54.43730482169373,
-        "layout": "horizontal",
-        "maxRadius": 145.1661461911833,
-        "outerRadius": 72.58307309559164
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "10",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.81129304+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
-      "chartType": "pie",
-      "columnPos": 0,
-      "dimensions": {
-        "height": 180,
-        "width": 340
-      },
-      "h": 2,
-      "i": "5ae462c0-01b7-11e8-9918-2d303bb12520",
-      "legend": [
-        {
-          "color": "#FF9000",
-          "name": "Medium"
-        }
-      ],
-      "legendStyle": {
-        "align": "left",
-        "iconType": "circle",
-        "layout": "vertical",
-        "verticalAlign": "top",
-        "width": 112.2
-      },
-      "rowPos": 2,
-      "w": 6
-    },
-    "query": {
-      "type": "incident",
-      "groupBy": [
-        "severity"
-      ],
-      "filter": {
-        "query": "",
-        "period": {
-          "byFrom": "days",
-          "fromValue": null,
-          "by": "day"
-        },
-        "fromDate": null,
-        "toDate": null
-      }
-    },
-    "automation": {
-      "name": "",
-      "args": null
-    },
-    "title": "dailyIncidentReport Severity"
-  },
-  {
-    "type": "chart",
-    "data": [
       {
-        "name": "Unclassified",
-        "data": [
-          1
-        ],
-        "groups": null
-      }
-    ],
-    "layout": {
-      "chartProperties": {
-        "cx": 103.9,
-        "cy": 75,
-        "innerRadius": 54.43730482169373,
-        "layout": "horizontal",
-        "maxRadius": 145.1661461911833,
-        "outerRadius": 72.58307309559164
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "11",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.82069967+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
-      "chartType": "pie",
-      "columnPos": 6,
-      "dimensions": {
-        "height": 180,
-        "width": 340
-      },
-      "h": 2,
-      "i": "5ba40940-01b7-11e8-9918-2d303bb12520",
-      "legend": [
-        {
-          "color": "#03B0FF",
-          "name": "Unclassified"
-        }
-      ],
-      "legendStyle": {
-        "align": "left",
-        "iconType": "circle",
-        "layout": "vertical",
-        "verticalAlign": "top",
-        "width": 112.2
-      },
-      "rowPos": 2,
-      "w": 6
-    },
-    "query": {
-      "type": "incident",
-      "groupBy": [
-        "type"
-      ],
-      "filter": {
-        "query": "",
-        "period": {
-          "byFrom": "days",
-          "fromValue": null,
-          "by": "day"
-        },
-        "fromDate": null,
-        "toDate": null
-      }
-    },
-    "automation": {
-      "name": "",
-      "args": null
-    },
-    "title": "dailyIncidentReport Type"
-  },
-  {
-    "type": "chart",
-    "data": [
       {
-        "name": "within",
-        "data": [
-          1
-        ],
-        "groups": null
-      }
-    ],
-    "layout": {
-      "chartProperties": {
-        "cx": 103.9,
-        "cy": 75,
-        "innerRadius": 54.43730482169373,
-        "layout": "horizontal",
-        "maxRadius": 145.1661461911833,
-        "outerRadius": 72.58307309559164
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "12",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.826645796+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
-      "chartType": "pie",
-      "columnPos": 0,
-      "dimensions": {
-        "height": 180,
-        "width": 340
-      },
-      "h": 2,
-      "i": "665f6190-01b7-11e8-9918-2d303bb12520",
-      "legend": null,
-      "legendStyle": {
-        "align": "left",
-        "iconType": "circle",
-        "layout": "vertical",
-        "verticalAlign": "top",
-        "width": 112.2
-      },
-      "rowPos": 4,
-      "w": 6
-    },
-    "query": {
-      "type": "incident",
-      "groupBy": [
-        "dbotDueDate"
-      ],
-      "filter": {
-        "query": "",
-        "period": {
-          "byFrom": "days",
-          "fromValue": null,
-          "by": "day"
-        },
-        "fromDate": null,
-        "toDate": null
-      }
-    },
-    "automation": {
-      "name": "",
-      "args": null
-    },
-    "title": "dailyIncidentReport SLA"
-  },
-  {
-    "type": "chart",
-    "data": [
       {
-        "name": "admin",
-        "data": [
-          1
-        ],
-        "groups": null
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "13",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.836298751+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Critical",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "14",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.843264286+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "Virus",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Virus",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "15",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.851831604+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Guy",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "16",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.856962111+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "Virus",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Low",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Virus",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "17",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.867420191+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Slavik",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Low",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:12:04 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:12:04 IDT",
+        "id": "18",
+        "investigationId": "",
+        "modified": "2016-07-15T20:12:04.141268665+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:12:04 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "High",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       }
     ],
     "layout": {
-      "chartProperties": {
-        "barSize": 15,
-        "layout": "vertical"
-      },
-      "chartType": "bar",
-      "columnPos": 6,
-      "dimensions": {
-        "height": 180,
-        "width": 340
-      },
-      "h": 2,
-      "i": "66e840a0-01b7-11e8-9918-2d303bb12520",
-      "legend": null,
-      "legendStyle": {
-        "align": "center",
-        "hideLegend": false,
-        "iconType": "square",
-        "layout": "horizontal",
-        "verticalAlign": "top",
-        "wrapperStyle": {
-          "maxHeight": 48,
-          "top": 5,
-          "width": "100%"
-        }
-      },
-      "rowPos": 4,
-      "w": 6
-    },
-    "query": {
-      "type": "incident",
-      "groupBy": [
-        "owner"
-      ],
-      "filter": {
-        "query": "",
-        "period": {
-          "byFrom": "days",
-          "fromValue": null,
-          "by": "day"
-        },
-        "fromDate": null,
-        "toDate": null
-      }
-    },
-    "automation": {
-      "name": "",
-      "args": null
-    },
-    "title": "dailyIncidentReport Analyst"
+      "rowPos": 10,
+      "columnPos": 1,
+      "tableColumns": ["name", "type", "status", "occurred", "severity", "owner", "playbookId"],
+      "classes": "striped stackable small very compact"
+    }
   }
 ]

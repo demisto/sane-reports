@@ -5,10 +5,20 @@
 Reports library that will keep you sane and not pulling your hair out
 
 ## Quick start
+**PhantomJS**
 ```sh
 $ npm install sane-reports
 $ cd sane-reports
 $ phantomjs reportsServer.js templates/test.json dist/test.pdf
+```
+**Chromium/Chrome**
+```sh
+$ npm install sane-reports
+$ cd sane-reports/reportService
+$ npm run build
+$ cd ..
+$ ./reportsServer templates/test.json dist/test.pdf # for linux users.
+$ ./reportsServer-macos templates/test.json dist/test.pdf # for macOS users.
 ```
 Report will be generated in: `dist/test.pdf`
 
@@ -33,11 +43,14 @@ This will generate a PDF report in the `dist` folder. The name of the report wil
 
 ### Generate report options:
 You can create PDF report with the following command as well:
-
+#### PhantomJS
 `
-phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <orientation> <resourceTimeout> <type> <headerLeftImage> <headerRightImage>]
+phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <orientation> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <customReportType> <pageSize>]
 `
-
+#### Chromium/Chrome
+`
+./reportsServer <report_template_file> [<output_file> <dist_folder> <orientation> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <customReportType> <pageSize> <chromiumPath>]
+`
 - report_template_file: The template of the report (JSON format)
 - output_file: The name of the generated report (leave empty for default name)
 - dist_folder: should be `dist`
@@ -46,12 +59,17 @@ phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <o
 - type: The report type: pdf or csv (default is pdf)
 - headerLeftImage: The image to show at the left side of the report header of each page (base64 or url)
 - headerRightImage: The image to show at the right side of the report header of each page (base64 or url)
+- customReportType: Custom report type if needed. currently not used.
+- pageSize: The report page size to generate. Possible: A4, A3, A5, letter (default A4).
+- chromiumPath: a custom chromium or chrome path. The service searches for installed chromium or chrome by order. Default usage by priority: Chromium -> Google Chrome Stable -> Google Chrome -> the default path '/usr/bin/chromium-browser'.
 
 ### PDF Example:
 `phantomjs reportsServer.js templates/test.json dist/test.pdf dist portrait 4000 pdf`
+`./reportsServer templates/test.json dist/test.pdf dist portrait 4000 pdf`
 
 ### CSV Example:
 `phantomjs reportsServer.js templates/testCSV.json dist/test.csv dist portrait 4000 csv`
+`./reportsServer templates/testCSV.json dist/test.csv dist portrait 4000 csv`
 
 ## Demo
 Reports templates (JSON) examples can be found in the [templates](https://github.com/demisto/sane-reports/blob/master/templates) folder.

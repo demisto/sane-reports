@@ -51,30 +51,6 @@ const mmPixelSize = 3.779527559055;
     }
     return size;
   }
-  /*
-  phantom.onError = function(msg, trace) {
-    const msgStack = ['PHANTOMJS ERROR: ' + msg];
-    if (trace && trace.length) {
-      msgStack.push('TRACE:');
-      trace.forEach(function(t) {
-        msgStack.push(' -> ' + (t.file || t.sourceURL) + ': ' + t.line + (t.function ? ' (in function ' + t.function +')' : ''));
-      });
-    }
-    console.error(msgStack.join('\n'));
-    phantom.exit(1);
-  };
-  */
-  /*
-  console.log('Starting report server');
-  console.log('Using PhantomJS version ' +
-      phantom.version.major + '.' +
-      phantom.version.minor + '.' +
-      phantom.version.patch
-  );
-  console.log('Agent details: ' +
-      page.settings.userAgent
-  );
-  */
   if (process.argv.length < 2) {
     console.log('Usage: reportServer <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout> <type> <headerLeftImage> <headerRightImage>]');
   }
