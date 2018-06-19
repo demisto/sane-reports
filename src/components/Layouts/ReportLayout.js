@@ -172,6 +172,14 @@ function getElementBySection(section) {
     default:
     // Ignored
   }
+  if (section.layout && section.layout.style && section.layout.style.pageBreakBefore) {
+    sectionToRender = (
+      <div>
+        <div style={{ pageBreakAfter: 'always' }}>&nbsp;</div>
+        {sectionToRender}
+      </div>
+    );
+  }
   return sectionToRender;
 }
 

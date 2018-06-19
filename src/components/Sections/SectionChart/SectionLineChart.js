@@ -14,90 +14,88 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   let preparedLegend = [];
   let preparedData = data || [];
   const finalToDate = toDate || moment().utc();
-  if (fromDate && finalToDate) {
-    const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
-    const lineTypes = {};
-    let from = moment(fromDate).utc();
-    const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
-    preparedData = compact(preparedData.sort((a, b) => sortStrings(a.name, b.name)).map((mainGroup) => {
-      let name = mainGroup.name;
-      if (chartProperties.isDatesChart || chartProperties.isDatesChart === undefined) {
-        if (!name) {
-          return null;
-        }
-        if (!isNaN(name)) {
-          if (!from || !from.isValid()) {
-            from = moment().add(-data.length, timeFrame);
-          }
-          name = moment(from).add(Number(name), timeFrame).format(timeFormat);
-        } else if (name) {
-          if (!from || !from.isValid()) {
-            from = moment(name);
-          }
-          name = moment(name).format(timeFormat);
-        }
-
-        mainGroup.name = name;
-        const mainObject = { name };
-        if (mainGroup.groups && mainGroup.data) {
-          // add all sub groups to main object.
-          mainGroup.groups.forEach((group) => {
-            const groupName = group.name;
-            const id = group.name;
-            mainObject[groupName] = group.data[0];
-            lineTypes[groupName] =
-            {
-              name: groupName,
-              color: groupName.color || getGraphColorByName(groupName),
-              id,
-              value: mainObject[groupName]
-            };
-          });
-        } else {
-          Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach(groupKey => {
-            lineTypes[groupKey] =
-              { name: groupKey, color: mainGroup.color || getGraphColorByName(groupKey), value: mainGroup[groupKey] };
-            mainObject[groupKey] = mainGroup[groupKey];
-          });
-        }
-
-        return mainObject;
+  const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
+  const lineTypes = {};
+  let from = fromDate && moment(fromDate).utc();
+  const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
+  preparedData = compact(preparedData.sort((a, b) => sortStrings(a.name, b.name)).map((mainGroup) => {
+    let name = mainGroup.name;
+    if (chartProperties.isDatesChart || chartProperties.isDatesChart === undefined) {
+      if (!name) {
+        return null;
       }
-      return mainGroup;
-    }));
+      if (!isNaN(name)) {
+        if (!from || !from.isValid()) {
+          from = moment().add(-data.length, timeFrame);
+        }
+        name = moment(from).add(Number(name), timeFrame).format(timeFormat);
+      } else if (name) {
+        if (!from || !from.isValid()) {
+          from = moment(name);
+        }
+        name = moment(name).format(timeFormat);
+      }
 
-    const retData = [];
-    const frames = finalToDate.diff(from, timeFrame);
-    const currentDate = moment(from);
-    for (let i = 0; i <= frames; i++) {
-      const formattedDate = currentDate.format(timeFormat);
-      const mainGroup = preparedData.filter(item =>
-        formattedDate === item.name);
-      const group = mainGroup && mainGroup.length > 0 && mainGroup[0];
-      if (!group) {
-        const dataObj = {
-          name: formattedDate
-        };
-        Object.keys(lineTypes).forEach((groupName) => {
-          dataObj[groupName] = 0;
+      mainGroup.name = name;
+      const mainObject = { name };
+      if (mainGroup.groups && mainGroup.data) {
+        // add all sub groups to main object.
+        mainGroup.groups.forEach((group) => {
+          const groupName = group.name;
+          const id = group.name;
+          mainObject[groupName] = group.data[0];
+          lineTypes[groupName] =
+          {
+            name: groupName,
+            color: groupName.color || getGraphColorByName(groupName),
+            id,
+            value: mainObject[groupName]
+          };
         });
-        retData.push(dataObj);
       } else {
-        // complete missing subgroups for the graph to show complete lines.
-        Object.keys(lineTypes).forEach((groupName) => {
-          if (!(groupName in group)) {
-            group[groupName] = 0;
-          }
+        Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach(groupKey => {
+          lineTypes[groupKey] =
+            { name: groupKey, color: mainGroup.color || getGraphColorByName(groupKey), value: mainGroup[groupKey] };
+          mainObject[groupKey] = mainGroup[groupKey];
         });
-        retData.push(group);
       }
 
-      currentDate.add(1, timeFrame);
+      return mainObject;
+    }
+    return mainGroup;
+  }));
+
+  const retData = [];
+  const frames = finalToDate.diff(from, timeFrame);
+  const currentDate = moment(from);
+  for (let i = 0; i <= frames; i++) {
+    const formattedDate = currentDate.format(timeFormat);
+    const mainGroup = preparedData.filter(item =>
+      formattedDate === item.name);
+    const group = mainGroup && mainGroup.length > 0 && mainGroup[0];
+    if (!group) {
+      const dataObj = {
+        name: formattedDate
+      };
+      Object.keys(lineTypes).forEach((groupName) => {
+        dataObj[groupName] = 0;
+      });
+      retData.push(dataObj);
+    } else {
+      // complete missing subgroups for the graph to show complete lines.
+      Object.keys(lineTypes).forEach((groupName) => {
+        if (!(groupName in group)) {
+          group[groupName] = 0;
+        }
+      });
+      retData.push(group);
     }
 
-    preparedLegend = values(lineTypes);
-    preparedData = retData;
+    currentDate.add(1, timeFrame);
   }
+
+  preparedLegend = values(lineTypes);
+  preparedData = retData;
   if (legend) {
     preparedLegend = legend.map((item) => {
       item.color = item.color || item.stroke || getGraphColorByName(item.name, existingColors);
