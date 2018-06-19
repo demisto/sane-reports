@@ -22,3 +22,7 @@ node_modules/
 
 webpack-assets.json
 package-lock.json
+
+reportsServer
+reportsServer-macos
+reportsServer-win.exe
