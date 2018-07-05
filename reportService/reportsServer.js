@@ -63,18 +63,19 @@ const mmPixelSize = 3.779527559055;
   var headerLeftImage = process.argv[8] || '';
   const headerRightImage = process.argv[9] || '';
   const pageSize = process.argv[11] || PAGE_SIZES.Letter;
-  const chromeExecution = process.argv[12] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
+  const disableHeaders = process.argv[12] === true || process.argv[12] === "true";
+  const chromeExecution = process.argv[13] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
   let browser;
 
-  if (headerLeftImage) {
+  if (headerLeftImage && headerLeftImage.indexOf('data:image') === -1) {
     try {
-      const headerLeftImageContent = fs.read(headerLeftImage);
+      const headerLeftImageContent = fs.readFileSync(headerLeftImage);
       headerLeftImage = headerLeftImageContent;
     } catch (ex) {
-      // ignored
+      console.log('found error when reading image: ', ex);
     }
   }
-
+  console.log('customer logo: ', headerLeftImage);
   try {
     const distFolder = distDir || (fs.absolute(".") + '/dist');
 
@@ -117,9 +118,9 @@ const mmPixelSize = 3.779527559055;
 
     console.log('output ' + outputFinal);
     await page.setViewport({width: dimensions.width, height: dimensions.height});
-    await page.goto('file://' + baseUrl + '/' + tmpReportName, {waitUntil: 'networkidle2'});
+    await page.goto('file://' + baseUrl + '/' + tmpReportName, {waitUntil: 'networkidle0'});
     await page.emulateMedia('screen');
-
+    await page._client.send('Emulation.clearDeviceMetricsOverride');
     switch (reportType) {
       case 'pdf': {
         await page.pdf({
@@ -127,11 +128,12 @@ const mmPixelSize = 3.779527559055;
           format: pageSize,
           printBackground: true,
           scale: 1,
-          margin: {top: headerLeftImage || headerRightImage ? 60 : 0, bottom: 60},
+          margin: {top: (headerLeftImage || headerRightImage) && !disableHeaders ? 60 : 0, bottom: 60},
           displayHeaderFooter: true,
-          headerTemplate: "" + "<div style='" +
+          headerTemplate: !disableHeaders ? "" + "<div style='" +
           "height: 200px;" +
           "font-size: 10px;" +
+          "width: 100%;" +
           "margin-top: -7px;" +
           "margin-right: -10px;" +
           "margin-left: -10px;" +
@@ -145,9 +147,11 @@ const mmPixelSize = 3.779527559055;
           "<div style='text-align: right; float: right'>" +
           "<img src=\"" + headerRightImage + "\" height='20px'/>" +
           "</div>" +
-          "</div>",
+          "</div>" : '',
           footerTemplate: `
-      <div style="font-size:12px!important;width:100%;margin: 0 auto;color:grey!important;background-color: yellow;padding-left:10px;text-align:center;" class="pdfheader">
+      <div style="font-size:12px!important;width:100%;margin: 0 auto;color:grey!important;padding-left:10px;text-align:center;" class="footer">
+      ${headerLeftImage && disableHeaders ? '<img style="float: left;height: 10px;width: auto;margin: 0 10px;" src='+ headerLeftImage +' />' : ''}
+      ${headerRightImage && disableHeaders ? '<img style="float: right;height: 10px;width: auto;margin: 0 10px;" src='+ headerRightImage +' />' : ''}
 <span class="pageNumber"></span>/<span class="totalPages"></span>
 </div>
   `,

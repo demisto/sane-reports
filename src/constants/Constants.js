@@ -18,7 +18,8 @@ export const SECTION_TYPES = {
   table: 'table',
   duration: 'duration',
   json: 'json',
-  divider: 'divider'
+  divider: 'divider',
+  logo: 'logo'
 };
 
 export const CHART_TYPES = {

@@ -110,6 +110,7 @@ function getElementBySection(section) {
         />
       );
       break;
+    case SECTION_TYPES.logo:
     case SECTION_TYPES.image:
       sectionToRender = (
         <SectionImage
@@ -200,7 +201,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
             .keys(sections)
             .map((rowPos) =>
               <div
-                className={sections[rowPos][0].class ? 'report-row ' + sections[rowPos][0].class : 'report-row'}
+                className={`report-row ${sections[rowPos][0].type} ${sections[rowPos][0].class || ''}`}
                 key={rowPos}
                 style={sections[rowPos].style}
               >

@@ -5,11 +5,13 @@
 }
 
 body {
-  background-color: @main-background-color;
   color: @font-color-base;
   font-family: @font-family-base !important;
 }
 
+.footer {
+  font-family: @font-family-base !important;
+}
 strong {
   font-family: @font-family-source-sans-pro-semi-bold;
 }
@@ -25,9 +27,19 @@ h1 {
     width: 100%;
     table-layout: fixed;
     border-spacing: 10px;
+    padding: 0 17px;
+    &.header, &.logo {
+      padding: 0 !important;
+    }
   }
   .report-section {
     display: table-cell;
+    .section-header {
+      padding: 8px 15px;
+      margin-top: 5px;
+      font-weight: normal;
+      background-color: #F9F9FB;
+    }
   }
   .react-grid-item {
     overflow: hidden;
