@@ -17,6 +17,7 @@ $ npm install sane-reports
 $ npm run make
 $ ./reportsServer templates/test.json dist/test.pdf # for linux users.
 $ ./reportsServer-macos templates/test.json dist/test.pdf # for macOS users.
+$ ./reportsServer-win.exe templates/test.json dist/test.pdf # for windows users.
 ```
 Report will be generated in: `dist/test.pdf`
 
@@ -43,11 +44,11 @@ This will generate a PDF report in the `dist` folder. The name of the report wil
 You can create PDF report with the following command as well:
 #### PhantomJS
 `
-phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <orientation> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <customReportType> <pageSize>]
+phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <orientation> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <customReportType> <pageSize> <disableTopHeaders>]
 `
 #### Chromium/Chrome
 `
-./reportsServer <report_template_file> [<output_file> <dist_folder> <orientation> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <customReportType> <pageSize> <chromiumPath>]
+./reportsServer <report_template_file> [<output_file> <dist_folder> <orientation> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <customReportType> <pageSize> <disableTopHeaders> <chromiumPath>]
 `
 - report_template_file: The template of the report (JSON format)
 - output_file: The name of the generated report (leave empty for default name)
@@ -59,6 +60,7 @@ phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <o
 - headerRightImage: The image to show at the right side of the report header of each page (base64 or url)
 - customReportType: Custom report type if needed. currently not used.
 - pageSize: The report page size to generate. Possible: A4, A3, A5, letter (default A4).
+- disableTopHeaders: true or "true" to disable the top headers and show icons in the footer. (default false)
 - chromiumPath: a custom chromium or chrome path. The service searches for installed chromium or chrome by order. Default usage by priority: Chromium -> Google Chrome Stable -> Google Chrome -> the default path '/usr/bin/chromium-browser'.
 
 ### PDF Example:
