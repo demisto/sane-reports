@@ -75,10 +75,10 @@ const reportType = system.args[6] || 'pdf';
 var headerLeftImage = system.args[7] || '';
 const headerRightImage = system.args[8] || '';
 const pageSize = system.args[10] || PAGE_SIZES.Letter;
-
+const disableHeaders = system.args[11] === true || system.args[11] === "true";
 page.settings.resourceTimeout = resourceTimeout ? Number(resourceTimeout) : 4000;
 
-if (headerLeftImage) {
+if (headerLeftImage && headerLeftImage.indexOf('data:image') === -1) {
   try {
     const headerLeftImageContent = fs.read(headerLeftImage);
     headerLeftImage = headerLeftImageContent;
@@ -86,6 +86,7 @@ if (headerLeftImage) {
     // ignored
   }
 }
+console.log(system.args);
 
 const distFolder = distDir || (fs.absolute(".") + '/dist');
 
@@ -115,9 +116,9 @@ try {
     format: pageSize, // 'A3', 'A4', 'A5', 'Legal', 'Letter', 'Tabloid'
     orientation: orientation, // portrait / landscape
     header: {
-      height: "1.3cm",
+      height: !disableHeaders ? "1.3cm" : '',
       contents: phantom.callback(function() {
-        return "" +
+        return !disableHeaders ? "" +
           "<div style='" +
             "background-color: #fcfcfc;" +
             "height: 200px;" +
@@ -135,7 +136,7 @@ try {
             "<div style='text-align: right; float: right'>" +
               "<img src=\""+headerRightImage+"\" height='20px' />" +
             "</div>" +
-          "</div>";
+          "</div>" : '';
       })
     },
     footer: {
@@ -148,10 +149,13 @@ try {
             "text-align: center;" +
             "border-top: 1px solid #d6d6d6;" +
             "color: #8e8e8e;" +
+            "font-family: \"Source Sans Pro\";" +
             "margin-top: -7px;" +
             "margin-bottom: 10px;" +
             "padding-top: 7px;'" +
           ">" +
+          headerLeftImage && disableHeaders ? '<img style="float: left; height: 10px; margin: 0 10px;width: auto;" src='+ headerLeftImage +' />' : '' +
+          headerRightImage && disableHeaders ? '<img style="float: right;height: 10px; margin: 0 10px;width: auto;" src='+ headerRightImage +' />' : '' +
             "<span>" +
             "" + pageNum + " / " + numPages + "" +
             "</span>" +
