@@ -9,7 +9,7 @@ import isArray from 'lodash/isArray';
 import { getGraphColorByName } from '../../../utils/colors';
 import { CHART_LAYOUT_TYPE, RADIANS } from '../../../constants/Constants';
 
-export const CustomizedPieLabel = ({ cx, cy, midAngle, outerRadius, percent, fill }) => {
+const CustomizedPieLabel = ({ cx, cy, midAngle, outerRadius, percent, fill }) => {
   const radius = outerRadius * 1.1;
   const x = cx + radius * Math.cos(-midAngle * RADIANS);
   const y = cy + radius * Math.sin(-midAngle * RADIANS);
