@@ -4,6 +4,7 @@ import { prepareSections } from '../../src/utils/reports';
 import ReportContainer from '../../src/containers/ReportContainer';
 import ChartLegend from '../../src/components/Sections/SectionChart/ChartLegend';
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
+import { CustomizedPieLabel } from '../../src/components/Sections/SectionChart/SectionPieChart';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
   SectionMarkdown, SectionJson, SectionNumber, SectionDuration } from '../../src/components/Sections';
 import { BarChart, PieChart, Pie, LineChart } from 'recharts';
@@ -282,6 +283,8 @@ describe('Report Container', () => {
 
     expect(pieChart.props().width).to.equal(sec5.layout.dimensions.width);
     expect(pie.props().data.length).to.equal(sec5.data.length);
+    const labels = reportContainer.find(CustomizedPieLabel);
+    expect(labels).to.have.length(sec5.data.length);
 
     expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);

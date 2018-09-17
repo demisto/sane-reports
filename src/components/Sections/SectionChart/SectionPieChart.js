@@ -7,7 +7,38 @@ import merge from 'lodash/merge';
 import orderBy from 'lodash/orderBy';
 import isArray from 'lodash/isArray';
 import { getGraphColorByName } from '../../../utils/colors';
-import { CHART_LAYOUT_TYPE } from '../../../constants/Constants';
+import { CHART_LAYOUT_TYPE, RADIANS } from '../../../constants/Constants';
+
+export const CustomizedPieLabel = ({ cx, cy, midAngle, outerRadius, percent, fill }) => {
+  const radius = outerRadius * 1.1;
+  const x = cx + radius * Math.cos(-midAngle * RADIANS);
+  const y = cy + radius * Math.sin(-midAngle * RADIANS);
+  // ignore less than 2 percent.
+  if (percent < 0.02) {
+    return '';
+  }
+  return (
+    <text
+      x={x}
+      y={y}
+      fill={fill}
+      fontSize={12}
+      transform={`rotate(0,${x},${y})`}
+      textAnchor={x > cx ? 'start' : 'end'}
+      dominantBaseline="central"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+CustomizedPieLabel.propTypes = {
+  cx: PropTypes.number,
+  cy: PropTypes.number,
+  midAngle: PropTypes.number,
+  outerRadius: PropTypes.number,
+  fill: PropTypes.string,
+  percent: PropTypes.number
+};
 
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
   const dataMap = {};
@@ -73,9 +104,9 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 endAngle={chartProperties.endAngle || -270}
                 outerRadius={outerRadius > 10 ? outerRadius - 5 : outerRadius}
                 innerRadius={innerRadius > 10 ? innerRadius - 5 : innerRadius}
-                labelLine={chartProperties.labelLine}
+                labelLine={false}
                 dataKey="value"
-                label={chartProperties.label || { offsetRadius: 1 }}
+                label={chartProperties.label || CustomizedPieLabel}
               >
                 {/* // creating links to urls according the 'url' filed in the data */}
                 {preparedData.map((entry) => {
