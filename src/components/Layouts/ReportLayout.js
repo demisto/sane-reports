@@ -18,8 +18,8 @@ function getGridItemFromSection(section, overflowRows) {
   const rows = section.layout.rowPos + overflowRows;
   let height = section.layout.h;
   if (section.type === SECTION_TYPES.table && section.layout.w >= GRID_LAYOUT_COLUMNS) {
-    const numOfRows = (section.data.length + 1) * 0.66;
-    if (section.data.length > section.layout.h) {
+    const numOfRows = ((section.data.length || section.data.total) + 1) * 0.66;
+    if (numOfRows > section.layout.h) {
       height = numOfRows;
     }
   }

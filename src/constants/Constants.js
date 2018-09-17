@@ -58,3 +58,5 @@ export const GRID_LAYOUT_COLUMNS = 12;
 export const CHART_LEGEND_ITEM_HEIGHT = 26;
 
 export const NONE_VALUE_DEFAULT_NAME = 'None';
+
+export const RADIANS = Math.PI / 180;
