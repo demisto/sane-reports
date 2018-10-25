@@ -115,7 +115,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       >
         {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
           <YAxis hide={!stacked} tick={{ fontSize: '15px' }} interval={0} dataKey="name" type="category" />}
-        {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && stacked && <XAxis type="number" />}
+        {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" allowDecimals={false} />}
         {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
         {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
         <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
