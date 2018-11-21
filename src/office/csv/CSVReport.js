@@ -48,8 +48,6 @@ export function generateCSVReport(sections) {
               break;
             }
             case SECTION_TYPES.table: {
-              csv += '\n';
-              csv += '\n';
               const columns = section.layout.tableColumns;
               const tableData = section.data;
 
