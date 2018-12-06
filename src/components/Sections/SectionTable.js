@@ -1,3 +1,4 @@
+import './SectionTable.less';
 import React, { PropTypes } from 'react';
 import { TABLE_CELL_TYPE, DEFAULT_MAX_LENGTH } from '../../constants/Constants';
 import isArray from 'lodash/isArray';
@@ -40,7 +41,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
   let tableBody;
   if (isArray(readyColumns)) {
     tableBody = (
-      <table className={'ui compact table unstackable ' + classes} style={{ tableLayout: 'fixed' }}>
+      <table className={'ui compact table unstackable section-table ' + classes} style={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
             {readyColumns.map((col) => {
