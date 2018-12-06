@@ -41,7 +41,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
   let tableBody;
   if (isArray(readyColumns)) {
     tableBody = (
-      <table className={'ui compact table unstackable ' + classes} style={{ tableLayout: 'fixed' }}>
+      <table className={'ui compact table unstackable section-table ' + classes} style={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
             {readyColumns.map((col) => {
