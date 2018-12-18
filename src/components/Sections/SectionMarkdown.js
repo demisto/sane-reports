@@ -21,6 +21,9 @@ import ins from 'markdown-it-ins';
 function handleIterate(tableClasses, Tag, props, children) {
   let res = '';
   switch (Tag) {
+    case 'p':
+      res = (<div className="preplacer" {...props}>{children}</div>);
+      break;
     case 'hr':
       res = (<hr {...props} />);
       break;
