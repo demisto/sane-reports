@@ -7,17 +7,11 @@ jobs:
     working_directory: ~/sane-reports
     steps:
       - checkout
-      - restore_cache:
-          key: npm-sane-reports-{{ checksum "package.json" }}
       - run:
           name: Install dependencies
           command: |
               sudo npm install npm@latest -g
               npm install
-      - save_cache:
-          key: npm-sane-reports-{{ checksum "package.json" }}
-          paths:
-            - node_modules
       - run:
           name: Build
           command: npm run production
