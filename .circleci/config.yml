@@ -1,61 +1,61 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9
+    resource_class: large
+    working_directory: ~/sane-reports
+    steps:
+      - checkout
+      - restore_cache:
+          key: npm-sane-reports-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: |
+              sudo npm install npm@latest -g
+              npm install
+      - save_cache:
+          key: npm-sane-reports-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Build
+          command: npm run production
+      - run:
+          name: Test
+          command: |
+              npm run lint
+              npm run coverage
+      - run:
+          name: Create Artifact
+          command:  |
+              cd reportService && npm install && npm run build && cd ..
+              tar -cvf sane-report.tar dist reportsServer.js reportsServer
+      - store_artifacts:
+          path: sane-report.tar
+          destination: sane-report
+      - run:
+          name: Deploy
+          command: |
+              echo CircleCI tag is: $CIRCLE_TAG
+              CIRCLE_TAG="$(git tag -l --points-at HEAD)" && if [[ $CIRCLE_TAG =~ /release-.*/ ]]; then
+                mkdir sane-reports
+                cp -avR dist sane-reports
+                cp -avR templates sane-reports
+                cp package.json sane-reports
+                cp LICENSE sane-reports
+                cp README.md sane-reports
+                cp reportsServer.js sane-reports
+                cd sane-reports
+                sudo npm set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
+                sudo npm publish sane-reports
+              else
+                echo 'Nothing to do.'
+              fi
 workflows:
-  version: 2
   untagged-build:
     jobs:
       - build
-  - tagged-build:
-      jobs:
-        - build
-  jobs:
-    build:
-      docker:
-        - image: circleci/node:9
-      resource_class: large
-      working_directory: ~/sane-reports
-      steps:
-        - checkout
-        - restore_cache:
-            key: npm-sane-reports-{{ checksum "package.json" }}
-        - run:
-            name: Install dependencies
-            command: |
-                sudo npm install npm@latest -g
-                npm install
-        - save_cache:
-            key: npm-sane-reports-{{ checksum "package.json" }}
-            paths:
-              - node_modules
-        - run:
-            name: Build
-            command: npm run production
-        - run:
-            name: Test
-            command: |
-                npm run lint
-                npm run coverage
-        - run:
-            name: Create Artifact
-            command:  |
-                cd reportService && npm install && npm run build && cd ..
-                tar -cvf sane-report.tar dist reportsServer.js reportsServer
-        - store_artifacts:
-            path: sane-report.tar
-            destination: sane-report
-        - run:
-            name: Deploy
-            command: |
-                echo CircleCI tag is: $CIRCLE_TAG
-                CIRCLE_TAG="$(git tag -l --points-at HEAD)" && if [[ $CIRCLE_TAG =~ /release-.*/ ]]; then
-                  mkdir sane-reports
-                  cp -avR dist sane-reports
-                  cp -avR templates sane-reports
-                  cp package.json sane-reports
-                  cp LICENSE sane-reports
-                  cp README.md sane-reports
-                  cp reportsServer.js sane-reports
-                  cd sane-reports
-                  sudo npm set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
-                  sudo npm publish sane-reports
-                else
-                  echo 'Nothing to do.'
-                fi
+  tagged-build:
+    jobs:
+      - build
