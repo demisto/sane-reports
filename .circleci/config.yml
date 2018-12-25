@@ -38,7 +38,7 @@ jobs:
           name: Deploy
           command: |
               echo CircleCI tag is: $CIRCLE_TAG
-              if [[ $CIRCLE_TAG =~ /release-.*/ ]]; then
+              if [[ $CIRCLE_TAG =~ ^release-.* ]]; then
                 mkdir sane-reports
                 cp -avR dist sane-reports
                 cp -avR templates sane-reports
