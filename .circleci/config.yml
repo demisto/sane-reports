@@ -60,7 +60,7 @@ workflows:
       - build
   tagged-build:
     jobs:
-      - build
-        filters:
-          tags:
-            only: /release-.*/
+      - build:
+          filters:
+            tags:
+              only: /release-.*/
