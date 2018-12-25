@@ -52,7 +52,9 @@ jobs:
               else
                 echo 'Nothing to do.'
               fi
+
 workflows:
+  version: 2
   untagged-build:
     jobs:
       - build
