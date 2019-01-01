@@ -8,12 +8,32 @@
     display: inline-block !important;
   }
 
+  img {
+    max-width: 100%;
+  }
+
   .markdown {
     &.blockquote {
       padding: 0 15px;
       margin-left: 0;
       color: #777;
       border-left: 4px solid @brand-color;
+    }
+  }
+
+  .preplacer {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    &:first-child {
+      margin-top: 0 !important;
     }
   }
 }

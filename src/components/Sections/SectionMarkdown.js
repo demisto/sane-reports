@@ -23,7 +23,7 @@ function handleIterate(tableClasses, Tag, props, children) {
   let res = '';
   switch (Tag) {
     case 'p':
-      res = (<div {...props}>{children}</div>);
+      res = (<div className="preplacer" {...props}>{children}</div>);
       break;
     case 'hr':
       res = (<hr {...props} />);
@@ -102,7 +102,7 @@ function handleIterate(tableClasses, Tag, props, children) {
       props.className = 'markdown blockquote';
       break;
     case 'br':
-      res = <span {...props}><br /><br /></span>;
+      res = <span {...props}><br /></span>;
       break;
     case 'code': {
       const clzz = props['data-language'] || '';
