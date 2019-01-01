@@ -4,7 +4,7 @@ import '../../../assets/styles/railscasts.css';
 import React, { PropTypes } from 'react';
 import { mdReact } from 'react-markdown-js';
 import Highlight from 'react-highlight';
-
+import isString from 'lodash/isString';
 
 // plugins for react markdown component
 import abbr from 'markdown-it-abbr';
@@ -16,6 +16,7 @@ import mark from 'markdown-it-mark';
 import footnote from 'markdown-it-footnote';
 import deflist from 'markdown-it-deflist';
 import ins from 'markdown-it-ins';
+import kbd from 'markdown-it-kbd';
 // end of import plugin
 
 function handleIterate(tableClasses, Tag, props, children) {
@@ -41,6 +42,9 @@ function handleIterate(tableClasses, Tag, props, children) {
       res = (<img {...props} />); // eslint-disable-line jsx-a11y/img-has-alt
       break;
     }
+    case 'a':
+      res = (<a {...props} target="_blank" rel="noopener noreferrer">{children[0]}</a>);
+      break;
     case 'mark': {
       props.className = 'highlight-result';
       break;
@@ -61,7 +65,7 @@ function handleIterate(tableClasses, Tag, props, children) {
           const cells = row.props.children;
           const cellValue = cells.map(cell => cell.props.children[0]);
           headersValues.forEach((headerValue, i) => {
-            newRow[i] = cellValue[i] ? cellValue[i].replace(/<br>/g, '\n') : cellValue[i];
+            newRow[i] = isString(cellValue[i]) ? cellValue[i].replace(/<br>/g, '\n') : cellValue[i];
           });
           tableContent.push(newRow);
         });
@@ -134,7 +138,8 @@ const SectionMarkdown = ({ text, style, tableClasses }) => {
           container,
           footnote,
           deflist,
-          ins
+          ins,
+          kbd
         ]
       }
     )(text);
