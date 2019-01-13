@@ -16,7 +16,6 @@ import mark from 'markdown-it-mark';
 import footnote from 'markdown-it-footnote';
 import deflist from 'markdown-it-deflist';
 import ins from 'markdown-it-ins';
-import kbd from 'markdown-it-kbd';
 // end of import plugin
 
 function handleIterate(tableClasses, Tag, props, children) {
@@ -138,8 +137,7 @@ const SectionMarkdown = ({ text, style, tableClasses }) => {
           container,
           footnote,
           deflist,
-          ins,
-          kbd
+          ins
         ]
       }
     )(text);
