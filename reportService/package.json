@@ -14,7 +14,7 @@
   },
   "scripts": {
     "clean": "rm -rf ../reportsServer ../reportsServer-mac",
-    "build": "./node_modules/.bin/pkg . --out-path .. && mv ../reportsServer-linux ../reportsServer",
+    "build": "./node_modules/.bin/pkg . --out-path .. && mv ../reportsServer-mac ../reportsServer",
     "build-mac": "npm run clean && ./node_modules/.bin/pkg . -t mac --out-path .."
   },
   "pre-commit": [
