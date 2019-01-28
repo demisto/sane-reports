@@ -41,7 +41,7 @@ jobs:
             tar -cvf sane-report-mac.tar dist reportsServer.js reportsServer
       - store_artifacts:
           path: sane-report-mac.tar
-          destination: sane-report
+          destination: sane-report-mac
       - run:
           name: Deploy
           command: |
