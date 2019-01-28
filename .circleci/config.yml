@@ -38,7 +38,7 @@ jobs:
           name: Create Artifact Mac
           command:  |
             cd reportService && npm install && npm run build-mac && cd ..
-            tar -cvf sane-report.tar dist reportsServer.js reportsServer
+            tar -cvf sane-report-mac.tar dist reportsServer.js reportsServer
       - store_artifacts:
           path: sane-report-mac.tar
           destination: sane-report
