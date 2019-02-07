@@ -7,6 +7,15 @@
         "relatedTo": 1,
         "value": [
           2
+        ],
+        "groups": [
+          {
+            "name": "SubGroup1",
+            "data": [
+              2
+            ],
+            "groups": null
+          }
         ]
       },
       {
@@ -14,6 +23,22 @@
         "relatedTo": 1,
         "value": [
           2
+        ],
+        "groups": [
+          {
+            "name": "SubGroup1",
+            "data": [
+              1
+            ],
+            "groups": null
+          },
+          {
+            "name": "SubGroup2",
+            "data": [
+              1
+            ],
+            "groups": null
+          }
         ]
       },
       {
@@ -21,6 +46,15 @@
         "relatedTo": 1,
         "value": [
           1
+        ],
+        "groups": [
+          {
+            "name": "SubGroup1",
+            "data": [
+              1
+            ],
+            "groups": null
+          }
         ]
       }
     ],
