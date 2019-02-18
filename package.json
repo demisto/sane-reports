@@ -99,7 +99,7 @@
     "npm-check-updates": "2.12.1",
     "phantomjs-prebuilt": "2.1.14",
     "postcss": "6.0.8",
-    "postcss-cssnext": "3.0.2",
+    "postcss-cssnext": "3.1.0",
     "postcss-import": "10.0.0",
     "postcss-loader": "2.0.6",
     "postcss-url": "7.1.1",
