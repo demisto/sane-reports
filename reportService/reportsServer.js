@@ -100,7 +100,7 @@ const mmPixelSize = 3.779527559055;
     console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
     const dimensions = getPageSizeByOrientation(pageSize, orientation);
-    const baseUrl = distDir.startsWith('/') ? distDir : path.join(process.cwd(), distDir);
+    const baseUrl = distFolder.startsWith('/') ? distFolder : path.join(process.cwd(), distFolder);
     console.log(`Using "${chromeExecution}" execution.`);
 
     const args = ['--no-sandbox'];
