@@ -77,7 +77,7 @@ const mmPixelSize = 3.779527559055;
   }
   console.log('customer logo: ', headerLeftImage);
   try {
-    const distFolder = distDir || (fs.absolute(".") + '/dist');
+    const distFolder = distDir || (path.resolve(".") + '/dist');
 
     console.log('now open: ' + distFolder + '/index.html');
     const indexHtml = fs.readFileSync(distFolder + '/index.html').toString();
