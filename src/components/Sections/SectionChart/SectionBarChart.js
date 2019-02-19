@@ -43,10 +43,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   const maxLabelSize = dimensions.width / 3 - 20;
   const margin = chartProperties.margin || {};
   let leftMargin = -5;
-  if (!isColumnChart) {
-    if (stacked) {
+  if (stacked) {
+    preparedData.forEach((item) => {
       // fix bar chart left label ticks cutoff.
-      preparedData.forEach((item) => {
+      if (!isColumnChart) {
         let name = item.name || '';
         // Spaces are breaking the words so find the longest word. 'A Cool Playbook' return 'Playbook'.
         if (name.indexOf(' ') > -1) {
@@ -58,36 +58,37 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           spaceNeeded = maxLabelSize;
         }
         leftMargin = Math.max(leftMargin, spaceNeeded);
+      }
+      if (item.groups) {
+        // iterate inner groups
+        (item.groups || []).forEach((innerItem => {
+          innerItem.color = innerItem.fill || innerItem.color || getGraphColorByName(innerItem.name, existingColors);
+          if (!innerItem.name) {
+            innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+          }
+          existingColors[innerItem.color] = true;
 
-        if (item.groups) {
-          // iterate inner groups
-          (item.groups || []).forEach((innerItem => {
-            innerItem.color = innerItem.fill || innerItem.color || getGraphColorByName(innerItem.name, existingColors);
-            if (!innerItem.name) {
-              innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
-            }
-            existingColors[innerItem.color] = true;
+          item[innerItem.name] = innerItem.data[0];
+        }));
 
-            item[innerItem.name] = innerItem.data[0];
-          }));
+        dataItems = preparedData
+          .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
+          .map(group => ({ name: group.name, color: group.fill || group.color }))
+          .sort((a, b) => sortStrings(a.name, b.name));
+      } else {
+        Object.keys(item).filter(key => key !== 'name' && key !== 'relatedTo' && key !== 'value').forEach(
+          groupKey => {
+            dataItems[groupKey] = {
+              name: groupKey,
+              color: getGraphColorByName(groupKey),
+              value: item[groupKey]
+            };
+          }
+        );
+      }
+    });
 
-          dataItems = preparedData
-            .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
-            .map(group => ({ name: group.name, color: group.fill || group.color }))
-            .sort((a, b) => sortStrings(a.name, b.name));
-        } else {
-          Object.keys(item).filter(key => key !== 'name' && key !== 'relatedTo' && key !== 'value').forEach(
-            groupKey => {
-              dataItems[groupKey] = {
-                name: groupKey,
-                color: getGraphColorByName(groupKey),
-                value: item[groupKey]
-              };
-            }
-          );
-        }
-      });
-
+    if (!isColumnChart) {
       margin.left = leftMargin;
     }
   }

@@ -6,7 +6,7 @@ import ChartLegend from '../../src/components/Sections/SectionChart/ChartLegend'
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
   SectionMarkdown, SectionJson, SectionNumber, SectionDuration } from '../../src/components/Sections';
-import { BarChart, PieChart, Pie, LineChart } from 'recharts';
+import { BarChart, Bar, PieChart, Pie, LineChart } from 'recharts';
 
 describe('Report Container', () => {
   it('Generate test template report', () => {
@@ -285,6 +285,9 @@ describe('Report Container', () => {
 
     expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);
+    expect(barChart.at(0).props().data).to.deep.equal(sec1.data);
+    const bars = barChart.at(0).find(Bar);
+    expect(bars).to.have.length(3);
     expect(barChart.at(1).props().width).to.equal(sec4.layout.dimensions.width);
     expect(barChart.at(1).props().height).to.equal(sec4.layout.dimensions.height);
     expect(barChart.at(1).props().data).to.deep.equal(sec4.data);

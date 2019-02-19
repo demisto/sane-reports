@@ -77,7 +77,7 @@ const mmPixelSize = 3.779527559055;
   }
   console.log('customer logo: ', headerLeftImage);
   try {
-    const distFolder = distDir || (fs.absolute(".") + '/dist');
+    const distFolder = distDir || (path.resolve(".") + '/dist');
 
     console.log('now open: ' + distFolder + '/index.html');
     const indexHtml = fs.readFileSync(distFolder + '/index.html').toString();
@@ -100,7 +100,7 @@ const mmPixelSize = 3.779527559055;
     console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
     const dimensions = getPageSizeByOrientation(pageSize, orientation);
-    const baseUrl = distDir.startsWith('/') ? distDir : path.join(process.cwd(), distDir);
+    const baseUrl = distFolder.startsWith('/') ? distFolder : path.join(process.cwd(), distFolder);
     console.log(`Using "${chromeExecution}" execution.`);
 
     const args = ['--no-sandbox'];

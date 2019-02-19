@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9
+      - image: circleci/node:10.15.1
     resource_class: large
     working_directory: ~/sane-reports
     steps:
@@ -34,6 +34,14 @@ jobs:
       - store_artifacts:
           path: sane-report.tar
           destination: sane-report
+      - run:
+          name: Create Artifact Mac
+          command:  |
+            cd reportService && npm install && npm run build-mac && cd ..
+            tar -cvf sane-report-mac.tar dist reportsServer.js reportsServer
+      - store_artifacts:
+          path: sane-report-mac.tar
+          destination: sane-report-mac
       - run:
           name: Deploy
           command: |
