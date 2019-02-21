@@ -41,9 +41,13 @@ h1 {
       background-color: #ebebec;
     }
   }
-  .react-grid-item {
-    overflow: hidden;
-    transition: none;
-    z-index: 1;
+  .react-grid-layout {
+    height: auto !important; // override grid height
+    .react-grid-item {
+      overflow: hidden;
+      transition: none;
+      z-index: 1;
+      height: auto !important; // override grid item height to fit content
+    }
   }
 }
