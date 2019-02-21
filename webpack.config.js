@@ -6,7 +6,6 @@ const LiveReloadPlugin = require('webpack-livereload-plugin');
 const postcssUrl = require('postcss-url');
 const postcssImport = require('postcss-import');
 const postcssCssnext = require('postcss-cssnext');
-const WebpackShellPlugin = require('webpack-shell-plugin');
 
 function createConfig(isProduction) {
   const plugins = [];
@@ -23,6 +22,14 @@ function createConfig(isProduction) {
         postcssUrl(),
         postcssCssnext()
       ]
+    }
+  };
+
+  const deleteGoogleFontsLoader = {
+    loader: 'string-replace-loader',
+    options: {
+      search: '@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin);',
+      replace: ''
     }
   };
 
@@ -45,12 +52,6 @@ function createConfig(isProduction) {
       new HtmlWebpackPlugin({
         filename: 'index.html',
         template: 'index.template.html'
-      }),
-      new WebpackShellPlugin({
-        onBuildStart: [
-          'sed -i -e s/@import[[:space:]]url\(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin\);//g node_modules/semantic-ui/dist/components/site.min.css',  // eslint-disable-line
-          'sed -i -e s/@import[[:space:]]url\(https:\\/\\/fonts.googleapis.com\\/css?family=Lato:400,700,400italic,700italic&subset=latin\);//g node_modules/semantic-ui/dist/semantic.min.css'  // eslint-disable-line
-        ]
       })
     ]),
     module: {
@@ -60,6 +61,7 @@ function createConfig(isProduction) {
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
+              deleteGoogleFontsLoader,
               'css-loader',
               postcssLoader
             ]
