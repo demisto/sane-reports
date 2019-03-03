@@ -113,7 +113,7 @@
     "webpack": "3.4.1",
     "webpack-cli": "3.2.1",
     "webpack-dev-middleware": "1.11.0",
-    "webpack-dev-server": "3.1.14",
+    "webpack-dev-server": "2.9.1",
     "webpack-hot-middleware": "2.18.2",
     "webpack-livereload-plugin": "0.11.0"
   }

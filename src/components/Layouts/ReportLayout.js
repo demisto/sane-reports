@@ -246,7 +246,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
                             return (
                               <div
                                 key={section.layout.i}
-                                className={section.layout.class}
+                                className={`section-${section.type} ${section.layout.class || ''}`}
                                 style={section.layout.sectionStyle}
                                 data-grid={gridItem}
                               >
