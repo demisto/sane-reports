@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import './SectionMarkdown.less';
 import '../../../assets/styles/railscasts.css';
-import React, { PropTypes } from 'react';
-import { mdReact } from 'react-markdown-js';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 

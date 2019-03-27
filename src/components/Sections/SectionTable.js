@@ -1,5 +1,6 @@
 import './SectionTable.less';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { TABLE_CELL_TYPE, DEFAULT_MAX_LENGTH } from '../../constants/Constants';
 import isArray from 'lodash/isArray';
 import map from 'lodash/map';

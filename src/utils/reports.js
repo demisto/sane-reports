@@ -1,4 +1,4 @@
-import { REPORT_TYPE_TOKEN, SECTION_TYPES, REPORT_TYPES } from '../constants/Constants';
+import { SECTION_TYPES, REPORT_TYPES } from '../constants/Constants';
 import merge from 'lodash/merge';
 import extend from 'lodash/extend';
 
@@ -67,8 +67,7 @@ export function prepareSections(reportData, reportType) {
 
 export function getReportType(reportType) {
   let type = reportType;
-  if (!type || type === REPORT_TYPE_TOKEN ||
-      (type !== REPORT_TYPES.csv && type !== REPORT_TYPES.pdf)) {
+  if (!type || (type !== REPORT_TYPES.csv && type !== REPORT_TYPES.pdf)) {
     type = REPORT_TYPES.pdf;
   }
   return type;

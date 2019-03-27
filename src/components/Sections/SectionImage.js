@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const SectionImage = ({ src, style, alt, classes }) =>
   <img className={'section-image ui image ' + classes} src={src} style={style} alt={alt} />

@@ -1,6 +1,7 @@
-import '../../../node_modules/generic-react-json-inspector/json-inspector.css';
-import React, { PropTypes } from 'react';
-import Inspector from 'generic-react-json-inspector';
+import '../../../node_modules/react-json-inspector-demisto/json-inspector.css';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Inspector from 'react-json-inspector-demisto';
 
 
 const SectionJson = ({ data, style }) => {

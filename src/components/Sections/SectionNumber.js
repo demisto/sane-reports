@@ -1,5 +1,6 @@
 import './SectionNumber.less';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import values from 'lodash/values';
 import classNames from 'classnames';
 import { CHART_LAYOUT_TYPE } from '../../constants/Constants';
