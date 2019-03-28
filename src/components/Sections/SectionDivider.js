@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const SectionDivider = ({ style }) =>
   <div className="section-divider ui divider" style={style}></div>

@@ -1,5 +1,6 @@
 import './SectionPieChart.less';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { AutoSizer } from 'react-virtualized';
 import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
 import ChartLegend from './ChartLegend';

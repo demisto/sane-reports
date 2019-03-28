@@ -1,5 +1,6 @@
 import './ReportLayout.less';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { AutoSizer } from 'react-virtualized';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
   SectionMarkdown, SectionJson, SectionNumber, SectionList, SectionDuration }

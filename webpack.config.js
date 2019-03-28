@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const postcssUrl = require('postcss-url');
@@ -45,9 +45,9 @@ function createConfig(isProduction) {
     },
     plugins: plugins.concat([
       new webpack.NoEmitOnErrorsPlugin(),
-      new ExtractTextPlugin({
+      new MiniCssExtractPlugin({
         filename: '[name].css',
-        allChunks: true
+        chunkFilename: '[id].css'
       }),
       new HtmlWebpackPlugin({
         filename: 'index.html',
@@ -58,27 +58,23 @@ function createConfig(isProduction) {
       rules: [
         {
           test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              deleteGoogleFontsLoader,
-              'css-loader',
-              postcssLoader
-            ]
-          })
+          use: [
+            !isProduction ? 'style-loader' : MiniCssExtractPlugin.loader,
+            deleteGoogleFontsLoader,
+            'css-loader',
+            postcssLoader
+          ]
         },
         {
           test: /\.less$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              'css-loader',
-              postcssLoader,
-              {
-                loader: 'less-loader'
-              }
-            ]
-          })
+          use: [
+            !isProduction ? 'style-loader' : MiniCssExtractPlugin.loader,
+            'css-loader',
+            postcssLoader,
+            {
+              loader: 'less-loader'
+            }
+          ]
         },
         {
           test: /\.js$/,

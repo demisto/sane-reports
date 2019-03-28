@@ -1,5 +1,6 @@
 import './SectionChart.less';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import SectionBarChart from './SectionBarChart';
 import SectionPieChart from './SectionPieChart';
 import SectionLineChart from './SectionLineChart';

@@ -1,5 +1,6 @@
 import './SectionBarChart.less';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import { isArray, orderBy, unionBy } from 'lodash';

@@ -1,5 +1,6 @@
 import './SectionText.less';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const SectionText = ({ text, style }) =>
   <div className="section-text" style={style}>

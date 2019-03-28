@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const SectionHeader = ({ header, style }) =>
   <h1 className="section-header" style={style}>

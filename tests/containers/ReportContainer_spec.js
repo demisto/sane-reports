@@ -16,7 +16,7 @@ describe('Report Container', () => {
 
     const hiddenHeader = reportContainer.find('.hidden-header');
     expect(hiddenHeader).to.have.length(1);
-    expect(hiddenHeader.get(0).style._values).to.deep.equal({ display: 'none' });
+    expect(hiddenHeader.get(0).props.style).to.deep.equal({ display: 'none' });
 
     const reportLayouts = reportContainer.find(ReportLayout);
     const rows = reportContainer.find('.report-row');
@@ -49,13 +49,8 @@ describe('Report Container', () => {
     const sec22 = testTemplate[21];
     const sec23 = testTemplate[22];
 
-    // Do the same as .textContent - keep it for future reference
     expect(rows.at(0).text()).to.contains(sec1.data);
     expect(rows.at(1).text()).to.contains(sec2.data + sec3.data);
-
-    // Do the same as .text() - keep it for future reference
-    expect(rows.get(0).textContent).to.contains(sec1.data);
-    expect(rows.get(1).textContent).to.contains(sec2.data + sec3.data);
 
     // Headers
     const sectionHeader = reportContainer.find(SectionHeader);
@@ -180,11 +175,11 @@ describe('Report Container', () => {
     expect(mediumCircularImage).to.have.length(1);
     expect(smallImage).to.have.length(1);
 
-    expect(imgEl.get(0).style._values).to.deep.equal({ display: 'none' });
-    expect(imgEl.get(1).style._values).to.deep.equal({ display: 'none' });
-    expect(imgEl.get(2).style._values).to.not.equal({ display: 'none' });
-    expect(imgEl.get(3).style._values).to.not.equal({ display: 'none' });
-    expect(imgEl.get(4).style._values).to.not.equal({ display: 'none' });
+    expect(imgEl.get(0).props.style).to.deep.equal({ display: 'none' });
+    expect(imgEl.get(1).props.style).to.deep.equal({ display: 'none' });
+    expect(imgEl.get(2).props.style).to.not.equal({ display: 'none' });
+    expect(imgEl.get(3).props.style).to.not.equal({ display: 'none' });
+    expect(imgEl.get(4).props.style).to.not.equal({ display: 'none' });
 
     // Dates
     const sectionDate = reportContainer.find(SectionDate);
@@ -198,8 +193,8 @@ describe('Report Container', () => {
 
     const dateEl = reportContainer.find('.section-date');
     expect(dateEl).to.have.length(2);
-    expect(dateEl.get(0).textContent).to.have.length.above(sec18.layout.format.length + 2);
-    expect(dateEl.get(1).textContent).to.equal('Jan 1st 16');
+    expect(dateEl.at(0).text()).to.have.length.above(sec18.layout.format.length + 2);
+    expect(dateEl.at(1).text()).to.equal('Jan 1st 16');
 
     // Divider
     const sectionDivider = reportContainer.find(SectionDivider);
@@ -222,12 +217,14 @@ describe('Report Container', () => {
     expect(sectionJSON.at(0).props().style).to.equal(sec23.layout.style);
     const jsonInspectorKey = reportContainer.find('.json-inspector__key');
     const jsonInspectorValue = reportContainer.find('.json-inspector__value_string');
-    expect(jsonInspectorKey).to.have.length(4);
+    expect(jsonInspectorKey).to.have.length(3);
+    const jsonInspectLeaf = reportContainer.find('.json-inspector__leafKey');
+    expect(jsonInspectLeaf).to.have.length(1);
     expect(jsonInspectorValue).to.have.length(1);
     expect(jsonInspectorKey.at(0).text()).to.equal('root:');
     expect(jsonInspectorKey.at(1).text()).to.equal('hello:');
     expect(jsonInspectorKey.at(2).text()).to.equal('how:');
-    expect(jsonInspectorKey.at(3).text()).to.equal('are:');
+    expect(jsonInspectLeaf.at(0).text()).to.equal('are:');
     expect(jsonInspectorValue.at(0).text()).to.equal('you?');
   });
 
@@ -238,7 +235,7 @@ describe('Report Container', () => {
 
     const hiddenHeader = reportContainer.find('.hidden-header');
     expect(hiddenHeader).to.have.length(1);
-    expect(hiddenHeader.get(0).style._values).to.deep.equal({ display: 'none' });
+    expect(hiddenHeader.get(0).props.style).to.deep.equal({ display: 'none' });
 
     const reportLayouts = reportContainer.find(ReportLayout);
     expect(reportLayouts).to.have.length(1);
