@@ -162,7 +162,7 @@ const mmPixelSize = 3.779527559055;
       case 'csv': {
         const csvData = await page.evaluate(evalsFunctions.getCSVData);
         if (csvData) {
-          fs.write(outputFinal, csvData, 'w');
+          fs.writeFileSync(outputFinal, csvData, { 'flag': 'w' });
           fs.remove(distFolder + '/' + tmpReportName);
           console.log("CSV report was generated successfully.");
         } else {
