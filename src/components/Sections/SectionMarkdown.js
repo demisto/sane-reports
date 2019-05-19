@@ -57,13 +57,13 @@ function handleIterate(tableClasses, Tag, props, children) {
       const headerCells = headerRows[0].props.children;
 
       const bodyRows = tbody.props.children;
-      const headersValues = headerCells.map(cell => cell.props.children[0]);
+      const headersValues = headerCells.map(cell => cell.props.children && cell.props.children[0] || '');
       const tableContent = [];
       if (headersValues && bodyRows) {
         bodyRows.forEach((row) => {
           const newRow = {};
           const cells = row.props.children;
-          const cellValue = cells.map(cell => cell.props.children[0]);
+          const cellValue = cells.map(cell => cell.props.children && cell.props.children[0] || '');
           headersValues.forEach((headerValue, i) => {
             newRow[i] = isString(cellValue[i]) ? cellValue[i].replace(/<br>/g, '\n') : cellValue[i];
           });
