@@ -21,7 +21,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
   }
 
   if (!isArray(tableData) && isObjectLike(tableData)) {
-    tableData = tableData.data || tableData.iocs || tableData.messages;
+    tableData = tableData.data || tableData.iocs || tableData.messages || [];
   }
 
   let readyColumns = columns;

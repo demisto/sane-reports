@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import isString from 'lodash/isString';
+import { isArray, isObjectLike, isString } from 'lodash';
 import moment from 'moment';
 
 function getFieldValue(fieldName, dataItem) {
@@ -35,6 +35,10 @@ function styleByFieldName(fieldName, currentData) {
 const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
   let tableData = data || [];
 
+  if (!isArray(tableData) && isObjectLike(tableData)) {
+    tableData = tableData.data || tableData.iocs || tableData.messages || [];
+  }
+
   if (isString(data)) {
     try {
       tableData = JSON.parse(data);
@@ -46,17 +50,15 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
   return (
     <div className={mainClass} style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
-      {tableData.map((item) => {
+      {tableData.map((item, i) => {
         const leftName = columns[0] ? columns[0].key : 'name';
         const mainKeyValue = getFieldValue(leftName, item);
 
         const rightName = columns[1] ? columns[1].key : 'value';
         const rightValue = getFieldValue(rightName, item);
 
-        const id = getFieldValue('id', item);
-
         return (
-          <div className="list-item item h3" key={id}>
+          <div className="list-item item h3" key={i}>
             <div className="left-list-value left floated content ellipsis" title={mainKeyValue}>
               {styleByFieldName(leftName, mainKeyValue)}
             </div>
