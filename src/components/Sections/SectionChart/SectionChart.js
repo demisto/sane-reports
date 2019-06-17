@@ -11,6 +11,7 @@ const SectionChart = ({ type, data, style, dimensions, legend, chartProperties =
         referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle }) =>
   <div className="section-chart" style={style}>
     {title && <div className="section-title" style={titleStyle}>{title}</div>}
+    <div className="section-chart-content">
     {
       (() => {
         let chartToRender;
@@ -66,6 +67,7 @@ const SectionChart = ({ type, data, style, dimensions, legend, chartProperties =
         return chartToRender;
       })()
     }
+    </div>
   </div>
 ;
 SectionChart.propTypes = {

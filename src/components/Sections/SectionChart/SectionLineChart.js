@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip, Legend } from 'recharts';
 import ChartLegend from './ChartLegend';
 import { compact, values } from 'lodash';
+import { AutoSizer } from 'react-virtualized';
 import moment from 'moment';
 import { QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/Constants';
 import { sortStrings } from '../../../utils/strings';
@@ -107,55 +108,60 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
 
   return (
     <div className="section-line-chart" style={style}>
-      <LineChart
-        width={dimensions.width}
-        height={dimensions.height}
-        data={preparedData}
-        margin={chartProperties.margin}
-      >
-        {(referenceLineX || chartProperties.layout === 'vertical') &&
-          [<XAxis
-            dataKey="name"
-            key="x"
-            interval="preserveStartEnd"
-          />,
-            <YAxis key="y" domain={[0, dataMax => dataMax + Math.ceil(dataMax * 0.33)]} />
-          ]
+      <AutoSizer>
+        {({ width, height }) => {
+          return (<LineChart
+            width={width || dimensions.width}
+            height={height || dimensions.height}
+            data={preparedData}
+            margin={chartProperties.margin}
+          >
+            {(referenceLineX || chartProperties.layout === 'vertical') &&
+            [<XAxis
+              dataKey="name"
+              key="x"
+              interval="preserveStartEnd"
+            />,
+              <YAxis key="y" domain={[0, dataMax => dataMax + Math.ceil(dataMax * 0.33)]} />
+            ]
+            }
+            {(referenceLineY || chartProperties.layout === 'horizontal') && <YAxis dataKey="name" />}
+            <CartesianGrid
+              strokeDasharray={chartProperties.strokeDasharray || '4 4'}
+              fill={chartProperties.chartFill || '#000000'}
+              vertical={false}
+              fillOpacity={chartProperties.chartFillOpacity || 0.04}
+            />
+            <Tooltip />
+            {referenceLineX &&
+              <ReferenceLine x={referenceLineX.x} stroke={referenceLineX.stroke} label={referenceLineX.label} />}
+            {referenceLineY &&
+              <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke} label={referenceLineY.label} />}
+            {legendStyle && !legendStyle.hideLegend &&
+              <Legend
+                content={<ChartLegend
+                  icon="square"
+                  data={preparedLegend}
+                  style={legendStyle && legendStyle.style}
+                />}
+                {...legendStyle}
+              />
+            }
+            {preparedLegend.map((item) =>
+              <Line
+                key={item.name}
+                dataKey={item.name}
+                type="monotone"
+                stroke={item.color}
+                animationDuration={0}
+                activeDot={{ strokeWidth: 0 }}
+                strokeWidth={3}
+                dot={false}
+              />)}
+          </LineChart>);
         }
-        {(referenceLineY || chartProperties.layout === 'horizontal') && <YAxis dataKey="name" />}
-        <CartesianGrid
-          strokeDasharray={chartProperties.strokeDasharray || '4 4'}
-          fill={chartProperties.chartFill || '#000000'}
-          vertical={false}
-          fillOpacity={chartProperties.chartFillOpacity || 0.04}
-        />
-        <Tooltip />
-        {referenceLineX &&
-          <ReferenceLine x={referenceLineX.x} stroke={referenceLineX.stroke} label={referenceLineX.label} />}
-        {referenceLineY &&
-          <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke} label={referenceLineY.label} />}
-        {legendStyle && !legendStyle.hideLegend &&
-          <Legend
-            content={<ChartLegend
-              icon="square"
-              data={preparedLegend}
-              style={legendStyle && legendStyle.style}
-            />}
-            {...legendStyle}
-          />
         }
-        {preparedLegend.map((item) =>
-          <Line
-            key={item.name}
-            dataKey={item.name}
-            type="monotone"
-            stroke={item.color}
-            animationDuration={0}
-            activeDot={{ strokeWidth: 0 }}
-            strokeWidth={3}
-            dot={false}
-          />)}
-      </LineChart>
+      </AutoSizer>
     </div>
   );
 };
