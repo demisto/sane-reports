@@ -7,6 +7,7 @@ import { isArray, orderBy, unionBy } from 'lodash';
 import { sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
 import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME } from '../../../constants/Constants';
+import { AutoSizer } from 'react-virtualized';
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
   legendStyle = null, sortBy, stacked }) => {
@@ -107,43 +108,52 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
 
   return (
     <div className={mainClass} style={style}>
-      <BarChart
-        width={dimensions.width}
-        height={dimensions.height}
-        data={preparedData}
-        layout={chartProperties.layout}
-        margin={margin}
-        barSize={chartProperties.barSize || 13}
-      >
-        {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
-          <YAxis hide={!stacked} tick={{ fontSize: '15px' }} interval={0} dataKey="name" type="category" />}
-        {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" allowDecimals={false} />}
-        {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
-        {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
-        <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
-        <Tooltip />
-        {legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend &&
-          <Legend
-            content={<ChartLegend
-              data={dataItems}
-              valueDisplay={VALUE_FORMAT_TYPES.minimal}
-              showValue={!isColumnChart && !stacked}
-              icon={legendStyle.iconType}
-              layout={legendStyle.layout}
-              style={legendStyle && legendStyle.style}
-            />}
-            {...legendStyle}
-          />
+      <AutoSizer>
+        {({ width, height }) => {
+          return (<BarChart
+            width={width || dimensions.width}
+            height={height || dimensions.height}
+            data={preparedData}
+            layout={chartProperties.layout}
+            margin={margin}
+            barSize={chartProperties.barSize || 13}
+          >
+            {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
+              <YAxis hide={!stacked} tick={{ fontSize: '15px' }} interval={0} dataKey="name" type="category" />}
+            {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" allowDecimals={false} />}
+            {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
+            {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
+            <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
+            <Tooltip />
+            {legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend &&
+              <Legend
+                content={<ChartLegend
+                  data={dataItems}
+                  valueDisplay={VALUE_FORMAT_TYPES.minimal}
+                  showValue={!isColumnChart && !stacked}
+                  icon={legendStyle.iconType}
+                  layout={legendStyle.layout}
+                  style={legendStyle && legendStyle.style}
+                />}
+                {...legendStyle}
+              />
+            }
+            {dataItems.map((item) => <Bar
+              key={item.name}
+              dataKey={item.name}
+              stackId="stack"
+              fill={item.color}
+              onClick={(e) => {
+                if (e.url) {
+                  window.open(e.url, '_blank');
+                }
+              }}
+              label={!!chartProperties.label}
+            />)}
+          </BarChart>);
         }
-        {dataItems.map((item) => <Bar
-          key={item.name}
-          dataKey={item.name}
-          stackId="stack"
-          fill={item.color}
-          onClick={(e) => { if (e.url) { window.open(e.url, '_blank'); } }}
-          label={!!chartProperties.label}
-        />)}
-      </BarChart>
+        }
+      </AutoSizer>
     </div>
   );
 };

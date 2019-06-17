@@ -1,6 +1,7 @@
+import './SectionList.less';
 import React from 'react';
 import PropTypes from 'prop-types';
-import isString from 'lodash/isString';
+import { isString, isEmpty, isObject } from 'lodash';
 import moment from 'moment';
 
 function getFieldValue(fieldName, dataItem) {
@@ -47,10 +48,16 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
     <div className={mainClass} style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
       {tableData.map((item) => {
-        const leftName = columns[0] ? columns[0].key : 'name';
+        let leftName = 'name';
+        if (!isEmpty(columns)) {
+          leftName = (isObject(columns[0]) ? columns[0].key : columns[0]) || leftName;
+        }
         const mainKeyValue = getFieldValue(leftName, item);
 
-        const rightName = columns[1] ? columns[1].key : 'value';
+        let rightName = 'value';
+        if (!isEmpty(columns) && columns.length > 1) {
+          rightName = (isObject(columns[1]) ? columns[1].key : columns[1]) || rightName;
+        }
         const rightValue = getFieldValue(rightName, item);
 
         const id = getFieldValue('id', item);
