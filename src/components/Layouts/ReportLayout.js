@@ -13,6 +13,7 @@ import {
 } from '../../constants/Constants';
 import { isNumber, isObjectLike } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
+import ErrorBoundary from '../ErrorBoundary';
 const ROW_PIXEL_HEIGHT = 110;
 
 function getGridItemFromSection(section, overflowRows) {
@@ -182,7 +183,7 @@ function getElementBySection(section) {
       </div>
     );
   }
-  return sectionToRender;
+  return <ErrorBoundary>{sectionToRender}</ErrorBoundary>;
 }
 
 const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout }) => {
@@ -210,7 +211,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
                   sections[rowPos]
                     .map((section) =>
                       <div
-                        key={`${section.layout.rowPos}${section.layout.columnPos}`}
+                        key={`${section.layout.rowPos}-${section.layout.columnPos}-${section.data}`}
                         className={section.layout.class ? 'report-section ' + section.layout.class : 'report-section'}
                         style={section.layout.sectionStyle}
                       >
