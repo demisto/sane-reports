@@ -12,7 +12,7 @@ export const VALUE_FORMAT_TYPES = { minimal: 'minimal', stretch: 'stretch' };
 const DIGIT_PIXEL_SIZE = 8;
 const ICON_CONTAINER_PIXEL_SIZE = 25;
 const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertical, height,
-                       onClick, style, showValue = true, valueDisplay = VALUE_FORMAT_TYPES.stretch }) => {
+  onClick, style, showValue = true, valueDisplay = VALUE_FORMAT_TYPES.stretch }) => {
   let legendData = data || [];
   if (legendData.length === 0) {
     return <div />;
@@ -34,7 +34,7 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
     // decrease width of name (if value exists) to allow for ellipsis.
     if (value && showValue) {
       if (valueDisplay === VALUE_FORMAT_TYPES.stretch) {
-        const valueInPixels = (value + '').replace('.', '').length * DIGIT_PIXEL_SIZE + ICON_CONTAINER_PIXEL_SIZE;
+        const valueInPixels = ((value + '').replace('.', '').length * DIGIT_PIXEL_SIZE) + ICON_CONTAINER_PIXEL_SIZE;
         width = `calc(100% - ${valueInPixels}px)`;
       }
     }

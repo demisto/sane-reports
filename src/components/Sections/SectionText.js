@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 const SectionText = ({ text, style }) =>
   <div className="section-text" style={style}>
     {text}
-  </div>
-;
+  </div>;
 SectionText.propTypes = {
   text: PropTypes.string,
   style: PropTypes.object

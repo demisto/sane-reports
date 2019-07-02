@@ -42,7 +42,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
 
   const mainClass =
     isColumnChart ? 'section-column-chart' : 'section-bar-chart';
-  const maxLabelSize = dimensions.width / 3 - 20;
+  const maxLabelSize = (dimensions.width / 3) - 20;
   const margin = chartProperties.margin || {};
   let leftMargin = -5;
   if (stacked) {
@@ -63,7 +63,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       }
       if (item.groups) {
         // iterate inner groups
-        (item.groups || []).forEach((innerItem => {
+        (item.groups || []).forEach(((innerItem) => {
           innerItem.color = innerItem.fill || innerItem.color || getGraphColorByName(innerItem.name, existingColors);
           if (!innerItem.name) {
             innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
@@ -79,7 +79,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           .sort((a, b) => sortStrings(a.name, b.name));
       } else {
         Object.keys(item).filter(key => key !== 'name' && key !== 'relatedTo' && key !== 'value').forEach(
-          groupKey => {
+          (groupKey) => {
             dataItems[groupKey] = {
               name: groupKey,
               color: getGraphColorByName(groupKey),
@@ -99,7 +99,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     return dataItems[key];
   });
   if (legend) {
-    dataItems = dataItems.map(item => {
+    dataItems = dataItems.map((item) => {
       const legendItem = legend.filter(l => l.name === item.name);
       item.color = legendItem.length > 0 ? legendItem[0].color || legendItem[0].fill || item.color : item.color;
       return item;
@@ -110,47 +110,48 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     <div className={mainClass} style={style}>
       <AutoSizer>
         {({ width, height }) => {
-          return (<BarChart
-            width={width || dimensions.width}
-            height={height || dimensions.height}
-            data={preparedData}
-            layout={chartProperties.layout}
-            margin={margin}
-            barSize={chartProperties.barSize || 13}
-          >
-            {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
-              <YAxis hide={!stacked} tick={{ fontSize: '15px' }} interval={0} dataKey="name" type="category" />}
-            {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" allowDecimals={false} />}
-            {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
-            {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
-            <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
-            <Tooltip />
-            {legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend &&
-              <Legend
-                content={<ChartLegend
-                  data={dataItems}
-                  valueDisplay={VALUE_FORMAT_TYPES.minimal}
-                  showValue={!isColumnChart && !stacked}
-                  icon={legendStyle.iconType}
-                  layout={legendStyle.layout}
-                  style={legendStyle && legendStyle.style}
-                />}
-                {...legendStyle}
-              />
-            }
-            {dataItems.map((item) => <Bar
-              key={item.name}
-              dataKey={item.name}
-              stackId="stack"
-              fill={item.color}
-              onClick={(e) => {
-                if (e.url) {
-                  window.open(e.url, '_blank');
-                }
-              }}
-              label={!!chartProperties.label}
-            />)}
-          </BarChart>);
+          return (
+            <BarChart
+              width={width || dimensions.width}
+              height={height || dimensions.height}
+              data={preparedData}
+              layout={chartProperties.layout}
+              margin={margin}
+              barSize={chartProperties.barSize || 13}
+            >
+              {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
+                <YAxis hide={!stacked} tick={{ fontSize: '15px' }} interval={0} dataKey="name" type="category" />}
+              {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" allowDecimals={false} />}
+              {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
+              {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
+              <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
+              <Tooltip />
+              {legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend &&
+                <Legend
+                  content={<ChartLegend
+                    data={dataItems}
+                    valueDisplay={VALUE_FORMAT_TYPES.minimal}
+                    showValue={!isColumnChart && !stacked}
+                    icon={legendStyle.iconType}
+                    layout={legendStyle.layout}
+                    style={legendStyle && legendStyle.style}
+                  />}
+                  {...legendStyle}
+                />
+              }
+              {dataItems.map(item => <Bar
+                key={item.name}
+                dataKey={item.name}
+                stackId="stack"
+                fill={item.color}
+                onClick={(e) => {
+                  if (e.url) {
+                    window.open(e.url, '_blank');
+                  }
+                }}
+                label={!!chartProperties.label}
+              />)}
+            </BarChart>);
         }
         }
       </AutoSizer>
