@@ -3,8 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AutoSizer } from 'react-virtualized';
 import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
-  SectionMarkdown, SectionJson, SectionNumber, SectionList, SectionDuration }
-    from '../Sections';
+  SectionMarkdown, SectionJson, SectionNumber, SectionList, SectionDuration } from '../Sections';
 import {
   SECTION_TYPES,
   REPORT_HEADER_IMAGE_LEFT_TOKEN,
@@ -200,7 +199,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
         !isLayout ?
           Object
             .keys(sections)
-            .map((rowPos) =>
+            .map(rowPos =>
               <div
                 className={`report-row ${sections[rowPos][0].type} ${sections[rowPos][0].class || ''}`}
                 key={rowPos}
@@ -208,7 +207,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
               >
                 {
                   sections[rowPos]
-                    .map((section) =>
+                    .map(section =>
                       <div
                         key={`${section.layout.rowPos}${section.layout.columnPos}`}
                         className={section.layout.class ? 'report-section ' + section.layout.class : 'report-section'}
@@ -222,8 +221,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
                       </div>
                     )
                 }
-              </div>
-          )
+              </div>)
           :
           <AutoSizer disableHeight>
             {({ width }) => {
@@ -239,7 +237,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
                   {
                     Object
                       .keys(sections)
-                      .map((rowPos) =>
+                      .map(rowPos =>
                         sections[rowPos]
                           .map((section) => {
                             const gridItem = getGridItemFromSection(section, overflowRows);
@@ -254,8 +252,7 @@ const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout })
                                 {getElementBySection(section)}
                               </div>
                             );
-                          }
-                        )
+                          })
                       )
                   }
                 </ReactGridLayout>

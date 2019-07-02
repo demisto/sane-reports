@@ -12,8 +12,8 @@ import { CHART_LAYOUT_TYPE, RADIANS } from '../../../constants/Constants';
 
 const CustomizedPieLabel = ({ cx, cy, midAngle, outerRadius, percent, fill }) => {
   const radius = outerRadius * 1.1;
-  const x = cx + radius * Math.cos(-midAngle * RADIANS);
-  const y = cy + radius * Math.sin(-midAngle * RADIANS);
+  const x = cx + (radius * Math.cos(-midAngle * RADIANS));
+  const y = cy + (radius * Math.sin(-midAngle * RADIANS));
   // ignore less than 2 percent.
   if (percent < 0.02) {
     return '';
@@ -110,11 +110,11 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 label={chartProperties.label || CustomizedPieLabel}
               >
                 {/* // creating links to urls according the 'url' filed in the data */}
-                {preparedData.map((entry) => {
+                {preparedData.map((entry, index) => {
                   const url = entry.url;
                   return (
                     <Cell
-                      key={'${entry.name}-cell-${index}'}
+                      key={`${entry.name}-cell-${index}`}
                       onClick={() => {
                         if (entry.url) {
                           window.open(url, '_blank');

@@ -10,4 +10,3 @@ export function generateOfficeReport(sections, reportType) {
       // do nothing
   }
 }
-
