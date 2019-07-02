@@ -152,6 +152,7 @@ function getElementBySection(section) {
           style={section.layout.style}
           titleStyle={section.titleStyle}
           title={section.title}
+          emptyString={section.emptyNotification}
         />
       );
       break;
