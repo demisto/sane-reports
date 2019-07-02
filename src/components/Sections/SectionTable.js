@@ -51,7 +51,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
           </tr>
         </thead>
         <tbody>
-          {tableData.map((row, i) =>
+          {tableData.length ? tableData.map((row, i) =>
             <tr key={i}>
               {readyColumns.map((col, j) =>
                 (() => {
@@ -78,8 +78,9 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
                   return <td key={j} style={{ wordBreak: 'break-word' }}>{cellToRender}</td>;
                 })()
               )}
-            </tr>
-          )}
+            </tr>)
+            : <td colSpan={readyColumns.length}>No results found</td>
+          }
         </tbody>
       </table>
     );
