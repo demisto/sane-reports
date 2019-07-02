@@ -9,7 +9,7 @@ import truncate from 'lodash/truncate';
 import isObjectLike from 'lodash/isObjectLike';
 
 
-const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle }) => {
+const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -79,7 +79,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
                 })()
               )}
             </tr>)
-            : <td colSpan={readyColumns.length}>No results found</td>
+            : <td colSpan={readyColumns.length}>{emptyString}</td>
           }
         </tbody>
       </table>
@@ -119,7 +119,8 @@ SectionTable.propTypes = {
   classes: PropTypes.string,
   style: PropTypes.object,
   title: PropTypes.string,
-  titleStyle: PropTypes.object
+  titleStyle: PropTypes.object,
+  emptyString: PropTypes.string
 };
 
 export default SectionTable;
