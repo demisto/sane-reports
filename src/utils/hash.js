@@ -22,7 +22,7 @@ export function hash(ArrayOrValue) {
     return map(ArrayOrValue, (element) => {
       return hash(element);
     });
-  } else if (isObject(ArrayOrValue)) {
+  } else if (isObject(ArrayOrValue)) { // eslint-disable-line
     const result = {};
     forEach(ArrayOrValue, (value, key) => {
       result[key] = hash(value);

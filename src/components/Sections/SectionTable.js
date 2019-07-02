@@ -51,35 +51,35 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
           </tr>
         </thead>
         <tbody>
-        {tableData.map((row, i) =>
-          <tr key={i}>
-            {readyColumns.map((col, j) =>
-              (() => {
-                const key = col.key || col;
-                const cell = row[key] || readableHeaders && row[readableHeaders[key]];
+          {tableData.map((row, i) =>
+            <tr key={i}>
+              {readyColumns.map((col, j) =>
+                (() => {
+                  const key = col.key || col;
+                  const cell = row[key] || (readableHeaders && row[readableHeaders[key]]);
 
-                let cellToRender = '';
-                if (cell) {
-                  switch (cell.type) {
-                    case TABLE_CELL_TYPE.image:
-                      cellToRender = (
-                        <img
-                          src={cell.data}
-                          alt={cell.alt}
-                          className={'ui image ' + cell.classes}
-                          style={cell.style}
-                        />
-                      );
-                      break;
-                    default:
-                      cellToRender = truncate(cell, { length: DEFAULT_MAX_LENGTH });
+                  let cellToRender = '';
+                  if (cell) {
+                    switch (cell.type) {
+                      case TABLE_CELL_TYPE.image:
+                        cellToRender = (
+                          <img
+                            src={cell.data}
+                            alt={cell.alt}
+                            className={'ui image ' + cell.classes}
+                            style={cell.style}
+                          />
+                        );
+                        break;
+                      default:
+                        cellToRender = truncate(cell, { length: DEFAULT_MAX_LENGTH });
+                    }
                   }
-                }
-                return <td key={j} style={{ wordBreak: 'break-word' }}>{cellToRender}</td>;
-              })()
-            )}
-          </tr>
-        )}
+                  return <td key={j} style={{ wordBreak: 'break-word' }}>{cellToRender}</td>;
+                })()
+              )}
+            </tr>
+          )}
         </tbody>
       </table>
     );
