@@ -1,275 +1,165 @@
 import './ReportLayout.less';
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AutoSizer } from 'react-virtualized';
-import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
-  SectionMarkdown, SectionJson, SectionNumber, SectionList, SectionDuration } from '../Sections';
 import {
   SECTION_TYPES,
   REPORT_HEADER_IMAGE_LEFT_TOKEN,
   REPORT_HEADER_IMAGE_RIGHT_TOKEN,
   GRID_LAYOUT_COLUMNS
 } from '../../constants/Constants';
-import { isNumber, isObjectLike } from 'lodash';
+import { groupBy, compact } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
+import { compareFields } from '../../utils/sort';
+import ErrorBoundary from '../ErrorBoundary';
+import { getSectionComponent } from '../../utils/layout';
 const ROW_PIXEL_HEIGHT = 110;
 
-function getGridItemFromSection(section, overflowRows) {
-  const rows = section.layout.rowPos + overflowRows;
-  let height = section.layout.h;
-  if (section.type === SECTION_TYPES.table && section.layout.w >= GRID_LAYOUT_COLUMNS) {
-    const numOfRows = (section.data.length || section.data.total) + 1;
-    if (numOfRows > section.layout.h) {
-      height = numOfRows;
-    }
+class ReportLayout extends Component {
+  static propTypes = {
+    sections: PropTypes.object,
+    headerLeftImage: PropTypes.string,
+    headerRightImage: PropTypes.string,
+    isLayout: PropTypes.bool
+  };
+
+  constructor(props) {
+    super(props);
+    this.itemElements = {};
   }
 
-  return { w: section.layout.w, h: height, y: rows, x: section.layout.columnPos || 0, i: section.layout.i };
-}
+  componentDidMount() {
+    setTimeout(() => {
+      // set dynamic height for all sections, fix top attribute.
+      const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
+      let accumulatedHeight = 0;
+      Object.keys(itemsByRow).sort(compareFields).forEach(key => {
+        const items = itemsByRow[key];
+        let maxHeight = 0;
+        items.forEach(item => {
+          if (item.element) {
+            if (maxHeight < item.element.clientHeight) {
+              maxHeight = item.element.clientHeight;
+            }
+            item.element.style.top = `${accumulatedHeight}px`;
+          }
+        });
+        accumulatedHeight += maxHeight;
+      });
+    }, 3000);
+  }
 
-function getElementBySection(section) {
-  let sectionToRender;
-  switch (section.type) {
-    case SECTION_TYPES.header:
-      sectionToRender = (
-        <SectionHeader
-          header={section.data}
-          style={section.layout.style}
-        />
-      );
-      break;
-    case SECTION_TYPES.text:
-      sectionToRender = (
-        <SectionText
-          text={isObjectLike(section.data) ? section.data.text : section.data}
-          style={section.layout.style}
-        />
-      );
-      break;
-    case SECTION_TYPES.trend:
-    case SECTION_TYPES.number: {
-      let numberData;
-      if (isNumber(section.data)) {
-        numberData = { currSum: section.data };
-      } else {
-        numberData = section.data;
+  getGridItemFromSection(section, overflowRows) {
+    const rows = section.layout.rowPos + overflowRows;
+    let height = section.layout.h;
+    if (section.type === SECTION_TYPES.table && section.layout.w >= GRID_LAYOUT_COLUMNS) {
+      const numOfRows = (section.data.length || section.data.total) + 1;
+      if (numOfRows > section.layout.h) {
+        height = numOfRows;
       }
-      sectionToRender = (
-        <SectionNumber
-          layout={section.layout.layout}
-          title={section.title}
-          titleStyle={section.titleStyle}
-          data={numberData}
-          sign={section.layout.currencySign || section.layout.sign}
-          signAlignment={section.layout.signAlignment}
-          text={section.data}
-          style={section.layout.style}
-        />
-      );
-      break;
     }
-    case SECTION_TYPES.duration:
-      sectionToRender = (
-        <SectionDuration
-          data={section.data}
-          chartProperties={section.layout.chartProperties}
-          style={section.layout.style}
-          titleStyle={section.titleStyle}
-          title={section.title}
-        />
-      );
-      break;
-    case SECTION_TYPES.list:
-      sectionToRender = (
-        <SectionList
-          data={section.data}
-          columns={section.layout.tableColumns}
-          classes={section.layout.classes}
-          style={section.layout.style}
-          titleStyle={section.titleStyle}
-          title={section.title}
-        />
-      );
-      break;
-    case SECTION_TYPES.markdown:
-    case SECTION_TYPES.placeholder:
-      sectionToRender = (
-        <SectionMarkdown
-          text={isObjectLike(section.data) ? section.data.text : section.data}
-          style={section.layout.style}
-          tableClasses={section.layout.tableClasses}
-        />
-      );
-      break;
-    case SECTION_TYPES.date:
-      sectionToRender = (
-        <SectionDate
-          date={section.data}
-          style={section.layout.style}
-          format={section.layout.format}
-        />
-      );
-      break;
-    case SECTION_TYPES.logo:
-    case SECTION_TYPES.image:
-      sectionToRender = (
-        <SectionImage
-          src={section.data}
-          style={section.layout.style}
-          alt={section.layout.alt}
-          classes={section.layout.classes}
-        />
-      );
-      break;
-    case SECTION_TYPES.chart:
-      sectionToRender = (
-        <SectionChart
-          data={section.data}
-          type={section.layout.chartType}
-          style={section.layout.style}
-          titleStyle={section.titleStyle}
-          dimensions={section.layout.dimensions}
-          chartProperties={section.layout.chartProperties}
-          legend={section.layout.legend}
-          legendStyle={section.layout.legendStyle}
-          sortBy={section.layout.sortBy}
-          title={section.title}
-          referenceLineX={section.layout.referenceLineX}
-          referenceLineY={section.layout.referenceLineY}
-          stacked={section.query && section.query.groupBy && section.query.groupBy.length > 1}
-          fromDate={section.fromDate}
-          toDate={section.toDate}
-        />
-      );
-      break;
-    case SECTION_TYPES.table:
-      sectionToRender = (
-        <SectionTable
-          data={section.data}
-          columns={section.layout.tableColumns}
-          readableHeaders={section.layout.readableHeaders}
-          classes={section.layout.classes}
-          style={section.layout.style}
-          titleStyle={section.titleStyle}
-          title={section.title}
-          emptyString={section.emptyNotification}
-        />
-      );
-      break;
-    case SECTION_TYPES.json:
-      sectionToRender = (
-        <SectionJson
-          data={section.data}
-          style={section.layout.style}
-        />
-      );
-      break;
-    case SECTION_TYPES.divider:
-      sectionToRender = (
-        <SectionDivider
-          style={section.layout.style}
-        />
-      );
-      break;
-    default:
-    // Ignored
+    return { w: section.layout.w, h: height, y: rows, x: section.layout.columnPos || 0, i: section.layout.i };
   }
-  if (section.layout && section.layout.style && section.layout.style.pageBreakBefore) {
-    sectionToRender = (
-      <div>
-        <div style={{ pageBreakAfter: 'always' }}>&nbsp;</div>
-        {sectionToRender}
+
+  getElementBySection(section) {
+    let sectionToRender = getSectionComponent(section);
+    if (section.layout && section.layout.style && section.layout.style.pageBreakBefore) {
+      sectionToRender = (
+        <div>
+          <div style={{ pageBreakAfter: 'always' }}>&nbsp;</div>
+          {sectionToRender}
+        </div>
+      );
+    }
+    return <ErrorBoundary>{sectionToRender}</ErrorBoundary>;
+  }
+
+  render() {
+    const { sections, headerLeftImage, headerRightImage, isLayout } = this.props;
+    return (
+      <div className="report-layout">
+      <span className="hidden-header" style={{ display: 'none' }}>
+        {headerLeftImage !== REPORT_HEADER_IMAGE_LEFT_TOKEN &&
+        <img src={headerLeftImage} style={{ display: 'none' }} alt="hidden" />
+        }
+        {headerRightImage !== REPORT_HEADER_IMAGE_RIGHT_TOKEN &&
+        <img src={headerRightImage} style={{ display: 'none' }} alt="hidden" />
+        }
+      </span>
+        {
+          !isLayout ?
+            Object
+              .keys(sections)
+              .map(rowPos =>
+                <div
+                  className={`report-row ${sections[rowPos][0].type} ${sections[rowPos][0].class || ''}`}
+                  key={rowPos}
+                  style={sections[rowPos].style}
+                >
+                  {
+                    sections[rowPos]
+                      .map(section =>
+                        <div
+                          key={`${section.layout.rowPos}-${section.layout.columnPos}-${section.data}`}
+                          className={section.layout.class ? 'report-section ' + section.layout.class : 'report-section'}
+                          style={section.layout.sectionStyle}
+                        >
+                          {
+                            (() => {
+                              return this.getElementBySection(section);
+                            })()
+                          }
+                        </div>
+                      )
+                  }
+                </div>)
+            :
+            <AutoSizer disableHeight>
+              {({ width }) => {
+                let overflowRows = 0;
+                return (
+                  <ReactGridLayout
+                    cols={GRID_LAYOUT_COLUMNS}
+                    width={width}
+                    isResizable={false}
+                    isDraggable={false}
+                    useCSSTransforms={false}
+                    rowHeight={ROW_PIXEL_HEIGHT}
+                  >
+                    {
+                      Object
+                        .keys(sections)
+                        .map(rowPos =>
+                          compact(sections[rowPos]
+                            .map((section) => {
+                              const gridItem = this.getGridItemFromSection(section, overflowRows);
+                              overflowRows += gridItem.h - section.layout.h;
+                              const element = this.getElementBySection(section);
+                              return element && (
+                                <div
+                                  ref={(element) =>
+                                    this.itemElements[section.layout.i] = { element, gridItem }
+                                  }
+                                  key={section.layout.i}
+                                  className={`section-${section.type} ${section.layout.class || ''}`}
+                                  style={section.layout.sectionStyle}
+                                  data-grid={gridItem}
+                                >
+                                  {element}
+                                </div>
+                              );
+                            })
+                        ))
+                    }
+                  </ReactGridLayout>
+                );
+              }
+              }
+            </AutoSizer>
+        }
       </div>
     );
   }
-  return sectionToRender;
 }
-
-const ReportLayout = ({ sections, headerLeftImage, headerRightImage, isLayout }) => {
-  return (
-    <div className="report-layout">
-      <span className="hidden-header" style={{ display: 'none' }}>
-        {headerLeftImage !== REPORT_HEADER_IMAGE_LEFT_TOKEN &&
-          <img src={headerLeftImage} style={{ display: 'none' }} alt="hidden" />
-        }
-        {headerRightImage !== REPORT_HEADER_IMAGE_RIGHT_TOKEN &&
-          <img src={headerRightImage} style={{ display: 'none' }} alt="hidden" />
-        }
-      </span>
-      {
-        !isLayout ?
-          Object
-            .keys(sections)
-            .map(rowPos =>
-              <div
-                className={`report-row ${sections[rowPos][0].type} ${sections[rowPos][0].class || ''}`}
-                key={rowPos}
-                style={sections[rowPos].style}
-              >
-                {
-                  sections[rowPos]
-                    .map(section =>
-                      <div
-                        key={`${section.layout.rowPos}${section.layout.columnPos}`}
-                        className={section.layout.class ? 'report-section ' + section.layout.class : 'report-section'}
-                        style={section.layout.sectionStyle}
-                      >
-                        {
-                          (() => {
-                            return getElementBySection(section);
-                          })()
-                        }
-                      </div>
-                    )
-                }
-              </div>)
-          :
-          <AutoSizer disableHeight>
-            {({ width }) => {
-              let overflowRows = 0;
-              return (
-                <ReactGridLayout
-                  cols={GRID_LAYOUT_COLUMNS}
-                  width={width}
-                  isResizable={false}
-                  isDraggable={false}
-                  rowHeight={ROW_PIXEL_HEIGHT}
-                >
-                  {
-                    Object
-                      .keys(sections)
-                      .map(rowPos =>
-                        sections[rowPos]
-                          .map((section) => {
-                            const gridItem = getGridItemFromSection(section, overflowRows);
-                            overflowRows += gridItem.h - section.layout.h;
-                            return (
-                              <div
-                                key={section.layout.i}
-                                className={`section-${section.type} ${section.layout.class || ''}`}
-                                style={section.layout.sectionStyle}
-                                data-grid={gridItem}
-                              >
-                                {getElementBySection(section)}
-                              </div>
-                            );
-                          })
-                      )
-                  }
-                </ReactGridLayout>
-              );
-            }
-            }
-          </AutoSizer>
-      }
-    </div>
-  );
-};
-ReportLayout.propTypes = {
-  sections: PropTypes.object,
-  headerLeftImage: PropTypes.string,
-  headerRightImage: PropTypes.string,
-  isLayout: PropTypes.bool
-};
 
 export default ReportLayout;

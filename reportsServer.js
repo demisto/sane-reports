@@ -184,7 +184,7 @@ try {
           console.log("Failed to generate PDF report.");
         }
         phantom.exit();
-      }, 3000); // time out is needed for all animation to be finished
+      }, 5000); // time out is needed for all animation to be finished
     }
   };
 

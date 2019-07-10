@@ -36,6 +36,7 @@
     "classnames": "2.2.5",
     "core-js": "3.1.4",
     "create-react-class": "15.6.3",
+    "dompurify": "1.0.11",
     "jquery": "3.4.0",
     "less": "2.7.2",
     "lodash": "4.17.11",
@@ -68,6 +69,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.1.2",
+    "@babel/plugin-proposal-class-properties": "7.4.4",
     "@babel/preset-env": "7.1.0",
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.0.0",

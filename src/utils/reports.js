@@ -30,9 +30,6 @@ function filterSectionsAccordingToReportType(reportData, reportType) {
           shouldShow = true;
         }
         break;
-      case REPORT_TYPES.pdf:
-        shouldShow = section.type !== SECTION_TYPES.globalSection;
-        break;
       default:
         shouldShow = true;
     }
@@ -45,12 +42,6 @@ export function prepareSections(reportData, reportType) {
 
   if (reportData) {
     reportData.sort(sortReportSections);
-
-    reportData.forEach((section) => {
-      if (section.type === SECTION_TYPES.globalSection) {
-        rows = merge(extend(prepareSections(section.data, reportType), rows), rows);
-      }
-    });
 
     filterSectionsAccordingToReportType(reportData, reportType).forEach((section) => {
       if (rows[section.layout.rowPos]) {

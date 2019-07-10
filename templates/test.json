@@ -338,5 +338,13 @@
         "marginTop": -9
       }
     }
+  },
+  {
+    "type": "html",
+    "data": "<p style=\"color: red; background-color: black;\">THIS IS HTML</p>",
+    "layout": {
+      "rowPos": 8400,
+      "columnPos": 100
+    }
   }
 ]

@@ -121,7 +121,7 @@ const mmPixelSize = 3.779527559055;
     await page.goto('file://' + baseUrl + '/' + tmpReportName, {waitUntil: 'networkidle0'});
     await page.emulateMedia('screen');
     await page._client.send('Emulation.clearDeviceMetricsOverride');
-    await page.waitFor(4000); // wait for animations
+    await page.waitFor(5000); // wait for animations
     switch (reportType) {
       case 'pdf': {
         await page.pdf({

@@ -1,15 +1,26 @@
 import './SectionList.less';
 import React from 'react';
 import PropTypes from 'prop-types';
+import uuid from 'uuid';
 import { isString, isEmpty, isObject } from 'lodash';
 import moment from 'moment';
+import { TABLE_CELL_TYPE } from '../../constants/Constants';
+
+function getFieldComponentIfNeeded(dataValue) {
+  return isObject(dataValue) && dataValue.type === TABLE_CELL_TYPE.image ? (<img
+    src={dataValue.data}
+    alt={dataValue.alt}
+    className={'ui image ' + dataValue.classes}
+    style={dataValue.style}
+  />) : dataValue;
+}
 
 function getFieldValue(fieldName, dataItem) {
   if (dataItem && dataItem[fieldName] !== undefined) {
-    return dataItem[fieldName];
+    return getFieldComponentIfNeeded(dataItem[fieldName]);
   }
   if (dataItem && dataItem.CustomFields) {
-    return dataItem.CustomFields[fieldName];
+    return getFieldComponentIfNeeded(dataItem.CustomFields[fieldName]);
   }
 
   return '';
@@ -43,7 +54,7 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
       return <div>Error parsing table</div>;
     }
   }
-  const mainClass = `section-list ui list ${classes}`;
+  const mainClass = `section-list ${classes || ''}`;
   return (
     <div className={mainClass} style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
@@ -60,11 +71,15 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
         }
         const rightValue = getFieldValue(rightName, item);
 
-        const id = getFieldValue('id', item);
+        let detailsValue;
+        if (!isEmpty(columns) && columns.length > 2) {
+          const detailsCol = (isObject(columns[2]) ? columns[2].key : columns[2]);
+          detailsValue = getFieldValue(detailsCol, item);
+        }
 
         return (
-          <div className="list-item item h3" key={id}>
-            <div className="left-list-value left floated content ellipsis" title={mainKeyValue}>
+          <div className="list-item item h3" key={uuid.v1()}>
+            <div className="left-list-value left floated content ellipsis" title={!isObject(mainKeyValue) ? mainKeyValue : ''}>
               {styleByFieldName(leftName, mainKeyValue)}
             </div>
             <div className="right-list-value right floated content">
@@ -72,6 +87,7 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
                 {styleByFieldName(rightName, rightValue)}
               </div>
             </div>
+            {detailsValue && <div className="details content">{detailsValue}</div>}
           </div>
         );
       })}
