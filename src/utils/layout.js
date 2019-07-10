@@ -192,7 +192,7 @@ export function getSectionComponent(section) {
           titleStyle={section.titleStyle}
           title={section.title}
           description={section.description}
-          columns={section.layout.w / 4 * 2}
+          columns={(section.layout.w / 4) * 2}
         />
       );
       break;
@@ -202,18 +202,19 @@ export function getSectionComponent(section) {
           {section.title && <div className="section-title" style={section.titleStyle}>{section.title}</div>}
           {section.description && <div className="section-description">{section.description}</div>}
           <>
-          {compact(Object.entries(groupBy(section.data || [], s => s.layout.rowPos)).map(([rowNum, subSections]) => {
-            return (<div className="global-section-row" key={`${section.i}-${rowNum}`}>
-              {(subSections || []).map((subSection, i) => {
-                return (
-                  <div key={`${section.i}-${rowNum}-subsection-${i}`} className="subsection-wrapper">
-                    {getSectionComponent(subSection)}
-                  </div>
-                );
-              })}
-            </div>);
-
-          }))}
+            {compact(Object.entries(groupBy(section.data || [], s => s.layout.rowPos)).map(([rowNum, subSections]) => {
+              return (
+                <div className="global-section-row" key={`${section.i}-${rowNum}`}>
+                  {(subSections || []).map((subSection, i) => {
+                    return (
+                      <div key={`${section.i}-${rowNum}-subsection-${i}`} className="subsection-wrapper">
+                        {getSectionComponent(subSection)}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            }))}
           </>
         </div>
       );

@@ -23,33 +23,7 @@ class ReportLayout extends Component {
     isLayout: PropTypes.bool
   };
 
-  constructor(props) {
-    super(props);
-    this.itemElements = {};
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      // set dynamic height for all sections, fix top attribute.
-      const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
-      let accumulatedHeight = 0;
-      Object.keys(itemsByRow).sort(compareFields).forEach(key => {
-        const items = itemsByRow[key];
-        let maxHeight = 0;
-        items.forEach(item => {
-          if (item.element) {
-            if (maxHeight < item.element.clientHeight) {
-              maxHeight = item.element.clientHeight;
-            }
-            item.element.style.top = `${accumulatedHeight}px`;
-          }
-        });
-        accumulatedHeight += maxHeight;
-      });
-    }, 3000);
-  }
-
-  getGridItemFromSection(section, overflowRows) {
+  static getGridItemFromSection(section, overflowRows) {
     const rows = section.layout.rowPos + overflowRows;
     let height = section.layout.h;
     if (section.type === SECTION_TYPES.table && section.layout.w >= GRID_LAYOUT_COLUMNS) {
@@ -61,7 +35,7 @@ class ReportLayout extends Component {
     return { w: section.layout.w, h: height, y: rows, x: section.layout.columnPos || 0, i: section.layout.i };
   }
 
-  getElementBySection(section) {
+  static getElementBySection(section) {
     let sectionToRender = getSectionComponent(section);
     if (section.layout && section.layout.style && section.layout.style.pageBreakBefore) {
       sectionToRender = (
@@ -74,16 +48,42 @@ class ReportLayout extends Component {
     return <ErrorBoundary>{sectionToRender}</ErrorBoundary>;
   }
 
+  constructor(props) {
+    super(props);
+    this.itemElements = {};
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      // set dynamic height for all sections, fix top attribute.
+      const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
+      let accumulatedHeight = 0;
+      Object.keys(itemsByRow).sort(compareFields).forEach((key) => {
+        const items = itemsByRow[key];
+        let maxHeight = 0;
+        items.forEach((item) => {
+          if (item.element) {
+            if (maxHeight < item.element.clientHeight) {
+              maxHeight = item.element.clientHeight;
+            }
+            item.element.style.top = `${accumulatedHeight}px`;
+          }
+        });
+        accumulatedHeight += maxHeight;
+      });
+    }, 3000);
+  }
+
   render() {
     const { sections, headerLeftImage, headerRightImage, isLayout } = this.props;
     return (
       <div className="report-layout">
       <span className="hidden-header" style={{ display: 'none' }}>
         {headerLeftImage !== REPORT_HEADER_IMAGE_LEFT_TOKEN &&
-        <img src={headerLeftImage} style={{ display: 'none' }} alt="hidden" />
+          <img src={headerLeftImage} style={{ display: 'none' }} alt="hidden" />
         }
         {headerRightImage !== REPORT_HEADER_IMAGE_RIGHT_TOKEN &&
-        <img src={headerRightImage} style={{ display: 'none' }} alt="hidden" />
+          <img src={headerRightImage} style={{ display: 'none' }} alt="hidden" />
         }
       </span>
         {
@@ -132,20 +132,20 @@ class ReportLayout extends Component {
                         .map(rowPos =>
                           compact(sections[rowPos]
                             .map((section) => {
-                              const gridItem = this.getGridItemFromSection(section, overflowRows);
+                              const gridItem = ReportLayout.getGridItemFromSection(section, overflowRows);
                               overflowRows += gridItem.h - section.layout.h;
-                              const element = this.getElementBySection(section);
-                              return element && (
+                              const elementToRender = ReportLayout.getElementBySection(section);
+                              return elementToRender && (
                                 <div
-                                  ref={(element) =>
+                                  ref={(element) => {
                                     this.itemElements[section.layout.i] = { element, gridItem }
-                                  }
+                                  }}
                                   key={section.layout.i}
                                   className={`section-${section.type} ${section.layout.class || ''}`}
                                   style={section.layout.sectionStyle}
                                   data-grid={gridItem}
                                 >
-                                  {element}
+                                  {elementToRender}
                                 </div>
                               );
                             })

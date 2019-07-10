@@ -128,7 +128,6 @@ const mmPixelSize = 3.779527559055;
           path: outputFinal,
           format: pageSize,
           printBackground: true,
-          scale: 1,
           margin: {top: (headerLeftImage || headerRightImage) && !disableHeaders ? 60 : 0, bottom: 60},
           displayHeaderFooter: true,
           headerTemplate: !disableHeaders ? "" + "<div style='" +

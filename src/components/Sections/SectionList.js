@@ -79,7 +79,10 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
 
         return (
           <div className="list-item item h3" key={uuid.v1()}>
-            <div className="left-list-value left floated content ellipsis" title={!isObject(mainKeyValue) ? mainKeyValue : ''}>
+            <div
+              className="left-list-value left floated content ellipsis"
+              title={!isObject(mainKeyValue) ? mainKeyValue : ''}
+            >
               {styleByFieldName(leftName, mainKeyValue)}
             </div>
             <div className="right-list-value right floated content">

@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import SectionList from './SectionList';
 
 const SectionGroupedList = ({ columns, data, classes, style, title, titleStyle, groupClass }) => {
-  let groupedData = data || {};
-
+  const groupedData = data || {};
   const mainClass = `section-grouped-list ${classes}`;
   return (
     <div className={mainClass} style={style}>

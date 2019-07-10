@@ -27,11 +27,6 @@ class ItemsSection extends Component {
     }))
   };
 
-  getSectionItemKey(item) {
-    const { id } = this.state;
-    return `section-item-${id}-${item.startCol}-${item.endCol}-${item.index}`;
-  }
-
   static getHeightOffset(columnUsage, item) {
     return get(columnUsage, `${item.startCol}.${item.index}.offset`, 0);
   }
@@ -51,10 +46,15 @@ class ItemsSection extends Component {
     setTimeout(() => this.setColumnUsage(nextProps), 400);
   }
 
+  getSectionItemKey(item) {
+    const { id } = this.state;
+    return `section-item-${id}-${item.startCol}-${item.endCol}-${item.index}`;
+  }
+
   setColumnUsage(props) {
     const { items } = props;
     const columnUsage = {};
-    (items || []).sort(sortByFieldsWithPriority(['index', 'startCol'])).forEach(sectionItem => {
+    (items || []).sort(sortByFieldsWithPriority(['index', 'startCol'])).forEach((sectionItem) => {
       let itemHeight = 0;
       let maxOffset = 0;
       const domNode = findDOMNode(this.itemElements[this.getSectionItemKey(sectionItem)]);
@@ -96,7 +96,7 @@ class ItemsSection extends Component {
     const { columnUsage } = this.state;
 
     let maxOffset = 0;
-    Object.values(columnUsage).forEach(colValues => {
+    Object.values(columnUsage).forEach((colValues) => {
       const maxVal = maxBy(Object.values(colValues), v => v.offset + v.height);
       if (maxOffset < maxVal.offset + maxVal.height) {
         maxOffset = maxVal.offset + maxVal.height;
@@ -116,12 +116,13 @@ class ItemsSection extends Component {
                 const id = this.getSectionItemKey(item);
                 const mainClass = `section-item ${(item.displayType || '').toLowerCase()}`;
                 const applyStyle = {
-                  transform: `translate(${item.startCol * columnWidth}px, ${ItemsSection.getHeightOffset(columnUsage, item)}px)`,
+                  transform:
+                    `translate(${item.startCol * columnWidth}px, ${ItemsSection.getHeightOffset(columnUsage, item)}px)`,
                   width: colSpan * columnWidth
                 };
                 const type = item.fieldType || '';
                 let dataDisplay = Array.isArray(item.data) ? <SectionTable data={item.data} /> : String(item.data);
-                if(type === SECTION_ITEM_TYPE.html) {
+                if (type === SECTION_ITEM_TYPE.html) {
                   dataDisplay = <SectionHTML text={item.data} />;
                 }
 
