@@ -1,18 +1,18 @@
 .section-list {
   .list-item {
-    display: flex !important;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    display: table-row !important;
     align-items: center;
     margin: 5px 10px !important;
     .right-list-value {
+      display: table-cell;
       margin-right: 5px;
     }
     .left-list-value {
+      display: table-cell;
       margin: 0 !important;
     }
     .content:last-child {
-      flex: 1;
+      display: table-cell;
       text-align: center;
     }
   }
