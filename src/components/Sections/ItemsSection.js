@@ -1,7 +1,6 @@
 import './ItemsSection.less';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom';
 import { SECTION_ITEMS_DISPLAY_LAYOUTS, SECTION_ITEM_TYPE } from '../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
 import { SectionHTML, SectionTable } from './index';
@@ -39,11 +38,11 @@ class ItemsSection extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.setColumnUsage(this.props), 400);
+    setTimeout(() => this.setColumnUsage(this.props), 1000); // avoid rerender height changes
   }
 
   componentWillReceiveProps(nextProps) {
-    setTimeout(() => this.setColumnUsage(nextProps), 400);
+    setTimeout(() => this.setColumnUsage(nextProps), 1000); // avoid rerender height changes
   }
 
   getSectionItemKey(item) {
@@ -57,7 +56,7 @@ class ItemsSection extends Component {
     (items || []).sort(sortByFieldsWithPriority(['index', 'startCol'])).forEach((sectionItem) => {
       let itemHeight = 0;
       let maxOffset = 0;
-      const domNode = findDOMNode(this.itemElements[this.getSectionItemKey(sectionItem)]);
+      const domNode = this.itemElements[this.getSectionItemKey(sectionItem)];
       if (domNode) {
         itemHeight = domNode.clientHeight;
       }
@@ -111,7 +110,7 @@ class ItemsSection extends Component {
             <div className="items-section" style={{ width, height: maxOffset, ...style }}>
               {title && <div className="section-title" style={titleStyle}>{title}</div>}
               {description && <div className="section-description">{description}</div>}
-              {(items || []).map(item => {
+              {(items || []).map((item) => {
                 const colSpan = this.getItemColSpan(item);
                 const id = this.getSectionItemKey(item);
                 const mainClass = `section-item ${(item.displayType || '').toLowerCase()}`;

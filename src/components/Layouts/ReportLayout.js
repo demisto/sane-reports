@@ -78,14 +78,14 @@ class ReportLayout extends Component {
     const { sections, headerLeftImage, headerRightImage, isLayout } = this.props;
     return (
       <div className="report-layout">
-      <span className="hidden-header" style={{ display: 'none' }}>
-        {headerLeftImage !== REPORT_HEADER_IMAGE_LEFT_TOKEN &&
-          <img src={headerLeftImage} style={{ display: 'none' }} alt="hidden" />
-        }
-        {headerRightImage !== REPORT_HEADER_IMAGE_RIGHT_TOKEN &&
-          <img src={headerRightImage} style={{ display: 'none' }} alt="hidden" />
-        }
-      </span>
+        <span className="hidden-header" style={{ display: 'none' }}>
+          {headerLeftImage !== REPORT_HEADER_IMAGE_LEFT_TOKEN &&
+            <img src={headerLeftImage} style={{ display: 'none' }} alt="hidden" />
+          }
+          {headerRightImage !== REPORT_HEADER_IMAGE_RIGHT_TOKEN &&
+            <img src={headerRightImage} style={{ display: 'none' }} alt="hidden" />
+          }
+        </span>
         {
           !isLayout ?
             Object
@@ -138,7 +138,7 @@ class ReportLayout extends Component {
                               return elementToRender && (
                                 <div
                                   ref={(element) => {
-                                    this.itemElements[section.layout.i] = { element, gridItem }
+                                    this.itemElements[section.layout.i] = { element, gridItem };
                                   }}
                                   key={section.layout.i}
                                   className={`section-${section.type} ${section.layout.class || ''}`}
