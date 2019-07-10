@@ -106,7 +106,7 @@ class ReportLayout extends Component {
                         >
                           {
                             (() => {
-                              return this.getElementBySection(section);
+                              return ReportLayout.getElementBySection(section);
                             })()
                           }
                         </div>
