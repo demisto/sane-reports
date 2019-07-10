@@ -253,7 +253,6 @@ describe('Report Container', () => {
     expect(groupNames.at(1).text()).to.equal(listKeys[1]);
     expect(listItems.at(0).props().data).to.equal(sec25.data[listKeys[0]]);
     expect(listItems.at(1).props().data).to.equal(sec25.data[listKeys[1]]);
-
   });
 
   it('Generate test template layout report', () => {
