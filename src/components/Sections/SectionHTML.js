@@ -2,10 +2,9 @@
 import './SectionHTML.less';
 import React from 'react';
 import PropTypes from 'prop-types';
-import DOMPurify from 'dompurify';
 
 const SectionHTML = ({ text, style }) =>
-  <div className="section-html" style={style} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }} />;
+  <div className="section-html" style={style} dangerouslySetInnerHTML={{ __html: text }} />;
 
 SectionHTML.propTypes = {
   text: PropTypes.string,
