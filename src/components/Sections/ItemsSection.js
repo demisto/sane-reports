@@ -126,27 +126,25 @@ class ItemsSection extends Component {
                 }
 
                 return (
-                  <>
-                    <div
-                      ref={(itemElement) => {
-                        if (!itemElement) {
-                          return;
-                        }
-                        this.itemElements[id] = itemElement;
-                      }}
-                      key={id}
-                      id={id}
-                      className={mainClass}
-                      style={applyStyle}
-                    >
-                      <div className="section-item-header" style={item.headerStyle}>
-                        {item.fieldName}
-                      </div>
-                      <div className="section-item-value">
-                        {dataDisplay}
-                      </div>
+                  <div
+                    ref={(itemElement) => {
+                      if (!itemElement) {
+                        return;
+                      }
+                      this.itemElements[id] = itemElement;
+                    }}
+                    key={id}
+                    id={id}
+                    className={mainClass}
+                    style={applyStyle}
+                  >
+                    <div className="section-item-header" style={item.headerStyle}>
+                      {item.fieldName}
                     </div>
-                  </>
+                    <div className="section-item-value">
+                      {dataDisplay}
+                    </div>
+                  </div>
                 );
               })}
             </div>
