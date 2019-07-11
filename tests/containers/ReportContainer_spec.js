@@ -365,7 +365,7 @@ describe('Report Container', () => {
     const itemValues = itemsSection.at(0).find('.section-item-value');
     expect(itemValues).to.have.length(sec8.data.length);
     expect(itemValues.at(0).text()).to.equal(sec8.data[0].data);
-    expect(itemValues.at(1).text()).to.equal("HELLO");
+    expect(itemValues.at(1).text()).to.equal('HELLO');
 
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
