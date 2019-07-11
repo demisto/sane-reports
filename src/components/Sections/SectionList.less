@@ -1,13 +1,22 @@
 .section-list {
   .list-item {
+    display: table-row !important;
+    align-items: center;
     margin: 5px 10px !important;
     .right-list-value {
-      width: 40%;
-      margin: 0 !important;
+      display: table-cell;
+      margin-right: 5px;
+      vertical-align: middle;
     }
     .left-list-value {
-      width: 60%;
+      display: table-cell;
       margin: 0 !important;
+      vertical-align: middle;
+    }
+    .content:last-child {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
     }
   }
 }

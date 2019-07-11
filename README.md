@@ -81,9 +81,11 @@ You can edit existing report templates or create your own template.
 Report templates are created in JSON format and includes sections.
 Sections are ordered according to their row and column positions. 
 
-**Section types**: Header, Divider, Date, Image, JSON, Markdown, Table, Text, Bar Chart, Line Chart, Pie Chart 
+**Section types**: Header, Divider, Date, Image, JSON, Markdown, Table, Text, Bar Chart, Line Chart, Pie Chart, HTML, List, Grouped List, Items Section.
 
 Each section can have its own style (camled case css style: font-size -> fontSize).
+##### Important notice:
+**HTML sections use `dangerouslySetInnerHTML` to set the given text as html. This method may cause a security risk, so before using, please validate the source of the text, and use with cautious at your own risk.**
 
 ## License
 demisto/sane-reports is licensed under the [Apache License 2.0](https://github.com/demisto/sane-reports/blob/master/LICENSE)

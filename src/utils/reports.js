@@ -1,6 +1,4 @@
 import { SECTION_TYPES, REPORT_TYPES } from '../constants/Constants';
-import merge from 'lodash/merge';
-import extend from 'lodash/extend';
 
 function sortReportSections(sec1, sec2) {
   const sec1RowPos = sec1.layout.rowPos;
@@ -30,9 +28,6 @@ function filterSectionsAccordingToReportType(reportData, reportType) {
           shouldShow = true;
         }
         break;
-      case REPORT_TYPES.pdf:
-        shouldShow = section.type !== SECTION_TYPES.globalSection;
-        break;
       default:
         shouldShow = true;
     }
@@ -41,16 +36,10 @@ function filterSectionsAccordingToReportType(reportData, reportType) {
 }
 
 export function prepareSections(reportData, reportType) {
-  let rows = {};
+  const rows = {};
 
   if (reportData) {
     reportData.sort(sortReportSections);
-
-    reportData.forEach((section) => {
-      if (section.type === SECTION_TYPES.globalSection) {
-        rows = merge(extend(prepareSections(section.data, reportType), rows), rows);
-      }
-    });
 
     filterSectionsAccordingToReportType(reportData, reportType).forEach((section) => {
       if (rows[section.layout.rowPos]) {

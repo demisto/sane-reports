@@ -7,7 +7,7 @@ import { compact, values } from 'lodash';
 import { AutoSizer } from 'react-virtualized';
 import moment from 'moment';
 import { QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/Constants';
-import { sortStrings } from '../../../utils/strings';
+import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
 
 const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null,
@@ -20,7 +20,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   const lineTypes = {};
   let from = fromDate && moment(fromDate).utc();
   const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
-  preparedData = compact(preparedData.sort((a, b) => sortStrings(a.name, b.name)).map((mainGroup) => {
+  preparedData = compact(preparedData.sort((a, b) => compareFields(a.name, b.name)).map((mainGroup) => {
     let name = mainGroup.name;
     if (chartProperties.isDatesChart || chartProperties.isDatesChart === undefined) {
       if (!name) {

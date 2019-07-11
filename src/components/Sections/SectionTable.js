@@ -46,7 +46,8 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
         <thead>
           <tr>
             {readyColumns.map((col) => {
-              return <th key={col.key || col}>{!col.hidden && ((readableHeaders && readableHeaders[col]) || col)}</th>;
+              const key = col.key || col;
+              return <th key={key}>{!col.hidden && ((readableHeaders && readableHeaders[key]) || key)}</th>;
             })}
           </tr>
         </thead>

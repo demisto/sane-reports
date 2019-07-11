@@ -4,8 +4,23 @@ import { prepareSections } from '../../src/utils/reports';
 import ReportContainer from '../../src/containers/ReportContainer';
 import ChartLegend from '../../src/components/Sections/SectionChart/ChartLegend';
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
-import { SectionHeader, SectionText, SectionDate, SectionChart, SectionTable, SectionImage, SectionDivider,
-  SectionMarkdown, SectionJson, SectionNumber, SectionDuration } from '../../src/components/Sections';
+import {
+  SectionHeader,
+  SectionText,
+  SectionDate,
+  SectionChart,
+  SectionTable,
+  SectionImage,
+  SectionDivider,
+  SectionMarkdown,
+  SectionJson,
+  SectionNumber,
+  SectionDuration,
+  SectionHTML,
+  SectionGroupedList,
+  SectionList,
+  ItemsSection
+} from '../../src/components/Sections';
 import { BarChart, Bar, PieChart, Pie, LineChart } from 'recharts';
 
 describe('Report Container', () => {
@@ -22,8 +37,8 @@ describe('Report Container', () => {
     const rows = reportContainer.find('.report-row');
     const sections = reportContainer.find('.report-section');
     expect(reportLayouts).to.have.length(1);
-    expect(rows).to.have.length(22);
-    expect(sections).to.have.length(23);
+    expect(rows).to.have.length(24);
+    expect(sections).to.have.length(25);
 
     const sec1 = testTemplate[0];
     const sec2 = testTemplate[1];
@@ -48,6 +63,8 @@ describe('Report Container', () => {
     const sec21 = testTemplate[20];
     const sec22 = testTemplate[21];
     const sec23 = testTemplate[22];
+    const sec24 = testTemplate[23];
+    const sec25 = testTemplate[24];
 
     expect(rows.at(0).text()).to.contains(sec1.data);
     expect(rows.at(1).text()).to.contains(sec2.data + sec3.data);
@@ -171,7 +188,7 @@ describe('Report Container', () => {
     const imgEl = reportContainer.find('img');
     const mediumCircularImage = reportContainer.find('.ui.image.medium.circular');
     const smallImage = reportContainer.find('.ui.image.small');
-    expect(imgEl).to.have.length(5);
+    expect(imgEl).to.have.length(7);
     expect(mediumCircularImage).to.have.length(1);
     expect(smallImage).to.have.length(1);
 
@@ -226,6 +243,29 @@ describe('Report Container', () => {
     expect(jsonInspectorKey.at(2).text()).to.equal('how:');
     expect(jsonInspectLeaf.at(0).text()).to.equal('are:');
     expect(jsonInspectorValue.at(0).text()).to.equal('you?');
+
+    // HTML
+    const sectionHTML = reportContainer.find(SectionHTML);
+    expect(sectionHTML).to.have.length(1);
+    expect(sectionHTML.at(0).props().text).to.equal(sec24.data);
+    const htmlClass = reportContainer.find('.section-html');
+    expect(htmlClass).to.have.length(1);
+    expect(htmlClass.at(0).text()).to.equal('THIS IS HTML');
+
+    // Grouped list
+    const sectionList = reportContainer.find(SectionGroupedList);
+    expect(sectionList).to.have.length(1);
+    const listTitle = sectionList.at(0).find('.section-title');
+    expect(listTitle.at(0).text()).to.equal(sec25.title);
+    expect(sectionList.at(0).props().data).to.equal(sec25.data);
+    const listKeys = Object.keys(sec25.data);
+    const listItems = sectionList.find(SectionList);
+    expect(listItems).to.have.length(listKeys.length);
+    const groupNames = sectionList.find('.group-item-name');
+    expect(groupNames.at(0).text()).to.equal(listKeys[0]);
+    expect(groupNames.at(1).text()).to.equal(listKeys[1]);
+    expect(listItems.at(0).props().data).to.equal(sec25.data[listKeys[0]]);
+    expect(listItems.at(1).props().data).to.equal(sec25.data[listKeys[1]]);
   });
 
   it('Generate test template layout report', () => {
@@ -248,6 +288,7 @@ describe('Report Container', () => {
     const sec6 = testTemplate[5];
     const sec7 = testTemplate[6];
     const sec8 = testTemplate[7];
+    const sec9 = testTemplate[8];
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
@@ -313,19 +354,32 @@ describe('Report Container', () => {
     const timeUnit = duration.at(0).find('.time-unit');
     expect(timeUnit).to.have.length(3);
 
+    // Items Section
+    const itemsSection = reportContainer.find(ItemsSection);
+    expect(itemsSection).to.have.length(1);
+    const headers = itemsSection.at(0).find('.section-item-header');
+    expect(headers).to.have.length(sec8.data.length);
+    expect(headers.at(0).text()).to.equal(sec8.data[0].fieldName);
+    expect(headers.at(1).text()).to.equal(sec8.data[1].fieldName);
+
+    const itemValues = itemsSection.at(0).find('.section-item-value');
+    expect(itemValues).to.have.length(sec8.data.length);
+    expect(itemValues.at(0).text()).to.equal(sec8.data[0].data);
+    expect(itemValues.at(1).text()).to.equal('HELLO');
+
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
     expect(sectionTable).to.have.length(1);
-    expect(sectionTable.at(0).props().columns).to.equal(sec8.layout.tableColumns);
-    expect(sectionTable.at(0).props().data).to.equal(sec8.data);
-    expect(sectionTable.at(0).props().classes).to.equal(sec8.layout.classes);
+    expect(sectionTable.at(0).props().columns).to.equal(sec9.layout.tableColumns);
+    expect(sectionTable.at(0).props().data).to.equal(sec9.data);
+    expect(sectionTable.at(0).props().classes).to.equal(sec9.layout.classes);
 
     const tableEl = reportContainer.find('table');
     const tableHeader = reportContainer.find('th');
     expect(tableEl).to.have.length(2); // there is a table in duration display.
     expect(tableHeader).to.have.length(2);
-    expect(tableHeader.at(0).text()).to.equal(sec8.layout.tableColumns[0]);
-    expect(tableHeader.at(1).text()).to.equal(sec8.layout.tableColumns[1]);
+    expect(tableHeader.at(0).text()).to.equal(sec9.layout.tableColumns[0]);
+    expect(tableHeader.at(1).text()).to.equal(sec9.layout.tableColumns[1]);
 
     const chartLegend = reportContainer.find(ChartLegend);
     expect(chartLegend).to.have.length(4);
