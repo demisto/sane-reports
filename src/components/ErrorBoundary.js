@@ -13,12 +13,14 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.errorMessage) {
-      return (<div className="error-section">
-        <h5>Something Went Wrong - Error:</h5>
-        <div className="error-message">
-          {this.state.errorMessage}
+      return (
+        <div className="error-section">
+          <h5>Something Went Wrong - Error:</h5>
+          <div className="error-message">
+            {this.state.errorMessage}
+          </div>
         </div>
-      </div>);
+      );
     }
 
     return this.props.children;
