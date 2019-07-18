@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SectionList from './SectionList';
 
-const SectionGroupedList = ({ columns, data, classes, style, title, titleStyle, groupClass }) => {
+const SectionGroupedList = ({ columns, data, classes, style, title, titleStyle, groupClass, emptyString }) => {
   const groupedData = data || {};
   const mainClass = `section-grouped-list ${classes}`;
   return (
@@ -16,6 +16,7 @@ const SectionGroupedList = ({ columns, data, classes, style, title, titleStyle, 
               data={groupedData[groupName] || []}
               columns={columns}
               classes={groupClass ? groupClass[groupName] : undefined}
+              emptyString={emptyString}
             />
           </div>
         );
@@ -31,7 +32,8 @@ SectionGroupedList.propTypes = {
   style: PropTypes.object,
   title: PropTypes.string,
   groupClass: PropTypes.object,
-  titleStyle: PropTypes.object
+  titleStyle: PropTypes.object,
+  emptyString: PropTypes.string
 };
 
 export default SectionGroupedList;

@@ -89,6 +89,7 @@ export function getSectionComponent(section) {
             style={section.layout.style}
             titleStyle={section.titleStyle}
             title={section.title}
+            emptyString={section.emptyNotification}
           />
         );
       } else {
@@ -100,6 +101,7 @@ export function getSectionComponent(section) {
             style={section.layout.style}
             titleStyle={section.titleStyle}
             title={section.title}
+            emptyString={section.emptyNotification}
           />
         );
       }
@@ -165,6 +167,7 @@ export function getSectionComponent(section) {
           style={section.layout.style}
           titleStyle={section.titleStyle}
           title={section.title}
+          emptyString={section.emptyNotification}
         />
       );
       break;

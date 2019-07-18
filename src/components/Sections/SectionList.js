@@ -44,7 +44,7 @@ function styleByFieldName(fieldName, currentData) {
   }
 }
 
-const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
+const SectionList = ({ columns, data, classes, style, title, titleStyle, emptyString }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -58,7 +58,7 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
   return (
     <div className={mainClass} style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
-      {tableData.map((item) => {
+      {tableData.length > 0 ? tableData.map((item) => {
         let leftName = 'name';
         if (!isEmpty(columns)) {
           leftName = (isObject(columns[0]) ? columns[0].key : columns[0]) || leftName;
@@ -93,7 +93,7 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
             {detailsValue && <div className="details content">{detailsValue}</div>}
           </div>
         );
-      })}
+      }) : <div className="no-data">{emptyString}</div>}
     </div>
   );
 };
@@ -108,7 +108,8 @@ SectionList.propTypes = {
   classes: PropTypes.string,
   style: PropTypes.object,
   title: PropTypes.string,
-  titleStyle: PropTypes.object
+  titleStyle: PropTypes.object,
+  emptyString: PropTypes.string
 };
 
 export default SectionList;
