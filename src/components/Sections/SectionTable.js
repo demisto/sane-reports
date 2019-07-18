@@ -83,7 +83,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
           }
         </tbody>
       </table>
-    ): <div className="no-data">{emptyString}</div>;
+    ) : <div className="no-data">{emptyString}</div>;
   } else {
     tableBody = (
       <table className={'ui compact table unstackable ' + classes}>
