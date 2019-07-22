@@ -20,7 +20,7 @@ import { isNumber, isObjectLike, compact, isString, groupBy } from 'lodash';
 import React from 'react';
 
 function getDefaultEmptyNotification() {
-  return 'No results found.'
+  return 'No results found.';
 }
 
 export function getSectionComponent(section) {
