@@ -68,7 +68,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   }));
 
   const retData = [];
-  const frames = finalToDate.diff(from, timeFrame);
+  const frames = Math.ceil(finalToDate.diff(from, timeFrame, true));
   const currentDate = moment(from);
   for (let i = 0; i <= frames; i++) {
     const formattedDate = currentDate.format(timeFormat);
