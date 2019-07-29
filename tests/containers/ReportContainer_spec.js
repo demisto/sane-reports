@@ -21,7 +21,7 @@ import {
   SectionList,
   ItemsSection
 } from '../../src/components/Sections';
-import { BarChart, Bar, PieChart, Pie, LineChart } from 'recharts';
+import { BarChart, Bar, PieChart, Pie, LineChart, Line } from 'recharts';
 
 describe('Report Container', () => {
   it('Generate test template report', () => {
@@ -335,6 +335,8 @@ describe('Report Container', () => {
 
     expect(lineChart.at(0).props().width).to.equal(sec6.layout.dimensions.width);
     expect(lineChart.at(0).props().height).to.equal(sec6.layout.dimensions.height);
+    const lines = lineChart.find(Line);
+    expect(lines).to.have.length(1);
 
     // Trend
     const trendNumber = reportContainer.find(SectionNumber);
