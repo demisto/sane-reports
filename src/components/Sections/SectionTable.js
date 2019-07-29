@@ -41,7 +41,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
 
   let tableBody;
   if (isArray(readyColumns)) {
-    tableBody = (
+    tableBody = tableData.length > 0 ? (
       <table className={'ui compact table unstackable section-table ' + classes} style={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
@@ -52,7 +52,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
           </tr>
         </thead>
         <tbody>
-          {tableData.length ? tableData.map((row, i) =>
+          {tableData.map((row, i) =>
             <tr key={i}>
               {readyColumns.map((col, j) =>
                 (() => {
@@ -80,11 +80,10 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
                 })()
               )}
             </tr>)
-            : <td colSpan={readyColumns.length}>{emptyString}</td>
           }
         </tbody>
       </table>
-    );
+    ) : <div className="no-data">{emptyString}</div>;
   } else {
     tableBody = (
       <table className={'ui compact table unstackable ' + classes}>

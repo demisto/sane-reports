@@ -19,6 +19,10 @@ import {
 import { isNumber, isObjectLike, compact, isString, groupBy } from 'lodash';
 import React from 'react';
 
+function getDefaultEmptyNotification() {
+  return 'No results found.';
+}
+
 export function getSectionComponent(section) {
   let sectionToRender;
   switch (section.type) {
@@ -89,6 +93,7 @@ export function getSectionComponent(section) {
             style={section.layout.style}
             titleStyle={section.titleStyle}
             title={section.title}
+            emptyString={section.emptyNotification || getDefaultEmptyNotification()}
           />
         );
       } else {
@@ -100,6 +105,7 @@ export function getSectionComponent(section) {
             style={section.layout.style}
             titleStyle={section.titleStyle}
             title={section.title}
+            emptyString={section.emptyNotification || getDefaultEmptyNotification()}
           />
         );
       }
@@ -165,6 +171,7 @@ export function getSectionComponent(section) {
           style={section.layout.style}
           titleStyle={section.titleStyle}
           title={section.title}
+          emptyString={section.emptyNotification || getDefaultEmptyNotification()}
         />
       );
       break;
