@@ -134,6 +134,7 @@
   },
   {
     "type": "chart",
+    "legend": [],
     "data": [
       {
         "name": "0",
