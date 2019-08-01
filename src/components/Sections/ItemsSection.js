@@ -121,7 +121,7 @@ class ItemsSection extends Component {
                 };
                 const type = item.fieldType || '';
                 let dataDisplay = Array.isArray(item.data) ? <SectionTable data={item.data} /> :
-                  <SectionMarkdown text={String(item.data)} />;
+                <SectionMarkdown text={String(item.data)} />;
                 if (type === SECTION_ITEM_TYPE.html) {
                   dataDisplay = <SectionHTML text={item.data} />;
                 }

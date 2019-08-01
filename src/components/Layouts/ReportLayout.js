@@ -27,7 +27,7 @@ class ReportLayout extends Component {
 
   static isPageBreakSection(section) {
     return !!get(section, 'layout.style.pageBreakBefore', false) || (section.type === SECTION_TYPES.markdown &&
-      section.data && (section.data.text || '').includes(PAGE_BREAK_KEY))
+      section.data && (section.data.text || '').includes(PAGE_BREAK_KEY));
   }
 
   static getGridItemFromSection(section, overflowRows) {
@@ -83,7 +83,7 @@ class ReportLayout extends Component {
         accumulatedHeight += maxHeight;
         // if page dimensions are set and should page break, calculate remaining height.
         if (dimensions && dimensions.height > 0 && shouldPageBreak) {
-          pageBreakOffsets += dimensions.height - accumulatedHeight % dimensions.height;
+          pageBreakOffsets += dimensions.height - (accumulatedHeight % dimensions.height);
         }
       });
     }, 3000);
