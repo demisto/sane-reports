@@ -44,7 +44,7 @@ class ReportLayout extends Component {
 
   static getElementBySection(section) {
     let sectionToRender = getSectionComponent(section);
-    if (section.layout && section.layout.style && section.layout.style.pageBreakBefore) {
+    if (ReportLayout.isPageBreakSection(section)) {
       sectionToRender = (
         <div>
           <div style={{ pageBreakAfter: 'always' }}>&nbsp;</div>
@@ -81,7 +81,7 @@ class ReportLayout extends Component {
           }
         });
         accumulatedHeight += maxHeight;
-        // if page dimentions are set and should page break, calculate remaining height.
+        // if page dimensions are set and should page break, calculate remaining height.
         if (dimensions && dimensions.height > 0 && shouldPageBreak) {
           pageBreakOffsets += dimensions.height - accumulatedHeight % dimensions.height;
         }

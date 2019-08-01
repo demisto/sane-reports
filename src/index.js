@@ -13,6 +13,16 @@ import { REPORT_DATA_TOKEN, REPORT_TYPES } from './constants/Constants';
 import { prepareSections, getReportType } from './utils/reports';
 import { generateOfficeReport } from './office/OfficeReport';
 
+function isJsonString(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
+
 let data = reportData;
 if (data === REPORT_DATA_TOKEN) {
   data = TemplateProvider.getIncidentDailyReportTemplate();
@@ -37,7 +47,7 @@ if (type === REPORT_TYPES.pdf) {
         sections={sections}
         headerLeftImage={headerLeftImage}
         headerRightImage={headerRightImage}
-        dimensions={reportDimensions ? JSON.parse(reportDimensions) : undefined}
+        dimensions={isJsonString(reportDimensions) ? JSON.parse(reportDimensions) : undefined}
       />
     </div>,
     document.getElementById('app')
