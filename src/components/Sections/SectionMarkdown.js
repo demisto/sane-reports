@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
+import { PAGE_BREAK_KEY } from '../../constants/Constants';
 
 // plugins for react markdown component
 import abbr from 'markdown-it-abbr';
@@ -18,6 +19,8 @@ import footnote from 'markdown-it-footnote';
 import deflist from 'markdown-it-deflist';
 import ins from 'markdown-it-ins';
 // end of import plugin
+
+const IGNORE_KEYS = [PAGE_BREAK_KEY];
 
 function handleIterate(tableClasses, Tag, props, children) {
   let res = '';
@@ -123,7 +126,9 @@ function handleIterate(tableClasses, Tag, props, children) {
 }
 
 const SectionMarkdown = ({ text, style, tableClasses }) => {
-  let res = text;
+  let finalText = text;
+  IGNORE_KEYS.forEach(s => finalText = (finalText || '').replace(s, ''));
+  let res = finalText;
   try {
     const mdData = mdReact(
       {
@@ -141,7 +146,7 @@ const SectionMarkdown = ({ text, style, tableClasses }) => {
           ins
         ]
       }
-    )(text);
+    )(finalText);
 
     if (mdData) {
       res = mdData;

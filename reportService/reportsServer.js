@@ -81,11 +81,13 @@ const mmPixelSize = 3.779527559055;
 
     console.log('now open: ' + distFolder + '/index.html');
     const indexHtml = fs.readFileSync(distFolder + '/index.html').toString();
+    const dimensions = getPageSizeByOrientation(pageSize, orientation);
     const afterTypeReplace =
       indexHtml
         .replace('\'{report-type}\'', JSON.stringify(reportType))
         .replace('{report-header-image-left}', headerLeftImage)
-        .replace('{report-header-image-right}', headerRightImage);
+        .replace('{report-header-image-right}', headerRightImage)
+        .replace('{report-dimensions}', JSON.stringify(dimensions));
 
     const loadedData = fs.readFileSync(dataFile).toString();
 
@@ -99,7 +101,6 @@ const mmPixelSize = 3.779527559055;
 
     console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
-    const dimensions = getPageSizeByOrientation(pageSize, orientation);
     const baseUrl = distFolder.startsWith('/') ? distFolder : path.join(process.cwd(), distFolder);
     console.log(`Using "${chromeExecution}" execution.`);
 

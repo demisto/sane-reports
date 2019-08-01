@@ -22,6 +22,7 @@ import {
   ItemsSection
 } from '../../src/components/Sections';
 import { BarChart, Bar, PieChart, Pie, LineChart, Line } from 'recharts';
+import { PAGE_BREAK_KEY } from '../../src/constants/Constants';
 
 describe('Report Container', () => {
   it('Generate test template report', () => {
@@ -225,6 +226,7 @@ describe('Report Container', () => {
     const sectionMarkdown = reportContainer.find(SectionMarkdown);
     expect(sectionMarkdown).to.have.length(1);
     expect(sectionMarkdown.at(0).props().text).to.equal(sec22.data);
+    expect(sectionMarkdown.at(0).text()).to.not.contain(PAGE_BREAK_KEY);
     expect(sectionMarkdown.at(0).props().style).to.equal(sec22.layout.style);
 
     // JSON

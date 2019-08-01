@@ -37,6 +37,7 @@ if (type === REPORT_TYPES.pdf) {
         sections={sections}
         headerLeftImage={headerLeftImage}
         headerRightImage={headerRightImage}
+        dimensions={reportDimensions ? JSON.parse(reportDimensions) : undefined}
       />
     </div>,
     document.getElementById('app')

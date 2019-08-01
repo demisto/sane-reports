@@ -6,9 +6,10 @@ import {
   SECTION_TYPES,
   REPORT_HEADER_IMAGE_LEFT_TOKEN,
   REPORT_HEADER_IMAGE_RIGHT_TOKEN,
-  GRID_LAYOUT_COLUMNS
+  GRID_LAYOUT_COLUMNS,
+  PAGE_BREAK_KEY
 } from '../../constants/Constants';
-import { groupBy, compact } from 'lodash';
+import { groupBy, compact, get } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
 import { compareFields } from '../../utils/sort';
 import ErrorBoundary from '../ErrorBoundary';
@@ -20,8 +21,14 @@ class ReportLayout extends Component {
     sections: PropTypes.object,
     headerLeftImage: PropTypes.string,
     headerRightImage: PropTypes.string,
-    isLayout: PropTypes.bool
+    isLayout: PropTypes.bool,
+    dimensions: PropTypes.object
   };
+
+  static isPageBreakSection(section) {
+    return !!get(section, 'layout.style.pageBreakBefore', false) || (section.type === SECTION_TYPES.markdown &&
+      section.data && (section.data.text || '').includes(PAGE_BREAK_KEY))
+  }
 
   static getGridItemFromSection(section, overflowRows) {
     const rows = section.layout.rowPos + overflowRows;
@@ -54,22 +61,30 @@ class ReportLayout extends Component {
   }
 
   componentDidMount() {
+    const { dimensions } = this.props;
     setTimeout(() => {
       // set dynamic height for all sections, fix top attribute.
       const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
       let accumulatedHeight = 0;
+      let pageBreakOffsets = 0;
       Object.keys(itemsByRow).sort(compareFields).forEach((key) => {
         const items = itemsByRow[key];
         let maxHeight = 0;
+        let shouldPageBreak = false;
         items.forEach((item) => {
           if (item.element) {
             if (maxHeight < item.element.clientHeight) {
               maxHeight = item.element.clientHeight;
             }
-            item.element.style.top = `${accumulatedHeight}px`;
+            item.element.style.top = `${accumulatedHeight + pageBreakOffsets}px`;
+            shouldPageBreak = shouldPageBreak || ReportLayout.isPageBreakSection(item.section);
           }
         });
         accumulatedHeight += maxHeight;
+        // if page dimentions are set and should page break, calculate remaining height.
+        if (dimensions && dimensions.height > 0 && shouldPageBreak) {
+          pageBreakOffsets += dimensions.height - accumulatedHeight % dimensions.height;
+        }
       });
     }, 3000);
   }
@@ -138,7 +153,7 @@ class ReportLayout extends Component {
                               return elementToRender && (
                                 <div
                                   ref={(element) => {
-                                    this.itemElements[section.layout.i] = { element, gridItem };
+                                    this.itemElements[section.layout.i] = { element, gridItem, section };
                                   }}
                                   key={section.layout.i}
                                   className={`section-${section.type} ${section.layout.class || ''}`}
