@@ -1,1461 +1,580 @@
 [
   {
-    "type": "number",
-    "data": 9,
+    "type": "header",
+    "data": "Daily Incident Report",
     "layout": {
-      "columnPos": 0,
-      "h": 1,
-      "i": "e226b510-b20c-11e9-94ff-1996bd9c05c6",
-      "layout": "horizontal",
-      "rowPos": 0,
-      "sign": null,
-      "signAlignment": null,
-      "style": {},
-      "w": 6
-    },
-    "query": {
-      "type": "incident",
-      "filter": {
-        "query": "-category:job and -status:archived and -status:closed and owner:\"\"",
-        "period": {
-          "by": "day",
-          "byFrom": "days",
-          "byTo": "",
-          "field": "",
-          "fromValue": 7,
-          "toValue": null
-        },
-        "fromDate": "0001-01-01T00:00:00Z",
-        "toDate": "0001-01-01T00:00:00Z"
+      "rowPos": 1,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 28
       }
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "fromDate": "2019-07-25T20:23:27+03:00",
-    "title": "Unassigned Incidents",
-    "emptyNotification": "No results found",
-    "titleStyle": null
+    }
   },
   {
-    "type": "number",
-    "data": 9,
+    "type": "date",
+    "class": "row-class",
     "layout": {
-      "columnPos": 0,
-      "h": 3,
-      "i": "e402a100-b20c-11e9-94ff-1996bd9c05c6",
-      "layout": "horizontal",
-      "rowPos": 1,
-      "sign": null,
-      "signAlignment": null,
-      "style": {},
-      "w": 4
-    },
-    "query": {
-      "type": "incident",
-      "filter": {
-        "query": "-category:job and -status:archived and -status:closed and owner:\"\"",
-        "period": {
-          "by": "day",
-          "byFrom": "days",
-          "byTo": "",
-          "field": "",
-          "fromValue": 7,
-          "toValue": null
-        },
-        "fromDate": "0001-01-01T00:00:00Z",
-        "toDate": "0001-01-01T00:00:00Z"
+      "rowPos": 2,
+      "columnPos": 1,
+      "class": "cell-class",
+      "style": {
+        "textAlign": "left",
+        "color": "gray",
+        "fontSize": 13,
+        "fontStyle": "italic",
+        "marginBottom:": 12
+      },
+      "format": "MMMM Do YYYY, h:mm:ss a z"
+    }
+  },
+  {
+    "type": "text",
+    "data": "Total incidents: 54",
+    "layout": {
+      "rowPos": 3,
+      "columnPos": 1,
+      "sectionStyle": {
+        "width": 200
+      },
+      "style": {
+        "textAlign": "left",
+        "fontSize": 18
       }
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "fromDate": "2019-07-25T20:23:27+03:00",
-    "title": "Unassigned Incidents",
-    "emptyNotification": "No results found",
-    "titleStyle": null
+    }
+  },
+  {
+    "type": "text",
+    "data": "Last day incidents: 39",
+    "layout": {
+      "rowPos": 3,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 18
+      }
+    }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 4,
+      "style": {
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Severity",
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Type",
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
   },
   {
     "type": "chart",
     "data": [
-      {
-        "name": "Critical",
-        "data": [
-          2
-        ],
-        "groups": null
-      },
-      {
-        "name": "High",
-        "data": [
-          2
-        ],
-        "groups": null
-      },
-      {
-        "name": "Low",
-        "data": [
-          2
-        ],
-        "groups": null
-      },
-      {
-        "name": "Medium",
-        "data": [
-          2
-        ],
-        "groups": null
-      },
-      {
-        "name": "Unknown",
-        "data": [
-          2
-        ],
-        "groups": null
-      }
+      { "name": "Unknown", "value": 5, "url": "" },
+      { "name": "Low", "value": 7, "url": "" },
+      { "name": "Medium", "value": 11, "url": "" },
+      { "name": "High", "value": 7, "url": "" },
+      { "name": "Critical", "value": 9 , "url": ""}
     ],
     "layout": {
-      "chartProperties": {
-        "cx": 104.905,
-        "cy": 75,
-        "innerRadius": 54.73350653750064,
-        "layout": "horizontal",
-        "maxRadius": 145.95601743333503,
-        "outerRadius": 72.97800871666752
-      },
+      "rowPos": 6,
+      "columnPos": 1,
       "chartType": "pie",
-      "columnPos": 6,
-      "dimensions": {
-        "height": 180,
-        "width": 343
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
       },
-      "h": 2,
-      "i": "edd8c970-b20c-11e9-94ff-1996bd9c05c6",
-      "legend": [
-        {
-          "color": "#D0021B",
-          "name": "Critical"
-        },
-        {
-          "color": "#FF1744",
-          "name": "High"
-        },
-        {
-          "color": "#00CD33",
-          "name": "Low"
-        },
-        {
-          "color": "#FF9000",
-          "name": "Medium"
-        },
-        {
-          "color": "#C5C5C5",
-          "name": "Unknown"
-        }
-      ],
+      "dimensions": {
+        "width": 330,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "cx": 155,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
       "legendStyle": {
         "align": "left",
-        "iconType": "circle",
         "layout": "vertical",
         "verticalAlign": "top",
-        "width": 113.19000000000001
+        "iconSize": 10
       },
-      "rowPos": 2,
-      "w": 6
-    },
-    "query": {
-      "type": "incident",
-      "groupBy": [
-        "severity"
-      ],
-      "filter": {
-        "query": "-category:job and -status:archived and -status:closed",
-        "period": {
-          "by": "day",
-          "byFrom": "days",
-          "byTo": "",
-          "field": "",
-          "fromValue": 7,
-          "toValue": null
-        },
-        "fromDate": "0001-01-01T00:00:00Z",
-        "toDate": "0001-01-01T00:00:00Z"
-      }
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "fromDate": "2019-07-25T20:23:27+03:00",
-    "title": "Active Incidents - Pie chart",
-    "emptyNotification": "No results found",
-    "titleStyle": null
+      "legend": [
+        { "name": "Critical", "fill": "#8d070a" },
+        { "name": "High", "fill": "#D00a00" },
+        { "name": "Medium", "fill": "#cb4a00" },
+        { "name": "Low", "fill": "#267634" },
+        { "name": "Unknown", "fill": "#999999" }
+      ]
+    }
   },
   {
-    "type": "duration",
-    "data": [],
+    "type": "chart",
+    "data": [
+      { "name": "C2Communication", "value": 3 },
+      { "name": "Default", "value": 2 },
+      { "name": "DeviceLost", "value": 3 },
+      { "name": "Malware", "value": 4 },
+      { "name": "Phishing", "value": 8 },
+      { "name": "wow", "value": 7 },
+      { "name": "Ransomware", "value": 8 },
+      { "name": "UnknownBinary", "value": 4 }
+    ],
     "layout": {
-      "chartProperties": {
-        "daysLabel": "DAYS",
-        "hoursLabel": "HOURS",
-        "minutesLabel": "MIN"
+      "rowPos": 6,
+      "columnPos": 2,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
       },
-      "columnPos": 3,
-      "h": 1,
-      "i": "f1eb4470-b20c-11e9-94ff-1996bd9c05c6",
-      "rowPos": 5,
-      "w": 9
-    },
-    "query": {
-      "type": "incident",
-      "filter": {
-        "query": "-category:job and detectionsla.runStatus:ended",
-        "period": {
-          "by": "day",
-          "byFrom": "days",
-          "byTo": "",
-          "field": "",
-          "fromValue": 7,
-          "toValue": null
-        },
-        "fromDate": "0001-01-01T00:00:00Z",
-        "toDate": "0001-01-01T00:00:00Z"
+      "dimensions": {
+        "width": 300,
+        "height": 220
       },
-      "keys": [
-        "avg|detectionsla.totalDuration"
+      "chartProperties" : {
+        "cy": 75,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "sortBy": {
+        "values": ["value", "name"],
+        "orders": ["desc", "asc"]
+      },
+      "legend": [
+        { "name": "C2Communication", "fill": "#853732" },
+        { "name": "Default", "fill": "#3aabe8" },
+        { "name": "DeviceLost", "fill": "#5fa54a" },
+        { "name": "Malware", "fill": "#4f8aab" },
+        { "name": "Phishing", "fill": "#4f854a" },
+        { "name": "Ransomware", "fill": "#5b4185" },
+        { "name": "UnknownBinary", "fill": "#4faa5b" }
       ]
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "fromDate": "2019-07-25T20:23:27+03:00",
-    "title": "Mean Time to Detection",
-    "emptyNotification": "No results found",
-    "titleStyle": null
+    }
+  },
+  {
+    "type": "text",
+    "data": "SLA",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Analyst",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "late", "value": 5 },
+      { "name": "about to end", "value": 11 },
+      { "name": "ok", "value": 23 }
+    ],
+    "layout": {
+      "rowPos": 8,
+      "columnPos": 1,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 180
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "cx": 155,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Late", "fill": "red" },
+        { "name": "About To End", "fill": "orange" },
+        { "name": "OK", "fill": "green" }
+      ]
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "Slavik", "relatedTo": 1, "value": 15, "url": "" },
+      { "name": "Guy", "relatedTo": 1, "value": 11 },
+      { "name": "Meir", "relatedTo": 1, "value": 9 },
+      { "name": "Aviad", "relatedTo": 1, "value": 4 }
+    ],
+    "layout": {
+      "rowPos": 8,
+      "columnPos": 2,
+      "chartType": "bar",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 10,
+        "marginLeft": -15
+      },
+      "chartProperties" : {
+        "layout": "vertical",
+        "strokeDasharray": "3 300",
+        "barSize": 13
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 200
+      },
+      "legend": [
+        { "name": "Busy Analyst", "fill": "#2884d1", "bar": 1 }
+      ]
+    }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 9,
+      "style": {
+      }
+    }
   },
   {
     "type": "table",
     "data": [
       {
-        "CloseReason": "N/A",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "N/A",
-        "Id": "40",
-        "Name": "layoutsss",
-        "Occurred": "Thu, 18 Jul 2019 14:36:25 IDT",
-        "PlaybookId": "Default",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Layout Kingdom",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1563449785326964000",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "Default Enrichment Playbook",
-        "closed": "Thu, 18 Jul 2019 14:36:39 IDT",
-        "closingUserId": "DBot",
-        "created": "Thu, 18 Jul 2019 14:36:25 IDT",
-        "cusotmseverity": "Sev1",
-        "details": "N/A",
-        "droppedCount": "0",
-        "griud": "[{\"columnheader1\":false,\"columnheader3\":\"ddsad\",\"coolnum\":\"5\"},{\"columnheader1\":false,\"columnheader3\":\"sadd\",\"coolnum\":\"141\"},{\"columnheader1\":false,\"columnheader3\":\"daaa\",\"coolnum\":\"2\"}]",
-        "hasRole": "N/A",
-        "hidden grid": "[{\"columnheader1\":\"cc\",\"columnheader2\":\"cccc\",\"columnheader3\":\"aadad\"}]",
-        "investigationId": "40",
-        "isPlayground": "N/A",
-        "labels": "map[type:Instance value:admin], map[type:Brand value:Manual]",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "0",
-        "linkedIncidents": "N/A",
-        "modified": "Thu, 18 Jul 2019 14:36:40 IDT",
-        "my grid": "[{\"column1\":\"a\",\"column5\":\"\",\"column5date\":\"2019-06-26T00:00:00+03:00\"},{\"column1\":\"b\"},{\"column1\":\"c\"}]",
-        "my multi select mandatory": "ras2",
-        "my timer": "Status: idle",
-        "my timer.runStatus": "Idle",
-        "my timer.totalElapsed": "0",
-        "notifyTime": "2019-07-18 14:36:28.53515 +0300 IDT",
-        "openDuration": "0h 0m 14s",
-        "owner": "meir",
-        "parent": "N/A",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "N/A",
-        "rawCloseReason": "N/A",
-        "rawJSON": "N/A",
-        "rawName": "layoutsss",
-        "rawPhase": "N/A",
-        "rawType": "Layout Kingdom",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "sla": "0",
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
-        "testgrid": "[{\"test\":\"test\"},{}]",
-        "testnum": "0",
-        "version": "9"
-      },
-      {
-        "CloseReason": "Duplicate",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "N/A",
-        "Id": "48",
-        "Name": "aaa",
-        "Occurred": "Mon, 22 Jul 2019 15:28:48 IDT",
-        "PlaybookId": "Default",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Layout Kingdom",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1563798528179524000",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "Closed by #close aa",
-        "closed": "Mon, 22 Jul 2019 15:28:48 IDT",
-        "closingUserId": "DBot",
-        "created": "Mon, 22 Jul 2019 15:28:48 IDT",
-        "cusotmseverity": "Sev1",
-        "details": "cxzc",
-        "droppedCount": "0",
-        "griud": "[{\"columnheader3\":\"cz\",\"coolnum\":\"5\"},{\"columnheader3\":\"zz\",\"coolnum\":\"141\"},{\"columnheader3\":\"cz\",\"coolnum\":\"2\"}]",
-        "hasRole": "N/A",
-        "hidden grid": "[{\"columnheader1\":\"cc\",\"columnheader2\":\"cccc\",\"columnheader3\":\"aadad\"}]",
-        "investigationId": "N/A",
-        "isPlayground": "N/A",
-        "labels": "map[type:Instance value:admin], map[type:Brand value:Manual]",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "1",
-        "linkedIncidents": "47",
-        "modified": "Mon, 22 Jul 2019 15:28:48 IDT",
-        "my grid": "[{\"column1\":\"a\",\"column5\":\"\",\"column5date\":\"2019-06-26T00:00:00+03:00\"},{\"column1\":\"b\"},{\"column1\":\"c\"}]",
-        "my multi select mandatory": "ras2",
-        "my timer": "Status: idle",
-        "my timer.runStatus": "Idle",
-        "my timer.totalElapsed": "0",
-        "notifyTime": "0001-01-01 00:00:00 +0000 UTC",
-        "openDuration": "0h 0m 0s",
-        "owner": "admin",
-        "parent": "N/A",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "N/A",
-        "rawCloseReason": "Duplicate",
-        "rawJSON": "N/A",
-        "rawName": "aaa",
-        "rawPhase": "N/A",
-        "rawType": "Layout Kingdom",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "sla": "0",
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
-        "testgrid": "[{\"test\":\"test\"},{}]",
-        "testnum": "0",
-        "version": "2"
-      },
-      {
-        "CloseReason": "Duplicate",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "N/A",
-        "Id": "60",
-        "Name": "aaaaa",
-        "Occurred": "Mon, 29 Jul 2019 17:35:58 IDT",
-        "PlaybookId": "Default",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Layout Kingdom",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1564410958865011000",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "Closed by #close aa",
-        "closed": "Mon, 29 Jul 2019 17:35:58 IDT",
-        "closingUserId": "DBot",
-        "created": "Mon, 29 Jul 2019 17:35:58 IDT",
-        "cusotmseverity": "Sev1",
-        "details": "d",
-        "droppedCount": "0",
-        "griud": "[{\"columnheader3\":\"z\",\"coolnum\":\"5\"},{\"columnheader3\":\"ccxc\",\"coolnum\":\"141\"},{\"columnheader3\":\"zz\",\"coolnum\":\"2\"}]",
-        "hasRole": "N/A",
-        "hidden grid": "[{\"columnheader1\":\"cc\",\"columnheader2\":\"cccc\",\"columnheader3\":\"aadad\"}]",
-        "investigationId": "N/A",
-        "isPlayground": "N/A",
-        "labels": "map[type:Instance value:admin], map[type:Brand value:Manual]",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "1",
-        "linkedIncidents": "47",
-        "modified": "Mon, 29 Jul 2019 17:35:58 IDT",
-        "my grid": "[{\"column1\":\"a\",\"column5\":\"\",\"column5date\":\"2019-06-26T00:00:00+03:00\"},{\"column1\":\"b\"},{\"column1\":\"c\"}]",
-        "my multi select mandatory": "ras2",
-        "my timer": "Status: idle",
-        "my timer.runStatus": "Idle",
-        "my timer.totalElapsed": "0",
-        "notifyTime": "0001-01-01 00:00:00 +0000 UTC",
-        "openDuration": "0h 0m 0s",
-        "owner": "admin",
-        "parent": "N/A",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "N/A",
-        "rawCloseReason": "Duplicate",
-        "rawJSON": "N/A",
-        "rawName": "aaaaa",
-        "rawPhase": "N/A",
-        "rawType": "Layout Kingdom",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "sla": "0",
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
-        "testgrid": "[{\"test\":\"test\"},{}]",
-        "testnum": "0",
-        "version": "2"
-      },
-      {
-        "CloseReason": "N/A",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "Wed, 12 Jun 2019 10:38:15 IDT",
-        "Id": "29",
-        "Name": "dxdsd",
-        "Occurred": "Sun, 02 Jun 2019 10:38:15 IDT",
-        "PlaybookId": "Default",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "test",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1559461095966569000",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "Default Enrichment Playbook",
-        "closed": "Wed, 24 Jul 2019 17:46:14 IDT",
-        "closingUserId": "DBot",
-        "created": "Sun, 02 Jun 2019 10:38:15 IDT",
-        "cusotmseverity": "Sev1",
-        "customMulti": "n, v",
-        "details": "dssds",
-        "droppedCount": "0",
-        "griud": "[{},{},{}]",
-        "hasRole": "N/A",
-        "investigationId": "29",
-        "isPlayground": "N/A",
-        "labels": "map[type:Instance value:admin], map[type:Brand value:Manual]",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "0",
-        "linkedIncidents": "N/A",
-        "modified": "Wed, 24 Jul 2019 17:46:14 IDT",
-        "myselect": "this is bad",
-        "notifyTime": "2019-06-02 10:38:27.49709 +0300 IDT",
-        "openDuration": "7w 3d 7h",
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 15:58:45 UTC",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 15:58:45 UTC",
+        "id": "1",
+        "investigationId": "1",
+        "modified": "2016-07-15T18:58:48.572316679+03:00",
+        "name": "tes1",
+        "occurred": "Fri, 15 Jul 2016 15:58:45 UTC",
+        "openDuration": 0,
         "owner": "dorsha",
-        "parent": "N/A",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "N/A",
-        "rawCloseReason": "N/A",
-        "rawJSON": "N/A",
-        "rawName": "dxdsd",
-        "rawPhase": "N/A",
-        "rawType": "test",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "sla": "2",
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
-        "testgrid": "[{},{}]",
-        "testnum": "0",
-        "version": "18"
+        "playbookId": "playbook0",
+        "rawName": "tes1",
+        "rawType": "Default",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": [],
+        "type": "Default",
+        "version": 3
       },
       {
-        "Attachment Count": "0",
-        "CloseReason": "N/A",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "Sat, 06 Jul 2019 11:09:51 IDT",
-        "Email Size": "0",
-        "Email Subject": "hkh",
-        "Id": "39",
-        "Name": "acccc",
-        "Occurred": "Wed, 26 Jun 2019 11:09:51 IDT",
-        "PlaybookId": "Default",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Layout Kingdom",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1561536591576625000",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "Default Enrichment Playbook",
-        "closed": "Thu, 18 Jul 2019 14:34:44 IDT",
-        "closingUserId": "DBot",
-        "created": "Wed, 26 Jun 2019 11:09:51 IDT",
-        "cusotmseverity": "Sev1",
-        "details": "N/A",
-        "droppedCount": "0",
-        "griud": "[{\"coolnum\":\"5\"},{\"coolnum\":\"141\"},{\"coolnum\":\"2\"}]",
-        "hasRole": "N/A",
-        "investigationId": "39",
-        "isPlayground": "N/A",
-        "labels": "map[type:Instance value:admin], map[type:Brand value:Manual]",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "0",
-        "linkedIncidents": "N/A",
-        "modified": "Thu, 01 Aug 2019 12:37:41 IDT",
-        "my attachments": "[]",
-        "notifyTime": "2019-07-18 14:34:40.970826 +0300 IDT",
-        "openDuration": "3w 1d 3h",
-        "owner": "analyst",
-        "parent": "N/A",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "N/A",
-        "rawCloseReason": "N/A",
-        "rawJSON": "N/A",
-        "rawName": "acccc",
-        "rawPhase": "N/A",
-        "rawType": "Layout Kingdom",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "sla": "2",
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
-        "testgrid": "[{\"test\":\"test\"},{}]",
-        "testnum": "0",
-        "version": "23"
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "10",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.81129304+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
       {
-        "CloseReason": "N/A",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "Sun, 09 Jun 2019 10:43:07 IDT",
-        "Id": "23",
-        "Name": "aaaa",
-        "Occurred": "Thu, 30 May 2019 10:43:07 IDT",
-        "PlaybookId": "Ransomware Playbook - Manual",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Ransomware",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1559202187691166000",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "N/A",
-        "closed": "Mon, 03 Jun 2019 21:02:38 IDT",
-        "closingUserId": "admin",
-        "created": "Thu, 30 May 2019 10:43:07 IDT",
-        "cusotmseverity": "Sev1",
-        "details": "N/A",
-        "droppedCount": "0",
-        "griud": "[{},{},{}]",
-        "hasRole": "N/A",
-        "investigationId": "23",
-        "isPlayground": "N/A",
-        "labels": "map[type:Instance value:admin], map[type:Brand value:Manual]",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "0",
-        "linkedIncidents": "N/A",
-        "modified": "Mon, 03 Jun 2019 21:02:38 IDT",
-        "notifyTime": "2019-05-30 10:43:09.627917 +0300 IDT",
-        "openDuration": "4d 10h 19m",
-        "owner": "admin",
-        "parent": "N/A",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "N/A",
-        "rawCloseReason": "N/A",
-        "rawJSON": "N/A",
-        "rawName": "aaaa",
-        "rawPhase": "N/A",
-        "rawType": "Ransomware",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "sla": "0",
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
-        "testgrid": "[{},{}]",
-        "testnum": "0",
-        "version": "8"
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "11",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.82069967+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
       {
-        "CloseReason": "Duplicate",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "Sun, 09 Jun 2019 13:14:05 IDT",
-        "Id": "24",
-        "Name": "access",
-        "Occurred": "Thu, 30 May 2019 13:14:05 IDT",
-        "PlaybookId": "N/A",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Access",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1559211245619878000",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "Duplicate to #30",
-        "closed": "Mon, 17 Jun 2019 16:18:29 IDT",
-        "closingUserId": "admin",
-        "created": "Thu, 30 May 2019 13:14:05 IDT",
-        "cusotmseverity": "Sev3",
-        "details": "zsz",
-        "droppedCount": "0",
-        "griud": "[{},{},{}]",
-        "hasRole": "N/A",
-        "investigationId": "24",
-        "isPlayground": "N/A",
-        "labels": "map[type:Instance value:admin], map[type:Brand value:Manual]",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "1",
-        "linkedIncidents": "30",
-        "modified": "Mon, 17 Jun 2019 21:51:52 IDT",
-        "notifyTime": "0001-01-01 00:00:00 +0000 UTC",
-        "openDuration": "2w 4d 3h",
-        "owner": "N/A",
-        "parent": "N/A",
-        "phase": "Unassigned",
-        "previousRoles": "Analyst, Administrator",
-        "rawCategory": "N/A",
-        "rawCloseReason": "Duplicate",
-        "rawJSON": "N/A",
-        "rawName": "access",
-        "rawPhase": "N/A",
-        "rawType": "Access",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Analyst, Administrator",
-        "runStatus": "idle",
-        "sla": "2",
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
-        "testgrid": "[{},{}]",
-        "testnum": "0",
-        "version": "5"
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "12",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.826645796+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
       {
-        "CloseReason": "Duplicate",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "Thu, 16 May 2019 12:34:06 IDT",
-        "Id": "2",
-        "Name": "this is the name that we need here",
-        "Occurred": "Mon, 06 May 2019 12:34:06 IDT",
-        "PlaybookId": "Default",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Informational",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Unclassified",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "map[description: name:6C400B5.png path:2_89b6285f-5e9b-43d5-8ef0-58480c5e0f63_6C400B5.png showMediaFile:true type:image/png]",
-        "autime": "1557135246070354000",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "Duplicate to #30",
-        "closed": "Mon, 17 Jun 2019 16:18:29 IDT",
-        "closingUserId": "admin",
-        "created": "Mon, 06 May 2019 12:34:06 IDT",
-        "details": "N/A",
-        "droppedCount": "0",
-        "griud": "[{},{},{}]",
-        "hasRole": "N/A",
-        "investigationId": "2",
-        "isPlayground": "N/A",
-        "labels": "map[type:Instance value:admin], map[type:Brand value:Manual]",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "1",
-        "linkedIncidents": "30",
-        "modified": "Mon, 17 Jun 2019 16:18:29 IDT",
-        "notifyTime": "2019-05-06 15:35:38.423647 +0300 IDT",
-        "openDuration": "6w 0d 3h",
-        "owner": "rishi",
-        "parent": "N/A",
-        "phase": "Unassigned",
-        "previousRoles": "Administrator",
-        "rawCategory": "N/A",
-        "rawCloseReason": "Duplicate",
-        "rawJSON": "N/A",
-        "rawName": "this is the name that we need here",
-        "rawPhase": "N/A",
-        "rawType": "Unclassified",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Administrator",
-        "runStatus": "idle",
-        "sla": "2",
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
-        "testgrid": "[{},{}]",
-        "version": "11"
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "13",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.836298751+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Critical",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
       },
       {
-        "CloseReason": "N/A",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "Thu, 23 May 2019 11:14:04 IDT",
-        "Id": "5",
-        "Name": "acxczcxzc",
-        "Occurred": "Mon, 13 May 2019 11:14:04 IDT",
-        "PlaybookId": "test1",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Unclassified",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1557735244276235000",
-        "canvases": "N/A",
-        "category": "job",
-        "closeNotes": "N/A",
-        "closed": "Mon, 13 May 2019 11:14:24 IDT",
-        "closingUserId": "admin",
-        "created": "Mon, 13 May 2019 11:14:04 IDT",
-        "details": "N/A",
-        "droppedCount": "0",
-        "griud": "[{},{\"columnheader1\":true,\"columnheader2\":\"2019-05-21T00:00:00+03:00\"},{}]",
-        "hasRole": "N/A",
-        "investigationId": "5",
-        "isPlayground": "N/A",
-        "labels": "N/A",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "0",
-        "linkedIncidents": "N/A",
-        "modified": "Mon, 13 May 2019 11:14:24 IDT",
-        "notifyTime": "2019-05-13 11:14:04.510619 +0300 IDT",
-        "openDuration": "0h 0m 20s",
-        "owner": "admin",
-        "parent": "1104fa2a-5789-4e03-8d00-21ebb63d8de8",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "job",
-        "rawCloseReason": "N/A",
-        "rawJSON": "N/A",
-        "rawName": "acxczcxzc",
-        "rawPhase": "N/A",
-        "rawType": "Unclassified",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "sla": "0",
-        "sourceBrand": "N/A",
-        "sourceInstance": "N/A",
-        "testgrid": "[{\"columnheader1\":\"ccc\"},{\"columnheader2\":\"zzz\"}]",
-        "version": "6"
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "14",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.843264286+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "Virus",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Virus",
+        "version": 1
       },
       {
-        "CloseReason": "Duplicate",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "Thu, 23 May 2019 11:14:48 IDT",
-        "Id": "6",
-        "Name": "acxczcxzc",
-        "Occurred": "Mon, 13 May 2019 11:14:48 IDT",
-        "PlaybookId": "test1",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Unclassified",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1557735288604117000",
-        "canvases": "N/A",
-        "category": "job",
-        "closeNotes": "Duplicate to #30",
-        "closed": "Mon, 17 Jun 2019 10:37:10 IDT",
-        "closingUserId": "admin",
-        "created": "Mon, 13 May 2019 11:14:48 IDT",
-        "details": "N/A",
-        "droppedCount": "0",
-        "griud": "[{},{\"columnheader1\":true,\"columnheader2\":\"2019-05-21T00:00:00+03:00\"},{}]",
-        "hasRole": "N/A",
-        "investigationId": "6",
-        "isPlayground": "N/A",
-        "labels": "N/A",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "1",
-        "linkedIncidents": "30",
-        "modified": "Mon, 17 Jun 2019 10:37:11 IDT",
-        "notifyTime": "0001-01-01 00:00:00 +0000 UTC",
-        "openDuration": "4w 6d 23h",
-        "owner": "admin",
-        "parent": "1104fa2a-5789-4e03-8d00-21ebb63d8de8",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "job",
-        "rawCloseReason": "Duplicate",
-        "rawJSON": "N/A",
-        "rawName": "acxczcxzc",
-        "rawPhase": "N/A",
-        "rawType": "Unclassified",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "sla": "2",
-        "sourceBrand": "N/A",
-        "sourceInstance": "N/A",
-        "testgrid": "[{\"columnheader1\":\"ccc\"},{\"columnheader2\":\"zzz\"}]",
-        "version": "7"
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "15",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.851831604+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Guy",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
       },
       {
-        "CloseReason": "Duplicate",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "Thu, 23 May 2019 11:14:51 IDT",
-        "Id": "7",
-        "Name": "acxczcxzc",
-        "Occurred": "Mon, 13 May 2019 11:14:51 IDT",
-        "PlaybookId": "test1",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Unclassified",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1557735291848303000",
-        "canvases": "N/A",
-        "category": "job",
-        "closeNotes": "Duplicate to #30",
-        "closed": "Mon, 17 Jun 2019 10:37:10 IDT",
-        "closingUserId": "admin",
-        "created": "Mon, 13 May 2019 11:14:51 IDT",
-        "details": "N/A",
-        "droppedCount": "0",
-        "griud": "[{},{\"columnheader1\":true,\"columnheader2\":\"2019-05-21T00:00:00+03:00\"},{}]",
-        "hasRole": "N/A",
-        "investigationId": "7",
-        "isPlayground": "N/A",
-        "labels": "N/A",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "1",
-        "linkedIncidents": "30",
-        "modified": "Mon, 17 Jun 2019 10:37:11 IDT",
-        "notifyTime": "0001-01-01 00:00:00 +0000 UTC",
-        "openDuration": "4w 6d 23h",
-        "owner": "admin",
-        "parent": "1104fa2a-5789-4e03-8d00-21ebb63d8de8",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "job",
-        "rawCloseReason": "Duplicate",
-        "rawJSON": "N/A",
-        "rawName": "acxczcxzc",
-        "rawPhase": "N/A",
-        "rawType": "Unclassified",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "sla": "2",
-        "sourceBrand": "N/A",
-        "sourceInstance": "N/A",
-        "testgrid": "[{\"columnheader1\":\"ccc\"},{\"columnheader2\":\"zzz\"}]",
-        "version": "7"
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "16",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.856962111+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "Virus",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Low",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Virus",
+        "version": 1
       },
       {
-        "CloseReason": "Duplicate",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: idle",
-        "Detection SLA.runStatus": "Idle",
-        "Detection SLA.totalElapsed": "0",
-        "DueDate": "Fri, 24 May 2019 09:51:28 IDT",
-        "Id": "8",
-        "Name": "aaaa",
-        "Occurred": "Tue, 14 May 2019 09:51:28 IDT",
-        "PlaybookId": "Default",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "Phishing",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1557816688887515000",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "Duplicate to #30",
-        "closed": "Mon, 17 Jun 2019 10:37:10 IDT",
-        "closingUserId": "admin",
-        "created": "Tue, 14 May 2019 09:51:28 IDT",
-        "details": "N/A",
-        "droppedCount": "0",
-        "griud": "[{},{},{}]",
-        "hasRole": "N/A",
-        "investigationId": "8",
-        "isPlayground": "N/A",
-        "labels": "map[type:Instance value:admin], map[type:Brand value:Manual]",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "1",
-        "linkedIncidents": "30",
-        "modified": "Wed, 03 Jul 2019 14:53:16 IDT",
-        "notifyTime": "2019-05-14 09:51:33.305978 +0300 IDT",
-        "openDuration": "4w 6d 0h",
-        "owner": "N/A",
-        "parent": "N/A",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "N/A",
-        "rawCloseReason": "Duplicate",
-        "rawJSON": "N/A",
-        "rawName": "aaaa",
-        "rawPhase": "N/A",
-        "rawType": "Phishing",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "sla": "2",
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
-        "testgrid": "[{},{}]",
-        "testnum": "5",
-        "version": "11"
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "17",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.867420191+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Slavik",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Low",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
       {
-        "CloseReason": "Duplicate",
-        "CustomFields": "N/A",
-        "Detection SLA": "Status: ended (2019-05-23T14:49:06+03:00)",
-        "Detection SLA.runStatus": "Ended",
-        "Detection SLA.totalElapsed": "2165525",
-        "DueDate": "Fri, 24 May 2019 10:12:11 IDT",
-        "Id": "9",
-        "Name": "zzzz",
-        "Occurred": "Tue, 14 May 2019 10:12:11 IDT",
-        "PlaybookId": "ask2",
-        "Remediation SLA": "Status: idle",
-        "Remediation SLA.runStatus": "Idle",
-        "Remediation SLA.totalElapsed": "0",
-        "Send to Mail": "helloddd",
-        "Severity": "Unknown",
-        "ShardID": "0",
-        "Status": "Closed",
-        "Time to Assignment": "Status: idle",
-        "Time to Assignment.runStatus": "Idle",
-        "Time to Assignment.totalElapsed": "0",
-        "Type": "dsfd",
-        "account": "test2",
-        "activated": "N/A",
-        "attachment": "N/A",
-        "autime": "1557817931316953000",
-        "canvases": "N/A",
-        "category": "N/A",
-        "closeNotes": "Duplicate to #30",
-        "closed": "Mon, 17 Jun 2019 16:18:29 IDT",
-        "closingUserId": "admin",
-        "created": "Tue, 14 May 2019 10:12:11 IDT",
-        "customHtml": "\u003cp style=\"color: red;\"\u003eHello\u003c/p\u003e\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
-        "customMD": "# Hey\n\n\n| aa | vcx   |   | ss  |   |\n|----|-------|---|-----|---|\n| 1  | zaaaa |   | ccc |   |\n\n\n\n\n\n\n\n\n",
-        "customMulti": "1, n",
-        "customURL": "http://google.com",
-        "details": "dwdewdads sadfsafd\nfdsfds\n\nV\nVzcxvv\n\n\n\n\n",
-        "droppedCount": "0",
-        "griud": "[{},{},{}]",
-        "hasRole": "N/A",
-        "investigationId": "9",
-        "isPlayground": "N/A",
-        "labels": "map[type:Instance value:admin], map[type:Brand value:Manual]",
-        "lastOpen": "0001-01-01 00:00:00 +0000 UTC",
-        "linkedCount": "1",
-        "linkedIncidents": "30",
-        "modified": "Tue, 23 Jul 2019 10:54:14 IDT",
-        "notifyTime": "2019-05-14 19:30:59.719113 +0300 IDT",
-        "openDuration": "4w 6d 6h",
-        "owner": "meir",
-        "parent": "N/A",
-        "phase": "Unassigned",
-        "previousRoles": "N/A",
-        "rawCategory": "N/A",
-        "rawCloseReason": "Duplicate",
-        "rawJSON": "N/A",
-        "rawName": "zzzz",
-        "rawPhase": "N/A",
-        "rawType": "dsfd",
-        "reason": "N/A",
-        "reminder": "N/A",
-        "roles": "Unassigned",
-        "runStatus": "idle",
-        "shorttest": "dsadsdddrewrewrewr",
-        "sla": "2",
-        "sourceBrand": "Manual",
-        "sourceInstance": "admin",
-        "testgrid": "[{},{}]",
-        "testnum": "39990",
-        "version": "50"
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:12:04 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:12:04 IDT",
+        "id": "18",
+        "investigationId": "",
+        "modified": "2016-07-15T20:12:04.141268665+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:12:04 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "High",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       }
     ],
     "layout": {
-      "classes": "striped stackable small compact",
-      "columnPos": 0,
-      "h": 3,
-      "i": "066b6010-b20d-11e9-94ff-1996bd9c05c6",
-      "readableHeaders": {
-        "closeReason": "CloseReason",
-        "dueDate": "DueDate",
-        "id": "Id",
-        "name": "Name",
-        "occurred": "Occurred",
-        "playbookId": "PlaybookId",
-        "severity": "Severity",
-        "status": "Status",
-        "type": "Type"
-      },
-      "rowPos": 7,
-      "tableColumns": [
-        "id",
-        "name",
-        "type",
-        "severity",
-        "status",
-        "playbookId",
-        "occurred",
-        "dueDate",
-        "closeReason"
-      ],
-      "w": 12
-    },
-    "query": {
-      "type": "incident",
-      "filter": {
-        "query": "status:Closed",
-        "fromDate": "0001-01-01T00:00:00Z",
-        "fromDateLicense": "0001-01-01T00:00:00Z",
-        "period": {
-          "by": "day",
-          "byFrom": "days",
-          "byTo": "",
-          "field": "",
-          "fromValue": 180,
-          "toValue": null
-        },
-        "toDate": "0001-01-01T00:00:00Z"
-      }
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "fromDate": "2019-02-02T20:23:27+02:00",
-    "title": "closed ",
-    "emptyNotification": "No results found",
-    "titleStyle": null
-  },
-  {
-    "type": "chart",
-    "data": [
-      {
-        "name": "2019-07-25",
-        "data": [
-          0
-        ],
-        "groups": []
-      },
-      {
-        "name": "2019-07-26",
-        "data": [
-          0
-        ],
-        "groups": []
-      },
-      {
-        "name": "2019-07-27",
-        "data": [
-          0
-        ],
-        "groups": []
-      },
-      {
-        "name": "2019-07-28",
-        "data": [
-          11
-        ],
-        "groups": [
-          {
-            "name": "Email",
-            "data": [
-              2
-            ],
-            "groups": null
-          },
-          {
-            "name": "Domain",
-            "data": [
-              5
-            ],
-            "groups": null
-          },
-          {
-            "name": "URL",
-            "data": [
-              3
-            ],
-            "groups": null
-          },
-          {
-            "name": "File",
-            "data": [
-              1
-            ],
-            "groups": null
-          }
-        ]
-      },
-      {
-        "name": "2019-07-29",
-        "data": [
-          3
-        ],
-        "groups": [
-          {
-            "name": "IP",
-            "data": [
-              2
-            ],
-            "groups": null
-          },
-          {
-            "name": "File",
-            "data": [
-              1
-            ],
-            "groups": null
-          }
-        ]
-      },
-      {
-        "name": "2019-07-30",
-        "data": [
-          0
-        ],
-        "groups": []
-      },
-      {
-        "name": "2019-07-31",
-        "data": [
-          0
-        ],
-        "groups": []
-      },
-      {
-        "name": "2019-08-01",
-        "data": [
-          1
-        ],
-        "groups": [
-          {
-            "name": "File",
-            "data": [
-              1
-            ],
-            "groups": null
-          }
-        ]
-      }
-    ],
-    "layout": {
-      "chartProperties": {
-        "format": "DD MMM Y",
-        "isDatesChart": true,
-        "layout": "vertical",
-        "margin": {
-          "bottom": 0,
-          "left": -20,
-          "right": 0,
-          "top": 5
-        },
-        "timeFrame": "days"
-      },
-      "chartType": "line",
-      "columnPos": 6,
-      "dimensions": {
-        "height": 180,
-        "width": 343
-      },
-      "h": 2,
-      "i": "ed9c7400-b21d-11e9-94ff-1996bd9c05c6",
-      "legend": [],
-      "legendStyle": {
-        "align": "center",
-        "iconSize": 8,
-        "iconType": "square",
-        "verticalAlign": "top",
-        "width": 343,
-        "wrapperStyle": {
-          "maxHeight": 48
-        }
-      },
-      "rowPos": 0,
-      "w": 6
-    },
-    "query": {
-      "type": "indicators",
-      "groupBy": [
-        "calculatedTime(d)",
-        "type"
-      ],
-      "filter": {
-        "query": "",
-        "period": {
-          "by": "day",
-          "byFrom": "days",
-          "byTo": "",
-          "field": "",
-          "fromValue": 7,
-          "toValue": null
-        },
-        "fromDate": "0001-01-01T00:00:00Z",
-        "toDate": "0001-01-01T00:00:00Z"
-      }
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "fromDate": "2019-07-25T20:23:27+03:00",
-    "title": "Indicators Activity by Type",
-    "emptyNotification": "No results found",
-    "titleStyle": null
-  },
-  {
-    "type": "markdown",
-    "data": {
-      "text": "THIS SHOULD PAGE BREAK AFTER\n\n\\pagebreak",
-      "groups": [
-        {
-          "name": "",
-          "data": [
-            11
-          ],
-          "groups": null
-        }
-      ]
-    },
-    "layout": {
-      "columnPos": 0,
-      "h": 1,
-      "i": "961ee380-b479-11e9-a274-6725d78de0c5",
-      "rowPos": 4,
-      "w": 12
-    },
-    "query": {
-      "type": "incident",
-      "filter": {
-        "query": "",
-        "period": {
-          "by": "day",
-          "byFrom": "days",
-          "byTo": "",
-          "field": "",
-          "fromValue": 7,
-          "toValue": null
-        },
-        "fromDate": "0001-01-01T00:00:00Z",
-        "toDate": "0001-01-01T00:00:00Z"
-      }
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "fromDate": "2019-07-25T20:23:27+03:00",
-    "title": "Text Widget",
-    "emptyNotification": "No results found",
-    "titleStyle": null
-  },
-  {
-    "type": "markdown",
-    "data": {
-      "text": "\\pagebreak",
-      "groups": [
-        {
-          "name": "",
-          "data": [
-            11
-          ],
-          "groups": null
-        }
-      ]
-    },
-    "layout": {
+      "rowPos": 10,
       "columnPos": 1,
-      "h": 1,
-      "i": "0c3ff610-b481-11e9-a274-6725d78de0c5",
-      "rowPos": 6,
-      "w": 11
-    },
-    "query": {
-      "type": "incident",
-      "filter": {
-        "query": "",
-        "period": {
-          "by": "day",
-          "byFrom": "days",
-          "byTo": "",
-          "field": "",
-          "fromValue": 7,
-          "toValue": null
-        },
-        "fromDate": "0001-01-01T00:00:00Z",
-        "toDate": "0001-01-01T00:00:00Z"
-      }
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "fromDate": "2019-07-25T20:23:27+03:00",
-    "title": "Text Widget",
-    "emptyNotification": "No results found",
-    "titleStyle": null
+      "tableColumns": ["name", "type", "status", "occurred", "severity", "owner", "playbookId"],
+      "classes": "striped stackable small very compact"
+    }
   }
 ]
