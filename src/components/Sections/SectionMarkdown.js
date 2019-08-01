@@ -127,8 +127,8 @@ function handleIterate(tableClasses, Tag, props, children) {
 
 const SectionMarkdown = ({ text, style, tableClasses }) => {
   let finalText = text;
-  IGNORE_KEYS.forEach(s => {
-    finalText = (finalText || '').replace(s, '')
+  IGNORE_KEYS.forEach((s) => {
+    finalText = (finalText || '').replace(s, '');
   });
   let res = finalText;
   try {
