@@ -66,7 +66,6 @@ class ReportLayout extends Component {
       // set dynamic height for all sections, fix top attribute.
       const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
       let accumulatedHeight = 0;
-      let pageBreakOffsets = 0;
       Object.keys(itemsByRow).sort(compareFields).forEach((key) => {
         const items = itemsByRow[key];
         let maxHeight = 0;
@@ -76,14 +75,14 @@ class ReportLayout extends Component {
             if (maxHeight < item.element.clientHeight) {
               maxHeight = item.element.clientHeight;
             }
-            item.element.style.top = `${accumulatedHeight + pageBreakOffsets}px`;
+            item.element.style.top = `${accumulatedHeight}px`;
             shouldPageBreak = shouldPageBreak || ReportLayout.isPageBreakSection(item.section);
           }
         });
         accumulatedHeight += maxHeight;
         // if page dimensions are set and should page break, calculate remaining height.
         if (dimensions && dimensions.height > 0 && shouldPageBreak) {
-          pageBreakOffsets += dimensions.height - (accumulatedHeight % dimensions.height);
+          accumulatedHeight += dimensions.height - (accumulatedHeight % dimensions.height);
         }
       });
     }, 3000);
