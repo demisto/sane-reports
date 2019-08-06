@@ -29,10 +29,11 @@ if (sections) {
     .forEach((rowPos) => { isLayout = isLayout && sections[rowPos].every(section => section.layout.i); });
 }
 
-let dimensions = undefined;
+let dimensions;
 try {
   dimensions = JSON.parse(reportDimensions);
 } catch (e) {
+  dimensions = undefined;
 }
 
 if (type === REPORT_TYPES.pdf) {
