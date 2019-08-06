@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { SECTION_ITEMS_DISPLAY_LAYOUTS, SECTION_ITEM_TYPE } from '../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
-import { SectionHTML, SectionTable } from './index';
+import { SectionHTML, SectionMarkdown, SectionTable } from './index';
 import { get, maxBy } from 'lodash';
 import uuid from 'uuid';
 import { sortByFieldsWithPriority } from '../../utils/sort';
@@ -120,7 +120,8 @@ class ItemsSection extends Component {
                   width: colSpan * columnWidth
                 };
                 const type = item.fieldType || '';
-                let dataDisplay = Array.isArray(item.data) ? <SectionTable data={item.data} /> : String(item.data);
+                let dataDisplay = Array.isArray(item.data) ? <SectionTable data={item.data} /> :
+                <SectionMarkdown text={String(item.data)} />;
                 if (type === SECTION_ITEM_TYPE.html) {
                   dataDisplay = <SectionHTML text={item.data} />;
                 }

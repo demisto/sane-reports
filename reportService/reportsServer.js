@@ -8,6 +8,8 @@ const path = require('path');
 
 const mmPixelSize = 3.779527559055;
 
+const PAGE_MARGIN = 60;
+
 (async() => {
   const paths = await chromePath();
   console.log(paths);
@@ -81,11 +83,16 @@ const mmPixelSize = 3.779527559055;
 
     console.log('now open: ' + distFolder + '/index.html');
     const indexHtml = fs.readFileSync(distFolder + '/index.html').toString();
+    const dimensions = getPageSizeByOrientation(pageSize, orientation);
+
+    const topMargin = (headerLeftImage || headerRightImage) && !disableHeaders ? PAGE_MARGIN : 0;
+    const bottomMargin = PAGE_MARGIN;
     const afterTypeReplace =
       indexHtml
         .replace('\'{report-type}\'', JSON.stringify(reportType))
         .replace('{report-header-image-left}', headerLeftImage)
-        .replace('{report-header-image-right}', headerRightImage);
+        .replace('{report-header-image-right}', headerRightImage)
+        .replace('{report-dimensions}', JSON.stringify({ height: dimensions.height - topMargin - bottomMargin, width: dimensions.width }));
 
     const loadedData = fs.readFileSync(dataFile).toString();
 
@@ -99,7 +106,6 @@ const mmPixelSize = 3.779527559055;
 
     console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
-    const dimensions = getPageSizeByOrientation(pageSize, orientation);
     const baseUrl = distFolder.startsWith('/') ? distFolder : path.join(process.cwd(), distFolder);
     console.log(`Using "${chromeExecution}" execution.`);
 
@@ -128,7 +134,7 @@ const mmPixelSize = 3.779527559055;
           path: outputFinal,
           format: pageSize,
           printBackground: true,
-          margin: {top: (headerLeftImage || headerRightImage) && !disableHeaders ? 60 : 0, bottom: 60},
+          margin: {top: topMargin, bottom: bottomMargin},
           displayHeaderFooter: true,
           headerTemplate: !disableHeaders ? "" + "<div style='" +
           "height: 200px;" +

@@ -72,3 +72,5 @@ export const SECTION_ITEM_TYPE = {
   html: 'html',
   text: 'text'
 };
+
+export const PAGE_BREAK_KEY = '\\pagebreak';

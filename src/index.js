@@ -29,6 +29,13 @@ if (sections) {
     .forEach((rowPos) => { isLayout = isLayout && sections[rowPos].every(section => section.layout.i); });
 }
 
+let dimensions;
+try {
+  dimensions = JSON.parse(reportDimensions);
+} catch (e) {
+  dimensions = undefined;
+}
+
 if (type === REPORT_TYPES.pdf) {
   ReactDOM.render(
     <div>
@@ -37,6 +44,7 @@ if (type === REPORT_TYPES.pdf) {
         sections={sections}
         headerLeftImage={headerLeftImage}
         headerRightImage={headerRightImage}
+        dimensions={dimensions}
       />
     </div>,
     document.getElementById('app')
