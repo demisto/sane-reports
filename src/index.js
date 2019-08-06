@@ -13,16 +13,6 @@ import { REPORT_DATA_TOKEN, REPORT_TYPES } from './constants/Constants';
 import { prepareSections, getReportType } from './utils/reports';
 import { generateOfficeReport } from './office/OfficeReport';
 
-function isJsonString(str) {
-  try {
-    JSON.parse(str);
-  } catch (e) {
-    return false;
-  }
-  return true;
-}
-
-
 let data = reportData;
 if (data === REPORT_DATA_TOKEN) {
   data = TemplateProvider.getIncidentDailyReportTemplate();
@@ -39,6 +29,12 @@ if (sections) {
     .forEach((rowPos) => { isLayout = isLayout && sections[rowPos].every(section => section.layout.i); });
 }
 
+let dimensions = undefined;
+try {
+  dimensions = JSON.parse(reportDimensions);
+} catch (e) {
+}
+
 if (type === REPORT_TYPES.pdf) {
   ReactDOM.render(
     <div>
@@ -47,7 +43,7 @@ if (type === REPORT_TYPES.pdf) {
         sections={sections}
         headerLeftImage={headerLeftImage}
         headerRightImage={headerRightImage}
-        dimensions={isJsonString(reportDimensions) ? JSON.parse(reportDimensions) : undefined}
+        dimensions={dimensions}
       />
     </div>,
     document.getElementById('app')
