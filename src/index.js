@@ -36,6 +36,8 @@ try {
   dimensions = undefined;
 }
 
+const isAutoHeightLayout = forceAutoHeightLayout === 'true';
+
 if (type === REPORT_TYPES.pdf) {
   ReactDOM.render(
     <div>
@@ -45,6 +47,7 @@ if (type === REPORT_TYPES.pdf) {
         headerLeftImage={headerLeftImage}
         headerRightImage={headerRightImage}
         dimensions={dimensions}
+        isAutoHeightLayout={isAutoHeightLayout}
       />
     </div>,
     document.getElementById('app')
