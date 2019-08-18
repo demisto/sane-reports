@@ -54,7 +54,7 @@ const PAGE_MARGIN = 60;
     return size;
   }
   if (process.argv.length < 2) {
-    console.log('Usage: ./reportServer <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <A3/A4/A5/Letter> <disableHeaders> <forceAutoHeightLayout> <chromePath>]');
+    console.log('Usage: ./reportServer <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <A3/A4/A5/Letter> <disableHeaders> <chromePath> <forceAutoHeightLayout>]');
   }
   const dataFile = process.argv[2];
   const outputFile = process.argv[3];
@@ -66,8 +66,8 @@ const PAGE_MARGIN = 60;
   const headerRightImage = process.argv[9] || '';
   const pageSize = process.argv[11] || PAGE_SIZES.Letter;
   const disableHeaders = process.argv[12] === true || process.argv[12] === "true";
-  const forceAutoHeightLayout = process.argv[13] === true || process.argv[13] === "true";
-  const chromeExecution = process.argv[14] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
+  const chromeExecution = process.argv[13] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
+  const forceAutoHeightLayout = process.argv[14] === true || process.argv[13] === "true";
   let browser;
 
   if (headerLeftImage && headerLeftImage.indexOf('data:image') === -1) {
