@@ -22,6 +22,7 @@ class ReportLayout extends Component {
     headerLeftImage: PropTypes.string,
     headerRightImage: PropTypes.string,
     isLayout: PropTypes.bool,
+    isAutoHeightLayout: PropTypes.bool,
     dimensions: PropTypes.object
   };
 
@@ -61,11 +62,12 @@ class ReportLayout extends Component {
   }
 
   componentDidMount() {
-    const { dimensions } = this.props;
+    const { dimensions, isAutoHeightLayout } = this.props;
     setTimeout(() => {
       // set dynamic height for all sections, fix top attribute.
       const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
       let accumulatedHeight = 0;
+      let pageOffset = 0;
       Object.keys(itemsByRow).sort(compareFields).forEach((key) => {
         const items = itemsByRow[key];
         let maxHeight = 0;
@@ -75,14 +77,20 @@ class ReportLayout extends Component {
             if (maxHeight < item.element.clientHeight) {
               maxHeight = item.element.clientHeight;
             }
-            item.element.style.top = `${accumulatedHeight}px`;
+            if (isAutoHeightLayout) {
+              item.element.style.top = `${accumulatedHeight}px`;
+            } else {
+              // just add page offset if any.
+              item.element.style.top = `${parseInt(item.element.style.top, 10) + pageOffset}px`;
+            }
             shouldPageBreak = shouldPageBreak || ReportLayout.isPageBreakSection(item.section);
           }
         });
         accumulatedHeight += maxHeight;
         // if page dimensions are set and should page break, calculate remaining height.
         if (dimensions && dimensions.height > 0 && shouldPageBreak) {
-          accumulatedHeight += dimensions.height - (accumulatedHeight % dimensions.height);
+          pageOffset += dimensions.height - (accumulatedHeight % dimensions.height);
+          accumulatedHeight += pageOffset;
         }
       });
     }, 3000);
@@ -155,7 +163,7 @@ class ReportLayout extends Component {
                                     this.itemElements[section.layout.i] = { element, gridItem, section };
                                   }}
                                   key={section.layout.i}
-                                  className={`section-${section.type} ${section.layout.class || ''}`}
+                                  className={`section-layout section-${section.type} ${section.layout.class || ''}`}
                                   style={section.layout.sectionStyle}
                                   data-grid={gridItem}
                                 >
