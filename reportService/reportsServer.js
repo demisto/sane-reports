@@ -67,7 +67,7 @@ const PAGE_MARGIN = 60;
   const pageSize = process.argv[11] || PAGE_SIZES.Letter;
   const disableHeaders = process.argv[12] === true || process.argv[12] === "true";
   const chromeExecution = process.argv[13] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
-  const forceAutoHeightLayout = process.argv[14] === true || process.argv[13] === "true";
+  const forceAutoHeightLayout = process.argv[14] === true || process.argv[14] === "true";
   let browser;
 
   if (headerLeftImage && headerLeftImage.indexOf('data:image') === -1) {
