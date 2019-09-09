@@ -7,6 +7,7 @@ import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 import { PAGE_BREAK_KEY } from '../../constants/Constants';
+import { mdBtn } from '../../utils/markdown';
 
 // plugins for react markdown component
 import abbr from 'markdown-it-abbr';
@@ -22,6 +23,18 @@ import ins from 'markdown-it-ins';
 
 const IGNORE_KEYS = [PAGE_BREAK_KEY];
 
+function createBtn(props, children) {
+  let message = children;
+  try {
+    const obj = JSON.parse(children[0]);
+    message = obj.message || message;
+  } catch (e) {
+    // do nothing
+  }
+  return (<span {...props}>{message}</span>);
+}
+
+
 function handleIterate(tableClasses, Tag, props, children) {
   let res = '';
   switch (Tag) {
@@ -31,6 +44,10 @@ function handleIterate(tableClasses, Tag, props, children) {
     case 'hr':
       res = (<hr {...props} />);
       break;
+    case 'mdbtn': {
+      res = createBtn(props, children);
+      break;
+    }
     case 'img': {
       const srcArr = props.src.split('=size=');
       props.src = srcArr[0];
@@ -145,7 +162,8 @@ const SectionMarkdown = ({ text, style, tableClasses }) => {
           container,
           footnote,
           deflist,
-          ins
+          ins,
+          mdBtn
         ]
       }
     )(finalText);
