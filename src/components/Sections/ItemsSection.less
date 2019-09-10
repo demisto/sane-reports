@@ -1,0 +1,33 @@
+@import (reference) "../../css/variables";
+
+.items-section {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  .section-description {
+    padding: 5px 10px;
+  }
+  .section-item {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 0 7px;
+    height: auto;
+    min-height: 50px;
+    &.row {
+      min-height: 24px;
+      flex-direction: row;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(137, 165, 193, 0.2);
+    }
+    .section-item-header {
+      width: 30%;
+      word-break: break-word;
+    }
+    .section-item-value {
+      flex: 1;
+      white-space: pre-line;
+      word-break: break-word;
+    }
+  }
+}

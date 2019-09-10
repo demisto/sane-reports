@@ -20,6 +20,21 @@ h1 {
   font-family: @font-family-base !important;
 }
 
+.global-section {
+  .global-section-row {
+    display: flex;
+    flex-direction: row;
+    .subsection-wrapper {
+      flex: 1;
+      .section-text {
+        height: 100%;
+      }
+    }
+  }
+  .section-chart {
+    display: block;
+  }
+}
 .report-layout {
   margin: @content-margin-top @content-margin-right @content-margin-bottom @content-margin-left;
   .report-row {
@@ -44,12 +59,38 @@ h1 {
   .react-grid-layout {
     height: auto !important; // override grid height
     .react-grid-item {
-      overflow: hidden;
+      overflow: visible;
       transition: none;
       z-index: 1;
+      height: auto !important;
+      transition-property: none;
+      &.fixed {
+      overflow: visible !important;
+      position: fixed !important;
+      transform: unset !important;
+      }
+      &.slim {
+        height: auto !important;
+      }
       &.section-table {
         height: auto !important; // override grid item height to fit content
       }
+      .section-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+        padding: 5px 10px;
+      }
+      &.section-layout {
+        padding: 10px 0;
+      }
+    }
+  }
+  .error-section {
+    border: 1px solid red;
+    padding: 5px;
+    word-break: break-all;
+    .error-message {
+      color: fade(red, 80%);
     }
   }
 }

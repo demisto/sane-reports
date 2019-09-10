@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
+import { PAGE_BREAK_KEY } from '../../constants/Constants';
+import { mdBtn } from '../../utils/markdown';
 
 // plugins for react markdown component
 import abbr from 'markdown-it-abbr';
@@ -19,6 +21,20 @@ import deflist from 'markdown-it-deflist';
 import ins from 'markdown-it-ins';
 // end of import plugin
 
+const IGNORE_KEYS = [PAGE_BREAK_KEY];
+
+function createBtn(props, children) {
+  let message = children;
+  try {
+    const obj = JSON.parse(children[0]);
+    message = obj.message || message;
+  } catch (e) {
+    // do nothing
+  }
+  return (<span {...props}>{message}</span>);
+}
+
+
 function handleIterate(tableClasses, Tag, props, children) {
   let res = '';
   switch (Tag) {
@@ -28,6 +44,10 @@ function handleIterate(tableClasses, Tag, props, children) {
     case 'hr':
       res = (<hr {...props} />);
       break;
+    case 'mdbtn': {
+      res = createBtn(props, children);
+      break;
+    }
     case 'img': {
       const srcArr = props.src.split('=size=');
       props.src = srcArr[0];
@@ -39,7 +59,7 @@ function handleIterate(tableClasses, Tag, props, children) {
         }
       }
 
-      res = (<img {...props} />); // eslint-disable-line jsx-a11y/img-has-alt
+      res = (<img {...props} />); // eslint-disable-line
       break;
     }
     case 'a':
@@ -57,13 +77,13 @@ function handleIterate(tableClasses, Tag, props, children) {
       const headerCells = headerRows[0].props.children;
 
       const bodyRows = tbody.props.children;
-      const headersValues = headerCells.map(cell => cell.props.children[0]);
+      const headersValues = headerCells.map(cell => (cell.props.children && cell.props.children[0]) || '');
       const tableContent = [];
       if (headersValues && bodyRows) {
         bodyRows.forEach((row) => {
           const newRow = {};
           const cells = row.props.children;
-          const cellValue = cells.map(cell => cell.props.children[0]);
+          const cellValue = cells.map(cell => (cell.props.children && cell.props.children[0]) || '');
           headersValues.forEach((headerValue, i) => {
             newRow[i] = isString(cellValue[i]) ? cellValue[i].replace(/<br>/g, '\n') : cellValue[i];
           });
@@ -123,7 +143,11 @@ function handleIterate(tableClasses, Tag, props, children) {
 }
 
 const SectionMarkdown = ({ text, style, tableClasses }) => {
-  let res = text;
+  let finalText = text;
+  IGNORE_KEYS.forEach((s) => {
+    finalText = (finalText || '').replace(s, '');
+  });
+  let res = finalText;
   try {
     const mdData = mdReact(
       {
@@ -138,10 +162,11 @@ const SectionMarkdown = ({ text, style, tableClasses }) => {
           container,
           footnote,
           deflist,
-          ins
+          ins,
+          mdBtn
         ]
       }
-    )(text);
+    )(finalText);
 
     if (mdData) {
       res = mdData;

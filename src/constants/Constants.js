@@ -7,6 +7,7 @@ export const SECTION_TYPES = {
   globalSection: 'globalSection',
   header: 'header',
   text: 'text',
+  html: 'html',
   list: 'list',
   trend: 'trend',
   number: 'number',
@@ -19,7 +20,8 @@ export const SECTION_TYPES = {
   duration: 'duration',
   json: 'json',
   divider: 'divider',
-  logo: 'logo'
+  logo: 'logo',
+  itemsSection: 'itemsSection'
 };
 
 export const CHART_TYPES = {
@@ -60,3 +62,15 @@ export const CHART_LEGEND_ITEM_HEIGHT = 26;
 export const NONE_VALUE_DEFAULT_NAME = 'None';
 
 export const RADIANS = Math.PI / 180;
+
+export const SECTION_ITEMS_DISPLAY_LAYOUTS = {
+  row: 'row',
+  card: 'card'
+};
+
+export const SECTION_ITEM_TYPE = {
+  html: 'html',
+  text: 'text'
+};
+
+export const PAGE_BREAK_KEY = '\\pagebreak';

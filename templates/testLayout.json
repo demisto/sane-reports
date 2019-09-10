@@ -134,6 +134,7 @@
   },
   {
     "type": "chart",
+    "legend": [],
     "data": [
       {
         "name": "0",
@@ -639,6 +640,42 @@
     "title": "Duration"
   },
   {
+    "type": "itemsSection",
+    "data": [
+      {
+        "fieldId": "id1",
+        "fieldName": "Name 1",
+        "fieldType": "",
+        "data": "flgdfkjgg ksdf;ajlgdsjkl kabg djfa;gzjdffdsfgadshlifaghoisgshg ofdhl djsaghdfhgldfjzhlgljhkdf;.gjkndflhdfnjlndaljnrdljgnfdg sdkzgjlfd;ng jfdglnzs;dgfzlnfbdkjfghsbklvkdnbvkjadlb/f jdfn;l zdgk;v rksdulngbjrslfhesutriWHOGWerkhewbNE;RDLVUBOdsEAS VTSLHFVSUTR UHOSG; DSGD;IJSbxIGS;NzzVFBS FDJLNGSB DL;SVdBL KBJLSARGN;IRS",
+        "headerStyle": null,
+        "endCol": 0,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 0
+      },
+      {
+        "fieldId": "id2",
+        "fieldName": "Name 2",
+        "fieldType": "html",
+        "data": "<p style=\"color: red;\">HELLO</p>",
+        "headerStyle": null,
+        "endCol": 0,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 1
+      }
+    ],
+    "layout": {
+      "columnPos": 0,
+      "h": 3,
+      "i": "ea707c90-9b20-11e9-90cd-270261182026",
+      "rowPos": 6,
+      "w": 4
+    },
+    "title": "Section with items",
+    "displayType": "row"
+  },
+  {
     "type": "table",
     "data": [
       {
@@ -652,7 +689,7 @@
       "columnPos": 0,
       "h": 2,
       "i": "3ebd9120-f5eb-11e7-92ea-eb1e1a874380",
-      "rowPos": 6,
+      "rowPos": 7,
       "tableColumns": [
         "aaa",
         "bbb"

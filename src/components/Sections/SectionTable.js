@@ -9,7 +9,7 @@ import truncate from 'lodash/truncate';
 import isObjectLike from 'lodash/isObjectLike';
 
 
-const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle }) => {
+const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -41,48 +41,49 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
 
   let tableBody;
   if (isArray(readyColumns)) {
-    tableBody = (
+    tableBody = tableData.length > 0 ? (
       <table className={'ui compact table unstackable section-table ' + classes} style={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
             {readyColumns.map((col) => {
-              return <th key={col.key || col}>{!col.hidden && ((readableHeaders && readableHeaders[col]) || col)}</th>;
+              const key = col.key || col;
+              return <th key={key}>{!col.hidden && ((readableHeaders && readableHeaders[key]) || key)}</th>;
             })}
           </tr>
         </thead>
         <tbody>
-        {tableData.map((row, i) =>
-          <tr key={i}>
-            {readyColumns.map((col, j) =>
-              (() => {
-                const key = col.key || col;
-                const cell = row[key] || readableHeaders && row[readableHeaders[key]];
+          {tableData.map((row, i) =>
+            <tr key={i}>
+              {readyColumns.map((col, j) =>
+                (() => {
+                  const key = col.key || col;
+                  const cell = row[key] || (readableHeaders && row[readableHeaders[key]]);
 
-                let cellToRender = '';
-                if (cell) {
-                  switch (cell.type) {
-                    case TABLE_CELL_TYPE.image:
-                      cellToRender = (
-                        <img
-                          src={cell.data}
-                          alt={cell.alt}
-                          className={'ui image ' + cell.classes}
-                          style={cell.style}
-                        />
-                      );
-                      break;
-                    default:
-                      cellToRender = truncate(cell, { length: DEFAULT_MAX_LENGTH });
+                  let cellToRender = '';
+                  if (cell) {
+                    switch (cell.type) {
+                      case TABLE_CELL_TYPE.image:
+                        cellToRender = (
+                          <img
+                            src={cell.data}
+                            alt={cell.alt}
+                            className={'ui image ' + cell.classes}
+                            style={cell.style}
+                          />
+                        );
+                        break;
+                      default:
+                        cellToRender = truncate(cell, { length: DEFAULT_MAX_LENGTH });
+                    }
                   }
-                }
-                return <td key={j} style={{ wordBreak: 'break-word' }}>{cellToRender}</td>;
-              })()
-            )}
-          </tr>
-        )}
+                  return <td key={j} style={{ wordBreak: 'break-word' }}>{cellToRender}</td>;
+                })()
+              )}
+            </tr>)
+          }
         </tbody>
       </table>
-    );
+    ) : <div className="no-data">{emptyString}</div>;
   } else {
     tableBody = (
       <table className={'ui compact table unstackable ' + classes}>
@@ -118,7 +119,8 @@ SectionTable.propTypes = {
   classes: PropTypes.string,
   style: PropTypes.object,
   title: PropTypes.string,
-  titleStyle: PropTypes.object
+  titleStyle: PropTypes.object,
+  emptyString: PropTypes.string
 };
 
 export default SectionTable;

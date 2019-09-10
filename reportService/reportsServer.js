@@ -8,6 +8,8 @@ const path = require('path');
 
 const mmPixelSize = 3.779527559055;
 
+const PAGE_MARGIN = 60;
+
 (async() => {
   const paths = await chromePath();
   console.log(paths);
@@ -52,7 +54,7 @@ const mmPixelSize = 3.779527559055;
     return size;
   }
   if (process.argv.length < 2) {
-    console.log('Usage: reportServer <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout> <type> <headerLeftImage> <headerRightImage>]');
+    console.log('Usage: ./reportServer <data file> [<output file> <dist folder> <portrait/landscape> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <A3/A4/A5/Letter> <disableHeaders> <chromePath> <forceAutoHeightLayout>]');
   }
   const dataFile = process.argv[2];
   const outputFile = process.argv[3];
@@ -65,6 +67,7 @@ const mmPixelSize = 3.779527559055;
   const pageSize = process.argv[11] || PAGE_SIZES.Letter;
   const disableHeaders = process.argv[12] === true || process.argv[12] === "true";
   const chromeExecution = process.argv[13] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
+  const forceAutoHeightLayout = process.argv[14] === true || process.argv[14] === "true";
   let browser;
 
   if (headerLeftImage && headerLeftImage.indexOf('data:image') === -1) {
@@ -81,11 +84,17 @@ const mmPixelSize = 3.779527559055;
 
     console.log('now open: ' + distFolder + '/index.html');
     const indexHtml = fs.readFileSync(distFolder + '/index.html').toString();
+    const dimensions = getPageSizeByOrientation(pageSize, orientation);
+
+    const topMargin = (headerLeftImage || headerRightImage) && !disableHeaders ? PAGE_MARGIN : 0;
+    const bottomMargin = PAGE_MARGIN;
     const afterTypeReplace =
       indexHtml
         .replace('\'{report-type}\'', JSON.stringify(reportType))
         .replace('{report-header-image-left}', headerLeftImage)
-        .replace('{report-header-image-right}', headerRightImage);
+        .replace('{report-header-image-right}', headerRightImage)
+        .replace('{report-dimensions}', JSON.stringify({ height: dimensions.height - topMargin - bottomMargin, width: dimensions.width }))
+        .replace('{force-auto-height}', !!forceAutoHeightLayout);
 
     const loadedData = fs.readFileSync(dataFile).toString();
 
@@ -99,7 +108,6 @@ const mmPixelSize = 3.779527559055;
 
     console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
-    const dimensions = getPageSizeByOrientation(pageSize, orientation);
     const baseUrl = distFolder.startsWith('/') ? distFolder : path.join(process.cwd(), distFolder);
     console.log(`Using "${chromeExecution}" execution.`);
 
@@ -121,15 +129,14 @@ const mmPixelSize = 3.779527559055;
     await page.goto('file://' + baseUrl + '/' + tmpReportName, {waitUntil: 'networkidle0'});
     await page.emulateMedia('screen');
     await page._client.send('Emulation.clearDeviceMetricsOverride');
-    await page.waitFor(4000); // wait for animations
+    await page.waitFor(5000); // wait for animations
     switch (reportType) {
       case 'pdf': {
         await page.pdf({
           path: outputFinal,
           format: pageSize,
           printBackground: true,
-          scale: 1,
-          margin: {top: (headerLeftImage || headerRightImage) && !disableHeaders ? 60 : 0, bottom: 60},
+          margin: {top: topMargin, bottom: bottomMargin},
           displayHeaderFooter: true,
           headerTemplate: !disableHeaders ? "" + "<div style='" +
           "height: 200px;" +

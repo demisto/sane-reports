@@ -3,6 +3,7 @@ import $ from 'jquery';
 window.jQuery = $; // Assure it's available globally.
 require('semantic-ui/dist/semantic.min.js'); // eslint-disable-line
 import './css/Index.css';
+import 'core-js';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -28,6 +29,15 @@ if (sections) {
     .forEach((rowPos) => { isLayout = isLayout && sections[rowPos].every(section => section.layout.i); });
 }
 
+let dimensions;
+try {
+  dimensions = JSON.parse(reportDimensions);
+} catch (e) {
+  dimensions = undefined;
+}
+
+const isAutoHeightLayout = forceAutoHeightLayout === 'true';
+
 if (type === REPORT_TYPES.pdf) {
   ReactDOM.render(
     <div>
@@ -36,6 +46,8 @@ if (type === REPORT_TYPES.pdf) {
         sections={sections}
         headerLeftImage={headerLeftImage}
         headerRightImage={headerRightImage}
+        dimensions={dimensions}
+        isAutoHeightLayout={isAutoHeightLayout}
       />
     </div>,
     document.getElementById('app')

@@ -1,14 +1,26 @@
+import './SectionList.less';
 import React from 'react';
 import PropTypes from 'prop-types';
-import isString from 'lodash/isString';
+import uuid from 'uuid';
+import { isString, isEmpty, isObject } from 'lodash';
 import moment from 'moment';
+import { TABLE_CELL_TYPE } from '../../constants/Constants';
+
+function getFieldComponentIfNeeded(dataValue) {
+  return isObject(dataValue) && dataValue.type === TABLE_CELL_TYPE.image ? (<img
+    src={dataValue.data}
+    alt={dataValue.alt}
+    className={'ui image ' + dataValue.classes}
+    style={dataValue.style}
+  />) : dataValue;
+}
 
 function getFieldValue(fieldName, dataItem) {
   if (dataItem && dataItem[fieldName] !== undefined) {
-    return dataItem[fieldName];
+    return getFieldComponentIfNeeded(dataItem[fieldName]);
   }
   if (dataItem && dataItem.CustomFields) {
-    return dataItem.CustomFields[fieldName];
+    return getFieldComponentIfNeeded(dataItem.CustomFields[fieldName]);
   }
 
   return '';
@@ -32,7 +44,7 @@ function styleByFieldName(fieldName, currentData) {
   }
 }
 
-const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
+const SectionList = ({ columns, data, classes, style, title, titleStyle, emptyString }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -42,22 +54,35 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
       return <div>Error parsing table</div>;
     }
   }
-  const mainClass = `section-list ui list ${classes}`;
+  const mainClass = `section-list ${classes || ''}`;
   return (
     <div className={mainClass} style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
-      {tableData.map((item) => {
-        const leftName = columns[0] ? columns[0].key : 'name';
+      {tableData.length > 0 ? tableData.map((item) => {
+        let leftName = 'name';
+        if (!isEmpty(columns)) {
+          leftName = (isObject(columns[0]) ? columns[0].key : columns[0]) || leftName;
+        }
         const mainKeyValue = getFieldValue(leftName, item);
 
-        const rightName = columns[1] ? columns[1].key : 'value';
+        let rightName = 'value';
+        if (!isEmpty(columns) && columns.length > 1) {
+          rightName = (isObject(columns[1]) ? columns[1].key : columns[1]) || rightName;
+        }
         const rightValue = getFieldValue(rightName, item);
 
-        const id = getFieldValue('id', item);
+        let detailsValue;
+        if (!isEmpty(columns) && columns.length > 2) {
+          const detailsCol = (isObject(columns[2]) ? columns[2].key : columns[2]);
+          detailsValue = getFieldValue(detailsCol, item);
+        }
 
         return (
-          <div className="list-item item h3" key={id}>
-            <div className="left-list-value left floated content ellipsis" title={mainKeyValue}>
+          <div className="list-item item h3" key={uuid.v1()}>
+            <div
+              className="left-list-value left floated content ellipsis"
+              title={!isObject(mainKeyValue) ? mainKeyValue : ''}
+            >
               {styleByFieldName(leftName, mainKeyValue)}
             </div>
             <div className="right-list-value right floated content">
@@ -65,9 +90,10 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle }) => {
                 {styleByFieldName(rightName, rightValue)}
               </div>
             </div>
+            {detailsValue && <div className="details content">{detailsValue}</div>}
           </div>
         );
-      })}
+      }) : <div className="no-data">{emptyString}</div>}
     </div>
   );
 };
@@ -82,7 +108,8 @@ SectionList.propTypes = {
   classes: PropTypes.string,
   style: PropTypes.object,
   title: PropTypes.string,
-  titleStyle: PropTypes.object
+  titleStyle: PropTypes.object,
+  emptyString: PropTypes.string
 };
 
 export default SectionList;

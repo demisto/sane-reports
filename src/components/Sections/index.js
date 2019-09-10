@@ -9,4 +9,7 @@ export { default as SectionMarkdown } from './SectionMarkdown';
 export { default as SectionJson } from './SectionJson';
 export { default as SectionNumber } from './SectionNumber';
 export { default as SectionList } from './SectionList';
+export { default as SectionGroupedList } from './SectionGroupedList';
 export { default as SectionDuration } from './SectionDuration';
+export { default as ItemsSection } from './ItemsSection';
+export { default as SectionHTML } from './SectionHTML';
