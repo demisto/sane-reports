@@ -76,7 +76,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
                         cellToRender = truncate(cell, { length: DEFAULT_MAX_LENGTH });
                     }
                   }
-                  return <td key={j} style={{ wordBreak: 'break-word' }}>{cellToRender}</td>;
+                  return <td key={j} style={{ wordBreak: 'break-word', whiteSpace: 'pre' }}>{cellToRender}</td>;
                 })()
               )}
             </tr>)
