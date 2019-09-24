@@ -87,6 +87,13 @@ Each section can have its own style (camled case css style: font-size -> fontSiz
 ##### Important notice:
 **HTML sections use `dangerouslySetInnerHTML` to set the given text as html. This method may cause a security risk, so before using, please validate the source of the text, and use with cautious at your own risk.**
 
+## Contributor License Agreement
+Contributions are welcome and appreciated. To contribute follow the [Quick Start](#quick-start) section and submit a PR. 
+
+Before merging any PRs, we need all contributors to sign a contributor license agreement. By signing a contributor license agreement, we ensure that the community is free to use your contributions.
+
+When you open a new pull request, a bot will evaluate whether you have signed the CLA. If required, the bot will comment on the pull request, including a link to accept the agreement. The CLA document is also available for review as a [PDF](https://github.com/demisto/content/blob/master/docs/cla.pdf).
+
 ## License
 demisto/sane-reports is licensed under the [Apache License 2.0](https://github.com/demisto/sane-reports/blob/master/LICENSE)
 
