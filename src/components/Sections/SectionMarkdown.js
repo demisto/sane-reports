@@ -142,29 +142,34 @@ function handleIterate(tableClasses, Tag, props, children) {
   return res;
 }
 
-const SectionMarkdown = ({ text, style, tableClasses }) => {
+const SectionMarkdown = ({ text, style, tableClasses, doNotShowEmoji }) => {
   let finalText = text;
   IGNORE_KEYS.forEach((s) => {
     finalText = (finalText || '').replace(s, '');
   });
   let res = finalText;
   try {
+    const plugins = [
+      abbr,
+      sub,
+      sup,
+      mark,
+      container,
+      footnote,
+      deflist,
+      ins,
+      mdBtn
+    ];
+
+    if (!doNotShowEmoji) {
+      plugins.push(emoji);
+    }
+
     const mdData = mdReact(
       {
         onIterate: handleIterate.bind(this, tableClasses),
         markdownOptions: { typographer: true },
-        plugins: [
-          emoji,
-          abbr,
-          sub,
-          sup,
-          mark,
-          container,
-          footnote,
-          deflist,
-          ins,
-          mdBtn
-        ]
+        plugins
       }
     )(finalText);
 

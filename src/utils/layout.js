@@ -117,6 +117,7 @@ export function getSectionComponent(section) {
           text={isObjectLike(section.data) ? section.data.text : section.data}
           style={section.layout.style}
           tableClasses={section.layout.tableClasses}
+          doNotShowEmoji={section.layout.doNotShowEmoji}
         />
       );
       break;
