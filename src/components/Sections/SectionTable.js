@@ -9,7 +9,7 @@ import truncate from 'lodash/truncate';
 import isObjectLike from 'lodash/isObjectLike';
 
 
-const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString }) => {
+const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString, maxColumns }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -38,9 +38,9 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
     readyColumns = Object.keys(headerKeys);
   }
 
-
   let tableBody;
   if (isArray(readyColumns)) {
+    readyColumns = maxColumns > 0 ? readyColumns.slice(0, maxColumns) : readyColumns;
     tableBody = tableData.length > 0 ? (
       <table className={'ui compact table unstackable section-table ' + classes} style={{ tableLayout: 'fixed' }}>
         <thead>
@@ -76,7 +76,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
                         cellToRender = truncate(cell, { length: DEFAULT_MAX_LENGTH });
                     }
                   }
-                  return <td key={j} style={{ wordBreak: 'break-word', whiteSpace: 'pre' }}>{cellToRender}</td>;
+                  return <td key={j} style={{ wordBreak: 'break-all', wordWrap: 'break-word', whiteSpace: 'normal' }}>{cellToRender}</td>;
                 })()
               )}
             </tr>)
@@ -119,6 +119,7 @@ SectionTable.propTypes = {
   classes: PropTypes.string,
   style: PropTypes.object,
   title: PropTypes.string,
+  maxColumns: PropTypes.number,
   titleStyle: PropTypes.object,
   emptyString: PropTypes.string
 };

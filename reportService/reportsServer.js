@@ -126,6 +126,7 @@ const PAGE_MARGIN = 60;
 
     console.log('output ' + outputFinal);
     await page.setViewport({width: dimensions.width, height: dimensions.height});
+    await page.setDefaultNavigationTimeout(0);
     await page.goto('file://' + baseUrl + '/' + tmpReportName, {waitUntil: 'networkidle0'});
     await page.emulateMedia('screen');
     await page._client.send('Emulation.clearDeviceMetricsOverride');

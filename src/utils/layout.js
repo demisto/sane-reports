@@ -23,7 +23,7 @@ function getDefaultEmptyNotification() {
   return 'No results found.';
 }
 
-export function getSectionComponent(section) {
+export function getSectionComponent(section, maxWidth) {
   let sectionToRender;
   switch (section.type) {
     case SECTION_TYPES.header:
@@ -172,6 +172,7 @@ export function getSectionComponent(section) {
           style={section.layout.style}
           titleStyle={section.titleStyle}
           title={section.title}
+          maxColumns={section.layout.maxColumns || (maxWidth ? maxWidth / 100 : 0)}
           emptyString={section.emptyNotification || getDefaultEmptyNotification()}
         />
       );
