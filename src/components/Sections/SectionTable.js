@@ -9,7 +9,8 @@ import truncate from 'lodash/truncate';
 import isObjectLike from 'lodash/isObjectLike';
 
 
-const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString, maxColumns }) => {
+const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString,
+  maxColumns }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -76,7 +77,11 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
                         cellToRender = truncate(cell, { length: DEFAULT_MAX_LENGTH });
                     }
                   }
-                  return <td key={j} style={{ wordBreak: 'break-all', wordWrap: 'break-word', whiteSpace: 'normal' }}>{cellToRender}</td>;
+                  return (
+                    <td key={j} style={{ wordBreak: 'break-all', wordWrap: 'break-word', whiteSpace: 'normal' }}>
+                      {cellToRender}
+                    </td>
+                  );
                 })()
               )}
             </tr>)
