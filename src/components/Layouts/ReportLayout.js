@@ -43,8 +43,8 @@ class ReportLayout extends Component {
     return { w: section.layout.w, h: height, y: rows, x: section.layout.columnPos || 0, i: section.layout.i };
   }
 
-  static getElementBySection(section) {
-    let sectionToRender = getSectionComponent(section);
+  static getElementBySection(section, maxWidth) {
+    let sectionToRender = getSectionComponent(section, maxWidth);
     if (ReportLayout.isPageBreakSection(section)) {
       sectionToRender = (
         <div>
@@ -97,7 +97,7 @@ class ReportLayout extends Component {
   }
 
   render() {
-    const { sections, headerLeftImage, headerRightImage, isLayout } = this.props;
+    const { sections, headerLeftImage, headerRightImage, isLayout, dimensions } = this.props;
     return (
       <div className="report-layout">
         <span className="hidden-header" style={{ display: 'none' }}>
@@ -128,7 +128,7 @@ class ReportLayout extends Component {
                         >
                           {
                             (() => {
-                              return ReportLayout.getElementBySection(section);
+                              return ReportLayout.getElementBySection(section, dimensions && dimensions.width);
                             })()
                           }
                         </div>
