@@ -78,7 +78,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
                     }
                   }
                   return (
-                    <td key={j} style={{ wordBreak: 'break-all', wordWrap: 'break-word', whiteSpace: 'normal' }}>
+                    <td key={j} style={{ wordBreak: 'break-word', whiteSpace: 'pre-line' }}>
                       {cellToRender}
                     </td>
                   );
