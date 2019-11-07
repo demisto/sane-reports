@@ -18,7 +18,11 @@
       "rowPos": 2,
       "columnPos": 1,
       "style": {
+        "backgroundImage": "url(https://images.freeimages.com/images/large-previews/b8d/irish-landscape-1393571.jpg)",
         "textAlign": "left",
+        "display": "flex",
+        "alignItems": "center",
+        "padding": "20px",
         "fontSize": 12,
         "color": "#1f8f51"
       }
