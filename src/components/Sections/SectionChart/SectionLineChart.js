@@ -142,6 +142,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                   content={<ChartLegend
                     icon="square"
                     data={preparedLegend}
+                    capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
                     style={legendStyle && legendStyle.style}
                   />}
                   {...legendStyle}
