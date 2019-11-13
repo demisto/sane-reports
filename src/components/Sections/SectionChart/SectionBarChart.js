@@ -133,6 +133,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                     valueDisplay={VALUE_FORMAT_TYPES.minimal}
                     showValue={!isColumnChart && !stacked}
                     icon={legendStyle.iconType}
+                    capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
                     layout={legendStyle.layout}
                     style={legendStyle && legendStyle.style}
                   />}

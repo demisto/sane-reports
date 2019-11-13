@@ -377,6 +377,7 @@
       "legendStyle": {
         "align": "center",
         "iconSize": 8,
+        "capitalize": false,
         "iconType": "square",
         "verticalAlign": "top",
         "width": 772,
