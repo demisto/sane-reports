@@ -24,6 +24,7 @@ function filterSectionsAccordingToReportType(reportData, reportType) {
         if (section.type === SECTION_TYPES.date ||
             section.type === SECTION_TYPES.header ||
             section.type === SECTION_TYPES.text ||
+            section.type === SECTION_TYPES.markdown ||
             section.type === SECTION_TYPES.table) {
           shouldShow = true;
         }
