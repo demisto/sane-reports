@@ -12,7 +12,7 @@
     }
   },
   {
-    "type": "text",
+    "type": "markdown",
     "data": "This is left small green text.",
     "layout": {
       "rowPos": 2,

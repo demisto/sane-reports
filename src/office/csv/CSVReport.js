@@ -36,6 +36,7 @@ export function generateCSVReport(sections) {
             case SECTION_TYPES.header:
               csv += csvEscape(section.data);
               break;
+            case SECTION_TYPES.markdown:
             case SECTION_TYPES.text:
               csv += csvEscape(section.data);
               break;
