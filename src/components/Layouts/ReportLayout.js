@@ -65,8 +65,7 @@ class ReportLayout extends Component {
     setTimeout(() => {
       // set dynamic height for all sections, fix top attribute.
       const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
-      let pageOffset = 0;
-      let heightMap = {};
+      const heightMap = {};
       Object.keys(itemsByRow).sort(compareFields).forEach((key) => {
         const items = itemsByRow[key];
         let shouldPageBreak = false;
@@ -83,7 +82,7 @@ class ReportLayout extends Component {
         if (dimensions && dimensions.height > 0 && shouldPageBreak) {
           for (let i = 0; i < GRID_LAYOUT_COLUMNS; i++) {
             const accumulatedHeight = heightMap[i] || 0;
-            pageOffset = dimensions.height - (accumulatedHeight % dimensions.height);
+            const pageOffset = dimensions.height - (accumulatedHeight % dimensions.height);
             heightMap[i] = accumulatedHeight + pageOffset;
           }
         }

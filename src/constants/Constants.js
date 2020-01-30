@@ -74,4 +74,5 @@ export const SECTION_ITEM_TYPE = {
 };
 
 export const PAGE_BREAK_KEY = '\\pagebreak';
+
 export const PIXEL_SIZE = 3.779527559055;
