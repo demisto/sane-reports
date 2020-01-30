@@ -22,7 +22,6 @@ class ReportLayout extends Component {
     headerLeftImage: PropTypes.string,
     headerRightImage: PropTypes.string,
     isLayout: PropTypes.bool,
-    isAutoHeightLayout: PropTypes.bool,
     dimensions: PropTypes.object
   };
 
@@ -62,35 +61,31 @@ class ReportLayout extends Component {
   }
 
   componentDidMount() {
-    const { dimensions, isAutoHeightLayout } = this.props;
+    const { dimensions } = this.props;
     setTimeout(() => {
       // set dynamic height for all sections, fix top attribute.
       const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
-      let accumulatedHeight = 0;
       let pageOffset = 0;
+      let heightMap = {};
       Object.keys(itemsByRow).sort(compareFields).forEach((key) => {
         const items = itemsByRow[key];
-        let maxHeight = 0;
         let shouldPageBreak = false;
         items.forEach((item) => {
           if (item.element) {
-            if (maxHeight < item.element.clientHeight) {
-              maxHeight = item.element.clientHeight;
-            }
-            if (isAutoHeightLayout) {
-              item.element.style.top = `${accumulatedHeight}px`;
-            } else {
-              // just add page offset if any.
-              item.element.style.top = `${parseInt(item.element.style.top, 10) + pageOffset}px`;
+            item.element.style.top = `${heightMap[item.gridItem.x]}px`;
+            for (let i = item.gridItem.x; i < item.gridItem.x + item.gridItem.w; i++) {
+              heightMap[i] = heightMap[i] ? heightMap[i] + 20 + item.element.clientHeight : item.element.clientHeight;
             }
             shouldPageBreak = shouldPageBreak || ReportLayout.isPageBreakSection(item.section);
           }
         });
-        accumulatedHeight += maxHeight;
         // if page dimensions are set and should page break, calculate remaining height.
         if (dimensions && dimensions.height > 0 && shouldPageBreak) {
-          pageOffset += dimensions.height - (accumulatedHeight % dimensions.height);
-          accumulatedHeight += pageOffset;
+          for (let i = 0; i < GRID_LAYOUT_COLUMNS; i++) {
+            const accumulatedHeight = heightMap[i] || 0;
+            pageOffset = dimensions.height - (accumulatedHeight % dimensions.height);
+            heightMap[i] = accumulatedHeight + pageOffset;
+          }
         }
       });
     }, 3000);
