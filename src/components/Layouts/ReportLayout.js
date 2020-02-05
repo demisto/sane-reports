@@ -14,7 +14,9 @@ import ReactGridLayout from 'react-grid-layout';
 import { compareFields } from '../../utils/sort';
 import ErrorBoundary from '../ErrorBoundary';
 import { getSectionComponent } from '../../utils/layout';
+
 const ROW_PIXEL_HEIGHT = 110;
+const SECTION_HEIGHT_TOTAL_PADDING = 20;
 
 class ReportLayout extends Component {
   static propTypes = {
@@ -73,7 +75,8 @@ class ReportLayout extends Component {
           if (item.element) {
             item.element.style.top = `${heightMap[item.gridItem.x]}px`;
             for (let i = item.gridItem.x; i < item.gridItem.x + item.gridItem.w; i++) {
-              heightMap[i] = heightMap[i] ? heightMap[i] + 20 + item.element.clientHeight : item.element.clientHeight;
+              heightMap[i] = heightMap[i] ? heightMap[i] + SECTION_HEIGHT_TOTAL_PADDING
+                + item.element.clientHeight : item.element.clientHeight;
             }
             shouldPageBreak = shouldPageBreak || ReportLayout.isPageBreakSection(item.section);
           }
