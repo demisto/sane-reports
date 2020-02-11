@@ -22,7 +22,8 @@ import {
   ItemsSection
 } from '../../src/components/Sections';
 import { BarChart, Bar, PieChart, Pie, LineChart, Line } from 'recharts';
-import { PAGE_BREAK_KEY } from '../../src/constants/Constants';
+import { NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
+import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 
 describe('Report Container', () => {
   it('Generate test template report', () => {
@@ -322,6 +323,8 @@ describe('Report Container', () => {
 
     expect(pieChart.props().width).to.equal(sec5.layout.dimensions.width);
     expect(pie.props().data.length).to.equal(sec5.data.length);
+    expect(pie.props().data[pie.props().data.length-1].name).to.equal(NONE_VALUE_DEFAULT_NAME);
+    expect(pie.props().data[pie.props().data.length-1].fill).to.equal(DEFAULT_NONE_COLOR);
 
     expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);
