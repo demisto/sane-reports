@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ReportLayout } from '../components';
 
-const ReportContainer = ({ sections, headerLeftImage, headerRightImage, isLayout, dimensions, isAutoHeightLayout }) => {
+const ReportContainer = ({ sections, headerLeftImage, headerRightImage, isLayout, dimensions }) => {
   return (
     <ReportLayout
       sections={sections}
@@ -10,7 +10,6 @@ const ReportContainer = ({ sections, headerLeftImage, headerRightImage, isLayout
       headerLeftImage={headerLeftImage}
       headerRightImage={headerRightImage}
       dimensions={dimensions}
-      isAutoHeightLayout={isAutoHeightLayout}
     />
   );
 };
@@ -19,7 +18,6 @@ ReportContainer.propTypes = {
   headerLeftImage: PropTypes.string,
   headerRightImage: PropTypes.string,
   isLayout: PropTypes.bool,
-  isAutoHeightLayout: PropTypes.bool,
   dimensions: PropTypes.object
 };
 

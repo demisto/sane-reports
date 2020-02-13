@@ -9,7 +9,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReportContainer from './containers/ReportContainer';
 import * as TemplateProvider from '../templates/templateProvider';
-import { REPORT_DATA_TOKEN, REPORT_TYPES } from './constants/Constants';
+import { REPORT_DATA_TOKEN, REPORT_TYPES, PIXEL_SIZE } from './constants/Constants';
 import { prepareSections, getReportType } from './utils/reports';
 import { generateOfficeReport } from './office/OfficeReport';
 
@@ -33,10 +33,9 @@ let dimensions;
 try {
   dimensions = JSON.parse(reportDimensions);
 } catch (e) {
-  dimensions = undefined;
+  // use A4 by default
+  dimensions = { width: 210 * PIXEL_SIZE, height: 297 * PIXEL_SIZE };
 }
-
-const isAutoHeightLayout = forceAutoHeightLayout === 'true';
 
 if (type === REPORT_TYPES.pdf) {
   ReactDOM.render(
@@ -47,7 +46,6 @@ if (type === REPORT_TYPES.pdf) {
         headerLeftImage={headerLeftImage}
         headerRightImage={headerRightImage}
         dimensions={dimensions}
-        isAutoHeightLayout={isAutoHeightLayout}
       />
     </div>,
     document.getElementById('app')
