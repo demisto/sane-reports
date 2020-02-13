@@ -50,6 +50,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       // fix bar chart left label ticks cutoff.
       if (!isColumnChart) {
         let name = item.name || '';
+        if (!name) {
+          name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+        }
         // Spaces are breaking the words so find the longest word. 'A Cool Playbook' return 'Playbook'.
         if (name.indexOf(' ') > -1) {
           const names = name.split(' ');

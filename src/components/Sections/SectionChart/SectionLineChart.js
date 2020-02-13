@@ -6,7 +6,7 @@ import ChartLegend from './ChartLegend';
 import { compact, values, isEmpty } from 'lodash';
 import { AutoSizer } from 'react-virtualized';
 import moment from 'moment';
-import { QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/Constants';
+import { NONE_VALUE_DEFAULT_NAME, QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/Constants';
 import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
 
@@ -43,8 +43,11 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
       if (mainGroup.groups && mainGroup.data) {
         // add all sub groups to main object.
         mainGroup.groups.forEach((group) => {
-          const groupName = group.name;
-          const id = group.name;
+          let groupName = group.name;
+          if (!groupName) {
+            groupName = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+          }
+          const id = groupName;
           mainObject[groupName] = group.data[0];
           lineTypes[groupName] =
           {
