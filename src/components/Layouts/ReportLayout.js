@@ -73,7 +73,11 @@ class ReportLayout extends Component {
         let shouldPageBreak = false;
         items.forEach((item) => {
           if (item.element) {
-            item.element.style.top = `${heightMap[item.gridItem.x]}px`;
+            let maxOffset = heightMap[item.gridItem.x];
+            for (let i = item.gridItem.x + 1; i < item.gridItem.x + item.gridItem.w; i++) {
+              maxOffset = Math.max(maxOffset, heightMap[i] || 0);
+            }
+            item.element.style.top = `${maxOffset}px`;
             for (let i = item.gridItem.x; i < item.gridItem.x + item.gridItem.w; i++) {
               heightMap[i] = heightMap[i] ? heightMap[i] + SECTION_HEIGHT_TOTAL_PADDING
                 + item.element.clientHeight : item.element.clientHeight;
