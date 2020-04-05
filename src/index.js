@@ -15,7 +15,7 @@ import { generateOfficeReport } from './office/OfficeReport';
 
 let data = reportData;
 if (data === REPORT_DATA_TOKEN) {
-  data = TemplateProvider.getIncidentDailyReportTemplate();
+  data = TemplateProvider.getTestLayoutTemplate();
 }
 
 const type = getReportType(reportType);

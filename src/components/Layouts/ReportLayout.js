@@ -9,7 +9,7 @@ import {
   GRID_LAYOUT_COLUMNS,
   PAGE_BREAK_KEY
 } from '../../constants/Constants';
-import { groupBy, compact, get } from 'lodash';
+import { groupBy, compact, get, isString } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
 import { compareFields } from '../../utils/sort';
 import ErrorBoundary from '../ErrorBoundary';
@@ -29,7 +29,7 @@ class ReportLayout extends Component {
 
   static isPageBreakSection(section) {
     return !!get(section, 'layout.style.pageBreakBefore', false) || (section.type === SECTION_TYPES.markdown &&
-      section.data && (section.data.text || '').includes(PAGE_BREAK_KEY));
+      section.data && ((isString(section.data) ? section.data : section.data.text) || '').includes(PAGE_BREAK_KEY));
   }
 
   static getGridItemFromSection(section, overflowRows) {
@@ -95,7 +95,7 @@ class ReportLayout extends Component {
         }
       });
       // mark the html as ready
-      var readyDiv = document.createElement('div');
+      const readyDiv = document.createElement('div');
       readyDiv.id = 'ready-doc';
       document.getElementsByTagName('body')[0].appendChild(readyDiv);
     }, 3000);

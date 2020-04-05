@@ -1,7 +1,6 @@
 import './ItemsSection.less';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import { SECTION_ITEMS_DISPLAY_LAYOUTS, SECTION_ITEM_TYPE } from '../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
 import { SectionHTML, SectionMarkdown, SectionTable } from './index';
@@ -120,11 +119,11 @@ class ItemsSection extends Component {
                 <SectionMarkdown
                   text={description}
                   className="section-description"
-                  ref={(itemElement) => {
+                  setRef={(itemElement) => {
                     if (!itemElement) {
                       return;
                     }
-                    this.itemElements[DESCRIPTION_KEY] = ReactDOM.findDOMNode(itemElement);
+                    this.itemElements[DESCRIPTION_KEY] = itemElement;
                   }}
                 />
               )}

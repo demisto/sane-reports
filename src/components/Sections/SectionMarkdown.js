@@ -23,10 +23,11 @@ import ins from 'markdown-it-ins';
 
 const IGNORE_KEYS = [PAGE_BREAK_KEY];
 
-class SectionMarkdown extends Component {
+export default class SectionMarkdown extends Component {
   static propTypes = {
     text: PropTypes.string,
     style: PropTypes.object,
+    setRef: PropTypes.any,
     tableClasses: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.string
@@ -44,7 +45,7 @@ class SectionMarkdown extends Component {
     return (<span {...props}>{message}</span>);
   }
 
-  handleIterate(tableClasses, Tag, props, children) {
+  static handleIterate(tableClasses, Tag, props, children) {
     let res = '';
     switch (Tag) {
       case 'p':
@@ -107,21 +108,21 @@ class SectionMarkdown extends Component {
             key={Math.random()}
           >
             <thead>
-            <tr>
-              {headersValues.map((col, i) => {
-                return <th key={i}>{col}</th>;
-              })}
-            </tr>
+              <tr>
+                {headersValues.map((col, i) => {
+                  return <th key={i}>{col}</th>;
+                })}
+              </tr>
             </thead>
             <tbody>
-            {tableContent.map((row, i) => {
-              return (
-                <tr key={i}>
-                  {Object.keys(row).map((key, j) =>
-                    <td key={j + '.' + i} style={{ wordBreak: 'break-word' }}>{row[key]}</td>)}
-                </tr>
-              );
-            })}
+              {tableContent.map((row, i) => {
+                return (
+                  <tr key={i}>
+                    {Object.keys(row).map((key, j) =>
+                      <td key={j + '.' + i} style={{ wordBreak: 'break-word' }}>{row[key]}</td>)}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         );
@@ -152,7 +153,7 @@ class SectionMarkdown extends Component {
   }
 
   render() {
-    const { text, style, tableClasses, doNotShowEmoji } = this.props;
+    const { text, style, tableClasses, doNotShowEmoji, setRef } = this.props;
     let finalText = text;
     IGNORE_KEYS.forEach((s) => {
       finalText = (finalText || '').replace(s, '');
@@ -177,8 +178,8 @@ class SectionMarkdown extends Component {
 
       const mdData = mdReact(
         {
-          onIterate: this.handleIterate.bind(this, tableClasses),
-          markdownOptions: {typographer: true},
+          onIterate: SectionMarkdown.handleIterate.bind(this, tableClasses),
+          markdownOptions: { typographer: true },
           plugins
         }
       )(finalText);
@@ -191,11 +192,9 @@ class SectionMarkdown extends Component {
     }
 
     return (
-      <div className="section-markdown" style={style}>
+      <div className="section-markdown" ref={setRef} style={style}>
         {res}
       </div>
     );
-  };
+  }
 }
-
-export default SectionMarkdown;
