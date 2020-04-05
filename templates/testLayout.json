@@ -642,7 +642,7 @@
   },
   {
     "type": "markdown",
-    "data": { "text": "I will pagebreak now \\pagebreak" },
+    "data": { "text": "I will pagebreak now\\pagebreak" },
     "layout": {
       "rowPos": 6,
       "columnPos": 0,
