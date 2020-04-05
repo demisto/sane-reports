@@ -642,6 +642,7 @@
   },
   {
     "type": "itemsSection",
+    "description": "hello\n#### this is the description",
     "data": [
       {
         "fieldId": "id1",

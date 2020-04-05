@@ -1,12 +1,15 @@
 import './ItemsSection.less';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import { SECTION_ITEMS_DISPLAY_LAYOUTS, SECTION_ITEM_TYPE } from '../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
 import { SectionHTML, SectionMarkdown, SectionTable } from './index';
 import { get, maxBy } from 'lodash';
 import uuid from 'uuid';
 import { sortByFieldsWithPriority } from '../../utils/sort';
+
+const DESCRIPTION_KEY = 'description';
 
 class ItemsSection extends Component {
   static propTypes = {
@@ -102,6 +105,10 @@ class ItemsSection extends Component {
       }
     });
     maxOffset += (title ? 40 : 0) + 5;
+    const descriptionItem = this.itemElements[DESCRIPTION_KEY];
+    if (descriptionItem) {
+      maxOffset += descriptionItem.clientHeight || 0;
+    }
     return (
       <AutoSizer disableHeight>
         {({ width }) => {
@@ -109,7 +116,18 @@ class ItemsSection extends Component {
           return (
             <div className="items-section" style={{ width, height: maxOffset, ...style }}>
               {title && <div className="section-title" style={titleStyle}>{title}</div>}
-              {description && <div className="section-description">{description}</div>}
+              {description && (
+                <SectionMarkdown
+                  text={description}
+                  className="section-description"
+                  ref={(itemElement) => {
+                    if (!itemElement) {
+                      return;
+                    }
+                    this.itemElements[DESCRIPTION_KEY] = ReactDOM.findDOMNode(itemElement);
+                  }}
+                />
+              )}
               {(items || []).map((item) => {
                 const colSpan = this.getItemColSpan(item);
                 const id = this.getSectionItemKey(item);

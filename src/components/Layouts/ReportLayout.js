@@ -94,6 +94,10 @@ class ReportLayout extends Component {
           }
         }
       });
+      // mark the html as ready
+      var readyDiv = document.createElement('div');
+      readyDiv.id = 'ready-doc';
+      document.getElementsByTagName('body')[0].appendChild(readyDiv);
     }, 3000);
   }
 
