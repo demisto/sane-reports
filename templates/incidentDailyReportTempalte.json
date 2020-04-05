@@ -1,456 +1,580 @@
 [
   {
-    "type": "image",
-    "data": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNCIgaGVpZ2h0PSIzNCIgdmlld0JveD0iMCAwIDM0IDM0Ij4gIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+ICAgIDxwb2x5Z29uIGZpbGw9IiMzODM4M0QiIHBvaW50cz0iMjQuMzU5IDI0LjMwNSAzNC4wMTUgMzQuMDE2IDMzLjk5NCAxNC43NzIiLz4gICAgPHBvbHlnb24gZmlsbD0iIzk1QzgzRCIgcG9pbnRzPSIzMy45OTUgMCAwIC4wMTQgMjIuNzc3IDIyLjg1OCAzMy45MzYgMTEuNTI1Ii8+ICA8L2c+PC9zdmc+",
+    "type": "header",
+    "data": "Daily Incident Report",
     "layout": {
-      "class": "fixed",
-      "columnPos": 0,
-      "h": 1,
-      "i": "b67a2e7c-8b21-4a64-9be9-df9ebe8b1c6e",
-      "rowPos": 0,
-      "style": {
-        "position": "fixed",
-        "right": -1,
-        "top": 0
-      },
-      "w": 6
-    },
-    "query": {},
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "emptyNotification": "No results found",
-    "titleStyle": null
-  },
-  {
-    "type": "logo",
-    "data": "",
-    "layout": {
-      "columnPos": 6,
-      "h": 1,
-      "i": "cdcc8507-6b4f-4dc1-9b2c-794fb76c3209",
       "rowPos": 1,
+      "columnPos": 1,
       "style": {
-        "float": "right",
-        "height": 40,
-        "marginTop": 10,
-        "width": "auto"
-      },
-      "w": 6
-    },
-    "query": {
-      "type": "customer"
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "emptyNotification": "No results found",
-    "titleStyle": null
-  },
-  {
-    "type": "logo",
-    "data": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjguNjYgMTkuNjIiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMzczODNkO30uY2xzLTJ7ZmlsbDojOTNkNTAwO308L3N0eWxlPjwvZGVmcz48dGl0bGU+bG9nby1yZXBvcnRzPC90aXRsZT48ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIj48ZyBpZD0iTGF5ZXJfMS0yIiBkYXRhLW5hbWU9IkxheWVyIDEiPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQuMTgsMS42MSw2LjExLDQuMThoNC41YTEsMSwwLDAsMSwxLDF2OS4zM2ExLDEsMCwwLDEtMSwxSDUuNDd2NC4xOGg2LjExYTQuMTgsNC4xOCwwLDAsMCw0LjE4LTQuMThWNC41QTQuNTIsNC41MiwwLDAsMCwxMS4yNiwwSDBWMTQuMTVINC4xOFoiLz48cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMjQuMTIgMTUuNDQgMjQuMTIgMTEuOSAzMS41MiAxMS45IDMxLjUyIDcuNzIgMjQuMTIgNy43MiAyNC4xMiA0LjE4IDMzLjc3IDQuMTggMzMuNzcgMCAxOS45NCAwIDE5Ljk0IDE5LjYyIDMzLjc3IDE5LjYyIDMzLjc3IDE1LjQ0IDI0LjEyIDE1LjQ0Ii8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNTUuMzIsOC4zNlYxOS42Mmg0LjE5VjBINTYuMjljLS42NCwwLTEsLjA3LTEuMjkuNjRMNDguODksMTEuNTgsNDIuNzguNjRDNDIuNDYuMDcsNDIuMTQsMCw0MS40OSwwSDM4LjI4VjE5LjYyaDQuMThWOC4ybDYuNDMsMTEuMjYiLz48cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjY0Ljk3IiB3aWR0aD0iNC4xOCIgaGVpZ2h0PSIxOS42MiIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIxMDkuNjggMCA5My45MiAwIDkzLjkyIDQuMTggOTkuNzEgNC4xOCA5OS43MSAxOS42MiAxMDMuODkgMTkuNjIgMTAzLjg5IDQuMTggMTA5LjY4IDQuMTggMTA5LjY4IDAiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik03OC40OCw3LjcyaDcuNzRhNC4zNiw0LjM2LDAsMCwxLDQuMTYsNC41MmwwLDIuODhhNC4zNiw0LjM2LDAsMCwxLTQuMTgsNC41SDc4LjQ4YTQuMTgsNC4xOCwwLDAsMS00LjE4LTQuMThWMTQuMTVsNC4xOCwwdi42M2EuNjUuNjUsMCwwLDAsLjY1LjY0aDYuNDNhLjY1LjY1LDAsMCwwLC42NC0uNjRWMTEuOUg3OC40OEE0LjE4LDQuMTgsMCwwLDEsNzQuMyw3LjcyVjQuNUE0LjUyLDQuNTIsMCwwLDEsNzguOCwwaDcuMDhhNC41LDQuNSwwLDAsMSw0LjUsNC41djFIODYuMlY0LjgzYS42NS42NSwwLDAsMC0uNjQtLjY1SDc5LjEzYS42OS42OSwwLDAsMC0uNjUuNjUiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMjQuNDgsMThsLTEuOTMtMi41N2gtNC44M2EuNjQuNjQsMCwwLDEtLjY0LS42NHYtMTBhLjY1LjY1LDAsMCwxLC42NC0uNjVoNi4xMWEuNjUuNjUsMCwwLDEsLjY1LjY1Wm0wLTE4aC03LjRhNC4xOCw0LjE4LDAsMCwwLTQuMTgsNC4xOFYxNS43NmEzLjksMy45LDAsMCwwLDQuMTgsMy44Nmg3LjRhNC4xOCw0LjE4LDAsMCwwLDQuMTgtNC4xOFY0LjE4QTQuMTgsNC4xOCwwLDAsMCwxMjQuNDgsMCIvPjxyZWN0IGNsYXNzPSJjbHMtMiIgeT0iMTUuNDQiIHdpZHRoPSI0LjE4IiBoZWlnaHQ9IjQuMTgiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00LjE4LDEuNjEsNi4xMSw0LjE4aDQuNWExLDEsMCwwLDEsMSwxdjkuMzNhMSwxLDAsMCwxLTEsMUg1LjQ3djQuMThoNi4xMWE0LjE4LDQuMTgsMCwwLDAsNC4xOC00LjE4VjQuNUE0LjUyLDQuNTIsMCwwLDAsMTEuMjYsMEgwVjE0LjE1SDQuMThaIi8+PHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjI0LjEyIDE1LjQ0IDI0LjEyIDExLjkgMzEuNTIgMTEuOSAzMS41MiA3LjcyIDI0LjEyIDcuNzIgMjQuMTIgNC4xOCAzMy43NyA0LjE4IDMzLjc3IDAgMTkuOTQgMCAxOS45NCAxOS42MiAzMy43NyAxOS42MiAzMy43NyAxNS40NCAyNC4xMiAxNS40NCIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTU1LjMyLDguMzZWMTkuNjJoNC4xOVYwSDU2LjI5Yy0uNjQsMC0xLC4wNy0xLjI5LjY0TDQ4Ljg5LDExLjU4LDQyLjc4LjY0QzQyLjQ2LjA3LDQyLjE0LDAsNDEuNDksMEgzOC4yOFYxOS42Mmg0LjE4VjguMmw2LjQzLDExLjI2Ii8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSI2NC45NyIgd2lkdGg9IjQuMTgiIGhlaWdodD0iMTkuNjIiLz48cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTA5LjY4IDAgOTMuOTIgMCA5My45MiA0LjE4IDk5LjcxIDQuMTggOTkuNzEgMTkuNjIgMTAzLjg5IDE5LjYyIDEwMy44OSA0LjE4IDEwOS42OCA0LjE4IDEwOS42OCAwIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNzguNDgsNy43Mmg3Ljc0YTQuMzYsNC4zNiwwLDAsMSw0LjE2LDQuNTJsMCwyLjg4YTQuMzYsNC4zNiwwLDAsMS00LjE4LDQuNUg3OC40OGE0LjE4LDQuMTgsMCwwLDEtNC4xOC00LjE4VjE0LjE1bDQuMTgsMHYuNjNhLjY1LjY1LDAsMCwwLC42NS42NGg2LjQzYS42NS42NSwwLDAsMCwuNjQtLjY0VjExLjlINzguNDhBNC4xOCw0LjE4LDAsMCwxLDc0LjMsNy43MlY0LjVBNC41Miw0LjUyLDAsMCwxLDc4LjgsMGg3LjA4YTQuNSw0LjUsMCwwLDEsNC41LDQuNXYxSDg2LjJWNC44M2EuNjUuNjUsMCwwLDAtLjY0LS42NUg3OS4xM2EuNjkuNjksMCwwLDAtLjY1LjY1Ii8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTI0LjQ4LDE4bC0xLjkzLTIuNTdoLTQuODNhLjY0LjY0LDAsMCwxLS42NC0uNjR2LTEwYS42NS42NSwwLDAsMSwuNjQtLjY1aDYuMTFhLjY1LjY1LDAsMCwxLC42NS42NVptMC0xOGgtNy40YTQuMTgsNC4xOCwwLDAsMC00LjE4LDQuMThWMTUuNzZhMy45LDMuOSwwLDAsMCw0LjE4LDMuODZoNy40YTQuMTgsNC4xOCwwLDAsMCw0LjE4LTQuMThWNC4xOEE0LjE4LDQuMTgsMCwwLDAsMTI0LjQ4LDAiLz48L2c+PC9nPjwvc3ZnPg==",
-    "layout": {
-      "columnPos": 0,
-      "h": 1,
-      "i": "94b9ebdd-b81f-46a8-a3a3-fd3f8a59aefe",
-      "rowPos": 1,
-      "style": {
-        "height": 35,
-        "marginTop": 10,
-        "padding": 5,
-        "width": "auto"
-      },
-      "w": 6
-    },
-    "query": {},
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "emptyNotification": "No results found",
-    "titleStyle": null
-  },
-  {
-    "type": "text",
-    "data": "test report #20769",
-    "layout": {
-      "columnPos": 0,
-      "h": 1,
-      "i": "5720bb2e-517e-4543-919e-9f28a3ed92d7",
-      "rowPos": 2,
-      "style": {
-        "color": "#4e6767",
-        "fontSize": 22,
-        "textAlign": "left"
-      },
-      "w": 6
-    },
-    "query": {
-      "type": "sessionData",
-      "filter": "investigation",
-      "keys": [
-        "name",
-        "id"
-      ]
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "emptyNotification": "No results found",
-    "titleStyle": null
+        "textAlign": "left",
+        "fontSize": 28
+      }
+    }
   },
   {
     "type": "date",
-    "data": null,
+    "class": "row-class",
     "layout": {
-      "columnPos": 0,
-      "format": "MMMM Do YYYY, h:mm:ss a z",
-      "h": 1,
-      "i": "e7a14cec-8dbb-46e9-97f6-e40a2147b6fd",
-      "rowPos": 3,
+      "rowPos": 2,
+      "columnPos": 1,
+      "class": "cell-class",
       "style": {
-        "fontSize": 14,
-        "marginBottom": 12,
-        "textAlign": "left"
+        "textAlign": "left",
+        "color": "gray",
+        "fontSize": 13,
+        "fontStyle": "italic",
+        "marginBottom:": 12
       },
-      "w": 6
-    },
-    "query": {},
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "emptyNotification": "No results found",
-    "titleStyle": null
+      "format": "MMMM Do YYYY, h:mm:ss a z"
+    }
   },
   {
     "type": "text",
-    "data": "Generated by: admin",
+    "data": "Total incidents: 54",
     "layout": {
-      "columnPos": 0,
-      "h": 1,
-      "i": "6ab92996-938e-49f7-8fe0-960ce1f5a0bc",
-      "rowPos": 4,
-      "rowStyle": {
-        "marginTop": -20
+      "rowPos": 3,
+      "columnPos": 1,
+      "sectionStyle": {
+        "width": 200
       },
       "style": {
-        "fontSize": 14,
-        "textAlign": "left"
-      },
-      "w": 6
-    },
-    "query": {
-      "type": "sessionData",
-      "filter": "sessionUser",
-      "keys": [
-        "name"
-      ]
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "emptyNotification": "No results found",
-    "titleStyle": null
-  },
-  {
-    "type": "itemsSection",
-    "data": [
-      {
-        "fieldId": "severity",
-        "fieldName": "severity",
-        "fieldType": "singleSelect",
-        "data": "Unknown",
-        "headerStyle": {
-          "color": "rgba(64, 65, 66, 0.7)",
-          "fontSize": "12px",
-          "fontWeight": 700
-        },
-        "endCol": 3,
-        "displayType": "row",
-        "startCol": 0,
-        "index": 4
-      },
-      {
-        "fieldId": "user",
-        "fieldName": "User",
-        "fieldType": "shortText",
-        "data": "N/A",
-        "headerStyle": {
-          "color": "rgba(64, 65, 66, 0.7)",
-          "fontSize": "12px",
-          "fontWeight": 700
-        },
-        "endCol": 5,
-        "displayType": "row",
-        "startCol": 3,
-        "index": 1
+        "textAlign": "left",
+        "fontSize": 18
       }
-    ],
-    "layout": {
-      "columnPos": 0,
-      "h": 2,
-      "i": "vwqequkr8x-743861c0-6d1e-11ea-9de5-77b68ddf333f",
-      "rowPos": 8,
-      "w": 12
-    },
-    "query": {
-      "type": "incident"
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "title": "Ticket Information",
-    "emptyNotification": "No results found",
-    "displayType": "row",
-    "titleStyle": {
-      "borderBottom": "1px solid rgba(64, 65, 66, 0.16)",
-      "color": "#768BA1"
     }
   },
   {
-    "type": "itemsSection",
-    "data": [],
+    "type": "text",
+    "data": "Last day incidents: 39",
     "layout": {
-      "columnPos": 0,
-      "h": 2,
-      "i": "vwqequkr8x-dd47f3d0-6d21-11ea-9ac9-778086b3e6d0",
+      "rowPos": 3,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 18
+      }
+    }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 4,
+      "style": {
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Severity",
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Type",
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "Unknown", "value": 5, "url": "" },
+      { "name": "Low", "value": 7, "url": "" },
+      { "name": "Medium", "value": 11, "url": "" },
+      { "name": "High", "value": 7, "url": "" },
+      { "name": "Critical", "value": 9 , "url": ""}
+    ],
+    "layout": {
       "rowPos": 6,
-      "w": 12
-    },
-    "query": {
-      "type": "incident"
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "emptyNotification": "No results found",
-    "description": "Dear Customer,\n \n This is a Request for Information (RFI) from AIS Monitoring Team. AIS Monitoring team has observed the following suspicious events and would like your immediate attention to investigate.\n\n\n\n\n.\n",
-    "displayType": "row",
-    "titleStyle": {
-      "borderBottom": "1px solid rgba(64, 65, 66, 0.16)",
-      "color": "#768BA1"
+      "columnPos": 1,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 330,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "cx": 155,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Critical", "fill": "#8d070a" },
+        { "name": "High", "fill": "#D00a00" },
+        { "name": "Medium", "fill": "#cb4a00" },
+        { "name": "Low", "fill": "#267634" },
+        { "name": "Unknown", "fill": "#999999" }
+      ]
     }
   },
   {
-    "type": "itemsSection",
+    "type": "chart",
+    "data": [
+      { "name": "C2Communication", "value": 3 },
+      { "name": "Default", "value": 2 },
+      { "name": "DeviceLost", "value": 3 },
+      { "name": "Malware", "value": 4 },
+      { "name": "Phishing", "value": 8 },
+      { "name": "wow", "value": 7 },
+      { "name": "Ransomware", "value": 8 },
+      { "name": "UnknownBinary", "value": 4 }
+    ],
+    "layout": {
+      "rowPos": 6,
+      "columnPos": 2,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "sortBy": {
+        "values": ["value", "name"],
+        "orders": ["desc", "asc"]
+      },
+      "legend": [
+        { "name": "C2Communication", "fill": "#853732" },
+        { "name": "Default", "fill": "#3aabe8" },
+        { "name": "DeviceLost", "fill": "#5fa54a" },
+        { "name": "Malware", "fill": "#4f8aab" },
+        { "name": "Phishing", "fill": "#4f854a" },
+        { "name": "Ransomware", "fill": "#5b4185" },
+        { "name": "UnknownBinary", "fill": "#4faa5b" }
+      ]
+    }
+  },
+  {
+    "type": "text",
+    "data": "SLA",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Analyst",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "late", "value": 5 },
+      { "name": "about to end", "value": 11 },
+      { "name": "ok", "value": 23 }
+    ],
+    "layout": {
+      "rowPos": 8,
+      "columnPos": 1,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 180
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "cx": 155,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Late", "fill": "red" },
+        { "name": "About To End", "fill": "orange" },
+        { "name": "OK", "fill": "green" }
+      ]
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "Slavik", "relatedTo": 1, "value": 15, "url": "" },
+      { "name": "Guy", "relatedTo": 1, "value": 11 },
+      { "name": "Meir", "relatedTo": 1, "value": 9 },
+      { "name": "Aviad", "relatedTo": 1, "value": 4 }
+    ],
+    "layout": {
+      "rowPos": 8,
+      "columnPos": 2,
+      "chartType": "bar",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 10,
+        "marginLeft": -15
+      },
+      "chartProperties" : {
+        "layout": "vertical",
+        "strokeDasharray": "3 300",
+        "barSize": 13
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 200
+      },
+      "legend": [
+        { "name": "Busy Analyst", "fill": "#2884d1", "bar": 1 }
+      ]
+    }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 9,
+      "style": {
+      }
+    }
+  },
+  {
+    "type": "table",
     "data": [
       {
-        "fieldId": "hostname",
-        "fieldName": "Host Name",
-        "fieldType": "shortText",
-        "data": "N/A",
-        "headerStyle": {
-          "color": "rgba(64, 65, 66, 0.7)",
-          "fontSize": "12px",
-          "fontWeight": 700
-        },
-        "endCol": 6,
-        "displayType": "row",
-        "startCol": 3,
-        "index": 1
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 15:58:45 UTC",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 15:58:45 UTC",
+        "id": "1",
+        "investigationId": "1",
+        "modified": "2016-07-15T18:58:48.572316679+03:00",
+        "name": "tes1",
+        "occurred": "Fri, 15 Jul 2016 15:58:45 UTC",
+        "openDuration": 0,
+        "owner": "dorsha",
+        "playbookId": "playbook0",
+        "rawName": "tes1",
+        "rawType": "Default",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": [],
+        "type": "Default",
+        "version": 3
       },
       {
-        "fieldId": "user",
-        "fieldName": "User",
-        "fieldType": "shortText",
-        "data": "N/A",
-        "headerStyle": {
-          "color": "rgba(64, 65, 66, 0.7)",
-          "fontSize": "12px",
-          "fontWeight": 700
-        },
-        "endCol": 6,
-        "displayType": "row",
-        "startCol": 3,
-        "index": 2
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "10",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.81129304+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "11",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.82069967+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "12",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.826645796+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "13",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.836298751+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Critical",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "14",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.843264286+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "Virus",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Virus",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "15",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.851831604+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Guy",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "16",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.856962111+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "Virus",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Low",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Virus",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "17",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.867420191+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Slavik",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Low",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
+      },
+      {
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:12:04 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:12:04 IDT",
+        "id": "18",
+        "investigationId": "",
+        "modified": "2016-07-15T20:12:04.141268665+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:12:04 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "High",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       }
     ],
     "layout": {
-      "columnPos": 0,
-      "h": 3,
-      "i": "vwqequkr8x-6853e400-6d24-11ea-9ac9-778086b3e6d0",
       "rowPos": 10,
-      "w": 12
-    },
-    "query": {
-      "type": "incident"
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "title": "Event Information",
-    "emptyNotification": "No results found",
-    "displayType": "row",
-    "titleStyle": {
-      "borderBottom": "1px solid rgba(64, 65, 66, 0.16)",
-      "color": "#768BA1"
-    }
-  },
-  {
-    "type": "itemsSection",
-    "data": [],
-    "layout": {
-      "columnPos": 0,
-      "h": 1,
-      "i": "vwqequkr8x-8a1a0500-6d25-11ea-9ac9-778086b3e6d0",
-      "rowPos": 13,
-      "w": 12
-    },
-    "query": {
-      "type": "incident"
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "title": "Event/Vulnerability",
-    "emptyNotification": "No results found",
-    "description": "ทีม AIS Monitor ตรวจพบ Event ของการ Install Service ชื่อ XvPK Service บนเครื่อง CSOC-WIN2016-AIS ( 10.1.1.14  ) โดยใช้ Account ชื่อ SYSTEM บน Domain ชื่อ NT AUTHORITY เมื่อวันที่ 09/03/2020 เวลา 12:05:20 AM \n",
-    "displayType": "row",
-    "titleStyle": {
-      "borderBottom": "1px solid rgba(64, 65, 66, 0.16)",
-      "color": "#768BA1"
-    }
-  },
-  {
-    "type": "itemsSection",
-    "data": [],
-    "layout": {
-      "columnPos": 0,
-      "h": 3,
-      "i": "vwqequkr8x-e7359f10-6d25-11ea-9ac9-778086b3e6d0",
-      "rowPos": 14,
-      "w": 12
-    },
-    "query": {
-      "type": "incident"
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "title": "Threat Analysis",
-    "emptyNotification": "No results found",
-    "description": "จากการวิเคราะห์ Event ดังกล่าวที่เกิดขึ้น อาจเป็นไปได้ว่าเครื่อง CSOC-WIN2016-AIS ( 10.1.1.14  ) ถูก Compromise และทำ Persistence เพื่อใช้ในการ Maintain access สำหรับเข้าควบคุมเครื่องโดยไม่ได้รับอนุญาต \n\nโดยพบความผิดปกติที่พบมีดังนี้\n\n1.\tพบความผิดปกติของ Service Name ชื่อ XvPK Service เนื่องจากเป็นชื่อที่นอกเหนือจาก White list ของลูกค้า\n*ในกรณีที่ลูกค้ามี White list ของ Service \n\n2.\tพบความผิดปกติของ Service File Name ประกอบไปด้วย\n*SOCA วิเคราะห์ตามสถานการณ์\n\n•\t มีการสั่งให้ Run คำสั่งของการเพิ่ม User ชื่อ admin$ และมีการ Assign group ชื่อ administrators และ administradores ให้กับ User ดังกล่าว \n\n•\t มีการใช้ regsvr32 ในการ Execute ไฟล์ Scriptlets จาก http://139.5.177.19:8019/blue.txt ( IP Location : Malaysia ) เพื่อทำ Bypass Application Whitelist \n",
-    "displayType": "row",
-    "titleStyle": {
-      "borderBottom": "1px solid rgba(64, 65, 66, 0.16)",
-      "color": "#768BA1"
-    }
-  },
-  {
-    "type": "itemsSection",
-    "data": [],
-    "layout": {
-      "columnPos": 0,
-      "h": 3,
-      "i": "vwqequkr8x-12ac7ba0-6d26-11ea-9ac9-778086b3e6d0",
-      "rowPos": 17,
-      "w": 12
-    },
-    "query": {
-      "type": "incident"
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "title": "Recommendation",
-    "emptyNotification": "No results found",
-    "description": "ให้ทำการตรวจสอบ Service ชื่อ XvPK Service บนเครื่อง CSOC-WIN2016-AIS ( 10.1.1.14 ) ดังนี้\n\n1.\tตรวจสอบว่าเป็น Service ถูกติดตั้งโดย System Admin, System Owner หรือไม่ โดยสอบถามจาก User ที่ทำการเข้ามา Install Service ดังกล่าว \n( หากเป็น User ในรูปแบบของ SYSTEM อาจหมายความว่า Service บนเครื่องที่ Run โดย SYSTEM ถูกโจมตี หรือถูกยกสิทธิ์เป็น SYSTEM หรือไม่ก็อาจเป็นการ Install Service ของระบบเองก็ได้ ควรตรวจสอบจากวิธีอื่นๆ เพิ่มเติม )\n\n2.\tตรวจสอบว่าเป็น Service มีไว้ทำหน้าที่อะไร โดยตรวจสอบไฟล์ที่ถูกให้ Run จาก Service File Name ว่าเป็นไฟล์อันตรายหรือไม่ \n\nโดยหลังจากการตรวจสอบ พบว่ามีความผิดปกติจะต้องเข้าสู่กระบวนการทำ Incident Response จากนั้นดำเนินการดังต่อไปนี้ \n\n•\tRemove Service ดังกล่าวที่เป็นอันตราย \n\n•\tหาก User ที่ใช้ในการ Install Service ที่เป็นอันตรายเป็น User ของ System Admin, System Owner จะต้องมีการเปลี่ยน Password โดยทันทีเนื่องจาก User ดังกล่าวถูก Compromise เป็นที่เรียบร้อยแล้ว\n",
-    "displayType": "row",
-    "titleStyle": {
-      "borderBottom": "1px solid rgba(64, 65, 66, 0.16)",
-      "color": "#768BA1"
-    }
-  },
-  {
-    "type": "itemsSection",
-    "data": [],
-    "layout": {
-      "columnPos": 0,
-      "h": 1,
-      "i": "vwqequkr8x-4b1825c0-6d26-11ea-9ac9-778086b3e6d0",
-      "rowPos": 20,
-      "w": 12
-    },
-    "query": {
-      "type": "incident"
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "title": "Impact Analysis",
-    "emptyNotification": "No results found",
-    "description": "หากตรวจสอบแล้วพบว่า Service ดังกล่าวเป็นอันตราย มีความเป็นไปได้ว่าเครื่อง CSOC-WIN2016-AIS ( 10.1.1.14 ) โดน Compromise เรียบร้อยแล้ว และถูก Install Service เพื่อทำ Persistence ซึ่ง Malware ที่ถูกฝังไว้อาจมีการ Callback เรียกออกไปยัง C2 Server เพื่อขโมยข้อมูลบนระบบ หรือเข้าควบคุมเครื่อง CSOC-WIN2016-AIS ( 10.1.1.14 ) รวมถึงทำ Lateral movement บน Internal network ได้\n",
-    "displayType": "row",
-    "titleStyle": {
-      "borderBottom": "1px solid rgba(64, 65, 66, 0.16)",
-      "color": "#768BA1"
-    }
-  },
-  {
-    "type": "itemsSection",
-    "data": [],
-    "layout": {
-      "columnPos": 0,
-      "h": 2,
-      "i": "vwqequkr8x-68fdcdb0-6d26-11ea-9ac9-778086b3e6d0",
-      "rowPos": 21,
-      "w": 12
-    },
-    "query": {
-      "type": "incident"
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "title": "Prevention guideline",
-    "emptyNotification": "No results found",
-    "description": "ควรมีการ Limit privileges โดยการให้สิทธิ์ที่มีความสามารถในการ Install Service กับ User Account ที่จำเป็นต้องใช้เท่านั้นเช่น System Admin \n\n\nPrepared by …………………………….         Approved by…………………………………\n\nRegards,\nSecurity Analyst 1\nAIS Team\n",
-    "displayType": "row",
-    "titleStyle": {
-      "borderBottom": "1px solid rgba(64, 65, 66, 0.16)",
-      "color": "#768BA1"
+      "columnPos": 1,
+      "tableColumns": ["name", "type", "status", "occurred", "severity", "owner", "playbookId"],
+      "classes": "striped stackable small very compact"
     }
   }
 ]
