@@ -641,7 +641,19 @@
     "title": "Duration"
   },
   {
+    "type": "markdown",
+    "data": { "text": "I will pagebreak now\\pagebreak" },
+    "layout": {
+      "rowPos": 6,
+      "columnPos": 0,
+      "h": 2,
+      "i": "ea707c90-9b20-11e9-90cd-2702611820x6",
+      "w": 12
+    }
+  },
+  {
     "type": "itemsSection",
+    "description": "hello\n#### this is the description",
     "data": [
       {
         "fieldId": "id1",
@@ -670,7 +682,7 @@
       "columnPos": 0,
       "h": 3,
       "i": "ea707c90-9b20-11e9-90cd-270261182026",
-      "rowPos": 6,
+      "rowPos": 7,
       "w": 4
     },
     "title": "Section with items",
@@ -690,7 +702,7 @@
       "columnPos": 0,
       "h": 2,
       "i": "3ebd9120-f5eb-11e7-92ea-eb1e1a874380",
-      "rowPos": 7,
+      "rowPos": 8,
       "tableColumns": [
         "aaa",
         "bbb"

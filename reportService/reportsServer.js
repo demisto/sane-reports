@@ -130,7 +130,9 @@ const PAGE_MARGIN = 60;
     await page.goto('file://' + baseUrl + '/' + tmpReportName, {waitUntil: 'networkidle0'});
     await page.emulateMedia('screen');
     await page._client.send('Emulation.clearDeviceMetricsOverride');
-    await page.waitFor(5000); // wait for animations
+    await page.waitForSelector('#ready-doc', {
+      timeout: 10000
+    }); // wait for animations
     switch (reportType) {
       case 'pdf': {
         await page.pdf({
