@@ -10,6 +10,8 @@ import { QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/C
 import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
 
+const SINGLE_LINE_CHART_NAME = 'sum';
+
 const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null,
   referenceLineX, referenceLineY, fromDate, toDate }) => {
   const existingColors = {};
@@ -55,9 +57,18 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           };
         });
       } else {
-        Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach((groupKey) => {
-          lineTypes[groupKey] =
-            { name: groupKey, color: mainGroup.color || getGraphColorByName(groupKey), value: mainGroup[groupKey] };
+        if (mainGroup.data && mainGroup.data.length > 0) {
+          mainGroup = { name, [SINGLE_LINE_CHART_NAME]: mainGroup.data[0], color: mainGroup.color };
+        }
+        Object.keys(mainGroup).filter(key => key !== 'name' &&
+          key !== 'color' && key !== 'relatedTo').forEach((groupKey) => {
+          // add line type definition or add if exists
+          if (lineTypes[groupKey]) {
+            lineTypes[groupKey].value = lineTypes[groupKey].value + mainGroup[groupKey];
+          } else {
+            lineTypes[groupKey] =
+              {name: groupKey, color: mainGroup.color || getGraphColorByName(groupKey), value: mainGroup[groupKey]};
+          }
           mainObject[groupKey] = mainGroup[groupKey];
         });
       }
