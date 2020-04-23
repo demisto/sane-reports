@@ -62,7 +62,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         });
       } else {
         if (currentGroup.data && currentGroup.data.length > 0) {
-          currentGroup = { name, [SINGLE_LINE_CHART_NAME]: currentGroup.data[0], color: group.color };
+          currentGroup = { name, [SINGLE_LINE_CHART_NAME]: currentGroup.data[0], color: currentGroup.color };
         }
         Object.keys(currentGroup).filter(key => key !== 'name' && key !== 'color' &&
           key !== 'relatedTo').forEach((groupKey) => {
@@ -70,8 +70,11 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           if (lineTypes[groupKey]) {
             lineTypes[groupKey].value += currentGroup[groupKey] || 0;
           } else {
-            lineTypes[groupKey] =
-              { name: groupKey, color: currentGroup.color || getGraphColorByName(groupKey), value: group[groupKey] };
+            lineTypes[groupKey] = {
+              name: groupKey,
+              color: currentGroup.color || getGraphColorByName(groupKey),
+              value: currentGroup[groupKey]
+            };
           }
           mainObject[groupKey] = currentGroup[groupKey];
         });
