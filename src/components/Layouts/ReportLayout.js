@@ -9,12 +9,14 @@ import {
   GRID_LAYOUT_COLUMNS,
   PAGE_BREAK_KEY
 } from '../../constants/Constants';
-import { groupBy, compact, get } from 'lodash';
+import { groupBy, compact, get, isString } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
 import { compareFields } from '../../utils/sort';
 import ErrorBoundary from '../ErrorBoundary';
 import { getSectionComponent } from '../../utils/layout';
+
 const ROW_PIXEL_HEIGHT = 110;
+const SECTION_HEIGHT_TOTAL_PADDING = 20;
 
 class ReportLayout extends Component {
   static propTypes = {
@@ -27,7 +29,7 @@ class ReportLayout extends Component {
 
   static isPageBreakSection(section) {
     return !!get(section, 'layout.style.pageBreakBefore', false) || (section.type === SECTION_TYPES.markdown &&
-      section.data && (section.data.text || '').includes(PAGE_BREAK_KEY));
+      section.data && ((isString(section.data) ? section.data : section.data.text) || '').includes(PAGE_BREAK_KEY));
   }
 
   static getGridItemFromSection(section, overflowRows) {
@@ -71,9 +73,14 @@ class ReportLayout extends Component {
         let shouldPageBreak = false;
         items.forEach((item) => {
           if (item.element) {
-            item.element.style.top = `${heightMap[item.gridItem.x]}px`;
+            let maxOffset = heightMap[item.gridItem.x];
+            for (let i = item.gridItem.x + 1; i < item.gridItem.x + item.gridItem.w; i++) {
+              maxOffset = Math.max(maxOffset, heightMap[i] || 0);
+            }
+            item.element.style.top = `${maxOffset}px`;
             for (let i = item.gridItem.x; i < item.gridItem.x + item.gridItem.w; i++) {
-              heightMap[i] = heightMap[i] ? heightMap[i] + 20 + item.element.clientHeight : item.element.clientHeight;
+              heightMap[i] = heightMap[i] ? heightMap[i] + SECTION_HEIGHT_TOTAL_PADDING
+                + item.element.clientHeight : item.element.clientHeight;
             }
             shouldPageBreak = shouldPageBreak || ReportLayout.isPageBreakSection(item.section);
           }
@@ -87,6 +94,10 @@ class ReportLayout extends Component {
           }
         }
       });
+      // mark the html as ready
+      const readyDiv = document.createElement('div');
+      readyDiv.id = 'ready-doc';
+      document.getElementsByTagName('body')[0].appendChild(readyDiv);
     }, 3000);
   }
 

@@ -8,7 +8,7 @@ import merge from 'lodash/merge';
 import orderBy from 'lodash/orderBy';
 import isArray from 'lodash/isArray';
 import { getGraphColorByName } from '../../../utils/colors';
-import { CHART_LAYOUT_TYPE, RADIANS } from '../../../constants/Constants';
+import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME, RADIANS } from '../../../constants/Constants';
 
 const CustomizedPieLabel = ({ cx, cy, midAngle, outerRadius, percent, fill }) => {
   const radius = outerRadius * 1.1;
@@ -48,6 +48,9 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
     item.value = item.value || item.data;
     if (isArray(item.value) && item.value.length > 0) {
       item.value = item.value[0];
+    }
+    if (!item.name) {
+      item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
     }
     dataMap[item.name.toLowerCase()] = item;
   });

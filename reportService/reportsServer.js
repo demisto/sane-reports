@@ -111,7 +111,7 @@ const PAGE_MARGIN = 60;
     const baseUrl = distFolder.startsWith('/') ? distFolder : path.join(process.cwd(), distFolder);
     console.log(`Using "${chromeExecution}" execution.`);
 
-    const args = ['--no-sandbox'];
+    const args = ['--no-sandbox', '--disable-dev-shm-usage', '--disable-auto-reload'];
     const chrome = { x: 0, y: 74 };   // comes from config in reality
     args.push(`--window-size=${dimensions.width+chrome.x},${dimensions.height+chrome.y}`);
     browser = await puppeteer.launch({
@@ -130,7 +130,9 @@ const PAGE_MARGIN = 60;
     await page.goto('file://' + baseUrl + '/' + tmpReportName, {waitUntil: 'networkidle0'});
     await page.emulateMedia('screen');
     await page._client.send('Emulation.clearDeviceMetricsOverride');
-    await page.waitFor(5000); // wait for animations
+    await page.waitForSelector('#ready-doc', {
+      timeout: 10000
+    }); // wait for animations
     switch (reportType) {
       case 'pdf': {
         await page.pdf({

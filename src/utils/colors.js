@@ -1,7 +1,8 @@
 import seedrandom from 'seedrandom';
 import { hash } from './hash';
+import { NONE_VALUE_DEFAULT_NAME } from '../constants/Constants';
 
-export const DEFAULT_BAR_COLOR = '#999999';
+export const DEFAULT_NONE_COLOR = '#999999';
 
 const graphColors = ['#E57373', '#FF1D1E', '#FF5000', '#E55100', '#D74315', '#F06292', '#FF3F81',
   '#F50057', '#C2195B', '#E91D63', '#AD1457', '#CE93D8', '#EA80FC', '#FA99D0', '#FD5BDE', '#D500F9', '#AA00FF',
@@ -28,8 +29,8 @@ export function hexToRgb(hex) {
 }
 
 export function getGraphColorByName(value, existingColors = {}) {
-  if (!value) {
-    return DEFAULT_BAR_COLOR;
+  if (!value || value === NONE_VALUE_DEFAULT_NAME) {
+    return DEFAULT_NONE_COLOR;
   }
 
   const index = hash(value) % graphColors.length;

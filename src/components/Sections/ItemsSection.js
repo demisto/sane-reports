@@ -8,6 +8,8 @@ import { get, maxBy } from 'lodash';
 import uuid from 'uuid';
 import { sortByFieldsWithPriority } from '../../utils/sort';
 
+const DESCRIPTION_KEY = 'description';
+
 class ItemsSection extends Component {
   static propTypes = {
     style: PropTypes.object,
@@ -102,6 +104,10 @@ class ItemsSection extends Component {
       }
     });
     maxOffset += (title ? 40 : 0) + 5;
+    const descriptionItem = this.itemElements[DESCRIPTION_KEY];
+    if (descriptionItem) {
+      maxOffset += descriptionItem.clientHeight || 0;
+    }
     return (
       <AutoSizer disableHeight>
         {({ width }) => {
@@ -109,7 +115,18 @@ class ItemsSection extends Component {
           return (
             <div className="items-section" style={{ width, height: maxOffset, ...style }}>
               {title && <div className="section-title" style={titleStyle}>{title}</div>}
-              {description && <div className="section-description">{description}</div>}
+              {description && (
+                <SectionMarkdown
+                  text={description}
+                  className="section-description"
+                  setRef={(itemElement) => {
+                    if (!itemElement) {
+                      return;
+                    }
+                    this.itemElements[DESCRIPTION_KEY] = itemElement;
+                  }}
+                />
+              )}
               {(items || []).map((item) => {
                 const colSpan = this.getItemColSpan(item);
                 const id = this.getSectionItemKey(item);

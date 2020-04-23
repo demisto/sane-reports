@@ -6,7 +6,7 @@ import ChartLegend from './ChartLegend';
 import { compact, values, isEmpty } from 'lodash';
 import { AutoSizer } from 'react-virtualized';
 import moment from 'moment';
-import { QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/Constants';
+import { NONE_VALUE_DEFAULT_NAME, QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/Constants';
 import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
 
@@ -40,14 +40,17 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         name = moment(name).format(timeFormat);
       }
 
-      let group = mainGroup;
-      group.name = name;
+      let currentGroup = mainGroup;
+      currentGroup.name = name;
       const mainObject = { name };
-      if (group.groups && group.data) {
+      if (currentGroup.groups && currentGroup.data) {
         // add all sub groups to main object.
-        group.groups.forEach((group) => {
-          const groupName = group.name;
-          const id = group.name;
+        currentGroup.groups.forEach((group) => {
+          let groupName = group.name;
+          if (!groupName) {
+            groupName = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+          }
+          const id = groupName;
           mainObject[groupName] = group.data[0];
           lineTypes[groupName] =
           {
@@ -58,19 +61,19 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           };
         });
       } else {
-        if (group.data && group.data.length > 0) {
-          group = { name, [SINGLE_LINE_CHART_NAME]: group.data[0], color: group.color };
+        if (currentGroup.data && currentGroup.data.length > 0) {
+          currentGroup = { name, [SINGLE_LINE_CHART_NAME]: currentGroup.data[0], color: group.color };
         }
-        Object.keys(group).filter(key => key !== 'name' && key !== 'color' &&
+        Object.keys(currentGroup).filter(key => key !== 'name' && key !== 'color' &&
           key !== 'relatedTo').forEach((groupKey) => {
           // add line type definition or add if exists
           if (lineTypes[groupKey]) {
-            lineTypes[groupKey].value += group[groupKey] || 0;
+            lineTypes[groupKey].value += currentGroup[groupKey] || 0;
           } else {
             lineTypes[groupKey] =
-              { name: groupKey, color: group.color || getGraphColorByName(groupKey), value: group[groupKey] };
+              { name: groupKey, color: currentGroup.color || getGraphColorByName(groupKey), value: group[groupKey] };
           }
-          mainObject[groupKey] = group[groupKey];
+          mainObject[groupKey] = currentGroup[groupKey];
         });
       }
 
