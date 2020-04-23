@@ -40,11 +40,12 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         name = moment(name).format(timeFormat);
       }
 
-      mainGroup.name = name;
+      let group = mainGroup;
+      group.name = name;
       const mainObject = { name };
-      if (mainGroup.groups && mainGroup.data) {
+      if (group.groups && group.data) {
         // add all sub groups to main object.
-        mainGroup.groups.forEach((group) => {
+        group.groups.forEach((group) => {
           const groupName = group.name;
           const id = group.name;
           mainObject[groupName] = group.data[0];
@@ -57,19 +58,19 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           };
         });
       } else {
-        if (mainGroup.data && mainGroup.data.length > 0) {
-          mainGroup = { name, [SINGLE_LINE_CHART_NAME]: mainGroup.data[0], color: mainGroup.color };
+        if (group.data && group.data.length > 0) {
+          group = { name, [SINGLE_LINE_CHART_NAME]: group.data[0], color: group.color };
         }
-        Object.keys(mainGroup).filter(key => key !== 'name' &&
-          key !== 'color' && key !== 'relatedTo').forEach((groupKey) => {
+        Object.keys(group).filter(key => key !== 'name' && key !== 'color' &&
+          key !== 'relatedTo').forEach((groupKey) => {
           // add line type definition or add if exists
           if (lineTypes[groupKey]) {
-            lineTypes[groupKey].value = lineTypes[groupKey].value + mainGroup[groupKey];
+            lineTypes[groupKey].value += group[groupKey] || 0;
           } else {
             lineTypes[groupKey] =
-              {name: groupKey, color: mainGroup.color || getGraphColorByName(groupKey), value: mainGroup[groupKey]};
+              { name: groupKey, color: group.color || getGraphColorByName(groupKey), value: group[groupKey] };
           }
-          mainObject[groupKey] = mainGroup[groupKey];
+          mainObject[groupKey] = group[groupKey];
         });
       }
 
