@@ -10,6 +10,8 @@ import { NONE_VALUE_DEFAULT_NAME, QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } f
 import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
 
+const SINGLE_LINE_CHART_NAME = 'sum';
+
 const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null,
   referenceLineX, referenceLineY, fromDate, toDate }) => {
   const existingColors = {};
@@ -38,11 +40,12 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         name = moment(name).format(timeFormat);
       }
 
-      mainGroup.name = name;
+      let currentGroup = mainGroup;
+      currentGroup.name = name;
       const mainObject = { name };
-      if (mainGroup.groups && mainGroup.data) {
+      if (currentGroup.groups && currentGroup.data) {
         // add all sub groups to main object.
-        mainGroup.groups.forEach((group) => {
+        currentGroup.groups.forEach((group) => {
           let groupName = group.name;
           if (!groupName) {
             groupName = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
@@ -58,10 +61,22 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           };
         });
       } else {
-        Object.keys(mainGroup).filter(key => key !== 'name' && key !== 'relatedTo').forEach((groupKey) => {
-          lineTypes[groupKey] =
-            { name: groupKey, color: mainGroup.color || getGraphColorByName(groupKey), value: mainGroup[groupKey] };
-          mainObject[groupKey] = mainGroup[groupKey];
+        if (currentGroup.data && currentGroup.data.length > 0) {
+          currentGroup = { name, [SINGLE_LINE_CHART_NAME]: currentGroup.data[0], color: currentGroup.color };
+        }
+        Object.keys(currentGroup).filter(key => key !== 'name' && key !== 'color' &&
+          key !== 'relatedTo').forEach((groupKey) => {
+          // add line type definition or add if exists
+          if (lineTypes[groupKey]) {
+            lineTypes[groupKey].value += currentGroup[groupKey] || 0;
+          } else {
+            lineTypes[groupKey] = {
+              name: groupKey,
+              color: currentGroup.color || getGraphColorByName(groupKey),
+              value: currentGroup[groupKey]
+            };
+          }
+          mainObject[groupKey] = currentGroup[groupKey];
         });
       }
 
