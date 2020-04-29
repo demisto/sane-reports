@@ -36,7 +36,7 @@
     "classnames": "2.2.5",
     "core-js": "3.1.4",
     "create-react-class": "15.6.3",
-    "jquery": "3.4.0",
+    "jquery": "3.5.0",
     "less": "2.7.2",
     "lodash": "4.17.14",
     "markdown-it-abbr": "1.0.4",
