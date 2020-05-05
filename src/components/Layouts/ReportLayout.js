@@ -75,12 +75,11 @@ class ReportLayout extends Component {
           if (item.element) {
             let maxOffset = heightMap[item.gridItem.x];
             for (let i = item.gridItem.x + 1; i < item.gridItem.x + item.gridItem.w; i++) {
-              maxOffset = Math.max(maxOffset, heightMap[i] || 0);
+              maxOffset = Math.max(maxOffset, heightMap[i] || 0) || 0;
             }
             item.element.style.top = `${maxOffset}px`;
             for (let i = item.gridItem.x; i < item.gridItem.x + item.gridItem.w; i++) {
-              heightMap[i] = heightMap[i] ? heightMap[i] + SECTION_HEIGHT_TOTAL_PADDING
-                + item.element.clientHeight : item.element.clientHeight;
+              heightMap[i] = maxOffset + SECTION_HEIGHT_TOTAL_PADDING + item.element.clientHeight;
             }
             shouldPageBreak = shouldPageBreak || ReportLayout.isPageBreakSection(item.section);
           }
