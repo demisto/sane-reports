@@ -2,7 +2,7 @@ import './SectionBarChart.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { isArray, orderBy, unionBy } from 'lodash';
 import { sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
@@ -127,7 +127,6 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
               {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" allowDecimals={false} />}
               {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
               {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
-              <CartesianGrid strokeDasharray={chartProperties.strokeDasharray || '3 3'} />
               <Tooltip />
               {legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend &&
                 <Legend
