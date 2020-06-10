@@ -364,7 +364,7 @@ describe('Report Container', () => {
 
     // Page break
     const markdown = reportContainer.find(SectionMarkdown);
-    expect(markdown).to.have.length(3);
+    expect(markdown).to.have.length(4);
     expect(markdown.at(0).text()).equal(sec8.data.text.replace(PAGE_BREAK_KEY, ''));
 
     // Items Section
@@ -380,17 +380,26 @@ describe('Report Container', () => {
     expect(itemValues).to.have.length(sec9.data.length);
     expect(itemValues.at(0).text()).to.equal(sec9.data[0].data);
     expect(itemValues.at(1).text()).to.equal('HELLO');
+    expect(itemValues.at(3).text()).to.equal('CENTER');
+
+    const markdownItem = itemValues.at(2).find(SectionMarkdown);
+    expect(markdownItem).to.have.length(1);
+    expect(markdownItem.at(0).props().text).to.equal(sec9.data[2].data);
+
+    const tableItem = itemValues.at(4).find(SectionTable);
+    expect(tableItem).to.have.length(1);
+    expect(tableItem.at(0).props().data).to.deep.equal(sec9.data[4].data);
 
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
-    expect(sectionTable).to.have.length(1);
-    expect(sectionTable.at(0).props().columns).to.equal(sec10.layout.tableColumns);
-    expect(sectionTable.at(0).props().data).to.equal(sec10.data);
-    expect(sectionTable.at(0).props().classes).to.equal(sec10.layout.classes);
+    expect(sectionTable).to.have.length(2);
+    expect(sectionTable.at(1).props().columns).to.equal(sec10.layout.tableColumns);
+    expect(sectionTable.at(1).props().data).to.equal(sec10.data);
+    expect(sectionTable.at(1).props().classes).to.equal(sec10.layout.classes);
 
-    const tableEl = reportContainer.find('table');
-    const tableHeader = reportContainer.find('th');
-    expect(tableEl).to.have.length(2); // there is a table in duration display.
+    const tableEl = sectionTable.at(1).find('table');
+    const tableHeader = sectionTable.at(1).find('th');
+    expect(tableEl).to.have.length(1);
     expect(tableHeader).to.have.length(2);
     expect(tableHeader.at(0).text()).to.equal(sec10.layout.tableColumns[0]);
     expect(tableHeader.at(1).text()).to.equal(sec10.layout.tableColumns[1]);

@@ -661,7 +661,7 @@
         "fieldType": "",
         "data": "flgdfkjgg ksdf;ajlgdsjkl kabg djfa;gzjdffdsfgadshlifaghoisgshg ofdhl djsaghdfhgldfjzhlgljhkdf;.gjkndflhdfnjlndaljnrdljgnfdg sdkzgjlfd;ng jfdglnzs;dgfzlnfbdkjfghsbklvkdnbvkjadlb/f jdfn;l zdgk;v rksdulngbjrslfhesutriWHOGWerkhewbNE;RDLVUBOdsEAS VTSLHFVSUTR UHOSG; DSGD;IJSbxIGS;NzzVFBS FDJLNGSB DL;SVdBL KBJLSARGN;IRS",
         "headerStyle": null,
-        "endCol": 0,
+        "endCol": 6,
         "displayType": "row",
         "startCol": 0,
         "index": 0
@@ -672,10 +672,50 @@
         "fieldType": "html",
         "data": "<p style=\"color: red;\">HELLO</p>",
         "headerStyle": null,
-        "endCol": 0,
+        "endCol": 3,
         "displayType": "row",
         "startCol": 0,
         "index": 1
+      },
+      {
+        "fieldId": "id4",
+        "fieldName": "Name 4",
+        "fieldType": "card",
+        "data": "### markdown text here\n- please look",
+        "headerStyle": null,
+        "endCol": 6,
+        "displayType": "card",
+        "startCol": 3,
+        "index": 1
+      },
+      {
+        "fieldId": "id3",
+        "fieldName": "Name 3",
+        "fieldType": "html",
+        "data": "<p style=\"color: green;text-align:center;\">CENTER</p>",
+        "headerStyle": null,
+        "endCol": 3,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 2
+      },
+      {
+        "fieldId": "id5",
+        "fieldName": "Name 5",
+        "fieldType": "text",
+        "data": [{
+          "prop1": "this is prop 1",
+          "prop2": "this is prop 2"
+        }, {
+          "prop1": "this is prop 1",
+          "prop2": "this is prop 2",
+          "prop3": "this is prop 3"
+        }],
+        "headerStyle": null,
+        "endCol": 6,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 3
       }
     ],
     "layout": {

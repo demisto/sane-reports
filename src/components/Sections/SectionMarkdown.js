@@ -28,6 +28,7 @@ export default class SectionMarkdown extends Component {
     text: PropTypes.string,
     style: PropTypes.object,
     setRef: PropTypes.any,
+    customClass: PropTypes.string,
     tableClasses: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.string
@@ -103,7 +104,7 @@ export default class SectionMarkdown extends Component {
 
         res = (
           <table
-            className={`ui very compact table celled fixed selectable ${tableClasses}`}
+            className={`ui very compact table celled fixed unstackable selectable ${tableClasses}`}
             style={{ tableLayout: 'fixed' }}
             key={Math.random()}
           >
@@ -153,7 +154,7 @@ export default class SectionMarkdown extends Component {
   }
 
   render() {
-    const { text, style, tableClasses, doNotShowEmoji, setRef } = this.props;
+    const { text, style, tableClasses, doNotShowEmoji, setRef, customClass } = this.props;
     let finalText = text;
     IGNORE_KEYS.forEach((s) => {
       finalText = (finalText || '').replace(s, '');
@@ -192,7 +193,7 @@ export default class SectionMarkdown extends Component {
     }
 
     return (
-      <div className="section-markdown" ref={setRef} style={style}>
+      <div className={`section-markdown ${customClass || ''}`} ref={setRef} style={style}>
         {res}
       </div>
     );
