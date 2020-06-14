@@ -9,6 +9,7 @@ import uuid from 'uuid';
 import { sortByFieldsWithPriority } from '../../utils/sort';
 
 const DESCRIPTION_KEY = 'description';
+const SECTION_ITEM_PADDING = 5;
 
 class ItemsSection extends Component {
   static propTypes = {
@@ -40,11 +41,11 @@ class ItemsSection extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.setColumnUsage(this.props), 1000); // avoid rerender height changes
+    setTimeout(() => this.setColumnUsage(this.props), 100); // avoid rerender height changes
   }
 
   componentWillReceiveProps(nextProps) {
-    setTimeout(() => this.setColumnUsage(nextProps), 1000); // avoid rerender height changes
+    setTimeout(() => this.setColumnUsage(nextProps), 100); // avoid rerender height changes
   }
 
   getSectionItemKey(item) {
@@ -79,7 +80,8 @@ class ItemsSection extends Component {
       }
       // use maximum offset
       for (let i = 0; i < colSpan; i++) {
-        columnUsage[sectionItem.startCol + i][sectionItem.index].offset = maxOffset;
+        columnUsage[sectionItem.startCol + i][sectionItem.index].offset = maxOffset > 0 ?
+          maxOffset + SECTION_ITEM_PADDING : 0;
       }
     });
 
@@ -118,7 +120,7 @@ class ItemsSection extends Component {
               {description && (
                 <SectionMarkdown
                   text={description}
-                  className="section-description"
+                  customClass="section-description"
                   setRef={(itemElement) => {
                     if (!itemElement) {
                       return;

@@ -87,7 +87,7 @@ const PAGE_MARGIN = 60;
     const dimensions = getPageSizeByOrientation(pageSize, orientation);
 
     const topMargin = (headerLeftImage || headerRightImage) && !disableHeaders ? PAGE_MARGIN : 0;
-    const bottomMargin = PAGE_MARGIN;
+    const bottomMargin = PAGE_MARGIN - 10;
     const afterTypeReplace =
       indexHtml
         .replace('\'{report-type}\'', JSON.stringify(reportType))
@@ -112,8 +112,7 @@ const PAGE_MARGIN = 60;
     console.log(`Using "${chromeExecution}" execution.`);
 
     const args = ['--no-sandbox', '--disable-dev-shm-usage', '--disable-auto-reload'];
-    const chrome = { x: 0, y: 74 };   // comes from config in reality
-    args.push(`--window-size=${dimensions.width+chrome.x},${dimensions.height+chrome.y}`);
+    args.push(`--window-size=${dimensions.width},${dimensions.height}`);
     browser = await puppeteer.launch({
       executablePath: chromeExecution,
       headless: true,

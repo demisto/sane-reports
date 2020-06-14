@@ -16,7 +16,7 @@ import ErrorBoundary from '../ErrorBoundary';
 import { getSectionComponent } from '../../utils/layout';
 
 const ROW_PIXEL_HEIGHT = 110;
-const SECTION_HEIGHT_TOTAL_PADDING = 20;
+const SECTION_HEIGHT_TOTAL_PADDING = 30;
 
 class ReportLayout extends Component {
   static propTypes = {
@@ -35,7 +35,7 @@ class ReportLayout extends Component {
   static getGridItemFromSection(section, overflowRows) {
     const rows = section.layout.rowPos + overflowRows;
     let height = section.layout.h;
-    if (section.type === SECTION_TYPES.table && section.layout.w >= GRID_LAYOUT_COLUMNS) {
+    if (section.type === SECTION_TYPES.table && section.layout.w >= GRID_LAYOUT_COLUMNS && section.data) {
       const numOfRows = (section.data.length || section.data.total) + 1;
       if (numOfRows > section.layout.h) {
         height = numOfRows;
@@ -77,9 +77,12 @@ class ReportLayout extends Component {
             for (let i = item.gridItem.x + 1; i < item.gridItem.x + item.gridItem.w; i++) {
               maxOffset = Math.max(maxOffset, heightMap[i] || 0) || 0;
             }
+            if ([SECTION_TYPES.image, SECTION_TYPES.logo, SECTION_TYPES.date].indexOf(item.section.type) < 0) {
+              maxOffset = maxOffset > 0 ? maxOffset + SECTION_HEIGHT_TOTAL_PADDING : maxOffset;
+            }
             item.element.style.top = `${maxOffset}px`;
             for (let i = item.gridItem.x; i < item.gridItem.x + item.gridItem.w; i++) {
-              heightMap[i] = maxOffset + SECTION_HEIGHT_TOTAL_PADDING + item.element.clientHeight;
+              heightMap[i] = maxOffset + item.element.clientHeight;
             }
             shouldPageBreak = shouldPageBreak || ReportLayout.isPageBreakSection(item.section);
           }
@@ -97,7 +100,7 @@ class ReportLayout extends Component {
       const readyDiv = document.createElement('div');
       readyDiv.id = 'ready-doc';
       document.getElementsByTagName('body')[0].appendChild(readyDiv);
-    }, 3000);
+    }, 5000);
   }
 
   render() {
