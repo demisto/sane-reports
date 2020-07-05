@@ -55,7 +55,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
           lineTypes[groupName] =
           {
             name: groupName,
-            color: groupName.color || getGraphColorByName(groupName),
+            color: group.color || getGraphColorByName(groupName),
             id,
             value: mainObject[groupName]
           };

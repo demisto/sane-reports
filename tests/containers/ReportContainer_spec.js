@@ -293,10 +293,11 @@ describe('Report Container', () => {
     const sec8 = testTemplate[7];
     const sec9 = testTemplate[8];
     const sec10 = testTemplate[9];
+    const sec11 = testTemplate[10];
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
-    expect(sectionChart).to.have.length(5);
+    expect(sectionChart).to.have.length(6);
     expect(sectionChart.at(0).props().data).to.equal(sec1.data);
     expect(sectionChart.at(0).props().style).to.equal(sec1.layout.style);
     expect(sectionChart.at(0).props().type).to.equal(sec1.layout.chartType);
@@ -311,6 +312,7 @@ describe('Report Container', () => {
     expect(sectionChart.at(2).props().title).to.equal(sec4.title);
     expect(sectionChart.at(3).props().title).to.equal(sec5.title);
     expect(sectionChart.at(4).props().title).to.equal(sec6.title);
+    expect(sectionChart.at(5).props().title).to.equal(sec7.title);
 
     const barChart = reportContainer.find(BarChart);
     const pieChart = reportContainer.find(PieChart);
@@ -319,7 +321,7 @@ describe('Report Container', () => {
 
     expect(barChart).to.have.length(3);
     expect(pieChart).to.have.length(1);
-    expect(lineChart).to.have.length(1);
+    expect(lineChart).to.have.length(2);
     expect(pie).to.have.length(1);
 
     expect(pieChart.props().width).to.equal(sec5.layout.dimensions.width);
@@ -341,8 +343,15 @@ describe('Report Container', () => {
 
     expect(lineChart.at(0).props().width).to.equal(sec6.layout.dimensions.width);
     expect(lineChart.at(0).props().height).to.equal(sec6.layout.dimensions.height);
-    const lines = lineChart.find(Line);
+    let lines = lineChart.at(0).find(Line);
     expect(lines).to.have.length(1);
+
+    expect(lineChart.at(0).props().width).to.equal(sec7.layout.dimensions.width);
+    expect(lineChart.at(0).props().height).to.equal(sec7.layout.dimensions.height);
+    lines = lineChart.at(1).find(Line);
+    expect(lines).to.have.length(2);
+    expect(lines.at(0).props().stroke).to.equal(sec7.data[1].groups[0].color);
+    expect(lines.at(1).props().stroke).to.equal(sec7.data[1].groups[1].color);
 
     // Trend
     const trendNumber = reportContainer.find(SectionNumber);
@@ -356,56 +365,56 @@ describe('Report Container', () => {
     // Duration
     const duration = reportContainer.find(SectionDuration);
     expect(duration).to.have.length(1);
-    expect(duration.at(0).props().title).to.equal(sec7.title);
-    expect(duration.at(0).props().data).to.equal(sec7.data);
-    expect(duration.at(0).props().chartProperties).to.equal(sec7.layout.chartProperties);
+    expect(duration.at(0).props().title).to.equal(sec8.title);
+    expect(duration.at(0).props().data).to.equal(sec8.data);
+    expect(duration.at(0).props().chartProperties).to.equal(sec8.layout.chartProperties);
     const timeUnit = duration.at(0).find('.time-unit');
     expect(timeUnit).to.have.length(3);
 
     // Page break
     const markdown = reportContainer.find(SectionMarkdown);
     expect(markdown).to.have.length(4);
-    expect(markdown.at(0).text()).equal(sec8.data.text.replace(PAGE_BREAK_KEY, ''));
+    expect(markdown.at(0).text()).equal(sec9.data.text.replace(PAGE_BREAK_KEY, ''));
 
     // Items Section
     const itemsSection = reportContainer.find(ItemsSection);
     expect(itemsSection).to.have.length(1);
-    expect(markdown.at(1).props().text).equal(sec9.description);
+    expect(markdown.at(1).props().text).equal(sec10.description);
     const headers = itemsSection.at(0).find('.section-item-header');
-    expect(headers).to.have.length(sec9.data.length);
-    expect(headers.at(0).text()).to.equal(sec9.data[0].fieldName);
-    expect(headers.at(1).text()).to.equal(sec9.data[1].fieldName);
+    expect(headers).to.have.length(sec10.data.length);
+    expect(headers.at(0).text()).to.equal(sec10.data[0].fieldName);
+    expect(headers.at(1).text()).to.equal(sec10.data[1].fieldName);
 
     const itemValues = itemsSection.at(0).find('.section-item-value');
-    expect(itemValues).to.have.length(sec9.data.length);
-    expect(itemValues.at(0).text()).to.equal(sec9.data[0].data);
+    expect(itemValues).to.have.length(sec10.data.length);
+    expect(itemValues.at(0).text()).to.equal(sec10.data[0].data);
     expect(itemValues.at(1).text()).to.equal('HELLO');
     expect(itemValues.at(3).text()).to.equal('CENTER');
 
     const markdownItem = itemValues.at(2).find(SectionMarkdown);
     expect(markdownItem).to.have.length(1);
-    expect(markdownItem.at(0).props().text).to.equal(sec9.data[2].data);
+    expect(markdownItem.at(0).props().text).to.equal(sec10.data[2].data);
 
     const tableItem = itemValues.at(4).find(SectionTable);
     expect(tableItem).to.have.length(1);
-    expect(tableItem.at(0).props().data).to.deep.equal(sec9.data[4].data);
+    expect(tableItem.at(0).props().data).to.deep.equal(sec10.data[4].data);
 
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
     expect(sectionTable).to.have.length(2);
-    expect(sectionTable.at(1).props().columns).to.equal(sec10.layout.tableColumns);
-    expect(sectionTable.at(1).props().data).to.equal(sec10.data);
-    expect(sectionTable.at(1).props().classes).to.equal(sec10.layout.classes);
+    expect(sectionTable.at(1).props().columns).to.equal(sec11.layout.tableColumns);
+    expect(sectionTable.at(1).props().data).to.equal(sec11.data);
+    expect(sectionTable.at(1).props().classes).to.equal(sec11.layout.classes);
 
     const tableEl = sectionTable.at(1).find('table');
     const tableHeader = sectionTable.at(1).find('th');
     expect(tableEl).to.have.length(1);
     expect(tableHeader).to.have.length(2);
-    expect(tableHeader.at(0).text()).to.equal(sec10.layout.tableColumns[0]);
-    expect(tableHeader.at(1).text()).to.equal(sec10.layout.tableColumns[1]);
+    expect(tableHeader.at(0).text()).to.equal(sec11.layout.tableColumns[0]);
+    expect(tableHeader.at(1).text()).to.equal(sec11.layout.tableColumns[1]);
 
     const chartLegend = reportContainer.find(ChartLegend);
-    expect(chartLegend).to.have.length(4);
+    expect(chartLegend).to.have.length(5);
     expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style);
     expect(chartLegend.at(0).props().capitalize).to.be.true;
     expect(chartLegend.at(3).props().capitalize).to.be.false;
