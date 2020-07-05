@@ -369,8 +369,8 @@
       "chartType": "line",
       "columnPos": 0,
       "dimensions": {
-        "height": 192,
-        "width": 772
+        "height": 312,
+        "width": 184
       },
       "h": 2,
       "i": "0f0cdb70-f5eb-11e7-92ea-eb1e1a874380",
@@ -386,7 +386,7 @@
         }
       },
       "rowPos": 3,
-      "w": 12
+      "w": 6
     },
     "query": {
       "filter": {
@@ -403,7 +403,103 @@
       "args": null
     },
     "fromDate": "2017-12-11T12:07:50+02:00",
-    "title": "my owner lol 2331"
+    "title": "legacy line chart"
+  },
+  {
+    "type": "chart",
+    "legend": [],
+    "data": [
+      {
+        "name": "2020-06-15",
+        "data": [
+          1
+        ],
+        "groups": [
+          {
+            "name": "test1",
+            "data": [
+              1
+            ],
+            "color": "green"
+          }
+        ]
+      },{
+        "name": "2020-06-16",
+        "data": [
+          10
+        ],
+        "groups": [
+          {
+            "name": "test1",
+            "data": [
+              4
+            ],
+            "color": "green"
+          },{
+            "name": "test2",
+            "data": [
+              6
+            ],
+            "color": "red"
+          }
+        ]
+      },{
+        "name": "2020-06-17",
+        "data": [
+          11
+        ],
+        "groups": [
+          {
+            "name": "test1",
+            "data": [
+              3
+            ],
+            "color": "green"
+          },{
+            "name": "test2",
+            "data": [
+              8
+            ],
+            "color": "red"
+          }
+        ]
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "format": "DD MMM Y",
+        "isDatesChart": true,
+        "layout": "vertical",
+        "margin": {
+          "bottom": 5,
+          "left": -20,
+          "right": 25,
+          "top": 5
+        }
+      },
+      "chartType": "line",
+      "columnPos": 6,
+      "dimensions": {
+        "height": 312,
+        "width": 184
+      },
+      "h": 2,
+      "i": "0f0cdb70-f5eb-11e7-92ea-eb1c16874380",
+      "legendStyle": {
+        "iconSize": 8,
+        "capitalize": false,
+        "iconType": "square",
+        "verticalAlign": "top",
+        "wrapperStyle": {
+          "maxHeight": 48
+        }
+      },
+      "rowPos": 3,
+      "w": 6
+    },
+    "fromDate": "2020-06-15T12:07:50+02:00",
+    "toDate": "2020-06-17T12:07:50+02:00",
+    "title": "line chart group nested"
   },
   {
     "type": "chart",
