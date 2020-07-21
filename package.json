@@ -38,7 +38,7 @@
     "create-react-class": "15.6.3",
     "jquery": "3.5.0",
     "less": "2.7.2",
-    "lodash": "4.17.14",
+    "lodash": "4.17.19",
     "markdown-it-abbr": "1.0.4",
     "markdown-it-container": "2.0.0",
     "markdown-it-deflist": "2.0.1",
