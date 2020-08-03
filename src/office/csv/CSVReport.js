@@ -3,6 +3,11 @@ import moment from 'moment-timezone';
 
 function storeCsvInDocument(csvData) {
   document.csvData = csvData;
+
+  // mark the doc as ready
+  const readyDiv = document.createElement('div');
+  readyDiv.id = 'ready-doc';
+  document.getElementsByTagName('body')[0].appendChild(readyDiv);
 }
 
 function csvEscape(data) {
