@@ -171,7 +171,7 @@ const PAGE_MARGIN = 60;
       }
       case 'csv': {
         const csvData = await page.evaluate(evalsFunctions.getCSVData);
-        if (csvData) {
+        if (csvData === '' || csvData) {
           fs.writeFileSync(outputFinal, csvData, { 'flag': 'w' });
           fs.unlinkSync(distFolder + '/' + tmpReportName);
           console.log("CSV report was generated successfully.");
