@@ -1,5 +1,6 @@
 import { SECTION_TYPES } from '../../constants/Constants';
 import moment from 'moment-timezone';
+import { isString } from 'lodash';
 
 function storeCsvInDocument(csvData) {
   document.csvData = csvData;
@@ -42,6 +43,8 @@ export function generateCSVReport(sections) {
               csv += csvEscape(section.data);
               break;
             case SECTION_TYPES.markdown:
+              csv += csvEscape((isString(section.data) ? section.data : section.data.text));
+              break;
             case SECTION_TYPES.text:
               csv += csvEscape(section.data);
               break;
@@ -56,15 +59,21 @@ export function generateCSVReport(sections) {
             case SECTION_TYPES.table: {
               const columns = section.layout.tableColumns;
               const tableData = section.data;
+              const readableHeaders = section.layout.readableHeaders;
 
               columns.forEach((col, i) => {
-                csv += col + (i === columns.length - 1 ? '' : ',');
+                csv += readableHeaders
+                  ? readableHeaders[col]
+                  : col;
+                csv += (i === columns.length - 1 ? '' : ',');
               });
               csv += '\n';
 
               tableData.forEach((row) => {
                 columns.forEach((col, j) => {
-                  const cell = row[col];
+                  const cell = readableHeaders
+                    ? row[readableHeaders[col]]
+                    : row[col];
                   let cellData = '';
 
                   if (cell) {
