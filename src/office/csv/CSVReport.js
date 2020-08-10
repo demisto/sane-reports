@@ -1,6 +1,6 @@
 import { SECTION_TYPES } from '../../constants/Constants';
 import moment from 'moment-timezone';
-import { isString } from 'lodash';
+import { isObject } from 'lodash';
 
 function storeCsvInDocument(csvData) {
   document.csvData = csvData;
@@ -43,7 +43,7 @@ export function generateCSVReport(sections) {
               csv += csvEscape(section.data);
               break;
             case SECTION_TYPES.markdown:
-              csv += csvEscape((isString(section.data) ? section.data : section.data.text));
+              csv += csvEscape((isObject(section.data) ? section.data.text : section.data));
               break;
             case SECTION_TYPES.text:
               csv += csvEscape(section.data);
