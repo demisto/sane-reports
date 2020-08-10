@@ -62,18 +62,14 @@ export function generateCSVReport(sections) {
               const readableHeaders = section.layout.readableHeaders;
 
               columns.forEach((col, i) => {
-                csv += readableHeaders
-                  ? readableHeaders[col]
-                  : col;
+                csv += (readableHeaders && readableHeaders[col]) || col;
                 csv += (i === columns.length - 1 ? '' : ',');
               });
               csv += '\n';
 
               tableData.forEach((row) => {
                 columns.forEach((col, j) => {
-                  const cell = readableHeaders
-                    ? row[readableHeaders[col]]
-                    : row[col];
+                  const cell = (readableHeaders && row[readableHeaders[col]]) || row[col];
                   let cellData = '';
 
                   if (cell) {
