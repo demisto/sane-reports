@@ -43,6 +43,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   const mainClass =
     isColumnChart ? 'section-column-chart' : 'section-bar-chart';
   const maxLabelSize = (dimensions.width / 3) - 20;
+  let maxCategorySize = 0;
   const margin = chartProperties.margin || {};
   let leftMargin = -5;
   if (stacked) {
@@ -53,6 +54,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         if (!name) {
           name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
         }
+        maxCategorySize = Math.max((name.length * 5), maxCategorySize);
         // Spaces are breaking the words so find the longest word. 'A Cool Playbook' return 'Playbook'.
         if (name.indexOf(' ') > -1) {
           const names = name.split(' ');
@@ -92,7 +94,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         );
       }
     });
-
+    maxCategorySize = Math.min(maxCategorySize, maxLabelSize);
     if (!isColumnChart) {
       margin.left = leftMargin;
     }
@@ -123,7 +125,11 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
               barSize={chartProperties.barSize || 13}
             >
               {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
-                <YAxis hide={!stacked} tick={{ fontSize: '15px' }} interval={0} dataKey="name" type="category" />}
+              <YAxis
+                hide={!stacked} tick={{ fontSize: '15px' }} width={maxCategorySize} interval={0}
+                dataKey="name" type="category"
+              />
+              }
               {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" allowDecimals={false} />}
               {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
               {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
