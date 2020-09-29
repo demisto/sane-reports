@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:14.9.0
+      - image: circleci/node:14.9.0-browsers
     resource_class: large
     working_directory: ~/sane-reports
     steps:
