@@ -127,7 +127,7 @@ const PAGE_MARGIN = 60;
     await page.setViewport({width: dimensions.width, height: dimensions.height});
     await page.setDefaultNavigationTimeout(0);
     await page.goto('file://' + baseUrl + '/' + tmpReportName, {waitUntil: 'networkidle0'});
-    await page.emulateMedia('screen');
+    await page.emulateMediaType('screen');
     await page._client.send('Emulation.clearDeviceMetricsOverride');
     await page.waitForSelector('#ready-doc', {
       timeout: 10000
