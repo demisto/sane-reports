@@ -27,9 +27,9 @@
     ]
   },
   "devDependencies": {
-    "pkg": "4.3.7",
+    "pkg": "4.4.9",
     "@moonandyou/chrome-path": "0.2.1",
-    "puppeteer": "1.2.0",
+    "puppeteer": "5.3.1",
     "@babel/core": "7.1.2",
     "@babel/preset-env": "7.1.0",
     "@babel/preset-react": "7.0.0",
