@@ -116,7 +116,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
 
   preparedLegend = values(lineTypes);
   preparedData = retData;
-  if (!isEmpty(legend)) {
+  if (!isEmpty(legend) && Object.keys(lineTypes).length > 1) {
     preparedLegend = legend.map((item) => {
       item.color = item.color || item.stroke || getGraphColorByName(item.name, existingColors);
       existingColors[item.color] = true;
