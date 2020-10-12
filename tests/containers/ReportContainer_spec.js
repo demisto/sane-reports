@@ -294,6 +294,7 @@ describe('Report Container', () => {
     const sec9 = testTemplate[8];
     const sec10 = testTemplate[9];
     const sec11 = testTemplate[10];
+    const sec12 = testTemplate[11];
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
@@ -401,17 +402,29 @@ describe('Report Container', () => {
 
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
-    expect(sectionTable).to.have.length(2);
+    expect(sectionTable).to.have.length(3);
     expect(sectionTable.at(1).props().columns).to.equal(sec11.layout.tableColumns);
     expect(sectionTable.at(1).props().data).to.equal(sec11.data);
     expect(sectionTable.at(1).props().classes).to.equal(sec11.layout.classes);
 
-    const tableEl = sectionTable.at(1).find('table');
-    const tableHeader = sectionTable.at(1).find('th');
+    let tableEl = sectionTable.at(1).find('table');
+    let tableHeader = sectionTable.at(1).find('th');
     expect(tableEl).to.have.length(1);
     expect(tableHeader).to.have.length(2);
     expect(tableHeader.at(0).text()).to.equal(sec11.layout.tableColumns[0]);
     expect(tableHeader.at(1).text()).to.equal(sec11.layout.tableColumns[1]);
+
+    expect(sectionTable.at(2).props().columns).to.equal(sec12.layout.tableColumns);
+    expect(sectionTable.at(2).props().data).to.equal(sec12.data);
+    expect(sectionTable.at(2).props().classes).to.equal(sec12.layout.classes);
+
+    tableEl = sectionTable.at(2).find('table');
+    tableHeader = sectionTable.at(2).find('th');
+    expect(tableEl).to.have.length(1);
+    expect(tableHeader).to.have.length(3);
+    expect(tableHeader.at(0).text()).to.equal('aaa');
+    expect(tableHeader.at(1).text()).to.equal('bbb');
+    expect(tableHeader.at(2).text()).to.equal('ccc');
 
     const chartLegend = reportContainer.find(ChartLegend);
     expect(chartLegend).to.have.length(5);

@@ -845,19 +845,25 @@
       ],
       "w": 12
     },
-    "query": {
-      "filter": {
-        "period": {
-          "fromValue": 30,
-          "by": "day"
-        },
-        "fromDate": "2017-12-10T22:00:00Z",
-        "toDate": null
+    "title": "table"
+  },
+  {
+    "type": "table",
+    "data": [
+      {
+        "aaa": "aaaa",
+        "bbb": "bbb",
+        "ccc": "ccc"
       }
-    },
-    "automation": {
-      "name": "",
-      "args": null
+    ],
+    "layout": {
+      "classes": "striped stackable small very compact",
+      "columnPos": 0,
+      "h": 2,
+      "i": "3ebd9cz0-f5eb-11e1-92ea-eb1e1adal180",
+      "rowPos": 9,
+      "tableColumns": [],
+      "w": 12
     },
     "title": "table"
   }
