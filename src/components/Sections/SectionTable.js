@@ -2,11 +2,7 @@ import './SectionTable.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TABLE_CELL_TYPE, DEFAULT_MAX_LENGTH } from '../../constants/Constants';
-import isArray from 'lodash/isArray';
-import map from 'lodash/map';
-import isString from 'lodash/isString';
-import truncate from 'lodash/truncate';
-import isObjectLike from 'lodash/isObjectLike';
+import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash';
 
 
 const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString,
@@ -26,7 +22,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
   }
 
   let readyColumns = columns;
-  if (!isArray(columns) && isArray(tableData)) {
+  if (isEmpty(columns) && isArray(tableData)) {
     const headerKeys = {};
     tableData.forEach((val, i) => {
       for (const key in tableData[i]) { // eslint-disable-line no-restricted-syntax
