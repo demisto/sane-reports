@@ -99,40 +99,6 @@
     "title": "aaa"
   },
   {
-    "type": "trend",
-    "data": {
-      "currSum": 5,
-      "prevSum": 49
-    },
-    "layout": {
-      "columnPos": 2,
-      "currencySign": "",
-      "h": 1,
-      "i": "0c22b3d0-f5eb-11e7-92ea-eb1e1a874380",
-      "layout": "horizontal",
-      "rowPos": 0,
-      "style": {
-        "backgroundColor": null
-      },
-      "w": 3
-    },
-    "query": {
-      "filter": {
-        "period": {
-          "fromValue": 30,
-          "by": "day"
-        },
-        "fromDate": "2017-12-10T22:00:00Z",
-        "toDate": null
-      }
-    },
-    "automation": {
-      "name": "",
-      "args": null
-    },
-    "title": "Trend Chart"
-  },
-  {
     "type": "chart",
     "legend": [],
     "data": [
@@ -866,5 +832,137 @@
       "w": 12
     },
     "title": "table"
+  },
+  {
+    "type": "trend",
+    "data": {
+      "currSum": 5,
+      "prevSum": 49
+    },
+    "layout": {
+      "columnPos": 2,
+      "currencySign": "",
+      "h": 1,
+      "i": "0c22b3d0-f5eb-11e7-92ea-eb1e1a874380",
+      "layout": "horizontal",
+      "rowPos": 0,
+      "style": {
+        "backgroundColor": null
+      },
+      "w": 3
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "title": "Trend Chart"
+  },
+  {
+    "type": "trend",
+    "data": {
+      "currSum": 5,
+      "prevSum": 49
+    },
+    "layout": {
+      "colors": {
+        "isEnabled": true,
+        "items": {
+          "#00CD33": {
+            "value": 2
+          },
+          "#FAC100": {
+            "value": 6
+          },
+          "#FF1B15": {
+            "value": 10
+          }
+        },
+        "type": "above"
+      },
+      "columnPos": 2,
+      "currencySign": "",
+      "h": 1,
+      "i": "0c22b3d0-f5eb-11e7-92ea-eb1e1a874380",
+      "layout": "horizontal",
+      "rowPos": 0,
+      "style": {
+        "backgroundColor": null
+      },
+      "w": 3
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "title": "Trend Chart with color - above"
+  },
+  {
+    "type": "trend",
+    "data": {
+      "currSum": 5,
+      "prevSum": 49
+    },
+    "layout": {
+      "colors": {
+        "isEnabled": true,
+        "items": {
+          "#00CD33": {
+            "value": 2
+          },
+          "#FAC100": {
+            "value": 6
+          },
+          "#FF1B15": {
+            "value": 10
+          }
+        },
+        "type": "below"
+      },
+      "columnPos": 2,
+      "currencySign": "",
+      "h": 1,
+      "i": "0c22b3d0-f5eb-11e7-92ea-eb1e1a874380",
+      "layout": "horizontal",
+      "rowPos": 0,
+      "style": {
+        "backgroundColor": null
+      },
+      "w": 3
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "title": "Trend Chart with color - below"
   }
 ]

@@ -7,7 +7,7 @@ import { CHART_LAYOUT_TYPE } from '../../constants/Constants';
 import { numberToShortString } from '../../utils/strings';
 
 const TREND_NUMBER_LIMIT = 999;
-const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleStyle }) => {
+const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleStyle, colors }) => {
   const isTrend = !!data.prevSum || data.prevSum === 0;
   let percentage = 0;
   const curr = data.currSum || 0;
@@ -16,12 +16,30 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
     const divider = prev === 0 ? 1 : prev;
     percentage = parseInt(((curr - prev) / divider) * 100, 10);
   }
-
+  let widgetBackgroundColor;
+  if (colors) {
+    const widgetBackgroundItems =
+        Object.keys(colors.items).map((v) => {
+          return { value: colors.items[v].value, color: v };
+        });
+    const widgetBackgroundCondition = colors.type;
+    if (colors.isEnabled) {
+      for (let i = 0; i < widgetBackgroundItems.length; i++) {
+        if ((widgetBackgroundCondition === 'above') && (curr > widgetBackgroundItems[i].value)) {
+          widgetBackgroundColor = widgetBackgroundItems[i].color;
+        }
+        if ((widgetBackgroundCondition === 'below') && (curr < widgetBackgroundItems.reverse()[i].value)) {
+          widgetBackgroundColor = widgetBackgroundItems[i].color;
+        }
+      }
+    }
+  }
+  const sectionNumberBackground = widgetBackgroundColor || (style && style.backgroundColor);
   const caretClass = classNames('trend-icon caret icon', {
     up: percentage > 0,
-    red: percentage > 0 && style.backgroundColor,
+    red: percentage > 0 && sectionNumberBackground,
     down: percentage < 0,
-    green: percentage < 0 && style.backgroundColor
+    green: percentage < 0 && sectionNumberBackground
   });
   const trendIcon = percentage === 0 ?
     (<span className="trend-icon trend-equal">=</span>) : (<i className={caretClass} />);
@@ -30,13 +48,12 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
   if (isTrend && percentage > TREND_NUMBER_LIMIT) {
     shortPercentage = `>${TREND_NUMBER_LIMIT}`;
   }
-
   let trendContainer = '';
   if (isTrend) {
     const boxClass = classNames('trend-box', {
-      red: !style.backgroundColor && percentage > 0,
-      green: !style.backgroundColor && percentage < 0,
-      grey: !style.backgroundColor && percentage === 0
+      red: !sectionNumberBackground && percentage > 0,
+      green: !sectionNumberBackground && percentage < 0,
+      grey: !sectionNumberBackground && percentage === 0
     });
     trendContainer = (
       <div className="trend-container">
@@ -47,15 +64,15 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
       </div>
     );
   }
-
-  const color = style && style.backgroundColor ? '#FFF' : undefined;
+  const trendTextColor = sectionNumberBackground ? '#FFF' : undefined;
+  const titleTextColor = sectionNumberBackground ? '#FFF' : titleStyle && titleStyle.color;
   const signElement = <span className="sign">{sign}</span>;
   return (
-    <div className="section-number" style={style}>
+    <div className="section-number" style={{ backgroundColor: sectionNumberBackground }}>
       <div className="number-container">
         <div
           className="trend-num-text"
-          style={{ color }}
+          style={{ color: trendTextColor }}
         >
           {signAlignment === 'left' && signElement}
           {numberToShortString(curr)}
@@ -64,7 +81,7 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
         {layout === CHART_LAYOUT_TYPE.horizontal && isTrend &&
         trendContainer
         }
-        <div className="trend-message" style={titleStyle}>
+        <div className="trend-message" style={{ color: titleTextColor }}>
           {title}
         </div>
         {layout === CHART_LAYOUT_TYPE.vertical && isTrend &&
@@ -77,6 +94,7 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
 SectionNumber.propTypes = {
   data: PropTypes.object,
   style: PropTypes.object,
+  colors: PropTypes.object,
   title: PropTypes.string,
   titleStyle: PropTypes.object,
   layout: PropTypes.oneOf(values(CHART_LAYOUT_TYPE)),

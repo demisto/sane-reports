@@ -68,6 +68,7 @@ export function getSectionComponent(section, maxWidth) {
           signAlignment={section.layout.signAlignment}
           text={section.data}
           style={section.layout.style}
+          colors={section.layout.colors}
         />
       );
       break;
