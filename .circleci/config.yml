@@ -2,17 +2,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:14.9.0-browsers
+      - image: circleci/node:10.22.1-browsers
     resource_class: large
     working_directory: ~/sane-reports
     steps:
       - checkout
-      - restore_cache:
-          key: npm-sane-reports-{{ checksum "package.json" }}
       - run:
           name: Install dependencies
           command: |
-              sudo npm install npm@latest -g
               npm install
       - save_cache:
           key: npm-sane-reports-{{ checksum "package.json" }}
