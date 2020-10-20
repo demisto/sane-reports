@@ -7,8 +7,6 @@ jobs:
     working_directory: ~/sane-reports
     steps:
       - checkout
-      - restore_cache:
-          key: npm-sane-reports-{{ checksum "package.json" }}
       - run:
           name: Install dependencies
           command: |
