@@ -295,8 +295,6 @@ describe('Report Container', () => {
     const sec10 = testTemplate[9];
     const sec11 = testTemplate[10];
     const sec12 = testTemplate[11];
-    const sec13 = testTemplate[12];
-    const sec14 = testTemplate[13];
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
@@ -358,23 +356,12 @@ describe('Report Container', () => {
 
     // Trend
     const trendNumber = reportContainer.find(SectionNumber);
-    expect(trendNumber).to.have.length(3);
+    expect(trendNumber).to.have.length(1);
     expect(trendNumber.at(0).props().title).to.equal(sec2.title);
     expect(trendNumber.at(0).props().data).to.equal(sec2.data);
     expect(trendNumber.at(0).props().layout).to.equal(sec2.layout.layout);
     const trendBox = trendNumber.at(0).find('.trend-box.green');
     expect(trendBox).to.have.length(1);
-
-    expect(trendNumber.at(1).props().title).to.equal(sec13.title);
-    expect(trendNumber.at(1).props().data).to.equal(sec13.data);
-    expect(trendNumber.at(1).props().layout).to.equal(sec13.layout.layout);
-
-    const trendBoxNoColor = trendNumber.at(1).find('.trend-box');
-    expect(trendBoxNoColor).to.have.length(1);
-
-    expect(trendNumber.at(2).props().title).to.equal(sec14.title);
-    expect(trendNumber.at(2).props().data).to.equal(sec14.data);
-    expect(trendNumber.at(2).props().layout).to.equal(sec14.layout.layout);
 
     // Duration
     const duration = reportContainer.find(SectionDuration);
