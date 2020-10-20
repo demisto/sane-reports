@@ -8,10 +8,6 @@ jobs:
     steps:
       - checkout
       - run:
-            name: Echo npm
-            command: |
-              node --version
-      - run:
           name: Install dependencies
           command: |
               npm install
