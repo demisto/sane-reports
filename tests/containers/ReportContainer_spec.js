@@ -361,7 +361,7 @@ describe('Report Container', () => {
     expect(trendNumber.at(0).props().title).to.equal(sec2.title);
     expect(trendNumber.at(0).props().data).to.equal(sec2.data);
     expect(trendNumber.at(0).props().layout).to.equal(sec2.layout.layout);
-    expect(trendNumber.at(0).props().colors).to.be.undefined;
+    expect(trendNumber.at(0).props().colors).to.equal(sec2.layout.colors);
 
     expect(trendNumber.at(1).props().title).to.equal(sec13.title);
     expect(trendNumber.at(1).props().data).to.equal(sec13.data);
@@ -371,8 +371,8 @@ describe('Report Container', () => {
     const trendBox = trendNumber.at(0).find('.trend-box.green');
     expect(trendBox).to.have.length(1);
 
-    const trendBox2 = trendNumber.at(1).find('.trend-box');
-    expect(trendBox2).to.have.length(1);
+    const trendBoxNoColor = trendNumber.at(1).find('.trend-box');
+    expect(trendBoxNoColor).to.have.length(1);
 
     // Duration
     const duration = reportContainer.find(SectionDuration);
