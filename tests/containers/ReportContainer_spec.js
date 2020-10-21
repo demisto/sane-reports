@@ -285,16 +285,17 @@ describe('Report Container', () => {
 
     const sec1 = testTemplate[0];
     const sec2 = testTemplate[1];
-    const sec3 = testTemplate[2];
-    const sec4 = testTemplate[3];
-    const sec5 = testTemplate[4];
-    const sec6 = testTemplate[5];
-    const sec7 = testTemplate[6];
-    const sec8 = testTemplate[7];
-    const sec9 = testTemplate[8];
-    const sec10 = testTemplate[9];
-    const sec11 = testTemplate[10];
-    const sec12 = testTemplate[11];
+    const sec13 = testTemplate[2];
+    const sec3 = testTemplate[3];
+    const sec4 = testTemplate[4];
+    const sec5 = testTemplate[5];
+    const sec6 = testTemplate[6];
+    const sec7 = testTemplate[7];
+    const sec8 = testTemplate[8];
+    const sec9 = testTemplate[9];
+    const sec10 = testTemplate[10];
+    const sec11 = testTemplate[11];
+    const sec12 = testTemplate[12];
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
@@ -356,12 +357,22 @@ describe('Report Container', () => {
 
     // Trend
     const trendNumber = reportContainer.find(SectionNumber);
-    expect(trendNumber).to.have.length(1);
+    expect(trendNumber).to.have.length(2);
     expect(trendNumber.at(0).props().title).to.equal(sec2.title);
     expect(trendNumber.at(0).props().data).to.equal(sec2.data);
     expect(trendNumber.at(0).props().layout).to.equal(sec2.layout.layout);
+    expect(trendNumber.at(0).props().colors).to.be.undefined;
+
+    expect(trendNumber.at(1).props().title).to.equal(sec13.title);
+    expect(trendNumber.at(1).props().data).to.equal(sec13.data);
+    expect(trendNumber.at(1).props().layout).to.equal(sec13.layout.layout);
+    expect(trendNumber.at(1).props().colors).to.equal(sec13.layout.colors);
+
     const trendBox = trendNumber.at(0).find('.trend-box.green');
     expect(trendBox).to.have.length(1);
+
+    const trendBox2 = trendNumber.at(1).find('.trend-box');
+    expect(trendBox2).to.have.length(1);
 
     // Duration
     const duration = reportContainer.find(SectionDuration);
