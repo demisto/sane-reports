@@ -25,12 +25,9 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
     const widgetBackgroundCondition = colors.type;
     if (colors.isEnabled) {
       for (let i = 0; i < widgetBackgroundItems.length; i++) {
-        if ((widgetBackgroundCondition === 'above') && (curr > widgetBackgroundItems[i].value)) {
-          widgetBackgroundColor = widgetBackgroundItems[i].color;
-        }
-        if ((widgetBackgroundCondition === 'below') && (curr < widgetBackgroundItems.reverse()[i].value)) {
-          widgetBackgroundColor = widgetBackgroundItems[i].color;
-        }
+        widgetBackgroundColor = (((widgetBackgroundCondition === 'above') && (curr > widgetBackgroundItems[i].value))
+          || ((widgetBackgroundCondition === 'below') && (curr < widgetBackgroundItems.reverse()[i].value)))
+            && widgetBackgroundItems[i].color;
       }
     }
   }
