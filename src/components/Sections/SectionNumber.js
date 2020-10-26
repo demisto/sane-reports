@@ -32,14 +32,14 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
   }
 
   const color = style && style.backgroundColor ? '#FFF' : undefined;
-  const titleColor = (style.backgroundColor || (titleStyle && titleStyle.color)) ? '#FFF' : undefined;
+  const titleColor = (color || (titleStyle && titleStyle.color)) ? '#FFF' : undefined;
   let trendContainer = '';
   if (isTrend) {
     const boxClass = classNames('trend-box', {
       red: !style.backgroundColor && percentage > 0,
       green: !style.backgroundColor && percentage < 0,
       grey: !style.backgroundColor && percentage === 0
-    }, !color && 'no-custom-background');
+    });
     trendContainer = (
       <div className="trend-container">
         <div className={boxClass}>
@@ -64,7 +64,7 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
         {layout === CHART_LAYOUT_TYPE.horizontal && isTrend &&
         trendContainer
         }
-        <div className="trend-message" style={{ color: titleColor }}>
+        <div className="trend-message" style={{ ...titleStyle, color: titleColor }}>
           {title}
         </div>
         {layout === CHART_LAYOUT_TYPE.vertical && isTrend &&
