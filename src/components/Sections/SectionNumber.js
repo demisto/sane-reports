@@ -32,7 +32,7 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
   }
 
   const color = style && style.backgroundColor ? '#FFF' : undefined;
-  const titleColor = ((titleStyle && titleStyle.color) || color) ? '#FFF' : undefined;
+  const titleColor = (titleStyle && titleStyle.color) ? titleStyle.color : color;
   let trendContainer = '';
   if (isTrend) {
     const boxClass = classNames('trend-box', {
