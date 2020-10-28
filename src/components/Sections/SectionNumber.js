@@ -31,6 +31,8 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
     shortPercentage = `>${TREND_NUMBER_LIMIT}`;
   }
 
+  const color = style && style.backgroundColor ? '#FFF' : undefined;
+  const titleColor = (titleStyle && titleStyle.color) ? titleStyle.color : color;
   let trendContainer = '';
   if (isTrend) {
     const boxClass = classNames('trend-box', {
@@ -47,8 +49,6 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
       </div>
     );
   }
-
-  const color = style && style.backgroundColor ? '#FFF' : undefined;
   const signElement = <span className="sign">{sign}</span>;
   return (
     <div className="section-number" style={style}>
@@ -64,7 +64,7 @@ const SectionNumber = ({ data, layout, style, sign, signAlignment, title, titleS
         {layout === CHART_LAYOUT_TYPE.horizontal && isTrend &&
         trendContainer
         }
-        <div className="trend-message" style={titleStyle}>
+        <div className="trend-message" style={{ ...titleStyle, color: titleColor }}>
           {title}
         </div>
         {layout === CHART_LAYOUT_TYPE.vertical && isTrend &&
