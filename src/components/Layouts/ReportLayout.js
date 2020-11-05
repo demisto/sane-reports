@@ -16,7 +16,7 @@ import ErrorBoundary from '../ErrorBoundary';
 import { getSectionComponent } from '../../utils/layout';
 
 const ROW_PIXEL_HEIGHT = 110;
-const SECTION_HEIGHT_TOTAL_PADDING = 30;
+const SECTION_HEIGHT_TOTAL_PADDING = 20;
 
 class ReportLayout extends Component {
   static propTypes = {
