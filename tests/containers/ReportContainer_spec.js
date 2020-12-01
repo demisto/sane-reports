@@ -25,6 +25,22 @@ import { BarChart, Bar, PieChart, Pie, LineChart, Line } from 'recharts';
 import { NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 
+Object.defineProperty(global, 'key', {
+  set(value) {
+    throw new Error('Found the leak!' + value);
+  }
+});
+Object.defineProperty(global, 'x', {
+  set(value) {
+    throw new Error('Found the leak!' + value);
+  }
+});
+Object.defineProperty(global, 'i', {
+  set(value) {
+    throw new Error('Found the leak!' + value);
+  }
+});
+
 describe('Report Container', () => {
   it('Generate test template report', () => {
     const testTemplate = TemplateProvider.getTestTemplate();
