@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { isDateNotValid } from './time';
 import { sortStrings } from './strings';
-import { isNumeric, isBoolean } from 'lodash';
+import { isNumber, isBoolean } from 'lodash';
 
 export function sortDates(date1, date2, asc = true) {
   const d1 = new Date(date1);
@@ -24,7 +24,7 @@ export function sortDates(date1, date2, asc = true) {
 
 export function compareFields(f1, f2) {
   if (typeof f1 === 'string' && typeof f2 === 'string') {
-    if (isNumeric(f1) && isNumeric(f2)) {
+    if (isNumber(f1) && isNumber(f2)) {
       const n1 = parseInt(f1, 10);
       const n2 = parseInt(f2, 10);
       return n1 - n2;
