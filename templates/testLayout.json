@@ -664,6 +664,13 @@
         "value": [
           1
         ]
+      },
+      {
+        "name": "CC",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
       }
     ],
     "layout": {
