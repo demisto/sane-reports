@@ -25,6 +25,20 @@ import { BarChart, Bar, PieChart, Pie, LineChart, Line } from 'recharts';
 import { NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 
+function expectChartLegendFromChartElement(pieChart, dataArr) {
+  const chartLegend = pieChart.find(ChartLegend);
+  expect(chartLegend).to.have.length(1);
+  const pieChartLegendTexts = chartLegend.at(0).find('.recharts-legend-item-text');
+  const pieChartLegendValues = chartLegend.at(0).find('.recharts-legend-item-value');
+  expect(pieChartLegendTexts).to.have.length(dataArr.length);
+  expect(pieChartLegendValues).to.have.length(dataArr.length);
+  dataArr.forEach((data, i) => {
+    expect(pieChartLegendTexts.at(i).text()).to.equal(data.name || NONE_VALUE_DEFAULT_NAME);
+    expect(pieChartLegendValues.at(i).text()).to.equal(`${data.value}`);
+  });
+  return chartLegend;
+}
+
 describe('Report Container', () => {
   it('Generate test template report', () => {
     const testTemplate = TemplateProvider.getTestTemplate();
@@ -325,10 +339,12 @@ describe('Report Container', () => {
     expect(lineChart).to.have.length(2);
     expect(pie).to.have.length(1);
 
-    expect(pieChart.props().width).to.equal(sec5.layout.dimensions.width);
-    expect(pie.props().data.length).to.equal(sec5.data.length);
-    expect(pie.props().data[pie.props().data.length - 1].name).to.equal(NONE_VALUE_DEFAULT_NAME);
-    expect(pie.props().data[pie.props().data.length - 1].fill).to.equal(DEFAULT_NONE_COLOR);
+    expect(pieChart.props().width).to.equal(sec3.layout.dimensions.width);
+    expect(pie.props().data.length).to.equal(sec3.data.length);
+
+    expect(pie.props().data[pie.props().data.length - 2].name).to.equal(NONE_VALUE_DEFAULT_NAME);
+    expect(pie.props().data[pie.props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
+    let chartLegend = expectChartLegendFromChartElement(pieChart, sec3.data);
 
     expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);
@@ -426,7 +442,7 @@ describe('Report Container', () => {
     expect(tableHeader.at(1).text()).to.equal('bbb');
     expect(tableHeader.at(2).text()).to.equal('ccc');
 
-    const chartLegend = reportContainer.find(ChartLegend);
+    chartLegend = reportContainer.find(ChartLegend);
     expect(chartLegend).to.have.length(5);
     expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style);
     expect(chartLegend.at(0).props().capitalize).to.be.true;

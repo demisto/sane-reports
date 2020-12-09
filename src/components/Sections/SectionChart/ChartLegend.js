@@ -30,9 +30,9 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
     const mainClass = `recharts-legend-item legend-item-${i} ${layout}`;
     const legendIconClass = `${icon} icon chart-legend-icon`;
     let width = 'auto';
-    const value = group.value;
+    const value = group.value || 0;
     // decrease width of name (if value exists) to allow for ellipsis.
-    if (value && showValue) {
+    if (showValue) {
       if (valueDisplay === VALUE_FORMAT_TYPES.stretch) {
         const valueInPixels = ((value + '').replace('.', '').length * DIGIT_PIXEL_SIZE) + ICON_CONTAINER_PIXEL_SIZE;
         width = `calc(100% - ${valueInPixels}px)`;
@@ -46,7 +46,7 @@ const ChartLegend = ({ data, icon = 'circle', layout = CHART_LAYOUT_TYPE.vertica
         <span className={classNames('recharts-legend-item-text', { capitalize })} style={{ width }} onClick={onClick}>
           {group.name}
         </span>
-        {showValue && value &&
+        {showValue &&
           <span className={`recharts-legend-item-value ${valueDisplay}`}>
             {valueDisplay === VALUE_FORMAT_TYPES.stretch ? value : `(${value})`}
           </span>
