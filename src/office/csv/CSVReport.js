@@ -22,7 +22,7 @@ function csvEscape(data) {
       case '+':
       case '-':
       case '@':
-        readyData = '("' + readyData[0] + '")' + readyData.substring(1);
+        readyData = '(""' + readyData[0] + '"")' + readyData.substring(1);
         break;
       default:
     }
