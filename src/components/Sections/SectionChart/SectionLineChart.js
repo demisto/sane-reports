@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip, Legend } from 'recharts';
 import ChartLegend from './ChartLegend';
-import { compact, values, isEmpty } from 'lodash';
+import { cloneDeep, compact, isEmpty, values } from 'lodash';
 import { AutoSizer } from 'react-virtualized';
 import moment from 'moment';
 import { NONE_VALUE_DEFAULT_NAME, QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/Constants';
@@ -16,7 +16,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   referenceLineX, referenceLineY, fromDate, toDate }) => {
   const existingColors = {};
   let preparedLegend = [];
-  let preparedData = data || [];
+  let preparedData = cloneDeep(data) || [];
   const finalToDate = toDate || moment().utc();
   const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
   const lineTypes = {};
