@@ -45,13 +45,27 @@
         "name": "CCC",
         "relatedTo": 1,
         "value": [
-          1
+          5
         ],
         "groups": [
           {
             "name": "SubGroup1",
             "data": [
               1
+            ],
+            "groups": null
+          },
+          {
+            "name": "SubGroup3",
+            "data": [
+              1
+            ],
+            "groups": null
+          },
+          {
+            "name": "SubGroup4",
+            "data": [
+              3
             ],
             "groups": null
           }
