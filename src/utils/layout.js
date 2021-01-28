@@ -16,7 +16,7 @@ import {
   SectionText,
   SectionHTML
 } from '../components/Sections';
-import { isNumber, isObjectLike, compact, isString, groupBy } from 'lodash';
+import { isNumber, isObjectLike, compact, isString, groupBy, get } from 'lodash';
 import React from 'react';
 
 function getDefaultEmptyNotification() {
@@ -156,7 +156,8 @@ export function getSectionComponent(section, maxWidth) {
           title={section.title}
           referenceLineX={section.layout.referenceLineX}
           referenceLineY={section.layout.referenceLineY}
-          stacked={section.query && section.query.groupBy && section.query.groupBy.length > 1}
+          stacked={get(section, 'query.groupBy.length', 0) > 1 ||
+          (Array.isArray(section.data) && section.data.some(group => get(group, 'groups.length') > 0))}
           fromDate={section.fromDate}
           toDate={section.toDate}
         />

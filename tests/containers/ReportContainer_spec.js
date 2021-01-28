@@ -24,6 +24,7 @@ import {
 import { BarChart, Bar, PieChart, Pie, LineChart, Line } from 'recharts';
 import { NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
+import { unionBy } from 'lodash';
 
 function expectChartLegendFromChartElement(pieChart, dataArr) {
   const chartLegend = pieChart.find(ChartLegend);
@@ -350,7 +351,7 @@ describe('Report Container', () => {
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);
     expect(barChart.at(0).props().data).to.deep.equal(sec1.data);
     const bars = barChart.at(0).find(Bar);
-    expect(bars).to.have.length(3);
+    expect(bars).to.have.length(sec1.data.reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), []).length);
     expect(barChart.at(1).props().width).to.equal(sec4.layout.dimensions.width);
     expect(barChart.at(1).props().height).to.equal(sec4.layout.dimensions.height);
     expect(barChart.at(1).props().data).to.deep.equal(sec4.data);
