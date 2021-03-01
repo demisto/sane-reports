@@ -140,8 +140,20 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                   dataKey="name"
                   key="x"
                   interval="preserveStartEnd"
+                  label={chartProperties.axis && chartProperties.axis.x ? {
+                    value: chartProperties.axis.x.label,
+                    position: 'insideBottom',
+                    offset: 0
+                  } : undefined}
                 />,
-                <YAxis key="y" domain={[0, dataMax => dataMax + Math.ceil(dataMax * 0.33)]} />
+                <YAxis
+                  key="y"
+                  domain={[0, dataMax => dataMax + Math.ceil(dataMax * 0.33)]}
+                  label={chartProperties.axis && chartProperties.axis.y ? {
+                    value: chartProperties.axis.y.label,
+                    angle: -90
+                  } : undefined}
+                />
               ]}
               {(referenceLineY || chartProperties.layout === 'horizontal') && <YAxis dataKey="name" />}
               <CartesianGrid
