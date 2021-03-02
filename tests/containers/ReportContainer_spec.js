@@ -1,27 +1,27 @@
 /* eslint-disable no-unused-expressions */
-import { React, mount, expect, TemplateProvider } from '../helpers/test_helper';
+import { expect, mount, React, TemplateProvider } from '../helpers/test_helper';
 import { prepareSections } from '../../src/utils/reports';
 import ReportContainer from '../../src/containers/ReportContainer';
 import ChartLegend from '../../src/components/Sections/SectionChart/ChartLegend';
 import ReportLayout from '../../src/components/Layouts/ReportLayout';
 import {
-  SectionHeader,
-  SectionText,
-  SectionDate,
+  ItemsSection,
   SectionChart,
-  SectionTable,
-  SectionImage,
+  SectionDate,
   SectionDivider,
-  SectionMarkdown,
-  SectionJson,
-  SectionNumber,
   SectionDuration,
-  SectionHTML,
   SectionGroupedList,
+  SectionHeader,
+  SectionHTML,
+  SectionImage,
+  SectionJson,
   SectionList,
-  ItemsSection
+  SectionMarkdown,
+  SectionNumber,
+  SectionTable,
+  SectionText
 } from '../../src/components/Sections';
-import { BarChart, Bar, PieChart, Pie, LineChart, Line } from 'recharts';
+import { Bar, BarChart, Line, LineChart, Pie, PieChart } from 'recharts';
 import { NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 import { unionBy } from 'lodash';
@@ -363,9 +363,11 @@ describe('Report Container', () => {
     expect(lineChart.at(0).props().height).to.equal(sec6.layout.dimensions.height);
     let lines = lineChart.at(0).find(Line);
     expect(lines).to.have.length(1);
+    expect(lineChart.at(0).find('.xAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.x.label);
+    expect(lineChart.at(0).find('.yAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.y.label);
 
-    expect(lineChart.at(0).props().width).to.equal(sec7.layout.dimensions.width);
-    expect(lineChart.at(0).props().height).to.equal(sec7.layout.dimensions.height);
+    expect(lineChart.at(1).props().width).to.equal(sec7.layout.dimensions.width);
+    expect(lineChart.at(1).props().height).to.equal(sec7.layout.dimensions.height);
     lines = lineChart.at(1).find(Line);
     expect(lines).to.have.length(2);
     expect(lines.at(0).props().stroke).to.equal(sec7.data[1].groups[0].color);

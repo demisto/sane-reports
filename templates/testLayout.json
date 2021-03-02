@@ -370,6 +370,14 @@
     ],
     "layout": {
       "chartProperties": {
+        "axis": {
+          "x": {
+            "label": "mambaX"
+          },
+          "y": {
+            "label": "mambaY"
+          }
+        },
         "format": "DD MMM Y",
         "isDatesChart": true,
         "layout": "vertical",
