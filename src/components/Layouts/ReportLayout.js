@@ -68,8 +68,10 @@ class ReportLayout extends Component {
       // set dynamic height for all sections, fix top attribute.
       const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
       const heightMap = {};
-      Object.keys(itemsByRow).sort(compareFields).forEach((key) => {
-        const items = itemsByRow[key];
+      const rows = Object.keys(itemsByRow);
+      Object.keys(itemsByRow).sort(compareFields).forEach((key, index) => {
+        const items = itemsByRow[rows[index]];
+        const nextRowHeight = this.getMaxHeight(itemsByRow[rows[index + 1]]);
         let shouldPageBreak = false;
         items.forEach((item) => {
           if (item.element) {
@@ -83,10 +85,17 @@ class ReportLayout extends Component {
             item.element.style.top = `${maxOffset}px`;
             for (let i = item.gridItem.x; i < item.gridItem.x + item.gridItem.w; i++) {
               heightMap[i] = maxOffset + item.element.clientHeight;
+              if (dimensions && !shouldPageBreak) {
+                const pageOffset = dimensions ? dimensions.height - (heightMap[i] % dimensions.height) : 0;
+                if (nextRowHeight > pageOffset) {
+                  shouldPageBreak = true;
+                }
+              }
             }
             shouldPageBreak = shouldPageBreak || ReportLayout.isPageBreakSection(item.section);
           }
         });
+
         // if page dimensions are set and should page break, calculate remaining height.
         if (dimensions && dimensions.height > 0 && shouldPageBreak) {
           for (let i = 0; i < GRID_LAYOUT_COLUMNS; i++) {
@@ -103,6 +112,17 @@ class ReportLayout extends Component {
     }, 5000);
   }
 
+  getMaxHeight = (items) => {
+    let clientHeight = 0;
+    (items || []).forEach((item) => {
+      if (item.element) {
+        clientHeight = Math.max(clientHeight, item.element.clientHeight);
+      }
+    });
+
+    return clientHeight;
+  }
+
   render() {
     const { sections, headerLeftImage, headerRightImage, isLayout, dimensions } = this.props;
     return (
@@ -116,7 +136,7 @@ class ReportLayout extends Component {
           }
         </span>
         {
-          !isLayout ?
+          !isLayout ? // ??
             Object
               .keys(sections)
               .map(rowPos =>
