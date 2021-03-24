@@ -2,7 +2,7 @@ import './SectionBarChart.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ReferenceLine, Label } from 'recharts';
 import { isArray, orderBy, unionBy } from 'lodash';
 import { sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
@@ -10,7 +10,7 @@ import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME } from '../../../constants/C
 import { AutoSizer } from 'react-virtualized';
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
-  legendStyle = null, sortBy, stacked }) => {
+  legendStyle = null, sortBy, stacked, referenceLineY }) => {
   const existingColors = {};
   const isColumnChart = chartProperties.layout === CHART_LAYOUT_TYPE.horizontal;
   let dataItems = {};
@@ -131,9 +131,22 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
               />
               }
               {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" allowDecimals={false} />}
-              {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <YAxis type="number" />}
+              {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal &&
+                <YAxis
+                  type="number"
+                  domain={
+                    [dataMin => Math.floor(Math.min(0, dataMin, referenceLineY.y || 0) * 1.33),
+                      dataMax => Math.ceil(Math.max(dataMax, referenceLineY.y || 0) * 1.33)]
+                  }
+                />
+              }
               {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
               <Tooltip />
+              {referenceLineY &&
+                <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke}>
+                  <Label value={referenceLineY.label} fill={referenceLineY.stroke} position="top" />
+                </ReferenceLine>
+              }
               {legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend &&
                 <Legend
                   content={<ChartLegend
@@ -178,6 +191,7 @@ SectionBarChart.propTypes = {
   legend: PropTypes.array,
   legendStyle: PropTypes.object,
   sortBy: PropTypes.object,
+  referenceLineY: PropTypes.object,
   stacked: PropTypes.bool
 };
 
