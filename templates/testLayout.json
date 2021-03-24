@@ -488,6 +488,11 @@
       }
     ],
     "layout": {
+      "referenceLineY": {
+        "y": 6,
+        "label": "Average",
+        "stroke": "rgb(64, 65, 66)"
+      },
       "chartProperties": {
         "format": "DD MMM Y",
         "isDatesChart": true,
@@ -624,6 +629,11 @@
       }
     ],
     "layout": {
+      "referenceLineY": {
+        "y": 6,
+        "label": "Average",
+        "stroke": "rgb(64, 65, 66)"
+      },
       "chartProperties": {
         "barSize": 35,
         "layout": "horizontal"

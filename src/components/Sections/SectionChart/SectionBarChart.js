@@ -135,8 +135,8 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                 <YAxis
                   type="number"
                   domain={
-                    [dataMin => Math.floor(Math.min(0, dataMin, referenceLineY.y || 0) * 1.33),
-                      dataMax => Math.ceil(Math.max(dataMax, referenceLineY.y || 0) * 1.33)]
+                    [dataMin => Math.floor(Math.min(0, dataMin, (referenceLineY && referenceLineY.y) || 0) * 1.33),
+                      dataMax => Math.ceil(Math.max(dataMax, (referenceLineY && referenceLineY.y) || 0) * 1.33)]
                   }
                 />
               }
