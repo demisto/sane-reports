@@ -28,6 +28,7 @@ const SectionChart = ({ type, data, style, dimensions, legend, chartProperties =
                     legendStyle={legendStyle}
                     sortBy={sortBy}
                     stacked={stacked}
+                    referenceLineY={referenceLineY}
                   />
                 );
                 break;

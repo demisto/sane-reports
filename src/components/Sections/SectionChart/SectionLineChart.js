@@ -1,7 +1,7 @@
 import './SectionLineChart.less';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Label, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip, Legend } from 'recharts';
 import ChartLegend from './ChartLegend';
 import { cloneDeep, compact, isEmpty, values } from 'lodash';
 import { AutoSizer } from 'react-virtualized';
@@ -148,7 +148,10 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                 />,
                 <YAxis
                   key="y"
-                  domain={[0, dataMax => dataMax + Math.ceil(dataMax * 0.33)]}
+                  domain={
+                    [dataMin => Math.floor(Math.min(0, dataMin, (referenceLineY && referenceLineY.y) || 0) * 1.33),
+                      dataMax => Math.ceil(Math.max(dataMax, (referenceLineY && referenceLineY.y) || 0) * 1.33)]
+                  }
                   label={chartProperties.axis && chartProperties.axis.y ? {
                     value: chartProperties.axis.y.label,
                     angle: -90
@@ -166,7 +169,10 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
               {referenceLineX &&
                 <ReferenceLine x={referenceLineX.x} stroke={referenceLineX.stroke} label={referenceLineX.label} />}
               {referenceLineY &&
-                <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke} label={referenceLineY.label} />}
+                <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke}>
+                  <Label value={referenceLineY.label} fill={referenceLineY.stroke} position="top" />
+                </ReferenceLine>
+              }
               {legendStyle && !legendStyle.hideLegend &&
                 <Legend
                   content={<ChartLegend

@@ -355,6 +355,13 @@ describe('Report Container', () => {
     expect(barChart.at(1).props().width).to.equal(sec4.layout.dimensions.width);
     expect(barChart.at(1).props().height).to.equal(sec4.layout.dimensions.height);
     expect(barChart.at(1).props().data).to.deep.equal(sec4.data);
+    let refLine = barChart.at(1).find('.recharts-reference-line-line');
+    expect(refLine.props().y).to.be.equal(sec4.layout.referenceLineY.y);
+    expect(refLine.props().stroke).to.be.equal(sec4.layout.referenceLineY.stroke);
+    let refLineLabel = barChart.at(1).find('.recharts-label');
+    expect(refLineLabel).to.have.length(2);
+    expect(refLineLabel.at(1).props().children[0].props.children).to.be.equal(sec4.layout.referenceLineY.label);
+
     expect(barChart.at(2).props().width).to.equal(sec5.layout.dimensions.width);
     expect(barChart.at(2).props().height).to.equal(sec5.layout.dimensions.height);
     expect(barChart.at(2).props().data).to.deep.equal(sec5.data);
@@ -368,6 +375,12 @@ describe('Report Container', () => {
 
     expect(lineChart.at(1).props().width).to.equal(sec7.layout.dimensions.width);
     expect(lineChart.at(1).props().height).to.equal(sec7.layout.dimensions.height);
+    refLine = lineChart.at(1).find('.recharts-reference-line-line');
+    expect(refLine.props().y).to.be.equal(sec7.layout.referenceLineY.y);
+    expect(refLine.props().stroke).to.be.equal(sec7.layout.referenceLineY.stroke);
+    refLineLabel = lineChart.at(1).find('.recharts-label');
+    expect(refLineLabel).to.have.length(2);
+    expect(refLineLabel.at(1).props().children[0].props.children).to.be.equal(sec7.layout.referenceLineY.label);
     lines = lineChart.at(1).find(Line);
     expect(lines).to.have.length(2);
     expect(lines.at(0).props().stroke).to.equal(sec7.data[1].groups[0].color);
