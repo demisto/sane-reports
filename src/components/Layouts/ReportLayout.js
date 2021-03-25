@@ -89,7 +89,7 @@ class ReportLayout extends Component {
               heightMap[i] = maxOffset + itemHeight;
 
               if (dimensions && !shouldPageBreak && autoPageBreak) {
-                const pageOffset = dimensions ? dimensions.height - (heightMap[i] % dimensions.height) : 0;
+                const pageOffset = dimensions.height - (heightMap[i] % dimensions.height);
                 if (nextRowHeight > pageOffset || itemHeight > dimensions.height) {
                   shouldPageBreak = true;
                 }
