@@ -24,7 +24,7 @@ import {
 import { Bar, BarChart, Line, LineChart, Pie, PieChart } from 'recharts';
 import { NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
-import { unionBy } from 'lodash';
+import { cloneDeep, unionBy } from 'lodash';
 
 function expectChartLegendFromChartElement(pieChart, dataArr) {
   const chartLegend = pieChart.find(ChartLegend);
@@ -450,5 +450,35 @@ describe('Report Container', () => {
     expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style);
     expect(chartLegend.at(0).props().capitalize).to.be.true;
     expect(chartLegend.at(3).props().capitalize).to.be.false;
+  });
+
+  it('Generate test template A4 layout - test auto page break', (done) => {
+    const testTemplate = TemplateProvider.getTestLayoutTemplateWithPageBreaks();
+    const dimensions = { width: 793.70078740155, height: 1122.519685039335 };
+
+    const section = prepareSections(cloneDeep(testTemplate), null, true);
+    const toRender = <ReportContainer sections={section} isLayout dimensions={dimensions} />;
+    const reportContainer = mount(toRender);
+
+    const section2 = prepareSections(cloneDeep(testTemplate), null, false);
+    const toRender2 = <ReportContainer sections={section2} isLayout dimensions={dimensions} />;
+    const reportContainer2 = mount(toRender2);
+
+    setTimeout(() => {
+      const reportLayouts = reportContainer.find(ReportLayout);
+      const reportLayouts2 = reportContainer2.find(ReportLayout);
+
+      const itemElements = reportLayouts.instance().itemElements;
+      const itemElements2 = reportLayouts2.instance().itemElements;
+
+      const keys = Object.keys(itemElements2);
+      const lastKey = keys[keys.length - 1];
+
+      const lastElementTop = itemElements[lastKey].element.style.top;
+      const lastElementTop2 = itemElements2[lastKey].element.style.top;
+
+      expect(lastElementTop).to.not.equal(lastElementTop2);
+      done();
+    }, 5001);
   });
 });

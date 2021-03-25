@@ -83,11 +83,14 @@ class ReportLayout extends Component {
               maxOffset = maxOffset > 0 ? maxOffset + SECTION_HEIGHT_TOTAL_PADDING : maxOffset;
             }
             item.element.style.top = `${maxOffset}px`;
+            const autoPageBreak = item.section.autoPageBreak !== false;
+            const itemHeight = this.getItemHeight(item);
             for (let i = item.gridItem.x; i < item.gridItem.x + item.gridItem.w; i++) {
-              heightMap[i] = maxOffset + item.element.clientHeight;
-              if (dimensions && !shouldPageBreak) {
+              heightMap[i] = maxOffset + itemHeight;
+
+              if (dimensions && !shouldPageBreak && autoPageBreak) {
                 const pageOffset = dimensions ? dimensions.height - (heightMap[i] % dimensions.height) : 0;
-                if (nextRowHeight > pageOffset) {
+                if (nextRowHeight > pageOffset || itemHeight > dimensions.height) {
                   shouldPageBreak = true;
                 }
               }
@@ -114,13 +117,18 @@ class ReportLayout extends Component {
 
   getMaxHeight = (items) => {
     let clientHeight = 0;
+    const getItemHeight = this.getItemHeight;
     (items || []).forEach((item) => {
       if (item.element) {
-        clientHeight = Math.max(clientHeight, item.element.clientHeight);
+        clientHeight = Math.max(clientHeight, getItemHeight(item));
       }
     });
 
     return clientHeight;
+  }
+
+  getItemHeight = (item) => {
+    return item.element.clientHeight || parseInt(item.element.style.height.replace('px', ''), 10);
   }
 
   render() {
