@@ -81,20 +81,21 @@ h1 {
       &.section-table, &.section-markdown {
 
         table {
-          page-break-inside:auto
+          break-inside:auto;
         }
 
         tr    {
-          page-break-inside:avoid;
-          page-break-after:auto;
+          break-inside:avoid;
+          break-after:auto;
         }
 
         thead {
-          display:table-header-group
+          display:table-header-group;
+          break-inside:avoid;
         }
 
         tfoot {
-          display:table-footer-group
+          display:table-header-group;
         }
       }
       .section-title {
