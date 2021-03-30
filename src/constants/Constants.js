@@ -76,3 +76,5 @@ export const SECTION_ITEM_TYPE = {
 export const PAGE_BREAK_KEY = '\\pagebreak';
 
 export const PIXEL_SIZE = 3.779527559055;
+
+export const A4_DIMENSIONS = { width: 210 * PIXEL_SIZE, height: 297 * PIXEL_SIZE };

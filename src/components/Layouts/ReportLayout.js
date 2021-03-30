@@ -128,7 +128,13 @@ class ReportLayout extends Component {
   }
 
   getItemHeight = (item) => {
-    return item.element.clientHeight || parseInt(item.element.style.height.replace('px', ''), 10);
+    if (item.element && item.element.clientHeight) {
+      return item.element.clientHeight;
+    } else if (item.element && item.element.style && item.element.style.height) {
+      return parseInt(item.element.style.height.replace('px', ''), 10);
+    }
+
+    return 0;
   }
 
   render() {

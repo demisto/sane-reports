@@ -22,7 +22,7 @@ import {
   SectionText
 } from '../../src/components/Sections';
 import { Bar, BarChart, Line, LineChart, Pie, PieChart } from 'recharts';
-import { NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
+import { A4_DIMENSIONS, NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 import { cloneDeep, unionBy } from 'lodash';
 
@@ -467,30 +467,32 @@ describe('Report Container', () => {
 
   it('Generate test template A4 layout - test auto page break', (done) => {
     const testTemplate = TemplateProvider.getTestLayoutTemplateWithPageBreaks();
-    const dimensions = { width: 793.70078740155, height: 1122.519685039335 };
+    const renderReport = (section) => {
+      return <ReportContainer
+        sections={section}
+        isLayout dimensions={A4_DIMENSIONS}
+      />;
+    };
+    const sectionWithAutoPageBreak = prepareSections(cloneDeep(testTemplate), null, true);
+    const reportWithAutoPageBreak = mount(renderReport(sectionWithAutoPageBreak));
 
-    const section = prepareSections(cloneDeep(testTemplate), null, true);
-    const toRender = <ReportContainer sections={section} isLayout dimensions={dimensions} />;
-    const reportContainer = mount(toRender);
-
-    const section2 = prepareSections(cloneDeep(testTemplate), null, false);
-    const toRender2 = <ReportContainer sections={section2} isLayout dimensions={dimensions} />;
-    const reportContainer2 = mount(toRender2);
+    const sectionWithoutAutoPageBreak = prepareSections(cloneDeep(testTemplate), null, false);
+    const reportWithoutAutoPageBreak = mount(renderReport(sectionWithoutAutoPageBreak));
 
     setTimeout(() => {
-      const reportLayouts = reportContainer.find(ReportLayout);
-      const reportLayouts2 = reportContainer2.find(ReportLayout);
+      const reportLayoutWithAutoPageBreak = reportWithAutoPageBreak.find(ReportLayout);
+      const reportLayoutWithoutAutoPageBreak = reportWithoutAutoPageBreak.find(ReportLayout);
 
-      const itemElements = reportLayouts.instance().itemElements;
-      const itemElements2 = reportLayouts2.instance().itemElements;
+      const elementsWithAutoPageBreak = reportLayoutWithAutoPageBreak.instance().itemElements;
+      const itemElementsWithoutAutoPageBreak = reportLayoutWithoutAutoPageBreak.instance().itemElements;
 
-      const keys = Object.keys(itemElements2);
+      const keys = Object.keys(itemElementsWithoutAutoPageBreak);
       const lastKey = keys[keys.length - 1];
 
-      const lastElementTop = itemElements[lastKey].element.style.top;
-      const lastElementTop2 = itemElements2[lastKey].element.style.top;
+      const lastElementTopWithAutoPageBreak = elementsWithAutoPageBreak[lastKey].element.style.top;
+      const lastElementTopWithoutAutoPageBreak = itemElementsWithoutAutoPageBreak[lastKey].element.style.top;
 
-      expect(lastElementTop).to.not.equal(lastElementTop2);
+      expect(lastElementTopWithAutoPageBreak).to.not.equal(lastElementTopWithoutAutoPageBreak);
       done();
     }, 5001);
   });
