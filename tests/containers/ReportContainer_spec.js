@@ -22,9 +22,9 @@ import {
   SectionText
 } from '../../src/components/Sections';
 import { Bar, BarChart, Line, LineChart, Pie, PieChart } from 'recharts';
-import { NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
+import { A4_DIMENSIONS, NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
-import { unionBy } from 'lodash';
+import { cloneDeep, unionBy } from 'lodash';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -470,5 +470,37 @@ describe('Report Container', () => {
     expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style);
     expect(chartLegend.at(0).props().capitalize).to.be.true;
     expect(chartLegend.at(3).props().capitalize).to.be.false;
+  });
+
+  it('Generate test template A4 layout - test auto page break', (done) => {
+    const testTemplate = TemplateProvider.getTestLayoutTemplateWithPageBreaks();
+    const renderReport = (section) => {
+      return <ReportContainer
+        sections={section}
+        isLayout dimensions={A4_DIMENSIONS}
+      />;
+    };
+    const sectionWithAutoPageBreak = prepareSections(cloneDeep(testTemplate), null, true);
+    const reportWithAutoPageBreak = mount(renderReport(sectionWithAutoPageBreak));
+
+    const sectionWithoutAutoPageBreak = prepareSections(cloneDeep(testTemplate), null, false);
+    const reportWithoutAutoPageBreak = mount(renderReport(sectionWithoutAutoPageBreak));
+
+    setTimeout(() => {
+      const reportLayoutWithAutoPageBreak = reportWithAutoPageBreak.find(ReportLayout);
+      const reportLayoutWithoutAutoPageBreak = reportWithoutAutoPageBreak.find(ReportLayout);
+
+      const elementsWithAutoPageBreak = reportLayoutWithAutoPageBreak.instance().itemElements;
+      const itemElementsWithoutAutoPageBreak = reportLayoutWithoutAutoPageBreak.instance().itemElements;
+
+      const keys = Object.keys(itemElementsWithoutAutoPageBreak);
+      const lastKey = keys[keys.length - 1];
+
+      const lastElementTopWithAutoPageBreak = elementsWithAutoPageBreak[lastKey].element.style.top;
+      const lastElementTopWithoutAutoPageBreak = itemElementsWithoutAutoPageBreak[lastKey].element.style.top;
+
+      expect(lastElementTopWithAutoPageBreak).to.not.equal(lastElementTopWithoutAutoPageBreak);
+      done();
+    }, 5001);
   });
 });

@@ -68,8 +68,10 @@ class ReportLayout extends Component {
       // set dynamic height for all sections, fix top attribute.
       const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
       const heightMap = {};
-      Object.keys(itemsByRow).sort(compareFields).forEach((key) => {
-        const items = itemsByRow[key];
+      const rows = Object.keys(itemsByRow);
+      Object.keys(itemsByRow).sort(compareFields).forEach((key, index) => {
+        const items = itemsByRow[rows[index]];
+        const nextRowHeight = this.getMaxHeight(itemsByRow[rows[index + 1]]);
         let shouldPageBreak = false;
         items.forEach((item) => {
           if (item.element) {
@@ -81,12 +83,22 @@ class ReportLayout extends Component {
               maxOffset = maxOffset > 0 ? maxOffset + SECTION_HEIGHT_TOTAL_PADDING : maxOffset;
             }
             item.element.style.top = `${maxOffset}px`;
+            const autoPageBreak = item.section.autoPageBreak !== false;
+            const itemHeight = this.getItemHeight(item);
             for (let i = item.gridItem.x; i < item.gridItem.x + item.gridItem.w; i++) {
-              heightMap[i] = maxOffset + item.element.clientHeight;
+              heightMap[i] = maxOffset + itemHeight;
+
+              if (dimensions && !shouldPageBreak && autoPageBreak) {
+                const pageOffset = dimensions.height - (heightMap[i] % dimensions.height);
+                if (nextRowHeight > pageOffset || itemHeight > dimensions.height) {
+                  shouldPageBreak = true;
+                }
+              }
             }
             shouldPageBreak = shouldPageBreak || ReportLayout.isPageBreakSection(item.section);
           }
         });
+
         // if page dimensions are set and should page break, calculate remaining height.
         if (dimensions && dimensions.height > 0 && shouldPageBreak) {
           for (let i = 0; i < GRID_LAYOUT_COLUMNS; i++) {
@@ -101,6 +113,28 @@ class ReportLayout extends Component {
       readyDiv.id = 'ready-doc';
       document.getElementsByTagName('body')[0].appendChild(readyDiv);
     }, 5000);
+  }
+
+  getMaxHeight = (items) => {
+    let clientHeight = 0;
+    const getItemHeight = this.getItemHeight;
+    (items || []).forEach((item) => {
+      if (item.element) {
+        clientHeight = Math.max(clientHeight, getItemHeight(item));
+      }
+    });
+
+    return clientHeight;
+  }
+
+  getItemHeight = (item) => {
+    if (item.element && item.element.clientHeight) {
+      return item.element.clientHeight;
+    } else if (item.element && item.element.style && item.element.style.height) {
+      return parseInt(item.element.style.height.replace('px', ''), 10);
+    }
+
+    return 0;
   }
 
   render() {

@@ -1,4 +1,5 @@
 import testTemplate from './test.json';
+import testLayoutWithPageBreaks from './testLayoutWithPageBreaks.json';
 import testLayoutTemplate from './testLayout.json';
 import incidentDailyReportTempalte from './incidentDailyReportTempalte.json';
 
@@ -10,6 +11,10 @@ function getTestLayoutTemplate() {
   return testLayoutTemplate;
 }
 
+function getTestLayoutTemplateWithPageBreaks() {
+  return testLayoutWithPageBreaks;
+}
+
 /* istanbul ignore next */
 function getIncidentDailyReportTemplate() {
   return incidentDailyReportTempalte;
@@ -18,5 +23,6 @@ function getIncidentDailyReportTemplate() {
 export {
   getTestTemplate,
   getIncidentDailyReportTemplate,
-  getTestLayoutTemplate
+  getTestLayoutTemplate,
+  getTestLayoutTemplateWithPageBreaks
 };
