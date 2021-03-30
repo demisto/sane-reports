@@ -26,16 +26,22 @@ import { NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Con
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 import { unionBy } from 'lodash';
 
-function expectChartLegendFromChartElement(pieChart, dataArr) {
-  const chartLegend = pieChart.find(ChartLegend);
+function expectChartLegendFromChartElement(chart, dataArr, showValue) {
+  const chartLegend = chart.find(ChartLegend);
   expect(chartLegend).to.have.length(1);
-  const pieChartLegendTexts = chartLegend.at(0).find('.recharts-legend-item-text');
-  const pieChartLegendValues = chartLegend.at(0).find('.recharts-legend-item-value');
-  expect(pieChartLegendTexts).to.have.length(dataArr.length);
-  expect(pieChartLegendValues).to.have.length(dataArr.length);
+  const chartLegendTexts = chartLegend.at(0).find('.recharts-legend-item-text');
+  const chartLegendValues = chartLegend.at(0).find('.recharts-legend-item-value');
+  expect(chartLegendTexts).to.have.length(dataArr.length);
+  if (showValue) {
+    expect(chartLegendValues).to.have.length(dataArr.length);
+  } else {
+    expect(chartLegendValues).to.have.length(0);
+  }
   dataArr.forEach((data, i) => {
-    expect(pieChartLegendTexts.at(i).text()).to.equal(data.name || NONE_VALUE_DEFAULT_NAME);
-    expect(pieChartLegendValues.at(i).text()).to.equal(`${data.value}`);
+    expect(chartLegendTexts.at(i).text()).to.equal(data.name || NONE_VALUE_DEFAULT_NAME);
+    if (showValue) {
+      expect(chartLegendValues.at(i).text()).to.equal(`${data.value}`);
+    }
   });
   return chartLegend;
 }
@@ -345,7 +351,7 @@ describe('Report Container', () => {
 
     expect(pie.props().data[pie.props().data.length - 2].name).to.equal(NONE_VALUE_DEFAULT_NAME);
     expect(pie.props().data[pie.props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
-    let chartLegend = expectChartLegendFromChartElement(pieChart, sec3.data);
+    let chartLegend = expectChartLegendFromChartElement(pieChart, sec3.data, true);
 
     expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);
@@ -385,6 +391,7 @@ describe('Report Container', () => {
     expect(lines).to.have.length(2);
     expect(lines.at(0).props().stroke).to.equal(sec7.data[1].groups[0].color);
     expect(lines.at(1).props().stroke).to.equal(sec7.data[1].groups[1].color);
+    expectChartLegendFromChartElement(lineChart.at(1), sec7.data[2].groups);
 
     // Trend
     const trendNumber = reportContainer.find(SectionNumber);
