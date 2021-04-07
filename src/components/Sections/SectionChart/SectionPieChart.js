@@ -135,7 +135,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 } : { top: 10 }}
                 content={
                   <ChartLegend
-                    iconType="circle"
+                    iconType="square"
                     capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
                     data={preparedData}
                     height={legendHeight}
