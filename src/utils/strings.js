@@ -1,3 +1,6 @@
+import { isNumber } from 'lodash';
+import { WIDGET_VALUES_FORMAT } from '../constants/Constants';
+
 function insertStringAt(originString, stringToInsert, position) {
   return [originString.slice(0, position), stringToInsert, originString.slice(position)].join('');
 }
@@ -50,3 +53,22 @@ export function sortStrings(s1In, s2In, asc = true) {
   // a must be equal to b
   return 0;
 }
+
+export const formatNumberValue = (v, format) => {
+  if (!isNumber(v)) {
+    return v;
+  }
+
+  switch (format) {
+    case WIDGET_VALUES_FORMAT.abbreviated:
+      return numberToShortString(v);
+    case WIDGET_VALUES_FORMAT.decimal:
+      return v && v.toFixed(2) ? v.toFixed(2) : null;
+    case WIDGET_VALUES_FORMAT.percentage:
+      return new Intl.NumberFormat().format(v) + '%';
+    case WIDGET_VALUES_FORMAT.regular:
+      return new Intl.NumberFormat().format(v);
+    default:
+      return v;
+  }
+};

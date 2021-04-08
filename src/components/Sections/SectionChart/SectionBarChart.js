@@ -2,9 +2,9 @@ import './SectionBarChart.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ReferenceLine, Label } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ReferenceLine, Label, LabelList } from 'recharts';
 import { isArray, orderBy, unionBy } from 'lodash';
-import { sortStrings } from '../../../utils/strings';
+import { formatNumberValue, sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
 import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME } from '../../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
@@ -16,9 +16,15 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   let dataItems = {};
   let preparedData = data || [];
 
+  const formatValue = (v) => {
+    const { valuesFormat } = chartProperties;
+    return formatNumberValue(v, valuesFormat);
+  };
+
   if (!stacked) {
     preparedData = preparedData.map((item) => {
       let val = item.value || item.data;
+      item.showValues = chartProperties.showValues;
       if (isArray(val) && val.length > 0) {
         val = val[0];
       }
@@ -48,6 +54,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   let leftMargin = -5;
   if (stacked) {
     preparedData.forEach((item) => {
+      item.showValues = chartProperties.showValues;
       // fix bar chart left label ticks cutoff.
       if (!isColumnChart) {
         let name = item.name || '';
@@ -68,7 +75,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       }
       if (item.groups) {
         // iterate inner groups
-        (item.groups || []).forEach(((innerItem) => {
+        (item.groups || []).forEach(((innerItem, index) => {
           innerItem.color = innerItem.fill || innerItem.color || getGraphColorByName(innerItem.name, existingColors);
           if (!innerItem.name) {
             innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
@@ -76,11 +83,15 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           existingColors[innerItem.color] = true;
 
           item[innerItem.name] = innerItem.data[0];
+          innerItem.showValues = index === item.groups.length - 1;
         }));
 
         dataItems = preparedData
           .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
-          .map(group => ({ name: group.name, color: group.fill || group.color }))
+          .map(group => ({ name: group.name,
+            color: group.fill || group.color,
+            groupValue: group.groupValue,
+            showValues: group.showValues && chartProperties.showValues }))
           .sort((a, b) => sortStrings(a.name, b.name));
       } else {
         Object.keys(item).filter(key => key !== 'name' && key !== 'relatedTo' && key !== 'value').forEach(
@@ -88,7 +99,8 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
             dataItems[groupKey] = {
               name: groupKey,
               color: getGraphColorByName(groupKey),
-              value: item[groupKey]
+              value: item[groupKey],
+              showValues: chartProperties.showValues
             };
           }
         );
@@ -161,18 +173,29 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   {...legendStyle}
                 />
               }
-              {dataItems.map(item => <Bar
-                key={item.name}
-                dataKey={item.name}
-                stackId="stack"
-                fill={item.color}
-                onClick={(e) => {
-                  if (e.url) {
-                    window.open(e.url, '_blank');
-                  }
-                }}
-                label={!!chartProperties.label}
-              />)}
+              {dataItems.map(item =>
+                <Bar
+                  key={item.name}
+                  dataKey={item.name}
+                  stackId="stack"
+                  fill={item.color}
+                  onClick={(e) => {
+                    if (e.url) {
+                      window.open(e.url, '_blank');
+                    }
+                  }}
+                  label={!!chartProperties.label}
+                >
+                  {!chartProperties.label && item.showValues &&
+                  <LabelList
+                    position="top"
+                    valueAccessor={(entry) => {
+                      return entry.data[0];
+                    }}
+                    formatter={formatValue}
+                  />}
+                </Bar>
+                  )}
             </BarChart>);
         }
         }
