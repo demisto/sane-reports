@@ -35,7 +35,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       existingColors[item.color] = true;
       if (!legend || !dataItems[item.name]) {
         item[item.name] = val;
-        dataItems[item.name] = { name: item.name, color: item.color, value: val };
+        dataItems[item.name] = { name: item.name,
+          color: item.color,
+          value: val,
+          showValues: chartProperties.showValues };
       } else {
         dataItems[item.name].value = val;
       }
