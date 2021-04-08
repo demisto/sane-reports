@@ -4,10 +4,45 @@ import PropTypes from 'prop-types';
 import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ReferenceLine, Label } from 'recharts';
 import { isArray, orderBy, unionBy } from 'lodash';
-import { sortStrings } from '../../../utils/strings';
+import {
+  createMiddleEllipsisFormatter,
+  getTextWidth,
+  sortStrings
+} from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
-import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME } from '../../../constants/Constants';
+import {
+  CHART_LAYOUT_TYPE,
+  NONE_VALUE_DEFAULT_NAME,
+  WIDGET_DEFAULT_CONF
+} from '../../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
+import { calculateAngledTickInterval } from '../../../utils/ticks';
+
+const createXAxisProps = (data, dataKey, width) => {
+  const ticks = data.map(x => x[dataKey]);
+  const ticksStr = ticks.join(' ');
+  const ticksUiWidth = getTextWidth(ticksStr, WIDGET_DEFAULT_CONF.font);
+  const props = {
+    interval: 0
+  };
+
+  if (ticksUiWidth > width) {
+    const mEllipsisFormatter = createMiddleEllipsisFormatter(WIDGET_DEFAULT_CONF.tickMaxChars);
+    const longestTick = ticks.reduce((acc, curr) => {
+      return acc.length > curr.length ? acc : curr;
+    });
+
+    props.interval = calculateAngledTickInterval(width, WIDGET_DEFAULT_CONF.lineHeight, data.length);
+    props.textAnchor = 'end';
+    props.angle = WIDGET_DEFAULT_CONF.tickAngle;
+    props.height = getTextWidth(mEllipsisFormatter(longestTick), WIDGET_DEFAULT_CONF.font) + 15;
+    props.tickFormatter = mEllipsisFormatter;
+    props.dx = -5;
+    props.dy = 0;
+  }
+
+  return props;
+};
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
   legendStyle = null, sortBy, stacked, referenceLineY }) => {
@@ -115,9 +150,12 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     <div className={mainClass} style={style}>
       <AutoSizer>
         {({ width, height }) => {
+          const finalWidth = width || dimensions.width;
+          const xAxisProps = isColumnChart ? createXAxisProps(data, 'name', finalWidth / 2) : {};
+
           return (
             <BarChart
-              width={width || dimensions.width}
+              width={finalWidth}
               height={height || dimensions.height}
               data={preparedData}
               layout={chartProperties.layout}
@@ -140,7 +178,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   }
                 />
               }
-              {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
+              {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal &&
+                <XAxis tick dataKey="name" type="category" {...xAxisProps} />
+              }
               <Tooltip />
               {referenceLineY &&
                 <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke}>

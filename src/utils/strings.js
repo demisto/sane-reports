@@ -50,3 +50,37 @@ export function sortStrings(s1In, s2In, asc = true) {
   // a must be equal to b
   return 0;
 }
+
+let canvas;
+export function getTextWidth(text, font = '14px Source Sans Pro') {
+  if (!canvas) {
+    canvas = document.createElement('canvas');
+  }
+  const context = canvas.getContext('2d');
+  context.font = font;
+  const { width } = context.measureText(text);
+
+  return width;
+}
+
+export function middleEllipsis(value, ellipsisThreshold, startLength, endLength) {
+  let newValue = value;
+  if (value.length > ellipsisThreshold) {
+    newValue = value.substring(0, startLength);
+    newValue = newValue.concat('...');
+    if (endLength > 0) {
+      newValue = newValue.concat(value.substring(value.length - endLength - 1));
+    }
+  }
+  return newValue;
+}
+
+export function createMiddleEllipsisFormatter(maxLen) {
+  const partsLen = maxLen - 3;
+  const partLeft = Math.ceil(partsLen / 2);
+  const partRight = Math.floor(partsLen / 2);
+
+  return (txt) => {
+    return middleEllipsis(txt, maxLen, partLeft, partRight);
+  };
+}

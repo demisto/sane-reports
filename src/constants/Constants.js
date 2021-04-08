@@ -47,6 +47,17 @@ export const CHART_LAYOUT_TYPE = {
   vertical: 'vertical'
 };
 
+export const WIDGET_DEFAULT_CONF = {
+  lineHeight: 22,
+  tickAngle: -40,
+  tickMaxChars: 10,
+  font: '12px Source Sans Pro',
+  size: 10,
+  sizeThresholdWarning: 100,
+  showOthers: true,
+  otherGroup: 'Other'
+};
+
 export const QUERIES_TIME_FORMAT = 'DD MMM Y';
 export const SUPPORTED_TIME_FRAMES = {
   days: 'days',
