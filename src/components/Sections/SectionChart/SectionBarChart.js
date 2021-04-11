@@ -93,7 +93,6 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
           .map(group => ({ name: group.name,
             color: group.fill || group.color,
-            groupValue: group.groupValue,
             showValues: group.showValues && chartProperties.showValues }))
           .sort((a, b) => sortStrings(a.name, b.name));
       } else {
@@ -193,7 +192,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   <LabelList
                     position="top"
                     valueAccessor={(entry) => {
-                      return entry.data[0];
+                      return entry.data[0] || entry.value[1];
                     }}
                     formatter={formatValue}
                   />}
