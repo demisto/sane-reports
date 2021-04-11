@@ -1,9 +1,17 @@
 .section-line-chart {
   height: 100%;
+
   .recharts-legend-wrapper {
     left: 0 !important;
     width: 100% !important;
     margin-top: -5px;
     overflow: hidden;
+  }
+
+  &.section-force-full{
+    .recharts-wrapper {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
   }
 }
