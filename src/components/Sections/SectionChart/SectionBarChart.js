@@ -8,6 +8,7 @@ import { formatNumberValue, sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
 import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME } from '../../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
+import classNames from 'classnames';
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
   legendStyle = null, sortBy, stacked, referenceLineY }) => {
@@ -49,8 +50,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     preparedData = orderBy(preparedData, sortBy.values, sortBy.orders);
   }
 
-  const mainClass =
-    isColumnChart ? 'section-column-chart' : 'section-bar-chart';
+  const mainClass = classNames(isColumnChart ? 'section-column-chart' : 'section-bar-chart', {
+    'section-force-full': chartProperties.forceFullChart === true || chartProperties.forceFullChart === undefined
+  });
+
   const maxLabelSize = (dimensions.width / 3) - 20;
   let maxCategorySize = 0;
   const margin = chartProperties.margin || {};
