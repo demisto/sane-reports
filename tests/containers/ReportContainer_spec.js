@@ -509,12 +509,27 @@ describe('Report Container', () => {
     setTimeout(() => {
       const barChart = reportContainer.find(SectionBarChart);
       expect(barChart).to.have.length(3);
-
       expect(barChart.at(0).props().chartProperties.showValues).to.equal(undefined);
       expect(barChart.at(1).props().chartProperties.showValues).to.equal(true);
       expect(barChart.at(2).props().chartProperties.showValues).to.equal(undefined);
-      expect(barChart.at(1).find('.recharts-label').length).to.equal(2);
+
+      const barWithShowValues = reportContainer.find(BarChart).at(1);
+
+      barWithShowValues.props().data.forEach((data) => {
+        expect(data.showValues).to.equal(true);
+      });
+
+      const bars = barWithShowValues.find(Bar);
+
+      bars.forEach((bar, index) => {
+        const data = bar.props().data[index];
+        const valueLabels = bar.props().children;
+
+        expect(valueLabels.props.valueAccessor(data).toString()).to.equal(valueLabels.props.formatter(data.value[1]));
+      });
+
       done();
     }, 5001);
   });
 });
+

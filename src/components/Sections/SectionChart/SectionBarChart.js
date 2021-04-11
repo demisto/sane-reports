@@ -57,7 +57,6 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   let leftMargin = -5;
   if (stacked) {
     preparedData.forEach((item) => {
-      item.showValues = chartProperties.showValues;
       // fix bar chart left label ticks cutoff.
       if (!isColumnChart) {
         let name = item.name || '';
@@ -77,6 +76,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         leftMargin = Math.max(leftMargin, spaceNeeded);
       }
       if (item.groups) {
+        item.showValues = chartProperties.showValues;
         // iterate inner groups
         (item.groups || []).forEach(((innerItem, index) => {
           innerItem.color = innerItem.fill || innerItem.color || getGraphColorByName(innerItem.name, existingColors);
@@ -101,8 +101,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
             dataItems[groupKey] = {
               name: groupKey,
               color: getGraphColorByName(groupKey),
-              value: item[groupKey],
-              showValues: chartProperties.showValues
+              value: item[groupKey]
             };
           }
         );
@@ -192,7 +191,13 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   <LabelList
                     position="top"
                     valueAccessor={(entry) => {
-                      return entry.data[0] || entry.value[1];
+                      let value = '';
+                      if (entry && entry.data && entry.data[0] !== undefined) {
+                        value = entry.data[0];
+                      } else if (entry && entry.value && entry.value[1] !== undefined) {
+                        value = entry.value[1];
+                      }
+                      return value;
                     }}
                     formatter={formatValue}
                   />}
