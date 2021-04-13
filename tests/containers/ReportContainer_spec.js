@@ -25,6 +25,7 @@ import { Bar, BarChart, Line, LineChart, Pie, PieChart } from 'recharts';
 import { A4_DIMENSIONS, NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 import { cloneDeep, unionBy } from 'lodash';
+import SectionBarChart from '../../src/components/Sections/SectionChart/SectionBarChart';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -503,4 +504,39 @@ describe('Report Container', () => {
       done();
     }, 5001);
   });
+
+  it('Generate test template layout report show bar values', (done) => {
+    const testTemplate = TemplateProvider.getTestLayoutTemplate();
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+
+    const reportLayouts = reportContainer.find(ReportLayout);
+    expect(reportLayouts).to.have.length(1);
+
+    setTimeout(() => {
+      const barChart = reportContainer.find(SectionBarChart);
+      expect(barChart).to.have.length(3);
+      expect(barChart.at(0).props().chartProperties.showValues).to.equal(undefined);
+      expect(barChart.at(1).props().chartProperties.showValues).to.equal(true);
+      expect(barChart.at(2).props().chartProperties.showValues).to.equal(undefined);
+
+      const barWithShowValues = reportContainer.find(BarChart).at(1);
+
+      barWithShowValues.props().data.forEach((data) => {
+        expect(data.showValues).to.equal(true);
+      });
+
+      const bars = barWithShowValues.find(Bar);
+
+      bars.forEach((bar, index) => {
+        const data = bar.props().data[index];
+        const valueLabels = bar.props().children;
+
+        expect(valueLabels.props.valueAccessor(data).toString()).to.equal(valueLabels.props.formatter(data.value[1]));
+      });
+
+      done();
+    }, 5001);
+  });
 });
+
