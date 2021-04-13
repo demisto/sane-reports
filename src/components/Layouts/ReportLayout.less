@@ -67,6 +67,9 @@ h1 {
 
       &:not(.section-force-full){
         height: auto !important;
+        &.section-table {
+          height: auto !important; // override grid item height to fit content
+        }
       }
       transition-property: none;
       .section-chart {
@@ -80,9 +83,6 @@ h1 {
       }
       &.slim {
         height: auto !important;
-      }
-      &.section-table {
-        height: auto !important; // override grid item height to fit content
       }
 
       &.section-table, &.section-markdown {
@@ -113,6 +113,18 @@ h1 {
 
       &.section-force-full {
         overflow-y: auto;
+
+        .section-column-chart {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .section-line-chart {
+          .recharts-wrapper {
+            overflow-y: auto;
+            overflow-x: hidden;
+          }
+        }
       }
     }
   }
