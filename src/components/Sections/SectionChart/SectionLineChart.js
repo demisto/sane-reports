@@ -6,11 +6,38 @@ import ChartLegend from './ChartLegend';
 import { cloneDeep, compact, isEmpty, values } from 'lodash';
 import { AutoSizer } from 'react-virtualized';
 import moment from 'moment';
-import { NONE_VALUE_DEFAULT_NAME, QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/Constants';
+import {
+  NONE_VALUE_DEFAULT_NAME,
+  QUERIES_TIME_FORMAT,
+  SUPPORTED_TIME_FRAMES,
+  WIDGET_DEFAULT_CONF
+} from '../../../constants/Constants';
 import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
+import { getTextWidth } from '../../../utils/strings';
+import { calculateAngledTickInterval } from '../../../utils/ticks';
 
 const SINGLE_LINE_CHART_NAME = 'sum';
+
+const createXAxisProps = (data, dataKey, width) => {
+  const ticks = data.map(x => x[dataKey]);
+  const ticksStr = ticks.join(' ');
+  const ticksUiWidth = getTextWidth(ticksStr, WIDGET_DEFAULT_CONF.font);
+  const props = {
+    interval: 'preserveStartEnd'
+  };
+
+  if (ticksUiWidth > width) {
+    props.interval = calculateAngledTickInterval(width, WIDGET_DEFAULT_CONF.lineHeight, data.length);
+    props.textAnchor = 'end';
+    props.angle = WIDGET_DEFAULT_CONF.tickAngle;
+    props.height = getTextWidth(ticks[0], WIDGET_DEFAULT_CONF.font) + 10;
+    props.dx = -5;
+    props.dy = 0;
+  }
+
+  return props;
+};
 
 const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null,
   referenceLineX, referenceLineY, fromDate, toDate }) => {
@@ -128,9 +155,12 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     <div className="section-line-chart" style={style}>
       <AutoSizer>
         {({ width, height }) => {
+          const finalWidth = width || dimensions.width;
+          const xAxisProps = createXAxisProps(data, 'name', finalWidth * 0.6);
+
           return (
             <LineChart
-              width={width || dimensions.width}
+              width={finalWidth}
               height={height || dimensions.height}
               data={preparedData}
               margin={chartProperties.margin}
@@ -140,6 +170,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                   dataKey="name"
                   key="x"
                   interval="preserveStartEnd"
+                  {...xAxisProps}
                   label={chartProperties.axis && chartProperties.axis.x ? {
                     value: chartProperties.axis.x.label,
                     position: 'insideBottom',

@@ -1,0 +1,120 @@
+[
+  {
+    "type": "duration",
+    "data": [
+      {
+        "name": "",
+        "data": [
+          3319488
+        ],
+        "groups": null,
+        "count": 3319488,
+        "floatData": [
+          3319488
+        ]
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "format": "months",
+        "labels": {
+          "days": "DAYS",
+          "hours": "HOURS",
+          "min": "MIN",
+          "months": "MONTHS",
+          "weeks": "WEEKS",
+          "years": "YEARS"
+        }
+      },
+      "columnPos": 0,
+      "h": 1,
+      "i": "77f96b80-9c55-11eb-b89d-bd8204c9fb46",
+      "legend": null,
+      "rowPos": 0,
+      "w": 12
+    },
+    "query": {
+      "type": "incident",
+      "filter": {
+        "query": "",
+        "period": {
+          "by": "",
+          "byTo": "",
+          "byFrom": "days",
+          "toValue": null,
+          "fromValue": 7,
+          "field": ""
+        },
+        "fromDate": "0001-01-01T00:00:00Z",
+        "toDate": "0001-01-01T00:00:00Z"
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "fromDate": "2021-04-06T13:08:19Z",
+    "title": "W-D-H",
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  },
+  {
+    "type": "duration",
+    "data": [
+      {
+        "name": "",
+        "data": [
+          93780
+        ],
+        "groups": null,
+        "count": 93780,
+        "floatData": [
+          93780
+        ]
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "daysLabel": "DAYS",
+        "hoursLabel": "HOURS",
+        "minutesLabel": "MIN"
+      },
+      "columnPos": 0,
+      "h": 1,
+      "i": "42ba2550-9c59-11eb-b268-ebc604d7b782",
+      "legend": null,
+      "rowPos": 1,
+      "w": 12
+    },
+    "query": {
+      "type": "incident",
+      "filter": {
+        "query": "",
+        "period": {
+          "by": "",
+          "byTo": "",
+          "byFrom": "days",
+          "toValue": null,
+          "fromValue": 7,
+          "field": ""
+        },
+        "fromDate": "0001-01-01T00:00:00Z",
+        "toDate": "0001-01-01T00:00:00Z"
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "fromDate": "2021-04-06T13:08:19Z",
+    "title": "DEFAULT",
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  }
+]

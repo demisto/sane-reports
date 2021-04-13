@@ -22,7 +22,12 @@ import {
   SectionText
 } from '../../src/components/Sections';
 import { Bar, BarChart, Line, LineChart, Pie, PieChart } from 'recharts';
-import { A4_DIMENSIONS, NONE_VALUE_DEFAULT_NAME, PAGE_BREAK_KEY } from '../../src/constants/Constants';
+import {
+  A4_DIMENSIONS,
+  NONE_VALUE_DEFAULT_NAME,
+  PAGE_BREAK_KEY,
+  WIDGET_DURATION_FORMAT
+} from '../../src/constants/Constants';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 import { cloneDeep, unionBy } from 'lodash';
 import SectionBarChart from '../../src/components/Sections/SectionChart/SectionBarChart';
@@ -538,5 +543,44 @@ describe('Report Container', () => {
       done();
     }, 5001);
   });
-});
 
+  it('Generate test template layout report with duration formats', () => {
+    const testTemplate = TemplateProvider.getTestLayoutDurationTemplate();
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+
+    const reportLayouts = reportContainer.find(ReportLayout);
+    expect(reportLayouts).to.have.length(1);
+
+    const duration = reportContainer.find(SectionDuration);
+    expect(duration).to.have.length(2);
+
+    // DURATION with format
+    expect(duration.at(0).props().chartProperties.format).to.equal(WIDGET_DURATION_FORMAT.months);
+    let durationHeaders = duration.at(0).find('.time-unit');
+    expect(durationHeaders).to.have.length(3);
+    expect(durationHeaders.at(0).text()).to.equal('MONTHS');
+    expect(durationHeaders.at(1).text()).to.equal('WEEKS');
+    expect(durationHeaders.at(2).text()).to.equal('DAYS');
+
+    let durationValues = duration.at(0).find('.part-header');
+    expect(durationValues).to.have.length(3);
+    expect(durationValues.at(0).text()).to.equal('01');
+    expect(durationValues.at(1).text()).to.equal('01');
+    expect(durationValues.at(2).text()).to.equal('01');
+
+    // DURATION without format
+    expect(duration.at(1).props().chartProperties.format).to.be.undefined;
+    durationHeaders = duration.at(1).find('.time-unit');
+    expect(durationHeaders).to.have.length(3);
+    expect(durationHeaders.at(0).text()).to.equal('DAYS');
+    expect(durationHeaders.at(1).text()).to.equal('HOURS');
+    expect(durationHeaders.at(2).text()).to.equal('MIN');
+
+    durationValues = duration.at(1).find('.part-header');
+    expect(durationValues).to.have.length(3);
+    expect(durationValues.at(0).text()).to.equal('01');
+    expect(durationValues.at(1).text()).to.equal('02');
+    expect(durationValues.at(2).text()).to.equal('03');
+  });
+});
