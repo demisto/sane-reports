@@ -14,6 +14,7 @@ import ReactGridLayout from 'react-grid-layout';
 import { compareFields } from '../../utils/sort';
 import ErrorBoundary from '../ErrorBoundary';
 import { getSectionComponent } from '../../utils/layout';
+import classNames from 'classnames';
 
 const ROW_PIXEL_HEIGHT = 110;
 const SECTION_HEIGHT_TOTAL_PADDING = 20;
@@ -197,6 +198,13 @@ class ReportLayout extends Component {
                             .map((section) => {
                               const gridItem = ReportLayout.getGridItemFromSection(section, overflowRows);
                               overflowRows += gridItem.h - section.layout.h;
+
+                              const mainClass = classNames(`section-layout section-${section.type} ` +
+                              `${section.layout.class || ''}`,
+                                  { 'section-force-full': section.forceFullChart === undefined ||
+                                    section.forceFullChart === true
+                                  });
+
                               const elementToRender = ReportLayout.getElementBySection(section);
                               return elementToRender && (
                                 <div
@@ -204,7 +212,7 @@ class ReportLayout extends Component {
                                     this.itemElements[section.layout.i] = { element, gridItem, section };
                                   }}
                                   key={section.layout.i}
-                                  className={`section-layout section-${section.type} ${section.layout.class || ''}`}
+                                  className={mainClass}
                                   style={section.layout.sectionStyle}
                                   data-grid={gridItem}
                                 >

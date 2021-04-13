@@ -9,7 +9,6 @@ import moment from 'moment';
 import { NONE_VALUE_DEFAULT_NAME, QUERIES_TIME_FORMAT, SUPPORTED_TIME_FRAMES } from '../../../constants/Constants';
 import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
-import classNames from 'classnames';
 
 const SINGLE_LINE_CHART_NAME = 'sum';
 
@@ -125,12 +124,8 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     });
   }
 
-  const mainClass = classNames('section-line-chart', {
-    'section-force-full': chartProperties.forceFullChart === true || chartProperties.forceFullChart === undefined
-  });
-
   return (
-    <div className={mainClass} style={style}>
+    <div className="section-line-chart" style={style}>
       <AutoSizer>
         {({ width, height }) => {
           return (

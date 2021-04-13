@@ -64,9 +64,12 @@ h1 {
       overflow: visible;
       transition: none;
       z-index: 1;
-      height: auto !important;
+
+      &:not(.section-force-full){
+        height: auto !important;
+      }
       transition-property: none;
-      .section-chart{
+      .section-chart {
         border: 1px solid #DADBDB;
         padding: 10px 12px 0;
       }
@@ -108,6 +111,9 @@ h1 {
         padding: 5px 10px;
       }
 
+      &.section-force-full {
+        overflow-y: auto;
+      }
     }
   }
   .error-section {
