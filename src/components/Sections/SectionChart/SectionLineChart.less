@@ -1,6 +1,12 @@
 .section-line-chart {
   height: 100%;
 
+  svg:not(:root) {
+    &.recharts-surface {
+      overflow: visible;
+    }
+  }
+
   .recharts-legend-wrapper {
     left: 0 !important;
     width: 100% !important;

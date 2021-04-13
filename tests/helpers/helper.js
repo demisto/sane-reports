@@ -3,6 +3,47 @@ import 'babel-polyfill';
 
 const globalKeys = {};
 
+function mockCanvas(window) {
+  window.HTMLCanvasElement.prototype.getContext = () => {
+    return {
+      fillRect: () => {},
+      clearRect: () => {},
+      getImageData: (x, y, w, h) => {
+        return {
+          data: new Array(w * h * 4)
+        };
+      },
+      putImageData: () => {},
+      createImageData: () => { return []; },
+      setTransform: () => {},
+      drawImage: () => {},
+      save: () => {},
+      fillText: () => {},
+      restore: () => {},
+      beginPath: () => {},
+      moveTo: () => {},
+      lineTo: () => {},
+      closePath: () => {},
+      stroke: () => {},
+      translate: () => {},
+      scale: () => {},
+      rotate: () => {},
+      arc: () => {},
+      fill: () => {},
+      measureText: (value = '') => {
+        return { width: value.length * 5 };
+      },
+      transform: () => {},
+      rect: () => {},
+      clip: () => {}
+    };
+  };
+
+  window.HTMLCanvasElement.prototype.toDataURL = () => {
+    return '';
+  };
+}
+
 export function initDOM(initGlobalKeys = false) {
   const doc = jsdom.jsdom('<!doctype html><html><body></body></html>', { url: 'http://localhost' });
   const win = doc.defaultView;
@@ -23,6 +64,8 @@ export function initDOM(initGlobalKeys = false) {
       global[key] = globalKeys[key];
     });
   }
+
+  mockCanvas(win);
 }
 
 initDOM(true);
