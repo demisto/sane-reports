@@ -58,6 +58,47 @@ export const WIDGET_DEFAULT_CONF = {
   otherGroup: 'Other'
 };
 
+export const DURATION_FORMAT = {
+  min: {
+    name: 'min',
+    weight: 60
+  },
+  hours: {
+    name: 'hours',
+    weight: 3600
+  },
+  days: {
+    name: 'days',
+    weight: 3600 * 24
+  },
+  weeks: {
+    name: 'weeks',
+    weight: 3600 * 24 * 7
+  },
+  months: {
+    name: 'months',
+    weight: 3600 * 24 * 30.42
+  },
+  years: {
+    name: 'years',
+    weight: 3600 * 24 * 365.24
+  }
+};
+
+export const WIDGET_DURATION_FORMAT = {
+  days: 'days',
+  weeks: 'weeks',
+  months: 'months',
+  years: 'years'
+};
+
+export const WIDGET_FORMAT_PARTS = {
+  [WIDGET_DURATION_FORMAT.days]: [DURATION_FORMAT.days, DURATION_FORMAT.hours, DURATION_FORMAT.min],
+  [WIDGET_DURATION_FORMAT.weeks]: [DURATION_FORMAT.weeks, DURATION_FORMAT.days, DURATION_FORMAT.hours],
+  [WIDGET_DURATION_FORMAT.months]: [DURATION_FORMAT.months, DURATION_FORMAT.weeks, DURATION_FORMAT.days],
+  [WIDGET_DURATION_FORMAT.years]: [DURATION_FORMAT.years, DURATION_FORMAT.months, DURATION_FORMAT.weeks]
+};
+
 export const QUERIES_TIME_FORMAT = 'DD MMM Y';
 export const SUPPORTED_TIME_FRAMES = {
   days: 'days',

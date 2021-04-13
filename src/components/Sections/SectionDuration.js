@@ -2,6 +2,7 @@ import './SectionDuration.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import isArray from 'lodash/isArray';
+import { WIDGET_FORMAT_PARTS } from '../../constants/Constants';
 
 function formatNumber(num) {
   return ('0' + num).slice(-2);
@@ -35,29 +36,53 @@ const createValues = (parts) => {
   });
 };
 
+const getLabels = (chartProperties) => {
+  if (chartProperties && chartProperties.labels) {
+    return chartProperties.labels;
+  }
+
+  return {
+    days: (chartProperties && chartProperties.daysLabel) || 'days',
+    hours: (chartProperties && chartProperties.hoursLabel) || 'hours',
+    min: (chartProperties && chartProperties.minutesLabel) || 'minutes'
+  };
+};
+
 const SectionDuration = ({ data, style, chartProperties, title, titleStyle }) => {
   let result = data.length > 0 && isArray(data[0].data) && data[0].data.length > 0 ? data[0].data[0] : 0;
-  const parts = (chartProperties && chartProperties.parts) ? chartProperties.parts : [];
+  const format = chartProperties && chartProperties.format;
+  const labels = getLabels(chartProperties);
+  const parts = [];
 
-  if (parts.length === 0) {
-    const daysLabel = (chartProperties && chartProperties.daysLabel) || 'days';
+  if (format && WIDGET_FORMAT_PARTS[format]) {
+    const formatParts = WIDGET_FORMAT_PARTS[format];
+
+    formatParts.forEach((part) => {
+      const partValue = Math.floor(result / part.weight);
+      const newPart = {
+        header: labels[part.name],
+        value: formatNumber(partValue)
+      };
+
+      result -= newPart.value * part.weight;
+      parts.push(newPart);
+    });
+  } else {
     let days = Math.floor(result / (3600 * 24));
     result -= days * 3600 * 24;
 
-    const hoursLabel = (chartProperties && chartProperties.hoursLabel) || 'hours';
     let hours = Math.floor(result / 3600);
     result -= hours * 3600;
 
-    const minutesLabel = (chartProperties && chartProperties.minutesLabel) || 'minutes';
     let minutes = Math.floor(result / 60);
 
     days = formatNumber(days);
     hours = formatNumber(hours);
     minutes = formatNumber(minutes);
 
-    parts.push({ header: daysLabel, value: days });
-    parts.push({ header: hoursLabel, value: hours });
-    parts.push({ header: minutesLabel, value: minutes });
+    parts.push({ header: labels.days, value: days });
+    parts.push({ header: labels.hours, value: hours });
+    parts.push({ header: labels.min, value: minutes });
   }
 
   return (
