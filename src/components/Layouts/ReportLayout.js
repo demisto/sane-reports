@@ -198,11 +198,11 @@ class ReportLayout extends Component {
                             .map((section) => {
                               const gridItem = ReportLayout.getGridItemFromSection(section, overflowRows);
                               overflowRows += gridItem.h - section.layout.h;
-
+                              const isForceFull = section.layout.reflectDimensions === undefined ||
+                                section.layout.reflectDimensions === false;
                               const mainClass = classNames(`section-layout section-${section.type} ` +
                               `${section.layout.class || ''}`,
-                                  { 'section-force-full': section.forceFullChart === undefined ||
-                                    section.forceFullChart === true
+                                  { 'section-force-full': isForceFull
                                   });
 
                               const elementToRender = ReportLayout.getElementBySection(section);
