@@ -2,7 +2,10 @@ import './SectionDuration.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import isArray from 'lodash/isArray';
-import { WIDGET_FORMAT_PARTS } from '../../constants/Constants';
+import {
+  DURATION_FORMAT,
+  WIDGET_FORMAT_PARTS
+} from '../../constants/Constants';
 
 function formatNumber(num) {
   return ('0' + num).slice(-2);
@@ -68,13 +71,13 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle }) =>
       parts.push(newPart);
     });
   } else {
-    let days = Math.floor(result / (3600 * 24));
+    let days = Math.floor(result / DURATION_FORMAT.days.weight);
     result -= days * 3600 * 24;
 
-    let hours = Math.floor(result / 3600);
+    let hours = Math.floor(result / DURATION_FORMAT.hours.weight);
     result -= hours * 3600;
 
-    let minutes = Math.floor(result / 60);
+    let minutes = Math.floor(result / DURATION_FORMAT.min.weight);
 
     days = formatNumber(days);
     hours = formatNumber(hours);
