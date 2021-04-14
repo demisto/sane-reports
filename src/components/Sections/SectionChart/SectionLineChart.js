@@ -7,6 +7,7 @@ import { cloneDeep, compact, isEmpty, values } from 'lodash';
 import { AutoSizer } from 'react-virtualized';
 import moment from 'moment';
 import {
+  CHART_LEGEND_ITEM_HEIGHT,
   NONE_VALUE_DEFAULT_NAME,
   QUERIES_TIME_FORMAT,
   SUPPORTED_TIME_FRAMES,
@@ -40,7 +41,7 @@ const createXAxisProps = (data, dataKey, width) => {
 };
 
 const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null,
-  referenceLineX, referenceLineY, fromDate, toDate }) => {
+  referenceLineX, referenceLineY, fromDate, toDate, showOverflow }) => {
   const existingColors = {};
   let preparedLegend = [];
   let preparedData = cloneDeep(data) || [];
@@ -151,6 +152,10 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     });
   }
 
+  if (!showOverflow && preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
+    dimensions.height = (preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT) + 200;
+  }
+
   return (
     <div className="section-line-chart" style={style}>
       <AutoSizer>
@@ -248,7 +253,8 @@ SectionLineChart.propTypes = {
   referenceLineX: PropTypes.object,
   referenceLineY: PropTypes.object,
   fromDate: PropTypes.object,
-  toDate: PropTypes.object
+  toDate: PropTypes.object,
+  showOverflow: PropTypes.bool
 };
 
 export default SectionLineChart;

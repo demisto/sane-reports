@@ -45,6 +45,7 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
                       sortBy={sortBy}
                       stacked={stacked}
                       referenceLineY={referenceLineY}
+                      showOverflow={showOverflow}
                     />
                   );
                   break;
@@ -76,6 +77,7 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
                       referenceLineY={referenceLineY}
                       fromDate={fromDate && moment(fromDate)}
                       toDate={toDate && moment(toDate)}
+                      showOverflow={showOverflow}
                     />
                   );
                   break;

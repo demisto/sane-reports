@@ -8,7 +8,12 @@ import merge from 'lodash/merge';
 import orderBy from 'lodash/orderBy';
 import isArray from 'lodash/isArray';
 import { getGraphColorByName } from '../../../utils/colors';
-import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME, RADIANS } from '../../../constants/Constants';
+import {
+  CHART_LAYOUT_TYPE,
+  CHART_LEGEND_ITEM_HEIGHT,
+  NONE_VALUE_DEFAULT_NAME,
+  RADIANS
+} from '../../../constants/Constants';
 
 const CustomizedPieLabel = ({ cx, cy, midAngle, outerRadius, percent, fill }) => {
   const radius = outerRadius * 1.1;
@@ -86,6 +91,14 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
     legendHeight = dimensions.height / 2;
   }
 
+  if (!showOverflow && preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
+    legendHeight = (preparedData.length * CHART_LEGEND_ITEM_HEIGHT);
+    if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical) {
+      legendHeight += 100;
+    }
+    dimensions.height = legendHeight;
+  }
+
   return (
     <div className="section-pie-chart" style={style}>
       <AutoSizer disableHeight>
@@ -136,6 +149,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 } : { top: 10 }}
                 content={
                   <ChartLegend
+                    showOverflow={showOverflow}
                     iconType="square"
                     capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
                     data={preparedData}
