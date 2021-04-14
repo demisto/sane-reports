@@ -65,7 +65,7 @@ h1 {
       transition: none;
       z-index: 1;
 
-      &:not(.section-force-full){
+      &:not(.section-show-overflow){
         height: auto !important;
         &.section-table {
           height: auto !important; // override grid item height to fit content
@@ -111,7 +111,7 @@ h1 {
         padding: 5px 10px;
       }
 
-      &.section-force-full {
+      &.section-show-overflow {
         overflow-y: auto;
 
         .section-column-chart {
