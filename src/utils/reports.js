@@ -36,7 +36,7 @@ function filterSectionsAccordingToReportType(reportData, reportType) {
   });
 }
 
-export function prepareSections(reportData, reportType, autoPageBreak, disableReflectDimensions) {
+export function prepareSections(reportData, reportType, autoPageBreak, reflectDimensions) {
   const rows = {};
 
   if (reportData) {
@@ -50,8 +50,8 @@ export function prepareSections(reportData, reportType, autoPageBreak, disableRe
         rows[section.layout.rowPos].style = section.layout.rowStyle || {};
       }
       section.autoPageBreak = autoPageBreak;
-      if (disableReflectDimensions) {
-        section.layout.reflectDimensions = false;
+      if (reflectDimensions) {
+        section.layout.reflectDimensions = true;
       }
     });
   }

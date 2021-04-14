@@ -597,8 +597,8 @@ describe('Report Container', () => {
         isLayout dimensions={A4_DIMENSIONS}
       />;
     };
-    const sectionWithDisabledReflectDimensions = prepareSections(cloneDeep(testTemplate), null, true, true);
-    const report = mount(renderReport(sectionWithDisabledReflectDimensions));
+    const sectionWithReflectDimensions = prepareSections(cloneDeep(testTemplate), null, true, true);
+    const report = mount(renderReport(sectionWithReflectDimensions));
 
     setTimeout(() => {
       const reportLayout = report.find(ReportLayout);
