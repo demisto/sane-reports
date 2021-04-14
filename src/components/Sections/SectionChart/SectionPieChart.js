@@ -41,7 +41,8 @@ CustomizedPieLabel.propTypes = {
   percent: PropTypes.number
 };
 
-const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
+const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {},
+  sortBy, showOverflow }) => {
   const dataMap = {};
   const existingColors = {};
   (data || []).forEach((item) => {
@@ -81,7 +82,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
   }
 
   let legendHeight = dimensions.height;
-  if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical) {
+  if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical && showOverflow) {
     legendHeight = dimensions.height / 2;
   }
 
@@ -161,7 +162,8 @@ SectionPieChart.propTypes = {
   chartProperties: PropTypes.object,
   legend: PropTypes.array,
   legendStyle: PropTypes.object,
-  sortBy: PropTypes.object
+  sortBy: PropTypes.object,
+  showOverflow: PropTypes.bool
 };
 
 export default SectionPieChart;

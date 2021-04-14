@@ -160,6 +160,7 @@ export function getSectionComponent(section, maxWidth) {
           (Array.isArray(section.data) && section.data.some(group => get(group, 'groups.length') > 0))}
           fromDate={section.fromDate}
           toDate={section.toDate}
+          showOverflow={section.layout.reflectDimensions}
         />
       );
       break;

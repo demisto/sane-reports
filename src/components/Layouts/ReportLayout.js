@@ -200,7 +200,7 @@ class ReportLayout extends Component {
                               overflowRows += gridItem.h - section.layout.h;
                               const mainClass = classNames(`section-layout section-${section.type} ` +
                               `${section.layout.class || ''}`,
-                                  { 'section-show-overflow': section.layout.reflectDimensions === false
+                                  { 'section-show-overflow': section.layout.reflectDimensions === true
                                   });
 
                               const elementToRender = ReportLayout.getElementBySection(section);

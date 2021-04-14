@@ -21,7 +21,7 @@ const filterResults = (chartProperties, rawResults) => {
 };
 
 const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
-  referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle }) => {
+  referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, showOverflow }) => {
   const data = filterResults(chartProperties, rawData);
 
   return (
@@ -58,6 +58,7 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
                       chartProperties={chartProperties}
                       legendStyle={legendStyle}
                       sortBy={sortBy}
+                      showOverflow={showOverflow}
                     />
                   );
                   break;
@@ -107,7 +108,8 @@ SectionChart.propTypes = {
   referenceLineY: PropTypes.object,
   stacked: PropTypes.bool,
   fromDate: PropTypes.string,
-  toDate: PropTypes.string
+  toDate: PropTypes.string,
+  showOverflow: PropTypes.bool
 };
 
 export default SectionChart;
