@@ -14,6 +14,7 @@ import {
   NONE_VALUE_DEFAULT_NAME,
   RADIANS
 } from '../../../constants/Constants';
+import classNames from 'classnames';
 
 const CustomizedPieLabel = ({ cx, cy, midAngle, outerRadius, percent, fill }) => {
   const radius = outerRadius * 1.1;
@@ -99,8 +100,11 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
     dimensions.height = legendHeight;
   }
 
+  const mainClass = classNames('section-pie-chart',
+    { 'section-pie-chart-horizontal': chartProperties.layout !== CHART_LAYOUT_TYPE.vertical });
+
   return (
-    <div className="section-pie-chart" style={style}>
+    <div className={mainClass} style={style}>
       <AutoSizer disableHeight>
         {({ width }) => {
           const outerRadius = chartProperties.outerRadius || 80;
