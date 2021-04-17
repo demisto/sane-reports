@@ -12,7 +12,8 @@ import {
   CHART_LAYOUT_TYPE,
   CHART_LEGEND_ITEM_HEIGHT,
   NONE_VALUE_DEFAULT_NAME,
-  RADIANS
+  RADIANS,
+  PIE_CHART_FULL_ITEM_HEIGHT
 } from '../../../constants/Constants';
 import classNames from 'classnames';
 
@@ -95,7 +96,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
   if (!showOverflow && preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
     legendHeight = (preparedData.length * CHART_LEGEND_ITEM_HEIGHT);
     if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical) {
-      legendHeight += 100;
+      legendHeight += PIE_CHART_FULL_ITEM_HEIGHT;
     }
     dimensions.height = legendHeight;
   }
