@@ -11,7 +11,8 @@ import {
   NONE_VALUE_DEFAULT_NAME,
   QUERIES_TIME_FORMAT,
   SUPPORTED_TIME_FRAMES,
-  WIDGET_DEFAULT_CONF
+  WIDGET_DEFAULT_CONF,
+  LINE_CHART_FULL_ITEM_HEIGHT
 } from '../../../constants/Constants';
 import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
@@ -153,7 +154,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   }
 
   if (!showOverflow && preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
-    dimensions.height = (preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT) + 200;
+    dimensions.height = (preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT) + LINE_CHART_FULL_ITEM_HEIGHT;
   }
 
   return (

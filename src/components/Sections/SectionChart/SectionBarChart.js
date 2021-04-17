@@ -14,7 +14,7 @@ import { getGraphColorByName } from '../../../utils/colors';
 import {
   CHART_LAYOUT_TYPE, CHART_LEGEND_ITEM_HEIGHT,
   NONE_VALUE_DEFAULT_NAME,
-  WIDGET_DEFAULT_CONF
+  WIDGET_DEFAULT_CONF, BAR_CHART_FULL_ITEM_HEIGHT
 } from '../../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
@@ -162,7 +162,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   let isFull = false;
   if (!showOverflow && (preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height || stacked)) {
     isFull = true;
-    dimensions.height = (preparedData.length * CHART_LEGEND_ITEM_HEIGHT) + 300;
+    dimensions.height = (preparedData.length * CHART_LEGEND_ITEM_HEIGHT) + BAR_CHART_FULL_ITEM_HEIGHT;
   }
 
   return (
