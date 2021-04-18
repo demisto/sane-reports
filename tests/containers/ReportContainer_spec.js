@@ -595,7 +595,7 @@ describe('Report Container', () => {
     const renderReport = (section) => {
       return <ReportContainer
         sections={section}
-        isLayout dimensions={A4_DIMENSIONS}
+        isLayout dimensions={constants.A4_DIMENSIONS}
       />;
     };
     const sectionWithReflectDimensions = prepareSections(cloneDeep(testTemplate), null, true, true);
