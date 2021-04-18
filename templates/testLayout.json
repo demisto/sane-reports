@@ -907,5 +907,153 @@
       "w": 12
     },
     "title": "table"
+  },
+  {
+    "type": "chart",
+    "data": [
+      {
+        "name": "2021-Q1",
+        "data": [
+          6
+        ],
+        "groups": [
+          {
+            "name": "Access",
+            "data": [
+              2
+            ],
+            "groups": null,
+            "count": 2,
+            "floatData": [
+              2
+            ]
+          },
+          {
+            "name": "DoS",
+            "data": [
+              3
+            ],
+            "groups": null,
+            "count": 3,
+            "floatData": [
+              3
+            ]
+          },
+          {
+            "name": "Hunt",
+            "data": [
+              1
+            ],
+            "groups": null,
+            "count": 1,
+            "floatData": [
+              1
+            ]
+          }
+        ],
+        "count": 6,
+        "floatData": [
+          6
+        ]
+      },
+      {
+        "name": "2021-Q2",
+        "data": [
+          1
+        ],
+        "groups": [
+          {
+            "name": "Access",
+            "data": [
+              1
+            ],
+            "groups": null,
+            "count": 1,
+            "floatData": [
+              1
+            ]
+          }
+        ],
+        "count": 1,
+        "floatData": [
+          1
+        ]
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "axis": {
+          "x": {},
+          "y": {}
+        },
+        "isDatesChart": true,
+        "layout": "vertical",
+        "margin": {
+          "bottom": 0,
+          "left": -20,
+          "right": 5,
+          "top": 5
+        },
+        "timeFrame": "none"
+      },
+      "chartType": "line",
+      "columnPos": 2,
+      "dimensions": {
+        "height": 300,
+        "width": 405
+      },
+      "h": 3,
+      "i": "e09cfac0-9e18-11eb-87dc-c3c900039e23",
+      "legend": [
+        {
+          "color": "#B287FE",
+          "name": "Access"
+        },
+        {
+          "color": "#00C853",
+          "name": "DoS"
+        },
+        {
+          "color": "#FE2C8C",
+          "name": "Hunt"
+        }
+      ],
+      "legendStyle": {
+        "align": "center",
+        "iconSize": 8,
+        "iconType": "square",
+        "verticalAlign": "top",
+        "width": 405,
+        "wrapperStyle": {
+          "maxHeight": 312
+        }
+      },
+      "rowPos": 10,
+      "w": 7
+    },
+    "query": {
+      "type": "incident",
+      "groupBy": [
+        "occurred(q)",
+        "type"
+      ],
+      "filter": {
+        "query": "",
+        "period": {
+          "byFrom": "days",
+          "fromValue": null
+        }
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "noformat",
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
   }
 ]

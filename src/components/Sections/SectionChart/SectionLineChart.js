@@ -57,12 +57,12 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
       if (!name) {
         return null;
       }
-      if (!isNaN(name)) {
+      if (!isNaN(name) && timeFrame !== SUPPORTED_TIME_FRAMES.none) {
         if (!from || !from.isValid()) {
           from = moment().add(-data.length, timeFrame);
         }
         name = moment(from).add(Number(name), timeFrame).format(timeFormat);
-      } else if (name) {
+      } else if (name && timeFrame !== SUPPORTED_TIME_FRAMES.none) {
         if (!from || !from.isValid()) {
           from = moment(name);
         }
@@ -115,10 +115,12 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   }));
 
   const retData = [];
-  const frames = Math.ceil(finalToDate.diff(from, timeFrame, true));
+  const frames = timeFrame !== SUPPORTED_TIME_FRAMES.none ?
+    Math.ceil(finalToDate.diff(from, timeFrame, true)) : preparedData.length - 1;
   const currentDate = moment(from);
   for (let i = 0; i <= frames; i++) {
-    const formattedDate = currentDate.format(timeFormat);
+    const formattedDate = timeFrame !== SUPPORTED_TIME_FRAMES.none ?
+      currentDate.format(timeFormat) : preparedData[i].name;
     const mainGroup = preparedData.filter(item =>
       formattedDate === item.name);
     const group = mainGroup && mainGroup.length > 0 && mainGroup[0];
