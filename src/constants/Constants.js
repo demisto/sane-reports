@@ -111,6 +111,9 @@ export const SUPPORTED_TIME_FRAMES = {
 };
 export const GRID_LAYOUT_COLUMNS = 12;
 export const CHART_LEGEND_ITEM_HEIGHT = 26;
+export const BAR_CHART_FULL_ITEM_HEIGHT = 300;
+export const LINE_CHART_FULL_ITEM_HEIGHT = 200;
+export const PIE_CHART_FULL_ITEM_HEIGHT = 100;
 
 export const NONE_VALUE_DEFAULT_NAME = 'None';
 

@@ -497,6 +497,11 @@ describe('Report Container', () => {
       const reportLayoutWithAutoPageBreak = reportWithAutoPageBreak.find(ReportLayout);
       const reportLayoutWithoutAutoPageBreak = reportWithoutAutoPageBreak.find(ReportLayout);
 
+      const sectionsLayout = reportLayoutWithAutoPageBreak.find('.section-layout');
+      expect(sectionsLayout).to.have.length(5);
+      const sectionsShowOverflows = reportLayoutWithAutoPageBreak.find('.section-show-overflow');
+      expect(sectionsShowOverflows).to.have.length(0);
+
       const elementsWithAutoPageBreak = reportLayoutWithAutoPageBreak.instance().itemElements;
       const itemElementsWithoutAutoPageBreak = reportLayoutWithoutAutoPageBreak.instance().itemElements;
 
@@ -583,5 +588,27 @@ describe('Report Container', () => {
     expect(durationValues.at(0).text()).to.equal('01');
     expect(durationValues.at(1).text()).to.equal('02');
     expect(durationValues.at(2).text()).to.equal('03');
+  });
+
+  it('Generate test template A4 layout - test reflect dimensions prop', (done) => {
+    const testTemplate = TemplateProvider.getTestLayoutTemplateWithPageBreaks();
+    const renderReport = (section) => {
+      return <ReportContainer
+        sections={section}
+        isLayout dimensions={constants.A4_DIMENSIONS}
+      />;
+    };
+    const sectionWithReflectDimensions = prepareSections(cloneDeep(testTemplate), null, true, true);
+    const report = mount(renderReport(sectionWithReflectDimensions));
+
+    setTimeout(() => {
+      const reportLayout = report.find(ReportLayout);
+
+      const sectionsLayout = reportLayout.find('.section-layout');
+      expect(sectionsLayout).to.have.length(5);
+      const sectionsShowOverflows = reportLayout.find('.section-show-overflow');
+      expect(sectionsShowOverflows).to.have.length(5);
+      done();
+    }, 5001);
   });
 });

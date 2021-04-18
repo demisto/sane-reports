@@ -12,9 +12,9 @@ import {
 } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
 import {
-  CHART_LAYOUT_TYPE,
+  CHART_LAYOUT_TYPE, CHART_LEGEND_ITEM_HEIGHT,
   NONE_VALUE_DEFAULT_NAME,
-  WIDGET_DEFAULT_CONF
+  WIDGET_DEFAULT_CONF, BAR_CHART_FULL_ITEM_HEIGHT
 } from '../../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
@@ -46,7 +46,7 @@ const createXAxisProps = (data, dataKey, width) => {
 };
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
-  legendStyle = null, sortBy, stacked, referenceLineY }) => {
+  legendStyle = null, sortBy, stacked, referenceLineY, reflectDimensions }) => {
   const existingColors = {};
   const isColumnChart = chartProperties.layout === CHART_LAYOUT_TYPE.horizontal;
   let dataItems = {};
@@ -159,6 +159,11 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       return item;
     });
   }
+  let isFull = false;
+  if (!reflectDimensions && (preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height || stacked)) {
+    isFull = true;
+    dimensions.height = (preparedData.length * CHART_LEGEND_ITEM_HEIGHT) + BAR_CHART_FULL_ITEM_HEIGHT;
+  }
 
   return (
     <div className={mainClass} style={style}>
@@ -166,11 +171,12 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         {({ width, height }) => {
           const finalWidth = width || dimensions.width;
           const xAxisProps = isColumnChart ? createXAxisProps(data, 'name', finalWidth / 2) : {};
+          const finalHeight = isFull ? dimensions.height : height || dimensions.height;
 
           return (
             <BarChart
               width={finalWidth}
-              height={height || dimensions.height}
+              height={finalHeight}
               data={preparedData}
               layout={chartProperties.layout}
               margin={margin}
@@ -263,7 +269,8 @@ SectionBarChart.propTypes = {
   legendStyle: PropTypes.object,
   sortBy: PropTypes.object,
   referenceLineY: PropTypes.object,
-  stacked: PropTypes.bool
+  stacked: PropTypes.bool,
+  reflectDimensions: PropTypes.bool
 };
 
 export default SectionBarChart;

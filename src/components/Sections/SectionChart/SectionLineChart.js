@@ -7,10 +7,12 @@ import { cloneDeep, compact, isEmpty, values } from 'lodash';
 import { AutoSizer } from 'react-virtualized';
 import moment from 'moment';
 import {
+  CHART_LEGEND_ITEM_HEIGHT,
   NONE_VALUE_DEFAULT_NAME,
   QUERIES_TIME_FORMAT,
   SUPPORTED_TIME_FRAMES,
-  WIDGET_DEFAULT_CONF
+  WIDGET_DEFAULT_CONF,
+  LINE_CHART_FULL_ITEM_HEIGHT
 } from '../../../constants/Constants';
 import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
@@ -40,7 +42,7 @@ const createXAxisProps = (data, dataKey, width) => {
 };
 
 const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null,
-  referenceLineX, referenceLineY, fromDate, toDate }) => {
+  referenceLineX, referenceLineY, fromDate, toDate, reflectDimensions }) => {
   const existingColors = {};
   let preparedLegend = [];
   let preparedData = cloneDeep(data) || [];
@@ -153,6 +155,10 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     });
   }
 
+  if (!reflectDimensions && preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
+    dimensions.height = (preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT) + LINE_CHART_FULL_ITEM_HEIGHT;
+  }
+
   return (
     <div className="section-line-chart" style={style}>
       <AutoSizer>
@@ -250,7 +256,8 @@ SectionLineChart.propTypes = {
   referenceLineX: PropTypes.object,
   referenceLineY: PropTypes.object,
   fromDate: PropTypes.object,
-  toDate: PropTypes.object
+  toDate: PropTypes.object,
+  reflectDimensions: PropTypes.bool
 };
 
 export default SectionLineChart;

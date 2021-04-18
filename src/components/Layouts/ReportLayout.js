@@ -14,6 +14,7 @@ import ReactGridLayout from 'react-grid-layout';
 import { compareFields } from '../../utils/sort';
 import ErrorBoundary from '../ErrorBoundary';
 import { getSectionComponent } from '../../utils/layout';
+import classNames from 'classnames';
 
 const ROW_PIXEL_HEIGHT = 110;
 const SECTION_HEIGHT_TOTAL_PADDING = 20;
@@ -35,7 +36,11 @@ class ReportLayout extends Component {
   static getGridItemFromSection(section, overflowRows) {
     const rows = section.layout.rowPos + overflowRows;
     let height = section.layout.h;
-    if (section.type === SECTION_TYPES.table && section.layout.w >= GRID_LAYOUT_COLUMNS && section.data) {
+    const reflectDimensions = section.layout.reflectDimensions === true;
+
+    if (section.type === SECTION_TYPES.table &&
+        section.layout.w >= GRID_LAYOUT_COLUMNS &&
+        section.data && !reflectDimensions) {
       const numOfRows = (section.data.length || section.data.total) + 1;
       if (numOfRows > section.layout.h) {
         height = numOfRows;
@@ -197,6 +202,11 @@ class ReportLayout extends Component {
                             .map((section) => {
                               const gridItem = ReportLayout.getGridItemFromSection(section, overflowRows);
                               overflowRows += gridItem.h - section.layout.h;
+                              const mainClass = classNames(`section-layout section-${section.type} ` +
+                              `${section.layout.class || ''}`,
+                                  { 'section-show-overflow': section.layout.reflectDimensions === true
+                                  });
+
                               const elementToRender = ReportLayout.getElementBySection(section);
                               return elementToRender && (
                                 <div
@@ -204,7 +214,7 @@ class ReportLayout extends Component {
                                     this.itemElements[section.layout.i] = { element, gridItem, section };
                                   }}
                                   key={section.layout.i}
-                                  className={`section-layout section-${section.type} ${section.layout.class || ''}`}
+                                  className={mainClass}
                                   style={section.layout.sectionStyle}
                                   data-grid={gridItem}
                                 >
