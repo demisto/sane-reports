@@ -169,6 +169,7 @@ export function getSectionComponent(section, maxWidth) {
           data={section.data}
           columns={section.layout.tableColumns}
           columnsMetaData={section.layout.tableColumnsMetaData}
+          xPos={section.layout.xPos}
           readableHeaders={section.layout.readableHeaders}
           classes={section.layout.classes}
           style={section.layout.style}

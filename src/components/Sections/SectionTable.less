@@ -1,5 +1,11 @@
 .section-table {
-  overflow-x: hidden;
+  overflow-x: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
 
   thead {
     th {
