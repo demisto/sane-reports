@@ -46,7 +46,7 @@ const createXAxisProps = (data, dataKey, width) => {
 };
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
-  legendStyle = null, sortBy, stacked, referenceLineY, showOverflow }) => {
+  legendStyle = null, sortBy, stacked, referenceLineY, reflectDimensions }) => {
   const existingColors = {};
   const isColumnChart = chartProperties.layout === CHART_LAYOUT_TYPE.horizontal;
   let dataItems = {};
@@ -160,7 +160,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     });
   }
   let isFull = false;
-  if (!showOverflow && (preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height || stacked)) {
+  if (!reflectDimensions && (preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height || stacked)) {
     isFull = true;
     dimensions.height = (preparedData.length * CHART_LEGEND_ITEM_HEIGHT) + BAR_CHART_FULL_ITEM_HEIGHT;
   }
@@ -270,7 +270,7 @@ SectionBarChart.propTypes = {
   sortBy: PropTypes.object,
   referenceLineY: PropTypes.object,
   stacked: PropTypes.bool,
-  showOverflow: PropTypes.bool
+  reflectDimensions: PropTypes.bool
 };
 
 export default SectionBarChart;

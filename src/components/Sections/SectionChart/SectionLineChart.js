@@ -42,7 +42,7 @@ const createXAxisProps = (data, dataKey, width) => {
 };
 
 const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null,
-  referenceLineX, referenceLineY, fromDate, toDate, showOverflow }) => {
+  referenceLineX, referenceLineY, fromDate, toDate, reflectDimensions }) => {
   const existingColors = {};
   let preparedLegend = [];
   let preparedData = cloneDeep(data) || [];
@@ -153,7 +153,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     });
   }
 
-  if (!showOverflow && preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
+  if (!reflectDimensions && preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
     dimensions.height = (preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT) + LINE_CHART_FULL_ITEM_HEIGHT;
   }
 
@@ -255,7 +255,7 @@ SectionLineChart.propTypes = {
   referenceLineY: PropTypes.object,
   fromDate: PropTypes.object,
   toDate: PropTypes.object,
-  showOverflow: PropTypes.bool
+  reflectDimensions: PropTypes.bool
 };
 
 export default SectionLineChart;

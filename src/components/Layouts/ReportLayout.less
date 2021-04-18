@@ -130,9 +130,25 @@ h1 {
             overflow-x: hidden;
           }
         }
+
         .section-bar-chart{
           overflow-y: auto;
           overflow-x: hidden;
+        }
+
+        @media print {
+          .section-column-chart {
+            overflow-y: hidden;
+          }
+
+          .section-line-chart {
+            .recharts-wrapper {
+              overflow-y: hidden;
+            }
+          }
+          .section-bar-chart{
+            overflow-y: hidden;
+          }
         }
       }
     }
