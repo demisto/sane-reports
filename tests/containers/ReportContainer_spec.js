@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { expect, mount, React, TemplateProvider } from '../helpers/test_helper';
+import { constants, expect, mount, React, TemplateProvider } from '../helpers/test_helper';
 import { prepareSections } from '../../src/utils/reports';
 import ReportContainer from '../../src/containers/ReportContainer';
 import ChartLegend from '../../src/components/Sections/SectionChart/ChartLegend';
@@ -22,12 +22,6 @@ import {
   SectionText
 } from '../../src/components/Sections';
 import { Bar, BarChart, Line, LineChart, Pie, PieChart } from 'recharts';
-import {
-  A4_DIMENSIONS,
-  NONE_VALUE_DEFAULT_NAME,
-  PAGE_BREAK_KEY,
-  WIDGET_DURATION_FORMAT
-} from '../../src/constants/Constants';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 import { cloneDeep, unionBy } from 'lodash';
 import SectionBarChart from '../../src/components/Sections/SectionChart/SectionBarChart';
@@ -44,7 +38,7 @@ function expectChartLegendFromChartElement(chart, dataArr, showValue) {
     expect(chartLegendValues).to.have.length(0);
   }
   dataArr.forEach((data, i) => {
-    expect(chartLegendTexts.at(i).text()).to.equal(data.name || NONE_VALUE_DEFAULT_NAME);
+    expect(chartLegendTexts.at(i).text()).to.equal(data.name || constants.NONE_VALUE_DEFAULT_NAME);
     if (showValue) {
       expect(chartLegendValues.at(i).text()).to.equal(`${data.value}`);
     }
@@ -254,7 +248,7 @@ describe('Report Container', () => {
     const sectionMarkdown = reportContainer.find(SectionMarkdown);
     expect(sectionMarkdown).to.have.length(1);
     expect(sectionMarkdown.at(0).props().text).to.equal(sec22.data);
-    expect(sectionMarkdown.at(0).text()).to.not.contain(PAGE_BREAK_KEY);
+    expect(sectionMarkdown.at(0).text()).to.not.contain(constants.PAGE_BREAK_KEY);
     expect(sectionMarkdown.at(0).props().style).to.equal(sec22.layout.style);
 
     // JSON
@@ -322,10 +316,11 @@ describe('Report Container', () => {
     const sec10 = testTemplate[9];
     const sec11 = testTemplate[10];
     const sec12 = testTemplate[11];
+    const sec13 = testTemplate[12];
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
-    expect(sectionChart).to.have.length(6);
+    expect(sectionChart).to.have.length(7);
     expect(sectionChart.at(0).props().data).to.equal(sec1.data);
     expect(sectionChart.at(0).props().style).to.equal(sec1.layout.style);
     expect(sectionChart.at(0).props().type).to.equal(sec1.layout.chartType);
@@ -341,6 +336,9 @@ describe('Report Container', () => {
     expect(sectionChart.at(3).props().title).to.equal(sec5.title);
     expect(sectionChart.at(4).props().title).to.equal(sec6.title);
     expect(sectionChart.at(5).props().title).to.equal(sec7.title);
+    expect(sectionChart.at(6).props().title).to.equal(sec13.title);
+    expect(sectionChart.at(6).props().chartProperties).to.equal(sec13.layout.chartProperties);
+    expect(sectionChart.at(6).props().chartProperties.timeFrame).to.equal(constants.SUPPORTED_TIME_FRAMES.none);
 
     const barChart = reportContainer.find(BarChart);
     const pieChart = reportContainer.find(PieChart);
@@ -349,13 +347,13 @@ describe('Report Container', () => {
 
     expect(barChart).to.have.length(3);
     expect(pieChart).to.have.length(1);
-    expect(lineChart).to.have.length(2);
+    expect(lineChart).to.have.length(3);
     expect(pie).to.have.length(1);
 
     expect(pieChart.props().width).to.equal(sec3.layout.dimensions.width);
     expect(pie.props().data.length).to.equal(sec3.data.length);
 
-    expect(pie.props().data[pie.props().data.length - 2].name).to.equal(NONE_VALUE_DEFAULT_NAME);
+    expect(pie.props().data[pie.props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
     expect(pie.props().data[pie.props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
     let chartLegend = expectChartLegendFromChartElement(pieChart, sec3.data, true);
 
@@ -384,6 +382,7 @@ describe('Report Container', () => {
     expect(lines).to.have.length(1);
     expect(lineChart.at(0).find('.xAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.x.label);
     expect(lineChart.at(0).find('.yAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.y.label);
+    expect(lineChart.at(0).props().data[0].name).to.equal('11 Dec 2017');
 
     expect(lineChart.at(1).props().width).to.equal(sec7.layout.dimensions.width);
     expect(lineChart.at(1).props().height).to.equal(sec7.layout.dimensions.height);
@@ -398,6 +397,8 @@ describe('Report Container', () => {
     expect(lines.at(0).props().stroke).to.equal(sec7.data[1].groups[0].color);
     expect(lines.at(1).props().stroke).to.equal(sec7.data[1].groups[1].color);
     expectChartLegendFromChartElement(lineChart.at(1), sec7.data[2].groups);
+
+    expect(lineChart.at(2).props().data[0].name).to.equal(sec13.data[0].name);
 
     // Trend
     const trendNumber = reportContainer.find(SectionNumber);
@@ -420,7 +421,7 @@ describe('Report Container', () => {
     // Page break
     const markdown = reportContainer.find(SectionMarkdown);
     expect(markdown).to.have.length(4);
-    expect(markdown.at(0).text()).equal(sec9.data.text.replace(PAGE_BREAK_KEY, ''));
+    expect(markdown.at(0).text()).equal(sec9.data.text.replace(constants.PAGE_BREAK_KEY, ''));
 
     // Items Section
     const itemsSection = reportContainer.find(ItemsSection);
@@ -472,7 +473,7 @@ describe('Report Container', () => {
     expect(tableHeader.at(2).text()).to.equal('ccc');
 
     chartLegend = reportContainer.find(ChartLegend);
-    expect(chartLegend).to.have.length(5);
+    expect(chartLegend).to.have.length(6);
     expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style);
     expect(chartLegend.at(0).props().capitalize).to.be.true;
     expect(chartLegend.at(3).props().capitalize).to.be.false;
@@ -483,7 +484,7 @@ describe('Report Container', () => {
     const renderReport = (section) => {
       return <ReportContainer
         sections={section}
-        isLayout dimensions={A4_DIMENSIONS}
+        isLayout dimensions={constants.A4_DIMENSIONS}
       />;
     };
     const sectionWithAutoPageBreak = prepareSections(cloneDeep(testTemplate), null, true);
@@ -556,7 +557,7 @@ describe('Report Container', () => {
     expect(duration).to.have.length(2);
 
     // DURATION with format
-    expect(duration.at(0).props().chartProperties.format).to.equal(WIDGET_DURATION_FORMAT.months);
+    expect(duration.at(0).props().chartProperties.format).to.equal(constants.WIDGET_DURATION_FORMAT.months);
     let durationHeaders = duration.at(0).find('.time-unit');
     expect(durationHeaders).to.have.length(3);
     expect(durationHeaders.at(0).text()).to.equal('MONTHS');

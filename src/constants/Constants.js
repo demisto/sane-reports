@@ -101,6 +101,7 @@ export const WIDGET_FORMAT_PARTS = {
 
 export const QUERIES_TIME_FORMAT = 'DD MMM Y';
 export const SUPPORTED_TIME_FRAMES = {
+  none: 'none',
   days: 'days',
   hours: 'hours',
   minutes: 'minutes',
