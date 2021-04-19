@@ -7,7 +7,7 @@ import {
   REPORT_HEADER_IMAGE_LEFT_TOKEN,
   REPORT_HEADER_IMAGE_RIGHT_TOKEN,
   GRID_LAYOUT_COLUMNS,
-  PAGE_BREAK_KEY
+  PAGE_BREAK_KEY, CHART_TYPES
 } from '../../constants/Constants';
 import { groupBy, compact, get, isString, isEmpty } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
@@ -143,6 +143,11 @@ class ReportLayout extends Component {
     return 0;
   }
 
+  shouldDisableAutoHeight = (section) => {
+    return [CHART_TYPES.line].includes(section.layout.chartType) ||
+        SECTION_TYPES.trend === section.type;
+  }
+
   render() {
     const { sections, headerLeftImage, headerRightImage, isLayout, dimensions } = this.props;
     return (
@@ -203,10 +208,12 @@ class ReportLayout extends Component {
                             .map((section) => {
                               const gridItem = ReportLayout.getGridItemFromSection(section, overflowRows);
                               overflowRows += gridItem.h - section.layout.h;
+                              const disableAutoHeight = this.shouldDisableAutoHeight(section);
                               const mainClass = classNames(`section-layout section-${section.type} ` +
                               `${section.layout.class || ''}`,
                                   { 'section-show-overflow': section.layout.reflectDimensions === true,
-                                    'section-show-empty-state': isEmpty(section.data) || section.data.length === 0
+                                    'section-show-empty-state': isEmpty(section.data) || section.data.length === 0,
+                                    'disable-auto-height': disableAutoHeight
                                   });
 
                               const elementToRender = ReportLayout.getElementBySection(section);

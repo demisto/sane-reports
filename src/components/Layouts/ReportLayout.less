@@ -77,8 +77,11 @@ h1 {
       &:not(.section-show-overflow) {
         &:not(.section-show-empty-state) {
 
-          &:not(.section-markdown ) {
-            height: auto !important;
+          &:not(.section-markdown) {
+
+            &:not(.disable-auto-height) {
+              height: auto !important;
+            }
           }
 
           &.section-table {
