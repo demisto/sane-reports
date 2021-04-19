@@ -20,7 +20,7 @@ const filterResults = (chartProperties, rawResults) => {
 };
 
 const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
-  referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions }) => {
+  referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions, emptyString }) => {
   const data = filterResults(chartProperties, rawData);
 
   return (
@@ -84,7 +84,7 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
                   // Ignored
               }
               return chartToRender;
-            })() : <WidgetEmptyState />
+            })() : <WidgetEmptyState emptyString={emptyString} />
           }
       </div>
     </div>
@@ -110,6 +110,7 @@ SectionChart.propTypes = {
   stacked: PropTypes.bool,
   fromDate: PropTypes.string,
   toDate: PropTypes.string,
+  emptyString: PropTypes.string,
   reflectDimensions: PropTypes.bool
 };
 

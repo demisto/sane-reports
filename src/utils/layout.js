@@ -161,6 +161,7 @@ export function getSectionComponent(section, maxWidth) {
           fromDate={section.fromDate}
           toDate={section.toDate}
           reflectDimensions={section.layout.reflectDimensions}
+          emptyString={section.emptyNotification || getDefaultEmptyNotification()}
         />
       );
       break;
