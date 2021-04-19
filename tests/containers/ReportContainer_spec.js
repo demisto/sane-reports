@@ -619,6 +619,8 @@ describe('Report Container', () => {
     const sectionTable = reportContainer.find(SectionTable);
     const emptyWidget = sectionTable.find('.widget-empty-state');
     expect(emptyWidget).to.have.length(1);
+    const emptyWidgetIcon = sectionTable.find('.icon-status-noresults-24-r');
+    expect(emptyWidgetIcon).to.have.length(1);
   });
 
   it('Generate test non-empty table template', () => {

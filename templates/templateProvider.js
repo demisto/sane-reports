@@ -2,7 +2,7 @@ import testTemplate from './test.json';
 import testLayoutWithPageBreaks from './testLayoutWithPageBreaks.json';
 import testLayoutTemplate from './testLayout.json';
 import testLayoutDurationTemplate from './testLayoutDuration.json';
-import incidentDailyReportTempalte from './incidentDailyReportTempalte.json';
+import incidentDailyReportTempalte from './genTemp.json';
 import testLayoutEmptyTemplate from './testLayoutEmptyTemplate.json';
 
 function getTestTemplate() {
