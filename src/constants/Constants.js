@@ -117,6 +117,8 @@ export const PIE_CHART_FULL_ITEM_HEIGHT = 100;
 
 export const NONE_VALUE_DEFAULT_NAME = 'None';
 
+export const EMPTY_STATE_TEXT = 'No results found';
+
 export const RADIANS = Math.PI / 180;
 
 export const SECTION_ITEMS_DISPLAY_LAYOUTS = {
