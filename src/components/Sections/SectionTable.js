@@ -62,7 +62,7 @@ const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes
                   {!col.hidden && ((readableHeaders && readableHeaders[key]) || key)}
                 </th>
               );
-            })};
+            })}
           </tr>
         </thead>
         <tbody>
@@ -102,8 +102,8 @@ const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes
         </tbody>
       </table>
     ) : (
-      <>
-        <table className={'ui compact table unstackable section-table ' + classes} style={{ tableLayout: 'fixed' }}>
+      <div>
+        <table className={'ui compact table unstackable ' + classes} style={{ tableLayout: 'fixed' }}>
           <thead>
             <tr>
               {readyColumns.map((col) => {
@@ -114,7 +114,7 @@ const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes
           </thead>
         </table>
         <WidgetEmptyState emptyString={emptyString} />
-      </>);
+      </div>);
   } else {
     tableBody = (
       <table className={'ui compact table unstackable ' + classes}>

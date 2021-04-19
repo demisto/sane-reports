@@ -104,30 +104,36 @@ export default class SectionMarkdown extends Component {
         }
 
         res = (
-          <table
-            className={`ui very compact table celled fixed unstackable selectable ${tableClasses}`}
-            style={{ tableLayout: 'fixed' }}
-            key={Math.random()}
-          >
-            <thead>
-              <tr>
-                {headersValues.map((col, i) => {
+          <div key={Math.random()}>
+            <table
+              className={`ui very compact table celled fixed unstackable selectable ${tableClasses}`}
+              style={{ tableLayout: 'fixed' }}
+            >
+              <thead>
+                <tr>
+                  {headersValues.map((col, i) => {
                   return <th key={i}>{col}</th>;
                 })}
-              </tr>
-            </thead>
-            <tbody>
-              {tableContent.length > 0 ? tableContent.map((row, i) => {
+                </tr>
+              </thead>
+              {tableContent.length > 0 &&
+              <tbody>
+                {tableContent.map((row, i) => {
                 return (
                   <tr key={i}>
                     {Object.keys(row).map((key, j) =>
                       <td key={j + '.' + i} style={{ wordBreak: 'break-word' }}>{row[key]}</td>)}
                   </tr>
                 );
-              }) : <WidgetEmptyState />}
+              })}
+              </tbody>
+              }
 
-            </tbody>
-          </table>
+            </table>
+            {tableContent.length === 0 &&
+              <WidgetEmptyState />
+            }
+          </div>
         );
         break;
       }
