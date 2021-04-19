@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import SectionBarChart from './SectionBarChart';
 import SectionPieChart from './SectionPieChart';
 import SectionLineChart from './SectionLineChart';
+import WidgetEmptyState from '../WidgetEmptyState';
 import {
   CHART_TYPES,
   WIDGET_DEFAULT_CONF
 } from '../../../constants/Constants';
 import moment from 'moment';
-import { isBoolean } from 'lodash';
+import { isBoolean, isEmpty } from 'lodash';
 
 const filterResults = (chartProperties, rawResults) => {
   const showOthersParam = chartProperties.showOthers;
@@ -19,14 +20,14 @@ const filterResults = (chartProperties, rawResults) => {
 };
 
 const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
-  referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions }) => {
+  referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions, emptyString }) => {
   const data = filterResults(chartProperties, rawData);
 
   return (
     <div className="section-chart" style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
       <div className="section-chart-content">
-        {
+        {!isEmpty(data) && data.length > 0 ?
             (() => {
               let chartToRender;
               switch (type) {
@@ -83,7 +84,7 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
                   // Ignored
               }
               return chartToRender;
-            })()
+            })() : <WidgetEmptyState emptyString={emptyString} />
           }
       </div>
     </div>
@@ -109,6 +110,7 @@ SectionChart.propTypes = {
   stacked: PropTypes.bool,
   fromDate: PropTypes.string,
   toDate: PropTypes.string,
+  emptyString: PropTypes.string,
   reflectDimensions: PropTypes.bool
 };
 

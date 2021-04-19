@@ -1,0 +1,217 @@
+[
+  {
+    "type": "table",
+    "data": [
+    ],
+    "layout": {
+      "classes": "striped stackable small very compact",
+      "columnPos": 0,
+      "h": 2,
+      "i": "3ebd9120-f5e4-11e7-2ea-eb1e1a874387",
+      "rowPos": 8,
+      "tableColumns": [
+        "aaa",
+        "bbb"
+      ],
+      "w": 12
+    },
+    "title": "table"
+  },
+  {
+    "type": "markdown",
+    "data": {
+      "text": "bla"
+    },
+    "layout": {
+      "rowPos": 6,
+      "columnPos": 0,
+      "h": 2,
+      "i": "ea707c90-9b20-11e9-90cd-2702611820x6",
+      "w": 12
+    }
+  },
+  {
+    "type": "chart",
+    "data": [],
+    "layout": {
+      "chartProperties": {
+        "cx": "50%",
+        "cy": "50%",
+        "innerRadius": "75%",
+        "layout": "vertical",
+        "maxRadius": 0,
+        "outerRadius": "100%"
+      },
+      "chartType": "pie",
+      "columnPos": 7,
+      "dimensions": {
+        "height": 200,
+        "width": 144
+      },
+      "h": 2,
+      "i": "77bca720-9df6-11eb-b23d-9bc677cfa1b8",
+      "legend": [],
+      "legendStyle": {
+        "align": "center",
+        "hideLegend": false,
+        "iconType": "square",
+        "layout": "vertical",
+        "verticalAlign": "bottom",
+        "width": 0
+      },
+      "reflectDimensions": false,
+      "rowPos": 2,
+      "w": 3
+    },
+    "query": {
+      "type": "incident",
+      "groupBy": [
+        "type"
+      ],
+      "filter": {
+        "fromDate": "0001-01-01T00:00:00Z",
+        "period": {
+          "by": "",
+          "byFrom": "days",
+          "byTo": "",
+          "field": "",
+          "fromValue": 7,
+          "toValue": null
+        },
+        "query": "",
+        "toDate": "0001-01-01T00:00:00Z"
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "fromDate": "2021-04-12T18:26:43Z",
+    "title": "pielow",
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  },
+  {
+    "type": "chart",
+    "data": [],
+    "layout": {
+      "chartProperties": {
+        "axis": {
+          "x": {},
+          "y": {}
+        },
+        "barSize": 35,
+        "format": "DD MMM Y",
+        "isDatesChart": false,
+        "layout": "horizontal",
+        "valuesFormat": "abbreviated"
+      },
+      "chartType": "column",
+      "columnPos": 4,
+      "dimensions": {
+        "height": 180,
+        "width": 144
+      },
+      "h": 2,
+      "i": "d103a360-9c52-11eb-9e6a-2381042caf68",
+      "legend": null,
+      "legendStyle": {
+        "align": "right",
+        "hideLegend": false,
+        "iconType": "square",
+        "layout": "horizontal",
+        "verticalAlign": "top",
+        "wrapperStyle": {
+          "top": 5,
+          "width": "100%"
+        }
+      },
+      "reflectDimensions": false,
+      "rowPos": 2,
+      "w": 3
+    },
+    "query": {
+      "type": "incident",
+      "groupBy": [
+        "owner"
+      ],
+      "filter": {
+        "fromDate": "0001-01-01T00:00:00Z",
+        "period": {
+          "by": "",
+          "byFrom": "days",
+          "byTo": "",
+          "field": "",
+          "fromValue": 7,
+          "toValue": null
+        },
+        "query": "",
+        "toDate": "0001-01-01T00:00:00Z"
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "fromDate": "2021-04-12T18:26:42Z",
+    "title": "vertical",
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  },
+  {
+    "type": "markdown",
+    "data": {
+      "text": "### Issues in progress: 300\n|gitowner|Issue Name|Demisto Link|Github Link|Github Labels|\n|---|---|---|---|---|\n",
+      "groups": [
+        {
+          "name": "",
+          "data": null,
+          "groups": null,
+          "count": 0,
+          "floatData": null
+        }
+      ]
+    },
+    "layout": {
+      "columnPos": 0,
+      "h": 4,
+      "i": "2a309a50-906f-11eb-9689-514ae1badcee",
+      "reflectDimensions": false,
+      "rowPos": 0,
+      "w": 11
+    },
+    "query": {
+      "type": "scripts",
+      "filter": {
+        "query": "ContentGroupPlanningWidget_copy",
+        "period": {
+          "by": "",
+          "byFrom": "days",
+          "byTo": "",
+          "field": "",
+          "fromValue": 7,
+          "toValue": null
+        },
+        "fromDate": "0001-01-01T00:00:00Z",
+        "toDate": "0001-01-01T00:00:00Z"
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "fromDate": "2021-04-12T15:23:40Z",
+    "title": "Content Group Planning Widget",
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  }
+]

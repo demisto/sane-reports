@@ -1,4 +1,4 @@
-import { SECTION_TYPES } from '../constants/Constants';
+import { PAGE_BREAK_KEY, SECTION_TYPES } from '../constants/Constants';
 import {
   ItemsSection,
   SectionChart,
@@ -21,6 +21,12 @@ import React from 'react';
 
 function getDefaultEmptyNotification() {
   return 'No results found.';
+}
+
+
+function isPageBreakSection(section) {
+  return !!get(section, 'layout.style.pageBreakBefore', false) || (section.type === SECTION_TYPES.markdown &&
+      section.data && ((isString(section.data) ? section.data : section.data.text) || '').includes(PAGE_BREAK_KEY));
 }
 
 export function getSectionComponent(section, maxWidth) {
@@ -119,6 +125,7 @@ export function getSectionComponent(section, maxWidth) {
           style={section.layout.style}
           tableClasses={section.layout.tableClasses}
           doNotShowEmoji={section.layout.doNotShowEmoji}
+          customClass={isPageBreakSection(section) ? 'page-break-section' : ''}
         />
       );
       break;
@@ -162,6 +169,7 @@ export function getSectionComponent(section, maxWidth) {
           fromDate={section.fromDate}
           toDate={section.toDate}
           reflectDimensions={section.layout.reflectDimensions}
+          emptyString={section.emptyNotification || getDefaultEmptyNotification()}
         />
       );
       break;

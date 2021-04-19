@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TABLE_CELL_TYPE, DEFAULT_MAX_LENGTH } from '../../constants/Constants';
 import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash';
+import WidgetEmptyState from './WidgetEmptyState';
 
 
 const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes, style, title, titleStyle, emptyString,
@@ -61,7 +62,7 @@ const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes
                   {!col.hidden && ((readableHeaders && readableHeaders[key]) || key)}
                 </th>
               );
-            })};
+            })}
           </tr>
         </thead>
         <tbody>
@@ -100,7 +101,20 @@ const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes
           }
         </tbody>
       </table>
-    ) : <div className="no-data">{emptyString}</div>;
+    ) : (
+      <div>
+        <table className={'ui compact table unstackable ' + classes} style={{ tableLayout: 'fixed' }}>
+          <thead>
+            <tr>
+              {readyColumns.map((col) => {
+              const key = col.key || col;
+              return <th key={key}>{!col.hidden && ((readableHeaders && readableHeaders[key]) || key)}</th>;
+            })}
+            </tr>
+          </thead>
+        </table>
+        <WidgetEmptyState emptyString={emptyString} />
+      </div>);
   } else {
     tableBody = (
       <table className={'ui compact table unstackable ' + classes}>

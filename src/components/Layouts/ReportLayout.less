@@ -75,15 +75,28 @@ h1 {
       z-index: 1;
 
       &:not(.section-show-overflow) {
-        height: auto !important;
+        &:not(.section-show-empty-state) {
 
-        &.section-table {
-          height: auto !important; // override grid item height to fit content
+          &:not(.section-markdown) {
+
+            &:not(.disable-auto-height) {
+              height: auto !important;
+            }
+          }
+
+          &.section-table, &.section-markdown {
+            height: auto !important; // override grid item height to fit content
+          }
+
+          .section-line-chart, .section-bar-chart {
+            .recharts-legend-wrapper {
+              max-height: 100% !important;
+            }
+          }
         }
-
-        .section-line-chart, .section-bar-chart {
-          .recharts-legend-wrapper {
-            max-height: 100% !important;
+        &.section-show-empty-state {
+          .section-table {
+            height: inherit !important;
           }
         }
       }
@@ -95,9 +108,11 @@ h1 {
         padding: 10px 12px 0;
       }
 
-      .section-number, .section-table {
-        border: 1px solid #DADBDB;
-        padding: 10px 12px;
+      .section-number, .section-table, .section-markdown {
+        &:not(.page-break-section) {
+          border: 1px solid #DADBDB;
+          padding: 10px 12px;
+        }
       }
 
       &.fixed {
@@ -157,13 +172,13 @@ h1 {
           overflow-x: hidden;
         }
 
-        .section-table {
+        .section-table, .section-markdown {
           height: inherit;
           overflow-y: auto;
         }
 
         @media print {
-          .section-table {
+          .section-table, .section-markdown  {
             overflow-y: hidden;
           }
 
