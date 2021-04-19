@@ -8,6 +8,7 @@ body {
 .footer {
   font-family: @font-family-base !important;
 }
+
 strong {
   font-family: @font-family-source-sans-pro-semi-bold;
 }
@@ -24,30 +25,37 @@ h1 {
   .global-section-row {
     display: flex;
     flex-direction: row;
+
     .subsection-wrapper {
       flex: 1;
       width: 100%;
+
       .section-text {
         height: 100%;
       }
     }
   }
+
   .section-chart {
     display: block;
   }
 }
+
 .report-layout {
   margin: @content-margin-top @content-margin-right @content-margin-bottom @content-margin-left;
+
   .report-row {
     display: table;
     width: 100%;
     table-layout: fixed;
     border-spacing: 10px;
     padding: 0 17px;
+
     &.header, &.logo {
       padding: 0 !important;
     }
   }
+
   .report-section {
     display: table-cell;
 
@@ -58,58 +66,126 @@ h1 {
       background-color: #ebebec;
     }
   }
+
   .react-grid-layout {
     height: auto !important; // override grid height
     .react-grid-item {
       overflow: visible;
       transition: none;
       z-index: 1;
-      height: auto !important;
-      transition-property: none;
-      &.fixed {
-      overflow: visible !important;
-      position: fixed !important;
-      transform: unset !important;
+
+      &:not(.section-show-overflow) {
+        height: auto !important;
+
+        &.section-table {
+          height: auto !important; // override grid item height to fit content
+        }
+
+        .section-line-chart, .section-bar-chart {
+          .recharts-legend-wrapper {
+            max-height: 100% !important;
+          }
+        }
       }
+
+      transition-property: none;
+
+      .section-chart {
+        border: 1px solid #DADBDB;
+        padding: 10px 12px 0;
+      }
+
+      .section-table {
+        border: 1px solid #DADBDB;
+        padding: 10px 12px;
+      }
+
+      &.fixed {
+        overflow: visible !important;
+        position: fixed !important;
+        transform: unset !important;
+      }
+
       &.slim {
         height: auto !important;
-      }
-      &.section-table {
-        height: auto !important; // override grid item height to fit content
       }
 
       &.section-table, &.section-markdown {
 
         table {
-          break-inside:auto;
+          break-inside: auto;
         }
 
-        tr    {
-          break-inside:avoid;
-          break-after:auto;
+        tr {
+          break-inside: avoid;
+          break-after: auto;
         }
 
         thead {
-          display:table-header-group;
-          break-inside:avoid;
+          display: table-header-group;
+          break-inside: avoid;
         }
 
         tfoot {
-          display:table-header-group;
+          display: table-header-group;
         }
       }
+
       .section-title {
         font-size: 18px;
         margin-bottom: 10px;
         padding: 5px 10px;
       }
 
+      &.section-show-overflow {
+        overflow-y: auto;
+
+        .section-column-chart {
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        .section-line-chart {
+          .recharts-wrapper {
+            overflow-y: auto;
+            overflow-x: hidden;
+          }
+        }
+
+        .section-bar-chart {
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        .section-table {
+          height: inherit;
+          overflow-y: auto;
+        }
+
+        @media print {
+          .section-column-chart {
+            overflow-y: hidden;
+          }
+
+          .section-line-chart {
+            .recharts-wrapper {
+              overflow-y: hidden;
+            }
+          }
+
+          .section-bar-chart {
+            overflow-y: hidden;
+          }
+        }
+      }
     }
   }
+
   .error-section {
     border: 1px solid red;
     padding: 5px;
     word-break: break-all;
+
     .error-message {
       color: fade(red, 80%);
     }

@@ -14,14 +14,12 @@ import { isBoolean } from 'lodash';
 const filterResults = (chartProperties, rawResults) => {
   const showOthersParam = chartProperties.showOthers;
   const showOthers = isBoolean(showOthersParam) ? showOthersParam : WIDGET_DEFAULT_CONF.showOthers;
-  const results = (!showOthers && rawResults && Array.isArray(rawResults)) ?
+  return (!showOthers && rawResults && Array.isArray(rawResults)) ?
     rawResults.filter(item => item.name !== WIDGET_DEFAULT_CONF.otherGroup) : rawResults;
-
-  return results;
 };
 
 const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
-  referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle }) => {
+  referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions }) => {
   const data = filterResults(chartProperties, rawData);
 
   return (
@@ -45,6 +43,7 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
                       sortBy={sortBy}
                       stacked={stacked}
                       referenceLineY={referenceLineY}
+                      reflectDimensions={reflectDimensions}
                     />
                   );
                   break;
@@ -58,6 +57,7 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
                       chartProperties={chartProperties}
                       legendStyle={legendStyle}
                       sortBy={sortBy}
+                      reflectDimensions={reflectDimensions}
                     />
                   );
                   break;
@@ -75,6 +75,7 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
                       referenceLineY={referenceLineY}
                       fromDate={fromDate && moment(fromDate)}
                       toDate={toDate && moment(toDate)}
+                      reflectDimensions={reflectDimensions}
                     />
                   );
                   break;
@@ -107,7 +108,8 @@ SectionChart.propTypes = {
   referenceLineY: PropTypes.object,
   stacked: PropTypes.bool,
   fromDate: PropTypes.string,
-  toDate: PropTypes.string
+  toDate: PropTypes.string,
+  reflectDimensions: PropTypes.bool
 };
 
 export default SectionChart;
