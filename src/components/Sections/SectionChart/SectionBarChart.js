@@ -2,23 +2,65 @@ import './SectionBarChart.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ReferenceLine, Label } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ReferenceLine, Label, LabelList } from 'recharts';
 import { isArray, orderBy, unionBy } from 'lodash';
-import { sortStrings } from '../../../utils/strings';
+import {
+  formatNumberValue,
+  createMiddleEllipsisFormatter,
+  getTextWidth,
+  sortStrings
+} from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
-import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME } from '../../../constants/Constants';
+import {
+  CHART_LAYOUT_TYPE, CHART_LEGEND_ITEM_HEIGHT,
+  NONE_VALUE_DEFAULT_NAME,
+  WIDGET_DEFAULT_CONF, BAR_CHART_FULL_ITEM_HEIGHT
+} from '../../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
+import { calculateAngledTickInterval } from '../../../utils/ticks';
+
+const createXAxisProps = (data, dataKey, width) => {
+  const ticks = data.map(x => x[dataKey]);
+  const ticksStr = ticks.join(' ');
+  const ticksUiWidth = getTextWidth(ticksStr, WIDGET_DEFAULT_CONF.font);
+  const props = {
+    interval: 0
+  };
+
+  if (ticksUiWidth > width) {
+    const mEllipsisFormatter = createMiddleEllipsisFormatter(WIDGET_DEFAULT_CONF.tickMaxChars);
+    const longestTick = ticks.reduce((acc, curr) => {
+      return acc.length > curr.length ? acc : curr;
+    });
+
+    props.interval = calculateAngledTickInterval(width, WIDGET_DEFAULT_CONF.lineHeight, data.length);
+    props.textAnchor = 'end';
+    props.angle = WIDGET_DEFAULT_CONF.tickAngle;
+    props.height = getTextWidth(mEllipsisFormatter(longestTick), WIDGET_DEFAULT_CONF.font) + 15;
+    props.tickFormatter = mEllipsisFormatter;
+    props.dx = -5;
+    props.dy = 0;
+  }
+
+  return props;
+};
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
-  legendStyle = null, sortBy, stacked, referenceLineY }) => {
+  legendStyle = null, sortBy, stacked, referenceLineY, reflectDimensions }) => {
   const existingColors = {};
   const isColumnChart = chartProperties.layout === CHART_LAYOUT_TYPE.horizontal;
   let dataItems = {};
   let preparedData = data || [];
 
+  const formatValue = (v) => {
+    const { valuesFormat } = chartProperties;
+    return formatNumberValue(v, valuesFormat);
+  };
+
   if (!stacked) {
     preparedData = preparedData.map((item) => {
       let val = item.value || item.data;
+      item.showValues = chartProperties.showValues;
       if (isArray(val) && val.length > 0) {
         val = val[0];
       }
@@ -29,7 +71,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       existingColors[item.color] = true;
       if (!legend || !dataItems[item.name]) {
         item[item.name] = val;
-        dataItems[item.name] = { name: item.name, color: item.color, value: val };
+        dataItems[item.name] = { name: item.name,
+          color: item.color,
+          value: val,
+          showValues: chartProperties.showValues };
       } else {
         dataItems[item.name].value = val;
       }
@@ -67,8 +112,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         leftMargin = Math.max(leftMargin, spaceNeeded);
       }
       if (item.groups) {
+        item.showValues = chartProperties.showValues;
         // iterate inner groups
-        (item.groups || []).forEach(((innerItem) => {
+        (item.groups || []).forEach(((innerItem, index) => {
           innerItem.color = innerItem.fill || innerItem.color || getGraphColorByName(innerItem.name, existingColors);
           if (!innerItem.name) {
             innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
@@ -76,11 +122,14 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           existingColors[innerItem.color] = true;
 
           item[innerItem.name] = innerItem.data[0];
+          innerItem.showValues = index === item.groups.length - 1;
         }));
 
         dataItems = preparedData
           .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
-          .map(group => ({ name: group.name, color: group.fill || group.color }))
+          .map(group => ({ name: group.name,
+            color: group.fill || group.color,
+            showValues: group.showValues && chartProperties.showValues }))
           .sort((a, b) => sortStrings(a.name, b.name));
       } else {
         Object.keys(item).filter(key => key !== 'name' && key !== 'relatedTo' && key !== 'value').forEach(
@@ -110,15 +159,24 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       return item;
     });
   }
+  let isFull = false;
+  if (!reflectDimensions && (preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height || stacked)) {
+    isFull = true;
+    dimensions.height = (preparedData.length * CHART_LEGEND_ITEM_HEIGHT) + BAR_CHART_FULL_ITEM_HEIGHT;
+  }
 
   return (
     <div className={mainClass} style={style}>
       <AutoSizer>
         {({ width, height }) => {
+          const finalWidth = width || dimensions.width;
+          const xAxisProps = isColumnChart ? createXAxisProps(data, 'name', finalWidth / 2) : {};
+          const finalHeight = isFull ? dimensions.height : height || dimensions.height;
+
           return (
             <BarChart
-              width={width || dimensions.width}
-              height={height || dimensions.height}
+              width={finalWidth}
+              height={finalHeight}
               data={preparedData}
               layout={chartProperties.layout}
               margin={margin}
@@ -140,7 +198,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   }
                 />
               }
-              {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal && <XAxis tick dataKey="name" type="category" />}
+              {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal &&
+                <XAxis tick dataKey="name" type="category" {...xAxisProps} />
+              }
               <Tooltip />
               {referenceLineY &&
                 <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke}>
@@ -153,7 +213,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                     data={dataItems}
                     valueDisplay={VALUE_FORMAT_TYPES.minimal}
                     showValue={!isColumnChart && !stacked}
-                    icon={legendStyle.iconType}
+                    icon="square"
                     capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
                     layout={legendStyle.layout}
                     style={legendStyle && legendStyle.style}
@@ -161,18 +221,35 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   {...legendStyle}
                 />
               }
-              {dataItems.map(item => <Bar
-                key={item.name}
-                dataKey={item.name}
-                stackId="stack"
-                fill={item.color}
-                onClick={(e) => {
-                  if (e.url) {
-                    window.open(e.url, '_blank');
-                  }
-                }}
-                label={!!chartProperties.label}
-              />)}
+              {dataItems.map(item =>
+                <Bar
+                  key={item.name}
+                  dataKey={item.name}
+                  stackId="stack"
+                  fill={item.color}
+                  onClick={(e) => {
+                    if (e.url) {
+                      window.open(e.url, '_blank');
+                    }
+                  }}
+                  label={!!chartProperties.label}
+                >
+                  {!chartProperties.label && item.showValues &&
+                  <LabelList
+                    position="top"
+                    valueAccessor={(entry) => {
+                      let value = '';
+                      if (entry && entry.data && entry.data[0] !== undefined) {
+                        value = entry.data[0];
+                      } else if (entry && entry.value && entry.value[1] !== undefined) {
+                        value = entry.value[1];
+                      }
+                      return value;
+                    }}
+                    formatter={formatValue}
+                  />}
+                </Bar>
+                  )}
             </BarChart>);
         }
         }
@@ -192,7 +269,8 @@ SectionBarChart.propTypes = {
   legendStyle: PropTypes.object,
   sortBy: PropTypes.object,
   referenceLineY: PropTypes.object,
-  stacked: PropTypes.bool
+  stacked: PropTypes.bool,
+  reflectDimensions: PropTypes.bool
 };
 
 export default SectionBarChart;

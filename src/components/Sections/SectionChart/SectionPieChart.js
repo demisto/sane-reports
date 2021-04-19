@@ -8,7 +8,14 @@ import merge from 'lodash/merge';
 import orderBy from 'lodash/orderBy';
 import isArray from 'lodash/isArray';
 import { getGraphColorByName } from '../../../utils/colors';
-import { CHART_LAYOUT_TYPE, NONE_VALUE_DEFAULT_NAME, RADIANS } from '../../../constants/Constants';
+import {
+  CHART_LAYOUT_TYPE,
+  CHART_LEGEND_ITEM_HEIGHT,
+  NONE_VALUE_DEFAULT_NAME,
+  RADIANS,
+  PIE_CHART_FULL_ITEM_HEIGHT
+} from '../../../constants/Constants';
+import classNames from 'classnames';
 
 const CustomizedPieLabel = ({ cx, cy, midAngle, outerRadius, percent, fill }) => {
   const radius = outerRadius * 1.1;
@@ -41,7 +48,8 @@ CustomizedPieLabel.propTypes = {
   percent: PropTypes.number
 };
 
-const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy }) => {
+const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {},
+  sortBy, reflectDimensions }) => {
   const dataMap = {};
   const existingColors = {};
   (data || []).forEach((item) => {
@@ -81,12 +89,23 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
   }
 
   let legendHeight = dimensions.height;
-  if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical) {
+  if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical && reflectDimensions) {
     legendHeight = dimensions.height / 2;
   }
 
+  if (!reflectDimensions && preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
+    legendHeight = (preparedData.length * CHART_LEGEND_ITEM_HEIGHT);
+    if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical) {
+      legendHeight += PIE_CHART_FULL_ITEM_HEIGHT;
+    }
+    dimensions.height = legendHeight;
+  }
+
+  const mainClass = classNames('section-pie-chart',
+    { 'section-pie-chart-horizontal': chartProperties.layout !== CHART_LAYOUT_TYPE.vertical });
+
   return (
-    <div className="section-pie-chart" style={style}>
+    <div className={mainClass} style={style}>
       <AutoSizer disableHeight>
         {({ width }) => {
           const outerRadius = chartProperties.outerRadius || 80;
@@ -135,7 +154,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 } : { top: 10 }}
                 content={
                   <ChartLegend
-                    iconType="circle"
+                    iconType="square"
                     capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
                     data={preparedData}
                     height={legendHeight}
@@ -161,7 +180,8 @@ SectionPieChart.propTypes = {
   chartProperties: PropTypes.object,
   legend: PropTypes.array,
   legendStyle: PropTypes.object,
-  sortBy: PropTypes.object
+  sortBy: PropTypes.object,
+  reflectDimensions: PropTypes.bool
 };
 
 export default SectionPieChart;

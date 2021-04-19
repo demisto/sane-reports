@@ -47,8 +47,61 @@ export const CHART_LAYOUT_TYPE = {
   vertical: 'vertical'
 };
 
+export const WIDGET_DEFAULT_CONF = {
+  lineHeight: 22,
+  tickAngle: -40,
+  tickMaxChars: 10,
+  font: '12px Source Sans Pro',
+  size: 10,
+  sizeThresholdWarning: 100,
+  showOthers: true,
+  otherGroup: 'Other'
+};
+
+export const DURATION_FORMAT = {
+  min: {
+    name: 'min',
+    weight: 60
+  },
+  hours: {
+    name: 'hours',
+    weight: 3600
+  },
+  days: {
+    name: 'days',
+    weight: 3600 * 24
+  },
+  weeks: {
+    name: 'weeks',
+    weight: 3600 * 24 * 7
+  },
+  months: {
+    name: 'months',
+    weight: 3600 * 24 * 30.42
+  },
+  years: {
+    name: 'years',
+    weight: 3600 * 24 * 365.24
+  }
+};
+
+export const WIDGET_DURATION_FORMAT = {
+  days: 'days',
+  weeks: 'weeks',
+  months: 'months',
+  years: 'years'
+};
+
+export const WIDGET_FORMAT_PARTS = {
+  [WIDGET_DURATION_FORMAT.days]: [DURATION_FORMAT.days, DURATION_FORMAT.hours, DURATION_FORMAT.min],
+  [WIDGET_DURATION_FORMAT.weeks]: [DURATION_FORMAT.weeks, DURATION_FORMAT.days, DURATION_FORMAT.hours],
+  [WIDGET_DURATION_FORMAT.months]: [DURATION_FORMAT.months, DURATION_FORMAT.weeks, DURATION_FORMAT.days],
+  [WIDGET_DURATION_FORMAT.years]: [DURATION_FORMAT.years, DURATION_FORMAT.months, DURATION_FORMAT.weeks]
+};
+
 export const QUERIES_TIME_FORMAT = 'DD MMM Y';
 export const SUPPORTED_TIME_FRAMES = {
+  none: 'none',
   days: 'days',
   hours: 'hours',
   minutes: 'minutes',
@@ -58,6 +111,9 @@ export const SUPPORTED_TIME_FRAMES = {
 };
 export const GRID_LAYOUT_COLUMNS = 12;
 export const CHART_LEGEND_ITEM_HEIGHT = 26;
+export const BAR_CHART_FULL_ITEM_HEIGHT = 300;
+export const LINE_CHART_FULL_ITEM_HEIGHT = 200;
+export const PIE_CHART_FULL_ITEM_HEIGHT = 100;
 
 export const NONE_VALUE_DEFAULT_NAME = 'None';
 
@@ -78,3 +134,10 @@ export const PAGE_BREAK_KEY = '\\pagebreak';
 export const PIXEL_SIZE = 3.779527559055;
 
 export const A4_DIMENSIONS = { width: 210 * PIXEL_SIZE, height: 297 * PIXEL_SIZE };
+
+export const WIDGET_VALUES_FORMAT = {
+  abbreviated: 'abbreviated',
+  regular: 'regular',
+  decimal: 'decimal',
+  percentage: 'percentage'
+};
