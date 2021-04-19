@@ -23,15 +23,11 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
   referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions }) => {
   const data = filterResults(chartProperties, rawData);
 
-  if (isEmpty(data) || data.length === 0) {
-    return <WidgetEmptyState />;
-  }
-
   return (
     <div className="section-chart" style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
       <div className="section-chart-content">
-        {
+        {!isEmpty(data) && data.length > 0 ?
             (() => {
               let chartToRender;
               switch (type) {
@@ -88,7 +84,7 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
                   // Ignored
               }
               return chartToRender;
-            })()
+            })() : <WidgetEmptyState />
           }
       </div>
     </div>
