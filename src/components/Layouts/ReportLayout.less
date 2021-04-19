@@ -109,8 +109,10 @@ h1 {
       }
 
       .section-number, .section-table, .section-markdown {
-        border: 1px solid #DADBDB;
-        padding: 10px 12px;
+        &:not(.page-break-section) {
+          border: 1px solid #DADBDB;
+          padding: 10px 12px;
+        }
       }
 
       &.fixed {
