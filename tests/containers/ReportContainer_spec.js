@@ -631,4 +631,35 @@ describe('Report Container', () => {
     const emptyWidget = sectionTable.find('.widget-empty-state');
     expect(emptyWidget).to.have.length(0);
   });
+
+  it('Generate test empty generic template', () => {
+    const testTemplate = TemplateProvider.getTestLayoutEmptyTemplate();
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+    const sectionChart = reportContainer.find(SectionChart);
+    const emptyWidget = sectionChart.find('.widget-empty-state');
+    expect(emptyWidget).to.have.length(2);
+    const emptyWidgetIcon = sectionChart.find('.icon-status-noresults-24-r');
+    expect(emptyWidgetIcon).to.have.length(2);
+  });
+
+  it('Generate test empty markdown template', () => {
+    const testTemplate = TemplateProvider.getTestLayoutEmptyTemplate();
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+    const sectionMark = reportContainer.find(SectionMarkdown);
+    const emptyWidget = sectionMark.find('.widget-empty-state');
+    expect(emptyWidget).to.have.length(1);
+    const emptyWidgetIcon = sectionMark.find('.icon-status-noresults-24-r');
+    expect(emptyWidgetIcon).to.have.length(1);
+  });
+
+  it('Generate test non-empty markdown template', () => {
+    const testTemplate = TemplateProvider.getTestTemplate();
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+    const sectionTable = reportContainer.find(SectionMarkdown);
+    const emptyWidget = sectionTable.find('.widget-empty-state');
+    expect(emptyWidget).to.have.length(0);
+  });
 });
