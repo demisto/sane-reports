@@ -2,19 +2,16 @@ import './SectionBarChart.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ReferenceLine, Label, LabelList } from 'recharts';
+import { Bar, BarChart, Label, LabelList, Legend, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
 import { isArray, orderBy, unionBy } from 'lodash';
-import {
-  formatNumberValue,
-  createMiddleEllipsisFormatter,
-  getTextWidth,
-  sortStrings
-} from '../../../utils/strings';
+import { createMiddleEllipsisFormatter, formatNumberValue, getTextWidth, sortStrings } from '../../../utils/strings';
 import { getGraphColorByName } from '../../../utils/colors';
 import {
-  CHART_LAYOUT_TYPE, CHART_LEGEND_ITEM_HEIGHT,
+  BAR_CHART_FULL_ITEM_HEIGHT,
+  CHART_LAYOUT_TYPE,
+  CHART_LEGEND_ITEM_HEIGHT,
   NONE_VALUE_DEFAULT_NAME,
-  WIDGET_DEFAULT_CONF, BAR_CHART_FULL_ITEM_HEIGHT
+  WIDGET_DEFAULT_CONF
 } from '../../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
@@ -190,17 +187,26 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
               }
               {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" allowDecimals={false} />}
               {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal &&
-                <YAxis
-                  type="number"
-                  domain={
-                    [dataMin => Math.floor(Math.min(0, dataMin, (referenceLineY && referenceLineY.y) || 0) * 1.33),
-                      dataMax => Math.ceil(Math.max(dataMax, (referenceLineY && referenceLineY.y) || 0) * 1.33)]
-                  }
-                />
-              }
+              <YAxis
+                type="number"
+                domain={
+                  [dataMin => Math.floor(Math.min(0, dataMin, (referenceLineY && referenceLineY.y) || 0) * 1.33),
+                    dataMax => Math.ceil(Math.max(dataMax, (referenceLineY && referenceLineY.y) || 0) * 1.33)]
+                }
+              >
+                {chartProperties.axis && chartProperties.axis.y &&
+                <Label
+                  value={chartProperties.axis.y.label}
+                  angle={-90}
+                  offset={16}
+                  position="insideLeft"
+                />}
+              </YAxis>}
               {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal &&
-                <XAxis tick dataKey="name" type="category" {...xAxisProps} />
-              }
+              <XAxis tick dataKey="name" type="category" {...xAxisProps}>
+                {chartProperties.axis && chartProperties.axis.x &&
+                <Label value={chartProperties.axis.x.label} offset={3} position="insideBottom" />}
+              </XAxis>}
               <Tooltip />
               {referenceLineY &&
                 <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke}>
