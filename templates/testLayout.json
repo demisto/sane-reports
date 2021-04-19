@@ -128,7 +128,8 @@
       "style": {
         "backgroundColor": null
       },
-      "w": 3
+      "w": 3,
+      "valuesFormat": "decimal"
     },
     "query": {
       "filter": {
@@ -635,6 +636,14 @@
         "stroke": "rgb(64, 65, 66)"
       },
       "chartProperties": {
+        "axis": {
+          "x": {
+            "label": "X"
+          },
+          "y": {
+            "label": "Y"
+          }
+        },
         "barSize": 35,
         "layout": "horizontal",
         "showValues": true,
