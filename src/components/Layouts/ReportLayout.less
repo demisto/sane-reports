@@ -76,7 +76,11 @@ h1 {
 
       &:not(.section-show-overflow) {
         &:not(.section-show-empty-state) {
-          height: auto !important;
+
+          &:not(.section-markdown ) {
+            height: auto !important;
+          }
+
           &.section-table {
             height: auto !important; // override grid item height to fit content
           }
