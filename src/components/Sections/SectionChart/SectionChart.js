@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import SectionBarChart from './SectionBarChart';
 import SectionPieChart from './SectionPieChart';
 import SectionLineChart from './SectionLineChart';
+import WidgetEmptyState from '../WidgetEmptyState';
 import {
   CHART_TYPES,
   WIDGET_DEFAULT_CONF
 } from '../../../constants/Constants';
 import moment from 'moment';
-import { isBoolean } from 'lodash';
+import { isBoolean, isEmpty } from 'lodash';
 
 const filterResults = (chartProperties, rawResults) => {
   const showOthersParam = chartProperties.showOthers;
@@ -21,6 +22,10 @@ const filterResults = (chartProperties, rawResults) => {
 const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
   referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions }) => {
   const data = filterResults(chartProperties, rawData);
+
+  if (isEmpty(data) || data.length === 0) {
+    return <WidgetEmptyState />;
+  }
 
   return (
     <div className="section-chart" style={style}>

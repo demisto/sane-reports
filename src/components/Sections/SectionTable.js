@@ -6,7 +6,7 @@ import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash'
 import WidgetEmptyState from './WidgetEmptyState';
 
 
-const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle,
+const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString,
   maxColumns }) => {
   let tableData = data || [];
 
@@ -97,7 +97,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
             </tr>
           </thead>
         </table>
-        <WidgetEmptyState />
+        <WidgetEmptyState emptyString={emptyString} />
       </>);
   } else {
     tableBody = (
@@ -135,7 +135,8 @@ SectionTable.propTypes = {
   style: PropTypes.object,
   title: PropTypes.string,
   maxColumns: PropTypes.number,
-  titleStyle: PropTypes.object
+  titleStyle: PropTypes.object,
+  emptyString: PropTypes.string
 };
 
 export default SectionTable;

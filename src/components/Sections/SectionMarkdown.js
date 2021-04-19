@@ -8,6 +8,7 @@ import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 import { PAGE_BREAK_KEY } from '../../constants/Constants';
 import { mdBtn } from '../../utils/markdown';
+import WidgetEmptyState from './WidgetEmptyState';
 
 // plugins for react markdown component
 import abbr from 'markdown-it-abbr';
@@ -116,14 +117,15 @@ export default class SectionMarkdown extends Component {
               </tr>
             </thead>
             <tbody>
-              {tableContent.map((row, i) => {
+              {tableContent.length > 0 ? tableContent.map((row, i) => {
                 return (
                   <tr key={i}>
                     {Object.keys(row).map((key, j) =>
                       <td key={j + '.' + i} style={{ wordBreak: 'break-word' }}>{row[key]}</td>)}
                   </tr>
                 );
-              })}
+              }) : <WidgetEmptyState />}
+
             </tbody>
           </table>
         );
