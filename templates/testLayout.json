@@ -128,7 +128,8 @@
       "style": {
         "backgroundColor": null
       },
-      "w": 3
+      "w": 3,
+      "valuesFormat": "decimal"
     },
     "query": {
       "filter": {

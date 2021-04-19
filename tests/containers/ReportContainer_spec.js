@@ -25,6 +25,7 @@ import { Bar, BarChart, Line, LineChart, Pie, PieChart } from 'recharts';
 import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 import { cloneDeep, unionBy } from 'lodash';
 import SectionBarChart from '../../src/components/Sections/SectionChart/SectionBarChart';
+import { formatNumberValue } from '../../src/utils/strings';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -368,7 +369,7 @@ describe('Report Container', () => {
     let refLine = barChart.at(1).find('.recharts-reference-line-line');
     expect(refLine.props().y).to.be.equal(sec4.layout.referenceLineY.y);
     expect(refLine.props().stroke).to.be.equal(sec4.layout.referenceLineY.stroke);
-    let refLineLabel = barChart.at(1).find('.recharts-label');
+    let refLineLabel = barChart.at(1).find('.recharts-reference-line .recharts-label');
     expect(refLineLabel).to.have.length(2);
     expect(refLineLabel.at(1).props().children[0].props.children).to.be.equal(sec4.layout.referenceLineY.label);
 
@@ -405,6 +406,8 @@ describe('Report Container', () => {
     expect(trendNumber).to.have.length(1);
     expect(trendNumber.at(0).props().title).to.equal(sec2.title);
     expect(trendNumber.at(0).props().data).to.equal(sec2.data);
+    expect(trendNumber.at(0).find('.trend-num-text').text()).to
+      .equal(formatNumberValue(sec2.data.currSum, sec2.layout.valuesFormat));
     expect(trendNumber.at(0).props().layout).to.equal(sec2.layout.layout);
     const trendBox = trendNumber.at(0).find('.trend-box.green');
     expect(trendBox).to.have.length(1);
