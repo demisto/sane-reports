@@ -6,7 +6,7 @@ import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash'
 import WidgetEmptyState from './WidgetEmptyState';
 
 
-const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString,
+const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle,
   maxColumns }) => {
   let tableData = data || [];
 
@@ -85,7 +85,20 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
           }
         </tbody>
       </table>
-    ) : <WidgetEmptyState />;
+    ) : (
+      <>
+        <table className={'ui compact table unstackable section-table ' + classes} style={{ tableLayout: 'fixed' }}>
+          <thead>
+            <tr>
+              {readyColumns.map((col) => {
+              const key = col.key || col;
+              return <th key={key}>{!col.hidden && ((readableHeaders && readableHeaders[key]) || key)}</th>;
+            })}
+            </tr>
+          </thead>
+        </table>
+        <WidgetEmptyState />
+      </>);
   } else {
     tableBody = (
       <table className={'ui compact table unstackable ' + classes}>
@@ -122,8 +135,7 @@ SectionTable.propTypes = {
   style: PropTypes.object,
   title: PropTypes.string,
   maxColumns: PropTypes.number,
-  titleStyle: PropTypes.object,
-  emptyString: PropTypes.string
+  titleStyle: PropTypes.object
 };
 
 export default SectionTable;

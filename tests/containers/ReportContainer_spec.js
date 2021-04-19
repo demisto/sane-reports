@@ -611,4 +611,22 @@ describe('Report Container', () => {
       done();
     }, 5001);
   });
+
+  it('Generate test empty table template', () => {
+    const testTemplate = TemplateProvider.getTestLayoutEmptyTemplate();
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+    const sectionTable = reportContainer.find(SectionTable);
+    const emptyWidget = sectionTable.find('.widget-empty-state');
+    expect(emptyWidget).to.have.length(1);
+  });
+
+  it('Generate test non-empty table template', () => {
+    const testTemplate = TemplateProvider.getTestTemplate();
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+    const sectionTable = reportContainer.find(SectionTable);
+    const emptyWidget = sectionTable.find('.widget-empty-state');
+    expect(emptyWidget).to.have.length(0);
+  });
 });

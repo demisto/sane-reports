@@ -5,7 +5,7 @@ const EMPTY_STATE_TEXT = 'No results found';
 
 const WidgetEmptyState = () => (
   <div className="widget-empty-state">
-    <i className="demisto-icon icon-status-noresults-24-r trend-icon trend-equal" />
+    <i className="demisto-icon icon-status-noresults-24-r" />
     <div className="widget-empty-state-text">{EMPTY_STATE_TEXT}</div>
   </div>);
 
