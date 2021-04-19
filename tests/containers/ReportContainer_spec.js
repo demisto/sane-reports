@@ -613,7 +613,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test empty table template', () => {
-    const testTemplate = TemplateProvider.getTestLayoutTemplate();
+    const testTemplate = TemplateProvider.getTestLayoutEmptyTemplate();
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
     const sectionTable = reportContainer.find(SectionTable);

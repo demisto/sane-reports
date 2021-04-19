@@ -1055,23 +1055,5 @@
     "emptyNotification": "No results found",
     "titleStyle": null,
     "autoPageBreak": true
-  },
-  {
-    "type": "table",
-    "data": [
-    ],
-    "layout": {
-      "classes": "striped stackable small very compact",
-      "columnPos": 0,
-      "h": 2,
-      "i": "3ebd9120-f5eb-11e7-92ea-eb1e1a874380",
-      "rowPos": 8,
-      "tableColumns": [
-        "aaa",
-        "bbb"
-      ],
-      "w": 12
-    },
-    "title": "table"
   }
 ]

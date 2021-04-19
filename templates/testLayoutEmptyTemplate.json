@@ -1,0 +1,31 @@
+[
+  {
+    "type": "table",
+    "data": [
+    ],
+    "layout": {
+      "classes": "striped stackable small very compact",
+      "columnPos": 0,
+      "h": 2,
+      "i": "3ebd9120-f5e4-11e7-2ea-eb1e1a874387",
+      "rowPos": 8,
+      "tableColumns": [
+        "aaa",
+        "bbb"
+      ],
+      "w": 12
+    },
+    "title": "table"
+  },
+  {
+    "type": "markdown",
+    "data": { "text": "bla" },
+    "layout": {
+      "rowPos": 6,
+      "columnPos": 0,
+      "h": 2,
+      "i": "ea707c90-9b20-11e9-90cd-2702611820x6",
+      "w": 12
+    }
+  }
+]
