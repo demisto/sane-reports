@@ -1,20 +1,14 @@
 import './SectionTable.less';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { TABLE_CELL_TYPE, DEFAULT_MAX_LENGTH } from '../../constants/Constants';
 import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash';
 
 
-const SectionTable = ({ columns, columnsMetaData, xPos, readableHeaders, data, classes, style, title,
-  titleStyle, emptyString, maxColumns }) => {
-  const sectionTableRef = useRef(null);
-  useEffect(() => {
-    if (sectionTableRef.current) {
-      sectionTableRef.current.scrollLeft = xPos;
-    }
-  }, [sectionTableRef.current]);
-
+const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes, style, title, titleStyle, emptyString,
+  maxColumns }) => {
   let tableData = data || [];
+
   if (isString(data)) {
     try {
       tableData = JSON.parse(data);
@@ -125,7 +119,7 @@ const SectionTable = ({ columns, columnsMetaData, xPos, readableHeaders, data, c
   }
 
   return (
-    <div className="section-table" ref={sectionTableRef} style={style}>
+    <div className="section-table" style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
       {tableBody}
     </div>
@@ -134,7 +128,6 @@ const SectionTable = ({ columns, columnsMetaData, xPos, readableHeaders, data, c
 SectionTable.propTypes = {
   columns: PropTypes.array,
   columnsMetaData: PropTypes.array,
-  xPos: PropTypes.number,
   readableHeaders: PropTypes.object,
   data: PropTypes.oneOfType([
     PropTypes.array,
