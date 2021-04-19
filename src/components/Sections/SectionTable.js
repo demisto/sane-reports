@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TABLE_CELL_TYPE, DEFAULT_MAX_LENGTH } from '../../constants/Constants';
 import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash';
+import WidgetEmptyState from './WidgetEmptyState';
 
 
 const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString,
@@ -101,6 +102,10 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
       </table>
     );
   }
+
+  tableBody = (
+    <WidgetEmptyState />
+  );
 
   return (
     <div className="section-table" style={style}>
