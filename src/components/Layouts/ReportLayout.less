@@ -157,12 +157,16 @@ h1 {
           overflow-x: hidden;
         }
 
-        .section-table {
+        .section-table, .section-markdown {
           height: inherit;
           overflow-y: auto;
         }
 
         @media print {
+          .section-table, .section-markdown  {
+            overflow-y: hidden;
+          }
+
           .section-column-chart {
             overflow-y: hidden;
           }
