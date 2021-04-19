@@ -75,15 +75,16 @@ h1 {
       z-index: 1;
 
       &:not(.section-show-overflow) {
-        height: auto !important;
+        &:not(.section-show-empty-state) {
+          height: auto !important;
+          &.section-table {
+            height: auto !important; // override grid item height to fit content
+          }
 
-        &.section-table {
-          height: auto !important; // override grid item height to fit content
-        }
-
-        .section-line-chart, .section-bar-chart {
-          .recharts-legend-wrapper {
-            max-height: 100% !important;
+          .section-line-chart, .section-bar-chart {
+            .recharts-legend-wrapper {
+              max-height: 100% !important;
+            }
           }
         }
       }

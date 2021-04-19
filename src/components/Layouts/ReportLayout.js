@@ -9,10 +9,11 @@ import {
   GRID_LAYOUT_COLUMNS,
   PAGE_BREAK_KEY
 } from '../../constants/Constants';
-import { groupBy, compact, get, isString } from 'lodash';
+import { groupBy, compact, get, isString, isEmpty } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
 import { compareFields } from '../../utils/sort';
 import ErrorBoundary from '../ErrorBoundary';
+
 import { getSectionComponent } from '../../utils/layout';
 import classNames from 'classnames';
 
@@ -155,7 +156,7 @@ class ReportLayout extends Component {
           }
         </span>
         {
-          !isLayout ?
+          !isLayout ? // ??
             Object
               .keys(sections)
               .map(rowPos =>
@@ -204,7 +205,8 @@ class ReportLayout extends Component {
                               overflowRows += gridItem.h - section.layout.h;
                               const mainClass = classNames(`section-layout section-${section.type} ` +
                               `${section.layout.class || ''}`,
-                                  { 'section-show-overflow': section.layout.reflectDimensions === true
+                                  { 'section-show-overflow': section.layout.reflectDimensions === true,
+                                    'section-show-empty-state': isEmpty(section.data) || section.data.length === 0
                                   });
 
                               const elementToRender = ReportLayout.getElementBySection(section);
