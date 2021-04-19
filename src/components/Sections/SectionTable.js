@@ -85,7 +85,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
           }
         </tbody>
       </table>
-    ) : <div className="no-data">{emptyString}</div>;
+    ) : <WidgetEmptyState />;
   } else {
     tableBody = (
       <table className={'ui compact table unstackable ' + classes}>
@@ -102,10 +102,6 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
       </table>
     );
   }
-
-  tableBody = (
-    <WidgetEmptyState />
-  );
 
   return (
     <div className="section-table" style={style}>
