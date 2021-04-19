@@ -635,6 +635,14 @@
         "stroke": "rgb(64, 65, 66)"
       },
       "chartProperties": {
+        "axis": {
+          "x": {
+            "label": "X"
+          },
+          "y": {
+            "label": "Y"
+          }
+        },
         "barSize": 35,
         "layout": "horizontal",
         "showValues": true,

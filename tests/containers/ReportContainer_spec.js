@@ -528,8 +528,19 @@ describe('Report Container', () => {
       const barChart = reportContainer.find(SectionBarChart);
       expect(barChart).to.have.length(3);
       expect(barChart.at(0).props().chartProperties.showValues).to.equal(undefined);
+      expect(barChart.at(0).props().chartProperties.axis).to.be.undefined;
+      expect(barChart.at(0).props().chartProperties.axis).to.be.undefined;
       expect(barChart.at(1).props().chartProperties.showValues).to.equal(true);
+      expect(barChart.at(1).props().chartProperties.axis.x.label).to.not.be.empty;
+      expect(barChart.at(1).props().chartProperties.axis.y.label).to.not.be.empty;
       expect(barChart.at(2).props().chartProperties.showValues).to.equal(undefined);
+
+      expect(barChart.at(0).find('.xAxis')).to.be.empty;
+      expect(barChart.at(0).find('.yAxis')).to.be.empty;
+      expect(barChart.at(1).find('.xAxis').at(0).text()).to
+        .contain(barChart.at(1).props().chartProperties.axis.x.label);
+      expect(barChart.at(1).find('.yAxis').at(0).text()).to
+        .contain(barChart.at(1).props().chartProperties.axis.y.label);
 
       const barWithShowValues = reportContainer.find(BarChart).at(1);
 
