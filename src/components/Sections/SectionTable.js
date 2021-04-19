@@ -6,7 +6,7 @@ import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash'
 import WidgetEmptyState from './WidgetEmptyState';
 
 
-const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString,
+const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes, style, title, titleStyle, emptyString,
   maxColumns }) => {
   let tableData = data || [];
 
@@ -36,6 +36,11 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
     readyColumns = Object.keys(headerKeys);
   }
 
+  const columnsMetaDataMap = new Map();
+  if (columnsMetaData && isArray(columnsMetaData)) {
+    columnsMetaData.forEach(mData => columnsMetaDataMap.set(mData.key, mData));
+  }
+
   let tableBody;
   if (isArray(readyColumns)) {
     readyColumns = maxColumns > 0 ? readyColumns.slice(0, maxColumns) : readyColumns;
@@ -45,8 +50,19 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
           <tr>
             {readyColumns.map((col) => {
               const key = col.key || col;
-              return <th key={key}>{!col.hidden && ((readableHeaders && readableHeaders[key]) || key)}</th>;
-            })}
+              const extraProps = {};
+              const metaData = columnsMetaDataMap.get(key);
+
+              if (metaData) {
+                extraProps.width = metaData.width;
+              }
+
+              return (
+                <th key={key} {...extraProps}>
+                  {!col.hidden && ((readableHeaders && readableHeaders[key]) || key)}
+                </th>
+              );
+            })};
           </tr>
         </thead>
         <tbody>
@@ -125,6 +141,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
 };
 SectionTable.propTypes = {
   columns: PropTypes.array,
+  columnsMetaData: PropTypes.array,
   readableHeaders: PropTypes.object,
   data: PropTypes.oneOfType([
     PropTypes.array,
