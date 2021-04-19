@@ -3,6 +3,7 @@ import testLayoutWithPageBreaks from './testLayoutWithPageBreaks.json';
 import testLayoutTemplate from './testLayout.json';
 import testLayoutDurationTemplate from './testLayoutDuration.json';
 import incidentDailyReportTempalte from './incidentDailyReportTempalte.json';
+import testLayoutEmptyTemplate from './testLayoutEmptyTemplate.json';
 
 function getTestTemplate() {
   return testTemplate;
