@@ -12,11 +12,6 @@ function getTestLayoutTemplate() {
   return testLayoutTemplate;
 }
 
-function getTestLayoutEmptyTemplate() {
-  return testLayoutEmptyTemplate;
-}
-
-
 function getTestLayoutDurationTemplate() {
   return testLayoutDurationTemplate;
 }
@@ -35,6 +30,5 @@ export {
   getIncidentDailyReportTemplate,
   getTestLayoutTemplate,
   getTestLayoutDurationTemplate,
-  getTestLayoutTemplateWithPageBreaks,
-  getTestLayoutEmptyTemplate
+  getTestLayoutTemplateWithPageBreaks
 };
