@@ -92,6 +92,13 @@ export const WIDGET_DURATION_FORMAT = {
   years: 'years'
 };
 
+export const WIDGET_DURATION_FORMAT_LAYOUT = {
+  [WIDGET_DURATION_FORMAT.days]: 'd[d:]h[h:]m[m]',
+  [WIDGET_DURATION_FORMAT.weeks]: 'w[w:]d[d:]h[h]',
+  [WIDGET_DURATION_FORMAT.months]: 'M[M-]w[w-]d[d]',
+  [WIDGET_DURATION_FORMAT.years]: 'y[y-]M[M-]w[w]'
+};
+
 export const WIDGET_FORMAT_PARTS = {
   [WIDGET_DURATION_FORMAT.days]: [DURATION_FORMAT.days, DURATION_FORMAT.hours, DURATION_FORMAT.min],
   [WIDGET_DURATION_FORMAT.weeks]: [DURATION_FORMAT.weeks, DURATION_FORMAT.days, DURATION_FORMAT.hours],
