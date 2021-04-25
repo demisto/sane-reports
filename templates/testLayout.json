@@ -647,7 +647,7 @@
         "barSize": 35,
         "layout": "horizontal",
         "showValues": true,
-        "valuesFormat": "abbreviated"
+        "valuesFormat": "days"
       },
       "chartType": "column",
       "columnPos": 8,

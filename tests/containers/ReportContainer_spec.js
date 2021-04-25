@@ -557,7 +557,8 @@ describe('Report Container', () => {
         const data = bar.props().data[index];
         const valueLabels = bar.props().children;
 
-        expect(valueLabels.props.valueAccessor(data).toString()).to.equal(valueLabels.props.formatter(data.value[1]));
+        expect(barWithShowValues.find('.recharts-bar').at(index).text()).to
+          .contain(valueLabels.props.formatter(data.value[1]));
       });
 
       done();
