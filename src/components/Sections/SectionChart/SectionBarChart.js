@@ -57,7 +57,6 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   if (!stacked) {
     preparedData = preparedData.map((item) => {
       let val = item.value || item.data;
-      item.showValues = chartProperties.showValues;
       if (isArray(val) && val.length > 0) {
         val = val[0];
       }
@@ -70,11 +69,12 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         item[item.name] = val;
         dataItems[item.name] = { name: item.name,
           color: item.color,
-          value: val,
-          showValues: chartProperties.showValues };
+          value: val
+        };
       } else {
         dataItems[item.name].value = val;
       }
+      item.total = val;
       return item;
     });
   }
@@ -109,9 +109,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         leftMargin = Math.max(leftMargin, spaceNeeded);
       }
       if (item.groups) {
-        item.showValues = chartProperties.showValues;
+        item.total = 0;
         // iterate inner groups
-        (item.groups || []).forEach(((innerItem, index) => {
+        (item.groups || []).forEach((innerItem) => {
           innerItem.color = innerItem.fill || innerItem.color || getGraphColorByName(innerItem.name, existingColors);
           if (!innerItem.name) {
             innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
@@ -119,14 +119,13 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           existingColors[innerItem.color] = true;
 
           item[innerItem.name] = innerItem.data[0];
-          innerItem.showValues = index === item.groups.length - 1;
-        }));
+          item.total += item[innerItem.name];
+        });
 
         dataItems = preparedData
           .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
           .map(group => ({ name: group.name,
-            color: group.fill || group.color,
-            showValues: group.showValues && chartProperties.showValues }))
+            color: group.fill || group.color }))
           .sort((a, b) => sortStrings(a.name, b.name));
       } else {
         Object.keys(item).filter(key => key !== 'name' && key !== 'relatedTo' && key !== 'value').forEach(
@@ -185,7 +184,8 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                 dataKey="name" type="category"
               />
               }
-              {chartProperties.layout === CHART_LAYOUT_TYPE.vertical && <XAxis type="number" allowDecimals={false} />}
+              {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
+                <XAxis type="number" hide allowDecimals={false} />}
               {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal &&
               <YAxis
                 type="number"
@@ -227,7 +227,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   {...legendStyle}
                 />
               }
-              {dataItems.map(item =>
+              {dataItems.map((item, i) =>
                 <Bar
                   key={item.name}
                   dataKey={item.name}
@@ -240,18 +240,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   }}
                   label={!!chartProperties.label}
                 >
-                  {!chartProperties.label && item.showValues &&
+                  {chartProperties.showValues && i === dataItems.length - 1 &&
                   <LabelList
                     position="top"
-                    valueAccessor={(entry) => {
-                      let value = '';
-                      if (entry && entry.data && entry.data[0] !== undefined) {
-                        value = entry.data[0];
-                      } else if (entry && entry.value && entry.value[1] !== undefined) {
-                        value = entry.value[1];
-                      }
-                      return value;
-                    }}
+                    dataKey={group => group.total}
                     formatter={formatValue}
                   />}
                 </Bar>

@@ -12,51 +12,21 @@ import {
   CHART_LAYOUT_TYPE,
   CHART_LEGEND_ITEM_HEIGHT,
   NONE_VALUE_DEFAULT_NAME,
-  RADIANS,
   PIE_CHART_FULL_ITEM_HEIGHT
 } from '../../../constants/Constants';
 import classNames from 'classnames';
-
-const CustomizedPieLabel = ({ cx, cy, midAngle, outerRadius, percent, fill }) => {
-  const radius = outerRadius * 1.1;
-  const x = cx + (radius * Math.cos(-midAngle * RADIANS));
-  const y = cy + (radius * Math.sin(-midAngle * RADIANS));
-  // ignore less than 2 percent.
-  if (percent < 0.02) {
-    return '';
-  }
-  return (
-    <text
-      x={x}
-      y={y}
-      fill={fill}
-      fontSize={12}
-      transform={`rotate(0,${x},${y})`}
-      textAnchor={x > cx ? 'start' : 'end'}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
-CustomizedPieLabel.propTypes = {
-  cx: PropTypes.number,
-  cy: PropTypes.number,
-  midAngle: PropTypes.number,
-  outerRadius: PropTypes.number,
-  fill: PropTypes.string,
-  percent: PropTypes.number
-};
 
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {},
   sortBy, reflectDimensions }) => {
   const dataMap = {};
   const existingColors = {};
+  let total = 0;
   (data || []).forEach((item) => {
     item.value = item.value || item.data;
     if (isArray(item.value) && item.value.length > 0) {
       item.value = item.value[0];
     }
+    total += item.value;
     if (!item.name) {
       item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
     }
@@ -87,7 +57,11 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
   if (sortBy) {
     preparedData = orderBy(preparedData, sortBy.values, sortBy.orders);
   }
-
+  if (total > 0 && (chartProperties.showValues === undefined || chartProperties.showValues)) {
+    preparedData.forEach((group) => {
+      group.percentage = (group.value / total) * 100;
+    });
+  }
   let legendHeight = dimensions.height;
   if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical && reflectDimensions) {
     legendHeight = dimensions.height / 2;
@@ -129,7 +103,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 innerRadius={innerRadius > 10 ? innerRadius - 5 : innerRadius}
                 labelLine={false}
                 dataKey="value"
-                label={chartProperties.label || CustomizedPieLabel}
+                label={chartProperties.label}
               >
                 {/* // creating links to urls according the 'url' filed in the data */}
                 {preparedData.map((entry, index) => {
@@ -150,7 +124,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
               <Tooltip />
               <Legend
                 wrapperStyle={chartProperties.layout === CHART_LAYOUT_TYPE.vertical ? {
-                  width: '90%'
+                  width: '100%'
                 } : { top: 10 }}
                 content={
                   <ChartLegend

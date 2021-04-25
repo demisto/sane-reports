@@ -16,7 +16,10 @@
       height: 23px;
     }
     &:not(.horizontal) {
+      display: flex;
+      justify-content: space-between;
     .recharts-legend-item-text {
+      flex: 2;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -35,14 +38,20 @@
       display: inline-block;
     }
     .recharts-legend-item-value {
-      float: right;
-      margin-left: 10px;
+      flex: 1;
+      text-align: right;
+      &.percentage {
+        text-align: center;
+      }
       &.minimal {
         margin-left: 6px;
         display: inline-block;
         float: none;
         vertical-align: top;
       }
+    }
+    .recharts-legend-item-percentage {
+      padding-left: 5px;
     }
   }
 }

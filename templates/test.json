@@ -117,7 +117,8 @@
         "startAngle": 90,
         "endAngle": -270,
         "outerRadius": 80,
-        "innerRadius": 40
+        "innerRadius": 40,
+        "showValues": true
       },
       "sortBy": {
         "values": ["value", "name"],
