@@ -1,5 +1,8 @@
 import { isNumber } from 'lodash';
-import { WIDGET_VALUES_FORMAT } from '../constants/Constants';
+import { WIDGET_DURATION_FORMAT, WIDGET_DURATION_FORMAT_LAYOUT, WIDGET_VALUES_FORMAT } from '../constants/Constants';
+import moment from 'moment';
+import momentDurationFormatSetup from 'moment-duration-format';
+momentDurationFormatSetup(moment);
 
 function insertStringAt(originString, stringToInsert, position) {
   return [originString.slice(0, position), stringToInsert, originString.slice(position)].join('');
@@ -88,6 +91,10 @@ export function createMiddleEllipsisFormatter(maxLen) {
   };
 }
 
+const formatDurationValue = (v, format) => {
+  return moment.duration(v, 'seconds').format(WIDGET_DURATION_FORMAT_LAYOUT[format], { trim: 'large mid' });
+};
+
 export const formatNumberValue = (v, format) => {
   if (!isNumber(v)) {
     return v;
@@ -102,6 +109,12 @@ export const formatNumberValue = (v, format) => {
       return new Intl.NumberFormat().format(v) + '%';
     case WIDGET_VALUES_FORMAT.regular:
       return new Intl.NumberFormat().format(v);
+    case WIDGET_DURATION_FORMAT.days:
+    case WIDGET_DURATION_FORMAT.months:
+    case WIDGET_DURATION_FORMAT.weeks:
+    case WIDGET_DURATION_FORMAT.years:
+      return formatDurationValue(v, format);
+
     default:
       return v;
   }
