@@ -67,6 +67,65 @@
       {
         "name": "",
         "data": [
+          3723
+        ],
+        "groups": null,
+        "count": 3723,
+        "floatData": [
+          3723
+        ]
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "format": "hours",
+        "labels": {
+          "hours": "HOURS",
+          "min": "MIN",
+          "sec": "SEC"
+        }
+      },
+      "columnPos": 0,
+      "h": 1,
+      "i": "77f96b80-9c55-11eb-b89d-bd8204c9fb46",
+      "legend": null,
+      "rowPos": 1,
+      "w": 12
+    },
+    "query": {
+      "type": "incident",
+      "filter": {
+        "query": "",
+        "period": {
+          "by": "",
+          "byTo": "",
+          "byFrom": "days",
+          "toValue": null,
+          "fromValue": 7,
+          "field": ""
+        },
+        "fromDate": "0001-01-01T00:00:00Z",
+        "toDate": "0001-01-01T00:00:00Z"
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "fromDate": "2021-04-06T13:08:19Z",
+    "title": "H-M-S",
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  },
+  {
+    "type": "duration",
+    "data": [
+      {
+        "name": "",
+        "data": [
           93780
         ],
         "groups": null,
@@ -86,7 +145,7 @@
       "h": 1,
       "i": "42ba2550-9c59-11eb-b268-ebc604d7b782",
       "legend": null,
-      "rowPos": 1,
+      "rowPos": 2,
       "w": 12
     },
     "query": {

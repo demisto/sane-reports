@@ -109,6 +109,8 @@ export const formatNumberValue = (v, format) => {
       return new Intl.NumberFormat().format(v) + '%';
     case WIDGET_VALUES_FORMAT.regular:
       return new Intl.NumberFormat().format(v);
+    case WIDGET_DURATION_FORMAT.minutes:
+    case WIDGET_DURATION_FORMAT.hours:
     case WIDGET_DURATION_FORMAT.days:
     case WIDGET_DURATION_FORMAT.months:
     case WIDGET_DURATION_FORMAT.weeks:
