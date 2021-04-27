@@ -59,6 +59,10 @@ export const WIDGET_DEFAULT_CONF = {
 };
 
 export const DURATION_FORMAT = {
+  sec: {
+    name: 'sec',
+    weight: 1
+  },
   min: {
     name: 'min',
     weight: 60
@@ -86,6 +90,8 @@ export const DURATION_FORMAT = {
 };
 
 export const WIDGET_DURATION_FORMAT = {
+  minutes: 'minutes',
+  hours: 'hours',
   days: 'days',
   weeks: 'weeks',
   months: 'months',
@@ -93,6 +99,8 @@ export const WIDGET_DURATION_FORMAT = {
 };
 
 export const WIDGET_DURATION_FORMAT_LAYOUT = {
+  [WIDGET_DURATION_FORMAT.minutes]: 'm[m:]s[s]',
+  [WIDGET_DURATION_FORMAT.hours]: 'h[h:]m[m:]s[s]',
   [WIDGET_DURATION_FORMAT.days]: 'd[d:]h[h:]m[m]',
   [WIDGET_DURATION_FORMAT.weeks]: 'w[w:]d[d:]h[h]',
   [WIDGET_DURATION_FORMAT.months]: 'M[M-]w[w-]d[d]',
@@ -100,6 +108,8 @@ export const WIDGET_DURATION_FORMAT_LAYOUT = {
 };
 
 export const WIDGET_FORMAT_PARTS = {
+  [WIDGET_DURATION_FORMAT.minutes]: [DURATION_FORMAT.min, DURATION_FORMAT.sec],
+  [WIDGET_DURATION_FORMAT.hours]: [DURATION_FORMAT.hours, DURATION_FORMAT.min, DURATION_FORMAT.sec],
   [WIDGET_DURATION_FORMAT.days]: [DURATION_FORMAT.days, DURATION_FORMAT.hours, DURATION_FORMAT.min],
   [WIDGET_DURATION_FORMAT.weeks]: [DURATION_FORMAT.weeks, DURATION_FORMAT.days, DURATION_FORMAT.hours],
   [WIDGET_DURATION_FORMAT.months]: [DURATION_FORMAT.months, DURATION_FORMAT.weeks, DURATION_FORMAT.days],

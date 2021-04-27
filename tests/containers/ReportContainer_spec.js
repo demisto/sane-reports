@@ -574,9 +574,9 @@ describe('Report Container', () => {
     expect(reportLayouts).to.have.length(1);
 
     const duration = reportContainer.find(SectionDuration);
-    expect(duration).to.have.length(2);
+    expect(duration).to.have.length(3);
 
-    // DURATION with format
+    // DURATION with format - months
     expect(duration.at(0).props().chartProperties.format).to.equal(constants.WIDGET_DURATION_FORMAT.months);
     let durationHeaders = duration.at(0).find('.time-unit');
     expect(durationHeaders).to.have.length(3);
@@ -590,15 +590,29 @@ describe('Report Container', () => {
     expect(durationValues.at(1).text()).to.equal('01');
     expect(durationValues.at(2).text()).to.equal('01');
 
-    // DURATION without format
-    expect(duration.at(1).props().chartProperties.format).to.be.undefined;
+    // DURATION with format - hours
+    expect(duration.at(1).props().chartProperties.format).to.equal(constants.WIDGET_DURATION_FORMAT.hours);
     durationHeaders = duration.at(1).find('.time-unit');
+    expect(durationHeaders).to.have.length(3);
+    expect(durationHeaders.at(0).text()).to.equal('HOURS');
+    expect(durationHeaders.at(1).text()).to.equal('MIN');
+    expect(durationHeaders.at(2).text()).to.equal('SEC');
+
+    durationValues = duration.at(1).find('.part-header');
+    expect(durationValues).to.have.length(3);
+    expect(durationValues.at(0).text()).to.equal('01');
+    expect(durationValues.at(1).text()).to.equal('02');
+    expect(durationValues.at(2).text()).to.equal('03');
+
+    // DURATION without format
+    expect(duration.at(2).props().chartProperties.format).to.be.undefined;
+    durationHeaders = duration.at(2).find('.time-unit');
     expect(durationHeaders).to.have.length(3);
     expect(durationHeaders.at(0).text()).to.equal('DAYS');
     expect(durationHeaders.at(1).text()).to.equal('HOURS');
     expect(durationHeaders.at(2).text()).to.equal('MIN');
 
-    durationValues = duration.at(1).find('.part-header');
+    durationValues = duration.at(2).find('.part-header');
     expect(durationValues).to.have.length(3);
     expect(durationValues.at(0).text()).to.equal('01');
     expect(durationValues.at(1).text()).to.equal('02');
