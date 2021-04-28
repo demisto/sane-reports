@@ -71,6 +71,8 @@ class ReportLayout extends Component {
   componentDidMount() {
     const { dimensions } = this.props;
     setTimeout(() => {
+      this.adjustItemsInRow();
+
       // set dynamic height for all sections, fix top attribute.
       const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
       const heightMap = {};
@@ -91,6 +93,7 @@ class ReportLayout extends Component {
             item.element.style.top = `${maxOffset}px`;
             const autoPageBreak = item.section.autoPageBreak !== false;
             const itemHeight = this.getItemHeight(item);
+            item.element.style.height = `${itemHeight}px`;
             for (let i = item.gridItem.x; i < item.gridItem.x + item.gridItem.w; i++) {
               heightMap[i] = maxOffset + itemHeight;
 
@@ -131,22 +134,52 @@ class ReportLayout extends Component {
     });
 
     return clientHeight;
-  }
+  };
 
   getItemHeight = (item) => {
-    if (item.element && item.element.clientHeight) {
+    if (!item.element) {
+      return 0;
+    }
+    if (item.element.scrollHeight) {
+      return item.element.scrollHeight;
+    } else if (item.element.clientHeight) {
       return item.element.clientHeight;
-    } else if (item.element && item.element.style && item.element.style.height) {
+    } else if (item.element.style && item.element.style.height) {
       return parseInt(item.element.style.height.replace('px', ''), 10);
     }
 
     return 0;
-  }
+  };
+
+  adjustItemsInRow = () => {
+    let runAgain;
+    do {
+      runAgain = false;
+      const itemsByRow = groupBy(Object.values(this.itemElements), item => item.gridItem.y);
+
+      const sortedRowsKeys = Object.keys(itemsByRow)
+        .sort(compareFields);
+
+      // eslint-disable-next-line no-loop-func
+      sortedRowsKeys.forEach((rowKey) => {
+        const items = itemsByRow[rowKey];
+        let totalW = 0;
+        items.forEach((item) => {
+          totalW += item.gridItem.w;
+          if (totalW > GRID_LAYOUT_COLUMNS) {
+            item.gridItem.y++;
+            runAgain = true;
+          }
+        });
+      });
+    }
+    while (runAgain);
+  };
 
   shouldDisableAutoHeight = (section) => {
-    return [CHART_TYPES.line].includes(section.layout.chartType) ||
+    return [CHART_TYPES.line, CHART_TYPES.bar, CHART_TYPES.column].includes(section.layout.chartType) ||
         SECTION_TYPES.trend === section.type;
-  }
+  };
 
   render() {
     const { sections, headerLeftImage, headerRightImage, isLayout, dimensions } = this.props;

@@ -31,6 +31,7 @@ const ChartLegend = ({ data, icon = 'square', layout = CHART_LAYOUT_TYPE.vertica
     const legendIconClass = `${icon} icon chart-legend-icon`;
     let width = 'auto';
     const value = group.value || 0;
+    const percentage = group.percentage ? `${Math.round(group.percentage)}%` : undefined;
     // decrease width of name (if value exists) to allow for ellipsis.
     if (showValue) {
       if (valueDisplay === VALUE_FORMAT_TYPES.stretch) {
@@ -47,10 +48,13 @@ const ChartLegend = ({ data, icon = 'square', layout = CHART_LAYOUT_TYPE.vertica
           {group.name}
         </span>
         {showValue &&
-          <span className={`recharts-legend-item-value ${valueDisplay}`}>
+          <span className={`recharts-legend-item-value ${valueDisplay} ${percentage ? 'percentage' : ''}`}>
             {valueDisplay === VALUE_FORMAT_TYPES.stretch ? value : `(${value})`}
-          </span>
-        }
+          </span>}
+        {percentage &&
+        <div className="recharts-legend-item-percentage">
+          {percentage}
+        </div>}
       </li>);
   });
   const mainClass = classNames('customized-legend recharts-default-legend', {

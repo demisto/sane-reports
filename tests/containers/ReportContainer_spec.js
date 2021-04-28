@@ -158,6 +158,14 @@ describe('Report Container', () => {
     expect(pieChart.props().height).to.equal(sec7.layout.dimensions.height);
     expect(pie.props().data).to.have.length(5);
 
+    const percetages = pieChart.find('.recharts-legend-item-percentage');
+    expect(percetages).to.have.length(5);
+    expect(percetages.at(0).text()).to.equal('20%');
+    expect(percetages.at(1).text()).to.equal('20%');
+    expect(percetages.at(2).text()).to.equal('20%');
+    expect(percetages.at(3).text()).to.equal('20%');
+    expect(percetages.at(4).text()).to.equal('20%');
+
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
     expect(sectionTable).to.have.length(3);
@@ -544,22 +552,6 @@ describe('Report Container', () => {
         .contain(barChart.at(1).props().chartProperties.axis.x.label);
       expect(barChart.at(1).find('.yAxis').at(0).text()).to
         .contain(barChart.at(1).props().chartProperties.axis.y.label);
-
-      const barWithShowValues = reportContainer.find(BarChart).at(1);
-
-      barWithShowValues.props().data.forEach((data) => {
-        expect(data.showValues).to.equal(true);
-      });
-
-      const bars = barWithShowValues.find(Bar);
-
-      bars.forEach((bar, index) => {
-        const data = bar.props().data[index];
-        const valueLabels = bar.props().children;
-
-        expect(barWithShowValues.find('.recharts-bar').at(index).text()).to
-          .contain(valueLabels.props.formatter(data.value[1]));
-      });
 
       done();
     }, 5001);
