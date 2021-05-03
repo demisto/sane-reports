@@ -155,6 +155,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     });
   }
 
+  const isFull = !reflectDimensions;
   if (!reflectDimensions && preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
     dimensions.height = (preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT) + LINE_CHART_FULL_ITEM_HEIGHT;
   }
@@ -165,11 +166,12 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         {({ width, height }) => {
           const finalWidth = width || dimensions.width;
           const xAxisProps = createXAxisProps(data, 'name', finalWidth * 0.6);
+          const finalHeight = isFull ? dimensions.height : height || dimensions.height;
 
           return (
             <LineChart
               width={finalWidth}
-              height={height || dimensions.height}
+              height={finalHeight}
               data={preparedData}
               margin={chartProperties.margin}
             >
