@@ -155,9 +155,8 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       return item;
     });
   }
-  let isFull = false;
-  if (!reflectDimensions && (preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height || stacked)) {
-    isFull = true;
+  const isFull = !reflectDimensions;
+  if (isFull && (preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height || stacked)) {
     dimensions.height = (preparedData.length * CHART_LEGEND_ITEM_HEIGHT) + BAR_CHART_FULL_ITEM_HEIGHT;
   }
 

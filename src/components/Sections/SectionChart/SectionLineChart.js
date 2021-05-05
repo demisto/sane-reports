@@ -156,7 +156,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   }
 
   const isFull = !reflectDimensions;
-  if (!reflectDimensions && preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
+  if (isFull && preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
     dimensions.height = (preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT) + LINE_CHART_FULL_ITEM_HEIGHT;
   }
 

@@ -87,13 +87,14 @@ const PAGE_MARGIN = 60;
     const dimensions = getPageSizeByOrientation(pageSize, orientation);
 
     const topMargin = (headerLeftImage || headerRightImage) && !disableHeaders ? PAGE_MARGIN : 0;
+    dimensions.height -= topMargin;
     const bottomMargin = PAGE_MARGIN - 10;
     const afterTypeReplace =
       indexHtml
         .replace('\'{report-type}\'', JSON.stringify(reportType))
         .replace('{report-header-image-left}', headerLeftImage)
         .replace('{report-header-image-right}', headerRightImage)
-        .replace('{report-dimensions}', JSON.stringify({ height: dimensions.height - topMargin - bottomMargin, width: dimensions.width }))
+        .replace('{report-dimensions}', JSON.stringify({ height: dimensions.height + 16, width: dimensions.width }))
         .replace('{force-auto-height}', !!forceAutoHeightLayout);
 
     const loadedData = fs.readFileSync(dataFile).toString();
