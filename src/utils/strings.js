@@ -14,7 +14,15 @@ export function numberToShortString(num) {
   let tempNum = 0;
   let suffix = '';
 
-  if (num >= 1000000) {
+  if (num >= 1000000000000) {
+    shortenNum = shortenNum.substring(0, shortenNum.length - 12);
+    suffix = 't';
+    tempNum = num / 1000000000000;
+  } else if (num >= 1000000000) {
+    shortenNum = shortenNum.match(/^\d{3}/)[0];
+    suffix = 'b';
+    tempNum = num / 1000000000;
+  } else if (num >= 1000000) {
     shortenNum = shortenNum.match(/^\d{3}/)[0];
     suffix = 'm';
     tempNum = num / 1000000;
