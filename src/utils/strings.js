@@ -8,28 +8,48 @@ function insertStringAt(originString, stringToInsert, position) {
   return [originString.slice(0, position), stringToInsert, originString.slice(position)].join('');
 }
 
+/*
+Prints maximum 3 digits of a number and adds needed suffix.
+1                 => 1
+233               => 233
+1233              => 1.23k
+11222             => 11.2k
+111222            => 111k
+1222333           => 1.22m
+1000000           => 1m
+11222333          => 11.2m
+111222333         => 111m
+111222333444      => 111b
+111222333444555   => 111t
+1110222333444555  => 1110t
+ */
 export function numberToShortString(num) {
-  let shortenNum = num + '';
+  if (isNaN(num)) {
+    return num;
+  }
 
+  const unsignedNum = Math.abs(num);
+  const prefix = num < 0 ? '-' : '';
+  let shortenNum = unsignedNum + '';
   let tempNum = 0;
   let suffix = '';
 
-  if (num >= 1000000000000) {
+  if (unsignedNum >= 1000000000000) {
     shortenNum = shortenNum.substring(0, shortenNum.length - 12);
     suffix = 't';
-    tempNum = num / 1000000000000;
-  } else if (num >= 1000000000) {
+    tempNum = unsignedNum / 1000000000000;
+  } else if (unsignedNum >= 1000000000) {
     shortenNum = shortenNum.match(/^\d{3}/)[0];
     suffix = 'b';
-    tempNum = num / 1000000000;
-  } else if (num >= 1000000) {
+    tempNum = unsignedNum / 1000000000;
+  } else if (unsignedNum >= 1000000) {
     shortenNum = shortenNum.match(/^\d{3}/)[0];
     suffix = 'm';
-    tempNum = num / 1000000;
-  } else if (num >= 1000) {
+    tempNum = unsignedNum / 1000000;
+  } else if (unsignedNum >= 1000) {
     shortenNum = shortenNum.match(/^\d{3}/)[0];
     suffix = 'k';
-    tempNum = num / 1000;
+    tempNum = unsignedNum / 1000;
   }
 
   if (tempNum < 10 && tempNum > 0) {
@@ -42,7 +62,7 @@ export function numberToShortString(num) {
     shortenNum = shortenNum.replace(/0+$/, '').replace(/\.$/, '');
   }
 
-  return shortenNum + suffix;
+  return prefix + shortenNum + suffix;
 }
 
 export function sortStrings(s1In, s2In, asc = true) {
