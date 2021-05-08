@@ -149,10 +149,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     return dataItems[key];
   });
   if (legend) {
-    dataItems = dataItems.map((item) => {
-      const legendItem = legend.filter(l => l.name === item.name);
-      item.color = legendItem.length > 0 ? legendItem[0].color || legendItem[0].fill || item.color : item.color;
-      return item;
+    dataItems = legend.map((item) => {
+      const dataItem = dataItems.find(l => l.name === item.name);
+      dataItem.color = item.color || dataItem.color;
+      return dataItem;
     });
   }
   const isFull = !reflectDimensions;
