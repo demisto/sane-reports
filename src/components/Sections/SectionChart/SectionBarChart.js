@@ -151,6 +151,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   if (legend) {
     dataItems = legend.map((item) => {
       const dataItem = dataItems.find(l => l.name === item.name);
+      if (!dataItem) {
+        return item;
+      }
       dataItem.color = item.color || dataItem.color;
       return dataItem;
     });
