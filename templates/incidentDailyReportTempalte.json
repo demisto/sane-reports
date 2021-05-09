@@ -1,907 +1,580 @@
 [
   {
+    "type": "header",
+    "data": "Daily Incident Report",
+    "layout": {
+      "rowPos": 1,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 28
+      }
+    }
+  },
+  {
+    "type": "date",
+    "class": "row-class",
+    "layout": {
+      "rowPos": 2,
+      "columnPos": 1,
+      "class": "cell-class",
+      "style": {
+        "textAlign": "left",
+        "color": "gray",
+        "fontSize": 13,
+        "fontStyle": "italic",
+        "marginBottom:": 12
+      },
+      "format": "MMMM Do YYYY, h:mm:ss a z"
+    }
+  },
+  {
+    "type": "text",
+    "data": "Total incidents: 54",
+    "layout": {
+      "rowPos": 3,
+      "columnPos": 1,
+      "sectionStyle": {
+        "width": 200
+      },
+      "style": {
+        "textAlign": "left",
+        "fontSize": 18
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Last day incidents: 39",
+    "layout": {
+      "rowPos": 3,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 18
+      }
+    }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 4,
+      "style": {
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Severity",
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Type",
+    "layout": {
+      "rowPos": 5,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
     "type": "chart",
     "data": [
+      { "name": "Unknown", "value": 5, "url": "" },
+      { "name": "Low", "value": 7, "url": "" },
+      { "name": "Medium", "value": 11, "url": "" },
+      { "name": "High", "value": 7, "url": "" },
+      { "name": "Critical", "value": 9 , "url": ""}
+    ],
+    "layout": {
+      "rowPos": 6,
+      "columnPos": 1,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 330,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "cx": 155,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Critical", "fill": "#8d070a" },
+        { "name": "High", "fill": "#D00a00" },
+        { "name": "Medium", "fill": "#cb4a00" },
+        { "name": "Low", "fill": "#267634" },
+        { "name": "Unknown", "fill": "#999999" }
+      ]
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "C2Communication", "value": 3 },
+      { "name": "Default", "value": 2 },
+      { "name": "DeviceLost", "value": 3 },
+      { "name": "Malware", "value": 4 },
+      { "name": "Phishing", "value": 8 },
+      { "name": "wow", "value": 7 },
+      { "name": "Ransomware", "value": 8 },
+      { "name": "UnknownBinary", "value": 4 }
+    ],
+    "layout": {
+      "rowPos": 6,
+      "columnPos": 2,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 220
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "sortBy": {
+        "values": ["value", "name"],
+        "orders": ["desc", "asc"]
+      },
+      "legend": [
+        { "name": "C2Communication", "fill": "#853732" },
+        { "name": "Default", "fill": "#3aabe8" },
+        { "name": "DeviceLost", "fill": "#5fa54a" },
+        { "name": "Malware", "fill": "#4f8aab" },
+        { "name": "Phishing", "fill": "#4f854a" },
+        { "name": "Ransomware", "fill": "#5b4185" },
+        { "name": "UnknownBinary", "fill": "#4faa5b" }
+      ]
+    }
+  },
+  {
+    "type": "text",
+    "data": "SLA",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "Analyst",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 16,
+        "fontWeight": "bold"
+      }
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "late", "value": 5 },
+      { "name": "about to end", "value": 11 },
+      { "name": "ok", "value": 23 }
+    ],
+    "layout": {
+      "rowPos": 8,
+      "columnPos": 1,
+      "chartType": "pie",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 180
+      },
+      "chartProperties" : {
+        "cy": 75,
+        "cx": 155,
+        "startAngle": 90,
+        "endAngle": -270,
+        "outerRadius": 60,
+        "innerRadius": 40,
+        "labelLine": false,
+        "label": { "offsetRadius": 10 }
+      },
+      "legendStyle": {
+        "align": "left",
+        "layout": "vertical",
+        "verticalAlign": "top",
+        "iconSize": 10
+      },
+      "legend": [
+        { "name": "Late", "fill": "red" },
+        { "name": "About To End", "fill": "orange" },
+        { "name": "OK", "fill": "green" }
+      ]
+    }
+  },
+  {
+    "type": "chart",
+    "data": [
+      { "name": "Slavik", "relatedTo": 1, "value": 15, "url": "" },
+      { "name": "Guy", "relatedTo": 1, "value": 11 },
+      { "name": "Meir", "relatedTo": 1, "value": 9 },
+      { "name": "Aviad", "relatedTo": 1, "value": 4 }
+    ],
+    "layout": {
+      "rowPos": 8,
+      "columnPos": 2,
+      "chartType": "bar",
+      "style": {
+        "textAlign": "left",
+        "fontSize": 10,
+        "marginLeft": -15
+      },
+      "chartProperties" : {
+        "layout": "vertical",
+        "strokeDasharray": "3 300",
+        "barSize": 13
+      },
+      "dimensions": {
+        "width": 300,
+        "height": 200
+      },
+      "legend": [
+        { "name": "Busy Analyst", "fill": "#2884d1", "bar": 1 }
+      ]
+    }
+  },
+  {
+    "type": "divider",
+    "layout": {
+      "rowPos": 9,
+      "style": {
+      }
+    }
+  },
+  {
+    "type": "table",
+    "data": [
       {
-        "name": "1-01-01",
-        "data": [
-          30
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              30
-            ],
-            "groups": null,
-            "count": 30,
-            "floatData": [
-              30
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 30,
-        "floatData": [
-          30
-        ]
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 15:58:45 UTC",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 15:58:45 UTC",
+        "id": "1",
+        "investigationId": "1",
+        "modified": "2016-07-15T18:58:48.572316679+03:00",
+        "name": "tes1",
+        "occurred": "Fri, 15 Jul 2016 15:58:45 UTC",
+        "openDuration": 0,
+        "owner": "dorsha",
+        "playbookId": "playbook0",
+        "rawName": "tes1",
+        "rawType": "Default",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": [],
+        "type": "Default",
+        "version": 3
       },
       {
-        "name": "2021-03-16",
-        "data": [
-          1
-        ],
-        "groups": [
-          {
-            "name": "Analyst Dude",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"analyst\"",
-            "query": "owner:\"analyst\""
-          }
-        ],
-        "count": 1,
-        "floatData": [
-          1
-        ]
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "10",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.81129304+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
       {
-        "name": "2021-03-18",
-        "data": [
-          53
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              53
-            ],
-            "groups": null,
-            "count": 53,
-            "floatData": [
-              53
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 53,
-        "floatData": [
-          53
-        ]
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "11",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.82069967+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
       {
-        "name": "2021-03-19",
-        "data": [
-          206
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              206
-            ],
-            "groups": null,
-            "count": 206,
-            "floatData": [
-              206
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 206,
-        "floatData": [
-          206
-        ]
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "12",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.826645796+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
       {
-        "name": "2021-03-21",
-        "data": [
-          54
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              54
-            ],
-            "groups": null,
-            "count": 54,
-            "floatData": [
-              54
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 54,
-        "floatData": [
-          54
-        ]
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "13",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.836298751+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Critical",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
       },
       {
-        "name": "2021-03-22",
-        "data": [
-          142
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              141
-            ],
-            "groups": null,
-            "count": 141,
-            "floatData": [
-              141
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          },
-          {
-            "name": "Ido Shavit",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"ido\"",
-            "query": "owner:\"ido\""
-          }
-        ],
-        "count": 142,
-        "floatData": [
-          142
-        ]
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "14",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.843264286+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Dan",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "Virus",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Unknown",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Virus",
+        "version": 1
       },
       {
-        "name": "2021-03-25",
-        "data": [
-          86
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              81
-            ],
-            "groups": null,
-            "count": 81,
-            "floatData": [
-              81
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          },
-          {
-            "name": "Eliya Sadan",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"eliya\"",
-            "query": "owner:\"eliya\""
-          },
-          {
-            "name": "Aviad Lichtenstatd",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"aviad\"",
-            "query": "owner:\"aviad\""
-          },
-          {
-            "name": "Admin Dude",
-            "data": [
-              2
-            ],
-            "groups": null,
-            "count": 2,
-            "floatData": [
-              2
-            ],
-            "pivot": "owner:\"admin\"",
-            "query": "owner:\"admin\""
-          },
-          {
-            "name": "Guest Dude",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"guest\"",
-            "query": "owner:\"guest\""
-          }
-        ],
-        "count": 86,
-        "floatData": [
-          86
-        ]
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "15",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.851831604+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Guy",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "chacha1",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Medium",
+        "status": "Assigned",
+        "targets": null,
+        "type": "chacha1",
+        "version": 1
       },
       {
-        "name": "2021-03-26",
-        "data": [
-          22
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              22
-            ],
-            "groups": null,
-            "count": 22,
-            "floatData": [
-              22
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 22,
-        "floatData": [
-          22
-        ]
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "id": "16",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.856962111+03:00",
+        "name": "some incident with long name",
+        "occurred": "Fri, 15 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "",
+        "rawName": "some incident with long name",
+        "rawType": "Virus",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Low",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Virus",
+        "version": 1
       },
       {
-        "name": "2021-03-28",
-        "data": [
-          31
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              31
-            ],
-            "groups": null,
-            "count": 31,
-            "floatData": [
-              31
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 31,
-        "floatData": [
-          31
-        ]
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:10:19 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:10:19 IDT",
+        "id": "17",
+        "investigationId": "",
+        "modified": "2016-07-15T20:10:19.867420191+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:10:19 UTC",
+        "openDuration": 0,
+        "owner": "Slavik",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "Low",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       },
       {
-        "name": "2021-03-29",
-        "data": [
-          42
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              42
-            ],
-            "groups": null,
-            "count": 42,
-            "floatData": [
-              42
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 42,
-        "floatData": [
-          42
-        ]
-      },
-      {
-        "name": "2021-04-05",
-        "data": [
-          57
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              57
-            ],
-            "groups": null,
-            "count": 57,
-            "floatData": [
-              57
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 57,
-        "floatData": [
-          57
-        ]
-      },
-      {
-        "name": "2021-04-06",
-        "data": [
-          145
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              145
-            ],
-            "groups": null,
-            "count": 145,
-            "floatData": [
-              145
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 145,
-        "floatData": [
-          145
-        ]
-      },
-      {
-        "name": "2021-04-07",
-        "data": [
-          167
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              167
-            ],
-            "groups": null,
-            "count": 167,
-            "floatData": [
-              167
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 167,
-        "floatData": [
-          167
-        ]
-      },
-      {
-        "name": "2021-04-08",
-        "data": [
-          5
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              5
-            ],
-            "groups": null,
-            "count": 5,
-            "floatData": [
-              5
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 5,
-        "floatData": [
-          5
-        ]
-      },
-      {
-        "name": "2021-04-09",
-        "data": [
-          139
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              139
-            ],
-            "groups": null,
-            "count": 139,
-            "floatData": [
-              139
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 139,
-        "floatData": [
-          139
-        ]
-      },
-      {
-        "name": "2021-04-10",
-        "data": [
-          195
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              195
-            ],
-            "groups": null,
-            "count": 195,
-            "floatData": [
-              195
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 195,
-        "floatData": [
-          195
-        ]
-      },
-      {
-        "name": "2021-04-11",
-        "data": [
-          53
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              53
-            ],
-            "groups": null,
-            "count": 53,
-            "floatData": [
-              53
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 53,
-        "floatData": [
-          53
-        ]
-      },
-      {
-        "name": "2021-04-13",
-        "data": [
-          3
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              3
-            ],
-            "groups": null,
-            "count": 3,
-            "floatData": [
-              3
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          }
-        ],
-        "count": 3,
-        "floatData": [
-          3
-        ]
-      },
-      {
-        "name": "2021-04-14",
-        "data": [
-          2
-        ],
-        "groups": [
-          {
-            "name": "Admin Dude",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"admin\"",
-            "query": "owner:\"admin\""
-          },
-          {
-            "name": "Yuval Ben-Shalom",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"yuval\"",
-            "query": "owner:\"yuval\""
-          }
-        ],
-        "count": 2,
-        "floatData": [
-          2
-        ]
-      },
-      {
-        "name": "2021-04-20",
-        "data": [
-          67
-        ],
-        "groups": [
-          {
-            "name": "",
-            "data": [
-              45
-            ],
-            "groups": null,
-            "count": 45,
-            "floatData": [
-              45
-            ],
-            "pivot": "owner:\"\"",
-            "query": "owner:\"\""
-          },
-          {
-            "name": "Aviad Lichtenstatd",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"aviad\"",
-            "query": "owner:\"aviad\""
-          },
-          {
-            "name": "Yuval Ben-Shalom",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"yuval\"",
-            "query": "owner:\"yuval\""
-          },
-          {
-            "name": "Doron Sharon",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"dorsha\"",
-            "query": "owner:\"dorsha\""
-          },
-          {
-            "name": "Amichay Spivak",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"amichay\"",
-            "query": "owner:\"amichay\""
-          },
-          {
-            "name": "Anar Azadaliyev",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"anara\"",
-            "query": "owner:\"anara\""
-          },
-          {
-            "name": "Eliya Sadan",
-            "data": [
-              3
-            ],
-            "groups": null,
-            "count": 3,
-            "floatData": [
-              3
-            ],
-            "pivot": "owner:\"eliya\"",
-            "query": "owner:\"eliya\""
-          },
-          {
-            "name": "Asaf Shen",
-            "data": [
-              4
-            ],
-            "groups": null,
-            "count": 4,
-            "floatData": [
-              4
-            ],
-            "pivot": "owner:\"asaf\"",
-            "query": "owner:\"asaf\""
-          },
-          {
-            "name": "Meir Wahnon",
-            "data": [
-              2
-            ],
-            "groups": null,
-            "count": 2,
-            "floatData": [
-              2
-            ],
-            "pivot": "owner:\"meir\"",
-            "query": "owner:\"meir\""
-          },
-          {
-            "name": "Admin Dude",
-            "data": [
-              2
-            ],
-            "groups": null,
-            "count": 2,
-            "floatData": [
-              2
-            ],
-            "pivot": "owner:\"admin\"",
-            "query": "owner:\"admin\""
-          },
-          {
-            "name": "Rishi Bhargava",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"rishi\"",
-            "query": "owner:\"rishi\""
-          },
-          {
-            "name": "Ido Shavit",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"ido\"",
-            "query": "owner:\"ido\""
-          },
-          {
-            "name": "Bar Lolz",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"bar\"",
-            "query": "owner:\"bar\""
-          },
-          {
-            "name": "Analyst Dude",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"analyst\"",
-            "query": "owner:\"analyst\""
-          },
-          {
-            "name": "Slavik Markovich",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"slavik\"",
-            "query": "owner:\"slavik\""
-          },
-          {
-            "name": "Nitzan Peretz",
-            "data": [
-              1
-            ],
-            "groups": null,
-            "count": 1,
-            "floatData": [
-              1
-            ],
-            "pivot": "owner:\"nitzan\"",
-            "query": "owner:\"nitzan\""
-          }
-        ],
-        "count": 67,
-        "floatData": [
-          67
-        ]
+        "activated": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "archiveReason": "",
+        "attachment": null,
+        "closed": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "closingUserId": "",
+        "created": "Fri, 15 Jul 2016 20:12:04 IDT",
+        "details": "",
+        "dueDate": "Mon, 25 Jul 2016 20:12:04 IDT",
+        "id": "18",
+        "investigationId": "",
+        "modified": "2016-07-15T20:12:04.141268665+03:00",
+        "name": "some incident with long name",
+        "occurred": "Thu, 14 Jul 2016 17:12:04 UTC",
+        "openDuration": 0,
+        "owner": "Rishi",
+        "playbookId": "playbook1",
+        "rawName": "some incident with long name",
+        "rawType": "Malware",
+        "reason": "",
+        "reminder": "Mon, 01 Jan 0001 00:00:00 UTC",
+        "severity": "High",
+        "status": "Assigned",
+        "targets": null,
+        "type": "Malware",
+        "version": 1
       }
     ],
     "layout": {
-      "chartProperties": {
-        "axis": {
-          "x": {},
-          "y": {}
-        },
-        "barSize": 15,
-        "format": "DD MMM Y",
-        "isDatesChart": true,
-        "layout": "vertical",
-        "valuesFormat": "abbreviated"
-      },
-      "chartType": "bar",
-      "columnPos": 0,
-      "dimensions": {
-        "height": 744,
-        "width": 530
-      },
-      "h": 5,
-      "i": "3f4e7a20-ae4b-11eb-9aee-43e758537a39",
-      "legend": [
-        {
-          "color": "#01A2EC",
-          "name": "Admin Dude"
-        },
-        {
-          "color": "#229D80",
-          "name": "Asaf Shen"
-        },
-        {
-          "color": "#F50057",
-          "name": "Eliya Sadan"
-        },
-        {
-          "color": "#AA00FF",
-          "name": "Aviad Lichtenstatd"
-        },
-        {
-          "color": "#FD5BDE",
-          "name": "Meir Wahnon"
-        },
-        {
-          "color": "#FF8411",
-          "name": "Ido Shavit"
-        },
-        {
-          "color": "#FED22C",
-          "name": "Yuval Ben-Shalom"
-        },
-        {
-          "color": "#989898",
-          "name": "Analyst Dude"
-        },
-        {
-          "color": "#AED581",
-          "name": "Nitzan Peretz"
-        },
-        {
-          "color": "#FFC4C6",
-          "name": "Guest Dude"
-        },
-        {
-          "color": "#C5EDFF",
-          "name": "Rishi Bhargava"
-        },
-        {
-          "color": "#C2ACF2",
-          "name": "Amichay Spivak"
-        },
-        {
-          "color": "#D1FC40",
-          "name": "Bar Lolz"
-        },
-        {
-          "color": "#00F3E5",
-          "name": "Slavik Markovich"
-        },
-        {
-          "color": "#4DE406",
-          "name": "Doron Sharon"
-        },
-        {
-          "color": "#897E0C",
-          "name": "Anar Azadaliyev"
-        }
-      ],
-      "legendStyle": {
-        "align": "right",
-        "hideLegend": false,
-        "iconType": "square",
-        "layout": "horizontal",
-        "verticalAlign": "top",
-        "wrapperStyle": {
-          "maxHeight": 144,
-          "top": 5,
-          "width": "100%"
-        }
-      },
-      "reflectDimensions": true,
-      "rowPos": 0,
-      "w": 9
-    },
-    "query": {
-      "type": "incident",
-      "groupBy": [
-        "occurred(d)",
-        "owner"
-      ],
-      "filter": {
-        "query": "-category:job and -status:archived and -status:closed",
-        "fromDateLicense": "0001-01-01T00:00:00Z",
-        "period": {
-          "byFrom": "days",
-          "fromValue": null
-        }
-      }
-    },
-    "automation": {
-      "name": "",
-      "id": "",
-      "args": null,
-      "noEvent": false
-    },
-    "title": "Active Incidents - Line chart",
-    "emptyNotification": "No results found",
-    "titleStyle": null,
-    "autoPageBreak": true
+      "rowPos": 10,
+      "columnPos": 1,
+      "tableColumns": ["name", "type", "status", "occurred", "severity", "owner", "playbookId"],
+      "classes": "striped stackable small very compact"
+    }
   }
 ]
