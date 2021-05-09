@@ -149,6 +149,9 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   preparedData = retData;
   if (!isEmpty(legend) && Object.keys(lineTypes).length > 1) {
     preparedLegend = legend.map((item) => {
+      if (!item.name) {
+        item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+      }
       item.color = item.color || item.stroke || getGraphColorByName(item.name, existingColors);
       existingColors[item.color] = true;
       return item;
@@ -156,7 +159,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   }
 
   const isFull = !reflectDimensions;
-  if (!reflectDimensions && preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
+  if (isFull && preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
     dimensions.height = (preparedLegend.length * CHART_LEGEND_ITEM_HEIGHT) + LINE_CHART_FULL_ITEM_HEIGHT;
   }
 

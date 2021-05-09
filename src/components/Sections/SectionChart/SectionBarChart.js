@@ -3,8 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
 import { Bar, BarChart, Label, LabelList, Legend, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
-import { isArray, orderBy, unionBy } from 'lodash';
-import { createMiddleEllipsisFormatter, formatNumberValue, getTextWidth, sortStrings } from '../../../utils/strings';
+import { isArray, orderBy } from 'lodash';
+import { createMiddleEllipsisFormatter, formatNumberValue, getTextWidth } from '../../../utils/strings';
+import { sortByField } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
 import {
   BAR_CHART_FULL_ITEM_HEIGHT,
@@ -77,6 +78,10 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       item.total = val;
       return item;
     });
+
+    dataItems = Object.keys(dataItems).map((key) => {
+      return dataItems[key];
+    });
   }
   if (sortBy) {
     preparedData = orderBy(preparedData, sortBy.values, sortBy.orders);
@@ -89,6 +94,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   const margin = chartProperties.margin || {};
   let leftMargin = -5;
   if (stacked) {
+    const allSubGroups = {};
     preparedData.forEach((item) => {
       // fix bar chart left label ticks cutoff.
       if (!isColumnChart) {
@@ -117,16 +123,13 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
             innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
           }
           existingColors[innerItem.color] = true;
+          allSubGroups[innerItem.name] = allSubGroups[innerItem.name] ?
+            { ...allSubGroups[innerItem.name], sum: allSubGroups[innerItem.name].sum + innerItem.name } :
+            { ...innerItem, sum: innerItem.name };
 
           item[innerItem.name] = innerItem.data[0];
           item.total += item[innerItem.name];
         });
-
-        dataItems = preparedData
-          .reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), [])
-          .map(group => ({ name: group.name,
-            color: group.fill || group.color }))
-          .sort((a, b) => sortStrings(a.name, b.name));
       } else {
         Object.keys(item).filter(key => key !== 'name' && key !== 'relatedTo' && key !== 'value').forEach(
           (groupKey) => {
@@ -143,22 +146,28 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     if (!isColumnChart) {
       margin.left = leftMargin;
     }
+    dataItems = Object.values(allSubGroups).sort((a, b) => sortByField(['sum', 'name'], [false, true])(a, b));
   }
 
-  dataItems = Object.keys(dataItems).map((key) => {
-    return dataItems[key];
-  });
   if (legend) {
-    dataItems = dataItems.map((item) => {
-      const legendItem = legend.filter(l => l.name === item.name);
-      item.color = legendItem.length > 0 ? legendItem[0].color || legendItem[0].fill || item.color : item.color;
-      return item;
+    dataItems = legend.map((item) => {
+      const dataItem = dataItems.find(l => l.name === item.name);
+      if (!item.name) {
+        item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+      }
+      if (!dataItem) {
+        return item;
+      }
+      dataItem.color = item.color || dataItem.color;
+      if (!dataItem.name) {
+        dataItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+      }
+      return dataItem;
     });
   }
-  let isFull = false;
-  if (!reflectDimensions && (preparedData.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height || stacked)) {
-    isFull = true;
-    dimensions.height = (preparedData.length * CHART_LEGEND_ITEM_HEIGHT) + BAR_CHART_FULL_ITEM_HEIGHT;
+  const isFull = !reflectDimensions;
+  if (isFull && dataItems.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
+    dimensions.height = (dataItems.length * CHART_LEGEND_ITEM_HEIGHT) + BAR_CHART_FULL_ITEM_HEIGHT;
   }
 
   return (
