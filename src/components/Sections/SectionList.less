@@ -1,8 +1,11 @@
 .section-list {
-  display: table;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   .list-item {
-    display: table-row !important;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     margin: 5px 10px !important;
     .content {
