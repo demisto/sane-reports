@@ -5,6 +5,7 @@ import uuid from 'uuid';
 import { isString, isEmpty, isObject } from 'lodash';
 import moment from 'moment';
 import { TABLE_CELL_TYPE } from '../../constants/Constants';
+import WidgetEmptyState from './WidgetEmptyState';
 
 function getFieldComponentIfNeeded(dataValue) {
   return isObject(dataValue) && dataValue.type === TABLE_CELL_TYPE.image ? (<img
@@ -93,7 +94,7 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle, emptySt
               {detailsValue && <div className="details content">{detailsValue}</div>}
             </div>
           );
-        }) : <div className="no-data">{emptyString}</div>}
+        }) : <WidgetEmptyState emptyString={emptyString} />}
       </div>
     </div>
   );
