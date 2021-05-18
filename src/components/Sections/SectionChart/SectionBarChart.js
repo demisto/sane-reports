@@ -16,6 +16,7 @@ import {
 } from '../../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
+import LabelAxisTick from '../LabelAxisTick';
 
 const createXAxisProps = (data, dataKey, width) => {
   const ticks = data.map(x => x[dataKey]);
@@ -189,8 +190,12 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
             >
               {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
               <YAxis
-                hide={!stacked} tick={{ fontSize: '15px' }} width={maxCategorySize} interval={0}
-                dataKey="name" type="category"
+                key="y"
+                hide={!stacked}
+                interval={0}
+                tick={stacked ? <LabelAxisTick /> : false}
+                dataKey="name"
+                type="category"
               />
               }
               {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
