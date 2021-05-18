@@ -193,7 +193,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                 key="y"
                 hide={!stacked}
                 interval={0}
-                tick={stacked ? <LabelAxisTick /> : false}
+                tick={stacked ? <LabelAxisTick maxCategorySize={maxCategorySize} /> : false}
                 dataKey="name"
                 type="category"
               />
