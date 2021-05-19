@@ -42,7 +42,7 @@ h1 {
 }
 
 .report-layout {
-  margin: @content-margin-top @content-margin-right @content-margin-bottom @content-margin-left;
+  margin: 30px 20px 0;
 
   .report-row {
     display: table;
@@ -152,7 +152,6 @@ h1 {
       }
 
       &.section-show-overflow {
-        overflow-y: auto;
 
         .section-column-chart {
           overflow-y: auto;
@@ -161,7 +160,7 @@ h1 {
 
         .section-line-chart {
           .recharts-wrapper {
-            overflow-y: auto;
+            overflow-y: hidden;
             overflow-x: hidden;
           }
         }
