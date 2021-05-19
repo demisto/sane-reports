@@ -90,7 +90,7 @@ const BOTTOM_MARGIN = 40;
     const topMargin = (headerLeftImage || headerRightImage) && !disableHeaders ? PAGE_MARGIN : 0;
     dimensions.height -= topMargin + BOTTOM_MARGIN;
 
-    console.log('dimensions.height: ' + topMargin + ' - topMargin: ' +
+    console.log('dimensions.height: ' + dimensions.height + ' - topMargin: ' +
         topMargin + ' - bottomMargin: ' + BOTTOM_MARGIN);
 
     const afterTypeReplace =
