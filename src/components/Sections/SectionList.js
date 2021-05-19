@@ -5,6 +5,7 @@ import uuid from 'uuid';
 import { isString, isEmpty, isObject } from 'lodash';
 import moment from 'moment';
 import { TABLE_CELL_TYPE } from '../../constants/Constants';
+import WidgetEmptyState from './WidgetEmptyState';
 
 function getFieldComponentIfNeeded(dataValue) {
   return isObject(dataValue) && dataValue.type === TABLE_CELL_TYPE.image ? (<img
@@ -34,7 +35,7 @@ function styleByFieldName(fieldName, currentData) {
       const msDiffSla = dueDate.diff(now);
       return (
         <div className="sla-container">
-          <span>{msDiffSla > 0 ? '+' : '-'}{moment.duration(msDiffSla).humanize()}</span>
+          <span>{moment.duration(msDiffSla).humanize()}{msDiffSla < 0 ? ' past SLA' : ''}</span>
         </div>
       );
     }
@@ -58,42 +59,43 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle, emptySt
   return (
     <div className={mainClass} style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
-      {tableData.length > 0 ? tableData.map((item) => {
-        let leftName = 'name';
-        if (!isEmpty(columns)) {
-          leftName = (isObject(columns[0]) ? columns[0].key : columns[0]) || leftName;
-        }
-        const mainKeyValue = getFieldValue(leftName, item);
+      <div className="list-data-container">
+        {tableData.length > 0 ? tableData.map((item) => {
+          let leftName = 'name';
+          if (!isEmpty(columns)) {
+            leftName = (isObject(columns[0]) ? columns[0].key : columns[0]) || leftName;
+          }
+          const mainKeyValue = getFieldValue(leftName, item);
 
-        let rightName = 'value';
-        if (!isEmpty(columns) && columns.length > 1) {
-          rightName = (isObject(columns[1]) ? columns[1].key : columns[1]) || rightName;
-        }
-        const rightValue = getFieldValue(rightName, item);
+          let rightName = 'value';
+          if (!isEmpty(columns) && columns.length > 1) {
+            rightName = (isObject(columns[1]) ? columns[1].key : columns[1]) || rightName;
+          }
+          const rightValue = getFieldValue(rightName, item);
 
-        let detailsValue;
-        if (!isEmpty(columns) && columns.length > 2) {
-          const detailsCol = (isObject(columns[2]) ? columns[2].key : columns[2]);
-          detailsValue = getFieldValue(detailsCol, item);
-        }
-
-        return (
-          <div className="list-item item h3" key={uuid.v1()}>
-            <div
-              className="left-list-value left floated content ellipsis"
-              title={!isObject(mainKeyValue) ? mainKeyValue : ''}
-            >
-              {styleByFieldName(leftName, mainKeyValue)}
-            </div>
-            <div className="right-list-value right floated content">
-              <div className="right-list-value-container">
-                {styleByFieldName(rightName, rightValue)}
+          let detailsValue;
+          if (!isEmpty(columns) && columns.length > 2) {
+            const detailsCol = (isObject(columns[2]) ? columns[2].key : columns[2]);
+            detailsValue = getFieldValue(detailsCol, item);
+          }
+          return (
+            <div className="list-item item h3" key={uuid.v1()}>
+              <div
+                className="left-list-value left floated content ellipsis"
+                title={!isObject(mainKeyValue) ? mainKeyValue : ''}
+              >
+                {styleByFieldName(leftName, mainKeyValue)}
               </div>
+              <div className="right-list-value right floated content">
+                <div className="right-list-value-container">
+                  {styleByFieldName(rightName, rightValue)}
+                </div>
+              </div>
+              {detailsValue && <div className="details content">{detailsValue}</div>}
             </div>
-            {detailsValue && <div className="details content">{detailsValue}</div>}
-          </div>
-        );
-      }) : <div className="no-data">{emptyString}</div>}
+          );
+        }) : <WidgetEmptyState emptyString={emptyString} />}
+      </div>
     </div>
   );
 };

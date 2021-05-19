@@ -108,7 +108,7 @@ h1 {
         padding: 10px 12px 0;
       }
 
-      .section-number, .section-table, .section-markdown, .section-duration {
+      .section-number, .section-table, .section-markdown, .section-duration, .section-list, .section-grouped-list {
         &:not(.page-break-section) {
           border: 1px solid #DADBDB;
           padding: 10px 12px;
@@ -171,13 +171,13 @@ h1 {
           overflow-x: hidden;
         }
 
-        .section-table, .section-markdown {
+        .section-table, .section-markdown, .section-list {
           height: inherit;
           overflow-y: auto;
         }
 
         @media print {
-          .section-table, .section-markdown  {
+          .section-table, .section-markdown, .section-list {
             overflow-y: hidden;
           }
 
