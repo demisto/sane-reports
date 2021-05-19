@@ -149,3 +149,38 @@ export const formatNumberValue = (v, format) => {
       return v;
   }
 };
+
+/*
+ * Smart sentence breaker according to spaces, max rows and max length
+ */
+export function sentenceBreaker(str = '', maxLength, maxRows) {
+  const strs = [];
+  let res = str;
+  while (res.length > maxLength) {
+    let pos = res.substring(0, maxLength).lastIndexOf(' ');
+    pos = pos <= 0 ? maxLength : pos;
+    strs.push(res.substring(0, pos));
+    let i = res.indexOf(' ', pos) + 1;
+    if (i < pos || i > pos + maxLength) {
+      i = pos;
+    }
+    res = res.substring(i);
+  }
+  strs.push(res);
+
+  const words = [];
+  for (let i = 0; i < maxRows; i++) {
+    let word = strs[i];
+    if (!word) {
+      break;
+    }
+    if (i === maxRows - 1 && (strs.length > maxRows || word.length > maxLength)) {
+      word = word.substring(0, maxLength - 3);
+      word += '...';
+    }
+    words.push(word);
+  }
+
+  return words;
+}
+

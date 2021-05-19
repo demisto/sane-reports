@@ -55,7 +55,8 @@ export const WIDGET_DEFAULT_CONF = {
   size: 10,
   sizeThresholdWarning: 100,
   showOthers: true,
-  otherGroup: 'Other'
+  otherGroup: 'Other',
+  barSizeMargin: 15
 };
 
 export const DURATION_FORMAT = {
