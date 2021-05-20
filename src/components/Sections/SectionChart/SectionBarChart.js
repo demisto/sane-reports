@@ -11,6 +11,8 @@ import {
   BAR_CHART_FULL_ITEM_HEIGHT,
   CHART_LAYOUT_TYPE,
   CHART_LEGEND_ITEM_HEIGHT,
+  BAR_CHART_BAR_SIZE,
+  BAR_CHART_BAR_SIZE_MARGIN,
   NONE_VALUE_DEFAULT_NAME,
   WIDGET_DEFAULT_CONF
 } from '../../../constants/Constants';
@@ -164,9 +166,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     });
   }
   const isFull = !reflectDimensions;
-  if (isFull && dataItems.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
-    dimensions.height = (dataItems.length * CHART_LEGEND_ITEM_HEIGHT) + BAR_CHART_FULL_ITEM_HEIGHT;
-  }
+  const barSize = chartProperties.barSize || BAR_CHART_BAR_SIZE;
+  const minHeight = (dataItems.length * CHART_LEGEND_ITEM_HEIGHT) +
+    Math.min(BAR_CHART_FULL_ITEM_HEIGHT, dataItems.length * (barSize + BAR_CHART_BAR_SIZE_MARGIN));
 
   return (
     <div className={mainClass} style={style}>
@@ -174,7 +176,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         {({ width, height }) => {
           const finalWidth = width || dimensions.width;
           const xAxisProps = isColumnChart ? createXAxisProps(data, 'name', finalWidth / 2) : {};
-          const finalHeight = isFull ? dimensions.height : height || dimensions.height;
+          const finalHeight = Math.max(isFull ? dimensions.height : height || dimensions.height, minHeight);
 
           return (
             <BarChart
@@ -183,7 +185,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
               data={preparedData}
               layout={chartProperties.layout}
               margin={margin}
-              barSize={chartProperties.barSize || 13}
+              barSize={barSize}
             >
               {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
               <YAxis
