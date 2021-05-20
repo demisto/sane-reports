@@ -8,16 +8,15 @@ class LabelAxisTick extends Component {
     payload: PropTypes.object,
     x: PropTypes.number,
     y: PropTypes.number,
-    angle: PropTypes.number,
-    maxCategorySize: PropTypes.any
+    angle: PropTypes.number
   };
 
   static defaultProps = {
     angle: 0
   };
 
-  calculateAndTruncateName = (size, name, maxCategorySize) => {
-    const maxAvailableSize = maxCategorySize || Math.max(0, size - WIDGET_DEFAULT_CONF.barSizeMargin);
+  calculateAndTruncateName = (size, name) => {
+    const maxAvailableSize = Math.max(0, size - WIDGET_DEFAULT_CONF.barSizeMargin);
     const spaceNeeded = getTextWidth(name, WIDGET_DEFAULT_CONF.font);
     if (spaceNeeded >= maxAvailableSize && name.length > 0) {
       // maxLength (chars) = max available size in pixels / average number of pixels per character using space needed.
@@ -28,8 +27,9 @@ class LabelAxisTick extends Component {
   };
 
   render() {
-    const { payload, x, y, angle, maxCategorySize } = this.props;
-    const name = this.calculateAndTruncateName(x, payload.value || '', maxCategorySize);
+    const { payload, x, y, angle } = this.props;
+
+    const name = this.calculateAndTruncateName(x, payload.value || '');
     return (
       <g transform={`translate(0,${y})`}>
         <text
