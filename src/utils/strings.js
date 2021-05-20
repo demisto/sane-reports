@@ -132,7 +132,7 @@ export const formatNumberValue = (v, format) => {
     case WIDGET_VALUES_FORMAT.abbreviated:
       return numberToShortString(v);
     case WIDGET_VALUES_FORMAT.decimal:
-      return v && v.toFixed(2) ? v.toFixed(2) : null;
+      return (v || v === 0) && v.toFixed(2) ? v.toFixed(2) : null;
     case WIDGET_VALUES_FORMAT.percentage:
       return new Intl.NumberFormat().format(v) + '%';
     case WIDGET_VALUES_FORMAT.regular:
