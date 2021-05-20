@@ -219,7 +219,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
               </YAxis>}
               {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal &&
               <XAxis tick dataKey="name" type="category" {...xAxisProps}>
-                {chartProperties.axis && chartProperties.axis.x &&chartProperties.axis.x.label &&
+                {chartProperties.axis && chartProperties.axis.x && chartProperties.axis.x.label &&
                 <Label
                   value={rightEllipsis(chartProperties.axis.x.label, Math.floor(finalWidth / 12))}
                   offset={3}
