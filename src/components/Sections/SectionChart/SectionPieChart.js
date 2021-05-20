@@ -15,6 +15,7 @@ import {
   PIE_CHART_FULL_ITEM_HEIGHT
 } from '../../../constants/Constants';
 import classNames from 'classnames';
+import { formatNumberValue } from '../../../utils/strings';
 
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {},
   sortBy, reflectDimensions }) => {
@@ -33,6 +34,12 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
     dataMap[item.name.toLowerCase()] = item;
   });
   let preparedData = [];
+
+  const formatValue = (v) => {
+    const { valuesFormat } = chartProperties;
+    return formatNumberValue(v, valuesFormat);
+  };
+
   if (legend) {
     legend.forEach((legendItem) => {
       const key = legendItem.name.toLowerCase();
@@ -131,6 +138,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                     iconType="square"
                     capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
                     data={preparedData}
+                    formatter={formatValue}
                     height={legendHeight}
                     style={legendStyle && legendStyle.style}
                   />
