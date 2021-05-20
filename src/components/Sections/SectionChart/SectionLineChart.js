@@ -185,7 +185,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                   interval="preserveStartEnd"
                   {...xAxisProps}
                 >
-                  {chartProperties.axis && chartProperties.axis.x &&
+                  {chartProperties.axis && chartProperties.axis.x && chartProperties.axis.x.label &&
                   <Label
                     value={rightEllipsis(chartProperties.axis.x.label, Math.floor(finalWidth / 12))}
                     offset={-5}
@@ -199,7 +199,8 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                       dataMax => Math.ceil(Math.max(dataMax, (referenceLineY && referenceLineY.y) || 0) * 1.33)]
                   }
                 >
-                  {chartProperties.axis && chartProperties.axis.y && <Label
+                  {chartProperties.axis && chartProperties.axis.y && chartProperties.axis.y.label &&
+                  <Label
                     value={rightEllipsis(chartProperties.axis.y.label, Math.floor(finalHeight / 12))}
                     angle={270}
                     offset={6}
