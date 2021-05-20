@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { WIDGET_DEFAULT_CONF } from '../../constants/Constants';
+import { NONE_VALUE_DEFAULT_NAME, WIDGET_DEFAULT_CONF } from '../../constants/Constants';
 import { getTextWidth, sentenceBreaker } from '../../utils/strings';
 
 class LabelAxisTick extends Component {
@@ -29,7 +29,8 @@ class LabelAxisTick extends Component {
   render() {
     const { payload, x, y, angle } = this.props;
 
-    const name = this.calculateAndTruncateName(x, payload.value || '');
+    const value = payload.value || NONE_VALUE_DEFAULT_NAME;
+    const name = this.calculateAndTruncateName(x, value);
     return (
       <g transform={`translate(0,${y})`}>
         <text
@@ -41,7 +42,7 @@ class LabelAxisTick extends Component {
           fill="rgb(64, 65, 66)"
           transform={`rotate(${angle})`}
         >
-          <title>{payload.value}</title>
+          <title>{value}</title>
           {name}
         </text>
       </g>

@@ -149,10 +149,11 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
 
   if (legend) {
     dataItems = legend.map((item) => {
-      const dataItem = dataItems.find(l => l.name === item.name);
       if (!item.name) {
         item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
       }
+      const dataItem = dataItems.find(l =>
+        (l.name || chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME) === item.name);
       if (!dataItem) {
         return item;
       }
@@ -164,9 +165,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     });
   }
   const isFull = !reflectDimensions;
-  if (isFull && dataItems.length * CHART_LEGEND_ITEM_HEIGHT > dimensions.height) {
-    dimensions.height = (dataItems.length * CHART_LEGEND_ITEM_HEIGHT) + BAR_CHART_FULL_ITEM_HEIGHT;
-  }
+  const barSize = chartProperties.barSize || WIDGET_DEFAULT_CONF.barSize;
+  const minHeight = (dataItems.length * CHART_LEGEND_ITEM_HEIGHT) +
+    Math.min(BAR_CHART_FULL_ITEM_HEIGHT, dataItems.length * (barSize + WIDGET_DEFAULT_CONF.barSizeMargin));
 
   return (
     <div className={mainClass} style={style}>
@@ -174,7 +175,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
         {({ width, height }) => {
           const finalWidth = width || dimensions.width;
           const xAxisProps = isColumnChart ? createXAxisProps(data, 'name', finalWidth / 2) : {};
-          const finalHeight = isFull ? dimensions.height : height || dimensions.height;
+          const finalHeight = Math.max(isFull ? dimensions.height : height || dimensions.height, minHeight);
 
           return (
             <BarChart
@@ -183,7 +184,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
               data={preparedData}
               layout={chartProperties.layout}
               margin={margin}
-              barSize={chartProperties.barSize || 13}
+              barSize={barSize}
             >
               {chartProperties.layout === CHART_LAYOUT_TYPE.vertical &&
               <YAxis

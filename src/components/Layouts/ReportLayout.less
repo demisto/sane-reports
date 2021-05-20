@@ -22,8 +22,11 @@ h1 {
 }
 
 .global-section {
+  display: flex;
+  flex-direction: column;
   .global-section-row {
     display: flex;
+    flex: 1;
     flex-direction: row;
 
     .subsection-wrapper {
@@ -34,10 +37,6 @@ h1 {
         height: 100%;
       }
     }
-  }
-
-  .section-chart {
-    display: block;
   }
 }
 

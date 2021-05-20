@@ -56,6 +56,7 @@ export const WIDGET_DEFAULT_CONF = {
   sizeThresholdWarning: 100,
   showOthers: true,
   otherGroup: 'Other',
+  barSize: 15,
   barSizeMargin: 15
 };
 
