@@ -16,7 +16,7 @@ import {
 } from '../../../constants/Constants';
 import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
-import { getTextWidth } from '../../../utils/strings';
+import { formatNumberValue, getTextWidth } from '../../../utils/strings';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
 
 const SINGLE_LINE_CHART_NAME = 'sum';
@@ -46,6 +46,12 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   const existingColors = {};
   let preparedLegend = [];
   let preparedData = cloneDeep(data) || [];
+
+  const formatValue = (v) => {
+    const { valuesFormat } = chartProperties;
+    return formatNumberValue(v, valuesFormat);
+  };
+
   const finalToDate = toDate || moment().utc();
   const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
   const lineTypes = {};
@@ -196,6 +202,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                     [dataMin => Math.floor(Math.min(0, dataMin, (referenceLineY && referenceLineY.y) || 0) * 1.33),
                       dataMax => Math.ceil(Math.max(dataMax, (referenceLineY && referenceLineY.y) || 0) * 1.33)]
                   }
+                  tickFormatter={formatValue}
                   label={chartProperties.axis && chartProperties.axis.y ? {
                     value: chartProperties.axis.y.label,
                     angle: -90
