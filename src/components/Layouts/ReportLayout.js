@@ -18,7 +18,7 @@ import { getSectionComponent } from '../../utils/layout';
 import classNames from 'classnames';
 
 const ROW_PIXEL_HEIGHT = 110;
-const SECTION_HEIGHT_TOTAL_PADDING = 20;
+const SECTION_HEIGHT_TOTAL_PADDING = 10;
 
 class ReportLayout extends Component {
   static propTypes = {
