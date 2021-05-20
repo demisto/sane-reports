@@ -11,8 +11,6 @@ import {
   BAR_CHART_FULL_ITEM_HEIGHT,
   CHART_LAYOUT_TYPE,
   CHART_LEGEND_ITEM_HEIGHT,
-  BAR_CHART_BAR_SIZE,
-  BAR_CHART_BAR_SIZE_MARGIN,
   NONE_VALUE_DEFAULT_NAME,
   WIDGET_DEFAULT_CONF
 } from '../../../constants/Constants';
@@ -151,10 +149,11 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
 
   if (legend) {
     dataItems = legend.map((item) => {
-      const dataItem = dataItems.find(l => l.name === item.name);
       if (!item.name) {
         item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
       }
+      const dataItem = dataItems.find(l =>
+        (l.name || chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME) === item.name);
       if (!dataItem) {
         return item;
       }
@@ -166,9 +165,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     });
   }
   const isFull = !reflectDimensions;
-  const barSize = chartProperties.barSize || BAR_CHART_BAR_SIZE;
+  const barSize = chartProperties.barSize || WIDGET_DEFAULT_CONF.barSize;
   const minHeight = (dataItems.length * CHART_LEGEND_ITEM_HEIGHT) +
-    Math.min(BAR_CHART_FULL_ITEM_HEIGHT, dataItems.length * (barSize + BAR_CHART_BAR_SIZE_MARGIN));
+    Math.min(BAR_CHART_FULL_ITEM_HEIGHT, dataItems.length * (barSize + WIDGET_DEFAULT_CONF.barSizeMargin));
 
   return (
     <div className={mainClass} style={style}>
