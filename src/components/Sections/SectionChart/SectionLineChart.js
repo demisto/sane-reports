@@ -16,7 +16,7 @@ import {
 } from '../../../constants/Constants';
 import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
-import { getTextWidth } from '../../../utils/strings';
+import { getTextWidth, rightEllipsis } from '../../../utils/strings';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
 
 const SINGLE_LINE_CHART_NAME = 'sum';
@@ -184,23 +184,30 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                   key="x"
                   interval="preserveStartEnd"
                   {...xAxisProps}
-                  label={chartProperties.axis && chartProperties.axis.x ? {
-                    value: chartProperties.axis.x.label,
-                    position: 'insideBottom',
-                    offset: 0
-                  } : undefined}
-                />,
+                >
+                  {chartProperties.axis && chartProperties.axis.x && chartProperties.axis.x.label &&
+                  <Label
+                    value={rightEllipsis(chartProperties.axis.x.label, Math.floor(finalWidth / 12))}
+                    offset={-5}
+                    position="insideBottom"
+                  />}
+                </XAxis>,
                 <YAxis
                   key="y"
                   domain={
                     [dataMin => Math.floor(Math.min(0, dataMin, (referenceLineY && referenceLineY.y) || 0) * 1.33),
                       dataMax => Math.ceil(Math.max(dataMax, (referenceLineY && referenceLineY.y) || 0) * 1.33)]
                   }
-                  label={chartProperties.axis && chartProperties.axis.y ? {
-                    value: chartProperties.axis.y.label,
-                    angle: -90
-                  } : undefined}
-                />
+                >
+                  {chartProperties.axis && chartProperties.axis.y && chartProperties.axis.y.label &&
+                  <Label
+                    value={rightEllipsis(chartProperties.axis.y.label, Math.floor(finalHeight / 12))}
+                    angle={270}
+                    offset={6}
+                    style={{ textAnchor: 'middle' }}
+                    position="left"
+                  />}
+                </YAxis>
               ]}
               {(referenceLineY || chartProperties.layout === 'horizontal') && <YAxis dataKey="name" />}
               <CartesianGrid

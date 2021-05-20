@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ChartLegend, { VALUE_FORMAT_TYPES } from './ChartLegend';
 import { Bar, BarChart, Label, LabelList, Legend, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
 import { isArray, orderBy } from 'lodash';
-import { createMiddleEllipsisFormatter, formatNumberValue, getTextWidth } from '../../../utils/strings';
+import { createMiddleEllipsisFormatter, formatNumberValue, getTextWidth, rightEllipsis } from '../../../utils/strings';
 import { sortByField } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
 import {
@@ -208,18 +208,23 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                     dataMax => Math.ceil(Math.max(dataMax, (referenceLineY && referenceLineY.y) || 0) * 1.33)]
                 }
               >
-                {chartProperties.axis && chartProperties.axis.y &&
+                {chartProperties.axis && chartProperties.axis.y && chartProperties.axis.y.label &&
                 <Label
-                  value={chartProperties.axis.y.label}
+                  value={rightEllipsis(chartProperties.axis.y.label, Math.floor(finalHeight / 12))}
                   angle={-90}
-                  offset={16}
+                  offset={6}
+                  style={{ textAnchor: 'middle' }}
                   position="insideLeft"
                 />}
               </YAxis>}
               {chartProperties.layout === CHART_LAYOUT_TYPE.horizontal &&
               <XAxis tick dataKey="name" type="category" {...xAxisProps}>
-                {chartProperties.axis && chartProperties.axis.x &&
-                <Label value={chartProperties.axis.x.label} offset={3} position="insideBottom" />}
+                {chartProperties.axis && chartProperties.axis.x && chartProperties.axis.x.label &&
+                <Label
+                  value={rightEllipsis(chartProperties.axis.x.label, Math.floor(finalWidth / 12))}
+                  offset={3}
+                  position="insideBottom"
+                />}
               </XAxis>}
               <Tooltip />
               {referenceLineY &&
