@@ -142,6 +142,7 @@ describe('Report Container', () => {
     expect(sectionChart.at(1).props().type).to.equal(sec7.layout.chartType);
     expect(sectionChart.at(1).props().dimensions).to.equal(sec7.layout.dimensions);
 
+    const sectionBarChart = reportContainer.find(SectionBarChart);
     const barChart = reportContainer.find(BarChart);
     const pieChart = reportContainer.find(PieChart);
     const pie = reportContainer.find(Pie);
@@ -152,7 +153,7 @@ describe('Report Container', () => {
 
     expect(barChart.props().width).to.equal(sec5.layout.dimensions.width);
     expect(barChart.props().height).to.equal(sec5.layout.dimensions.height);
-    expect(barChart.props().data).to.deep.equal(sec5.data);
+    expect(sectionBarChart.props().data).to.deep.equal(sec5.data);
 
     expect(pieChart.props().width).to.equal(sec7.layout.dimensions.width);
     expect(pieChart.props().height).to.equal(sec7.layout.dimensions.height);
@@ -349,6 +350,7 @@ describe('Report Container', () => {
     expect(sectionChart.at(6).props().chartProperties).to.equal(sec13.layout.chartProperties);
     expect(sectionChart.at(6).props().chartProperties.timeFrame).to.equal(constants.SUPPORTED_TIME_FRAMES.none);
 
+    const sectionBarChart = reportContainer.find(SectionBarChart);
     const barChart = reportContainer.find(BarChart);
     const pieChart = reportContainer.find(PieChart);
     const lineChart = reportContainer.find(LineChart);
@@ -373,7 +375,7 @@ describe('Report Container', () => {
     expect(bars).to.have.length(sec1.data.reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), []).length);
     expect(barChart.at(1).props().width).to.equal(sec4.layout.dimensions.width);
     expect(barChart.at(1).props().height).to.equal(sec4.layout.dimensions.height);
-    expect(barChart.at(1).props().data).to.deep.equal(sec4.data);
+    expect(sectionBarChart.at(1).props().data).to.deep.equal(sec4.data);
     let refLine = barChart.at(1).find('.recharts-reference-line-line');
     expect(refLine.props().y).to.be.equal(sec4.layout.referenceLineY.y);
     expect(refLine.props().stroke).to.be.equal(sec4.layout.referenceLineY.stroke);
