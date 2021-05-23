@@ -224,13 +224,6 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                 fillOpacity={chartProperties.chartFillOpacity || 0.04}
               />
               <Tooltip />
-              {referenceLineX &&
-                <ReferenceLine x={referenceLineX.x} stroke={referenceLineX.stroke} label={referenceLineX.label} />}
-              {referenceLineY &&
-                <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke}>
-                  <Label value={referenceLineY.label} fill={referenceLineY.stroke} position="top" />
-                </ReferenceLine>
-              }
               {legendStyle && !legendStyle.hideLegend &&
                 <Legend
                   content={<ChartLegend
@@ -254,6 +247,13 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                   strokeWidth={3}
                   dot={false}
                 />)}
+              {referenceLineX &&
+              <ReferenceLine x={referenceLineX.x} stroke={referenceLineX.stroke} label={referenceLineX.label} />}
+              {referenceLineY &&
+              <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke}>
+                <Label value={referenceLineY.label} fill={referenceLineY.stroke} position="top" />
+              </ReferenceLine>
+              }
             </LineChart>);
           }
         }
