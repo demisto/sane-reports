@@ -226,11 +226,6 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                 />}
               </XAxis>}
               <Tooltip />
-              {referenceLineY &&
-                <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke}>
-                  <Label value={referenceLineY.label} fill={referenceLineY.stroke} position="top" />
-                </ReferenceLine>
-              }
               {legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend &&
                 <Legend
                   content={<ChartLegend
@@ -267,6 +262,11 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   />}
                 </Bar>
                   )}
+              {referenceLineY &&
+              <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke}>
+                <Label value={referenceLineY.label} fill={referenceLineY.stroke} position="top" />
+              </ReferenceLine>
+              }
             </BarChart>);
         }
         }
