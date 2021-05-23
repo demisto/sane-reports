@@ -22,8 +22,11 @@ h1 {
 }
 
 .global-section {
+  display: flex;
+  flex-direction: column;
   .global-section-row {
     display: flex;
+    flex: 1;
     flex-direction: row;
 
     .subsection-wrapper {
@@ -34,10 +37,6 @@ h1 {
         height: 100%;
       }
     }
-  }
-
-  .section-chart {
-    display: block;
   }
 }
 
@@ -147,12 +146,12 @@ h1 {
       }
 
       .section-title {
-        font-size: 18px;
-        margin-bottom: 10px;
+        font-size: @font-size-h3;
+        font-weight: @font-title-weight;
+        max-height: 36px;
       }
 
       &.section-show-overflow {
-        overflow-y: auto;
 
         .section-column-chart {
           overflow-y: auto;
@@ -161,7 +160,7 @@ h1 {
 
         .section-line-chart {
           .recharts-wrapper {
-            overflow-y: auto;
+            overflow-y: hidden;
             overflow-x: hidden;
           }
         }

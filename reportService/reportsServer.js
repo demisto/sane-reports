@@ -8,7 +8,8 @@ const path = require('path');
 
 const mmPixelSize = 3.779527559055;
 
-const PAGE_MARGIN = 60;
+const PAGE_MARGIN = 61;
+const BOTTOM_MARGIN = 40;
 
 (async() => {
   const paths = await chromePath();
@@ -87,16 +88,18 @@ const PAGE_MARGIN = 60;
     const dimensions = getPageSizeByOrientation(pageSize, orientation);
 
     const topMargin = (headerLeftImage || headerRightImage) && !disableHeaders ? PAGE_MARGIN : 0;
-    dimensions.height -= topMargin;
-    const bottomMargin = PAGE_MARGIN - 10;
-    const afterTypeReplace =
-      indexHtml
-        .replace('\'{report-type}\'', JSON.stringify(reportType))
-        .replace('{report-header-image-left}', headerLeftImage)
-        .replace('{report-header-image-right}', headerRightImage)
-        .replace('{report-dimensions}', JSON.stringify({ height: dimensions.height + 16, width: dimensions.width }))
-        .replace('{force-auto-height}', !!forceAutoHeightLayout);
+    dimensions.height -= topMargin + BOTTOM_MARGIN;
 
+    console.log('dimensions.height: ' + dimensions.height + ' - topMargin: ' +
+        topMargin + ' - bottomMargin: ' + BOTTOM_MARGIN);
+
+    const afterTypeReplace =
+        indexHtml
+            .replace('\'{report-type}\'', JSON.stringify(reportType))
+            .replace('{report-header-image-left}', headerLeftImage)
+            .replace('{report-header-image-right}', headerRightImage)
+            .replace('{report-dimensions}', JSON.stringify({ height: dimensions.height, width: dimensions.width }))
+            .replace('{force-auto-height}', !!forceAutoHeightLayout);
     const loadedData = fs.readFileSync(dataFile).toString();
 
     // $ is a special character in string replace, see here: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter
@@ -139,26 +142,26 @@ const PAGE_MARGIN = 60;
           path: outputFinal,
           format: pageSize,
           printBackground: true,
-          margin: {top: topMargin, bottom: bottomMargin},
+          margin: {top: topMargin, bottom: BOTTOM_MARGIN},
           displayHeaderFooter: true,
           headerTemplate: !disableHeaders ? "" + "<div style='" +
-          "height: 200px;" +
-          "font-size: 10px;" +
-          "width: 100%;" +
-          "margin-top: -7px;" +
-          "margin-right: -10px;" +
-          "margin-left: -10px;" +
-          "padding-top: 13px;" +
-          "padding-right: 20px;" +
-          "padding-left: 20px;'" +
-          ">" +
-          "<div style='text-align: left; float: left'>" +
-          "<img src=\"" + headerLeftImage + "\" height='20px'/>" +
-          "</div>" +
-          "<div style='text-align: right; float: right'>" +
-          "<img src=\"" + headerRightImage + "\" height='20px'/>" +
-          "</div>" +
-          "</div>" : '',
+              "height: 200px;" +
+              "font-size: 10px;" +
+              "width: 100%;" +
+              "margin-top: -7px;" +
+              "margin-right: -10px;" +
+              "margin-left: -10px;" +
+              "padding-top: 13px;" +
+              "padding-right: 20px;" +
+              "padding-left: 20px;'" +
+              ">" +
+              "<div style='text-align: left; float: left'>" +
+              "<img src=\"" + headerLeftImage + "\" height='20px'/>" +
+              "</div>" +
+              "<div style='text-align: right; float: right'>" +
+              "<img src=\"" + headerRightImage + "\" height='20px'/>" +
+              "</div>" +
+              "</div>" : '',
           footerTemplate: `
       <div style="font-size:12px!important;width:100%;margin: 0 auto;color:grey!important;padding-left:10px;text-align:center;" class="footer">
       ${headerLeftImage && disableHeaders ? '<img style="float: left;height: 10px;width: auto;margin: 0 10px;" src='+ headerLeftImage +' />' : ''}
@@ -193,3 +196,4 @@ const PAGE_MARGIN = 60;
     }
   }
 })().catch(console.error);
+

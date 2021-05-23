@@ -109,6 +109,10 @@ export function middleEllipsis(value, ellipsisThreshold, startLength, endLength)
   return newValue;
 }
 
+export function rightEllipsis(text, threshold) {
+  return middleEllipsis(text, threshold, threshold);
+}
+
 export function createMiddleEllipsisFormatter(maxLen) {
   const partsLen = maxLen - 3;
   const partLeft = Math.ceil(partsLen / 2);

@@ -18,7 +18,7 @@ import { getSectionComponent } from '../../utils/layout';
 import classNames from 'classnames';
 
 const ROW_PIXEL_HEIGHT = 110;
-const SECTION_HEIGHT_TOTAL_PADDING = 20;
+const SECTION_HEIGHT_TOTAL_PADDING = 10;
 
 class ReportLayout extends Component {
   static propTypes = {
@@ -88,7 +88,9 @@ class ReportLayout extends Component {
               maxOffset = Math.max(maxOffset, heightMap[i] || 0) || 0;
             }
             if ([SECTION_TYPES.image, SECTION_TYPES.logo, SECTION_TYPES.date].indexOf(item.section.type) < 0) {
-              maxOffset = maxOffset > 0 ? maxOffset + SECTION_HEIGHT_TOTAL_PADDING : maxOffset;
+              maxOffset = maxOffset % dimensions.height > 0 ?
+                maxOffset + SECTION_HEIGHT_TOTAL_PADDING :
+                maxOffset;
             }
             item.element.style.top = `${maxOffset}px`;
             const autoPageBreak = item.section.autoPageBreak !== false;
@@ -133,7 +135,7 @@ class ReportLayout extends Component {
       }
     });
 
-    return clientHeight;
+    return clientHeight + SECTION_HEIGHT_TOTAL_PADDING;
   };
 
   getItemHeight = (item) => {
