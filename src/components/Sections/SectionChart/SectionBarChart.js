@@ -205,6 +205,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   [dataMin => Math.floor(Math.min(0, dataMin, (referenceLineY && referenceLineY.y) || 0) * 1.33),
                     dataMax => Math.ceil(Math.max(dataMax, (referenceLineY && referenceLineY.y) || 0) * 1.33)]
                 }
+                tickFormatter={formatValue}
               >
                 {chartProperties.axis && chartProperties.axis.y && chartProperties.axis.y.label &&
                 <Label
@@ -236,6 +237,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                     data={dataItems}
                     valueDisplay={VALUE_FORMAT_TYPES.minimal}
                     showValue={!isColumnChart && !stacked}
+                    formatter={formatValue}
                     icon="square"
                     capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
                     layout={legendStyle.layout}

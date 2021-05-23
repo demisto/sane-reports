@@ -12,7 +12,7 @@ export const VALUE_FORMAT_TYPES = { minimal: 'minimal', stretch: 'stretch' };
 const DIGIT_PIXEL_SIZE = 8;
 const ICON_CONTAINER_PIXEL_SIZE = 25;
 const ChartLegend = ({ data, icon = 'square', layout = CHART_LAYOUT_TYPE.vertical, height, capitalize,
-  onClick, style, showValue = true, valueDisplay = VALUE_FORMAT_TYPES.stretch }) => {
+  onClick, style, showValue = true, valueDisplay = VALUE_FORMAT_TYPES.stretch, formatter }) => {
   let legendData = data || [];
   if (legendData.length === 0) {
     return <div />;
@@ -30,7 +30,8 @@ const ChartLegend = ({ data, icon = 'square', layout = CHART_LAYOUT_TYPE.vertica
     const mainClass = `recharts-legend-item legend-item-${i} ${layout}`;
     const legendIconClass = `${icon} icon chart-legend-icon`;
     let width = 'auto';
-    const value = group.value || 0;
+    const rawValue = group.value || 0;
+    const value = formatter ? formatter(rawValue) : rawValue;
     const percentage = group.percentage ? `${Math.round(group.percentage)}%` : undefined;
     // decrease width of name (if value exists) to allow for ellipsis.
     if (showValue) {
@@ -71,6 +72,7 @@ ChartLegend.propTypes = {
   data: PropTypes.array,
   icon: PropTypes.string,
   showValue: PropTypes.bool,
+  formatter: PropTypes.func,
   capitalize: PropTypes.bool,
   valueDisplay: PropTypes.oneOf(values(VALUE_FORMAT_TYPES)),
   layout: PropTypes.oneOf(values(CHART_LAYOUT_TYPE)),
