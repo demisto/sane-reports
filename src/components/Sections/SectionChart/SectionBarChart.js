@@ -12,11 +12,15 @@ import {
   CHART_LAYOUT_TYPE,
   CHART_LEGEND_ITEM_HEIGHT,
   NONE_VALUE_DEFAULT_NAME,
+  QUERIES_TIME_FORMAT,
+  SUPPORTED_TIME_FRAMES,
   WIDGET_DEFAULT_CONF
 } from '../../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
 import LabelAxisTick from '../LabelAxisTick';
+import moment from 'moment';
+import { getDateGroupName } from '../../../utils/time';
 
 const createXAxisProps = (data, dataKey, width) => {
   const ticks = data.map(x => x[dataKey]);
@@ -45,7 +49,7 @@ const createXAxisProps = (data, dataKey, width) => {
 };
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
-  legendStyle = null, sortBy, stacked, referenceLineY, reflectDimensions }) => {
+  legendStyle = null, sortBy, stacked, fromDate, referenceLineY, reflectDimensions }) => {
   const existingColors = {};
   const isColumnChart = chartProperties.layout === CHART_LAYOUT_TYPE.horizontal;
   let dataItems = {};
@@ -58,26 +62,40 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
 
   if (!stacked) {
     preparedData = preparedData.map((item) => {
-      let val = item.value || item.data;
+      const newItem = { ...item };
+      let val = newItem.value || newItem.data;
       if (isArray(val) && val.length > 0) {
         val = val[0];
       }
-      item.color = item.fill || item.color || getGraphColorByName(item.name, existingColors);
-      if (!item.name) {
-        item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+      newItem.color = newItem.fill || newItem.color || getGraphColorByName(newItem.name, existingColors);
+      if (!newItem.name) {
+        newItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
       }
-      existingColors[item.color] = true;
-      if (!legend || !dataItems[item.name]) {
-        item[item.name] = val;
-        dataItems[item.name] = { name: item.name,
-          color: item.color,
+
+      let formattedName = newItem.name;
+      if (chartProperties.isDatesChart) {
+        const from = fromDate && moment(fromDate).utc();
+        const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
+        const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
+
+        formattedName = getDateGroupName(newItem.name, timeFrame, timeFormat, from);
+      }
+
+      existingColors[newItem.color] = true;
+      if (!legend || !dataItems[newItem.name]) {
+        newItem[formattedName] = val;
+        dataItems[formattedName] = {
+          name: newItem.name,
+          formattedName,
+          color: newItem.color,
           value: val
         };
       } else {
-        dataItems[item.name].value = val;
+        dataItems[formattedName].value = val;
       }
-      item.total = val;
-      return item;
+      newItem.total = val;
+      newItem.name = formattedName;
+      return newItem;
     });
 
     dataItems = Object.keys(dataItems).map((key) => {
@@ -160,6 +178,9 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       dataItem.color = item.color || dataItem.color;
       if (!dataItem.name) {
         dataItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
+      }
+      if (dataItem.formattedName) {
+        dataItem.name = dataItem.formattedName;
       }
       return dataItem;
     });
@@ -286,6 +307,7 @@ SectionBarChart.propTypes = {
   legendStyle: PropTypes.object,
   sortBy: PropTypes.object,
   referenceLineY: PropTypes.object,
+  fromDate: PropTypes.object,
   stacked: PropTypes.bool,
   reflectDimensions: PropTypes.bool
 };

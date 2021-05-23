@@ -39,6 +39,7 @@ const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartPro
                       dimensions={dimensions}
                       legend={legend}
                       chartProperties={chartProperties}
+                      fromDate={fromDate && moment(fromDate)}
                       legendStyle={legendStyle}
                       sortBy={sortBy}
                       stacked={stacked}
