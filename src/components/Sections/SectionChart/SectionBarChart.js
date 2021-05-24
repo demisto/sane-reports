@@ -158,6 +158,15 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           }
         );
       }
+
+      if (chartProperties.isDatesChart) {
+        item.id = item.name;
+        const from = fromDate && moment(fromDate).utc();
+        const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
+        const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
+
+        item.name = getDateGroupName(item.name, timeFrame, timeFormat, from);
+      }
     });
     if (!isColumnChart) {
       margin.left = leftMargin;
