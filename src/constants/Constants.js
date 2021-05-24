@@ -119,6 +119,7 @@ export const WIDGET_FORMAT_PARTS = {
 };
 
 export const QUERIES_TIME_FORMAT = 'DD MMM Y';
+export const WEEKS_TIME_FORMAT = 'WW GG';
 export const SUPPORTED_TIME_FRAMES = {
   none: 'none',
   days: 'days',
@@ -126,7 +127,8 @@ export const SUPPORTED_TIME_FRAMES = {
   minutes: 'minutes',
   years: 'years',
   quarters: 'quarters',
-  months: 'months'
+  months: 'months',
+  weeks: 'weeks'
 };
 export const GRID_LAYOUT_COLUMNS = 12;
 export const CHART_LEGEND_ITEM_HEIGHT = 26;
