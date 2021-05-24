@@ -166,9 +166,13 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
   }
   const isFull = !reflectDimensions;
   const barSize = chartProperties.barSize || WIDGET_DEFAULT_CONF.barSize;
-  const minHeight = (dataItems.length * CHART_LEGEND_ITEM_HEIGHT) +
-    Math.min(BAR_CHART_FULL_ITEM_HEIGHT, dataItems.length * (barSize + WIDGET_DEFAULT_CONF.barSizeMargin));
 
+  let minHeight = Math.min(BAR_CHART_FULL_ITEM_HEIGHT,
+    dataItems.length * (barSize + WIDGET_DEFAULT_CONF.barSizeMargin));
+
+  if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical) {
+    minHeight += (dataItems.length * CHART_LEGEND_ITEM_HEIGHT);
+  }
   return (
     <div className={mainClass} style={style}>
       <AutoSizer>
