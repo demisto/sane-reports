@@ -18,6 +18,7 @@ import { compareFields } from '../../../utils/sort';
 import { getGraphColorByName } from '../../../utils/colors';
 import { formatNumberValue, getTextWidth, rightEllipsis } from '../../../utils/strings';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
+import { getDateGroupName } from '../../../utils/time';
 
 const SINGLE_LINE_CHART_NAME = 'sum';
 
@@ -72,7 +73,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         if (!from || !from.isValid()) {
           from = moment(name);
         }
-        name = moment(name).format(timeFormat);
+        name = getDateGroupName(name, timeFrame, timeFormat, from);
       }
 
       let currentGroup = mainGroup;
