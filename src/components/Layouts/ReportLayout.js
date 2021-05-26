@@ -139,13 +139,12 @@ class ReportLayout extends Component {
   };
 
   getItemHeight = (item) => {
-    const reflectDimensions = item.section.layout.reflectDimensions === true;
     if (!item.element) {
       return 0;
     }
-    if (item.element.scrollHeight && !reflectDimensions) {
+    if (item.element.scrollHeight) {
       return item.element.scrollHeight;
-    } else if (item.element.clientHeight && !reflectDimensions) {
+    } else if (item.element.clientHeight) {
       return item.element.clientHeight;
     } else if (item.element.style && item.element.style.height) {
       return parseInt(item.element.style.height.replace('px', ''), 10);
