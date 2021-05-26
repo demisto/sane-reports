@@ -3,6 +3,7 @@ import { hash } from './hash';
 import { NONE_VALUE_DEFAULT_NAME } from '../constants/Constants';
 
 export const DEFAULT_NONE_COLOR = '#999999';
+export const DEFAULT_LINE_STROKE_COLOR = 'rgb(137, 165, 193)';
 
 const graphColors = ['#E57373', '#FF1D1E', '#FF5000', '#E55100', '#D74315', '#F06292', '#FF3F81',
   '#F50057', '#C2195B', '#E91D63', '#AD1457', '#CE93D8', '#EA80FC', '#FA99D0', '#FD5BDE', '#D500F9', '#AA00FF',
