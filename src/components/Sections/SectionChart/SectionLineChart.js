@@ -81,7 +81,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
       currentGroup.name = name;
       const mainObject = { name };
       if (currentGroup.groups && currentGroup.data) {
-        multiGroupBy = currentGroup.groups.length > 0;
+        multiGroupBy = multiGroupBy || currentGroup.groups.length > 0;
         // add all sub groups to main object.
         currentGroup.groups.forEach((group) => {
           let groupName = group.name;
