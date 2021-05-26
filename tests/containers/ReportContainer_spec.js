@@ -392,11 +392,6 @@ describe('Report Container', () => {
     let lines = lineChart.at(0).find(Line);
     expect(lines).to.have.length(1);
 
-    chartLegend = lineChart.at(0).find(ChartLegend);
-    expect(chartLegend).to.have.length(1);
-    const chartLegendTexts = chartLegend.at(0).find('.recharts-legend-item-text');
-    expect(chartLegendTexts).to.have.length(1);
-
     expect(lineChart.at(0).find('.xAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.x.label);
     expect(lineChart.at(0).find('.yAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.y.label);
     expect(lineChart.at(0).props().data[0].name).to.equal('11 Dec 2017');
