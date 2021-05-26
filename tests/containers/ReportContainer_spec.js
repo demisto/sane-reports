@@ -611,6 +611,9 @@ describe('Report Container', () => {
     expect(durationValues.at(0).text()).to.equal('01');
     expect(durationValues.at(1).text()).to.equal('02');
     expect(durationValues.at(2).text()).to.equal('03');
+
+    const bg = duration.at(2).find('.duration-widget-container');
+    expect(bg.props().style.backgroundColor).to.equal('#D13C3C');
   });
 
   it('Generate test template A4 layout - test reflect dimensions prop', (done) => {

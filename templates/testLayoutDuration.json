@@ -139,7 +139,16 @@
       "chartProperties": {
         "daysLabel": "DAYS",
         "hoursLabel": "HOURS",
-        "minutesLabel": "MIN"
+        "minutesLabel": "MIN",
+        "colorParams": {
+          "isEnabled": true,
+          "items": {
+            "#D13C3C": {
+              "value": 60
+            }
+          },
+          "type": "above"
+        }
       },
       "columnPos": 0,
       "h": 1,
