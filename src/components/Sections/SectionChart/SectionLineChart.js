@@ -15,7 +15,7 @@ import {
   LINE_CHART_FULL_ITEM_HEIGHT
 } from '../../../constants/Constants';
 import { compareFields } from '../../../utils/sort';
-import { getGraphColorByName } from '../../../utils/colors';
+import { DEFAULT_LINE_STROKE_COLOR, getGraphColorByName } from '../../../utils/colors';
 import { formatNumberValue, getTextWidth, rightEllipsis } from '../../../utils/strings';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
 import { getDateGroupName } from '../../../utils/time';
@@ -58,6 +58,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   const lineTypes = {};
   let from = fromDate && moment(fromDate).utc();
   const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
+  let multiGroupBy = false;
   preparedData = compact(preparedData.sort((a, b) => compareFields(a.name, b.name)).map((mainGroup) => {
     let name = mainGroup.name;
     if (chartProperties.isDatesChart || chartProperties.isDatesChart === undefined) {
@@ -80,6 +81,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
       currentGroup.name = name;
       const mainObject = { name };
       if (currentGroup.groups && currentGroup.data) {
+        multiGroupBy = multiGroupBy || currentGroup.groups.length > 0;
         // add all sub groups to main object.
         currentGroup.groups.forEach((group) => {
           let groupName = group.name;
@@ -98,7 +100,9 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         });
       } else {
         if (currentGroup.data && currentGroup.data.length > 0) {
-          currentGroup = { name, [SINGLE_LINE_CHART_NAME]: currentGroup.data[0], color: currentGroup.color };
+          currentGroup = { name,
+            [SINGLE_LINE_CHART_NAME]: currentGroup.data[0],
+            color: currentGroup.color || DEFAULT_LINE_STROKE_COLOR };
         }
         Object.keys(currentGroup).filter(key => key !== 'name' && key !== 'color' &&
           key !== 'relatedTo').forEach((groupKey) => {
@@ -151,10 +155,9 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
 
     currentDate.add(1, timeFrame);
   }
-
   preparedLegend = values(lineTypes);
   preparedData = retData;
-  if (!isEmpty(legend) && Object.keys(lineTypes).length > 1) {
+  if (!isEmpty(legend) && Object.keys(lineTypes).length > 0 && multiGroupBy) {
     preparedLegend = legend.map((item) => {
       if (!item.name) {
         item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
@@ -225,7 +228,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                 fillOpacity={chartProperties.chartFillOpacity || 0.04}
               />
               <Tooltip />
-              {legendStyle && !legendStyle.hideLegend &&
+              {preparedLegend.length > 1 && legendStyle && !legendStyle.hideLegend &&
                 <Legend
                   content={<ChartLegend
                     icon="square"

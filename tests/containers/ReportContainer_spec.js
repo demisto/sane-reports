@@ -391,6 +391,7 @@ describe('Report Container', () => {
     expect(lineChart.at(0).props().height).to.equal(sec6.layout.dimensions.height);
     let lines = lineChart.at(0).find(Line);
     expect(lines).to.have.length(1);
+
     expect(lineChart.at(0).find('.xAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.x.label);
     expect(lineChart.at(0).find('.yAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.y.label);
     expect(lineChart.at(0).props().data[0].name).to.equal('11 Dec 2017');
@@ -486,7 +487,7 @@ describe('Report Container', () => {
     expect(tableHeader.at(2).text()).to.equal('ccc');
 
     chartLegend = reportContainer.find(ChartLegend);
-    expect(chartLegend).to.have.length(6);
+    expect(chartLegend).to.have.length(5);
     expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style);
     expect(chartLegend.at(0).props().capitalize).to.be.true;
     expect(chartLegend.at(3).props().capitalize).to.be.false;
