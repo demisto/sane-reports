@@ -154,7 +154,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
 
   preparedLegend = values(lineTypes);
   preparedData = retData;
-  if (!isEmpty(legend) && Object.keys(lineTypes).length > 1) {
+  if (!isEmpty(legend) && Object.keys(lineTypes).length > 0) {
     preparedLegend = legend.map((item) => {
       if (!item.name) {
         item.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
