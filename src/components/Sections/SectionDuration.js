@@ -6,6 +6,7 @@ import {
   DURATION_FORMAT,
   WIDGET_FORMAT_PARTS
 } from '../../constants/Constants';
+import { getThresholdColor } from '../../utils/colors';
 
 function formatNumber(num) {
   return ('0' + num).slice(-2);
@@ -88,10 +89,12 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle }) =>
     parts.push({ header: labels.min, value: minutes });
   }
 
+  const durationData = data.length > 0 && isArray(data[0].data) && data[0].data.length > 0 ? data[0].data[0] : 0;
+  const backgroundColor = getThresholdColor(chartProperties.colorParams, durationData);
   return (
     <div className="section-duration" style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
-      <div className="duration-widget-container">
+      <div style={{ backgroundColor }} className="duration-widget-container">
         <div className="ui center aligned middle aligned grid duration-widget">
           <div className="four wide column" style={{ padding: 0 }}>
             <i className="wait icon home" />

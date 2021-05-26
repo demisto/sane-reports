@@ -164,3 +164,8 @@ export const WIDGET_VALUES_FORMAT = {
   decimal: 'decimal',
   percentage: 'percentage'
 };
+
+export const COLOR_THRESHOLD_TYPE = {
+  above: 'above',
+  below: 'below'
+};

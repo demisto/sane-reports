@@ -1,6 +1,7 @@
 import seedrandom from 'seedrandom';
 import { hash } from './hash';
-import { NONE_VALUE_DEFAULT_NAME } from '../constants/Constants';
+import { COLOR_THRESHOLD_TYPE, NONE_VALUE_DEFAULT_NAME } from '../constants/Constants';
+import { isNumber } from 'lodash';
 
 export const DEFAULT_NONE_COLOR = '#999999';
 
@@ -43,4 +44,35 @@ export function getGraphColorByName(value, existingColors = {}) {
   const randomOpacity = rnd() + 0.01;
   const result = hexToRgb(candidate);
   return `rgba(${result.r}, ${result.g}, ${result.b}, ${randomOpacity})`;
+}
+
+export function getThresholdColor(colorParams, curr) {
+  let backgroundColor = null;
+
+  if (colorParams && colorParams.isEnabled) {
+    const type = colorParams.type || COLOR_THRESHOLD_TYPE.above;
+    let bestValue;
+    Object.keys(colorParams.items || {}).forEach((key) => {
+      const threshold = colorParams.items[key];
+      const value = isNumber(threshold.value) ? threshold.value : parseInt(threshold.value, 10);
+      if (!value && value !== 0) {
+        return;
+      }
+
+      const isMatchRequirements = type === COLOR_THRESHOLD_TYPE.above ? value < curr : value > curr;
+      if (isMatchRequirements) {
+        let isBest = true;
+        if (bestValue) {
+          isBest = type === COLOR_THRESHOLD_TYPE.above ?
+            value > bestValue : value < bestValue;
+        }
+        if (isBest) {
+          backgroundColor = key;
+          bestValue = value;
+        }
+      }
+    });
+  }
+
+  return backgroundColor;
 }
