@@ -487,7 +487,7 @@ describe('Report Container', () => {
     expect(tableHeader.at(2).text()).to.equal('ccc');
 
     chartLegend = reportContainer.find(ChartLegend);
-    expect(chartLegend).to.have.length(6);
+    expect(chartLegend).to.have.length(5);
     expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style);
     expect(chartLegend.at(0).props().capitalize).to.be.true;
     expect(chartLegend.at(3).props().capitalize).to.be.false;
