@@ -298,7 +298,11 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                   )}
               {referenceLineY &&
               <ReferenceLine y={referenceLineY.y} stroke={referenceLineY.stroke}>
-                <Label value={referenceLineY.label} fill={referenceLineY.stroke} position="top" />
+                <Label
+                  value={referenceLineY.label}
+                  fill={referenceLineY.stroke}
+                  position={chartProperties.showValues && dataItems.length === 1 ? 'insideBottomRight' : 'top'}
+                />
               </ReferenceLine>
               }
             </BarChart>);
