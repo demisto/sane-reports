@@ -11,7 +11,6 @@ import { isEmpty } from 'lodash';
 
 const SectionChart = ({ type, data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
   referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions, emptyString }) => {
-
   return (
     <div className="section-chart" style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
