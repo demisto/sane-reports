@@ -182,7 +182,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
         {({ width, height }) => {
           const finalWidth = width || dimensions.width;
           const xAxisProps = createXAxisProps(preparedData, 'name', finalWidth * 0.6);
-          const finalHeight = isFull ? dimensions.height : height || dimensions.height;
+          const finalHeight = isFull ? dimensions.height : dimensions.height || height;
 
           return (
             <LineChart
