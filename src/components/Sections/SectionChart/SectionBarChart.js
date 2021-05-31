@@ -141,8 +141,8 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
           }
           existingColors[innerItem.color] = true;
           allSubGroups[innerItem.name] = allSubGroups[innerItem.name] ?
-            { ...allSubGroups[innerItem.name], sum: allSubGroups[innerItem.name].sum + innerItem.name } :
-            { ...innerItem, sum: innerItem.name };
+            { ...allSubGroups[innerItem.name], sum: allSubGroups[innerItem.name].sum + innerItem.data[0] } :
+            { ...innerItem, sum: innerItem.data[0] };
 
           item[innerItem.name] = innerItem.data[0];
           item.total += item[innerItem.name];
@@ -171,7 +171,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     if (!isColumnChart) {
       margin.left = leftMargin;
     }
-    dataItems = Object.values(allSubGroups).sort((a, b) => sortByField(['sum', 'name'], [false, true])(a, b));
+    dataItems = Object.values(allSubGroups);
   }
 
   if (legend) {
@@ -194,6 +194,11 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
       return dataItem;
     });
   }
+
+  if (stacked) {
+    dataItems = dataItems.sort((a, b) => sortByField(['sum', 'name'], [false, true])(a, b));
+  }
+
   const isFull = !reflectDimensions;
   const barSize = chartProperties.barSize || WIDGET_DEFAULT_CONF.barSize;
 

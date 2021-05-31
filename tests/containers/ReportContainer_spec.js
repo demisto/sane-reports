@@ -371,6 +371,13 @@ describe('Report Container', () => {
     expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);
     expect(barChart.at(0).props().data).to.deep.equal(sec1.data);
+
+    const legendItems = barChart.at(0).find('.recharts-legend-item-text');
+    expect(legendItems[0]).to.equal('SubGroup1');
+    expect(legendItems[1]).to.equal('SubGroup4');
+    expect(legendItems[2]).to.equal('SubGroup2');
+    expect(legendItems[3]).to.equal('SubGroup3');
+
     const bars = barChart.at(0).find(Bar);
     expect(bars).to.have.length(sec1.data.reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), []).length);
     expect(barChart.at(1).props().width).to.equal(sec4.layout.dimensions.width);
