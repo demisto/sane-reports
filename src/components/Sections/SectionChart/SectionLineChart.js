@@ -129,7 +129,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
   const frames = timeFrame !== SUPPORTED_TIME_FRAMES.none ?
     Math.ceil(finalToDate.diff(from, timeFrame, true)) : preparedData.length - 1;
   const currentDate = moment(from);
-  for (let i = 0; i <= frames; i++) {
+  for (let i = 0; i < frames; i++) {
     const formattedDate = timeFrame !== SUPPORTED_TIME_FRAMES.none ?
       currentDate.format(timeFormat) : preparedData[i].name;
     const mainGroup = preparedData.filter(item =>
