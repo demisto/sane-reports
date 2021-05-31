@@ -181,7 +181,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
       <AutoSizer>
         {({ width, height }) => {
           const finalWidth = width || dimensions.width;
-          const xAxisProps = createXAxisProps(data, 'name', finalWidth * 0.6);
+          const xAxisProps = createXAxisProps(preparedData, 'name', finalWidth * 0.6);
           const finalHeight = isFull ? dimensions.height : height || dimensions.height;
 
           return (
