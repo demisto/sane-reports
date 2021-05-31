@@ -395,7 +395,7 @@ describe('Report Container', () => {
     expect(lineChart.at(0).find('.xAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.x.label);
     expect(lineChart.at(0).find('.yAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.y.label);
     expect(lineChart.at(0).props().data[0].name).to.equal('11 Dec 2017');
-    expect(lineChart.at(0).props().data.length).to.equal(1267);
+    expect(lineChart.at(0).props().data.length).to.equal(1268);
 
     expect(lineChart.at(1).props().width).to.equal(sec7.layout.dimensions.width);
     expect(lineChart.at(1).props().height).to.equal(sec7.layout.dimensions.height);
@@ -413,7 +413,7 @@ describe('Report Container', () => {
     expectChartLegendFromChartElement(lineChart.at(1), sec7.data[2].groups);
 
     expect(lineChart.at(2).props().data[0].name).to.equal(sec13.data[0].name);
-    expect(lineChart.at(2).props().data.length).to.equal(1);
+    expect(lineChart.at(2).props().data.length).to.equal(2);
     // Trend
     const trendNumber = reportContainer.find(SectionNumber);
     expect(trendNumber).to.have.length(1);
