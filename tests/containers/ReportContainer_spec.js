@@ -307,8 +307,6 @@ describe('Report Container', () => {
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
 
-    await new Promise(resolve => setTimeout(resolve, 5001));
-
     const hiddenHeader = reportContainer.find('.hidden-header');
     expect(hiddenHeader).to.have.length(1);
     expect(hiddenHeader.get(0).props.style).to.deep.equal({ display: 'none' });
@@ -368,18 +366,18 @@ describe('Report Container', () => {
 
     expect(pie.props().data[pie.props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
     expect(pie.props().data[pie.props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
-    let chartLegend = expectChartLegendFromChartElement(pieChart, sec3.data, true);
+    expectChartLegendFromChartElement(pieChart, sec3.data, true);
 
     expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);
     expect(barChart.at(0).props().data).to.deep.equal(sec1.data);
 
-    const legendItems = barChart.at(0).find('.recharts-legend-item-text');
-    expect(legendItems.length).to.equal(4);
-    expect(legendItems[0]).to.equal('SubGroup1');
-    expect(legendItems[1]).to.equal('SubGroup4');
-    expect(legendItems[2]).to.equal('SubGroup2');
-    expect(legendItems[3]).to.equal('SubGroup3');
+    expectChartLegendFromChartElement(barChart.at(0), [
+      { name: 'SubGroup1' },
+      { name: 'SubGroup4' },
+      { name: 'SubGroup2' },
+      { name: 'SubGroup3' }
+    ]);
 
     const bars = barChart.at(0).find(Bar);
     expect(bars).to.have.length(sec1.data.reduce((prev, curr) => unionBy(prev, curr.groups, 'name'), []).length);
@@ -496,7 +494,7 @@ describe('Report Container', () => {
     expect(tableHeader.at(1).text()).to.equal('bbb');
     expect(tableHeader.at(2).text()).to.equal('ccc');
 
-    chartLegend = reportContainer.find(ChartLegend);
+    const chartLegend = reportContainer.find(ChartLegend);
     expect(chartLegend).to.have.length(5);
     expect(chartLegend.at(0).props().style).to.be.equal(sec1.layout.legendStyle.style);
     expect(chartLegend.at(0).props().capitalize).to.be.true;
