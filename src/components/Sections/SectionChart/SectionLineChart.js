@@ -35,6 +35,9 @@ const createXAxisProps = (data, dataKey, width) => {
     props.textAnchor = 'end';
     props.angle = WIDGET_DEFAULT_CONF.tickAngle;
     props.height = getTextWidth(ticks[0], WIDGET_DEFAULT_CONF.font) + 10;
+    props.tick = {
+      width: 0
+    };
     props.dx = -5;
     props.dy = 0;
   }
@@ -178,7 +181,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
       <AutoSizer>
         {({ width, height }) => {
           const finalWidth = width || dimensions.width;
-          const xAxisProps = createXAxisProps(data, 'name', finalWidth * 0.6);
+          const xAxisProps = createXAxisProps(preparedData, 'name', finalWidth * 0.6);
           const finalHeight = isFull ? dimensions.height : dimensions.height || height;
 
           return (
