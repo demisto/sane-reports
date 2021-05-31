@@ -302,10 +302,12 @@ describe('Report Container', () => {
     expect(listItems.at(1).props().data).to.equal(sec25.data[listKeys[1]]);
   });
 
-  it('Generate test template layout report', () => {
+  it('Generate test template layout report', async () => {
     const testTemplate = TemplateProvider.getTestLayoutTemplate();
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
+
+    await new Promise(resolve => setTimeout(resolve, 5001));
 
     const hiddenHeader = reportContainer.find('.hidden-header');
     expect(hiddenHeader).to.have.length(1);
@@ -373,6 +375,7 @@ describe('Report Container', () => {
     expect(barChart.at(0).props().data).to.deep.equal(sec1.data);
 
     const legendItems = barChart.at(0).find('.recharts-legend-item-text');
+    expect(legendItems.length).to.equal(4);
     expect(legendItems[0]).to.equal('SubGroup1');
     expect(legendItems[1]).to.equal('SubGroup4');
     expect(legendItems[2]).to.equal('SubGroup2');
@@ -500,7 +503,7 @@ describe('Report Container', () => {
     expect(chartLegend.at(3).props().capitalize).to.be.false;
   });
 
-  it('Generate test template A4 layout - test auto page break', (done) => {
+  it('Generate test template A4 layout - test auto page break', async () => {
     const testTemplate = TemplateProvider.getTestLayoutTemplateWithPageBreaks();
     const renderReport = (section) => {
       return <ReportContainer
@@ -514,30 +517,29 @@ describe('Report Container', () => {
     const sectionWithoutAutoPageBreak = prepareSections(cloneDeep(testTemplate), null, false);
     const reportWithoutAutoPageBreak = mount(renderReport(sectionWithoutAutoPageBreak));
 
-    setTimeout(() => {
-      const reportLayoutWithAutoPageBreak = reportWithAutoPageBreak.find(ReportLayout);
-      const reportLayoutWithoutAutoPageBreak = reportWithoutAutoPageBreak.find(ReportLayout);
+    await new Promise(resolve => setTimeout(resolve, 5001));
 
-      const sectionsLayout = reportLayoutWithAutoPageBreak.find('.section-layout');
-      expect(sectionsLayout).to.have.length(5);
-      const sectionsShowOverflows = reportLayoutWithAutoPageBreak.find('.section-show-overflow');
-      expect(sectionsShowOverflows).to.have.length(0);
+    const reportLayoutWithAutoPageBreak = reportWithAutoPageBreak.find(ReportLayout);
+    const reportLayoutWithoutAutoPageBreak = reportWithoutAutoPageBreak.find(ReportLayout);
 
-      const elementsWithAutoPageBreak = reportLayoutWithAutoPageBreak.instance().itemElements;
-      const itemElementsWithoutAutoPageBreak = reportLayoutWithoutAutoPageBreak.instance().itemElements;
+    const sectionsLayout = reportLayoutWithAutoPageBreak.find('.section-layout');
+    expect(sectionsLayout).to.have.length(5);
+    const sectionsShowOverflows = reportLayoutWithAutoPageBreak.find('.section-show-overflow');
+    expect(sectionsShowOverflows).to.have.length(0);
 
-      const keys = Object.keys(itemElementsWithoutAutoPageBreak);
-      const lastKey = keys[keys.length - 1];
+    const elementsWithAutoPageBreak = reportLayoutWithAutoPageBreak.instance().itemElements;
+    const itemElementsWithoutAutoPageBreak = reportLayoutWithoutAutoPageBreak.instance().itemElements;
 
-      const lastElementTopWithAutoPageBreak = elementsWithAutoPageBreak[lastKey].element.style.top;
-      const lastElementTopWithoutAutoPageBreak = itemElementsWithoutAutoPageBreak[lastKey].element.style.top;
+    const keys = Object.keys(itemElementsWithoutAutoPageBreak);
+    const lastKey = keys[keys.length - 1];
 
-      expect(lastElementTopWithAutoPageBreak).to.not.equal(lastElementTopWithoutAutoPageBreak);
-      done();
-    }, 5001);
+    const lastElementTopWithAutoPageBreak = elementsWithAutoPageBreak[lastKey].element.style.top;
+    const lastElementTopWithoutAutoPageBreak = itemElementsWithoutAutoPageBreak[lastKey].element.style.top;
+
+    expect(lastElementTopWithAutoPageBreak).to.not.equal(lastElementTopWithoutAutoPageBreak);
   });
 
-  it('Generate test template layout report show bar values', (done) => {
+  it('Generate test template layout report show bar values', async () => {
     const testTemplate = TemplateProvider.getTestLayoutTemplate();
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
@@ -545,26 +547,24 @@ describe('Report Container', () => {
     const reportLayouts = reportContainer.find(ReportLayout);
     expect(reportLayouts).to.have.length(1);
 
-    setTimeout(() => {
-      const barChart = reportContainer.find(SectionBarChart);
-      expect(barChart).to.have.length(3);
-      expect(barChart.at(0).props().chartProperties.showValues).to.equal(undefined);
-      expect(barChart.at(0).props().chartProperties.axis).to.be.undefined;
-      expect(barChart.at(0).props().chartProperties.axis).to.be.undefined;
-      expect(barChart.at(1).props().chartProperties.showValues).to.equal(true);
-      expect(barChart.at(1).props().chartProperties.axis.x.label).to.not.be.empty;
-      expect(barChart.at(1).props().chartProperties.axis.y.label).to.not.be.empty;
-      expect(barChart.at(2).props().chartProperties.showValues).to.equal(undefined);
+    await new Promise(resolve => setTimeout(resolve, 5001));
 
-      expect(barChart.at(0).find('.xAxis')).to.be.empty;
-      expect(barChart.at(0).find('.yAxis')).to.be.empty;
-      expect(barChart.at(1).find('.xAxis').at(0).text()).to
-        .contain(barChart.at(1).props().chartProperties.axis.x.label);
-      expect(barChart.at(1).find('.yAxis').at(0).text()).to
-        .contain(barChart.at(1).props().chartProperties.axis.y.label);
+    const barChart = reportContainer.find(SectionBarChart);
+    expect(barChart).to.have.length(3);
+    expect(barChart.at(0).props().chartProperties.showValues).to.equal(undefined);
+    expect(barChart.at(0).props().chartProperties.axis).to.be.undefined;
+    expect(barChart.at(0).props().chartProperties.axis).to.be.undefined;
+    expect(barChart.at(1).props().chartProperties.showValues).to.equal(true);
+    expect(barChart.at(1).props().chartProperties.axis.x.label).to.not.be.empty;
+    expect(barChart.at(1).props().chartProperties.axis.y.label).to.not.be.empty;
+    expect(barChart.at(2).props().chartProperties.showValues).to.equal(undefined);
 
-      done();
-    }, 5001);
+    expect(barChart.at(0).find('.xAxis')).to.be.empty;
+    expect(barChart.at(0).find('.yAxis')).to.be.empty;
+    expect(barChart.at(1).find('.xAxis').at(0).text()).to
+      .contain(barChart.at(1).props().chartProperties.axis.x.label);
+    expect(barChart.at(1).find('.yAxis').at(0).text()).to
+      .contain(barChart.at(1).props().chartProperties.axis.y.label);
   });
 
   it('Generate test template layout report with duration formats', () => {
@@ -621,7 +621,7 @@ describe('Report Container', () => {
     expect(durationValues.at(2).text()).to.equal('03');
   });
 
-  it('Generate test template A4 layout - test reflect dimensions prop', (done) => {
+  it('Generate test template A4 layout - test reflect dimensions prop', async () => {
     const testTemplate = TemplateProvider.getTestLayoutTemplateWithPageBreaks();
     const renderReport = (section) => {
       return <ReportContainer
@@ -632,15 +632,14 @@ describe('Report Container', () => {
     const sectionWithReflectDimensions = prepareSections(cloneDeep(testTemplate), null, true, true);
     const report = mount(renderReport(sectionWithReflectDimensions));
 
-    setTimeout(() => {
-      const reportLayout = report.find(ReportLayout);
+    await new Promise(resolve => setTimeout(resolve, 5001));
 
-      const sectionsLayout = reportLayout.find('.section-layout');
-      expect(sectionsLayout).to.have.length(5);
-      const sectionsShowOverflows = reportLayout.find('.section-show-overflow');
-      expect(sectionsShowOverflows).to.have.length(5);
-      done();
-    }, 5001);
+    const reportLayout = report.find(ReportLayout);
+
+    const sectionsLayout = reportLayout.find('.section-layout');
+    expect(sectionsLayout).to.have.length(5);
+    const sectionsShowOverflows = reportLayout.find('.section-show-overflow');
+    expect(sectionsShowOverflows).to.have.length(5);
   });
 
   it('Generate test empty table template', () => {
