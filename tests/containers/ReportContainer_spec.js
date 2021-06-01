@@ -327,6 +327,7 @@ describe('Report Container', () => {
     const sec11 = testTemplate[10];
     const sec12 = testTemplate[11];
     const sec13 = testTemplate[12];
+    const sec14 = testTemplate[13];
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
@@ -357,16 +358,23 @@ describe('Report Container', () => {
     const pie = reportContainer.find(Pie);
 
     expect(barChart).to.have.length(3);
-    expect(pieChart).to.have.length(1);
+    expect(pieChart).to.have.length(2);
     expect(lineChart).to.have.length(3);
-    expect(pie).to.have.length(1);
+    expect(pie).to.have.length(2);
 
-    expect(pieChart.props().width).to.equal(sec3.layout.dimensions.width);
-    expect(pie.props().data.length).to.equal(sec3.data.length);
+    expect(pieChart.at(0).props().width).to.equal(sec3.layout.dimensions.width);
+    expect(pie.at(0).props().data.length).to.equal(sec3.data.length);
 
-    expect(pie.props().data[pie.props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
-    expect(pie.props().data[pie.props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
-    expectChartLegendFromChartElement(pieChart, sec3.data, true);
+    expect(pie.at(0).props().data[pie.props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
+    expect(pie.at(0).props().data[pie.props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
+    expectChartLegendFromChartElement(pieChart.at(0), sec3.data, true);
+
+    expect(pieChart.at(1).props().width).to.equal(sec3.layout.dimensions.width);
+    expect(pie.at(1).props().data.length).to.equal(sec3.data.length);
+
+    expect(pie.at(1).props().data[pie.props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
+    expect(pie.at(1).props().data[pie.props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
+    expectChartLegendFromChartElement(pieChart.at(1), sec14.data, false);
 
     expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);

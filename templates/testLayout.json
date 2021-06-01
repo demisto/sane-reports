@@ -1064,5 +1064,82 @@
     "emptyNotification": "No results found",
     "titleStyle": null,
     "autoPageBreak": true
+  },
+  {
+    "type": "chart",
+    "data": [
+      {
+        "name": "AA",
+        "relatedTo": 1,
+        "value": [
+          2
+        ]
+      },
+      {
+        "name": "BB",
+        "relatedTo": 1,
+        "value": [
+          2
+        ]
+      },
+      {
+        "name": "",
+        "relatedTo": 1,
+        "value": [
+          1
+        ]
+      },
+      {
+        "name": "CC",
+        "relatedTo": 1,
+        "value": [
+          0
+        ]
+      }
+    ],
+    "layout": {
+      "chartProperties": {
+        "cx": "50%",
+        "cy": "50%",
+        "innerRadius": "75%",
+        "layout": "vertical",
+        "maxRadius": 0,
+        "outerRadius": "100%"
+      },
+      "chartType": "pie",
+      "columnPos": 5,
+      "dimensions": {
+        "height": 312,
+        "width": 184
+      },
+      "h": 3,
+      "i": "1a834660-f5eb-11e7-92ea-eb1e1a874380",
+      "legendStyle": {
+        "align": "center",
+        "iconType": "circle",
+        "layout": "vertical",
+        "verticalAlign": "bottom",
+        "width": 0,
+        "hideLegend": true
+      },
+      "rowPos": 10,
+      "w": 3
+    },
+    "query": {
+      "filter": {
+        "period": {
+          "fromValue": 30,
+          "by": "day"
+        },
+        "fromDate": "2017-12-10T22:00:00Z",
+        "toDate": null
+      }
+    },
+    "automation": {
+      "name": "",
+      "args": null
+    },
+    "fromDate": "2017-12-11T12:07:50+02:00",
+    "title": "Test test"
   }
 ]
