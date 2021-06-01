@@ -403,11 +403,11 @@ describe('Report Container', () => {
     expect(lineChart.at(0).find('.xAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.x.label);
     expect(lineChart.at(0).find('.yAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.y.label);
     expect(lineChart.at(0).props().data[0].name).to.equal('11 Dec 2017');
-    expect(lineChart.at(0).props().data.length).to.equal(1268);
+    expect(lineChart.at(0).props().data.length).to.equal(1269);
 
     expect(lineChart.at(1).props().width).to.equal(sec7.layout.dimensions.width);
     expect(lineChart.at(1).props().height).to.equal(sec7.layout.dimensions.height);
-    expect(lineChart.at(1).props().data.length).to.equal(2);
+    expect(lineChart.at(1).props().data.length).to.equal(3);
     refLine = lineChart.at(1).find('.recharts-reference-line-line');
     expect(refLine.props().y).to.be.equal(sec7.layout.referenceLineY.y);
     expect(refLine.props().stroke).to.be.equal(sec7.layout.referenceLineY.stroke);
