@@ -129,7 +129,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 }
               </Pie>
               <Tooltip />
-              {preparedData.length > 1 && legendStyle && !legendStyle.hideLegend &&
+              {preparedData.length > 0 && legendStyle && !legendStyle.hideLegend &&
                 <Legend
                   wrapperStyle={chartProperties.layout === CHART_LAYOUT_TYPE.vertical ? {
                     width: '100%'
