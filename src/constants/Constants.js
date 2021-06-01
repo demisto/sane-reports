@@ -47,6 +47,8 @@ export const CHART_LAYOUT_TYPE = {
   vertical: 'vertical'
 };
 
+export const GROUPS_COMPLEMENT_NAME = 'Other';
+
 export const WIDGET_DEFAULT_CONF = {
   lineHeight: 22,
   tickAngle: -40,
@@ -54,8 +56,8 @@ export const WIDGET_DEFAULT_CONF = {
   font: '12px Source Sans Pro',
   size: 10,
   sizeThresholdWarning: 100,
-  showOthers: true,
-  otherGroup: 'Other',
+  showOthers: false,
+  otherGroup: GROUPS_COMPLEMENT_NAME,
   barSize: 15,
   barSizeMargin: 15
 };

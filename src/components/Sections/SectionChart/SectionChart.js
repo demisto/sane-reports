@@ -5,24 +5,12 @@ import SectionBarChart from './SectionBarChart';
 import SectionPieChart from './SectionPieChart';
 import SectionLineChart from './SectionLineChart';
 import WidgetEmptyState from '../WidgetEmptyState';
-import {
-  CHART_TYPES,
-  WIDGET_DEFAULT_CONF
-} from '../../../constants/Constants';
+import { CHART_TYPES } from '../../../constants/Constants';
 import moment from 'moment';
-import { isBoolean, isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
 
-const filterResults = (chartProperties, rawResults) => {
-  const showOthersParam = chartProperties.showOthers;
-  const showOthers = isBoolean(showOthersParam) ? showOthersParam : WIDGET_DEFAULT_CONF.showOthers;
-  return (!showOthers && rawResults && Array.isArray(rawResults)) ?
-    rawResults.filter(item => item.name !== WIDGET_DEFAULT_CONF.otherGroup) : rawResults;
-};
-
-const SectionChart = ({ type, data: rawData, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
+const SectionChart = ({ type, data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
   referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions, emptyString }) => {
-  const data = filterResults(chartProperties, rawData);
-
   return (
     <div className="section-chart" style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
