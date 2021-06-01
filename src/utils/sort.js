@@ -1,7 +1,37 @@
 import moment from 'moment';
 import { isDateNotValid } from './time';
-import { sortStrings } from './strings';
+import { isNumber } from './validators';
 import { isBoolean, get } from 'lodash';
+
+export function sortNumbers(n1, n2, asc = true) {
+  if (n1 > n2) {
+    return asc ? -1 : 1;
+  }
+  if (n1 < n2) {
+    return asc ? 1 : -1;
+  }
+  return 0;
+}
+
+export function sortStrings(s1In, s2In, asc = true) {
+  if (!isNaN(s1In) && !isNaN(s2In)) {
+    const s1 = parseInt(s1In, 10);
+    const s2 = parseInt(s2In, 10);
+    return s1 - s2;
+  }
+
+  // make sure empty strings are in the end
+  const s1 = s1In || '|||';
+  const s2 = s2In || '|||';
+  if ((s1.toLowerCase()) > (s2.toLowerCase())) {
+    return asc ? 1 : -1;
+  }
+  if (s1.toLowerCase() < s2.toLowerCase()) {
+    return asc ? -1 : 1;
+  }
+  // a must be equal to b
+  return 0;
+}
 
 export function sortDates(date1, date2, asc = true) {
   const d1 = new Date(date1);
@@ -22,28 +52,22 @@ export function sortDates(date1, date2, asc = true) {
   return 0;
 }
 
-export function compareFields(f1, f2) {
+export function compareFields(f1, f2, asc = true) {
   if (typeof f1 === 'string' && typeof f2 === 'string') {
-    if (!isNaN(f1) && !isNaN(f2)) {
+    if (isNumber(f1) && isNumber(f2)) {
       const n1 = parseInt(f1, 10);
       const n2 = parseInt(f2, 10);
-      return n1 - n2;
+      return asc ? n1 - n2 : n2 - n1;
     }
     if (!isDateNotValid(f1) && !isDateNotValid(f2)) {
-      return sortDates(f1, f2);
+      return sortDates(f1, f2, asc);
     }
-    return sortStrings(f1, f2);
+    return sortStrings(f1, f2, asc);
   }
   if (isBoolean(f1) || isBoolean(f2)) {
-    return (f2 || false) - (f1 || false);
+    return asc ? (f2 || false) - (f1 || false) : (f1 || false) - (f2 || false);
   }
-  if (f1 > f2) {
-    return 1;
-  }
-  if (f1 < f2) {
-    return -1;
-  }
-  return 0;
+  return sortNumbers(f1, f2, !asc);
 }
 
 export function sortByFieldsWithPriority(fields) {
