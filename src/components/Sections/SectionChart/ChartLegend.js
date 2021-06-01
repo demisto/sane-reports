@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   CHART_LEGEND_ITEM_HEIGHT,
-  CHART_LAYOUT_TYPE
+  CHART_LAYOUT_TYPE, INCIDENT_FORM_FIELDS
 } from '../../../constants/Constants';
 import { isEmpty, values } from 'lodash';
 import { sortByField } from '../../../utils/sort';
 
-const NON_SORT_FIELDS = ['severity', 'dbotStatus'];
+const NON_SORT_FIELDS = [INCIDENT_FORM_FIELDS.severity, INCIDENT_FORM_FIELDS.status];
 export const VALUE_FORMAT_TYPES = { minimal: 'minimal', stretch: 'stretch' };
 
 const DIGIT_PIXEL_SIZE = 8;
