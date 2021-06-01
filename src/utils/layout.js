@@ -151,7 +151,11 @@ export function getSectionComponent(section, maxWidth) {
       );
       break;
     case SECTION_TYPES.chart: {
-      const processedData = processData(section.query.type, section.data, section.query.groupBy);
+      const processedData = processData(
+        get(section, 'query.type', null),
+        section.data,
+        get(section, 'query.groupBy', [])
+      );
       sectionToRender = (
         <SectionChart
           data={processedData}
