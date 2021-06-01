@@ -166,3 +166,33 @@ export const WIDGET_VALUES_FORMAT = {
   decimal: 'decimal',
   percentage: 'percentage'
 };
+
+export const INCIDENT_FIELDS = {
+  severity: 'severity'
+};
+
+export const INCIDENT_SEVERITY = {
+  unknown: {
+    value: 0
+  },
+  informational: {
+    value: 0.5
+  },
+  low: {
+    value: 1
+  },
+  medium: {
+    value: 2
+  },
+  high: {
+    value: 3
+  },
+  critical: {
+    value: 4
+  }
+};
+
+export const DATA_TYPES = {
+  incident: 'incident'
+};
+

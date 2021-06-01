@@ -18,6 +18,7 @@ import {
 } from '../components/Sections';
 import { isNumber, isObjectLike, compact, isString, groupBy, get } from 'lodash';
 import React from 'react';
+import { processData } from './data';
 
 function getDefaultEmptyNotification() {
   return 'No results found.';
@@ -149,10 +150,11 @@ export function getSectionComponent(section, maxWidth) {
         />
       );
       break;
-    case SECTION_TYPES.chart:
+    case SECTION_TYPES.chart: {
+      const processedData = processData(section.query.type, section.data, section.query.groupBy);
       sectionToRender = (
         <SectionChart
-          data={section.data}
+          data={processedData}
           type={section.layout.chartType}
           style={section.layout.style}
           titleStyle={section.titleStyle}
@@ -173,6 +175,7 @@ export function getSectionComponent(section, maxWidth) {
         />
       );
       break;
+    }
     case SECTION_TYPES.table:
       sectionToRender = (
         <SectionTable
