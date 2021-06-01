@@ -56,7 +56,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     return formatNumberValue(v, valuesFormat);
   };
 
-  const finalToDate = toDate || moment().subtract(1, 'days').utc();
+  const finalToDate = toDate || moment().utc();
   const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
   const lineTypes = {};
   let from = fromDate && moment(fromDate).utc();
@@ -134,29 +134,30 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
 
   const currentDate = moment(from);
   for (let i = 0; i <= frames; i++) {
-    const formattedDate = timeFrame !== SUPPORTED_TIME_FRAMES.none ?
-      currentDate.format(timeFormat) : preparedData[i].name;
-    const mainGroup = preparedData.filter(item =>
-      formattedDate === item.name);
-    const group = mainGroup && mainGroup.length > 0 && mainGroup[0];
-    if (!group) {
-      const dataObj = {
-        name: formattedDate
-      };
-      Object.keys(lineTypes).forEach((groupName) => {
-        dataObj[groupName] = 0;
-      });
-      retData.push(dataObj);
-    } else {
+    if (currentDate <= finalToDate) {
+      const formattedDate = timeFrame !== SUPPORTED_TIME_FRAMES.none ?
+        currentDate.format(timeFormat) : preparedData[i].name;
+      const mainGroup = preparedData.filter(item =>
+        formattedDate === item.name);
+      const group = mainGroup && mainGroup.length > 0 && mainGroup[0];
+      if (!group) {
+        const dataObj = {
+          name: formattedDate
+        };
+        Object.keys(lineTypes).forEach((groupName) => {
+          dataObj[groupName] = 0;
+        });
+        retData.push(dataObj);
+      } else {
       // complete missing subgroups for the graph to show complete lines.
-      Object.keys(lineTypes).forEach((groupName) => {
-        if (!(groupName in group)) {
-          group[groupName] = 0;
-        }
-      });
-      retData.push(group);
+        Object.keys(lineTypes).forEach((groupName) => {
+          if (!(groupName in group)) {
+            group[groupName] = 0;
+          }
+        });
+        retData.push(group);
+      }
     }
-
     currentDate.add(1, timeFrame);
   }
   preparedLegend = values(lineTypes);
