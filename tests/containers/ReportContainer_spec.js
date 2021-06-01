@@ -365,15 +365,15 @@ describe('Report Container', () => {
     expect(pieChart.at(0).props().width).to.equal(sec3.layout.dimensions.width);
     expect(pie.at(0).props().data.length).to.equal(sec3.data.length);
 
-    expect(pie.at(0).props().data[pie.props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
-    expect(pie.at(0).props().data[pie.props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
+    expect(pie.at(0).props().data[pie.at(0).props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
+    expect(pie.at(0).props().data[pie.at(0).props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
     expectChartLegendFromChartElement(pieChart.at(0), sec3.data, true);
 
     expect(pieChart.at(1).props().width).to.equal(sec3.layout.dimensions.width);
     expect(pie.at(1).props().data.length).to.equal(sec3.data.length);
 
-    expect(pie.at(1).props().data[pie.props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
-    expect(pie.at(1).props().data[pie.props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
+    expect(pie.at(1).props().data[pie.at(1).props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
+    expect(pie.at(1).props().data[pie.at(1).props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
     expectChartLegendFromChartElement(pieChart.at(1), sec14.data, false);
 
     expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
