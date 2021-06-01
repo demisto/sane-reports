@@ -6,7 +6,7 @@ import {
   CHART_LEGEND_ITEM_HEIGHT,
   CHART_LAYOUT_TYPE, INCIDENT_FORM_FIELDS
 } from '../../../constants/Constants';
-import { isEmpty, values } from 'lodash';
+import { cloneDeep, isEmpty, values } from 'lodash';
 import { sortByField } from '../../../utils/sort';
 
 const NON_SORT_FIELDS = [INCIDENT_FORM_FIELDS.severity, INCIDENT_FORM_FIELDS.status];
@@ -17,7 +17,7 @@ const ICON_CONTAINER_PIXEL_SIZE = 25;
 const ChartLegend = ({ data, icon = 'square', layout = CHART_LAYOUT_TYPE.vertical, height, capitalize,
   onClick, style, showValue = true, valueDisplay = VALUE_FORMAT_TYPES.stretch, formatter, enableSort,
   groupBy }) => {
-  let legendData = data || [];
+  let legendData = cloneDeep(data) || [];
   if (legendData.length === 0) {
     return <div />;
   }
