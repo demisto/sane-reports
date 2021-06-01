@@ -35,9 +35,6 @@ const createXAxisProps = (data, dataKey, width) => {
     props.textAnchor = 'end';
     props.angle = WIDGET_DEFAULT_CONF.tickAngle;
     props.height = getTextWidth(ticks[0], WIDGET_DEFAULT_CONF.font) + 10;
-    props.tick = {
-      width: 0
-    };
     props.dx = -5;
     props.dy = 0;
   }
