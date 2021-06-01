@@ -331,7 +331,7 @@ describe('Report Container', () => {
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
-    expect(sectionChart).to.have.length(7);
+    expect(sectionChart).to.have.length(8);
     expect(sectionChart.at(0).props().data).to.equal(sec1.data);
     expect(sectionChart.at(0).props().style).to.equal(sec1.layout.style);
     expect(sectionChart.at(0).props().type).to.equal(sec1.layout.chartType);
