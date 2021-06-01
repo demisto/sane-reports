@@ -399,7 +399,7 @@ describe('Report Container', () => {
 
     expect(lineChart.at(1).props().width).to.equal(sec7.layout.dimensions.width);
     expect(lineChart.at(1).props().height).to.equal(sec7.layout.dimensions.height);
-    expect(lineChart.at(1).props().data.length).to.equal(2);
+    expect(lineChart.at(1).props().data.length).to.equal(3);
     refLine = lineChart.at(1).find('.recharts-reference-line-line');
     expect(refLine.props().y).to.be.equal(sec7.layout.referenceLineY.y);
     expect(refLine.props().stroke).to.be.equal(sec7.layout.referenceLineY.stroke);

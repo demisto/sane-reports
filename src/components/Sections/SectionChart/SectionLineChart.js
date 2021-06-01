@@ -56,7 +56,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
     return formatNumberValue(v, valuesFormat);
   };
 
-  const finalToDate = toDate || moment().utc();
+  const finalToDate = toDate || moment().subtract(1, 'days').utc();
   const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
   const lineTypes = {};
   let from = fromDate && moment(fromDate).utc();
@@ -130,7 +130,7 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
 
   const retData = [];
   const frames = timeFrame !== SUPPORTED_TIME_FRAMES.none ?
-    Math.ceil(finalToDate.diff(from, timeFrame, true)) - 1 : preparedData.length - 1;
+    Math.ceil(finalToDate.diff(from, timeFrame, true)) : preparedData.length - 1;
 
   const currentDate = moment(from);
   for (let i = 0; i <= frames; i++) {
