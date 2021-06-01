@@ -129,22 +129,24 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 }
               </Pie>
               <Tooltip />
-              <Legend
-                wrapperStyle={chartProperties.layout === CHART_LAYOUT_TYPE.vertical ? {
-                  width: '100%'
-                } : { top: 10 }}
-                content={
-                  <ChartLegend
-                    iconType="square"
-                    capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
-                    data={preparedData}
-                    formatter={formatValue}
-                    height={legendHeight}
-                    style={legendStyle && legendStyle.style}
-                  />
-                }
-                {...legendStyle}
-              />
+              {preparedData.length > 0 && legendStyle && !legendStyle.hideLegend &&
+                <Legend
+                  wrapperStyle={chartProperties.layout === CHART_LAYOUT_TYPE.vertical ? {
+                    width: '100%'
+                  } : { top: 10 }}
+                  content={
+                    <ChartLegend
+                      iconType="square"
+                      capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
+                      data={preparedData}
+                      formatter={formatValue}
+                      height={legendHeight}
+                      style={legendStyle && legendStyle.style}
+                    />
+                  }
+                  {...legendStyle}
+                />
+              }
             </PieChart>);
         }
         }
