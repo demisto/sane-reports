@@ -161,13 +161,8 @@ const SectionLineChart = ({ data, groupBy, style, dimensions, legend, chartPrope
     }
     currentDate.add(1, timeFrame);
   }
-
   preparedLegend = values(lineTypes);
-  if (groupBy === INCIDENT_FIELDS.severity) {
-    preparedLegend = sortBySeverity(preparedLegend);
-  }
   preparedData = retData;
-
   if (!isEmpty(legend) && Object.keys(lineTypes).length > 0 && multiGroupBy) {
     preparedLegend = legend.map((item) => {
       if (!item.name) {
@@ -177,6 +172,10 @@ const SectionLineChart = ({ data, groupBy, style, dimensions, legend, chartPrope
       existingColors[item.color] = true;
       return item;
     });
+  }
+
+  if (groupBy === INCIDENT_FIELDS.severity) {
+    preparedLegend = sortBySeverity(preparedLegend);
   }
 
   const isFull = !reflectDimensions;
