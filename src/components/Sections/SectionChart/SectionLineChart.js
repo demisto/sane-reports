@@ -12,9 +12,10 @@ import {
   QUERIES_TIME_FORMAT,
   SUPPORTED_TIME_FRAMES,
   WIDGET_DEFAULT_CONF,
-  LINE_CHART_FULL_ITEM_HEIGHT
+  LINE_CHART_FULL_ITEM_HEIGHT,
+  INCIDENT_FIELDS
 } from '../../../constants/Constants';
-import { compareFields } from '../../../utils/sort';
+import { compareFields, sortBySeverity } from '../../../utils/sort';
 import { DEFAULT_LINE_STROKE_COLOR, getGraphColorByName } from '../../../utils/colors';
 import { formatNumberValue, getTextWidth, rightEllipsis } from '../../../utils/strings';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
@@ -171,6 +172,10 @@ const SectionLineChart = ({ data, groupBy, style, dimensions, legend, chartPrope
       existingColors[item.color] = true;
       return item;
     });
+  }
+
+  if (groupBy === INCIDENT_FIELDS.severity) {
+    preparedLegend = sortBySeverity(preparedLegend);
   }
 
   const isFull = !reflectDimensions;
