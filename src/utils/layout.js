@@ -151,6 +151,8 @@ export function getSectionComponent(section, maxWidth) {
       );
       break;
     case SECTION_TYPES.chart: {
+      const groupByField = section.query && section.query.groupBy;
+      const chartGroupField = groupByField && groupByField.length > 0 ? groupByField[groupByField.length - 1] : null;
       const processedData = processData(
         get(section, 'query.type', null),
         section.data,
@@ -182,6 +184,7 @@ export function getSectionComponent(section, maxWidth) {
           toDate={section.toDate}
           reflectDimensions={section.layout.reflectDimensions}
           emptyString={section.emptyNotification || getDefaultEmptyNotification()}
+          groupBy={chartGroupField}
         />
       );
       break;

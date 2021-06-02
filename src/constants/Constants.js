@@ -168,7 +168,8 @@ export const WIDGET_VALUES_FORMAT = {
 };
 
 export const INCIDENT_FIELDS = {
-  severity: 'severity'
+  severity: 'severity',
+  status: 'dbotStatus'
 };
 
 export const INCIDENT_SEVERITY = {
