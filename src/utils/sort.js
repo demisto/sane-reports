@@ -2,6 +2,7 @@ import moment from 'moment';
 import { isDateNotValid } from './time';
 import { isNumber } from './validators';
 import { isBoolean, get } from 'lodash';
+import { INCIDENT_SEVERITY } from '../constants/Constants';
 
 export function sortNumbers(n1, n2, asc = true) {
   if (n1 > n2) {
@@ -130,4 +131,20 @@ export function sortByField(fields, asc = true) {
 
     return res;
   };
+}
+
+export function sortBySeverity(data) {
+  return data.sort((a, b) => {
+    let aValue = 0;
+    let bValue = 0;
+    const aName = a.name && a.name.toLowerCase();
+    const bName = b.name && b.name.toLowerCase();
+    if (aName && aName in INCIDENT_SEVERITY) {
+      aValue = INCIDENT_SEVERITY[aName].value;
+    }
+    if (bName && bName in INCIDENT_SEVERITY) {
+      bValue = INCIDENT_SEVERITY[bName].value;
+    }
+    return bValue - aValue;
+  });
 }
