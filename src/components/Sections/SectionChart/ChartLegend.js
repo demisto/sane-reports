@@ -4,18 +4,33 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   CHART_LEGEND_ITEM_HEIGHT,
-  CHART_LAYOUT_TYPE
+  CHART_LAYOUT_TYPE,
+  INCIDENT_FIELDS
 } from '../../../constants/Constants';
-import { values } from 'lodash';
+import { cloneDeep, isEmpty, values } from 'lodash';
+import { sortByField } from '../../../utils/sort';
 
+const NON_SORT_FIELDS = [INCIDENT_FIELDS.severity, INCIDENT_FIELDS.status];
 export const VALUE_FORMAT_TYPES = { minimal: 'minimal', stretch: 'stretch' };
+
 const DIGIT_PIXEL_SIZE = 8;
 const ICON_CONTAINER_PIXEL_SIZE = 25;
 const ChartLegend = ({ data, icon = 'square', layout = CHART_LAYOUT_TYPE.vertical, height, capitalize,
-  onClick, style, showValue = true, valueDisplay = VALUE_FORMAT_TYPES.stretch, formatter }) => {
-  let legendData = data || [];
+  onClick, style, showValue = true, valueDisplay = VALUE_FORMAT_TYPES.stretch, formatter, enableSort,
+  groupBy }) => {
+  let legendData = cloneDeep(data) || [];
   if (legendData.length === 0) {
     return <div />;
+  }
+  if (enableSort && groupBy && !NON_SORT_FIELDS.includes(groupBy) && legendData.length > 0) {
+    let toAdd = [];
+    if (legendData[legendData.length - 1].name === 'Other') {
+      toAdd = legendData.splice(-1, 1);
+    }
+    legendData = legendData.sort((a, b) => sortByField('value')(a, b) * -1 || sortByField('name')(a, b));
+    if (!isEmpty(toAdd)) {
+      legendData.push(...toAdd);
+    }
   }
   let numOfElements = legendData.length;
   if (height) {
@@ -77,7 +92,9 @@ ChartLegend.propTypes = {
   valueDisplay: PropTypes.oneOf(values(VALUE_FORMAT_TYPES)),
   layout: PropTypes.oneOf(values(CHART_LAYOUT_TYPE)),
   height: PropTypes.number,
-  style: PropTypes.object
+  style: PropTypes.object,
+  enableSort: PropTypes.bool,
+  groupBy: PropTypes.string
 };
 
 export default ChartLegend;

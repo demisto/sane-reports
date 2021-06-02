@@ -9,8 +9,9 @@ import { CHART_TYPES } from '../../../constants/Constants';
 import moment from 'moment';
 import { isEmpty } from 'lodash';
 
-const SectionChart = ({ type, data, style, dimensions, legend, chartProperties = {}, legendStyle = {}, sortBy,
-  referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions, emptyString }) => {
+const SectionChart = ({ type, data, groupBy, style, dimensions, legend, chartProperties = {}, legendStyle = {},
+  sortBy, referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions,
+  emptyString }) => {
   return (
     <div className="section-chart" style={style}>
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
@@ -54,6 +55,7 @@ const SectionChart = ({ type, data, style, dimensions, legend, chartProperties =
                   chartToRender = (
                     <SectionLineChart
                       data={data}
+                      groupBy={groupBy}
                       style={style}
                       dimensions={dimensions}
                       legend={legend}
@@ -84,6 +86,7 @@ SectionChart.propTypes = {
     PropTypes.object,
     PropTypes.array
   ]),
+  groupBy: PropTypes.string,
   style: PropTypes.object,
   dimensions: PropTypes.object,
   chartProperties: PropTypes.object,

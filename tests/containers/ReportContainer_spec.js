@@ -302,7 +302,7 @@ describe('Report Container', () => {
     expect(listItems.at(1).props().data).to.equal(sec25.data[listKeys[1]]);
   });
 
-  it('Generate test template layout report', async () => {
+  it('Generate test template layout report', () => {
     const testTemplate = TemplateProvider.getTestLayoutTemplate();
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
