@@ -151,18 +151,11 @@ export function getSectionComponent(section, maxWidth) {
       );
       break;
     case SECTION_TYPES.chart: {
-      const groupByField = section.query && section.query.groupBy;
+      const dataType = get(section, 'query.type', null);
+      const groupByField = get(section, 'query.groupBy', null);
       const chartGroupField = groupByField && groupByField.length > 0 ? groupByField[groupByField.length - 1] : null;
-      const processedData = processData(
-        get(section, 'query.type', null),
-        section.data,
-        get(section, 'query.groupBy', [])
-      );
-      const processedLegendData = processData(
-        get(section, 'query.type', null),
-        section.layout.legend,
-        get(section, 'query.groupBy', [])
-      );
+      const processedData = processData(dataType, section.data, groupByField);
+      const processedLegendData = processData(dataType, section.layout.legend, groupByField);
 
       sectionToRender = (
         <SectionChart
