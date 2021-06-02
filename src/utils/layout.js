@@ -149,7 +149,10 @@ export function getSectionComponent(section, maxWidth) {
         />
       );
       break;
-    case SECTION_TYPES.chart:
+    case SECTION_TYPES.chart: {
+      const groupByField = section.query && section.query.groupBy;
+      const chartGroupField = groupByField && groupByField.length > 0 ? groupByField[groupByField.length - 1] : null;
+
       sectionToRender = (
         <SectionChart
           data={section.data}
@@ -170,9 +173,11 @@ export function getSectionComponent(section, maxWidth) {
           toDate={section.toDate}
           reflectDimensions={section.layout.reflectDimensions}
           emptyString={section.emptyNotification || getDefaultEmptyNotification()}
+          groupBy={chartGroupField}
         />
       );
       break;
+    }
     case SECTION_TYPES.table:
       sectionToRender = (
         <SectionTable
