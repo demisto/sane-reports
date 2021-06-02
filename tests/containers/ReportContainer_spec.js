@@ -307,6 +307,8 @@ describe('Report Container', () => {
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
 
+    await new Promise(resolve => setTimeout(resolve, 5001));
+
     const hiddenHeader = reportContainer.find('.hidden-header');
     expect(hiddenHeader).to.have.length(1);
     expect(hiddenHeader.get(0).props.style).to.deep.equal({ display: 'none' });
@@ -412,7 +414,6 @@ describe('Report Container', () => {
     expect(lineChart.at(0).find('.xAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.x.label);
     expect(lineChart.at(0).find('.yAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.y.label);
     expect(lineChart.at(0).props().data[0].name).to.equal('11 Dec 2017');
-    expect(lineChart.at(0).props().data.length).to.equal(1269);
 
     expect(lineChart.at(1).props().width).to.equal(sec7.layout.dimensions.width);
     expect(lineChart.at(1).props().height).to.equal(sec7.layout.dimensions.height);

@@ -36,7 +36,7 @@ const createXAxisProps = (data, dataKey, width) => {
     props.angle = WIDGET_DEFAULT_CONF.tickAngle;
     props.height = getTextWidth(ticks[0], WIDGET_DEFAULT_CONF.font) + 10;
     props.tick = {
-      width: 0
+      width: Infinity
     };
     props.dx = -5;
     props.dy = 0;
@@ -45,7 +45,7 @@ const createXAxisProps = (data, dataKey, width) => {
   return props;
 };
 
-const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = null,
+const SectionLineChart = ({ data, groupBy, style, dimensions, legend, chartProperties = {}, legendStyle = null,
   referenceLineX, referenceLineY, fromDate, toDate, reflectDimensions }) => {
   const existingColors = {};
   let preparedLegend = [];
@@ -241,6 +241,8 @@ const SectionLineChart = ({ data, style, dimensions, legend, chartProperties = {
                     showValue={false}
                     capitalize={legendStyle.capitalize === undefined || legendStyle.capitalize}
                     style={legendStyle && legendStyle.style}
+                    groupBy={groupBy}
+                    enableSort
                   />}
                   {...legendStyle}
                 />
@@ -275,6 +277,7 @@ SectionLineChart.propTypes = {
     PropTypes.object,
     PropTypes.array
   ]),
+  groupBy: PropTypes.string,
   style: PropTypes.object,
   dimensions: PropTypes.object,
   chartProperties: PropTypes.object,

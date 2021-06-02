@@ -18,6 +18,7 @@ import {
 } from '../components/Sections';
 import { isNumber, isObjectLike, compact, isString, groupBy, get } from 'lodash';
 import React from 'react';
+import { processData } from './data';
 
 function getDefaultEmptyNotification() {
   return 'No results found.';
@@ -149,16 +150,22 @@ export function getSectionComponent(section, maxWidth) {
         />
       );
       break;
-    case SECTION_TYPES.chart:
+    case SECTION_TYPES.chart: {
+      const dataType = get(section, 'query.type', null);
+      const groupByField = get(section, 'query.groupBy', null);
+      const chartGroupField = groupByField && groupByField.length > 0 ? groupByField[groupByField.length - 1] : null;
+      const processedData = processData(dataType, section.data, groupByField);
+      const processedLegendData = processData(dataType, section.layout.legend, groupByField);
+
       sectionToRender = (
         <SectionChart
-          data={section.data}
+          data={processedData}
           type={section.layout.chartType}
           style={section.layout.style}
           titleStyle={section.titleStyle}
           dimensions={section.layout.dimensions}
           chartProperties={section.layout.chartProperties}
-          legend={section.layout.legend}
+          legend={processedLegendData}
           legendStyle={section.layout.legendStyle}
           sortBy={section.layout.sortBy}
           title={section.title}
@@ -170,9 +177,11 @@ export function getSectionComponent(section, maxWidth) {
           toDate={section.toDate}
           reflectDimensions={section.layout.reflectDimensions}
           emptyString={section.emptyNotification || getDefaultEmptyNotification()}
+          groupBy={chartGroupField}
         />
       );
       break;
+    }
     case SECTION_TYPES.table:
       sectionToRender = (
         <SectionTable
