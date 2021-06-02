@@ -327,10 +327,11 @@ describe('Report Container', () => {
     const sec11 = testTemplate[10];
     const sec12 = testTemplate[11];
     const sec13 = testTemplate[12];
+    const sec14 = testTemplate[13];
 
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
-    expect(sectionChart).to.have.length(7);
+    expect(sectionChart).to.have.length(8);
     expect(sectionChart.at(0).props().data).to.equal(sec1.data);
     expect(sectionChart.at(0).props().style).to.equal(sec1.layout.style);
     expect(sectionChart.at(0).props().type).to.equal(sec1.layout.chartType);
@@ -357,16 +358,24 @@ describe('Report Container', () => {
     const pie = reportContainer.find(Pie);
 
     expect(barChart).to.have.length(3);
-    expect(pieChart).to.have.length(1);
+    expect(pieChart).to.have.length(2);
     expect(lineChart).to.have.length(3);
-    expect(pie).to.have.length(1);
+    expect(pie).to.have.length(2);
 
-    expect(pieChart.props().width).to.equal(sec3.layout.dimensions.width);
-    expect(pie.props().data.length).to.equal(sec3.data.length);
+    expect(pieChart.at(0).props().width).to.equal(sec3.layout.dimensions.width);
+    expect(pie.at(0).props().data.length).to.equal(sec3.data.length);
 
-    expect(pie.props().data[pie.props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
-    expect(pie.props().data[pie.props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
-    expectChartLegendFromChartElement(pieChart, sec3.data, true);
+    expect(pie.at(0).props().data[pie.at(0).props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
+    expect(pie.at(0).props().data[pie.at(0).props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
+    expectChartLegendFromChartElement(pieChart.at(0), sec3.data, true);
+
+    expect(pieChart.at(1).props().width).to.equal(sec14.layout.dimensions.width);
+    expect(pie.at(1).props().data.length).to.equal(sec14.data.length);
+
+    expect(pie.at(1).props().data[pie.at(1).props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
+    expect(pie.at(1).props().data[pie.at(1).props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);
+    const pieChartLegend = pieChart.at(1).find(ChartLegend);
+    expect(pieChartLegend).to.have.length(0);
 
     expect(barChart.at(0).props().width).to.equal(sec1.layout.dimensions.width);
     expect(barChart.at(0).props().height).to.equal(sec1.layout.dimensions.height);
@@ -403,11 +412,11 @@ describe('Report Container', () => {
     expect(lineChart.at(0).find('.xAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.x.label);
     expect(lineChart.at(0).find('.yAxis').at(0).text()).to.contain(sec6.layout.chartProperties.axis.y.label);
     expect(lineChart.at(0).props().data[0].name).to.equal('11 Dec 2017');
-    expect(lineChart.at(0).props().data.length).to.equal(1268);
+    expect(lineChart.at(0).props().data.length).to.equal(1269);
 
     expect(lineChart.at(1).props().width).to.equal(sec7.layout.dimensions.width);
     expect(lineChart.at(1).props().height).to.equal(sec7.layout.dimensions.height);
-    expect(lineChart.at(1).props().data.length).to.equal(2);
+    expect(lineChart.at(1).props().data.length).to.equal(3);
     refLine = lineChart.at(1).find('.recharts-reference-line-line');
     expect(refLine.props().y).to.be.equal(sec7.layout.referenceLineY.y);
     expect(refLine.props().stroke).to.be.equal(sec7.layout.referenceLineY.stroke);
