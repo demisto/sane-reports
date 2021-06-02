@@ -167,7 +167,7 @@ export const WIDGET_VALUES_FORMAT = {
   percentage: 'percentage'
 };
 
-export const INCIDENT_FORM_FIELDS = {
+export const INCIDENT_FIELDS = {
   severity: 'severity',
   status: 'dbotStatus'
 };
