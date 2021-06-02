@@ -156,6 +156,12 @@ export function getSectionComponent(section, maxWidth) {
         section.data,
         get(section, 'query.groupBy', [])
       );
+      const processedLegendData = processData(
+        get(section, 'query.type', null),
+        section.layout.legend,
+        get(section, 'query.groupBy', [])
+      );
+
       sectionToRender = (
         <SectionChart
           data={processedData}
@@ -164,7 +170,7 @@ export function getSectionComponent(section, maxWidth) {
           titleStyle={section.titleStyle}
           dimensions={section.layout.dimensions}
           chartProperties={section.layout.chartProperties}
-          legend={section.layout.legend}
+          legend={processedLegendData}
           legendStyle={section.layout.legendStyle}
           sortBy={section.layout.sortBy}
           title={section.title}
