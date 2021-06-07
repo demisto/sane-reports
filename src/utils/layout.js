@@ -76,6 +76,7 @@ export function getSectionComponent(section, maxWidth) {
           text={section.data}
           style={section.layout.style}
           valuesFormat={section.layout.valuesFormat}
+          subTitle={section.layout.forceRangeMessage}
         />
       );
       break;
@@ -156,7 +157,6 @@ export function getSectionComponent(section, maxWidth) {
       const chartGroupField = groupByField && groupByField.length > 0 ? groupByField[groupByField.length - 1] : null;
       const processedData = processData(dataType, section.data, groupByField);
       const processedLegendData = processData(dataType, section.layout.legend, groupByField);
-
       sectionToRender = (
         <SectionChart
           data={processedData}
@@ -178,6 +178,7 @@ export function getSectionComponent(section, maxWidth) {
           reflectDimensions={section.layout.reflectDimensions}
           emptyString={section.emptyNotification || getDefaultEmptyNotification()}
           groupBy={chartGroupField}
+          forceRangeMessage={section.layout.forceRangeMessage}
         />
       );
       break;

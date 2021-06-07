@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import values from 'lodash/values';
 import classNames from 'classnames';
 import { CHART_LAYOUT_TYPE, WIDGET_VALUES_FORMAT } from '../../constants/Constants';
-import { formatNumberValue } from '../../utils/strings';
+import { capitalizeFirstLetter, formatNumberValue } from '../../utils/strings';
 
 const TREND_NUMBER_LIMIT = 999;
 const SectionNumber = ({
-  data, layout, style, sign, signAlignment, title, titleStyle, valuesFormat = WIDGET_VALUES_FORMAT.abbreviated
+  data, layout, style, sign, signAlignment, title, titleStyle, valuesFormat = WIDGET_VALUES_FORMAT.abbreviated,
+  subTitle
 }) => {
   const isTrend = !!data.prevSum || data.prevSum === 0;
   let percentage = 0;
@@ -35,6 +36,9 @@ const SectionNumber = ({
 
   const color = style && style.backgroundColor ? '#FFF' : undefined;
   const titleColor = (titleStyle && titleStyle.color) ? titleStyle.color : color;
+  const subTitleClass = classNames('demisto-number-sub-title', {
+    'color-warning': !color
+  });
   let trendContainer = '';
   if (isTrend) {
     const boxClass = classNames('trend-box', {
@@ -68,7 +72,12 @@ const SectionNumber = ({
         trendContainer
         }
         <div className="trend-message" style={{ ...titleStyle, color: titleColor }}>
-          {title}
+          {capitalizeFirstLetter(title)}
+          {subTitle && (
+          <div className={subTitleClass} style={{ color: color || '#ff9000' }} title={subTitle}>
+            {subTitle}
+          </div>
+          )}
         </div>
         {layout === CHART_LAYOUT_TYPE.vertical && isTrend &&
         trendContainer
@@ -85,7 +94,8 @@ SectionNumber.propTypes = {
   layout: PropTypes.oneOf(values(CHART_LAYOUT_TYPE)),
   sign: PropTypes.string,
   signAlignment: PropTypes.string,
-  valuesFormat: PropTypes.oneOf(values(WIDGET_VALUES_FORMAT))
+  valuesFormat: PropTypes.oneOf(values(WIDGET_VALUES_FORMAT)),
+  subTitle: PropTypes.string
 };
 
 export default SectionNumber;
