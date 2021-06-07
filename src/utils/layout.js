@@ -89,6 +89,7 @@ export function getSectionComponent(section, maxWidth) {
           style={section.layout.style}
           titleStyle={section.titleStyle}
           title={section.title}
+          forceRangeMessage={section.layout.forceRangeMessage}
         />
       );
       break;
@@ -103,6 +104,7 @@ export function getSectionComponent(section, maxWidth) {
             titleStyle={section.titleStyle}
             title={section.title}
             emptyString={section.emptyNotification || getDefaultEmptyNotification()}
+            forceRangeMessage={section.layout.forceRangeMessage}
           />
         );
       } else {
@@ -115,6 +117,7 @@ export function getSectionComponent(section, maxWidth) {
             titleStyle={section.titleStyle}
             title={section.title}
             emptyString={section.emptyNotification || getDefaultEmptyNotification()}
+            forceRangeMessage={section.layout.forceRangeMessage}
           />
         );
       }
@@ -196,6 +199,7 @@ export function getSectionComponent(section, maxWidth) {
           title={section.title}
           maxColumns={section.layout.maxColumns || (maxWidth ? maxWidth / 100 : 0)}
           emptyString={section.emptyNotification || getDefaultEmptyNotification()}
+          forceRangeMessage={section.layout.forceRangeMessage}
         />
       );
       break;
