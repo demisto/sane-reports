@@ -26,6 +26,7 @@ import { DEFAULT_NONE_COLOR } from '../../src/utils/colors';
 import { cloneDeep, unionBy } from 'lodash';
 import SectionBarChart from '../../src/components/Sections/SectionChart/SectionBarChart';
 import { formatNumberValue } from '../../src/utils/strings';
+import SectionTitle from '../../src/components/Sections/SectionTitle';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -334,10 +335,16 @@ describe('Report Container', () => {
     // Charts
     const sectionChart = reportContainer.find(SectionChart);
     expect(sectionChart).to.have.length(8);
-    expect(sectionChart.at(0).props().data).to.equal(sec1.data);
-    expect(sectionChart.at(0).props().style).to.equal(sec1.layout.style);
-    expect(sectionChart.at(0).props().type).to.equal(sec1.layout.chartType);
-    expect(sectionChart.at(0).props().dimensions).to.equal(sec1.layout.dimensions);
+    let widget = sectionChart.at(0);
+    let widgetProps = widget.props();
+    expect(widgetProps.data).to.equal(sec1.data);
+    expect(widgetProps.style).to.equal(sec1.layout.style);
+    expect(widgetProps.type).to.equal(sec1.layout.chartType);
+    expect(widgetProps.dimensions).to.equal(sec1.layout.dimensions);
+
+    const sectionTitle = widget.find(SectionTitle);
+    expect(sectionTitle.find('.section-title').textContent).to.equal(sec1.layout.title);
+    expect(sectionTitle.find('.section-sub-title').textContent).to.equal(sec1.layout.forceRangeMessage);
 
     expect(sectionChart.at(1).props().data).to.equal(sec3.data);
     expect(sectionChart.at(1).props().style).to.equal(sec3.layout.style);
@@ -435,21 +442,31 @@ describe('Report Container', () => {
     // Trend
     const trendNumber = reportContainer.find(SectionNumber);
     expect(trendNumber).to.have.length(1);
-    expect(trendNumber.at(0).props().title).to.equal(sec2.title);
-    expect(trendNumber.at(0).props().data).to.equal(sec2.data);
-    expect(trendNumber.at(0).find('.trend-num-text').text()).to
+    widget = trendNumber.at(0);
+    widgetProps = widget.props();
+    expect(widgetProps.title).to.equal(sec2.title);
+    expect(widgetProps.data).to.equal(sec2.data);
+    expect(widget.find('.trend-num-text').text()).to
       .equal(formatNumberValue(sec2.data.currSum, sec2.layout.valuesFormat));
-    expect(trendNumber.at(0).props().layout).to.equal(sec2.layout.layout);
+    expect(widget.find('.demisto-number-sub-title').textContent).to
+      .equal(sec2.layout.forceRangeMessage);
+    expect(widgetProps.layout).to.equal(sec2.layout.layout);
     const trendBox = trendNumber.at(0).find('.trend-box.green');
     expect(trendBox).to.have.length(1);
 
     // Duration
     const duration = reportContainer.find(SectionDuration);
     expect(duration).to.have.length(1);
-    expect(duration.at(0).props().title).to.equal(sec8.title);
-    expect(duration.at(0).props().data).to.equal(sec8.data);
-    expect(duration.at(0).props().chartProperties).to.equal(sec8.layout.chartProperties);
-    const timeUnit = duration.at(0).find('.time-unit');
+    widget = duration.at(0);
+    widgetProps = widget.props();
+
+    expect(widget.find('.section-sub-title').textContent).to
+      .equal(sec8.layout.forceRangeMessage);
+
+    expect(widgetProps.title).to.equal(sec8.title);
+    expect(widgetProps.data).to.equal(sec8.data);
+    expect(widgetProps.chartProperties).to.equal(sec8.layout.chartProperties);
+    const timeUnit = widget.find('.time-unit');
     expect(timeUnit).to.have.length(3);
 
     // Page break
@@ -483,9 +500,16 @@ describe('Report Container', () => {
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
     expect(sectionTable).to.have.length(3);
-    expect(sectionTable.at(1).props().columns).to.equal(sec11.layout.tableColumns);
-    expect(sectionTable.at(1).props().data).to.equal(sec11.data);
-    expect(sectionTable.at(1).props().classes).to.equal(sec11.layout.classes);
+
+    widget = sectionTable.at(1);
+    widgetProps = widget.props();
+
+    expect(widgetProps.columns).to.equal(sec11.layout.tableColumns);
+    expect(widgetProps.data).to.equal(sec11.data);
+    expect(widgetProps.classes).to.equal(sec11.layout.classes);
+
+    expect(widget.find('.section-sub-title').textContent).to
+      .equal(sec11.layout.forceRangeMessage);
 
     let tableEl = sectionTable.at(1).find('table');
     let tableHeader = sectionTable.at(1).find('th');

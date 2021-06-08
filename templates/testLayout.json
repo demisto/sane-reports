@@ -93,7 +93,8 @@
         "verticalAlign": "top"
       },
       "rowPos": 0,
-      "w": 2
+      "w": 2,
+      "forceRangeMessage": "Last 7 days"
     },
     "query": {
       "filter": {
@@ -129,7 +130,8 @@
         "backgroundColor": null
       },
       "w": 3,
-      "valuesFormat": "decimal"
+      "valuesFormat": "decimal",
+      "forceRangeMessage": "Last 7 days"
     },
     "query": {
       "filter": {
@@ -782,7 +784,8 @@
       "h": 1,
       "i": "50581960-333e-11e8-8c3c-57387b30abc2",
       "rowPos": 5,
-      "w": 12
+      "w": 12,
+      "forceRangeMessage": "30 May 2021 - 31 May 2021"
     },
     "title": "Duration"
   },
@@ -893,7 +896,8 @@
         "aaa",
         "bbb"
       ],
-      "w": 12
+      "w": 12,
+      "forceRangeMessage": "Last 7 days"
     },
     "title": "table"
   },
