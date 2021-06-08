@@ -343,8 +343,8 @@ describe('Report Container', () => {
     expect(widgetProps.dimensions).to.equal(sec1.layout.dimensions);
 
     const sectionTitle = widget.find(SectionTitle);
-    expect(sectionTitle.find('.section-title').textContent).to.equal(sec1.layout.title);
-    expect(sectionTitle.find('.section-sub-title').textContent).to.equal(sec1.layout.forceRangeMessage);
+    expect(sectionTitle.find('.section-title').text()).to.equal(sec1.title);
+    expect(sectionTitle.find('.section-sub-title').text()).to.equal(sec1.layout.forceRangeMessage);
 
     expect(sectionChart.at(1).props().data).to.equal(sec3.data);
     expect(sectionChart.at(1).props().style).to.equal(sec3.layout.style);
@@ -448,7 +448,7 @@ describe('Report Container', () => {
     expect(widgetProps.data).to.equal(sec2.data);
     expect(widget.find('.trend-num-text').text()).to
       .equal(formatNumberValue(sec2.data.currSum, sec2.layout.valuesFormat));
-    expect(widget.find('.demisto-number-sub-title').textContent).to
+    expect(widget.find('.demisto-number-sub-title').text()).to
       .equal(sec2.layout.forceRangeMessage);
     expect(widgetProps.layout).to.equal(sec2.layout.layout);
     const trendBox = trendNumber.at(0).find('.trend-box.green');
@@ -460,7 +460,7 @@ describe('Report Container', () => {
     widget = duration.at(0);
     widgetProps = widget.props();
 
-    expect(widget.find('.section-sub-title').textContent).to
+    expect(widget.find('.section-sub-title').text()).to
       .equal(sec8.layout.forceRangeMessage);
 
     expect(widgetProps.title).to.equal(sec8.title);
@@ -508,7 +508,7 @@ describe('Report Container', () => {
     expect(widgetProps.data).to.equal(sec11.data);
     expect(widgetProps.classes).to.equal(sec11.layout.classes);
 
-    expect(widget.find('.section-sub-title').textContent).to
+    expect(widget.find('.section-sub-title').text()).to
       .equal(sec11.layout.forceRangeMessage);
 
     let tableEl = sectionTable.at(1).find('table');
