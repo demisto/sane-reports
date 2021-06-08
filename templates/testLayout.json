@@ -129,6 +129,14 @@
       "style": {
         "backgroundColor": null
       },
+      "numberStyle": {
+        "fontSize": "40px",
+        "fontWeight": 300
+      },
+      "titleStyle": {
+        "fontSize": "34px",
+        "fontWeight": 400
+      },
       "w": 3,
       "valuesFormat": "decimal",
       "forceRangeMessage": "Last 7 days"

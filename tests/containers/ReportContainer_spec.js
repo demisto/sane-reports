@@ -451,6 +451,10 @@ describe('Report Container', () => {
     expect(widget.find('.demisto-number-sub-title').text()).to
       .equal(sec2.layout.forceRangeMessage);
     expect(widgetProps.layout).to.equal(sec2.layout.layout);
+    expect(trendNumber.at(0).props().numberStyle).to.deep.equal(sec2.layout.numberStyle);
+    expect(trendNumber.at(0).props().titleStyle).to.deep.equal(sec2.layout.titleStyle);
+    expect(trendNumber.at(0).find('.trend-num-text').prop('style')).to.contain(sec2.layout.numberStyle);
+    expect(trendNumber.at(0).find('.trend-message').prop('style')).to.contain(sec2.layout.titleStyle);
     const trendBox = trendNumber.at(0).find('.trend-box.green');
     expect(trendBox).to.have.length(1);
 

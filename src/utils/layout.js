@@ -69,7 +69,8 @@ export function getSectionComponent(section, maxWidth) {
         <SectionNumber
           layout={section.layout.layout}
           title={section.title}
-          titleStyle={section.titleStyle}
+          titleStyle={section.layout.titleStyle}
+          numberStyle={section.layout.numberStyle}
           data={numberData}
           sign={section.layout.currencySign || section.layout.sign}
           signAlignment={section.layout.signAlignment}
