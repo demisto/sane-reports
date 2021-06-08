@@ -9,7 +9,7 @@ import { capitalizeFirstLetter, formatNumberValue } from '../../utils/strings';
 const TREND_NUMBER_LIMIT = 999;
 const SectionNumber = ({
   data, layout, style, sign, signAlignment, title, titleStyle, valuesFormat = WIDGET_VALUES_FORMAT.abbreviated,
-                         subTitle, numberStyle = {}
+  subTitle, numberStyle = {}
 }) => {
   const isTrend = !!data.prevSum || data.prevSum === 0;
   let percentage = 0;
