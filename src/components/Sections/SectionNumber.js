@@ -8,7 +8,8 @@ import { formatNumberValue } from '../../utils/strings';
 
 const TREND_NUMBER_LIMIT = 999;
 const SectionNumber = ({
-  data, layout, style, sign, signAlignment, title, titleStyle, valuesFormat = WIDGET_VALUES_FORMAT.abbreviated
+  data, layout, style, sign, signAlignment, title, titleStyle, valuesFormat = WIDGET_VALUES_FORMAT.abbreviated,
+  numberStyle = {}
 }) => {
   const isTrend = !!data.prevSum || data.prevSum === 0;
   let percentage = 0;
@@ -57,7 +58,7 @@ const SectionNumber = ({
       <div className="number-container">
         <div
           className="trend-num-text"
-          style={{ color }}
+          style={{ ...numberStyle, color }}
         >
           {signAlignment === 'left' && signElement}
           {formatNumberValue(curr,
@@ -82,6 +83,7 @@ SectionNumber.propTypes = {
   style: PropTypes.object,
   title: PropTypes.string,
   titleStyle: PropTypes.object,
+  numberStyle: PropTypes.object,
   layout: PropTypes.oneOf(values(CHART_LAYOUT_TYPE)),
   sign: PropTypes.string,
   signAlignment: PropTypes.string,
