@@ -342,7 +342,7 @@ describe('Report Container', () => {
     expect(widgetProps.type).to.equal(sec1.layout.chartType);
     expect(widgetProps.dimensions).to.equal(sec1.layout.dimensions);
 
-    const sectionTitle = widget.find(SectionTitle);
+    let sectionTitle = widget.find(SectionTitle);
     expect(sectionTitle.find('.section-title').text()).to.equal(sec1.title);
     expect(sectionTitle.find('.section-sub-title').text()).to.equal(sec1.layout.forceRangeMessage);
 
@@ -471,8 +471,14 @@ describe('Report Container', () => {
 
     // Page break
     const markdown = reportContainer.find(SectionMarkdown);
-    expect(markdown).to.have.length(4);
+    expect(markdown).to.have.length(5);
     expect(markdown.at(0).text()).equal(sec9.data.text.replace(constants.PAGE_BREAK_KEY, ''));
+
+    // Markdown
+    const sec = testTemplate[14];
+    widget = markdown.at(4);
+    sectionTitle = widget.find(SectionTitle);
+    expect(sectionTitle.find('.section-sub-title').text()).to.equal(sec.layout.forceRangeMessage);
 
     // Items Section
     const itemsSection = reportContainer.find(ItemsSection);

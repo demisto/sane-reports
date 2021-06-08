@@ -1145,5 +1145,17 @@
     },
     "fromDate": "2017-12-11T12:07:50+02:00",
     "title": "Test test"
+  },
+  {
+    "type": "markdown",
+    "data": { "text": "markdown with force range message" },
+    "layout": {
+      "rowPos": 11,
+      "columnPos": 0,
+      "h": 2,
+      "i": "ea707c90-9b20-11e9-90cd-2702611820x6",
+      "w": 12,
+      "forceRangeMessage": "Last 7 days"
+    }
   }
 ]

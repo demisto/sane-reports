@@ -131,6 +131,7 @@ export function getSectionComponent(section, maxWidth) {
           tableClasses={section.layout.tableClasses}
           doNotShowEmoji={section.layout.doNotShowEmoji}
           customClass={isPageBreakSection(section) ? 'page-break-section' : ''}
+          forceRangeMessage={section.layout.forceRangeMessage}
         />
       );
       break;
