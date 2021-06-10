@@ -56,6 +56,7 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle }) =>
   const format = chartProperties && chartProperties.format;
   const labels = getLabels(chartProperties);
   const parts = [];
+  const color = style && style.backgroundColor;
 
   if (format && WIDGET_FORMAT_PARTS[format]) {
     const formatParts = WIDGET_FORMAT_PARTS[format];
@@ -89,12 +90,12 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle }) =>
   }
 
   return (
-    <div className="section-duration" style={style}>
+    <div className="section-duration">
       {title && <div className="section-title" style={titleStyle}>{title}</div>}
       <div className="duration-widget-container">
         <div className="ui center aligned middle aligned grid duration-widget">
           <div className="four wide column" style={{ padding: 0 }}>
-            <i className="wait icon home" />
+            <i className="icon icon-widget-stopper-24-l" style={{ color }} />
           </div>
           <div className="twelve wide column" style={{ padding: 0 }}>
             <table className="wrapper-table">
