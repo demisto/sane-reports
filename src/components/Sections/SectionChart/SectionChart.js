@@ -8,13 +8,14 @@ import WidgetEmptyState from '../WidgetEmptyState';
 import { CHART_TYPES } from '../../../constants/Constants';
 import moment from 'moment';
 import { isEmpty } from 'lodash';
+import SectionTitle from '../SectionTitle';
 
 const SectionChart = ({ type, data, groupBy, style, dimensions, legend, chartProperties = {}, legendStyle = {},
   sortBy, referenceLineX, referenceLineY, title, stacked, fromDate, toDate, titleStyle, reflectDimensions,
-  emptyString }) => {
+  emptyString, forceRangeMessage }) => {
   return (
     <div className="section-chart" style={style}>
-      {title && <div className="section-title" style={titleStyle}>{title}</div>}
+      <SectionTitle title={title} titleStyle={titleStyle} subTitle={forceRangeMessage} />
       {!isEmpty(data) && data.length > 0 ?
             (() => {
               let chartToRender;
@@ -101,7 +102,8 @@ SectionChart.propTypes = {
   fromDate: PropTypes.string,
   toDate: PropTypes.string,
   emptyString: PropTypes.string,
-  reflectDimensions: PropTypes.bool
+  reflectDimensions: PropTypes.bool,
+  forceRangeMessage: PropTypes.string
 };
 
 export default SectionChart;

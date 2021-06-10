@@ -20,6 +20,7 @@ import mark from 'markdown-it-mark';
 import footnote from 'markdown-it-footnote';
 import deflist from 'markdown-it-deflist';
 import ins from 'markdown-it-ins';
+import SectionTitle from './SectionTitle';
 // end of import plugin
 
 const IGNORE_KEYS = [PAGE_BREAK_KEY];
@@ -33,7 +34,8 @@ export default class SectionMarkdown extends Component {
     tableClasses: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.string
-    ])
+    ]),
+    forceRangeMessage: PropTypes.string
   };
 
   static createBtn(props, children) {
@@ -162,7 +164,7 @@ export default class SectionMarkdown extends Component {
   }
 
   render() {
-    const { text, style, tableClasses, doNotShowEmoji, setRef, customClass } = this.props;
+    const { text, style, tableClasses, doNotShowEmoji, setRef, customClass, forceRangeMessage } = this.props;
     let finalText = text;
     IGNORE_KEYS.forEach((s) => {
       finalText = (finalText || '').replace(s, '');
@@ -202,6 +204,7 @@ export default class SectionMarkdown extends Component {
 
     return (
       <div className={`section-markdown ${customClass || ''}`} ref={setRef} style={style}>
+        <SectionTitle subTitle={forceRangeMessage} />
         {res}
       </div>
     );

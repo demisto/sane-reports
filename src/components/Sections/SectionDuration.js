@@ -6,6 +6,7 @@ import {
   DURATION_FORMAT,
   WIDGET_FORMAT_PARTS
 } from '../../constants/Constants';
+import SectionTitle from './SectionTitle';
 
 function formatNumber(num) {
   return ('0' + num).slice(-2);
@@ -51,7 +52,7 @@ const getLabels = (chartProperties) => {
   };
 };
 
-const SectionDuration = ({ data, style, chartProperties, title, titleStyle }) => {
+const SectionDuration = ({ data, style, chartProperties, title, titleStyle, forceRangeMessage }) => {
   let result = data.length > 0 && isArray(data[0].data) && data[0].data.length > 0 ? data[0].data[0] : 0;
   const format = chartProperties && chartProperties.format;
   const labels = getLabels(chartProperties);
@@ -91,7 +92,7 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle }) =>
 
   return (
     <div className="section-duration">
-      {title && <div className="section-title" style={titleStyle}>{title}</div>}
+      <SectionTitle title={title} titleStyle={titleStyle} subTitle={forceRangeMessage} />
       <div className="duration-widget-container">
         <div className="ui center aligned middle aligned grid duration-widget">
           <div className="four wide column" style={{ padding: 0 }}>
@@ -119,7 +120,8 @@ SectionDuration.propTypes = {
   style: PropTypes.object,
   title: PropTypes.string,
   chartProperties: PropTypes.object,
-  titleStyle: PropTypes.object
+  titleStyle: PropTypes.object,
+  forceRangeMessage: PropTypes.string
 };
 
 export default SectionDuration;
