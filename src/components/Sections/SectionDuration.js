@@ -1,12 +1,13 @@
 import './SectionDuration.less';
 import React from 'react';
 import PropTypes from 'prop-types';
-import isArray from 'lodash/isArray';
+import { isArray, cloneDeep } from 'lodash';
 import {
   DURATION_FORMAT,
   WIDGET_FORMAT_PARTS
 } from '../../constants/Constants';
 import SectionTitle from './SectionTitle';
+import SectionDurationIcon from './SectionDurationIcon';
 
 function formatNumber(num) {
   return ('0' + num).slice(-2);
@@ -57,6 +58,13 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle, forc
   const format = chartProperties && chartProperties.format;
   const labels = getLabels(chartProperties);
   const parts = [];
+  const containerStyle = cloneDeep(style);
+  let color;
+
+  if (containerStyle) {
+    color = containerStyle.backgroundColor;
+    delete containerStyle.backgroundColor;
+  }
 
   if (format && WIDGET_FORMAT_PARTS[format]) {
     const formatParts = WIDGET_FORMAT_PARTS[format];
@@ -90,12 +98,12 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle, forc
   }
 
   return (
-    <div className="section-duration" style={style}>
+    <div className="section-duration" style={containerStyle}>
       <SectionTitle title={title} titleStyle={titleStyle} subTitle={forceRangeMessage} />
       <div className="duration-widget-container">
         <div className="ui center aligned middle aligned grid duration-widget">
-          <div className="four wide column" style={{ padding: 0 }}>
-            <i className="wait icon home" />
+          <div className="four wide column icon-container">
+            <SectionDurationIcon color={color} size="32" />
           </div>
           <div className="twelve wide column" style={{ padding: 0 }}>
             <table className="wrapper-table">

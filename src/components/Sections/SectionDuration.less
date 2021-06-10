@@ -23,6 +23,19 @@
       font-weight: bold;
       font-size: @font-size-header + 4;
       margin: 0;
+
+      .icon-container {
+        padding: 0;
+
+        &.column {
+          align-self: flex-start !important;
+        }
+
+        svg {
+          fill: @brand-color-dark;
+        }
+      }
+
       .wrapper-table {
         width: 100%;
         .time-unit {
@@ -37,9 +50,6 @@
         .colon {
           margin-top: -2px !important;
         }
-      }
-      .icon {
-        color: @brand-color-dark;
       }
     }
   }
