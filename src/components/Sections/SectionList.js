@@ -6,6 +6,7 @@ import { isString, isEmpty, isObject } from 'lodash';
 import moment from 'moment';
 import { TABLE_CELL_TYPE } from '../../constants/Constants';
 import WidgetEmptyState from './WidgetEmptyState';
+import SectionTitle from './SectionTitle';
 
 function getFieldComponentIfNeeded(dataValue) {
   return isObject(dataValue) && dataValue.type === TABLE_CELL_TYPE.image ? (<img
@@ -45,7 +46,7 @@ function styleByFieldName(fieldName, currentData) {
   }
 }
 
-const SectionList = ({ columns, data, classes, style, title, titleStyle, emptyString }) => {
+const SectionList = ({ columns, data, classes, style, title, titleStyle, emptyString, forceRangeMessage }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -58,7 +59,7 @@ const SectionList = ({ columns, data, classes, style, title, titleStyle, emptySt
   const mainClass = `section-list ${classes || ''}`;
   return (
     <div className={mainClass} style={style}>
-      {title && <div className="section-title" style={titleStyle}>{title}</div>}
+      <SectionTitle title={title} titleStyle={titleStyle} subTitle={forceRangeMessage} />
       <div className="list-data-container">
         {tableData.length > 0 ? tableData.map((item) => {
           let leftName = 'name';
@@ -111,7 +112,8 @@ SectionList.propTypes = {
   style: PropTypes.object,
   title: PropTypes.string,
   titleStyle: PropTypes.object,
-  emptyString: PropTypes.string
+  emptyString: PropTypes.string,
+  forceRangeMessage: PropTypes.string
 };
 
 export default SectionList;

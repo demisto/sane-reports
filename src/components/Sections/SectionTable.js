@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import { TABLE_CELL_TYPE, DEFAULT_MAX_LENGTH } from '../../constants/Constants';
 import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash';
 import WidgetEmptyState from './WidgetEmptyState';
+import SectionTitle from './SectionTitle';
 
 
 const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes, style, title, titleStyle, emptyString,
-  maxColumns }) => {
+  maxColumns, forceRangeMessage }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -134,7 +135,7 @@ const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes
 
   return (
     <div className="section-table" style={style}>
-      {title && <div className="section-title" style={titleStyle}>{title}</div>}
+      <SectionTitle title={title} titleStyle={titleStyle} subTitle={forceRangeMessage} />
       {tableBody}
     </div>
   );
@@ -153,7 +154,8 @@ SectionTable.propTypes = {
   title: PropTypes.string,
   maxColumns: PropTypes.number,
   titleStyle: PropTypes.object,
-  emptyString: PropTypes.string
+  emptyString: PropTypes.string,
+  forceRangeMessage: PropTypes.string
 };
 
 export default SectionTable;

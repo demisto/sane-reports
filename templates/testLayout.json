@@ -93,7 +93,8 @@
         "verticalAlign": "top"
       },
       "rowPos": 0,
-      "w": 2
+      "w": 2,
+      "forceRangeMessage": "Last 7 days"
     },
     "query": {
       "filter": {
@@ -137,7 +138,8 @@
         "fontWeight": 400
       },
       "w": 3,
-      "valuesFormat": "decimal"
+      "valuesFormat": "decimal",
+      "forceRangeMessage": "Last 7 days"
     },
     "query": {
       "filter": {
@@ -790,7 +792,8 @@
       "h": 1,
       "i": "50581960-333e-11e8-8c3c-57387b30abc2",
       "rowPos": 5,
-      "w": 12
+      "w": 12,
+      "forceRangeMessage": "30 May 2021 - 31 May 2021"
     },
     "title": "Duration"
   },
@@ -901,7 +904,8 @@
         "aaa",
         "bbb"
       ],
-      "w": 12
+      "w": 12,
+      "forceRangeMessage": "Last 7 days"
     },
     "title": "table"
   },
@@ -1149,5 +1153,17 @@
     },
     "fromDate": "2017-12-11T12:07:50+02:00",
     "title": "Test test"
+  },
+  {
+    "type": "markdown",
+    "data": { "text": "markdown with force range message" },
+    "layout": {
+      "rowPos": 11,
+      "columnPos": 0,
+      "h": 2,
+      "i": "ea707c90-9b20-11e9-90cd-2702611820x6",
+      "w": 12,
+      "forceRangeMessage": "Last 7 days"
+    }
   }
 ]
