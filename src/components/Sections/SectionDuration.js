@@ -13,11 +13,11 @@ function formatNumber(num) {
   return ('0' + num).slice(-2);
 }
 
-const createHeaders = (parts) => {
+const createHeaders = (parts, style) => {
   return (parts || []).map((part, ind) => {
     return (
       <React.Fragment key={'header' + part.header}>
-        <td className="time-unit">
+        <td className="time-unit" style={style}>
           {part.header}
         </td>
         {(ind + 1) < parts.length &&
@@ -28,13 +28,13 @@ const createHeaders = (parts) => {
   });
 };
 
-const createValues = (parts) => {
+const createValues = (parts, style) => {
   return (parts || []).map((part, ind) => {
     return (
       <React.Fragment key={'value' + part.header}>
-        <td className="part-header">{part.value}</td>
+        <td className="part-header" style={style}>{part.value}</td>
         {(ind + 1) < parts.length &&
-          <td className="colon center aligned">:</td>
+          <td className="colon center aligned" style={style}>:</td>
         }
       </React.Fragment>
     );
@@ -59,12 +59,12 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle, forc
   const labels = getLabels(chartProperties);
   const parts = [];
   const containerStyle = cloneDeep(style);
-  let color;
 
-  if (containerStyle) {
-    color = containerStyle.backgroundColor;
+  const { backgroundColor: color, iconStyle, valueStyle, labelStyle } = containerStyle || {};
+  if (color) {
     delete containerStyle.backgroundColor;
   }
+
 
   if (format && WIDGET_FORMAT_PARTS[format]) {
     const formatParts = WIDGET_FORMAT_PARTS[format];
@@ -103,16 +103,16 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle, forc
       <div className="duration-widget-container">
         <div className="ui center aligned middle aligned grid duration-widget">
           <div className="four wide column icon-container">
-            <SectionDurationIcon color={color} size="32" />
+            <SectionDurationIcon color={color} size={(iconStyle && iconStyle.fontSize) || '32'} />
           </div>
           <div className="twelve wide column" style={{ padding: 0 }}>
             <table className="wrapper-table">
               <tbody>
                 <tr>
-                  {createValues(parts)}
+                  {createValues(parts, valueStyle)}
                 </tr>
                 <tr>
-                  {createHeaders(parts)}
+                  {createHeaders(parts, labelStyle)}
                 </tr>
               </tbody>
             </table>
