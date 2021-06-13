@@ -31,6 +31,20 @@
       "i": "77f96b80-9c55-11eb-b89d-bd8204c9fb46",
       "legend": null,
       "rowPos": 0,
+      "style": {
+        "backgroundColor": "#F50057",
+        "iconStyle": {
+          "fontSize": "45px"
+        },
+        "labelStyle": {
+          "fontSize": "18px",
+          "marginTop": "6px"
+        },
+        "valueStyle": {
+          "fontSize": "50px",
+          "fontWeight": 500
+        }
+      },
       "w": 12
     },
     "query": {

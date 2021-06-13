@@ -27,6 +27,7 @@ import { cloneDeep, unionBy } from 'lodash';
 import SectionBarChart from '../../src/components/Sections/SectionChart/SectionBarChart';
 import { formatNumberValue } from '../../src/utils/strings';
 import SectionTitle from '../../src/components/Sections/SectionTitle';
+import SectionDurationIcon from '../../src/components/Sections/SectionDurationIcon';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -663,6 +664,33 @@ describe('Report Container', () => {
     expect(durationValues.at(0).text()).to.equal('01');
     expect(durationValues.at(1).text()).to.equal('02');
     expect(durationValues.at(2).text()).to.equal('03');
+  });
+
+  it('Generate test template layout report with duration styles', () => {
+    const testTemplate = TemplateProvider.getTestLayoutDurationTemplate();
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+
+    const reportLayouts = reportContainer.find(ReportLayout);
+    expect(reportLayouts).to.have.length(1);
+
+    const duration = reportContainer.find(SectionDuration);
+    expect(duration).to.have.length(3);
+
+    // DURATION with format - months
+    expect(duration.at(0).props().style).to.not.be.empty;
+
+    const durationHeaders = duration.at(0).find('.time-unit');
+    expect(durationHeaders).to.have.length(3);
+    expect(durationHeaders.at(0).props().style.fontSize).to.equal('18px');
+
+    const durationValues = duration.at(0).find('.part-header');
+    expect(durationValues).to.have.length(3);
+    expect(durationValues.at(0).props().style.fontSize).to.equal('50px');
+
+    const icon = duration.at(0).find(SectionDurationIcon);
+    expect(icon).to.have.length(1);
+    expect(icon.at(0).props().color).to.equal('#F50057');
   });
 
   it('Generate test template A4 layout - test reflect dimensions prop', async () => {
