@@ -103,7 +103,7 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle, forc
       <div className="duration-widget-container">
         <div className="ui center aligned middle aligned grid duration-widget">
           <div className="four wide column icon-container">
-            <SectionDurationIcon color={color} size={(iconStyle && iconStyle.fontSize) || '32'} />
+            <SectionDurationIcon color={color} size={(iconStyle && iconStyle.fontSize) || '32px'} />
           </div>
           <div className="twelve wide column" style={{ padding: 0 }}>
             <table className="wrapper-table">
