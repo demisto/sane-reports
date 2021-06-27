@@ -81,7 +81,7 @@ export default class SectionMarkdown extends Component {
         res = (<a {...props} target="_blank" rel="noopener noreferrer">{children[0]}</a>);
         break;
       case 'u': {
-        res = <u key={uuid.v1()}>{props.content}</u>;
+        res = <u {...props}>{props.content}</u>;
         break;
       }
       case 'mark': {
