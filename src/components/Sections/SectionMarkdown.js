@@ -8,7 +8,6 @@ import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 import { PAGE_BREAK_KEY } from '../../constants/Constants';
 import { mdBtn, mdUnderline } from '../../utils/markdown';
-import uuid from 'uuid';
 import WidgetEmptyState from './WidgetEmptyState';
 
 // plugins for react markdown component
