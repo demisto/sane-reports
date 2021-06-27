@@ -1,3 +1,5 @@
+@import (reference) "../../../css/variables";
+
 .section-pie-chart {
   flex: 1;
   display: flex;
@@ -14,6 +16,22 @@
   &.section-pie-chart-horizontal {
     .recharts-pie {
       transform: translate(-25px, 0px);
+    }
+  }
+
+  &.with-labels {
+    .recharts-wrapper {
+      svg {
+        &.recharts-surface {
+          overflow: visible;
+        }
+      }
+    }
+
+    .recharts-pie-labels {
+      .recharts-pie-label-text {
+        fill: @font-color-base;
+      }
     }
   }
 }
