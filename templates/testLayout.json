@@ -905,7 +905,10 @@
         "bbb"
       ],
       "w": 12,
-      "forceRangeMessage": "Last 7 days"
+      "forceRangeMessage": "Last 7 days",
+      "headerStyle": {
+        "color": "maroon"
+      }
     },
     "title": "table"
   },

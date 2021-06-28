@@ -519,6 +519,7 @@ describe('Report Container', () => {
     widgetProps = widget.props();
 
     expect(widgetProps.columns).to.equal(sec11.layout.tableColumns);
+    expect(widgetProps.headerStyle).to.equal(sec11.layout.headerStyle);
     expect(widgetProps.data).to.equal(sec11.data);
     expect(widgetProps.classes).to.equal(sec11.layout.classes);
 
@@ -531,6 +532,7 @@ describe('Report Container', () => {
     expect(tableHeader).to.have.length(2);
     expect(tableHeader.at(0).text()).to.equal(sec11.layout.tableColumns[0]);
     expect(tableHeader.at(1).text()).to.equal(sec11.layout.tableColumns[1]);
+    expect(tableHeader.at(1).prop('style')).to.equal(sec11.layout.headerStyle);
 
     expect(sectionTable.at(2).props().columns).to.equal(sec12.layout.tableColumns);
     expect(sectionTable.at(2).props().data).to.equal(sec12.data);
