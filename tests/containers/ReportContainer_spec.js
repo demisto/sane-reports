@@ -381,6 +381,9 @@ describe('Report Container', () => {
 
     expect(pieChart.at(1).props().width).to.equal(sec14.layout.dimensions.width);
     expect(pie.at(1).props().data.length).to.equal(sec14.data.length);
+    expect(!!pie.at(1).props().label).to.equal(sec14.layout.chartProperties.label);
+    expect(reportContainer.find('.section-pie-chart').at(1).hasClass('with-labels'))
+      .to.equal(sec14.layout.chartProperties.label);
 
     expect(pie.at(1).props().data[pie.at(1).props().data.length - 2].name).to.equal(constants.NONE_VALUE_DEFAULT_NAME);
     expect(pie.at(1).props().data[pie.at(1).props().data.length - 2].fill).to.equal(DEFAULT_NONE_COLOR);

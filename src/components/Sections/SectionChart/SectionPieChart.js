@@ -83,7 +83,10 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
   }
 
   const mainClass = classNames('section-pie-chart',
-    { 'section-pie-chart-horizontal': chartProperties.layout !== CHART_LAYOUT_TYPE.vertical });
+    {
+      'section-pie-chart-horizontal': chartProperties.layout !== CHART_LAYOUT_TYPE.vertical,
+      'with-labels': chartProperties.label
+    });
 
   return (
     <div className={mainClass} style={style}>
@@ -108,9 +111,9 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
                 endAngle={chartProperties.endAngle || -270}
                 outerRadius={outerRadius > 10 ? outerRadius - 5 : outerRadius}
                 innerRadius={innerRadius > 10 ? innerRadius - 5 : innerRadius}
-                labelLine={false}
+                labelLine={chartProperties.label}
                 dataKey="value"
-                label={chartProperties.label}
+                label={chartProperties.label && (d => formatValue(d && d.payload ? d.payload.value : undefined))}
               >
                 {/* // creating links to urls according the 'url' filed in the data */}
                 {preparedData.map((entry, index) => {
