@@ -202,6 +202,7 @@ export function getSectionComponent(section, maxWidth) {
           maxColumns={section.layout.maxColumns || (maxWidth ? maxWidth / 100 : 0)}
           emptyString={section.emptyNotification || getDefaultEmptyNotification()}
           forceRangeMessage={section.layout.forceRangeMessage}
+          headerStyle={section.layout.headerStyle}
         />
       );
       break;

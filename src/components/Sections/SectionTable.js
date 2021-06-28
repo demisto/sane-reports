@@ -8,7 +8,7 @@ import SectionTitle from './SectionTitle';
 
 
 const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes, style, title, titleStyle, emptyString,
-  maxColumns, forceRangeMessage }) => {
+  maxColumns, forceRangeMessage, headerStyle }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -56,6 +56,10 @@ const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes
 
               if (metaData) {
                 extraProps.width = metaData.width;
+              }
+
+              if (headerStyle) {
+                extraProps.style = headerStyle;
               }
 
               return (
@@ -109,7 +113,14 @@ const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes
             <tr>
               {readyColumns.map((col) => {
               const key = col.key || col;
-              return <th key={key}>{!col.hidden && ((readableHeaders && readableHeaders[key]) || key)}</th>;
+                return (
+                  <th
+                    key={key}
+                    {...(headerStyle ? { style: headerStyle } : {})}
+                  >
+                    {!col.hidden && ((readableHeaders && readableHeaders[key]) || key)}
+                  </th>
+                );
             })}
             </tr>
           </thead>
@@ -155,7 +166,8 @@ SectionTable.propTypes = {
   maxColumns: PropTypes.number,
   titleStyle: PropTypes.object,
   emptyString: PropTypes.string,
-  forceRangeMessage: PropTypes.string
+  forceRangeMessage: PropTypes.string,
+  headerStyle: PropTypes.object
 };
 
 export default SectionTable;
