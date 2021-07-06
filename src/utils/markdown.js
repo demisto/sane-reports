@@ -1,7 +1,3 @@
-
-const MD_BTTN = 0x25; // %
-const MD_BTTN_STR = String.fromCharCode(MD_BTTN) + String.fromCharCode(MD_BTTN) + String.fromCharCode(MD_BTTN);
-
 export function mdUnderline(md) {
   md.inline.ruler.push(
     'underline',
@@ -24,7 +20,7 @@ export function mdUnderline(md) {
         pos++;
       }
 
-      const marker = state.src.slice(start, pos);
+      const underlined = state.src.slice(start, pos);
 
       matchEnd = pos;
       matchStart = state.src.indexOf('+', matchEnd);
@@ -35,19 +31,15 @@ export function mdUnderline(md) {
           matchEnd++;
         }
 
-        if (matchEnd - matchStart === marker.length) {
+        if (matchEnd - matchStart === underlined.length) {
           if (!silent) {
-            token = state.push('underline', 'u', 0);
+            token = state.push('underline_open', 'u', 1);
+            const text = state.src.slice(pos, matchStart);
+            token.attrs = [['content', text]];
+            const inlineToken = state.push('inline', '', 0);
+            inlineToken.children = state.md.parseInline(text, state.env);
 
-            token.attrs = [
-              [
-                'content',
-                state.src
-                  .slice(pos, matchStart)
-                  .replace(/[ \n]+/g, ' ')
-                  .trim()
-              ]
-            ];
+            token = state.push('underline_close', 'u', -1);
           }
           state.pos = matchEnd;
           return true;
@@ -56,15 +48,75 @@ export function mdUnderline(md) {
       }
 
       if (!silent) {
-        state.pending += marker;
+        state.pending += underlined;
       }
 
-      state.pos += marker.length;
+      state.pos += underlined.length;
       return true;
     },
     { alt: ['paragraph', 'reference', 'blockquote', 'list'] }
   );
 }
+
+const TEXT_ALIGN_TOKEN_LENGTH = 5;
+const TEXT_ALIGN_DIRECTION = {
+  Left: 'left',
+  Right: 'right',
+  Center: 'center'
+};
+
+function getTextAlignTokenDirection(token) {
+  if (token && token.length !== TEXT_ALIGN_TOKEN_LENGTH) {
+    return false;
+  }
+
+  switch (token) {
+    case '<:-->':
+      return TEXT_ALIGN_DIRECTION.Left;
+    case '<-:->':
+      return TEXT_ALIGN_DIRECTION.Center;
+    case '<--:>':
+      return TEXT_ALIGN_DIRECTION.Right;
+    default:
+      return false;
+  }
+}
+
+export function mdTextAlign(md) {
+  md.inline.ruler.push(
+    'textalign',
+    (state, silent) => {
+      if (state.posMax < TEXT_ALIGN_TOKEN_LENGTH) {
+        return false;
+      }
+
+      const direction = getTextAlignTokenDirection(state.src.slice(state.pos, state.pos + TEXT_ALIGN_TOKEN_LENGTH));
+
+      if (!direction) {
+        return false;
+      }
+
+      const start = state.pos + TEXT_ALIGN_TOKEN_LENGTH;
+      const textToAlign = state.src.slice(start, state.posMax);
+
+      if (!silent) {
+        const token = state.push('textalign_open', 'textalign', 1);
+        token.attrs = [['style', `text-align:${direction}`]];
+
+        const inlineToken = state.push('inline', '', 0);
+        inlineToken.children = state.md.parseInline(textToAlign, state.env);
+
+        state.push('textalign_close', 'textalign', -1);
+      }
+      state.pos = state.posMax;
+      return true;
+    },
+    { alt: ['paragraph', 'reference', 'blockquote', 'list'] }
+  );
+}
+
+const MD_BTTN = 0x25; // %
+const MD_BTTN_STR = String.fromCharCode(MD_BTTN) + String.fromCharCode(MD_BTTN) + String.fromCharCode(MD_BTTN);
 
 export function mdBtn(md) {
   md.inline.ruler.push(
