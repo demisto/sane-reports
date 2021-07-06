@@ -7,7 +7,7 @@ import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 import { PAGE_BREAK_KEY } from '../../constants/Constants';
-import { mdBtn, mdUnderline } from '../../utils/markdown';
+import { mdBtn, mdTextAlign, mdUnderline } from '../../utils/markdown';
 import WidgetEmptyState from './WidgetEmptyState';
 
 // plugins for react markdown component
@@ -52,6 +52,18 @@ export default class SectionMarkdown extends Component {
   static handleIterate(tableClasses, Tag, props, children) {
     let res = '';
     switch (Tag) {
+      case 'textalign': {
+        let content = props.content;
+        if (children) {
+          content = children;
+        }
+        res = (
+          <div className="text-align" {...props}>
+            {content}
+          </div>
+        );
+        break;
+      }
       case 'p':
         res = (<div className="preplacer" {...props}>{children}</div>);
         break;
@@ -79,10 +91,6 @@ export default class SectionMarkdown extends Component {
       case 'a':
         res = (<a {...props} target="_blank" rel="noopener noreferrer">{children[0]}</a>);
         break;
-      case 'u': {
-        res = <u {...props}>{props.content}</u>;
-        break;
-      }
       case 'mark': {
         props.className = 'highlight-result';
         break;
@@ -185,7 +193,8 @@ export default class SectionMarkdown extends Component {
         deflist,
         ins,
         mdBtn,
-        mdUnderline
+        mdUnderline,
+        mdTextAlign
       ];
 
       if (!doNotShowEmoji) {
