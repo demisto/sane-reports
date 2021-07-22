@@ -58,6 +58,90 @@ export function mdUnderline(md) {
   );
 }
 
+const TEXT_STYLE_TOKEN_REG = /^{{([a-zA-Z-]+:[-.!# a-zA-Z0-9]+;)*([a-zA-Z-]+:[-.!# a-zA-Z0-9]+;?)}}/g;
+
+export const SUPPORTED_STYLE_ATTRIBUTES = {
+  BG: 'background',
+  BG_COLOR: 'background-color',
+  COLOR: 'color',
+  LETTER_SPACING: 'letter-spacing',
+  SHADOW: 'text-shadow',
+  FONT_WEIGHT: 'font-weight',
+  FONT_SIZE: 'font-size'
+};
+
+const SUPPORTED_STYLE_ATTRIBUTES_ARRAY = [
+  SUPPORTED_STYLE_ATTRIBUTES.BG,
+  SUPPORTED_STYLE_ATTRIBUTES.BG_COLOR,
+  SUPPORTED_STYLE_ATTRIBUTES.COLOR,
+  SUPPORTED_STYLE_ATTRIBUTES.LETTER_SPACING,
+  SUPPORTED_STYLE_ATTRIBUTES.SHADOW,
+  SUPPORTED_STYLE_ATTRIBUTES.FONT_SIZE,
+  SUPPORTED_STYLE_ATTRIBUTES.FONT_WEIGHT
+];
+
+function getTextStyleToken(source) {
+  let token = source.match(TEXT_STYLE_TOKEN_REG);
+  if (token === null) {
+    return false;
+  }
+
+  token = token[0];
+  // remove '{{' and '}}' to extract the style string
+  const styleString = token.slice(2, token.length - 2);
+  const attrs = styleString.split(';');
+  const filteredStyles = attrs.filter(attr => SUPPORTED_STYLE_ATTRIBUTES_ARRAY.includes(attr.split(':')[0]));
+
+  if (filteredStyles.length === 0) {
+    return false;
+  }
+
+  return { token, style: filteredStyles.join(';') };
+}
+
+export function mdTextStyle(md) {
+  md.inline.ruler.push(
+    'textstyle',
+    (state, silent) => {
+      const tsToken = getTextStyleToken(state.src.slice(state.pos, state.posMax));
+      if (!tsToken) {
+        return false;
+      }
+
+      const pos = state.pos + tsToken.token.length;
+      const ch = state.src.charCodeAt(pos);
+
+      if (ch !== 0x28 /* ( */) {
+        return false;
+      }
+
+      const start = pos;
+      const end = state.src.lastIndexOf(')');
+      if (end === -1) {
+        return false;
+      }
+
+      const styled = state.src.slice(start + 1, end);
+
+      if (!silent) {
+        const token = state.push('textstyle_open', 'span', 1);
+        token.attrs = [
+          ['style', tsToken.style],
+          ['className', 'text-style']
+        ];
+
+        const inlineToken = state.push('inline', '', 0);
+        inlineToken.children = state.md.parseInline(styled, state.env);
+
+        state.push('textstyle_close', 'span', -1);
+      }
+      state.pos = end + 1;
+      return true;
+    },
+    { alt: ['paragraph', 'reference', 'blockquote', 'list'] }
+  );
+}
+
 const TEXT_ALIGN_TOKEN_LENGTH = 5;
 const TEXT_ALIGN_DIRECTION = {
   Left: 'left',
