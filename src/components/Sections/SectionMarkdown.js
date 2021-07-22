@@ -7,7 +7,7 @@ import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 import { PAGE_BREAK_KEY } from '../../constants/Constants';
-import { mdBtn, mdTextAlign, mdUnderline } from '../../utils/markdown';
+import { mdBtn, mdTextAlign, mdTextStyle, mdUnderline } from '../../utils/markdown';
 import WidgetEmptyState from './WidgetEmptyState';
 
 // plugins for react markdown component
@@ -194,7 +194,8 @@ export default class SectionMarkdown extends Component {
         ins,
         mdBtn,
         mdUnderline,
-        mdTextAlign
+        mdTextAlign,
+        mdTextStyle
       ];
 
       if (!doNotShowEmoji) {
