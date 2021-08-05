@@ -18,12 +18,15 @@
     &:not(.horizontal) {
       display: flex;
       justify-content: space-between;
-    .recharts-legend-item-text {
-      flex: 2;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
+      .recharts-legend-item-text {
+        flex: 2;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .recharts-legend-item-value {
+        flex: unset;
+      }
   }
     .recharts-legend-icon-container {
       display: inline-block;
