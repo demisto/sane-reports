@@ -1,5 +1,8 @@
 /* eslint-disable */
 /* This file is deprecated and used as legacy only */
+import {
+  MARKDOWN_ARTIFACTS_DEFAULT_SERVER_ADDRESS
+} from '../src/constants/Constants';
 const evalsFunctions = require('./evals');
 const puppeteer = require('puppeteer');
 const chromePath = require('@moonandyou/chrome-path');
@@ -69,6 +72,7 @@ const BOTTOM_MARGIN = 40;
   const disableHeaders = process.argv[12] === true || process.argv[12] === "true";
   const chromeExecution = process.argv[13] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
   const forceAutoHeightLayout = process.argv[14] === true || process.argv[14] === "true";
+  const markdownArtifactsServerAddress = process.argv[15] || MARKDOWN_ARTIFACTS_DEFAULT_SERVER_ADDRESS;
   let browser;
 
   if (headerLeftImage && headerLeftImage.indexOf('data:image') === -1) {
@@ -99,7 +103,8 @@ const BOTTOM_MARGIN = 40;
             .replace('{report-header-image-left}', headerLeftImage)
             .replace('{report-header-image-right}', headerRightImage)
             .replace('{report-dimensions}', JSON.stringify({ height: dimensions.height, width: dimensions.width }))
-            .replace('{force-auto-height}', !!forceAutoHeightLayout);
+            .replace('{force-auto-height}', !!forceAutoHeightLayout)
+            .replace('{md-server-address-to-replace}', markdownArtifactsServerAddress);
     const loadedData = fs.readFileSync(dataFile).toString();
 
     // $ is a special character in string replace, see here: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter

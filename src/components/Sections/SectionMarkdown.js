@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
-import { PAGE_BREAK_KEY } from '../../constants/Constants';
+import { MARKDOWN_IMAGES_PATH, PAGE_BREAK_KEY } from '../../constants/Constants';
 import { mdBtn, mdTextAlign, mdTextStyle, mdUnderline } from '../../utils/markdown';
 import WidgetEmptyState from './WidgetEmptyState';
 
@@ -35,7 +35,8 @@ export default class SectionMarkdown extends Component {
       PropTypes.object,
       PropTypes.string
     ]),
-    forceRangeMessage: PropTypes.string
+    forceRangeMessage: PropTypes.string,
+    markdownArtifactsServerAddress: PropTypes.string
   };
 
   static createBtn(props, children) {
@@ -49,7 +50,7 @@ export default class SectionMarkdown extends Component {
     return (<span {...props}>{message}</span>);
   }
 
-  static handleIterate(tableClasses, Tag, props, children) {
+  static handleIterate(tableClasses, markdownArtifactsServerAddress, Tag, props, children) {
     let res = '';
     switch (Tag) {
       case 'textalign': {
@@ -76,7 +77,11 @@ export default class SectionMarkdown extends Component {
       }
       case 'img': {
         const srcArr = props.src.split('=size=');
-        props.src = srcArr[0];
+        if (srcArr[0].startsWith(MARKDOWN_IMAGES_PATH)) {
+          props.src = `${markdownArtifactsServerAddress}${srcArr[0]}`;
+        } else {
+          props.src = srcArr[0];
+        }
         if (srcArr.length > 1) {
           const sizeArr = srcArr[1].split('x');
           props.height = sizeArr[0];
@@ -176,7 +181,16 @@ export default class SectionMarkdown extends Component {
   }
 
   render() {
-    const { text, style, tableClasses, doNotShowEmoji, setRef, customClass, forceRangeMessage } = this.props;
+    const {
+      text,
+      style,
+      tableClasses,
+      doNotShowEmoji,
+      setRef,
+      customClass,
+      forceRangeMessage,
+      markdownArtifactsServerAddress
+    } = this.props;
     let finalText = text;
     IGNORE_KEYS.forEach((s) => {
       finalText = (finalText || '').replace(s, '');
@@ -204,7 +218,7 @@ export default class SectionMarkdown extends Component {
 
       const mdData = mdReact(
         {
-          onIterate: SectionMarkdown.handleIterate.bind(this, tableClasses),
+          onIterate: SectionMarkdown.handleIterate.bind(this, tableClasses, markdownArtifactsServerAddress),
           markdownOptions: { typographer: true },
           plugins
         }

@@ -133,6 +133,7 @@ export function getSectionComponent(section, maxWidth) {
           doNotShowEmoji={section.layout.doNotShowEmoji}
           customClass={isPageBreakSection(section) ? 'page-break-section' : ''}
           forceRangeMessage={section.layout.forceRangeMessage}
+          markdownArtifactsServerAddress={section.markdownArtifactsServerAddress}
         />
       );
       break;
