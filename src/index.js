@@ -12,8 +12,7 @@ import * as TemplateProvider from '../templates/templateProvider';
 import {
   REPORT_DATA_TOKEN,
   REPORT_TYPES,
-  PIXEL_SIZE,
-  MARKDOWN_ARTIFACTS_DEFAULT_SERVER_ADDRESS, MD_ARTIFACTS_SERVER_ADDRESS_TOKEN
+  PIXEL_SIZE
 } from './constants/Constants';
 import { prepareSections, getReportType } from './utils/reports';
 import { generateOfficeReport } from './office/OfficeReport';
@@ -24,10 +23,8 @@ if (data === REPORT_DATA_TOKEN) {
 }
 
 const type = getReportType(reportType);
-const mdArtifactsServerAddress = markdownArtifactsServerAddress === MD_ARTIFACTS_SERVER_ADDRESS_TOKEN ?
-  MARKDOWN_ARTIFACTS_DEFAULT_SERVER_ADDRESS : markdownArtifactsServerAddress;
 
-const sections = prepareSections(data, type, false, false, mdArtifactsServerAddress);
+const sections = prepareSections(data, type, false, false, markdownArtifactsServerAddress);
 
 let isLayout = false;
 if (sections) {

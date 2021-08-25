@@ -1,8 +1,5 @@
 /* eslint-disable */
 /* This file is deprecated and used as legacy only */
-import {
-  MARKDOWN_ARTIFACTS_DEFAULT_SERVER_ADDRESS
-} from '../src/constants/Constants';
 const evalsFunctions = require('./evals');
 const puppeteer = require('puppeteer');
 const chromePath = require('@moonandyou/chrome-path');
@@ -72,7 +69,7 @@ const BOTTOM_MARGIN = 40;
   const disableHeaders = process.argv[12] === true || process.argv[12] === "true";
   const chromeExecution = process.argv[13] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
   const forceAutoHeightLayout = process.argv[14] === true || process.argv[14] === "true";
-  const markdownArtifactsServerAddress = process.argv[15] || MARKDOWN_ARTIFACTS_DEFAULT_SERVER_ADDRESS;
+  const markdownArtifactsServerAddress = process.argv[15] || '';
   let browser;
 
   if (headerLeftImage && headerLeftImage.indexOf('data:image') === -1) {

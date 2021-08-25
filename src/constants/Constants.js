@@ -1,7 +1,6 @@
 export const REPORT_DATA_TOKEN = '{report-data-to-replace}';
 export const REPORT_HEADER_IMAGE_RIGHT_TOKEN = '{report-header-image-right}';
 export const REPORT_HEADER_IMAGE_LEFT_TOKEN = '{report-header-image-left}';
-export const MD_ARTIFACTS_SERVER_ADDRESS_TOKEN = '{md-server-address-to-replace}';
 
 
 export const SECTION_TYPES = {
@@ -198,6 +197,5 @@ export const DATA_TYPES = {
   incident: 'incident'
 };
 
-export const MARKDOWN_ARTIFACTS_DEFAULT_SERVER_ADDRESS = 'http://localhost:10888';
 export const MARKDOWN_IMAGES_PATH = '/markdown/image';
 
