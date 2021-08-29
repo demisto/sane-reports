@@ -4,26 +4,41 @@
   margin: auto;
   width: 100%;
   height: 100%;
+
   .section-description {
     padding: 0 6px 5px;
   }
+
   .section-item {
     display: flex;
     flex-direction: column;
     position: absolute;
-    padding: 0 7px;
     height: auto;
     min-height: 50px;
+
+    &.card {
+      padding-bottom: 30px;
+
+      .section-item-header {
+        padding-bottom: 9px;
+        word-break: break-word;
+      }
+    }
+
     &.row {
       min-height: 24px;
       flex-direction: row;
       justify-content: space-between;
+      align-items: center;
       border-bottom: 1px solid rgba(137, 165, 193, 0.2);
+      padding: 10px 0;
+
+      .section-item-header {
+        width: 30%;
+        word-break: break-word;
+       }
     }
-    .section-item-header {
-      width: 30%;
-      word-break: break-word;
-    }
+
     .section-item-value {
       flex: 1;
       white-space: pre-line;

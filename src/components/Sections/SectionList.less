@@ -1,31 +1,42 @@
 .section-list {
   display: flex;
   flex-direction: column;
+  height: 100%;
   width: 100%;
 
   .list-data-container {
     flex: 1;
   }
+
   .list-item {
     display: flex !important;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin: 5px 10px !important;
+
     .content {
       word-break: break-word;
       padding: 0 2px;
     }
+
     .right-list-value {
       display: table-cell;
       margin-right: 5px;
       vertical-align: middle;
     }
+
     .left-list-value {
       display: table-cell;
       margin: 0 !important;
       vertical-align: middle;
     }
+
+    .avatar {
+      width: 20px;
+      margin-right: 10px;
+    }
+
     .content:last-child {
       display: table-cell;
       text-align: center;

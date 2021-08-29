@@ -5,12 +5,6 @@
 Reports library that will keep you sane and not pulling your hair out
 
 ## Quick start
-**PhantomJS**
-```sh
-$ npm install sane-reports
-$ cd sane-reports
-$ phantomjs reportsServer.js templates/test.json dist/test.pdf
-```
 **Chromium/Chrome**
 ```sh
 $ npm install sane-reports
@@ -19,6 +13,14 @@ $ ./reportsServer templates/test.json dist/test.pdf # for linux users.
 $ ./reportsServer-macos templates/test.json dist/test.pdf # for macOS users.
 $ ./reportsServer-win.exe templates/test.json dist/test.pdf # for windows users.
 ```
+
+**PhantomJS**
+```sh
+$ npm install sane-reports
+$ cd sane-reports
+$ phantomjs reportsServer.js templates/test.json dist/test.pdf
+```
+
 Report will be generated in: `dist/test.pdf`
 
 ## Generating dashboard mode (browser) report
@@ -42,14 +44,17 @@ This will generate a PDF report in the `dist` folder. The name of the report wil
 
 ### Generate report options:
 You can create PDF report with the following command as well:
-#### PhantomJS
-`
-phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <orientation> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <customReportType> <pageSize> <disableTopHeaders>]
-`
+
 #### Chromium/Chrome
 `
 ./reportsServer <report_template_file> [<output_file> <dist_folder> <orientation> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <customReportType> <pageSize> <disableTopHeaders> <chromiumPath>]
 `
+
+#### PhantomJS
+`
+phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <orientation> <resourceTimeout> <type> <headerLeftImage> <headerRightImage> <customReportType> <pageSize> <disableTopHeaders>]
+`
+
 - report_template_file: The template of the report (JSON format)
 - output_file: The name of the generated report (leave empty for default name)
 - dist_folder: should be `dist`
@@ -63,13 +68,20 @@ phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <o
 - disableTopHeaders: true or "true" to disable the top headers and show icons in the footer. (default false)
 - chromiumPath: a custom chromium or chrome path. The service searches for installed chromium or chrome by order. Default usage by priority: Chromium -> Google Chrome Stable -> Google Chrome -> the default path '/usr/bin/chromium-browser'.
 
-### PDF Example:
-`phantomjs reportsServer.js templates/test.json dist/test.pdf dist portrait 4000 pdf`
-`./reportsServer templates/test.json dist/test.pdf dist portrait 4000 pdf`
+### Example:
+- npm run production
+- npm run make
+- `/reportsServer-macos templates/incidentDailyReportTempalte.json dist/incidentDailyReportTempalte.pdf dist portrait 4000 pdf '' '' '' A4 '' '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'`
 
-### CSV Example:
-`phantomjs reportsServer.js templates/testCSV.json dist/test.csv dist portrait 4000 csv`
-`./reportsServer templates/testCSV.json dist/test.csv dist portrait 4000 csv`
+## Debugging
+- Download the [mamba-reports.patch](https://github.com/demisto/sane-reports/files/7072628/mamba-reports.patch.txt)
+- Apply the patch (In WebStorm: git -> patch -> apply patch...)
+- Debug the server and add a breakpoint in the beginning of the method `servicereport.go/generatePdfReport`
+- genereta a PDF report from the UI (web-client)
+- when it stops on the breakpoint:
+  - refresh the files in `Debug/lib/temp` (right click -> reload from disk)
+  - copy the last json content from the server folder to `incidentDailyReportTemplate.json`
+  - while the project is running `(npm start)` the page will be auto-reloaded at `localhost:8082`
 
 ## Demo
 Reports templates (JSON) examples can be found in the [templates](https://github.com/demisto/sane-reports/blob/master/templates) folder.
