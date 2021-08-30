@@ -1,4 +1,6 @@
 import testTemplate from './test.json';
+import testLayoutCsvTemplate from './testLayoutCsv.json';
+import testLayoutScriptBasedTableTemplate from './testLayoutScriptBasedTable.json';
 import testLayoutWithPageBreaks from './testLayoutWithPageBreaks.json';
 import testLayoutTemplate from './testLayout.json';
 import testLayoutDurationTemplate from './testLayoutDuration.json';
@@ -7,6 +9,14 @@ import testLayoutEmptyTemplate from './testLayoutEmptyTemplate.json';
 
 function getTestTemplate() {
   return testTemplate;
+}
+
+function getTestLayoutCsvTemplate() {
+  return testLayoutCsvTemplate;
+}
+
+function getTestLayoutScriptBasedTableTemplate() {
+  return testLayoutScriptBasedTableTemplate;
 }
 
 function getTestLayoutTemplate() {
@@ -32,6 +42,8 @@ function getIncidentDailyReportTemplate() {
 
 export {
   getTestTemplate,
+  getTestLayoutCsvTemplate,
+  getTestLayoutScriptBasedTableTemplate,
   getIncidentDailyReportTemplate,
   getTestLayoutTemplate,
   getTestLayoutDurationTemplate,

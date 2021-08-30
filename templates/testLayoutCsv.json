@@ -1,0 +1,83 @@
+[
+  {
+    "type": "header",
+    "data": "Sane Reports!!!",
+    "layout": {
+      "rowPos": 1,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "center",
+        "fontSize": 32
+      }
+    }
+  },
+  {
+    "type": "markdown",
+    "data": "This is left small green text.",
+    "layout": {
+      "rowPos": 2,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 12,
+        "color": "#1f8f51"
+      }
+    }
+  },
+  {
+    "type": "text",
+    "data": "This is right text.",
+    "layout": {
+      "rowPos": 2,
+      "columnPos": 2,
+      "style": {
+        "textAlign": "right",
+        "fontSize": 18
+      }
+    }
+  },
+  {
+    "type": "header",
+    "data": "Tables",
+    "layout": {
+      "rowPos": 7,
+      "columnPos": 1,
+      "style": {
+        "textAlign": "left",
+        "fontSize": 28
+      }
+    }
+  },
+  {
+    "type": "table",
+    "data": [
+      { "name": "Group B", "value": 4567, "fill": "#82ca9d", "bla": 1, "hidden": "hidden" },
+      { "name": "Group C", "value": 1398, "fill": "#ffbb28", "bla": 2, "hidden": "hidden" },
+      { "name": "Group D", "value": 9800, "fill": "#ff8042", "bla": 3, "hidden": "hidden" },
+      { "name": "Group E", "value": 3908, "fill": "#0088fe", "bla": 4, "hidden": "hidden" },
+      { "name": "Group F", "value": 4800, "fill": "#8884d8", "bla": 5, "hidden": "hidden" }
+    ],
+    "layout": {
+      "rowPos": 8,
+      "columnPos": 1,
+      "tableColumns": [ "name", "fill", "value", "bla"],
+      "classes": "collapsing selectable unstackable"
+    }
+  },
+  {
+    "type": "table",
+    "data": [
+      { "name": "Group B", "value": 4567, "fill": "#82ca9d", "bla": 1, "hidden": "hidden" },
+      { "name": "Group C", "value": 1398, "fill": "#ffbb28", "bla": 2, "hidden": "hidden" },
+      { "name": "Group D", "value": 9800, "fill": "#ff8042", "bla": 3, "hidden": "hidden" },
+      { "name": "Group E", "value": 3908, "fill": "#0088fe", "bla": 4, "hidden": "hidden" },
+      { "name": "Group F", "value": 4800, "fill": "#8884d8", "bla": 5, "hidden": "hidden" }
+    ],
+    "layout": {
+      "rowPos": 9,
+      "columnPos": 1,
+      "tableColumns": [ "name", "value", "fill", "bla"],
+      "classes": "striped stackable"
+    }
+  }
+]
