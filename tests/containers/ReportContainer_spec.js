@@ -243,7 +243,7 @@ describe('Report Container', () => {
     expect(sectionDate.at(1).props().style).to.equal(sec19.layout.style);
     expect(sectionDate.at(1).props().format).to.equal(sec19.layout.format);
 
-    const dateEl = reportContainer.find('.section-date');
+    const dateEl = reportContainer.find('.section-date-value');
     expect(dateEl).to.have.length(2);
     expect(dateEl.at(0).text()).to.have.length.above(sec18.layout.format.length + 2);
     expect(dateEl.at(1).text()).to.equal('Jan 1st 16');

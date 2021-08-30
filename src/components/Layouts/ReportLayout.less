@@ -24,6 +24,8 @@ h1 {
 .global-section {
   display: flex;
   flex-direction: column;
+  height: 100%;
+
   .global-section-row {
     display: flex;
     flex: 1;
@@ -107,10 +109,24 @@ h1 {
         padding: 10px 12px 0;
       }
 
-      .section-number, .section-table, .section-markdown, .section-duration, .section-list, .section-grouped-list {
+      &.section-itemsSection,
+      .section-list:first-child,
+      .section-number,
+      .section-table,
+      .section-markdown,
+      .section-duration,
+      .section-grouped-list,
+      .global-section {
         &:not(.page-break-section) {
           border: 1px solid #DADBDB;
           padding: 10px 12px;
+        }
+      }
+
+      .section-item-value {
+        .section-markdown {
+          border: none;
+          padding: 0;
         }
       }
 
