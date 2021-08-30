@@ -256,33 +256,6 @@
     }
   },
   {
-    "type": "date",
-    "layout": {
-      "rowPos": 17,
-      "columnPos": 1,
-      "style": {
-        "textAlign": "left",
-        "color": "gray",
-        "fontSize": 14,
-        "fontStyle": "italic"
-      },
-      "format": "MMMM Do YYYY, h:mm:ss a z"
-    }
-  },
-  {
-    "type": "date",
-    "data": "2016-01-01",
-    "layout": {
-      "rowPos": 18,
-      "columnPos": 1,
-      "style": {
-        "textAlign": "left",
-        "fontSize": 14
-      },
-      "format": "MMM Do YY"
-    }
-  },
-  {
     "type": "divider",
     "layout": {
       "rowPos": 19,

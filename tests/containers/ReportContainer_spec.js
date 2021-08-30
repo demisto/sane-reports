@@ -63,8 +63,8 @@ describe('Report Container', () => {
     const rows = reportContainer.find('.report-row');
     const sections = reportContainer.find('.report-section');
     expect(reportLayouts).to.have.length(1);
-    expect(rows).to.have.length(24);
-    expect(sections).to.have.length(25);
+    expect(rows).to.have.length(22);
+    expect(sections).to.have.length(23);
 
     const sec1 = testTemplate[0];
     const sec2 = testTemplate[1];
@@ -89,8 +89,6 @@ describe('Report Container', () => {
     const sec21 = testTemplate[20];
     const sec22 = testTemplate[21];
     const sec23 = testTemplate[22];
-    const sec24 = testTemplate[23];
-    const sec25 = testTemplate[24];
 
     expect(rows.at(0).text()).to.contains(sec1.data);
     expect(rows.at(1).text()).to.contains(sec2.data + sec3.data);
@@ -180,9 +178,9 @@ describe('Report Container', () => {
     expect(sectionTable.at(1).props().data).to.equal(sec10.data);
     expect(sectionTable.at(1).props().classes).to.equal(sec10.layout.classes);
 
-    expect(sectionTable.at(2).props().columns).to.equal(sec21.layout.tableColumns);
-    expect(sectionTable.at(2).props().data).to.equal(sec21.data);
-    expect(sectionTable.at(2).props().classes).to.equal(sec21.layout.classes);
+    expect(sectionTable.at(2).props().columns).to.equal(sec19.layout.tableColumns);
+    expect(sectionTable.at(2).props().data).to.equal(sec19.data);
+    expect(sectionTable.at(2).props().classes).to.equal(sec19.layout.classes);
 
     const tableEl = reportContainer.find('table');
     const tableHeader = reportContainer.find('th');
@@ -198,9 +196,9 @@ describe('Report Container', () => {
     expect(tableHeader.at(6).text()).to.equal(sec10.layout.tableColumns[2]);
     expect(tableHeader.at(7).text()).to.equal(sec10.layout.tableColumns[3]);
 
-    expect(tableHeader.at(8).text()).to.equal(sec21.layout.tableColumns[0]);
-    expect(tableHeader.at(9).text()).to.equal(sec21.layout.tableColumns[1]);
-    expect(tableHeader.at(10).text()).to.equal(sec21.layout.tableColumns[2]);
+    expect(tableHeader.at(8).text()).to.equal(sec19.layout.tableColumns[0]);
+    expect(tableHeader.at(9).text()).to.equal(sec19.layout.tableColumns[1]);
+    expect(tableHeader.at(10).text()).to.equal(sec19.layout.tableColumns[2]);
 
     expect(tableHeader.at(11).text()).to.equal('Field');
     expect(tableHeader.at(12).text()).to.equal('Data');
@@ -233,15 +231,10 @@ describe('Report Container', () => {
     expect(imgEl.get(3).props.style).to.not.equal({ display: 'none' });
     expect(imgEl.get(4).props.style).to.not.equal({ display: 'none' });
 
-    const dateEl = reportContainer.find('.section-date-value');
-    expect(dateEl).to.have.length(2);
-    expect(dateEl.at(0).text()).to.have.length.above(sec18.layout.format.length + 2);
-    expect(dateEl.at(1).text()).to.equal('Jan 1st 16');
-
     // Divider
     const sectionDivider = reportContainer.find(SectionDivider);
     expect(sectionDivider).to.have.length(1);
-    expect(sectionDivider.at(0).props().style).to.equal(sec20.layout.style);
+    expect(sectionDivider.at(0).props().style).to.equal(sec18.layout.style);
 
     const dividerEl = reportContainer.find('.section-divider');
     expect(dividerEl).to.have.length(1);
@@ -249,15 +242,15 @@ describe('Report Container', () => {
     // Markdown
     const sectionMarkdown = reportContainer.find(SectionMarkdown);
     expect(sectionMarkdown).to.have.length(1);
-    expect(sectionMarkdown.at(0).props().text).to.equal(sec22.data);
+    expect(sectionMarkdown.at(0).props().text).to.equal(sec20.data);
     expect(sectionMarkdown.at(0).text()).to.not.contain(constants.PAGE_BREAK_KEY);
-    expect(sectionMarkdown.at(0).props().style).to.equal(sec22.layout.style);
+    expect(sectionMarkdown.at(0).props().style).to.equal(sec20.layout.style);
 
     // JSON
     const sectionJSON = reportContainer.find(SectionJson);
     expect(sectionJSON).to.have.length(1);
-    expect(sectionJSON.at(0).props().data).to.equal(sec23.data);
-    expect(sectionJSON.at(0).props().style).to.equal(sec23.layout.style);
+    expect(sectionJSON.at(0).props().data).to.equal(sec21.data);
+    expect(sectionJSON.at(0).props().style).to.equal(sec21.layout.style);
     const jsonInspectorKey = reportContainer.find('.json-inspector__key');
     const jsonInspectorValue = reportContainer.find('.json-inspector__value_string');
     expect(jsonInspectorKey).to.have.length(3);
@@ -273,7 +266,7 @@ describe('Report Container', () => {
     // HTML
     const sectionHTML = reportContainer.find(SectionHTML);
     expect(sectionHTML).to.have.length(1);
-    expect(sectionHTML.at(0).props().text).to.equal(sec24.data);
+    expect(sectionHTML.at(0).props().text).to.equal(sec22.data);
     const htmlClass = reportContainer.find('.section-html');
     expect(htmlClass).to.have.length(1);
     expect(htmlClass.at(0).text()).to.equal('THIS IS HTML');
@@ -282,16 +275,16 @@ describe('Report Container', () => {
     const sectionList = reportContainer.find(SectionGroupedList);
     expect(sectionList).to.have.length(1);
     const listTitle = sectionList.at(0).find('.section-title');
-    expect(listTitle.at(0).text()).to.equal(sec25.title);
-    expect(sectionList.at(0).props().data).to.equal(sec25.data);
-    const listKeys = Object.keys(sec25.data);
+    expect(listTitle.at(0).text()).to.equal(sec23.title);
+    expect(sectionList.at(0).props().data).to.equal(sec23.data);
+    const listKeys = Object.keys(sec23.data);
     const listItems = sectionList.find(SectionList);
     expect(listItems).to.have.length(listKeys.length);
     const groupNames = sectionList.find('.group-item-name');
     expect(groupNames.at(0).text()).to.equal(listKeys[0]);
     expect(groupNames.at(1).text()).to.equal(listKeys[1]);
-    expect(listItems.at(0).props().data).to.equal(sec25.data[listKeys[0]]);
-    expect(listItems.at(1).props().data).to.equal(sec25.data[listKeys[1]]);
+    expect(listItems.at(0).props().data).to.equal(sec23.data[listKeys[0]]);
+    expect(listItems.at(1).props().data).to.equal(sec23.data[listKeys[1]]);
   });
 
   it('Generate test template layout report', async () => {
