@@ -43,12 +43,13 @@ export function prepareSections(reportData, reportType, autoPageBreak, reflectDi
     reportData.sort(sortReportSections);
 
     filterSectionsAccordingToReportType(reportData, reportType).forEach((section) => {
-      if (rows[section.layout.rowPos]) {
-        rows[section.layout.rowPos].push(section);
-      } else {
-        rows[section.layout.rowPos] = [section];
-        rows[section.layout.rowPos].style = section.layout.rowStyle || {};
+      if (!rows[section.layout.rowPos]) {
+        rows[section.layout.rowPos] = [];
       }
+
+      rows[section.layout.rowPos].push(section);
+      rows[section.layout.rowPos].style = section.layout.rowStyle || {};
+
       section.autoPageBreak = autoPageBreak;
       if (reflectDimensions) {
         section.layout.reflectDimensions = true;

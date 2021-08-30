@@ -2,7 +2,6 @@ import { PAGE_BREAK_KEY, SECTION_TYPES } from '../constants/Constants';
 import {
   ItemsSection,
   SectionChart,
-  SectionDate,
   SectionGroupedList,
   SectionDivider,
   SectionDuration,
@@ -133,15 +132,6 @@ export function getSectionComponent(section, maxWidth) {
           doNotShowEmoji={section.layout.doNotShowEmoji}
           customClass={isPageBreakSection(section) ? 'page-break-section' : ''}
           forceRangeMessage={section.layout.forceRangeMessage}
-        />
-      );
-      break;
-    case SECTION_TYPES.date:
-      sectionToRender = (
-        <SectionDate
-          date={section.data}
-          style={section.layout.style}
-          format={section.layout.format}
         />
       );
       break;

@@ -7,7 +7,6 @@ import ReportLayout from '../../src/components/Layouts/ReportLayout';
 import {
   ItemsSection,
   SectionChart,
-  SectionDate,
   SectionDivider,
   SectionDuration,
   SectionGroupedList,
@@ -233,16 +232,6 @@ describe('Report Container', () => {
     expect(imgEl.get(2).props.style).to.not.equal({ display: 'none' });
     expect(imgEl.get(3).props.style).to.not.equal({ display: 'none' });
     expect(imgEl.get(4).props.style).to.not.equal({ display: 'none' });
-
-    // Dates
-    const sectionDate = reportContainer.find(SectionDate);
-    expect(sectionDate).to.have.length(2);
-    expect(sectionDate.at(0).props().date).to.equal(sec18.data);
-    expect(sectionDate.at(0).props().style).to.equal(sec18.layout.style);
-    expect(sectionDate.at(0).props().format).to.equal(sec18.layout.format);
-    expect(sectionDate.at(1).props().date).to.equal(sec19.data);
-    expect(sectionDate.at(1).props().style).to.equal(sec19.layout.style);
-    expect(sectionDate.at(1).props().format).to.equal(sec19.layout.format);
 
     const dateEl = reportContainer.find('.section-date-value');
     expect(dateEl).to.have.length(2);

@@ -13,7 +13,6 @@ export const SECTION_TYPES = {
   number: 'number',
   markdown: 'markdown',
   placeholder: 'placeholder',
-  date: 'date',
   image: 'image',
   chart: 'chart',
   table: 'table',
