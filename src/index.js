@@ -9,7 +9,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReportContainer from './containers/ReportContainer';
 import * as TemplateProvider from '../templates/templateProvider';
-import { REPORT_DATA_TOKEN, REPORT_TYPES, PIXEL_SIZE } from './constants/Constants';
+import {
+  REPORT_DATA_TOKEN,
+  REPORT_TYPES,
+  PIXEL_SIZE
+} from './constants/Constants';
 import { prepareSections, getReportType } from './utils/reports';
 import { generateOfficeReport } from './office/OfficeReport';
 
@@ -19,7 +23,8 @@ if (data === REPORT_DATA_TOKEN) {
 }
 
 const type = getReportType(reportType);
-const sections = prepareSections(data, type);
+
+const sections = prepareSections(data, type, false, false, markdownArtifactsServerAddress);
 
 let isLayout = false;
 if (sections) {

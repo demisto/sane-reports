@@ -197,3 +197,5 @@ export const DATA_TYPES = {
   incident: 'incident'
 };
 
+export const MARKDOWN_IMAGES_PATH = '/markdown/image';
+
