@@ -28,6 +28,7 @@ import SectionBarChart from '../../src/components/Sections/SectionChart/SectionB
 import { formatNumberValue } from '../../src/utils/strings';
 import SectionTitle from '../../src/components/Sections/SectionTitle';
 import SectionDurationIcon from '../../src/components/Sections/SectionDurationIcon';
+import { generateCSVReport } from '../../src/office/csv/CSVReport';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -768,5 +769,44 @@ describe('Report Container', () => {
     const sectionTable = reportContainer.find(SectionMarkdown);
     const emptyWidget = sectionTable.find('.widget-empty-state');
     expect(emptyWidget).to.have.length(0);
+  });
+
+  it('Generate csv report with table based automation', () => {
+    const testTemplate = TemplateProvider.getTestLayoutScriptBasedTableTemplate();
+    const expectedCsv = [
+      'Email,Employee,Phone',
+      '"David@org.com","David D","050-123"',
+      '"James@org.com","James J","050-456"',
+      '"Alex@org.com","Alex A","050-789"'
+    ].join('\n');
+
+    generateCSVReport(prepareSections(testTemplate));
+    expect(document.csvData.trim()).to.be.equal(expectedCsv);
+  });
+
+  it('Generate csv report', () => {
+    const testTemplate = TemplateProvider.getTestLayoutCsvTemplate();
+    const expectedCsv = [
+      '"Sane Reports!!!"',
+      '"This is left small green text.","This is right text."',
+      '"Tables"',
+      'name,fill,value,bla',
+      '"Group B","#82ca9d","4567","1"',
+      '"Group C","#ffbb28","1398","2"',
+      '"Group D","#ff8042","9800","3"',
+      '"Group E","#0088fe","3908","4"',
+      '"Group F","#8884d8","4800","5"',
+      '',
+      '',
+      'name,value,fill,bla',
+      '"Group B","4567","#82ca9d","1"',
+      '"Group C","1398","#ffbb28","2"',
+      '"Group D","9800","#ff8042","3"',
+      '"Group E","3908","#0088fe","4"',
+      '"Group F","4800","#8884d8","5"'
+    ].join('\n');
+
+    generateCSVReport(prepareSections(testTemplate));
+    expect(document.csvData.trim()).to.be.equal(expectedCsv);
   });
 });

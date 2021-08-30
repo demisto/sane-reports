@@ -1,0 +1,64 @@
+[
+  {
+    "type": "table",
+    "data": {
+      "data": [
+        {
+          "Email": "David@org.com",
+          "Employee": "David D",
+          "Phone": "050-123"
+        },
+        {
+          "Email": "James@org.com",
+          "Employee": "James J",
+          "Phone": "050-456"
+        },
+        {
+          "Email": "Alex@org.com",
+          "Employee": "Alex A",
+          "Phone": "050-789"
+        }
+      ],
+      "total": 0
+    },
+    "layout": {
+      "classes": "striped stackable small compact",
+      "columnPos": 0,
+      "h": 3,
+      "i": "08114c00-067e-11ec-9ec4-5bea5a24507d",
+      "readableHeaders": {},
+      "reflectDimensions": true,
+      "rowPos": 0,
+      "tableColumns": [],
+      "tableColumnsMetaData": [],
+      "w": 5
+    },
+    "query": {
+      "type": "scripts",
+      "filter": {
+        "query": "Kuku",
+        "period": {
+          "by": "",
+          "byFrom": "days",
+          "byTo": "",
+          "field": "",
+          "fromValue": 7,
+          "toValue": null
+        },
+        "fromDate": "0001-01-01T00:00:00Z",
+        "toDate": "0001-01-01T00:00:00Z"
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "fromDate": "2021-08-22T07:38:44Z",
+    "title": "Fufu",
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  }
+]
