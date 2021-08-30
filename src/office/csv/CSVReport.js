@@ -31,6 +31,23 @@ function csvEscape(data) {
   return '"' + readyData + '"';
 }
 
+function getTableData(results) {
+  let data = results || [];
+  if (results && results.data) {
+    data = results.data;
+  }
+  return data;
+}
+
+function getTableColumns(columns, tableData) {
+  let allColumns = columns || [];
+  if (allColumns.length === 0 && tableData.length > 0) {
+    allColumns = Object.keys(tableData[0]);
+  }
+
+  return allColumns;
+}
+
 export function generateCSVReport(sections) {
   let csv = '';
   Object
@@ -57,8 +74,8 @@ export function generateCSVReport(sections) {
               break;
             }
             case SECTION_TYPES.table: {
-              const columns = section.layout.tableColumns;
-              const tableData = section.data;
+              const tableData = getTableData(section.data);
+              const columns = getTableColumns(section.layout.tableColumns, tableData);
               const readableHeaders = section.layout.readableHeaders;
 
               columns.forEach((col, i) => {
