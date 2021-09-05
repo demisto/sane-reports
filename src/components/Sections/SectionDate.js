@@ -5,12 +5,12 @@ import moment from 'moment-timezone';
 
 
 const SectionDate = ({ date, style, format }) =>
-  <span className="section-date" style={style}>
+  <div className="section-date" style={style}>
     <span className="section-date-key">Date:</span>
     <span className="section-date-value">
       {date ? moment(date).tz(moment.tz.guess()).format(format) : moment().tz(moment.tz.guess()).format(format)}
     </span>
-  </span>;
+  </div>;
 SectionDate.propTypes = {
   date: PropTypes.string,
   style: PropTypes.object,
