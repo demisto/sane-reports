@@ -34,6 +34,10 @@ class ItemsSection extends Component {
     return get(columnUsage, `${item.startCol}.${item.index}.offset`, 0);
   }
 
+  static getItemDisplayType(item) {
+    return (item.displayType || '').toLowerCase();
+  }
+
   constructor(props) {
     super(props);
 
@@ -95,10 +99,6 @@ class ItemsSection extends Component {
     return colSpan === 0 ? columns : colSpan;
   }
 
-  getItemDisplayType(item) {
-    return (item.displayType || '').toLowerCase();
-  }
-
   render() {
     const { style, items, columns, title, titleStyle, description } = this.props;
     const { columnUsage } = this.state;
@@ -121,7 +121,7 @@ class ItemsSection extends Component {
           const columnWidth = width / columns;
           const lastRowIndex = maxBy(items, item => item.index).index;
           const allItemsAreDisplayedAsCards = every(items,
-            item => this.getItemDisplayType(item) === SECTION_ITEMS_DISPLAY_LAYOUTS.card
+            item => ItemsSection.getItemDisplayType(item) === SECTION_ITEMS_DISPLAY_LAYOUTS.card
           );
 
           return (
@@ -145,7 +145,7 @@ class ItemsSection extends Component {
               {(items || []).map((item) => {
                 const colSpan = this.getItemColSpan(item);
                 const id = this.getSectionItemKey(item);
-                const itemDisplayType = this.getItemDisplayType(item);
+                const itemDisplayType = ItemsSection.getItemDisplayType(item);
                 const mainClass = classNames('section-item', {
                   [itemDisplayType]: true,
                   'first-column': allItemsAreDisplayedAsCards && item.startCol === 0,
