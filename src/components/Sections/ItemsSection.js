@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { SECTION_ITEMS_DISPLAY_LAYOUTS, SECTION_ITEM_TYPE } from '../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
 import { SectionHTML, SectionMarkdown, SectionTable, SectionTags } from './index';
-import { get, maxBy } from 'lodash';
+import { get, maxBy, every } from 'lodash';
 import uuid from 'uuid';
 import { sortByFieldsWithPriority } from '../../utils/sort';
 
@@ -95,6 +95,10 @@ class ItemsSection extends Component {
     return colSpan === 0 ? columns : colSpan;
   }
 
+  getItemDisplayType(item) {
+    return (item.displayType || '').toLowerCase();
+  }
+
   render() {
     const { style, items, columns, title, titleStyle, description } = this.props;
     const { columnUsage } = this.state;
@@ -115,9 +119,16 @@ class ItemsSection extends Component {
       <AutoSizer disableHeight>
         {({ width }) => {
           const columnWidth = width / columns;
-          const maxRow = maxBy(items, item => item.index).index;
+          const lastRowIndex = maxBy(items, item => item.index).index;
+          const allItemsAreDisplayedAsCards = every(items,
+            item => this.getItemDisplayType(item) === SECTION_ITEMS_DISPLAY_LAYOUTS.card
+          );
+
           return (
-            <div className="items-section" style={{ width, height: maxOffset, ...style }}>
+            <div
+              className={classNames('items-section', { 'cards-container': allItemsAreDisplayedAsCards })}
+              style={{ width, height: maxOffset, ...style }}
+            >
               {title && <div className="section-title" style={titleStyle}>{title}</div>}
               {description && (
                 <SectionMarkdown
@@ -134,13 +145,12 @@ class ItemsSection extends Component {
               {(items || []).map((item) => {
                 const colSpan = this.getItemColSpan(item);
                 const id = this.getSectionItemKey(item);
-                const displayTypeClass = (item.displayType || '').toLowerCase();
-                const isCard = displayTypeClass === SECTION_ITEMS_DISPLAY_LAYOUTS.card;
+                const itemDisplayType = this.getItemDisplayType(item);
                 const mainClass = classNames('section-item', {
-                  [displayTypeClass]: true,
-                  'first-column': isCard && item.startCol === 0,
-                  'last-column': isCard && item.endCol === columns,
-                  'last-row': isCard && item.index === maxRow
+                  [itemDisplayType]: true,
+                  'first-column': allItemsAreDisplayedAsCards && item.startCol === 0,
+                  'last-column': allItemsAreDisplayedAsCards && item.endCol === columns,
+                  'last-row': allItemsAreDisplayedAsCards && item.index === lastRowIndex
                 });
                 const applyStyle = {
                   transform:
