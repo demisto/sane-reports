@@ -13,3 +13,4 @@ export { default as SectionGroupedList } from './SectionGroupedList';
 export { default as SectionDuration } from './SectionDuration';
 export { default as ItemsSection } from './ItemsSection';
 export { default as SectionHTML } from './SectionHTML';
+export { default as SectionTags } from './SectionTags';

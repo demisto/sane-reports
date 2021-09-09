@@ -151,7 +151,8 @@ export const SECTION_ITEMS_DISPLAY_LAYOUTS = {
 
 export const SECTION_ITEM_TYPE = {
   html: 'html',
-  text: 'text'
+  text: 'text',
+  tagsSelect: 'tagsSelect'
 };
 
 export const PAGE_BREAK_KEY = '\\pagebreak';
