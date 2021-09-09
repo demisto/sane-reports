@@ -183,6 +183,10 @@ class ReportLayout extends Component {
         SECTION_TYPES.trend === section.type;
   };
 
+  shouldShowEmptyState = (section) => {
+    return section.type !== SECTION_TYPES.date && (isEmpty(section.data) || section.data.length === 0);
+  }
+
   render() {
     const { sections, headerLeftImage, headerRightImage, isLayout, dimensions } = this.props;
     return (
@@ -244,10 +248,11 @@ class ReportLayout extends Component {
                               const gridItem = ReportLayout.getGridItemFromSection(section, overflowRows);
                               overflowRows += gridItem.h - section.layout.h;
                               const disableAutoHeight = this.shouldDisableAutoHeight(section);
+                              const showEmptyState = this.shouldShowEmptyState(section);
                               const mainClass = classNames(`section-layout section-${section.type} ` +
                               `${section.layout.class || ''}`,
                                   { 'section-show-overflow': section.layout.reflectDimensions === true,
-                                    'section-show-empty-state': isEmpty(section.data) || section.data.length === 0,
+                                    'section-show-empty-state': showEmptyState,
                                     'disable-auto-height': disableAutoHeight
                                   });
 
