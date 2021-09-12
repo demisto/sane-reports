@@ -147,30 +147,29 @@ const BOTTOM_MARGIN = 40;
           margin: {top: topMargin, bottom: BOTTOM_MARGIN},
           displayHeaderFooter: true,
           headerTemplate: !disableHeaders ? "" + "<div style='" +
-              "height: 200px;" +
-              "font-size: 10px;" +
-              "width: 100%;" +
-              "margin-top: -7px;" +
-              "margin-right: -10px;" +
-              "margin-left: -10px;" +
-              "padding-top: 13px;" +
-              "padding-right: 20px;" +
-              "padding-left: 20px;'" +
-              ">" +
-              "<div style='text-align: left; float: left'>" +
-              "<img src=\"" + headerLeftImage + "\" height='20px'/>" +
-              "</div>" +
-              "<div style='text-align: right; float: right'>" +
-              "<img src=\"" + headerRightImage + "\" height='20px'/>" +
-              "</div>" +
-              "</div>" : '',
+            "height: 200px;" +
+            "font-size: 10px;" +
+            "width: 100%;" +
+            "margin-top: -7px;" +
+            "margin-right: -10px;" +
+            "margin-left: -10px;" +
+            "padding-top: 13px;" +
+            "padding-right: 20px;" +
+            "padding-left: 20px;'" +
+            ">" +
+            "<div style='text-align: left; float: left'>" +
+            "<img src=\"" + headerLeftImage + "\" height='20px'/>" +
+            "</div>" +
+            "<div style='text-align: right; float: right'>" +
+            "<img src=\"" + headerRightImage + "\" height='20px'/>" +
+            "</div>" +
+            "</div>" : '',
           footerTemplate: `
-      <div style="font-size:12px!important;width:100%;margin: 0 auto;color:grey!important;padding-left:10px;text-align:center;" class="footer">
-      ${headerLeftImage && disableHeaders ? '<img style="float: left;height: 10px;width: auto;margin: 0 10px;" src='+ headerLeftImage +' />' : ''}
-      ${headerRightImage && disableHeaders ? '<img style="float: right;height: 10px;width: auto;margin: 0 10px;" src='+ headerRightImage +' />' : ''}
-<span class="pageNumber"></span>/<span class="totalPages"></span>
-</div>
-  `,
+            <div style="font-size:12px!important;width:100%;margin: 0 auto;color:rgba(40, 41 , 42, 0.7)!important;padding-left:10px;text-align:center;" class="footer">
+              ${headerLeftImage && disableHeaders ? '<img style="float: left;height: 10px;width: auto;margin: 0 10px;" src='+ headerLeftImage +' />' : ''}
+              ${headerRightImage && disableHeaders ? '<img style="float: right;height: 10px;width: auto;margin: 0 10px;" src='+ headerRightImage +' />' : ''}
+              <span class="pageNumber"></span>/<span class="totalPages"></span>
+            </div>`,
           landscape: orientation === PAGE_ORIENTATION.landscape
         });
         break;

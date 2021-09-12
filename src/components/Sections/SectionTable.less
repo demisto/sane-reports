@@ -1,10 +1,32 @@
 .section-table {
   overflow-x: hidden;
+  margin-top: 0 !important;
 
   thead {
     th {
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  th, td {
+    border-top: 1px solid #DADBDB !important;
+    border-left: 1px solid #DADBDB !important;
+    border-bottom: none !important;
+    border-right: none !important;
+
+    &:empty {
+      height: 35px !important;
+    }
+
+    &:last-child {
+      border-right: 1px solid #DADBDB !important;
+    }
+  }
+
+  tr:last-child {
+    td {
+      border-bottom:  1px solid #DADBDB !important;
     }
   }
 }

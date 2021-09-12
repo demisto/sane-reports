@@ -17,8 +17,6 @@
     min-height: 50px;
 
     &.card {
-      padding-bottom: 30px;
-
       .section-item-header {
         padding-bottom: 9px;
         word-break: break-word;
@@ -46,6 +44,24 @@
       flex: 1;
       white-space: pre-line;
       word-break: break-word;
+    }
+  }
+
+  &.cards-container {
+    .section-item {
+      &.card {
+        &:not(.first-column) {
+          padding-left: 15px;
+        }
+
+        &:not(.last-column) {
+          padding-right: 15px;
+        }
+
+        &:not(.last-row) {
+          padding-bottom: 30px;
+        }
+      }
     }
   }
 }
