@@ -70,6 +70,7 @@ h1 {
 
   .react-grid-layout {
     height: auto !important; // override grid height
+
     .react-grid-item {
       overflow: visible;
       transition: none;
@@ -77,9 +78,7 @@ h1 {
 
       &:not(.section-show-overflow) {
         &:not(.section-show-empty-state) {
-
           &:not(.section-markdown) {
-
             &:not(.disable-auto-height) {
               height: auto !important;
             }
@@ -95,9 +94,12 @@ h1 {
             }
           }
         }
+
         &.section-show-empty-state {
-          .section-table {
-            height: inherit !important;
+          height: 100% !important;
+
+          table {
+            display: none;
           }
         }
       }
@@ -120,6 +122,7 @@ h1 {
         &:not(.page-break-section) {
           border: 1px solid #DADBDB;
           padding: 10px 12px;
+          min-height: 140px;
         }
       }
 
@@ -128,6 +131,7 @@ h1 {
         .section-table {
           border: none;
           padding: 0;
+          min-height: 0;
         }
       }
 
