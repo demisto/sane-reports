@@ -2,14 +2,19 @@
   overflow-x: hidden;
   margin-top: 0 !important;
 
+  thead {
+    th {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
   th, td {
     padding: 3px !important;
     border-top: 1px solid #DADBDB !important;
     border-left: 1px solid #DADBDB !important;
     border-bottom: none !important;
     border-right: none !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
     width: 80px;
 
     &:empty {
