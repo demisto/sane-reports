@@ -153,7 +153,6 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
 };
 SectionTable.propTypes = {
   columns: PropTypes.array,
-  columnsMetaData: PropTypes.array,
   readableHeaders: PropTypes.object,
   data: PropTypes.oneOfType([
     PropTypes.array,
