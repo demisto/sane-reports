@@ -7,7 +7,7 @@ import WidgetEmptyState from './WidgetEmptyState';
 import SectionTitle from './SectionTitle';
 
 
-const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes, style, title, titleStyle, emptyString,
+const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString,
   maxColumns, forceRangeMessage, headerStyle }) => {
   let tableData = data || [];
 
@@ -38,8 +38,8 @@ const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, classes
   }
 
   const columnsMetaDataMap = new Map();
-  if (columnsMetaData && isArray(columnsMetaData)) {
-    columnsMetaData.forEach(mData => columnsMetaDataMap.set(mData.key, mData));
+  if (columns && isArray(columns)) {
+    columns.forEach(mData => columnsMetaDataMap.set(mData.key, mData));
   }
 
   let tableBody;
