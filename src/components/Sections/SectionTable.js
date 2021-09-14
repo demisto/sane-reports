@@ -7,6 +7,21 @@ import WidgetEmptyState from './WidgetEmptyState';
 import SectionTitle from './SectionTitle';
 
 
+function getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle) {
+  const extraProps = {};
+  const metaData = columnsMetaDataMap.get(key);
+
+  if (metaData) {
+    extraProps.width = metaData.width;
+  }
+
+  if (headerStyle) {
+    extraProps.style = headerStyle;
+  }
+
+  return extraProps;
+}
+
 const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString,
   maxColumns, forceRangeMessage, headerStyle }) => {
   let tableData = data || [];
@@ -51,16 +66,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
           <tr>
             {readyColumns.map((col) => {
               const key = col.key || col;
-              const extraProps = {};
-              const metaData = columnsMetaDataMap.get(key);
-
-              if (metaData) {
-                extraProps.width = metaData.width;
-              }
-
-              if (headerStyle) {
-                extraProps.style = headerStyle;
-              }
+              const extraProps = getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle);
 
               return (
                 <th key={key} {...extraProps}>
@@ -112,9 +118,12 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
           <thead>
             <tr>
               {readyColumns.map((col) => {
-              const key = col.key || col;
+                const key = col.key || col;
+                const extraProps = getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle);
+
                 return (
                   <th
+                    {...extraProps}
                     key={key}
                     {...(headerStyle ? { style: headerStyle } : {})}
                   >
