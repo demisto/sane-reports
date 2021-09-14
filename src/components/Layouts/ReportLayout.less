@@ -70,6 +70,7 @@ h1 {
 
   .react-grid-layout {
     height: auto !important; // override grid height
+
     .react-grid-item {
       overflow: visible;
       transition: none;
@@ -77,9 +78,7 @@ h1 {
 
       &:not(.section-show-overflow) {
         &:not(.section-show-empty-state) {
-
           &:not(.section-markdown) {
-
             &:not(.disable-auto-height) {
               height: auto !important;
             }
@@ -95,11 +94,6 @@ h1 {
             }
           }
         }
-        &.section-show-empty-state {
-          .section-table {
-            height: inherit !important;
-          }
-        }
       }
 
       transition-property: none;
@@ -112,7 +106,7 @@ h1 {
       &.section-itemsSection,
       .section-list:first-child,
       .section-number,
-      .section-table,
+      .section-table:first-child,
       .section-markdown,
       .section-duration,
       .section-grouped-list,
