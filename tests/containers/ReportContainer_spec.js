@@ -562,10 +562,10 @@ describe('Report Container', () => {
         isLayout dimensions={constants.A4_DIMENSIONS}
       />;
     };
-    const sectionWithAutoPageBreak = prepareSections(cloneDeep(testTemplate), null, true);
+    const sectionWithAutoPageBreak = prepareSections(cloneDeep(testTemplate), null, null, true);
     const reportWithAutoPageBreak = mount(renderReport(sectionWithAutoPageBreak));
 
-    const sectionWithoutAutoPageBreak = prepareSections(cloneDeep(testTemplate), null, false);
+    const sectionWithoutAutoPageBreak = prepareSections(cloneDeep(testTemplate), null, null, false);
     const reportWithoutAutoPageBreak = mount(renderReport(sectionWithoutAutoPageBreak));
 
     await new Promise(resolve => setTimeout(resolve, 5001));
@@ -707,7 +707,7 @@ describe('Report Container', () => {
         isLayout dimensions={constants.A4_DIMENSIONS}
       />;
     };
-    const sectionWithReflectDimensions = prepareSections(cloneDeep(testTemplate), null, true, true);
+    const sectionWithReflectDimensions = prepareSections(cloneDeep(testTemplate), null, null, true, true);
     const report = mount(renderReport(sectionWithReflectDimensions));
 
     await new Promise(resolve => setTimeout(resolve, 5001));
