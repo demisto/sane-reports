@@ -39,9 +39,9 @@ function filterSectionsAccordingToReportType(reportData, reportType) {
 export function prepareSections(
   reportData,
   reportType,
+  markdownArtifactsServerAddress,
   autoPageBreak,
-  reflectDimensions,
-  markdownArtifactsServerAddress
+  reflectDimensions
 ) {
   const rows = {};
 

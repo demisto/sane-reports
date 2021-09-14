@@ -24,7 +24,7 @@ if (data === REPORT_DATA_TOKEN) {
 
 const type = getReportType(reportType);
 
-const sections = prepareSections(data, type, false, false, markdownArtifactsServerAddress);
+const sections = prepareSections(data, type, markdownArtifactsServerAddress);
 
 let isLayout = false;
 if (sections) {
