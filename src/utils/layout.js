@@ -16,9 +16,10 @@ import {
   SectionText,
   SectionHTML
 } from '../components/Sections';
-import { isNumber, isObjectLike, compact, isString, groupBy, get } from 'lodash';
+import { isNumber, isObjectLike, compact, isString, groupBy, get, isEmpty } from 'lodash';
 import React from 'react';
 import { processData } from './data';
+import WidgetEmptyState from '../components/Sections/WidgetEmptyState';
 
 function getDefaultEmptyNotification() {
   return 'No results found.';
@@ -253,6 +254,9 @@ export function getSectionComponent(section, maxWidth) {
                 </div>
               );
             }))}
+            { isEmpty(section.data) &&
+              <WidgetEmptyState emptyString={section.emptyNotification || getDefaultEmptyNotification()} />
+            }
           </>
         </div>
       );
