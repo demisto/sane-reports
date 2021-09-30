@@ -102,7 +102,7 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle, forc
       <SectionTitle title={title} titleStyle={titleStyle} subTitle={forceRangeMessage} />
       <div className="duration-widget-container">
         <div className="duration-widget">
-          <div className="icon-container">
+          <div className="icon-container" style={iconStyle || {}}>
             <SectionDurationIcon color={color} size={(iconStyle && iconStyle.fontSize) || '32px'} />
           </div>
           <div style={{ padding: 0 }}>
