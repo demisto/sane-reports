@@ -101,11 +101,11 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle, forc
     <div className="section-duration" style={containerStyle}>
       <SectionTitle title={title} titleStyle={titleStyle} subTitle={forceRangeMessage} />
       <div className="duration-widget-container">
-        <div className="ui center aligned middle aligned grid duration-widget">
-          <div className="four wide column icon-container">
+        <div className="duration-widget">
+          <div className="icon-container" style={iconStyle || {}}>
             <SectionDurationIcon color={color} size={(iconStyle && iconStyle.fontSize) || '32px'} />
           </div>
-          <div className="twelve wide column" style={{ padding: 0 }}>
+          <div style={{ padding: 0 }}>
             <table className="wrapper-table">
               <tbody>
                 <tr>
