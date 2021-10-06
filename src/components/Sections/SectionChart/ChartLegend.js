@@ -47,7 +47,7 @@ const ChartLegend = ({ data, icon = 'square', layout = CHART_LAYOUT_TYPE.vertica
     let width = 'auto';
     const rawValue = group.value || 0;
     const value = formatter ? formatter(rawValue) : rawValue;
-    const percentage = group.percentage ? `${Math.round(group.percentage)}%` : undefined;
+    const percentage = group.percentage ? `${group.percentage.toFixed(2)}%` : undefined;
     // decrease width of name (if value exists) to allow for ellipsis.
     if (showValue) {
       if (valueDisplay === VALUE_FORMAT_TYPES.stretch) {

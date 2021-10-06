@@ -164,11 +164,11 @@ describe('Report Container', () => {
 
     const percetages = pieChart.find('.recharts-legend-item-percentage');
     expect(percetages).to.have.length(5);
-    expect(percetages.at(0).text()).to.equal('20%');
-    expect(percetages.at(1).text()).to.equal('20%');
-    expect(percetages.at(2).text()).to.equal('20%');
-    expect(percetages.at(3).text()).to.equal('20%');
-    expect(percetages.at(4).text()).to.equal('20%');
+    expect(percetages.at(0).text()).to.equal('20.00%');
+    expect(percetages.at(1).text()).to.equal('20.00%');
+    expect(percetages.at(2).text()).to.equal('20.00%');
+    expect(percetages.at(3).text()).to.equal('20.00%');
+    expect(percetages.at(4).text()).to.equal('20.00%');
 
     // Tables
     const sectionTable = reportContainer.find(SectionTable);
