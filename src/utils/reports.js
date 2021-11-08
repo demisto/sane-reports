@@ -60,7 +60,7 @@ export function prepareSections(
       if (reflectDimensions) {
         section.layout.reflectDimensions = true;
       }
-      if (section.type === SECTION_TYPES.markdown) {
+      if (section.type === SECTION_TYPES.markdown || section.type === SECTION_TYPES.itemsSection) {
         section.markdownArtifactsServerAddress = markdownArtifactsServerAddress;
       }
     });
