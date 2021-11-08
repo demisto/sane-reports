@@ -77,20 +77,24 @@ export default class SectionMarkdown extends Component {
       }
       case 'img': {
         const srcArr = props.src.split('=size=');
-        if (srcArr[0].startsWith(MARKDOWN_IMAGES_PATH)) {
-          props.src = `${markdownArtifactsServerAddress}${srcArr[0]}`;
-        } else {
-          props.src = srcArr[0];
-        }
-        if (srcArr.length > 1) {
-          const sizeArr = srcArr[1].split('x');
-          props.height = sizeArr[0];
-          if (sizeArr.length > 1) {
-            props.width = sizeArr[1];
-          }
-        }
-
-        res = (<img {...props} />); // eslint-disable-line
+         res = (<div><span {JSON.stringify(srcArr)} />
+          <span {MARKDOWN_IMAGES_PATH} />
+          <span {'##' + markdownArtifactsServerAddress + '##'} />
+        </div>);
+        // if (srcArr[0].startsWith(MARKDOWN_IMAGES_PATH)) {
+        //   props.src = `${markdownArtifactsServerAddress}${srcArr[0]}`;
+        // } else {
+        //   props.src = srcArr[0];
+        // }
+        // if (srcArr.length > 1) {
+        //   const sizeArr = srcArr[1].split('x');
+        //   props.height = sizeArr[0];
+        //   if (sizeArr.length > 1) {
+        //     props.width = sizeArr[1];
+        //   }
+        // }
+        //
+        // res = (<img {...props} />); // eslint-disable-line
         break;
       }
       case 'a':
