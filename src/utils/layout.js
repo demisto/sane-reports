@@ -232,6 +232,7 @@ export function getSectionComponent(section, maxWidth) {
           title={section.title}
           description={section.description}
           columns={(section.layout.w / 4) * 2}
+          markdownArtifactsServerAddress={section.markdownArtifactsServerAddress}
         />
       );
       break;
