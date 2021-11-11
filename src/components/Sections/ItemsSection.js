@@ -118,7 +118,7 @@ class ItemsSection extends Component {
     return (
       <AutoSizer disableHeight>
         {({ width }) => {
-          const columnWidth = (width + 20) / columns;
+          const columnWidth = width / columns;
           const lastRowIndex = maxBy(items, item => item.index).index;
           const allItemsAreDisplayedAsCards = every(items,
             item => ItemsSection.getItemDisplayType(item) === SECTION_ITEMS_DISPLAY_LAYOUTS.card
