@@ -163,10 +163,15 @@ export default class SectionMarkdown extends Component {
         res = <span {...props}><br /></span>;
         break;
       case 'code': {
-        const clzz = props['data-language'] || '';
+        let clzz = '';
+        let parsedContent;
+        if (children) {
+          clzz = props['data-language'] || '';
+          parsedContent = children[0];
+        }
         res = (
           <Highlight className={clzz} key={new Date().getMilliseconds()}>
-            {children[0]}
+            {parsedContent}
           </Highlight>
         );
         break;
