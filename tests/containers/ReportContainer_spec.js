@@ -810,7 +810,7 @@ describe('Report Container', () => {
     expect(document.csvData.trim()).to.be.equal(expectedCsv);
   });
 
-  it.only('should render code block no duplicates on section markdown', () => {
+  it('should render code block no duplicates on section markdown', () => {
     const testTemplate = TemplateProvider.getTestLayoutMarkdownWithCodeBlock();
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
