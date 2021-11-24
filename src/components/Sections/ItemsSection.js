@@ -28,7 +28,8 @@ class ItemsSection extends Component {
       endCol: PropTypes.number,
       index: PropTypes.number,
       displayType: PropTypes.oneOf(Object.values(SECTION_ITEMS_DISPLAY_LAYOUTS))
-    }))
+    })),
+    markdownArtifactsServerAddress: PropTypes.string
   };
 
   static getHeightOffset(columnUsage, item) {
@@ -101,7 +102,7 @@ class ItemsSection extends Component {
   }
 
   render() {
-    const { style, items, columns, title, titleStyle, description } = this.props;
+    const { style, items, columns, title, titleStyle, description, markdownArtifactsServerAddress } = this.props;
     const { columnUsage } = this.state;
 
     let maxOffset = 0;
@@ -134,6 +135,7 @@ class ItemsSection extends Component {
               {description && (
                 <SectionMarkdown
                   text={description}
+                  markdownArtifactsServerAddress={markdownArtifactsServerAddress}
                   customClass="section-description"
                   setRef={(itemElement) => {
                     if (!itemElement) {
@@ -159,8 +161,12 @@ class ItemsSection extends Component {
                   width: colSpan * columnWidth
                 };
                 const type = item.fieldType || '';
-                let dataDisplay = Array.isArray(item.data) ? <SectionTable data={item.data} /> :
-                <SectionMarkdown text={String(item.data)} />;
+                let dataDisplay = Array.isArray(item.data) ?
+                  <SectionTable data={item.data} /> :
+                  <SectionMarkdown
+                    text={String(item.data)}
+                    markdownArtifactsServerAddress={markdownArtifactsServerAddress}
+                  />;
                 if (type === SECTION_ITEM_TYPE.html) {
                   dataDisplay = <SectionHTML text={item.data} />;
                 } else if (type === SECTION_ITEM_TYPE.tagsSelect) {
