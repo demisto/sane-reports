@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
+import { uniqueId } from 'lodash';
 import { MARKDOWN_IMAGES_PATH, PAGE_BREAK_KEY } from '../../constants/Constants';
 import { mdBtn, mdTextAlign, mdTextStyle, mdUnderline } from '../../utils/markdown';
 import WidgetEmptyState from './WidgetEmptyState';
@@ -66,7 +67,7 @@ export default class SectionMarkdown extends Component {
         break;
       }
       case 'p':
-        res = (<div className="preplacer" {...props}>{children}</div>);
+        res = (<div key={uniqueId('preplacer_')} className="preplacer" {...props}>{children}</div>);
         break;
       case 'hr':
         res = (<hr {...props} />);
@@ -123,7 +124,7 @@ export default class SectionMarkdown extends Component {
         }
 
         res = (
-          <div key={Math.random()}>
+          <div key={uniqueId('table_')}>
             <table
               className={`ui very compact table celled fixed unstackable selectable ${tableClasses}`}
               style={{ tableLayout: 'fixed' }}
@@ -170,7 +171,7 @@ export default class SectionMarkdown extends Component {
           parsedContent = children[0];
         }
         res = (
-          <Highlight className={clzz} key={new Date().getMilliseconds()}>
+          <Highlight className={clzz} key={uniqueId('highlight_')}>
             {parsedContent}
           </Highlight>
         );

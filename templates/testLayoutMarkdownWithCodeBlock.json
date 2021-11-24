@@ -1,0 +1,47 @@
+[
+  {
+    "type": "itemsSection",
+    "data": [
+      {
+        "fieldId": "bodycampaign",
+        "fieldName": "Body Campaign",
+        "fieldType": "markdown",
+        "data": "## Indicators of Compromise\n#### Excel file with macros for BazarLoader, \nSHA256 hash: `8662d511c7f1bef3a6e4f6d72965760345b57ddf0de5d3e6eae4e610216a39c1`\nFile size: 332,087 bytes\nFile name: `Documents new.xlsb`",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 6,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 0
+      }
+    ],
+    "layout": {
+      "columnPos": 0,
+      "h": 2,
+      "i": "vug7e0qild-aa90b1c0-3273-11ec-b393-053bb5ecdeef",
+      "rowPos": 9,
+      "w": 12
+    },
+    "query": {
+      "type": "incident"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "emptyNotification": "No results found",
+    "displayType": "row",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  }
+]
