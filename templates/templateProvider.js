@@ -6,6 +6,7 @@ import testLayoutTemplate from './testLayout.json';
 import testLayoutDurationTemplate from './testLayoutDuration.json';
 import incidentDailyReportTempalte from './incidentDailyReportTempalte.json';
 import testLayoutEmptyTemplate from './testLayoutEmptyTemplate.json';
+import testLayoutMarkdownWithCodeBlock from './testLayoutMarkdownWithCodeBlock.json';
 
 function getTestTemplate() {
   return testTemplate;
@@ -25,6 +26,10 @@ function getTestLayoutTemplate() {
 
 function getTestLayoutEmptyTemplate() {
   return testLayoutEmptyTemplate;
+}
+
+function getTestLayoutMarkdownWithCodeBlock() {
+  return testLayoutMarkdownWithCodeBlock;
 }
 
 function getTestLayoutDurationTemplate() {
@@ -48,5 +53,6 @@ export {
   getTestLayoutTemplate,
   getTestLayoutDurationTemplate,
   getTestLayoutTemplateWithPageBreaks,
-  getTestLayoutEmptyTemplate
+  getTestLayoutEmptyTemplate,
+  getTestLayoutMarkdownWithCodeBlock
 };

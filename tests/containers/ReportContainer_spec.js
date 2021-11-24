@@ -809,4 +809,13 @@ describe('Report Container', () => {
     generateCSVReport(prepareSections(testTemplate));
     expect(document.csvData.trim()).to.be.equal(expectedCsv);
   });
+
+  it('should render code block no duplicates on section markdown', () => {
+    const testTemplate = TemplateProvider.getTestLayoutMarkdownWithCodeBlock();
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+    const sectionMark = reportContainer.find(SectionMarkdown);
+    const codeBlockElements = sectionMark.find('code');
+    expect(codeBlockElements).to.have.length(2);
+  });
 });
