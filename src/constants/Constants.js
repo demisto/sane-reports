@@ -152,7 +152,8 @@ export const SECTION_ITEMS_DISPLAY_LAYOUTS = {
 export const SECTION_ITEM_TYPE = {
   html: 'html',
   text: 'text',
-  tagsSelect: 'tagsSelect'
+  tagsSelect: 'tagsSelect',
+  date: 'date'
 };
 
 export const PAGE_BREAK_KEY = '\\pagebreak';
