@@ -7,6 +7,7 @@ import testLayoutDurationTemplate from './testLayoutDuration.json';
 import incidentDailyReportTempalte from './incidentDailyReportTempalte.json';
 import testLayoutEmptyTemplate from './testLayoutEmptyTemplate.json';
 import testLayoutMarkdownWithCodeBlock from './testLayoutMarkdownWithCodeBlock.json';
+import testLayoutLongTextItemSection from './testLayoutLongTextItemSection.json';
 
 function getTestTemplate() {
   return testTemplate;
@@ -40,6 +41,10 @@ function getTestLayoutTemplateWithPageBreaks() {
   return testLayoutWithPageBreaks;
 }
 
+function getTestLayoutLongTextItemSection() {
+  return testLayoutLongTextItemSection;
+}
+
 /* istanbul ignore next */
 function getIncidentDailyReportTemplate() {
   return incidentDailyReportTempalte;
@@ -54,5 +59,6 @@ export {
   getTestLayoutDurationTemplate,
   getTestLayoutTemplateWithPageBreaks,
   getTestLayoutEmptyTemplate,
-  getTestLayoutMarkdownWithCodeBlock
+  getTestLayoutMarkdownWithCodeBlock,
+  getTestLayoutLongTextItemSection
 };

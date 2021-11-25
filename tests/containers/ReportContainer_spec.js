@@ -818,4 +818,8 @@ describe('Report Container', () => {
     const codeBlockElements = sectionMark.find('code');
     expect(codeBlockElements).to.have.length(2);
   });
+
+  it.skip('long text should not overflow item section border', () => {
+    // SKIP REASON: https://github.com/demisto/sane-reports/pull/195#issuecomment-978027651
+  });
 });

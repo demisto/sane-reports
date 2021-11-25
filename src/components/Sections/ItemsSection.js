@@ -11,6 +11,7 @@ import { sortByFieldsWithPriority } from '../../utils/sort';
 
 const DESCRIPTION_KEY = 'description';
 const SECTION_ITEM_PADDING = 5;
+const RERENDER_TIMEOUT_MS = 550;
 
 class ItemsSection extends Component {
   static propTypes = {
@@ -47,11 +48,11 @@ class ItemsSection extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.setColumnUsage(this.props), 100); // avoid rerender height changes
+    setTimeout(() => this.setColumnUsage(this.props), RERENDER_TIMEOUT_MS); // avoid rerender height changes
   }
 
   componentWillReceiveProps(nextProps) {
-    setTimeout(() => this.setColumnUsage(nextProps), 100); // avoid rerender height changes
+    setTimeout(() => this.setColumnUsage(nextProps), RERENDER_TIMEOUT_MS); // avoid rerender height changes
   }
 
   getSectionItemKey(item) {
