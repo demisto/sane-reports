@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 
 const PARSING_STRING_WITH_TIME_ZONE = 'YYYY-MM-DD HH:mm:ss.SSSSSS Z';
-const DEFAULT_FORMAT = 'MMMM Do YYYY, h:mm:ss a Z';
+const DEFAULT_FORMAT = 'MMMM Do YYYY, h:mm:ss a z';
 
 function dateToMoment(date) {
   if (!date) {
