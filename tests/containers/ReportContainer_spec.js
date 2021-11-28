@@ -828,6 +828,7 @@ describe('Report Container', () => {
 
   describe('SectionDate', () => {
     it('dateToMoment(date) should convert date to moment', () => {
+      expect(dateToMoment().diff(moment(), 'seconds')).to.eq(0);
       expect(dateToMoment('2021-11-24 12:57:02.889261 +0200 IST').isValid()).to.be.true;
       expect(moment.isMoment(dateToMoment('2021-11-24 12:57:02.889261 +0200 IST'))).to.be.true;
       expect(
@@ -835,16 +836,12 @@ describe('Report Container', () => {
       ).to.equal(moment('2021-11-24 12:57:02.889261 +0200').tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT));
     });
 
-    it('dateToMoment(date) should be N/A when date is falsy', () => {
-      expect(dateToMoment(undefined)).to.equal('N/A');
-    });
-
     it('should render date section ok', () => {
       const testTemplate = TemplateProvider.getTestLayoutWithDateTime();
       const itemsSection = testTemplate.find(section => section.type === 'itemsSection');
       const datesSections = itemsSection.data.filter(section => section.fieldType === 'date');
       const expectedDates = [
-        'N/A',
+        moment().tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
         dateToMoment(datesSections[0].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
         dateToMoment(datesSections[1].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT)
       ];
