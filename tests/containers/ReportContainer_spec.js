@@ -29,6 +29,7 @@ import { formatNumberValue } from '../../src/utils/strings';
 import SectionTitle from '../../src/components/Sections/SectionTitle';
 import SectionDurationIcon from '../../src/components/Sections/SectionDurationIcon';
 import { generateCSVReport } from '../../src/office/csv/CSVReport';
+import { getCachedTemplate } from '../../templates/templateProvider';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -821,5 +822,16 @@ describe('Report Container', () => {
 
   it.skip('long text should not overflow item section border', () => {
     // SKIP REASON: https://github.com/demisto/sane-reports/pull/195#issuecomment-978027651
+  });
+
+  describe.only('SectionDate', () => {
+    it('should render date section ok', () => {
+      const testTemplate = getCachedTemplate('testLayoutWithDateTime.json');
+      const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+      const reportContainer = mount(toRender);
+      const dateSections = reportContainer.find('span.section-date-value');
+      expect(dateSections).to.have.length(3);
+      reportContainer.debug();
+    });
   });
 });

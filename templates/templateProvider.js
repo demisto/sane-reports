@@ -1,3 +1,5 @@
+import { readFileSync } from 'fs';
+import path from 'path';
 import testTemplate from './test.json';
 import testLayoutCsvTemplate from './testLayoutCsv.json';
 import testLayoutScriptBasedTableTemplate from './testLayoutScriptBasedTable.json';
@@ -50,6 +52,19 @@ function getIncidentDailyReportTemplate() {
   return incidentDailyReportTempalte;
 }
 
+let cache = {};
+function getCachedTemplate(filename) {
+  if (filename in cache) {
+    return cache[filename];
+  }
+  cache[filename] = JSON.parse(readFileSync(path.resolve(__dirname, filename)));
+  return cache[filename];
+}
+
+function clearCachedTemplates() {
+  cache = {};
+}
+
 export {
   getTestTemplate,
   getTestLayoutCsvTemplate,
@@ -60,5 +75,7 @@ export {
   getTestLayoutTemplateWithPageBreaks,
   getTestLayoutEmptyTemplate,
   getTestLayoutMarkdownWithCodeBlock,
-  getTestLayoutLongTextItemSection
+  getTestLayoutLongTextItemSection,
+  getCachedTemplate,
+  clearCachedTemplates
 };

@@ -13,12 +13,12 @@ function dateToMoment(date) {
 
   let result;
 
-  result = moment(date);
+  result = moment(date, PARSING_STRING_WITH_TIME_ZONE);
   if (result.isValid()) {
     return result;
   }
 
-  result = moment(date, PARSING_STRING_WITH_TIME_ZONE);
+  result = moment(date);
   if (result.isValid()) {
     return result;
   }
