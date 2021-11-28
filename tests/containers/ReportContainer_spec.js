@@ -30,6 +30,8 @@ import SectionTitle from '../../src/components/Sections/SectionTitle';
 import SectionDurationIcon from '../../src/components/Sections/SectionDurationIcon';
 import { generateCSVReport } from '../../src/office/csv/CSVReport';
 import { getCachedTemplate } from '../../templates/templateProvider';
+import { DEFAULT_DATE_TIME_FORMAT } from '../../src/constants/Constants';
+import moment from 'moment-timezone';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -824,14 +826,21 @@ describe('Report Container', () => {
     // SKIP REASON: https://github.com/demisto/sane-reports/pull/195#issuecomment-978027651
   });
 
-  describe.only('SectionDate', () => {
+  describe('SectionDate', () => {
     it('should render date section ok', () => {
+      const expectedDates = [
+        moment().tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
+        'November 24th 2021, 12:56:50 pm IST',
+        'November 24th 2021, 12:57:02 pm IST'
+      ];
       const testTemplate = getCachedTemplate('testLayoutWithDateTime.json');
       const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
       const reportContainer = mount(toRender);
-      const dateSections = reportContainer.find('span.section-date-value');
+      const dateSections = reportContainer.find(SectionDate);
       expect(dateSections).to.have.length(3);
-      reportContainer.debug();
+      dateSections.forEach((section, i) => {
+        expect(section.text()).to.be.equal('Date:' + expectedDates[i]);
+      });
     });
   });
 });

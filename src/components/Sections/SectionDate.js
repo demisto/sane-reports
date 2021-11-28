@@ -2,9 +2,8 @@ import './SectionDate.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
+import { DEFAULT_DATE_TIME_FORMAT, PARSING_STRING_WITH_TIME_ZONE } from '../../constants/Constants';
 
-const PARSING_STRING_WITH_TIME_ZONE = 'YYYY-MM-DD HH:mm:ss.SSSSSS Z';
-const DEFAULT_FORMAT = 'MMMM Do YYYY, h:mm:ss a z';
 
 function dateToMoment(date) {
   if (!date) {
@@ -33,7 +32,8 @@ const SectionDate = ({ date, style, format }) => {
     <div className="section-date" style={style}>
       <span className="section-date-key">Date:</span>
       <span className="section-date-value">
-        {moment.isMoment(dateTime) ? dateTime.tz(moment.tz.guess()).format(format || DEFAULT_FORMAT) : dateTime}
+        {moment.isMoment(dateTime) ? dateTime.tz(moment.tz.guess())
+          .format(format || DEFAULT_DATE_TIME_FORMAT) : dateTime}
       </span>
     </div>);
 };
