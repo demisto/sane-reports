@@ -827,10 +827,11 @@ describe('Report Container', () => {
 
   describe('SectionDate', () => {
     it('should render date section ok', () => {
+      const zoneAbbr = moment().tz(moment.tz.guess()).format('z');
       const expectedDates = [
         moment().tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
-        'November 24th 2021, 12:56:50 pm IST',
-        'November 24th 2021, 12:57:02 pm IST'
+        'November 24th 2021, 12:56:50 pm ' + zoneAbbr,
+        'November 24th 2021, 12:57:02 pm ' + zoneAbbr
       ];
       const testTemplate = TemplateProvider.getTestLayoutWithDateTime();
       const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
