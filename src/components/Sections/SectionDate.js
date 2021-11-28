@@ -5,7 +5,7 @@ import moment from 'moment-timezone';
 import { DEFAULT_DATE_TIME_FORMAT, PARSING_STRING_WITH_TIME_ZONE } from '../../constants/Constants';
 
 
-function dateToMoment(date) {
+export function dateToMoment(date) {
   if (!date) {
     return moment();
   }

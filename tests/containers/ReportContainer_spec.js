@@ -31,6 +31,7 @@ import SectionDurationIcon from '../../src/components/Sections/SectionDurationIc
 import { generateCSVReport } from '../../src/office/csv/CSVReport';
 import { DEFAULT_DATE_TIME_FORMAT } from '../../src/constants/Constants';
 import moment from 'moment-timezone';
+import { dateToMoment } from '../../src/components/Sections/SectionDate';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -826,14 +827,22 @@ describe('Report Container', () => {
   });
 
   describe('SectionDate', () => {
+    it('dateToMoment(date) should convert date to moment', () => {
+      expect(dateToMoment().diff(moment(), 'seconds')).to.eq(0);
+      expect(dateToMoment('2021-11-24 12:57:02.889261 +0200 IST').isValid()).to.be.true;
+      expect(moment.isMoment(dateToMoment('2021-11-24 12:57:02.889261 +0200 IST'))).to.be.true;
+      expect(
+        dateToMoment('2021-11-24 12:57:02.889261 +0200 IST').tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT)
+      ).to.equal(moment('2021-11-24 12:57:02.889261 +0200').tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT));
+    });
+
     it('should render date section ok', () => {
-      const zoneAbbr = moment().tz(moment.tz.guess()).format('z');
+      const testTemplate = TemplateProvider.getTestLayoutWithDateTime();
       const expectedDates = [
         moment().tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
-        'November 24th 2021, 12:56:50 pm ' + zoneAbbr,
-        'November 24th 2021, 12:57:02 pm ' + zoneAbbr
+        dateToMoment(testTemplate[5].data[2].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
+        dateToMoment(testTemplate[5].data[4].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT)
       ];
-      const testTemplate = TemplateProvider.getTestLayoutWithDateTime();
       const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
       const reportContainer = mount(toRender);
       const dateSections = reportContainer.find(SectionDate);
