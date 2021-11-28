@@ -842,10 +842,11 @@ describe('Report Container', () => {
     it('should render date section ok', () => {
       const testTemplate = TemplateProvider.getTestLayoutWithDateTime();
       const itemsSection = testTemplate.find(section => section.type === 'itemsSection');
+      const datesSections = itemsSection.data.filter(section => section.fieldType === 'date');
       const expectedDates = [
-        moment().tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
-        dateToMoment(itemsSection.data[2].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
-        dateToMoment(itemsSection.data[4].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT)
+        'N/A',
+        dateToMoment(datesSections[0].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
+        dateToMoment(datesSections[1].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT)
       ];
       const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
       const reportContainer = mount(toRender);
