@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { SECTION_ITEMS_DISPLAY_LAYOUTS, SECTION_ITEM_TYPE } from '../../constants/Constants';
 import { AutoSizer } from 'react-virtualized';
-import { SectionHTML, SectionMarkdown, SectionTable, SectionTags } from './index';
+import { SectionDate, SectionHTML, SectionMarkdown, SectionTable, SectionTags } from './index';
 import { get, maxBy, every } from 'lodash';
 import uuid from 'uuid';
 import { sortByFieldsWithPriority } from '../../utils/sort';
@@ -171,6 +171,8 @@ class ItemsSection extends Component {
                   dataDisplay = <SectionHTML text={item.data} />;
                 } else if (type === SECTION_ITEM_TYPE.tagsSelect) {
                   dataDisplay = <SectionTags tags={item.data} />;
+                } else if (type === SECTION_ITEM_TYPE.date) {
+                  dataDisplay = <SectionDate date={item.data} format={item.format} />;
                 }
 
                 return (

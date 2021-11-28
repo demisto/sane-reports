@@ -152,7 +152,8 @@ export const SECTION_ITEMS_DISPLAY_LAYOUTS = {
 export const SECTION_ITEM_TYPE = {
   html: 'html',
   text: 'text',
-  tagsSelect: 'tagsSelect'
+  tagsSelect: 'tagsSelect',
+  date: 'date'
 };
 
 export const PAGE_BREAK_KEY = '\\pagebreak';
@@ -200,3 +201,5 @@ export const DATA_TYPES = {
 
 export const MARKDOWN_IMAGES_PATH = '/markdown/image';
 
+export const PARSING_STRING_WITH_TIME_ZONE = 'YYYY-MM-DD HH:mm:ss.SSSSSS Z';
+export const DEFAULT_DATE_TIME_FORMAT = 'MMMM Do YYYY, h:mm:ss a z';

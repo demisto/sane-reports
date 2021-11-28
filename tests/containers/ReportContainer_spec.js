@@ -29,6 +29,9 @@ import { formatNumberValue } from '../../src/utils/strings';
 import SectionTitle from '../../src/components/Sections/SectionTitle';
 import SectionDurationIcon from '../../src/components/Sections/SectionDurationIcon';
 import { generateCSVReport } from '../../src/office/csv/CSVReport';
+import { DEFAULT_DATE_TIME_FORMAT } from '../../src/constants/Constants';
+import moment from 'moment-timezone';
+import { dateToMoment } from '../../src/components/Sections/SectionDate';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -821,5 +824,34 @@ describe('Report Container', () => {
 
   it.skip('long text should not overflow item section border', () => {
     // SKIP REASON: https://github.com/demisto/sane-reports/pull/195#issuecomment-978027651
+  });
+
+  describe('SectionDate', () => {
+    it('dateToMoment(date) should convert date to moment', () => {
+      expect(dateToMoment().diff(moment(), 'seconds')).to.eq(0);
+      expect(dateToMoment('2021-11-24 12:57:02.889261 +0200 IST').isValid()).to.be.true;
+      expect(moment.isMoment(dateToMoment('2021-11-24 12:57:02.889261 +0200 IST'))).to.be.true;
+      expect(
+        dateToMoment('2021-11-24 12:57:02.889261 +0200 IST').tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT)
+      ).to.equal(moment('2021-11-24 12:57:02.889261 +0200').tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT));
+    });
+
+    it('should render date section ok', () => {
+      const testTemplate = TemplateProvider.getTestLayoutWithDateTime();
+      const itemsSection = testTemplate.find(section => section.type === 'itemsSection');
+      const datesSections = itemsSection.data.filter(section => section.fieldType === 'date');
+      const expectedDates = [
+        moment().tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
+        dateToMoment(datesSections[0].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
+        dateToMoment(datesSections[1].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT)
+      ];
+      const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+      const reportContainer = mount(toRender);
+      const dateSections = reportContainer.find(SectionDate);
+      expect(dateSections).to.have.length(3);
+      dateSections.forEach((section, i) => {
+        expect(section.text()).to.be.equal('Date:' + expectedDates[i]);
+      });
+    });
   });
 });
