@@ -313,7 +313,7 @@ describe('Report Container', () => {
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
 
-    await new Promise(resolve => setTimeout(resolve, 5001));
+    await new Promise(resolve => setTimeout(resolve, 10000));
 
     const hiddenHeader = reportContainer.find('.hidden-header');
     expect(hiddenHeader).to.have.length(1);
