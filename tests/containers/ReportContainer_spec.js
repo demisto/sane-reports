@@ -29,7 +29,6 @@ import { formatNumberValue } from '../../src/utils/strings';
 import SectionTitle from '../../src/components/Sections/SectionTitle';
 import SectionDurationIcon from '../../src/components/Sections/SectionDurationIcon';
 import { generateCSVReport } from '../../src/office/csv/CSVReport';
-import { getCachedTemplate } from '../../templates/templateProvider';
 import { DEFAULT_DATE_TIME_FORMAT } from '../../src/constants/Constants';
 import moment from 'moment-timezone';
 
@@ -833,7 +832,7 @@ describe('Report Container', () => {
         'November 24th 2021, 12:56:50 pm IST',
         'November 24th 2021, 12:57:02 pm IST'
       ];
-      const testTemplate = getCachedTemplate('testLayoutWithDateTime.json');
+      const testTemplate = TemplateProvider.getTestLayoutWithDateTime();
       const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
       const reportContainer = mount(toRender);
       const dateSections = reportContainer.find(SectionDate);
