@@ -856,4 +856,29 @@ describe('Report Container', () => {
       });
     });
   });
+
+  describe('markdown back-quote: code-blocks and inline-code', () => {
+    let testTemplate;
+    let toRender;
+    let reportContainer;
+    let sectionMark;
+
+    before(() => {
+      testTemplate = loadTemplate('testLayoutMarkdownWithCodeBlock2.json');
+    });
+
+    beforeEach(() => {
+      toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+      reportContainer = mount(toRender);
+      sectionMark = reportContainer.find(SectionMarkdown);
+    });
+
+    it('should create code block when using ```...```', () => {
+      expect(sectionMark.find('.markdown.inline-blockquote')).to.have.length(1);
+    });
+
+    it('should create inline code when using `...`', () => {
+      expect(sectionMark.find('code')).to.have.length(1);
+    });
+  });
 });

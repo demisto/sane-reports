@@ -8,7 +8,7 @@ import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 import { uniqueId } from 'lodash';
 import { MARKDOWN_IMAGES_PATH, PAGE_BREAK_KEY } from '../../constants/Constants';
-import { mdBtn, mdTextAlign, mdTextStyle, mdUnderline } from '../../utils/markdown';
+import { mdBtn, mdHyper, mdTextAlign, mdTextStyle, mdUnderline, myBackticks } from '../../utils/markdown';
 import WidgetEmptyState from './WidgetEmptyState';
 
 // plugins for react markdown component
@@ -160,6 +160,10 @@ export default class SectionMarkdown extends Component {
       case 'blockquote':
         props.className = 'markdown blockquote';
         break;
+      case 'inlineCode':
+        props.className = 'markdown inline-blockquote';
+        res = <span {...props}>{children}</span>;
+        break;
       case 'br':
         res = <span {...props}><br /></span>;
         break;
@@ -204,6 +208,10 @@ export default class SectionMarkdown extends Component {
     let res = finalText;
     try {
       const plugins = [
+        myBackticks,
+        mdUnderline,
+        mdTextAlign,
+        mdTextStyle,
         abbr,
         sub,
         sup,
@@ -213,9 +221,7 @@ export default class SectionMarkdown extends Component {
         deflist,
         ins,
         mdBtn,
-        mdUnderline,
-        mdTextAlign,
-        mdTextStyle
+        mdHyper
       ];
 
       if (!doNotShowEmoji) {
@@ -224,6 +230,7 @@ export default class SectionMarkdown extends Component {
 
       const mdData = mdReact(
         {
+          disableRules: ['backticks'],
           onIterate: SectionMarkdown.handleIterate.bind(this, tableClasses, markdownArtifactsServerAddress),
           markdownOptions: { typographer: true },
           plugins

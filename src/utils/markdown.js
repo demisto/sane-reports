@@ -201,6 +201,8 @@ export function mdTextAlign(md) {
 
 const MD_BTTN = 0x25; // %
 const MD_BTTN_STR = String.fromCharCode(MD_BTTN) + String.fromCharCode(MD_BTTN) + String.fromCharCode(MD_BTTN);
+const MD_MARKER = 0x5e; // ^
+const MD_MARKER_STR = String.fromCharCode(MD_MARKER) + String.fromCharCode(MD_MARKER) + String.fromCharCode(MD_MARKER);
 
 export function mdBtn(md) {
   md.inline.ruler.push(
@@ -238,3 +240,113 @@ export function mdBtn(md) {
   );
 }
 
+export function myBackticks(md) {
+  md.inline.ruler.push(
+    'mybackticks',
+    (state, silent) => {
+      let matchStart;
+      let matchEnd;
+      let token;
+      let pos = state.pos;
+      const ch = state.src.charCodeAt(pos);
+
+      if (ch !== 0x60 /* ` */) {
+        return false;
+      }
+
+      const start = pos;
+      pos++;
+      const max = state.posMax;
+
+      while (pos < max && state.src.charCodeAt(pos) === 0x60 /* ` */) {
+        pos++;
+      }
+
+      const marker = state.src.slice(start, pos);
+
+      matchEnd = pos;
+      matchStart = state.src.indexOf('`', matchEnd);
+      while (matchStart !== -1) {
+        matchEnd = matchStart + 1;
+
+        while (matchEnd < max && state.src.charCodeAt(matchEnd) === 0x60 /* ` */) {
+          matchEnd++;
+        }
+
+        if (matchEnd - matchStart === marker.length) {
+          if (!silent) {
+            if (marker.length === 1) {
+              token = state.push('code_inline', 'inlineCode', 0);
+            } else {
+              token = state.push('code_inline', 'code', 0);
+            }
+            token.markup = marker;
+            token.content = state.src
+              .slice(pos, matchStart)
+              .replace(/[ \n]+/g, ' ')
+              .trim();
+          }
+          state.pos = matchEnd;
+          return true;
+        }
+        matchStart = state.src.indexOf('`', matchEnd);
+      }
+
+      if (!silent) {
+        state.pending += marker;
+      }
+      state.pos += marker.length;
+      return true;
+    },
+    { alt: ['paragraph', 'reference', 'blockquote', 'list'] }
+  );
+}
+
+export function mdHyper(md) {
+  md.inline.ruler.push(
+    'hyper',
+    (state, silent) => {
+      let token;
+      let pos = state.pos;
+      const ch = state.src.charCodeAt(pos);
+
+      if (ch !== MD_MARKER) {
+        return false;
+      }
+
+      const start = pos;
+      pos++;
+      const max = state.posMax;
+
+      while (pos < max && state.src.charCodeAt(pos) === MD_MARKER) {
+        pos++;
+      }
+      if (pos - start < MD_MARKER_STR.length) {
+        return false;
+      }
+
+      const marker = state.src.slice(pos - MD_MARKER_STR.length, pos);
+
+      const matchStart = state.src.indexOf(MD_MARKER_STR, pos);
+      if (matchStart === -1) {
+        return false;
+      }
+
+      if (!silent) {
+        token = state.push('code_inline', 'hyper', 0);
+        token.markup = marker;
+        token.content = state.src
+          .slice(pos, matchStart)
+          .replace(/[ \n]+/g, ' ')
+          .trim();
+      }
+      state.pos = matchStart + MD_MARKER_STR.length;
+      return true;
+    },
+    { alt: ['paragraph', 'reference', 'blockquote', 'list'] }
+  );
+}
+
+export function hyperMarker() {
+  return MD_MARKER_STR;
+}

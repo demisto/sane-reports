@@ -6,7 +6,7 @@
         "fieldId": "bodycampaign",
         "fieldName": "Body Campaign",
         "fieldType": "markdown",
-        "data": "## Indicators of Compromise\n#### Excel file with macros for BazarLoader, \nSHA256 hash: ```8662d511c7f1bef3a6e4f6d72965760345b57ddf0de5d3e6eae4e610216a39c1```\nFile size: 332,087 bytes\nFile name: ```Documents new.xlsb```",
+        "data": "## This is a header\n### This is sub header\nthis will have inline code `inline code here`\nthis will have code block ```code block```",
         "headerStyle": {
           "color": "rgba(64, 65, 66, 0.7)",
           "fontSize": "14px",
