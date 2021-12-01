@@ -172,7 +172,7 @@ class ItemsSection extends Component {
                 } else if (type === SECTION_ITEM_TYPE.tagsSelect) {
                   dataDisplay = <SectionTags tags={item.data} />;
                 } else if (type === SECTION_ITEM_TYPE.date) {
-                  dataDisplay = <SectionDate date={item.data} format={item.format} />;
+                  dataDisplay = <SectionDate date={item.data} format={item.format} isPrefixRequired={false} />;
                 }
 
                 return (

@@ -26,11 +26,11 @@ export function dateToMoment(date) {
   return date;
 }
 
-const SectionDate = ({ date, style, format }) => {
+const SectionDate = ({ date, style, format, isPrefixRequired = true }) => {
   const dateTime = dateToMoment(date);
   return (
     <div className="section-date" style={style}>
-      <span className="section-date-key">Date:</span>
+      {isPrefixRequired && <span className="section-date-key">Date:</span>}
       <span className="section-date-value">
         {moment.isMoment(dateTime) ? dateTime.tz(moment.tz.guess())
           .format(format || DEFAULT_DATE_TIME_FORMAT) : dateTime}
@@ -40,7 +40,8 @@ const SectionDate = ({ date, style, format }) => {
 SectionDate.propTypes = {
   date: PropTypes.string,
   style: PropTypes.object,
-  format: PropTypes.string
+  format: PropTypes.string,
+  isPrefixRequired: PropTypes.bool
 };
 
 export default SectionDate;

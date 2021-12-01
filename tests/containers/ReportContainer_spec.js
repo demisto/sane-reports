@@ -840,8 +840,9 @@ describe('Report Container', () => {
       const testTemplate = TemplateProvider.getTestLayoutWithDateTime();
       const itemsSection = testTemplate.find(section => section.type === 'itemsSection');
       const datesSections = itemsSection.data.filter(section => section.fieldType === 'date');
+      const titleDateSection = testTemplate.find(section => section.type === 'date');
       const expectedDates = [
-        moment().tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
+        'Date:' + moment().tz(moment.tz.guess()).format(titleDateSection.layout.format),
         dateToMoment(datesSections[0].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
         dateToMoment(datesSections[1].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT)
       ];
@@ -850,7 +851,7 @@ describe('Report Container', () => {
       const dateSections = reportContainer.find(SectionDate);
       expect(dateSections).to.have.length(3);
       dateSections.forEach((section, i) => {
-        expect(section.text()).to.be.equal('Date:' + expectedDates[i]);
+        expect(section.text()).to.be.equal(expectedDates[i]);
       });
     });
   });
