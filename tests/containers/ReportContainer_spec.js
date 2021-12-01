@@ -857,27 +857,28 @@ describe('Report Container', () => {
     });
   });
 
-  describe('markdown back-quote: code-blocks and inline-code', () => {
-    let template;
-    // eslint-disable-next-line global-require
-    const fs = require('fs');
-    // eslint-disable-next-line global-require
-    const path = require('path');
+  describe.only('markdown back-quote: code-blocks and inline-code', () => {
+    let testTemplate;
+    let toRender;
+    let reportContainer;
+    let sectionMark;
 
-    function loadTemplate(filename) {
-      return JSON.parse(fs.readFileSync(path.resolve(`./templates/${filename}`),
-        { encoding: 'utf8' }));
-    }
+    before(() => {
+      testTemplate = loadTemplate('testLayoutMarkdownWithCodeBlock2.json');
+    });
 
     beforeEach(() => {
-      template = loadTemplate('testLayoutMarkdownWithCodeBlock2.json');
+      toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+      reportContainer = mount(toRender);
+      sectionMark = reportContainer.find(SectionMarkdown);
     });
+
     it('should create code block when using ```...```', () => {
-      expect(template).not.to.be.undefined;
+      expect(sectionMark.find('.markdown.inline-blockquote')).to.have.length(1);
     });
 
     it('should create inline code when using `...`', () => {
-      expect(template).not.to.be.undefined;
+      expect(sectionMark.find('code')).to.have.length(1);
     });
   });
 });
