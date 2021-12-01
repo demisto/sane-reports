@@ -32,6 +32,7 @@ import { generateCSVReport } from '../../src/office/csv/CSVReport';
 import { DEFAULT_DATE_TIME_FORMAT } from '../../src/constants/Constants';
 import moment from 'moment-timezone';
 import { dateToMoment } from '../../src/components/Sections/SectionDate';
+import { loadTemplate } from '../helpers/templateTestHelper';
 
 function expectChartLegendFromChartElement(chart, dataArr, showValue) {
   const chartLegend = chart.find(ChartLegend);
@@ -309,7 +310,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test template layout report', async () => {
-    const testTemplate = TemplateProvider.getTestLayoutTemplate();
+    const testTemplate = loadTemplate('testLayout.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
 
@@ -558,7 +559,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test template A4 layout - test auto page break', async () => {
-    const testTemplate = TemplateProvider.getTestLayoutTemplateWithPageBreaks();
+    const testTemplate = loadTemplate('testLayoutWithPageBreaks.json');
     const renderReport = (section) => {
       return <ReportContainer
         sections={section}
@@ -594,7 +595,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test template layout report show bar values', async () => {
-    const testTemplate = TemplateProvider.getTestLayoutTemplate();
+    const testTemplate = loadTemplate('testLayout.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
 
@@ -622,7 +623,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test template layout report with duration formats', () => {
-    const testTemplate = TemplateProvider.getTestLayoutDurationTemplate();
+    const testTemplate = loadTemplate('testLayoutDuration.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
 
@@ -676,7 +677,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test template layout report with duration styles', () => {
-    const testTemplate = TemplateProvider.getTestLayoutDurationTemplate();
+    const testTemplate = loadTemplate('testLayoutDuration.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
 
@@ -703,7 +704,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test template A4 layout - test reflect dimensions prop', async () => {
-    const testTemplate = TemplateProvider.getTestLayoutTemplateWithPageBreaks();
+    const testTemplate = loadTemplate('testLayoutWithPageBreaks.json');
     const renderReport = (section) => {
       return <ReportContainer
         sections={section}
@@ -724,7 +725,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test empty table template', () => {
-    const testTemplate = TemplateProvider.getTestLayoutEmptyTemplate();
+    const testTemplate = loadTemplate('testLayoutEmptyTemplate.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
     const sectionTable = reportContainer.find(SectionTable);
@@ -735,7 +736,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test non-empty table template', () => {
-    const testTemplate = TemplateProvider.getTestTemplate();
+    const testTemplate = loadTemplate('testLayout.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
     const sectionTable = reportContainer.find(SectionTable);
@@ -744,7 +745,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test empty generic template', () => {
-    const testTemplate = TemplateProvider.getTestLayoutEmptyTemplate();
+    const testTemplate = loadTemplate('testLayoutEmptyTemplate.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
     const sectionChart = reportContainer.find(SectionChart);
@@ -755,7 +756,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test empty markdown template', () => {
-    const testTemplate = TemplateProvider.getTestLayoutEmptyTemplate();
+    const testTemplate = loadTemplate('testLayoutEmptyTemplate.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
     const sectionMark = reportContainer.find(SectionMarkdown);
@@ -766,7 +767,7 @@ describe('Report Container', () => {
   });
 
   it('Generate test non-empty markdown template', () => {
-    const testTemplate = TemplateProvider.getTestTemplate();
+    const testTemplate = loadTemplate('testLayout.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
     const sectionTable = reportContainer.find(SectionMarkdown);
@@ -775,7 +776,7 @@ describe('Report Container', () => {
   });
 
   it('Generate csv report with table based automation', () => {
-    const testTemplate = TemplateProvider.getTestLayoutScriptBasedTableTemplate();
+    const testTemplate = loadTemplate('testLayoutScriptBasedTable.json');
     const expectedCsv = [
       'Email,Employee,Phone',
       '"David@org.com","David D","050-123"',
@@ -788,7 +789,7 @@ describe('Report Container', () => {
   });
 
   it('Generate csv report', () => {
-    const testTemplate = TemplateProvider.getTestLayoutCsvTemplate();
+    const testTemplate = loadTemplate('testLayoutCsv.json');
     const expectedCsv = [
       '"Sane Reports!!!"',
       '"This is left small green text.","This is right text."',
@@ -814,7 +815,7 @@ describe('Report Container', () => {
   });
 
   it('should render code block no duplicates on section markdown', () => {
-    const testTemplate = TemplateProvider.getTestLayoutMarkdownWithCodeBlock();
+    const testTemplate = loadTemplate('testLayoutMarkdownWithCodeBlock.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
     const sectionMark = reportContainer.find(SectionMarkdown);
@@ -837,7 +838,7 @@ describe('Report Container', () => {
     });
 
     it('should render date section ok', () => {
-      const testTemplate = TemplateProvider.getTestLayoutWithDateTime();
+      const testTemplate = loadTemplate('testLayoutWithDateTime.json');
       const itemsSection = testTemplate.find(section => section.type === 'itemsSection');
       const datesSections = itemsSection.data.filter(section => section.fieldType === 'date');
       const expectedDates = [
