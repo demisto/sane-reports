@@ -857,7 +857,7 @@ describe('Report Container', () => {
     });
   });
 
-  describe.only('markdown back-quote: code-blocks and inline-code', () => {
+  describe('markdown back-quote: code-blocks and inline-code', () => {
     let testTemplate;
     let toRender;
     let reportContainer;
