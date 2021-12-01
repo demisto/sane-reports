@@ -54,6 +54,10 @@ function expectChartLegendFromChartElement(chart, dataArr, showValue) {
 }
 
 describe('Report Container', () => {
+  before(() => {
+    TemplateProvider.initLegacyTemplates();
+  });
+
   it('Generate test template report', () => {
     const testTemplate = TemplateProvider.getTestTemplate();
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
