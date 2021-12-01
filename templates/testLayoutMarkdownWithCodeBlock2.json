@@ -1,0 +1,47 @@
+[
+  {
+    "type": "itemsSection",
+    "data": [
+      {
+        "fieldId": "bodycampaign",
+        "fieldName": "Body Campaign",
+        "fieldType": "markdown",
+        "data": "## This is a header\n### This is sub header\nthis will have inline code `inline code here`\nthis will have code block ```code block```",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 6,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 0
+      }
+    ],
+    "layout": {
+      "columnPos": 0,
+      "h": 2,
+      "i": "vug7e0qild-aa90b1c0-3273-11ec-b393-053bb5ecdeef",
+      "rowPos": 9,
+      "w": 12
+    },
+    "query": {
+      "type": "incident"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "emptyNotification": "No results found",
+    "displayType": "row",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  }
+]

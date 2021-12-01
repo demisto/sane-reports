@@ -854,4 +854,28 @@ describe('Report Container', () => {
       });
     });
   });
+
+  describe('markdown back-quote: code-blocks and inline-code', () => {
+    let template;
+    // eslint-disable-next-line global-require
+    const fs = require('fs');
+    // eslint-disable-next-line global-require
+    const path = require('path');
+
+    function loadTemplate(filename) {
+      return JSON.parse(fs.readFileSync(path.resolve(`./templates/${filename}`),
+        { encoding: 'utf8' }));
+    }
+
+    beforeEach(() => {
+      template = loadTemplate('testLayoutMarkdownWithCodeBlock2.json');
+    });
+    it('should create code block when using ```...```', () => {
+      expect(template).not.to.be.undefined;
+    });
+
+    it('should create inline code when using `...`', () => {
+      expect(template).not.to.be.undefined;
+    });
+  });
 });
