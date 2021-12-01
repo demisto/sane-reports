@@ -1,81 +1,70 @@
-// eslint-disable-next-line global-require
-const fs = require('fs');
-// eslint-disable-next-line global-require
-const path = require('path');
+import testTemplate from './test.json';
+import testLayoutCsvTemplate from './testLayoutCsv.json';
+import testLayoutScriptBasedTableTemplate from './testLayoutScriptBasedTable.json';
+import testLayoutWithPageBreaks from './testLayoutWithPageBreaks.json';
+import testLayoutTemplate from './testLayout.json';
+import testLayoutDurationTemplate from './testLayoutDuration.json';
+import incidentDailyReportTempalte from './incidentDailyReportTempalte.json';
+import testLayoutEmptyTemplate from './testLayoutEmptyTemplate.json';
+import testLayoutMarkdownWithCodeBlock from './testLayoutMarkdownWithCodeBlock.json';
+import testLayoutLongTextItemSection from './testLayoutLongTextItemSection.json';
+import testLayoutWithDateTime from './testLayoutWithDateTime.json';
 
-let testTemplate;
-let testLayoutCsvTemplate;
-let testLayoutScriptBasedTableTemplate;
-let testLayoutWithPageBreaks;
-let testLayoutTemplate;
-let testLayoutDurationTemplate;
-let incidentDailyReportTempalte;
-let testLayoutEmptyTemplate;
-let testLayoutMarkdownWithCodeBlock;
-let testLayoutLongTextItemSection;
-let testLayoutWithDateTime;
-
-
-function loadTemplate(filename) {
-  return JSON.parse(fs.readFileSync(path.resolve(`./templates/${filename}`),
-    { encoding: 'utf8' }));
-}
-
-export function initLegacyTemplates() {
-  testTemplate = loadTemplate('test.json');
-  testLayoutCsvTemplate = loadTemplate('testLayoutCsv.json');
-  testLayoutScriptBasedTableTemplate = loadTemplate('testLayoutScriptBasedTable.json');
-  testLayoutWithPageBreaks = loadTemplate('testLayoutWithPageBreaks.json');
-  testLayoutTemplate = loadTemplate('testLayout.json');
-  testLayoutDurationTemplate = loadTemplate('testLayoutDuration.json');
-  incidentDailyReportTempalte = loadTemplate('incidentDailyReportTempalte.json');
-  testLayoutEmptyTemplate = loadTemplate('testLayoutEmptyTemplate.json');
-  testLayoutMarkdownWithCodeBlock = loadTemplate('testLayoutMarkdownWithCodeBlock.json');
-  testLayoutLongTextItemSection = loadTemplate('testLayoutLongTextItemSection.json');
-  testLayoutWithDateTime = loadTemplate('testLayoutWithDateTime.json');
-}
-
-export function getTestTemplate() {
+function getTestTemplate() {
   return testTemplate;
 }
 
-export function getTestLayoutCsvTemplate() {
+function getTestLayoutCsvTemplate() {
   return testLayoutCsvTemplate;
 }
 
-export function getTestLayoutScriptBasedTableTemplate() {
+function getTestLayoutScriptBasedTableTemplate() {
   return testLayoutScriptBasedTableTemplate;
 }
 
-export function getTestLayoutTemplate() {
+function getTestLayoutTemplate() {
   return testLayoutTemplate;
 }
 
-export function getTestLayoutEmptyTemplate() {
+function getTestLayoutEmptyTemplate() {
   return testLayoutEmptyTemplate;
 }
 
-export function getTestLayoutMarkdownWithCodeBlock() {
+function getTestLayoutMarkdownWithCodeBlock() {
   return testLayoutMarkdownWithCodeBlock;
 }
 
-export function getTestLayoutDurationTemplate() {
+function getTestLayoutDurationTemplate() {
   return testLayoutDurationTemplate;
 }
 
-export function getTestLayoutTemplateWithPageBreaks() {
+function getTestLayoutTemplateWithPageBreaks() {
   return testLayoutWithPageBreaks;
 }
 
-export function getTestLayoutLongTextItemSection() {
+function getTestLayoutLongTextItemSection() {
   return testLayoutLongTextItemSection;
 }
 
 /* istanbul ignore next */
-export function getIncidentDailyReportTemplate() {
+function getIncidentDailyReportTemplate() {
   return incidentDailyReportTempalte;
 }
 
-export function getTestLayoutWithDateTime() {
+function getTestLayoutWithDateTime() {
   return testLayoutWithDateTime;
 }
+
+export {
+  getTestTemplate,
+  getTestLayoutCsvTemplate,
+  getTestLayoutScriptBasedTableTemplate,
+  getIncidentDailyReportTemplate,
+  getTestLayoutTemplate,
+  getTestLayoutDurationTemplate,
+  getTestLayoutTemplateWithPageBreaks,
+  getTestLayoutEmptyTemplate,
+  getTestLayoutMarkdownWithCodeBlock,
+  getTestLayoutLongTextItemSection,
+  getTestLayoutWithDateTime
+};
