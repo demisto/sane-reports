@@ -26,7 +26,8 @@
     "test-no-cover": "NODE_ENV=test mocha tests -R spec --compilers js:babel-core/register,css:null-compiler.js --require ./tests/helpers/helper.js --recursive --check-leaks",
     "coverage": "NODE_ENV=test istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- tests --require @babel/register --require null-compiler.js --ignore node_modules,vendors --require ./tests/helpers/helper.js --recursive --timeout 60000",
     "test:watch": "npm run test-no-cover -- -w",
-    "check": "npm run lint && npm run test"
+    "check": "npm run lint && npm run test",
+    "test:macos": "npm run build --prefix=reportService && npm run production && suffix=$(date +%F_%H-%M-%S) && ./reportsServer-macos templates/incidentDailyReportTempalte.json test.pdf dist portrait 60000 pdf '' '' '' A4 '' '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary' && mv test.pdf out/${suffix}_test.pdf && open out/${suffix}_test.pdf"
   },
   "pre-commit": [
     "lint"
