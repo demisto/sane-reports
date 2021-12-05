@@ -13,6 +13,7 @@ node_modules/
 
 # Dist
 /dist
+/out
 
 # IDEA
 .idea
