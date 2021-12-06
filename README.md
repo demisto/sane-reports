@@ -73,6 +73,12 @@ phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <o
 - npm run make
 - `/reportsServer-macos templates/incidentDailyReportTempalte.json dist/incidentDailyReportTempalte.pdf dist portrait 4000 pdf '' '' '' A4 '' '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'`
 
+### Running on MacOS Locally:
+You can use npm script:
+```
+npm run test:macos
+```
+
 ## Debugging
 - Download the [mamba-reports.patch](https://github.com/demisto/sane-reports/files/7072628/mamba-reports.patch.txt)
 - Apply the patch (In WebStorm: git -> patch -> apply patch...)
