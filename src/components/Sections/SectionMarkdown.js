@@ -8,7 +8,7 @@ import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 import { uniqueId } from 'lodash';
 import { MARKDOWN_IMAGES_PATH, PAGE_BREAK_KEY } from '../../constants/Constants';
-import { mdBtn, mdHyper, mdTextAlign, mdTextStyle, mdUnderline, myBackticks } from '../../utils/markdown';
+import { mdBtn, mdHyper, mdPageBreak, mdTextAlign, mdTextStyle, mdUnderline, myBackticks } from '../../utils/markdown';
 import WidgetEmptyState from './WidgetEmptyState';
 
 // plugins for react markdown component
@@ -181,6 +181,9 @@ export default class SectionMarkdown extends Component {
         );
         break;
       }
+      case 'page_break':
+        res = (<div key={uniqueId('page_break_')} className="page_break">&nbsp;</div>);
+        break;
       default:
       // Do nothing - will be set after switch
     }
@@ -208,6 +211,7 @@ export default class SectionMarkdown extends Component {
     let res = finalText;
     try {
       const plugins = [
+        mdPageBreak,
         myBackticks,
         mdUnderline,
         mdTextAlign,

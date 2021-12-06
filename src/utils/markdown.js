@@ -240,6 +240,26 @@ export function mdBtn(md) {
   );
 }
 
+export function mdPageBreak(md) {
+  md.inline.ruler.push(
+    'page_break',
+    (state, silent) => {
+      const regex = /<page_break\/>/;
+      const index = state.src.search(regex);
+
+      if (index > -1) {
+        if (!silent) {
+          state.push('page_break', 'page_break', 0);
+        }
+        state.src = state.src.replace(regex, '');
+        return true;
+      }
+      return false;
+    },
+    { alt: ['paragraph', 'reference', 'blockquote', 'list'] }
+  );
+}
+
 export function myBackticks(md) {
   md.inline.ruler.push(
     'mybackticks',
