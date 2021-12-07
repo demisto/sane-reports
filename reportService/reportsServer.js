@@ -5,11 +5,13 @@ const puppeteer = require('puppeteer');
 const chromePath = require('@moonandyou/chrome-path');
 const fs = require('fs');
 const path = require('path');
+const { cloneDeep } = require('lodash')
 
 const mmPixelSize = 3.779527559055;
 
 const PAGE_MARGIN = 61;
 const BOTTOM_MARGIN = 40;
+const MIN_TOP_MARGIN_PX = 40;
 
 (async() => {
   const paths = await chromePath();
@@ -63,7 +65,7 @@ const BOTTOM_MARGIN = 40;
   const orientation = process.argv[5] || PAGE_ORIENTATION.portrait;
   const resourceTimeout = process.argv[6] ? Number(process.argv[6]) : 4000;
   const reportType = process.argv[7] || 'pdf';
-  var headerLeftImage = process.argv[8] || '';
+  let headerLeftImage = process.argv[8] || '';
   const headerRightImage = process.argv[9] || '';
   const pageSize = process.argv[11] || PAGE_SIZES.Letter;
   const disableHeaders = process.argv[12] === true || process.argv[12] === "true";
@@ -88,11 +90,18 @@ const BOTTOM_MARGIN = 40;
     const indexHtml = fs.readFileSync(distFolder + '/index.html').toString();
     const dimensions = getPageSizeByOrientation(pageSize, orientation);
 
-    const topMargin = (headerLeftImage || headerRightImage) && !disableHeaders ? PAGE_MARGIN : 0;
+    const topMargin = Math.max((headerLeftImage || headerRightImage) && !disableHeaders ? PAGE_MARGIN : 0, MIN_TOP_MARGIN_PX);
+    const originalDimensions = cloneDeep(dimensions);
     dimensions.height -= topMargin + BOTTOM_MARGIN;
 
-    console.log('dimensions.height: ' + dimensions.height + ' - topMargin: ' +
-        topMargin + ' - bottomMargin: ' + BOTTOM_MARGIN);
+    console.log(
+      'page size: ', pageSize, ',',
+      'orientation: ', orientation, ',',
+      'original dimensions: ', originalDimensions, ',',
+      'top margin: ', topMargin, ',',
+      'bottom margin: ', BOTTOM_MARGIN, ',',
+      'dimensions: ', dimensions
+    );
 
     const afterTypeReplace =
         indexHtml
@@ -129,6 +138,25 @@ const BOTTOM_MARGIN = 40;
     console.log('go to ' + baseUrl + '/' + tmpReportName);
     const outputFinal = outputFile || distFolder + '/report-' + date + '.' + reportType;
 
+    // #region Templates
+    const headerTemplate =
+      `<div style='height: 200px;font-size: 10px;width: 100%;margin-top: -7px;margin-right: -10px;margin-left: -10px;padding-top: 13px;padding-right: 20px;padding-left: 20px;'>
+        <div style='text-align: left; float: left'>
+            <img src="${headerLeftImage}" height='20px'/>
+            </div>
+            <div style='text-align: right; float: right'>
+                <img src="${headerRightImage}" height='20px'/>
+            </div>
+      </div>`;
+
+    const footerTemplate =
+      `<div style="font-size:12px!important;width:100%;margin: 0 auto;color:rgba(40, 41 , 42, 0.7)!important;padding-left:10px;text-align:center;" class="footer">
+        ${headerLeftImage && disableHeaders ? '<img style="float: left;height: 10px;width: auto;margin: 0 10px;" src=' + headerLeftImage + ' />' : ''}
+        ${headerRightImage && disableHeaders ? '<img style="float: right;height: 10px;width: auto;margin: 0 10px;" src=' + headerRightImage + ' />' : ''}
+        <span class="pageNumber"></span>/<span class="totalPages"></span>
+      </div>`;
+    // #endregion
+
     console.log('output ' + outputFinal);
     await page.setViewport({width: dimensions.width, height: dimensions.height});
     await page.setDefaultNavigationTimeout(0);
@@ -146,30 +174,8 @@ const BOTTOM_MARGIN = 40;
           printBackground: true,
           margin: {top: topMargin, bottom: BOTTOM_MARGIN},
           displayHeaderFooter: true,
-          headerTemplate: !disableHeaders ? "" + "<div style='" +
-            "height: 200px;" +
-            "font-size: 10px;" +
-            "width: 100%;" +
-            "margin-top: -7px;" +
-            "margin-right: -10px;" +
-            "margin-left: -10px;" +
-            "padding-top: 13px;" +
-            "padding-right: 20px;" +
-            "padding-left: 20px;'" +
-            ">" +
-            "<div style='text-align: left; float: left'>" +
-            "<img src=\"" + headerLeftImage + "\" height='20px'/>" +
-            "</div>" +
-            "<div style='text-align: right; float: right'>" +
-            "<img src=\"" + headerRightImage + "\" height='20px'/>" +
-            "</div>" +
-            "</div>" : '',
-          footerTemplate: `
-            <div style="font-size:12px!important;width:100%;margin: 0 auto;color:rgba(40, 41 , 42, 0.7)!important;padding-left:10px;text-align:center;" class="footer">
-              ${headerLeftImage && disableHeaders ? '<img style="float: left;height: 10px;width: auto;margin: 0 10px;" src='+ headerLeftImage +' />' : ''}
-              ${headerRightImage && disableHeaders ? '<img style="float: right;height: 10px;width: auto;margin: 0 10px;" src='+ headerRightImage +' />' : ''}
-              <span class="pageNumber"></span>/<span class="totalPages"></span>
-            </div>`,
+          headerTemplate: !disableHeaders ? headerTemplate : '',
+          footerTemplate,
           landscape: orientation === PAGE_ORIENTATION.landscape
         });
         break;
