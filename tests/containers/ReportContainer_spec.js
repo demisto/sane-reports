@@ -750,9 +750,9 @@ describe('Report Container', () => {
     const reportContainer = mount(toRender);
     const sectionChart = reportContainer.find(SectionChart);
     const emptyWidget = sectionChart.find('.widget-empty-state');
-    expect(emptyWidget).to.have.length(2);
+    expect(emptyWidget).to.have.length(3);
     const emptyWidgetIcon = sectionChart.find('.icon-status-noresults-24-r');
-    expect(emptyWidgetIcon).to.have.length(2);
+    expect(emptyWidgetIcon).to.have.length(3);
   });
 
   it('Generate test empty markdown template', () => {
