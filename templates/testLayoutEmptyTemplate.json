@@ -213,5 +213,52 @@
     "emptyNotification": "No results found",
     "titleStyle": null,
     "autoPageBreak": true
+  },
+  {
+    "type": "chart",
+    "data": null,
+    "layout": {
+      "chartProperties": {
+        "barSize": 35,
+        "format": "DD MMM Y",
+        "isDatesChart": false,
+        "layout": "horizontal",
+        "showValues": true,
+        "timeFrame": "days",
+        "valuesFormat": "abbreviated"
+      },
+      "chartType": "column",
+      "columnPos": 8,
+      "dimensions": {
+        "height": 300,
+        "width": 332
+      },
+      "h": 3,
+      "i": "4bf15d80-0d8a-11ec-b214-d1631273aadb",
+      "legendStyle": {
+        "align": "right",
+        "hideLegend": false,
+        "iconType": "square",
+        "layout": "horizontal",
+        "verticalAlign": "top",
+        "wrapperStyle": {
+          "maxHeight": 96,
+          "top": 5,
+          "width": "100%"
+        }
+      },
+      "reflectDimensions": true,
+      "rowPos": 0,
+      "w": 4
+    },
+    "query": {
+      "type": "incident",
+      "groupBy": [
+        "severity",
+        "status"
+      ],
+      "filter": {}
+    },
+    "title": "NULL DATA"
   }
 ]

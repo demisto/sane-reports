@@ -134,7 +134,11 @@ export function sortByField(fields, asc = true) {
 }
 
 export function sortBySeverity(data) {
-  return data.sort((a, b) => {
+  let arr = data;
+  if (!Array.isArray(arr)) {
+    arr = [];
+  }
+  return arr.sort((a, b) => {
     let aValue = 0;
     let bValue = 0;
     const aName = a.name && a.name.toLowerCase();
