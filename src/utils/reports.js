@@ -46,9 +46,13 @@ export function prepareSections(
   const rows = {};
 
   if (reportData) {
-    reportData.sort(sortReportSections);
+    let data = [];
+    if (Array.isArray(reportData)) {
+      data = reportData;
+      data.sort(sortReportSections);
+    }
 
-    filterSectionsAccordingToReportType(reportData, reportType).forEach((section) => {
+    filterSectionsAccordingToReportType(data, reportType).forEach((section) => {
       if (!rows[section.layout.rowPos]) {
         rows[section.layout.rowPos] = [];
       }
