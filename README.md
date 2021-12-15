@@ -89,6 +89,8 @@ npm run test:macos
   - copy the last json content from the server folder to `incidentDailyReportTemplate.json`
   - while the project is running `(npm start)` the page will be auto-reloaded at `localhost:8082`
 
+To debug the automation/docker image behind sane pdf reports, you can use your own automation with the `reports.pdf.script` setting (use in the troubleshooting tab).
+
 ## Demo
 Reports templates (JSON) examples can be found in the [templates](https://github.com/demisto/sane-reports/blob/master/templates) folder.
 
