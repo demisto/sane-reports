@@ -178,7 +178,6 @@ const BOTTOM_MARGIN = 40;
         const csvData = await page.evaluate(evalsFunctions.getCSVData);
         if (csvData === '' || csvData) {
           fs.writeFileSync(outputFinal, csvData, { 'flag': 'w' });
-          fs.unlinkSync(distFolder + '/' + tmpReportName);
           console.log("CSV report was generated successfully.");
         } else {
           console.log("Failed to generate CSV report.");
@@ -188,6 +187,13 @@ const BOTTOM_MARGIN = 40;
       case 'html':
         console.log("HTML report was generated successfully.");
     }
+    fs.unlink(baseUrl + '/' + tmpReportName, function (err) {
+      if (err) {
+        console.log('HTML template was not deleted!');
+      } else {
+        console.log('HTML template deleted from: ', baseUrl + '/' + tmpReportName);
+      }
+    });
   } catch (e) {
     console.log("Error while executing report", e);
     process.exitCode = 1;
