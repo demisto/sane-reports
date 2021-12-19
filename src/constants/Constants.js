@@ -153,7 +153,8 @@ export const SECTION_ITEM_TYPE = {
   html: 'html',
   text: 'text',
   tagsSelect: 'tagsSelect',
-  date: 'date'
+  date: 'date',
+  markdown: 'markdown'
 };
 
 export const PAGE_BREAK_KEY = '\\pagebreak';
