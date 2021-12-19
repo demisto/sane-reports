@@ -92,7 +92,7 @@ export default class SectionMarkdown extends Component {
           }
         }
 
-        res = (<img {...props} />); // eslint-disable-line
+        res = (<img alt="" {...props} />);
         break;
       }
       case 'a':
