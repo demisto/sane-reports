@@ -153,7 +153,8 @@ class ItemsSection extends Component {
                   [itemDisplayType]: true,
                   'first-column': allItemsAreDisplayedAsCards && item.startCol === 0,
                   'last-column': allItemsAreDisplayedAsCards && item.endCol === columns,
-                  'last-row': allItemsAreDisplayedAsCards && item.index === lastRowIndex
+                  'last-row': allItemsAreDisplayedAsCards && item.index === lastRowIndex,
+                  bordered: item.fieldType === SECTION_ITEM_TYPE.markdown
                 });
                 const applyStyle = {
                   transform:

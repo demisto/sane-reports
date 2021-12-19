@@ -7,7 +7,7 @@ import {
   REPORT_HEADER_IMAGE_LEFT_TOKEN,
   REPORT_HEADER_IMAGE_RIGHT_TOKEN,
   GRID_LAYOUT_COLUMNS,
-  PAGE_BREAK_KEY, CHART_TYPES
+  PAGE_BREAK_KEY, CHART_TYPES, SECTION_ITEMS_DISPLAY_LAYOUTS
 } from '../../constants/Constants';
 import { groupBy, compact, get, isString, isEmpty } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
@@ -19,6 +19,11 @@ import classNames from 'classnames';
 
 const ROW_PIXEL_HEIGHT = 110;
 const SECTION_HEIGHT_TOTAL_PADDING = 10;
+
+function shouldSectionBeNotBordered(section) {
+  return section.displayType === SECTION_ITEMS_DISPLAY_LAYOUTS.card &&
+    section.data.length === 1 && section.data[0].fieldType === SECTION_TYPES.markdown;
+}
 
 class ReportLayout extends Component {
   static propTypes = {
@@ -253,7 +258,8 @@ class ReportLayout extends Component {
                               `${section.layout.class || ''}`,
                                   { 'section-show-overflow': section.layout.reflectDimensions === true,
                                     'section-show-empty-state': showEmptyState,
-                                    'disable-auto-height': disableAutoHeight
+                                    'disable-auto-height': disableAutoHeight,
+                                    'not-bordered': shouldSectionBeNotBordered(section)
                                   });
 
                               const elementToRender = ReportLayout.getElementBySection(section);
