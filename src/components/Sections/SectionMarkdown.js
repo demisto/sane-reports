@@ -22,6 +22,7 @@ import footnote from 'markdown-it-footnote';
 import deflist from 'markdown-it-deflist';
 import ins from 'markdown-it-ins';
 import SectionTitle from './SectionTitle';
+import classNames from 'classnames';
 // end of import plugin
 
 const IGNORE_KEYS = [PAGE_BREAK_KEY];
@@ -245,7 +246,7 @@ export default class SectionMarkdown extends Component {
     }
 
     return (
-      <div className={`section-markdown ${customClass || ''}`} ref={setRef} style={style}>
+      <div className={classNames('section-markdown', customClass, 'bordered')} ref={setRef} style={style}>
         <SectionTitle subTitle={forceRangeMessage} />
         {res}
       </div>

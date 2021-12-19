@@ -153,8 +153,7 @@ class ItemsSection extends Component {
                   [itemDisplayType]: true,
                   'first-column': allItemsAreDisplayedAsCards && item.startCol === 0,
                   'last-column': allItemsAreDisplayedAsCards && item.endCol === columns,
-                  'last-row': allItemsAreDisplayedAsCards && item.index === lastRowIndex,
-                  bordered: item.fieldType === SECTION_ITEM_TYPE.markdown
+                  'last-row': allItemsAreDisplayedAsCards && item.index === lastRowIndex
                 });
                 const applyStyle = {
                   transform:
@@ -162,18 +161,22 @@ class ItemsSection extends Component {
                   width: colSpan * columnWidth
                 };
                 const type = item.fieldType || '';
-                let dataDisplay = Array.isArray(item.data) ?
-                  <SectionTable data={item.data} /> :
-                  <SectionMarkdown
-                    text={String(item.data)}
-                    markdownArtifactsServerAddress={markdownArtifactsServerAddress}
-                  />;
-                if (type === SECTION_ITEM_TYPE.html) {
-                  dataDisplay = <SectionHTML text={item.data} />;
+                let dataDisplay = item.data;
+                if (Array.isArray(item.data)) {
+                  dataDisplay = (<SectionTable data={item.data} />);
+                } else if (type === SECTION_ITEM_TYPE.markdown) {
+                  dataDisplay = (
+                    <SectionMarkdown
+                      text={String(item.data)}
+                      markdownArtifactsServerAddress={markdownArtifactsServerAddress}
+                    />
+                  );
+                } else if (type === SECTION_ITEM_TYPE.html) {
+                  dataDisplay = (<SectionHTML text={item.data} />);
                 } else if (type === SECTION_ITEM_TYPE.tagsSelect) {
-                  dataDisplay = <SectionTags tags={item.data} />;
+                  dataDisplay = (<SectionTags tags={item.data} />);
                 } else if (type === SECTION_ITEM_TYPE.date) {
-                  dataDisplay = <SectionDate date={item.data} format={item.format} isPrefixRequired={false} />;
+                  dataDisplay = (<SectionDate date={item.data} format={item.format} isPrefixRequired={false} />);
                 }
 
                 return (
