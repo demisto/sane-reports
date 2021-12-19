@@ -72,6 +72,9 @@ const BOTTOM_MARGIN = 40;
   const markdownArtifactsServerAddress = process.argv[15] || '';
   let browser;
 
+  let baseUrl = '';
+  let tmpReportName = '';
+
   if (headerLeftImage && headerLeftImage.indexOf('data:image') === -1) {
     try {
       const headerLeftImageContent = fs.readFileSync(headerLeftImage);
@@ -109,12 +112,12 @@ const BOTTOM_MARGIN = 40;
 
     const date = Date.now();
 
-    const tmpReportName = outputFile ? (outputFile.substring(outputFile.lastIndexOf('/'), outputFile.lastIndexOf('.')) + '.html') : 'reportTmp-' + date + '.html';
+    tmpReportName = outputFile ? (outputFile.substring(outputFile.lastIndexOf('/'), outputFile.lastIndexOf('.')) + '.html') : 'reportTmp-' + date + '.html';
     fs.writeFileSync(distFolder + '/' + tmpReportName, finalHtmlData);
 
     console.log('HTML template was created: ' + distFolder + '/' + tmpReportName);
 
-    const baseUrl = distFolder.startsWith('/') ? distFolder : path.join(process.cwd(), distFolder);
+    baseUrl = distFolder.startsWith('/') ? distFolder : path.join(process.cwd(), distFolder);
     console.log(`Using "${chromeExecution}" execution.`);
 
     const args = ['--no-sandbox', '--disable-dev-shm-usage', '--disable-auto-reload'];
@@ -187,17 +190,17 @@ const BOTTOM_MARGIN = 40;
       case 'html':
         console.log("HTML report was generated successfully.");
     }
-    fs.unlink(baseUrl + '/' + tmpReportName, function (err) {
-      if (err) {
-        console.log('HTML template was not deleted! with error: ', err);
-      } else {
-        console.log('HTML template deleted from: ', baseUrl + '/' + tmpReportName);
-      }
-    });
   } catch (e) {
     console.log("Error while executing report", e);
     process.exitCode = 1;
   } finally {
+    fs.unlink(baseUrl + '/' + tmpReportName, function (err) {
+      if (err) {
+        console.log('HTML template was not deleted with error: ', err);
+      } else {
+        console.log('HTML template deleted from: ', baseUrl + '/' + tmpReportName);
+      }
+    });
     if (browser) {
       await browser.close();
     }
