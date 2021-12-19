@@ -189,7 +189,7 @@ const BOTTOM_MARGIN = 40;
     }
     fs.unlink(baseUrl + '/' + tmpReportName, function (err) {
       if (err) {
-        console.log('HTML template was not deleted!');
+        console.log('HTML template was not deleted! with error: ', err);
       } else {
         console.log('HTML template deleted from: ', baseUrl + '/' + tmpReportName);
       }
