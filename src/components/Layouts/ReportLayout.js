@@ -57,6 +57,9 @@ class ReportLayout extends Component {
 
   static getElementBySection(section, maxWidth) {
     let sectionToRender = getSectionComponent(section, maxWidth);
+    if (!sectionToRender) {
+      return null;
+    }
     if (ReportLayout.isPageBreakSection(section)) {
       sectionToRender = (
         <div>

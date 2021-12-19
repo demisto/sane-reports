@@ -191,6 +191,10 @@ export function getSectionComponent(section, maxWidth) {
       break;
     }
     case SECTION_TYPES.table:
+      if (section.data.length === 0) {
+        sectionToRender = null;
+        break;
+      }
       sectionToRender = (
         <SectionTable
           data={section.data}

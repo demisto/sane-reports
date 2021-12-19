@@ -163,6 +163,9 @@ class ItemsSection extends Component {
                 const type = item.fieldType || '';
                 let dataDisplay = item.data;
                 if (Array.isArray(item.data)) {
+                  if (item.data.length === 0) {
+                    return null;
+                  }
                   dataDisplay = (<SectionTable data={item.data} />);
                 } else if (type === SECTION_ITEM_TYPE.markdown) {
                   dataDisplay = (
