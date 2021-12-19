@@ -7,23 +7,18 @@ import {
   REPORT_HEADER_IMAGE_LEFT_TOKEN,
   REPORT_HEADER_IMAGE_RIGHT_TOKEN,
   GRID_LAYOUT_COLUMNS,
-  PAGE_BREAK_KEY, CHART_TYPES, SECTION_ITEMS_DISPLAY_LAYOUTS
+  PAGE_BREAK_KEY, CHART_TYPES
 } from '../../constants/Constants';
 import { groupBy, compact, get, isString, isEmpty } from 'lodash';
 import ReactGridLayout from 'react-grid-layout';
 import { compareFields } from '../../utils/sort';
 import ErrorBoundary from '../ErrorBoundary';
 
-import { getSectionComponent } from '../../utils/layout';
+import { getSectionComponent, shouldSectionBeNotBordered } from '../../utils/layout';
 import classNames from 'classnames';
 
 const ROW_PIXEL_HEIGHT = 110;
 const SECTION_HEIGHT_TOTAL_PADDING = 10;
-
-function shouldSectionBeNotBordered(section) {
-  return section.displayType === SECTION_ITEMS_DISPLAY_LAYOUTS.card &&
-    section.data.length === 1 && section.data[0].fieldType === SECTION_TYPES.markdown;
-}
 
 class ReportLayout extends Component {
   static propTypes = {

@@ -38,7 +38,8 @@ export default class SectionMarkdown extends Component {
       PropTypes.string
     ]),
     forceRangeMessage: PropTypes.string,
-    markdownArtifactsServerAddress: PropTypes.string
+    markdownArtifactsServerAddress: PropTypes.string,
+    isBordered: PropTypes.bool
   };
 
   static createBtn(props, children) {
@@ -246,7 +247,11 @@ export default class SectionMarkdown extends Component {
     }
 
     return (
-      <div className={classNames('section-markdown', customClass, 'bordered')} ref={setRef} style={style}>
+      <div
+        className={classNames('section-markdown', customClass, { bordered: this.props.isBordered })}
+        ref={setRef}
+        style={style}
+      >
         <SectionTitle subTitle={forceRangeMessage} />
         {res}
       </div>
