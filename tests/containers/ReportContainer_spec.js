@@ -824,10 +824,6 @@ describe('Report Container', () => {
     expect(codeBlockElements).to.have.length(2);
   });
 
-  it.skip('long text should not overflow item section border', () => {
-    // SKIP REASON: https://github.com/demisto/sane-reports/pull/195#issuecomment-978027651
-  });
-
   describe('SectionDate', () => {
     it('dateToMoment(date) should convert date to moment', () => {
       expect(dateToMoment().diff(moment(), 'seconds')).to.eq(0);
