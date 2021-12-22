@@ -724,7 +724,7 @@ describe('Report Container', () => {
     expect(sectionsShowOverflows).to.have.length(5);
   });
 
-  it.only('Generate test empty table template - should not show empty table', () => {
+  it('Generate test empty table template - should not show empty table', () => {
     const testTemplate = loadTemplate('testLayoutEmptyTemplate.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
