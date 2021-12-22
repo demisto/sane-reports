@@ -837,7 +837,7 @@
       {
         "fieldId": "id4",
         "fieldName": "Name 4",
-        "fieldType": "markdown",
+        "fieldType": "card",
         "data": "### markdown text here\n- please look",
         "headerStyle": null,
         "endCol": 6,

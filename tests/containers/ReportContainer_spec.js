@@ -310,7 +310,6 @@ describe('Report Container', () => {
   });
 
   it('Generate test template layout report', async () => {
-    // this test is too long, unstable and needs refactor
     const testTemplate = loadTemplate('testLayout.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
@@ -485,12 +484,12 @@ describe('Report Container', () => {
 
     // Page break
     const markdown = reportContainer.find(SectionMarkdown);
-    expect(markdown).to.have.length(4);
+    expect(markdown).to.have.length(5);
     expect(markdown.at(0).text()).equal(sec9.data.text.replace(constants.PAGE_BREAK_KEY, ''));
 
     // Markdown
     const sec = testTemplate[14];
-    widget = markdown.at(3);
+    widget = markdown.at(4);
     sectionTitle = widget.find(SectionTitle);
     expect(sectionTitle.find('.section-sub-title').text()).to.equal(sec.layout.forceRangeMessage);
 
@@ -509,7 +508,7 @@ describe('Report Container', () => {
     expect(itemValues.at(1).text()).to.equal('HELLO');
     expect(itemValues.at(3).text()).to.equal('CENTER');
 
-    const markdownItem = itemValues.find(SectionMarkdown);
+    const markdownItem = itemValues.at(2).find(SectionMarkdown);
     expect(markdownItem).to.have.length(1);
     expect(markdownItem.at(0).props().text).to.equal(sec10.data[2].data);
 
@@ -725,16 +724,12 @@ describe('Report Container', () => {
     expect(sectionsShowOverflows).to.have.length(5);
   });
 
-  it('Generate test empty table template - should not render empty table', () => {
-    // fix - should not render empty table
+  it.only('Generate test empty table template - should not show empty table', () => {
     const testTemplate = loadTemplate('testLayoutEmptyTemplate.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
     const sectionTable = reportContainer.find(SectionTable);
-    const emptyWidget = sectionTable.find('.widget-empty-state');
-    expect(emptyWidget).to.have.length(0);
-    const emptyWidgetIcon = sectionTable.find('.icon-status-noresults-24-r');
-    expect(emptyWidgetIcon).to.have.length(0);
+    expect(sectionTable).to.have.length(0);
   });
 
   it('Generate test non-empty table template', () => {
