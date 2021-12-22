@@ -201,7 +201,6 @@ class ItemsSection extends Component {
                   width: colSpan * columnWidth
                 };
 
-
                 const dataDisplay = this.getDisplayDataComponent(item);
 
                 return (
