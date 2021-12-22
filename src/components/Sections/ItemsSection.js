@@ -121,19 +121,12 @@ class ItemsSection extends Component {
         return (<SectionDate date={item.data} format={item.format} isPrefixRequired={false} />);
 
       case SECTION_ITEM_TYPE.markdown:
+      default:
         return (
           <SectionMarkdown
             text={String(item.data)}
             markdownArtifactsServerAddress={markdownArtifactsServerAddress}
-            isBordered
-          />
-        );
-
-      default: // Note: use section markdown as default
-        return (
-          <SectionMarkdown
-            text={String(item.data)}
-            markdownArtifactsServerAddress={markdownArtifactsServerAddress}
+            isBordered={item.fieldType === SECTION_ITEM_TYPE.markdown}
           />
         );
     }
