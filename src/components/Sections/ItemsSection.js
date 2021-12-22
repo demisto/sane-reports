@@ -102,7 +102,7 @@ class ItemsSection extends Component {
     return colSpan === 0 ? columns : colSpan;
   }
 
-  getDisplayData = (item) => {
+  getDisplayDataComponent = (item) => {
     const { markdownArtifactsServerAddress } = this.props;
     if (Array.isArray(item.data)) {
       if (item.data.length === 0) {
@@ -194,7 +194,7 @@ class ItemsSection extends Component {
                 };
 
 
-                const dataDisplay = this.getDisplayData(item);
+                const dataDisplay = this.getDisplayDataComponent(item);
 
                 return (
                   <div
