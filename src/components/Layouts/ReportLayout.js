@@ -14,7 +14,7 @@ import ReactGridLayout from 'react-grid-layout';
 import { compareFields } from '../../utils/sort';
 import ErrorBoundary from '../ErrorBoundary';
 
-import { getSectionComponent, shouldSectionBeNotBordered } from '../../utils/layout';
+import { getSectionComponent, shouldParentSectionBeNotBordered } from '../../utils/layout';
 import classNames from 'classnames';
 
 const ROW_PIXEL_HEIGHT = 110;
@@ -257,7 +257,7 @@ class ReportLayout extends Component {
                                   { 'section-show-overflow': section.layout.reflectDimensions === true,
                                     'section-show-empty-state': showEmptyState,
                                     'disable-auto-height': disableAutoHeight,
-                                    'not-bordered': shouldSectionBeNotBordered(section)
+                                    'not-bordered': shouldParentSectionBeNotBordered(section)
                                   });
 
                               const elementToRender = ReportLayout.getElementBySection(section);

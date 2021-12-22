@@ -31,7 +31,7 @@ function isPageBreakSection(section) {
       section.data && ((isString(section.data) ? section.data : section.data.text) || '').includes(PAGE_BREAK_KEY));
 }
 
-export function shouldSectionBeNotBordered(section) {
+export function shouldParentSectionBeNotBordered(section) {
   return section.displayType === SECTION_ITEMS_DISPLAY_LAYOUTS.card &&
     section.data.length === 1 && section.data[0].fieldType === SECTION_TYPES.markdown;
 }
@@ -140,7 +140,7 @@ export function getSectionComponent(section, maxWidth) {
           customClass={isPageBreakSection(section) ? 'page-break-section' : ''}
           forceRangeMessage={section.layout.forceRangeMessage}
           markdownArtifactsServerAddress={section.markdownArtifactsServerAddress}
-          isBordered={shouldSectionBeNotBordered(section)}
+          isBordered={shouldParentSectionBeNotBordered(section)}
         />
       );
       break;
