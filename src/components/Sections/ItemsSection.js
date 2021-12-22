@@ -13,7 +13,6 @@ const DESCRIPTION_KEY = 'description';
 const SECTION_ITEM_PADDING = 5;
 const RERENDER_TIMEOUT_MS = 550;
 
-
 class ItemsSection extends Component {
   static propTypes = {
     style: PropTypes.object,
