@@ -13,6 +13,7 @@ const DESCRIPTION_KEY = 'description';
 const SECTION_ITEM_PADDING = 5;
 const RERENDER_TIMEOUT_MS = 550;
 
+
 class ItemsSection extends Component {
   static propTypes = {
     style: PropTypes.object,
@@ -101,6 +102,37 @@ class ItemsSection extends Component {
     return colSpan === 0 ? columns : colSpan;
   }
 
+  getDisplayData = (item) => {
+    const { markdownArtifactsServerAddress } = this.props;
+    if (Array.isArray(item.data)) {
+      if (item.data.length === 0) {
+        return null;
+      }
+      return (<SectionTable data={item.data} />);
+    }
+
+    switch (item.fieldType) {
+      case SECTION_ITEM_TYPE.html:
+        return (<SectionHTML text={item.data} />);
+
+      case SECTION_ITEM_TYPE.tagsSelect:
+        return (<SectionTags tags={item.data} />);
+
+      case SECTION_ITEM_TYPE.date:
+        return (<SectionDate date={item.data} format={item.format} isPrefixRequired={false} />);
+
+      case SECTION_ITEM_TYPE.markdown: // Note: use section markdown as default
+      default:
+        return (
+          <SectionMarkdown
+            text={String(item.data)}
+            markdownArtifactsServerAddress={markdownArtifactsServerAddress}
+          />
+        );
+    }
+  }
+
+
   render() {
     const { style, items, columns, title, titleStyle, description, markdownArtifactsServerAddress } = this.props;
     const { columnUsage } = this.state;
@@ -160,27 +192,9 @@ class ItemsSection extends Component {
                     `translate(${item.startCol * columnWidth}px, ${ItemsSection.getHeightOffset(columnUsage, item)}px)`,
                   width: colSpan * columnWidth
                 };
-                const type = item.fieldType || '';
-                let dataDisplay = item.data;
-                if (Array.isArray(item.data)) {
-                  if (item.data.length === 0) {
-                    return null;
-                  }
-                  dataDisplay = (<SectionTable data={item.data} />);
-                } else if (type === SECTION_ITEM_TYPE.markdown) {
-                  dataDisplay = (
-                    <SectionMarkdown
-                      text={String(item.data)}
-                      markdownArtifactsServerAddress={markdownArtifactsServerAddress}
-                    />
-                  );
-                } else if (type === SECTION_ITEM_TYPE.html) {
-                  dataDisplay = (<SectionHTML text={item.data} />);
-                } else if (type === SECTION_ITEM_TYPE.tagsSelect) {
-                  dataDisplay = (<SectionTags tags={item.data} />);
-                } else if (type === SECTION_ITEM_TYPE.date) {
-                  dataDisplay = (<SectionDate date={item.data} format={item.format} isPrefixRequired={false} />);
-                }
+
+
+                const dataDisplay = this.getDisplayData(item);
 
                 return (
                   <div
