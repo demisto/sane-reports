@@ -248,7 +248,10 @@ export default class SectionMarkdown extends Component {
 
     return (
       <div
-        className={classNames('section-markdown', customClass, { bordered: this.props.isBordered })}
+        className={classNames('section-markdown', customClass, {
+          bordered: this.props.isBordered,
+          'not-bordered': !this.props.isBordered
+        })}
         ref={setRef}
         style={style}
       >
