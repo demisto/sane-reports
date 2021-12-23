@@ -22,6 +22,7 @@ import footnote from 'markdown-it-footnote';
 import deflist from 'markdown-it-deflist';
 import ins from 'markdown-it-ins';
 import SectionTitle from './SectionTitle';
+import classNames from 'classnames';
 // end of import plugin
 
 const IGNORE_KEYS = [PAGE_BREAK_KEY];
@@ -37,7 +38,8 @@ export default class SectionMarkdown extends Component {
       PropTypes.string
     ]),
     forceRangeMessage: PropTypes.string,
-    markdownArtifactsServerAddress: PropTypes.string
+    markdownArtifactsServerAddress: PropTypes.string,
+    isBordered: PropTypes.bool
   };
 
   static createBtn(props, children) {
@@ -91,7 +93,7 @@ export default class SectionMarkdown extends Component {
           }
         }
 
-        res = (<img {...props} />); // eslint-disable-line
+        res = (<img alt="" {...props} />);
         break;
       }
       case 'a':
@@ -245,7 +247,14 @@ export default class SectionMarkdown extends Component {
     }
 
     return (
-      <div className={`section-markdown ${customClass || ''}`} ref={setRef} style={style}>
+      <div
+        className={classNames('section-markdown', customClass, {
+          bordered: this.props.isBordered,
+          'not-bordered': !this.props.isBordered
+        })}
+        ref={setRef}
+        style={style}
+      >
         <SectionTitle subTitle={forceRangeMessage} />
         {res}
       </div>

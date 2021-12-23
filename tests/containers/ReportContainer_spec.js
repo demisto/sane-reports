@@ -724,15 +724,12 @@ describe('Report Container', () => {
     expect(sectionsShowOverflows).to.have.length(5);
   });
 
-  it('Generate test empty table template', () => {
+  it('Generate test empty table template - should not show empty table', () => {
     const testTemplate = loadTemplate('testLayoutEmptyTemplate.json');
     const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
     const reportContainer = mount(toRender);
     const sectionTable = reportContainer.find(SectionTable);
-    const emptyWidget = sectionTable.find('.widget-empty-state');
-    expect(emptyWidget).to.have.length(1);
-    const emptyWidgetIcon = sectionTable.find('.icon-status-noresults-24-r');
-    expect(emptyWidgetIcon).to.have.length(1);
+    expect(sectionTable).to.have.length(0);
   });
 
   it('Generate test non-empty table template', () => {
@@ -825,10 +822,6 @@ describe('Report Container', () => {
     const sectionMark = reportContainer.find(SectionMarkdown);
     const codeBlockElements = sectionMark.find('code');
     expect(codeBlockElements).to.have.length(2);
-  });
-
-  it.skip('long text should not overflow item section border', () => {
-    // SKIP REASON: https://github.com/demisto/sane-reports/pull/195#issuecomment-978027651
   });
 
   describe('SectionDate', () => {

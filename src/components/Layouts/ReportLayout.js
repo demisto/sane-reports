@@ -14,7 +14,7 @@ import ReactGridLayout from 'react-grid-layout';
 import { compareFields } from '../../utils/sort';
 import ErrorBoundary from '../ErrorBoundary';
 
-import { getSectionComponent } from '../../utils/layout';
+import { getSectionComponent, shouldParentSectionBeNotBordered } from '../../utils/layout';
 import classNames from 'classnames';
 
 const ROW_PIXEL_HEIGHT = 110;
@@ -52,6 +52,9 @@ class ReportLayout extends Component {
 
   static getElementBySection(section, maxWidth) {
     let sectionToRender = getSectionComponent(section, maxWidth);
+    if (!sectionToRender) {
+      return null;
+    }
     if (ReportLayout.isPageBreakSection(section)) {
       sectionToRender = (
         <div>
@@ -253,7 +256,8 @@ class ReportLayout extends Component {
                               `${section.layout.class || ''}`,
                                   { 'section-show-overflow': section.layout.reflectDimensions === true,
                                     'section-show-empty-state': showEmptyState,
-                                    'disable-auto-height': disableAutoHeight
+                                    'disable-auto-height': disableAutoHeight,
+                                    'not-bordered': shouldParentSectionBeNotBordered(section)
                                   });
 
                               const elementToRender = ReportLayout.getElementBySection(section);

@@ -101,6 +101,38 @@ class ItemsSection extends Component {
     return colSpan === 0 ? columns : colSpan;
   }
 
+  getDisplayDataComponent = (item) => {
+    const { markdownArtifactsServerAddress } = this.props;
+    if (Array.isArray(item.data)) {
+      if (item.data.length === 0) {
+        return null;
+      }
+      return (<SectionTable data={item.data} />);
+    }
+
+    switch (item.fieldType) {
+      case SECTION_ITEM_TYPE.html:
+        return (<SectionHTML text={item.data} />);
+
+      case SECTION_ITEM_TYPE.tagsSelect:
+        return (<SectionTags tags={item.data} />);
+
+      case SECTION_ITEM_TYPE.date:
+        return (<SectionDate date={item.data} format={item.format} isPrefixRequired={false} />);
+
+      case SECTION_ITEM_TYPE.markdown:
+      default:
+        return (
+          <SectionMarkdown
+            text={String(item.data)}
+            markdownArtifactsServerAddress={markdownArtifactsServerAddress}
+            isBordered={item.fieldType === SECTION_ITEM_TYPE.markdown}
+          />
+        );
+    }
+  }
+
+
   render() {
     const { style, items, columns, title, titleStyle, description, markdownArtifactsServerAddress } = this.props;
     const { columnUsage } = this.state;
@@ -160,20 +192,8 @@ class ItemsSection extends Component {
                     `translate(${item.startCol * columnWidth}px, ${ItemsSection.getHeightOffset(columnUsage, item)}px)`,
                   width: colSpan * columnWidth
                 };
-                const type = item.fieldType || '';
-                let dataDisplay = Array.isArray(item.data) ?
-                  <SectionTable data={item.data} /> :
-                  <SectionMarkdown
-                    text={String(item.data)}
-                    markdownArtifactsServerAddress={markdownArtifactsServerAddress}
-                  />;
-                if (type === SECTION_ITEM_TYPE.html) {
-                  dataDisplay = <SectionHTML text={item.data} />;
-                } else if (type === SECTION_ITEM_TYPE.tagsSelect) {
-                  dataDisplay = <SectionTags tags={item.data} />;
-                } else if (type === SECTION_ITEM_TYPE.date) {
-                  dataDisplay = <SectionDate date={item.data} format={item.format} isPrefixRequired={false} />;
-                }
+
+                const dataDisplay = this.getDisplayDataComponent(item);
 
                 return (
                   <div
