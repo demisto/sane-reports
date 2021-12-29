@@ -126,7 +126,6 @@ class ItemsSection extends Component {
           <SectionMarkdown
             text={String(item.data)}
             markdownArtifactsServerAddress={markdownArtifactsServerAddress}
-            isBordered={item.fieldType === SECTION_ITEM_TYPE.markdown}
           />
         );
     }

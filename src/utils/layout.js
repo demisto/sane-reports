@@ -1,4 +1,4 @@
-import { PAGE_BREAK_KEY, SECTION_ITEMS_DISPLAY_LAYOUTS, SECTION_TYPES } from '../constants/Constants';
+import { PAGE_BREAK_KEY, SECTION_TYPES } from '../constants/Constants';
 import {
   ItemsSection,
   SectionChart,
@@ -29,11 +29,6 @@ function getDefaultEmptyNotification() {
 function isPageBreakSection(section) {
   return !!get(section, 'layout.style.pageBreakBefore', false) || (section.type === SECTION_TYPES.markdown &&
       section.data && ((isString(section.data) ? section.data : section.data.text) || '').includes(PAGE_BREAK_KEY));
-}
-
-export function shouldParentSectionBeNotBordered(section) {
-  return section.displayType === SECTION_ITEMS_DISPLAY_LAYOUTS.card &&
-    section.data.length === 1 && section.data[0].fieldType === SECTION_TYPES.markdown;
 }
 
 export function getSectionComponent(section, maxWidth) {
@@ -140,7 +135,6 @@ export function getSectionComponent(section, maxWidth) {
           customClass={isPageBreakSection(section) ? 'page-break-section' : ''}
           forceRangeMessage={section.layout.forceRangeMessage}
           markdownArtifactsServerAddress={section.markdownArtifactsServerAddress}
-          isBordered={shouldParentSectionBeNotBordered(section)}
         />
       );
       break;
