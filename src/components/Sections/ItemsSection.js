@@ -151,7 +151,6 @@ class ItemsSection extends Component {
     return (
       <AutoSizer disableHeight>
         {({ width }) => {
-          const columnWidth = width / columns;
           const lastRowIndex = maxBy(items, item => item.index).index;
           const allItemsAreDisplayedAsCards = every(items,
             item => ItemsSection.getItemDisplayType(item) === SECTION_ITEMS_DISPLAY_LAYOUTS.card
@@ -160,7 +159,7 @@ class ItemsSection extends Component {
           return (
             <div
               className={classNames('items-section', { 'cards-container': allItemsAreDisplayedAsCards })}
-              style={{ width, height: maxOffset, ...style }}
+              style={{ width, ...style }}
             >
               {title && <div className="section-title" style={titleStyle}>{title}</div>}
               {description && (
@@ -176,46 +175,50 @@ class ItemsSection extends Component {
                   }}
                 />
               )}
-              {(items || []).map((item) => {
-                const colSpan = this.getItemColSpan(item);
-                const id = this.getSectionItemKey(item);
-                const itemDisplayType = ItemsSection.getItemDisplayType(item);
-                const mainClass = classNames('section-item', {
-                  [itemDisplayType]: true,
-                  'first-column': allItemsAreDisplayedAsCards && item.startCol === 0,
-                  'last-column': allItemsAreDisplayedAsCards && item.endCol === columns,
-                  'last-row': allItemsAreDisplayedAsCards && item.index === lastRowIndex
-                });
-                const applyStyle = {
-                  transform:
-                    `translate(${item.startCol * columnWidth}px, ${ItemsSection.getHeightOffset(columnUsage, item)}px)`,
-                  width: colSpan * columnWidth
-                };
+              <div
+                className="items-container" style={{
+                  display: 'grid',
+                  gridTemplateColumns: `repeat(${columns}, 1fr)`
+              }}
+              >
+                {(items || []).map((item) => {
+                  const id = this.getSectionItemKey(item);
+                  const itemDisplayType = ItemsSection.getItemDisplayType(item);
+                  const mainClass = classNames('section-item', {
+                    [itemDisplayType]: true,
+                    'first-column': allItemsAreDisplayedAsCards && item.startCol === 0,
+                    'last-column': allItemsAreDisplayedAsCards && item.endCol === columns,
+                    'last-row': allItemsAreDisplayedAsCards && item.index === lastRowIndex
+                  });
+                  const applyStyle = {
+                    gridColumn: `${item.startCol + 1}/${item.endCol + 1}`
+                  };
 
-                const dataDisplay = this.getDisplayDataComponent(item);
+                  const dataDisplay = this.getDisplayDataComponent(item);
 
-                return (
-                  <div
-                    ref={(itemElement) => {
-                      if (!itemElement) {
-                        return;
-                      }
-                      this.itemElements[id] = itemElement;
-                    }}
-                    key={id}
-                    id={id}
-                    className={mainClass}
-                    style={applyStyle}
-                  >
-                    <div className="section-item-header" style={item.headerStyle}>
-                      {item.fieldName}
+                  return (
+                    <div
+                      ref={(itemElement) => {
+                            if (!itemElement) {
+                              return;
+                            }
+                            this.itemElements[id] = itemElement;
+                          }}
+                      key={id}
+                      id={id}
+                      className={mainClass}
+                      style={applyStyle}
+                    >
+                      <div className="section-item-header" style={item.headerStyle}>
+                        {item.fieldName}
+                      </div>
+                      <div className="section-item-value">
+                        {dataDisplay}
+                      </div>
                     </div>
-                    <div className="section-item-value">
-                      {dataDisplay}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           );
         }}
