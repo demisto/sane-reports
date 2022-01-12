@@ -776,6 +776,22 @@ describe('Report Container', () => {
     expect(emptyWidget).to.have.length(0);
   });
 
+  it('Generate test item sections field title', () => {
+    const testTemplate = loadTemplate('testLayoutSingleItemSectionTitle.json');
+    const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+    const reportContainer = mount(toRender);
+    const items = reportContainer.find(ItemsSection);
+
+    expect(items).to.have.length(3);
+
+    // Item section with 2 fields & hideItemTitleOnlyOne=true
+    expect(items.at(0).find('.section-item-header')).to.have.length(2);
+    // Item section with single field & hideItemTitleOnlyOne=true
+    expect(items.at(1).find('.section-item-header')).to.have.length(0);
+    // Item section with single field & hideItemTitleOnlyOne=undefined
+    expect(items.at(2).find('.section-item-header')).to.have.length(1);
+  });
+
   it('Generate csv report with table based automation', () => {
     const testTemplate = loadTemplate('testLayoutScriptBasedTable.json');
     const expectedCsv = [

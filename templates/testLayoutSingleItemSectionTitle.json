@@ -1,0 +1,155 @@
+[
+  {
+    "type": "itemsSection",
+    "data": [
+      {
+        "fieldId": "value",
+        "fieldName": "shown1",
+        "fieldType": "shortText",
+        "data": "saar",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 3,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 0
+      },
+      {
+        "fieldId": "fuzzyhash",
+        "fieldName": "shown2",
+        "fieldType": "shortText",
+        "data": "saarhash",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 3,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 1
+      }
+    ],
+    "layout": {
+      "columnPos": 0,
+      "h": 2,
+      "i": "nvfgylktov-vug7e0qild-2c72c1db-1e4a-479d-8e9d-e03fd83804a5-vug7e0qild-8f729e00-34d3-11ec-b092-6b987c4156ab",
+      "rowPos": 7,
+      "w": 12
+    },
+    "query": {
+      "type": "incident"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Malware Details",
+    "emptyNotification": "No results found",
+    "displayType": "card",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true,
+    "hideItemTitleOnlyOne": true
+  },
+  {
+    "type": "itemsSection",
+    "data": [
+      {
+        "fieldId": "bodymalware",
+        "fieldName": "Body Malware kuku",
+        "fieldType": "markdown",
+        "data": "kuku",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 6,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 0
+      }
+    ],
+    "layout": {
+      "columnPos": 0,
+      "h": 2,
+      "i": "nvfgylktov-vug7e0qild-2c72c1db-1e4a-479d-8e9d-e03fd83804a5-vug7e0qild-3f4377a0-34d4-11ec-b092-6b987c4156ab",
+      "rowPos": 11,
+      "w": 12
+    },
+    "query": {
+      "type": "incident"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "emptyNotification": "No results found",
+    "displayType": "card",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true,
+    "hideItemTitleOnlyOne": true
+  },
+  {
+    "type": "itemsSection",
+    "data": [
+      {
+        "fieldId": "bodymalware",
+        "fieldName": "Body Malware fufu",
+        "fieldType": "markdown",
+        "data": "fufu",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 6,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 0
+      }
+    ],
+    "layout": {
+      "columnPos": 0,
+      "h": 2,
+      "i": "nvfgylktov-vug7e0qild-2c72c1db-1e4a-479d-8e9d-e03fd83804a5-vug7e0qild-3f4377a0-34d4-11ec-b092-6b987c4156ab",
+      "rowPos": 11,
+      "w": 12
+    },
+    "query": {
+      "type": "incident"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "emptyNotification": "No results found",
+    "displayType": "card",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  }
+]
