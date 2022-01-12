@@ -20,6 +20,7 @@ class ItemsSection extends Component {
     title: PropTypes.string,
     description: PropTypes.string,
     titleStyle: PropTypes.object,
+    hideItemTitleOnlyOne: PropTypes.bool,
     items: PropTypes.arrayOf(PropTypes.shape({
       fieldId: PropTypes.string,
       fieldName: PropTypes.string,
@@ -133,7 +134,8 @@ class ItemsSection extends Component {
 
 
   render() {
-    const { style, items, columns, title, titleStyle, description, markdownArtifactsServerAddress } = this.props;
+    const { style, items, columns, title, titleStyle, description,
+      markdownArtifactsServerAddress, hideItemTitleOnlyOne } = this.props;
     const { columnUsage } = this.state;
 
     let maxOffset = 0;
@@ -193,7 +195,7 @@ class ItemsSection extends Component {
                   const applyStyle = {
                     gridColumn: `${item.startCol + 1}/${item.endCol + 1}`
                   };
-
+                  const hideSingleItemTitle = hideItemTitleOnlyOne && (items || []).length <= 1;
                   const dataDisplay = this.getDisplayDataComponent(item);
 
                   return (
@@ -209,9 +211,11 @@ class ItemsSection extends Component {
                       className={mainClass}
                       style={applyStyle}
                     >
-                      <div className="section-item-header" style={item.headerStyle}>
-                        {item.fieldName}
-                      </div>
+                      {!hideSingleItemTitle && (
+                        <div className="section-item-header" style={item.headerStyle}>
+                          {item.fieldName}
+                        </div>
+                      )}
                       <div className="section-item-value">
                         {dataDisplay}
                       </div>

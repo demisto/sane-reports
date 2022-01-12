@@ -237,6 +237,7 @@ export function getSectionComponent(section, maxWidth) {
           description={section.description}
           columns={(section.layout.w / 4) * 2}
           markdownArtifactsServerAddress={section.markdownArtifactsServerAddress}
+          hideItemTitleOnlyOne={section.hideItemTitleOnlyOne}
         />
       );
       break;
