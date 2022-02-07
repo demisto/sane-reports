@@ -1,5 +1,5 @@
 /* eslint-disable */
-/* This file is deprecated and used as legacy only */
+
 const evalsFunctions = require('./evals');
 const puppeteer = require('puppeteer');
 const chromePath = require('@moonandyou/chrome-path');
