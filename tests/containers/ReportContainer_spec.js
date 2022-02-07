@@ -842,7 +842,7 @@ describe('Report Container', () => {
 
   describe('SectionDate', () => {
     it('dateToMoment(date) should convert date to moment', () => {
-      expect(dateToMoment().diff(moment(), 'seconds')).to.eq(0);
+      expect(dateToMoment()).to.eq(' N/A');
       expect(dateToMoment('2021-11-24 12:57:02.889261 +0200 IST').isValid()).to.be.true;
       expect(moment.isMoment(dateToMoment('2021-11-24 12:57:02.889261 +0200 IST'))).to.be.true;
       expect(
@@ -854,9 +854,8 @@ describe('Report Container', () => {
       const testTemplate = loadTemplate('testLayoutWithDateTime.json');
       const itemsSection = testTemplate.find(section => section.type === 'itemsSection');
       const datesSections = itemsSection.data.filter(section => section.fieldType === 'date');
-      const titleDateSection = testTemplate.find(section => section.type === 'date');
       const expectedDates = [
-        'Date:' + moment().tz(moment.tz.guess()).format(titleDateSection.layout.format),
+        'Date: N/A',
         dateToMoment(datesSections[0].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
         dateToMoment(datesSections[1].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT)
       ];
@@ -867,6 +866,16 @@ describe('Report Container', () => {
       dateSections.forEach((section, i) => {
         expect(section.text()).to.be.equal(expectedDates[i]);
       });
+    });
+
+    it('should render "N/A" if date is missing', () => {
+      const testTemplate = loadTemplate('testLayoutWithDateTime.json');
+      const expectedDate = 'Date: N/A';
+      const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
+      const reportContainer = mount(toRender);
+      const dateSections = reportContainer.find(SectionDate);
+      expect(dateSections).to.have.length(3);
+      expect(dateSections.at(0).text()).to.be.equal(expectedDate);
     });
   });
 
