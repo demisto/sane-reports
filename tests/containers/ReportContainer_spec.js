@@ -250,7 +250,7 @@ describe('Report Container', () => {
 
     const dateEl = reportContainer.find('.section-date-value');
     expect(dateEl).to.have.length(2);
-    expect(dateEl.at(0).text()).to.have.length.above(sec18.layout.format.length + 2);
+    expect(dateEl.at(0).text()).to.be.equal(' N/A');
     expect(dateEl.at(1).text()).to.equal('Jan 1st 16');
 
     // Divider
