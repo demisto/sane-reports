@@ -27,7 +27,7 @@
     "coverage": "NODE_ENV=test istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- tests --require @babel/register --require null-compiler.js --ignore node_modules,vendors --require ./tests/helpers/helper.js --recursive --timeout 60000",
     "test:watch": "npm run test-no-cover -- -w",
     "check": "npm run lint && npm run test",
-    "test:macos": "npm run build-mac --prefix=reportService && npm run production && prefix=$(date +%F_%H-%M-%S) && ./reportsServer ${npm_config_data:-templates/incidentDailyReportTempalte.json} test.pdf dist portrait 60000 pdf '' '' '' A4 '' ${npm_config_chrome:-'/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'} && mv test.pdf out/${prefix}_test.pdf && open out/${prefix}_test.pdf"
+    "test:macos": "npm run build-mac --prefix=reportService && npm run production && prefix=$(date +%F_%H-%M-%S) && NODE_ENV=development ./reportsServer ${npm_config_data:-templates/incidentDailyReportTempalte.json} test.pdf dist portrait 60000 pdf '' '' '' A4 '' ${npm_config_chrome:-'/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'} && mv test.pdf out/${prefix}_test.pdf && open out/${prefix}_test.pdf"
   },
   "pre-commit": [
     "lint"

@@ -74,11 +74,13 @@ const MIN_TOP_MARGIN_PX = 40;
   const markdownArtifactsServerAddress = process.argv[15] || '';
   let browser;
 
-  console.table ? console.table({
-    dataFile, outputFile, distDir, orientation, resourceTimeout, reportType,
-    headerLeftImage, headerRightImage, pageSize, disableHeaders, chromeExecution,
-    forceAutoHeightLayout, markdownArtifactsServerAddress,
-  }) : console.log('args:', process.argv);
+  if (process.env.NODE_ENV === 'development') {
+    console.table ? console.table({
+      dataFile, outputFile, distDir, orientation, resourceTimeout, reportType,
+      headerLeftImage, headerRightImage, pageSize, disableHeaders, chromeExecution,
+      forceAutoHeightLayout, markdownArtifactsServerAddress
+    }) : console.log('args:', process.argv);
+  }
 
   let baseUrl = '';
   let tmpReportName = '';
