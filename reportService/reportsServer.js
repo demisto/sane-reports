@@ -74,7 +74,7 @@ const MIN_TOP_MARGIN_PX = 40;
   const markdownArtifactsServerAddress = process.argv[15] || '';
   let browser;
 
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'test') {
     console.table ? console.table({
       dataFile, outputFile, distDir, orientation, resourceTimeout, reportType,
       headerLeftImage, headerRightImage, pageSize, disableHeaders, chromeExecution,
