@@ -7,7 +7,7 @@ import { DEFAULT_DATE_TIME_FORMAT, PARSING_STRING_WITH_TIME_ZONE } from '../../c
 
 export function dateToMoment(date) {
   if (!date) {
-    return ' N/A';
+    return 'N/A';
   }
 
   let result;

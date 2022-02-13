@@ -250,7 +250,7 @@ describe('Report Container', () => {
 
     const dateEl = reportContainer.find('.section-date-value');
     expect(dateEl).to.have.length(2);
-    expect(dateEl.at(0).text()).to.be.equal(' N/A');
+    expect(dateEl.at(0).text()).to.be.equal('N/A');
     expect(dateEl.at(1).text()).to.equal('Jan 1st 16');
 
     // Divider
@@ -842,7 +842,7 @@ describe('Report Container', () => {
 
   describe('SectionDate', () => {
     it('dateToMoment(date) should convert date to moment', () => {
-      expect(dateToMoment()).to.eq(' N/A');
+      expect(dateToMoment()).to.eq('N/A');
       expect(dateToMoment('2021-11-24 12:57:02.889261 +0200 IST').isValid()).to.be.true;
       expect(moment.isMoment(dateToMoment('2021-11-24 12:57:02.889261 +0200 IST'))).to.be.true;
       expect(
@@ -855,7 +855,7 @@ describe('Report Container', () => {
       const itemsSection = testTemplate.find(section => section.type === 'itemsSection');
       const datesSections = itemsSection.data.filter(section => section.fieldType === 'date');
       const expectedDates = [
-        'Date: N/A',
+        'Date:N/A',
         dateToMoment(datesSections[0].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT),
         dateToMoment(datesSections[1].data).tz(moment.tz.guess()).format(DEFAULT_DATE_TIME_FORMAT)
       ];
@@ -870,7 +870,7 @@ describe('Report Container', () => {
 
     it('should render "N/A" if date is missing', () => {
       const testTemplate = loadTemplate('testLayoutWithDateTime.json');
-      const expectedDate = 'Date: N/A';
+      const expectedDate = 'Date:N/A';
       const toRender = <ReportContainer sections={prepareSections(testTemplate)} />;
       const reportContainer = mount(toRender);
       const dateSections = reportContainer.find(SectionDate);
