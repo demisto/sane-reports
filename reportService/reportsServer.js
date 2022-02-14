@@ -1,5 +1,5 @@
 /* eslint-disable */
-/* This file is deprecated and used as legacy only */
+
 const evalsFunctions = require('./evals');
 const puppeteer = require('puppeteer');
 const chromePath = require('@moonandyou/chrome-path');
@@ -73,6 +73,14 @@ const MIN_TOP_MARGIN_PX = 40;
   const forceAutoHeightLayout = process.argv[14] === true || process.argv[14] === "true";
   const markdownArtifactsServerAddress = process.argv[15] || '';
   let browser;
+
+  if (process.env.NODE_ENV === 'test') {
+    console.table ? console.table({
+      dataFile, outputFile, distDir, orientation, resourceTimeout, reportType,
+      headerLeftImage, headerRightImage, pageSize, disableHeaders, chromeExecution,
+      forceAutoHeightLayout, markdownArtifactsServerAddress
+    }) : console.log('args:', process.argv);
+  }
 
   let baseUrl = '';
   let tmpReportName = '';

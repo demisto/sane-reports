@@ -1,4 +1,10 @@
 /* eslint-disable */
+
+/*
+* this file is for sole phantomjs use, currently deprecated.
+* please use ./reportService/reportServer.js for puppeteer use.
+* */
+
 const page = require('webpage').create();
 const system = require('system');
 const fs = require('fs');
