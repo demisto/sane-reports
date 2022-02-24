@@ -40,8 +40,6 @@ export const TABLE_CELL_TYPE = {
   image: 'image'
 };
 
-export const DEFAULT_MAX_LENGTH = 300;
-
 export const CHART_LAYOUT_TYPE = {
   horizontal: 'horizontal',
   vertical: 'vertical'
