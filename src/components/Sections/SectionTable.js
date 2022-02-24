@@ -6,9 +6,6 @@ import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash'
 import WidgetEmptyState from './WidgetEmptyState';
 import SectionTitle from './SectionTitle';
 
-// eslint-disable-next-line no-undef
-const DEFAULT_MAX_LENGTH = parseInt(maxTextLength, 10) || 300;
-
 function getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle) {
   const extraProps = {};
   const metaData = columnsMetaDataMap.get(key);
@@ -60,6 +57,10 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
   }
 
   let tableBody;
+
+  // eslint-disable-next-line no-undef
+  const DEFAULT_MAX_LENGTH = maxTextLength;
+
   if (isArray(readyColumns)) {
     readyColumns = maxColumns > 0 ? readyColumns.slice(0, maxColumns) : readyColumns;
     tableBody = tableData.length > 0 ? (
