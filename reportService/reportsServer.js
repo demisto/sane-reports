@@ -72,7 +72,7 @@ const MIN_TOP_MARGIN_PX = 40;
   const chromeExecution = process.argv[13] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
   const forceAutoHeightLayout = process.argv[14] === true || process.argv[14] === "true";
   const markdownArtifactsServerAddress = process.argv[15] || '';
-  const maxTextLength = process.argv[16] || '';
+  const maxTableTextLength = process.argv[16] || 300;
   let browser;
 
   if (process.env.NODE_ENV === 'test') {
@@ -123,7 +123,7 @@ const MIN_TOP_MARGIN_PX = 40;
             .replace('{report-dimensions}', JSON.stringify({ height: dimensions.height, width: dimensions.width }))
             .replace('{force-auto-height}', !!forceAutoHeightLayout)
             .replace('{md-server-address-to-replace}', markdownArtifactsServerAddress)
-            .replace('{max-text-length}', maxTextLength);
+            .replace('{max-table-text-length}', maxTableTextLength);
     const loadedData = fs.readFileSync(dataFile).toString();
 
     // $ is a special character in string replace, see here: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter

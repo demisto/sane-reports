@@ -1,7 +1,7 @@
 export const REPORT_DATA_TOKEN = '{report-data-to-replace}';
 export const REPORT_HEADER_IMAGE_RIGHT_TOKEN = '{report-header-image-right}';
 export const REPORT_HEADER_IMAGE_LEFT_TOKEN = '{report-header-image-left}';
-export const DEFAULT_MAX_LENGTH = '{max-text-length}';
+export const DEFAULT_MAX_LENGTH = '{max-table-text-length}';
 
 
 export const SECTION_TYPES = {
