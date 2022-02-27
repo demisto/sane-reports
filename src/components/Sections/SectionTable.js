@@ -2,6 +2,7 @@ import './SectionTable.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TABLE_CELL_TYPE } from '../../constants/Constants';
+import { DEFAULT_MAX_LENGTH } from '../../index';
 import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash';
 import WidgetEmptyState from './WidgetEmptyState';
 import SectionTitle from './SectionTitle';
@@ -57,9 +58,6 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
   }
 
   let tableBody;
-
-  // eslint-disable-next-line no-undef
-  const DEFAULT_MAX_LENGTH = maxTextLength;
 
   if (isArray(readyColumns)) {
     readyColumns = maxColumns > 0 ? readyColumns.slice(0, maxColumns) : readyColumns;

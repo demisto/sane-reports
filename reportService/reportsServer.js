@@ -123,7 +123,7 @@ const MIN_TOP_MARGIN_PX = 40;
             .replace('{report-dimensions}', JSON.stringify({ height: dimensions.height, width: dimensions.width }))
             .replace('{force-auto-height}', !!forceAutoHeightLayout)
             .replace('{md-server-address-to-replace}', markdownArtifactsServerAddress)
-            .replace('{max-text-length}', parseInt(maxTextLength, 10) || 300);
+            .replace('{max-text-length}', maxTextLength);
     const loadedData = fs.readFileSync(dataFile).toString();
 
     // $ is a special character in string replace, see here: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter
