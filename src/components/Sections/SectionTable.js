@@ -1,8 +1,7 @@
 import './SectionTable.less';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TABLE_CELL_TYPE } from '../../constants/Constants';
-import { DEFAULT_MAX_LENGTH } from '../../index';
+import { TABLE_CELL_TYPE, DEFAULT_MAX_LENGTH } from '../../constants/Constants';
 import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash';
 import WidgetEmptyState from './WidgetEmptyState';
 import SectionTitle from './SectionTitle';

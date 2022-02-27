@@ -40,6 +40,9 @@ export const TABLE_CELL_TYPE = {
   image: 'image'
 };
 
+// eslint-disable-next-line no-undef
+export const DEFAULT_MAX_LENGTH = parseInt(maxTextLength, 10) || 300;
+
 export const CHART_LAYOUT_TYPE = {
   horizontal: 'horizontal',
   vertical: 'vertical'

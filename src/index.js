@@ -26,9 +26,6 @@ const type = getReportType(reportType);
 
 const sections = prepareSections(data, type, markdownArtifactsServerAddress);
 
-// eslint-disable-next-line no-undef
-export const DEFAULT_MAX_LENGTH = parseInt(maxTextLength, 10) || 300;
-
 let isLayout = false;
 if (sections) {
   isLayout = true;
