@@ -1,7 +1,6 @@
 export const REPORT_DATA_TOKEN = '{report-data-to-replace}';
 export const REPORT_HEADER_IMAGE_RIGHT_TOKEN = '{report-header-image-right}';
 export const REPORT_HEADER_IMAGE_LEFT_TOKEN = '{report-header-image-left}';
-export const DEFAULT_MAX_LENGTH = '{max-table-text-length}';
 
 
 export const SECTION_TYPES = {
@@ -40,6 +39,9 @@ export const REPORT_TYPES = {
 export const TABLE_CELL_TYPE = {
   image: 'image'
 };
+
+// eslint-disable-next-line no-undef
+export const DEFAULT_MAX_LENGTH = maxTableTextLength;
 
 export const CHART_LAYOUT_TYPE = {
   horizontal: 'horizontal',
