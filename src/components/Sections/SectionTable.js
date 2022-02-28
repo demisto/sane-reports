@@ -1,11 +1,10 @@
 import './SectionTable.less';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TABLE_CELL_TYPE, DEFAULT_MAX_LENGTH } from '../../constants/Constants';
+import { getDefaultMaxLength, TABLE_CELL_TYPE } from '../../constants/Constants';
 import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash';
 import WidgetEmptyState from './WidgetEmptyState';
 import SectionTitle from './SectionTitle';
-
 
 function getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle) {
   const extraProps = {};
@@ -58,6 +57,8 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
   }
 
   let tableBody;
+  const defaultMaxLength = getDefaultMaxLength();
+
   if (isArray(readyColumns)) {
     readyColumns = maxColumns > 0 ? readyColumns.slice(0, maxColumns) : readyColumns;
     tableBody = tableData.length > 0 ? (
@@ -98,7 +99,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
                         );
                         break;
                       default:
-                        cellToRender = truncate(cell, { length: DEFAULT_MAX_LENGTH });
+                        cellToRender = truncate(cell, { length: defaultMaxLength });
                     }
                   }
                   return (
@@ -145,7 +146,7 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
               <td style={{ background: 'rgb(249, 250, 251)', width: '20%', whiteSpace: 'nowrap' }}>
                 {key}
               </td>
-              <td>{truncate(val, { length: DEFAULT_MAX_LENGTH })}</td>
+              <td>{truncate(val, { length: defaultMaxLength })}</td>
             </tr>
           ))}
         </tbody>
