@@ -40,7 +40,15 @@ export const TABLE_CELL_TYPE = {
   image: 'image'
 };
 
-export const DEFAULT_MAX_LENGTH = 300;
+let defaultMaxLength = 300;
+
+export function getDefaultMaxLength() {
+  return defaultMaxLength;
+}
+
+export function setDefaultMaxLength(maxTextLength) {
+  defaultMaxLength = parseInt(maxTextLength, 10) || defaultMaxLength;
+}
 
 export const CHART_LAYOUT_TYPE = {
   horizontal: 'horizontal',
