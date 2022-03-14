@@ -187,7 +187,7 @@ const MIN_TOP_MARGIN_PX = 40;
           printBackground: true,
           margin: {top: topMargin, bottom: BOTTOM_MARGIN},
           displayHeaderFooter: true,
-          headerTemplate: !disableHeaders ? headerTemplate : '',
+          headerTemplate: !disableHeaders ? headerTemplate : '<div/>',
           footerTemplate,
           landscape: orientation === PAGE_ORIENTATION.landscape
         });
