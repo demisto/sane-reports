@@ -191,7 +191,7 @@ export function getSectionComponent(section, maxWidth) {
       break;
     }
     case SECTION_TYPES.table:
-      if (section.data.length === 0) {
+      if (isEmpty(section.data)) {
         sectionToRender = null;
         break;
       }
