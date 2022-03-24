@@ -83,10 +83,13 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
               {readyColumns.map((col, j) =>
                 (() => {
                   const key = col.key || col;
-                  const cell = row[key] || (readableHeaders && row[readableHeaders[key]]);
+                  let cell = row[key];
+                  if (cell === undefined || cell === null) {
+                    cell = readableHeaders && row[readableHeaders[key]];
+                  }
 
                   let cellToRender = '';
-                  if (cell) {
+                  if (cell || cell === 0) {
                     switch (cell.type) {
                       case TABLE_CELL_TYPE.image:
                         cellToRender = (
