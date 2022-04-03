@@ -892,6 +892,11 @@
         "aaa": "aaaa",
         "bbb": "bbb",
         "ccc": "ccc"
+      },
+      {
+        "aaa": 0,
+        "bbb": "",
+        "ccc": "ccc"
       }
     ],
     "layout": {

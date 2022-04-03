@@ -739,6 +739,19 @@ describe('Report Container', () => {
     const sectionTable = reportContainer.find(SectionTable);
     const emptyWidget = sectionTable.find('.widget-empty-state');
     expect(emptyWidget).to.have.length(0);
+
+    const tableEl = sectionTable.at(1).find('table');
+    const tableHeader = tableEl.find('th');
+    expect(tableEl).to.have.length(1);
+    expect(tableHeader).to.have.length(2);
+    expect(tableHeader.at(0).text()).to.equal('aaa');
+    expect(tableHeader.at(1).text()).to.equal('bbb');
+    const cells = tableEl.find('td');
+    expect(cells).to.have.length(4);
+    expect(cells.at(0).text()).to.equal('aaaa');
+    expect(cells.at(1).text()).to.equal('bbb');
+    expect(cells.at(2).text()).to.equal('0');
+    expect(cells.at(3).text()).to.equal('');
   });
 
   it('Generate test empty generic template', () => {
