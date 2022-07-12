@@ -7,7 +7,7 @@ import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 import { uniqueId } from 'lodash';
-import { MARKDOWN_IMAGES_PATH, PAGE_BREAK_KEY } from '../../constants/Constants';
+import { MARKDOWN_IMAGES_ACC_PATH, MARKDOWN_IMAGES_PATH, PAGE_BREAK_KEY } from '../../constants/Constants';
 import { mdBtn, mdHyper, mdTextAlign, mdTextStyle, mdUnderline, myBackticks } from '../../utils/markdown';
 import WidgetEmptyState from './WidgetEmptyState';
 
@@ -79,7 +79,7 @@ export default class SectionMarkdown extends Component {
       }
       case 'img': {
         const srcArr = props.src.split('=size=');
-        if (srcArr[0].startsWith(MARKDOWN_IMAGES_PATH)) {
+        if (srcArr[0].startsWith(MARKDOWN_IMAGES_PATH) || MARKDOWN_IMAGES_ACC_PATH.test(srcArr[0])) {
           props.src = `${markdownArtifactsServerAddress}${srcArr[0]}`;
         } else {
           props.src = srcArr[0];
