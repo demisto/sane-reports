@@ -50,6 +50,16 @@ export function setDefaultMaxLength(maxTextLength) {
   defaultMaxLength = parseInt(maxTextLength, 10) || defaultMaxLength;
 }
 
+let markdownImageServer;
+
+export function getMarkdownImageServer() {
+  return markdownImageServer;
+}
+
+export function setMarkdownImageServer(mdServerAddress) {
+  markdownImageServer = mdServerAddress;
+}
+
 export const CHART_LAYOUT_TYPE = {
   horizontal: 'horizontal',
   vertical: 'vertical'
