@@ -134,7 +134,6 @@ export function getSectionComponent(section, maxWidth) {
           doNotShowEmoji={section.layout.doNotShowEmoji}
           customClass={isPageBreakSection(section) ? 'page-break-section' : ''}
           forceRangeMessage={section.layout.forceRangeMessage}
-          markdownArtifactsServerAddress={section.markdownArtifactsServerAddress}
         />
       );
       break;
@@ -236,7 +235,6 @@ export function getSectionComponent(section, maxWidth) {
           title={section.title}
           description={section.description}
           columns={(section.layout.w / 4) * 2}
-          markdownArtifactsServerAddress={section.markdownArtifactsServerAddress}
           hideItemTitleOnlyOne={section.hideItemTitleOnlyOne}
         />
       );

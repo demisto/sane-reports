@@ -29,8 +29,7 @@ class ItemsSection extends Component {
       endCol: PropTypes.number,
       index: PropTypes.number,
       displayType: PropTypes.oneOf(Object.values(SECTION_ITEMS_DISPLAY_LAYOUTS))
-    })),
-    markdownArtifactsServerAddress: PropTypes.string
+    }))
   };
 
   static getHeightOffset(columnUsage, item) {
@@ -103,7 +102,6 @@ class ItemsSection extends Component {
   }
 
   getDisplayDataComponent = (item) => {
-    const { markdownArtifactsServerAddress } = this.props;
     if (Array.isArray(item.data)) {
       if (item.data.length === 0) {
         return null;
@@ -126,7 +124,6 @@ class ItemsSection extends Component {
         return (
           <SectionMarkdown
             text={String(item.data)}
-            markdownArtifactsServerAddress={markdownArtifactsServerAddress}
           />
         );
     }
@@ -134,8 +131,7 @@ class ItemsSection extends Component {
 
 
   render() {
-    const { style, items, columns, title, titleStyle, description,
-      markdownArtifactsServerAddress, hideItemTitleOnlyOne } = this.props;
+    const { style, items, columns, title, titleStyle, description, hideItemTitleOnlyOne } = this.props;
     const { columnUsage } = this.state;
 
     let maxOffset = 0;
@@ -167,7 +163,6 @@ class ItemsSection extends Component {
               {description && (
                 <SectionMarkdown
                   text={description}
-                  markdownArtifactsServerAddress={markdownArtifactsServerAddress}
                   customClass="section-description"
                   setRef={(itemElement) => {
                     if (!itemElement) {

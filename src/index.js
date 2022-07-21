@@ -13,7 +13,8 @@ import {
   REPORT_DATA_TOKEN,
   REPORT_TYPES,
   PIXEL_SIZE,
-  setDefaultMaxLength
+  setDefaultMaxLength,
+  setMarkdownImageServer
 } from './constants/Constants';
 import { prepareSections, getReportType } from './utils/reports';
 import { generateOfficeReport } from './office/OfficeReport';
@@ -25,8 +26,9 @@ if (data === REPORT_DATA_TOKEN) {
 
 const type = getReportType(reportType);
 
-const sections = prepareSections(data, type, markdownArtifactsServerAddress);
+const sections = prepareSections(data, type);
 
+setMarkdownImageServer(markdownArtifactsServerAddress);
 setDefaultMaxLength(maxTableTextLength);
 
 let isLayout = false;
