@@ -42,7 +42,7 @@ export default class SectionMarkdown extends Component {
       PropTypes.object,
       PropTypes.string
     ]),
-    forceRangeMessage: PropTypes.string,
+    forceRangeMessage: PropTypes.string
   };
 
   static createBtn(props, children) {
