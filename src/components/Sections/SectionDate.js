@@ -9,7 +9,6 @@ export function dateToMoment(date) {
   if (!date) {
     return 'N/A';
   }
-
   let result;
 
   result = moment(date, PARSING_STRING_WITH_TIME_ZONE);
