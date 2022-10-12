@@ -7,7 +7,12 @@ import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 import { uniqueId } from 'lodash';
-import { MARKDOWN_IMAGES_PATH, PAGE_BREAK_KEY } from '../../constants/Constants';
+import {
+  getMarkdownImageServer,
+  MARKDOWN_IMAGES_ACC_PATH,
+  MARKDOWN_IMAGES_PATH,
+  PAGE_BREAK_KEY
+} from '../../constants/Constants';
 import { mdBtn, mdHyper, mdTextAlign, mdTextStyle, mdUnderline, myBackticks } from '../../utils/markdown';
 import WidgetEmptyState from './WidgetEmptyState';
 
@@ -37,8 +42,7 @@ export default class SectionMarkdown extends Component {
       PropTypes.object,
       PropTypes.string
     ]),
-    forceRangeMessage: PropTypes.string,
-    markdownArtifactsServerAddress: PropTypes.string
+    forceRangeMessage: PropTypes.string
   };
 
   static createBtn(props, children) {
@@ -52,7 +56,7 @@ export default class SectionMarkdown extends Component {
     return (<span {...props}>{message}</span>);
   }
 
-  static handleIterate(tableClasses, markdownArtifactsServerAddress, Tag, props, children) {
+  static handleIterate(tableClasses, Tag, props, children) {
     let res = '';
     switch (Tag) {
       case 'textalign': {
@@ -79,8 +83,8 @@ export default class SectionMarkdown extends Component {
       }
       case 'img': {
         const srcArr = props.src.split('=size=');
-        if (srcArr[0].startsWith(MARKDOWN_IMAGES_PATH)) {
-          props.src = `${markdownArtifactsServerAddress}${srcArr[0]}`;
+        if (srcArr[0].startsWith(MARKDOWN_IMAGES_PATH) || MARKDOWN_IMAGES_ACC_PATH.test(srcArr[0])) {
+          props.src = `${getMarkdownImageServer()}${srcArr[0]}`;
         } else {
           props.src = srcArr[0];
         }
@@ -199,8 +203,7 @@ export default class SectionMarkdown extends Component {
       doNotShowEmoji,
       setRef,
       customClass,
-      forceRangeMessage,
-      markdownArtifactsServerAddress
+      forceRangeMessage
     } = this.props;
     let finalText = text;
     IGNORE_KEYS.forEach((s) => {
@@ -232,7 +235,7 @@ export default class SectionMarkdown extends Component {
       const mdData = mdReact(
         {
           disableRules: ['backticks'],
-          onIterate: SectionMarkdown.handleIterate.bind(this, tableClasses, markdownArtifactsServerAddress),
+          onIterate: SectionMarkdown.handleIterate.bind(this, tableClasses),
           markdownOptions: { typographer: true },
           plugins
         }

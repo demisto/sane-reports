@@ -39,7 +39,6 @@ function filterSectionsAccordingToReportType(reportData, reportType) {
 export function prepareSections(
   reportData,
   reportType,
-  markdownArtifactsServerAddress,
   autoPageBreak,
   reflectDimensions
 ) {
@@ -63,9 +62,6 @@ export function prepareSections(
       section.autoPageBreak = autoPageBreak;
       if (reflectDimensions) {
         section.layout.reflectDimensions = true;
-      }
-      if (section.type === SECTION_TYPES.markdown || section.type === SECTION_TYPES.itemsSection) {
-        section.markdownArtifactsServerAddress = markdownArtifactsServerAddress;
       }
     });
   }

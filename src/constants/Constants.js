@@ -50,6 +50,16 @@ export function setDefaultMaxLength(maxTextLength) {
   defaultMaxLength = parseInt(maxTextLength, 10) || defaultMaxLength;
 }
 
+let markdownImageServer;
+
+export function getMarkdownImageServer() {
+  return markdownImageServer;
+}
+
+export function setMarkdownImageServer(mdServerAddress) {
+  markdownImageServer = mdServerAddress;
+}
+
 export const CHART_LAYOUT_TYPE = {
   horizontal: 'horizontal',
   vertical: 'vertical'
@@ -209,6 +219,7 @@ export const DATA_TYPES = {
 };
 
 export const MARKDOWN_IMAGES_PATH = '/markdown/image';
+export const MARKDOWN_IMAGES_ACC_PATH = /^\/acc_.*\/markdown\/image/;
 
 export const PARSING_STRING_WITH_TIME_ZONE = 'YYYY-MM-DD HH:mm:ss.SSSSSS Z';
 export const DEFAULT_DATE_TIME_FORMAT = 'MMMM Do YYYY, h:mm a z';
