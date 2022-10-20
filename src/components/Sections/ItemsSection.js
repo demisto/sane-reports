@@ -149,7 +149,8 @@ class ItemsSection extends Component {
     return (
       <AutoSizer disableHeight>
         {({ width }) => {
-          const lastRowIndex = maxBy(items, item => item.index).index;
+          const lastRow = maxBy(items, item => item.index);
+          const lastRowIndex = lastRow ? lastRow.index : null;
           const allItemsAreDisplayedAsCards = every(items,
             item => ItemsSection.getItemDisplayType(item) === SECTION_ITEMS_DISPLAY_LAYOUTS.card
           );
