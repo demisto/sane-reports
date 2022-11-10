@@ -141,7 +141,7 @@ export function getSectionComponent(section, maxWidth) {
     case SECTION_TYPES.date:
       sectionToRender = (
         <SectionDate
-          date={section.layout.useCurrentTime ? moment() : section.data}
+          date={section.data || (section.layout.useCurrentTime ? moment() : undefined)}
           style={section.layout.style}
           format={section.layout.format}
         />
