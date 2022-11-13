@@ -203,7 +203,7 @@ class ReportLayout extends Component {
           }
         </span>
         {
-          !isLayout ?
+          !isLayout ? //??
             Object
               .keys(sections)
               .map(rowPos =>
