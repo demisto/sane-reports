@@ -79,8 +79,10 @@ h1 {
       &:not(.section-show-overflow) {
         &:not(.section-show-empty-state) {
           &:not(.section-markdown) {
-            &:not(.disable-auto-height) {
-              height: auto !important;
+            &:not(.section-image) {
+              &:not(.disable-auto-height) {
+                height: auto !important;
+              }
             }
           }
 
@@ -101,6 +103,12 @@ h1 {
       .section-chart {
         border: 1px solid #DADBDB;
         padding: 10px 12px 0;
+      }
+
+      &.section-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       &.section-itemsSection,
