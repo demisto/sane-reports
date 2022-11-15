@@ -99,6 +99,22 @@ function getTextStyleToken(source) {
   return { token, style: filteredStyles.join(';') };
 }
 
+function findClosingBracket(str, pos) {
+  const rExp = /\(|\)/g;
+  rExp.lastIndex = pos + 1;
+  let deep = 1;
+  let curr = rExp.exec(str);
+  while (curr) {
+    const close = !(deep += str[curr.index] === '(' ? 1 : -1);
+    if (close) {
+      return curr.index;
+    }
+    curr = rExp.exec(str);
+  }
+
+  return -1;
+}
+
 export function mdTextStyle(md) {
   md.inline.ruler.push(
     'textstyle',
@@ -116,7 +132,7 @@ export function mdTextStyle(md) {
       }
 
       const start = pos;
-      const end = state.src.lastIndexOf(')');
+      const end = findClosingBracket(state.src, start);
       if (end === -1) {
         return false;
       }
