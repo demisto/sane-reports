@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 import { DEFAULT_DATE_TIME_FORMAT, PARSING_STRING_WITH_TIME_ZONE } from '../../constants/Constants';
 
+function isInvalidDate(date) {
+  return !date || (date.startsWith && date.startsWith('0001-01-01 00:00:00'));
+}
 
 export function dateToMoment(date) {
-  if (!date) {
+  if (isInvalidDate(date)) {
     return 'N/A';
   }
   let result;
