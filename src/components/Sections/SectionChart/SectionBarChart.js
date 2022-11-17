@@ -199,22 +199,28 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
     dataItems = dataItems.sort((a, b) => sortByField(['sum', 'name'], [false, true])(a, b));
   }
 
-  const isFull = !reflectDimensions;
   const barSize = chartProperties.barSize || WIDGET_DEFAULT_CONF.barSize;
+  const isLegend = legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend;
 
-  let minHeight = Math.min(BAR_CHART_FULL_ITEM_HEIGHT,
-    dataItems.length * (barSize + WIDGET_DEFAULT_CONF.barSizeMargin));
+  const isFull = !reflectDimensions;
+  if (isFull) {
+    let minHeight = BAR_CHART_FULL_ITEM_HEIGHT;
+    if (chartProperties.layout === CHART_LAYOUT_TYPE.horizontal) {
+      minHeight = Math.min(minHeight, dataItems.length * (barSize + WIDGET_DEFAULT_CONF.barSizeMargin));
+    } else if (isLegend) {
+      minHeight += dataItems.length * CHART_LEGEND_ITEM_HEIGHT;
+    }
 
-  if (chartProperties.layout === CHART_LAYOUT_TYPE.vertical) {
-    minHeight += (dataItems.length * CHART_LEGEND_ITEM_HEIGHT);
+    dimensions.height = Math.max(dimensions.height, minHeight);
   }
+
   return (
     <div className={mainClass} style={style}>
       <AutoSizer>
         {({ width, height }) => {
           const finalWidth = width || dimensions.width;
           const xAxisProps = isColumnChart ? createXAxisProps(data, 'name', finalWidth / 2) : {};
-          const finalHeight = Math.max(isFull ? dimensions.height : height || dimensions.height, minHeight);
+          const finalHeight = isFull ? dimensions.height : height || dimensions.height;
 
           return (
             <BarChart
@@ -265,7 +271,7 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
                 />}
               </XAxis>}
               <Tooltip />
-              {legendStyle && Object.keys(legendStyle).length > 0 && !legendStyle.hideLegend &&
+              {isLegend &&
                 <Legend
                   content={<ChartLegend
                     data={dataItems}
