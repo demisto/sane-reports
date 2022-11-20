@@ -20,6 +20,7 @@ import { DEFAULT_LINE_STROKE_COLOR, getGraphColorByName } from '../../../utils/c
 import { formatNumberValue, getTextWidth, rightEllipsis } from '../../../utils/strings';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
 import { getDateGroupName } from '../../../utils/time';
+import { getFormattedGroupValue } from '../../../utils/charts';
 
 const SINGLE_LINE_CHART_NAME = 'sum';
 
@@ -48,12 +49,12 @@ const createXAxisProps = (data, dataKey, width) => {
 
 const SectionLineChart = ({ data, groupBy, style, dimensions, legend, chartProperties = {}, legendStyle = null,
   referenceLineX, referenceLineY, fromDate, toDate, reflectDimensions }) => {
+  const { valuesFormat } = chartProperties;
   const existingColors = {};
   let preparedLegend = [];
   let preparedData = cloneDeep(data) || [];
 
   const formatValue = (v) => {
-    const { valuesFormat } = chartProperties;
     return formatNumberValue(v, valuesFormat);
   };
 
@@ -93,19 +94,20 @@ const SectionLineChart = ({ data, groupBy, style, dimensions, legend, chartPrope
             groupName = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
           }
           const id = groupName;
-          mainObject[groupName] = group.data[0];
+          const value = getFormattedGroupValue(group, valuesFormat);
+          mainObject[groupName] = value;
           lineTypes[groupName] =
           {
             name: groupName,
             color: group.color || getGraphColorByName(groupName),
             id,
-            value: mainObject[groupName]
+            value
           };
         });
       } else {
         if (currentGroup.data && currentGroup.data.length > 0) {
           currentGroup = { name,
-            [SINGLE_LINE_CHART_NAME]: currentGroup.data[0],
+            [SINGLE_LINE_CHART_NAME]: getFormattedGroupValue(currentGroup, valuesFormat),
             color: currentGroup.color || DEFAULT_LINE_STROKE_COLOR };
         }
         Object.keys(currentGroup).filter(key => key !== 'name' && key !== 'color' &&
