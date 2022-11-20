@@ -16,14 +16,16 @@ import {
 } from '../../../constants/Constants';
 import classNames from 'classnames';
 import { formatNumberValue } from '../../../utils/strings';
+import { getFormattedGroup } from '../../../utils/charts';
 
 const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}, legendStyle = {},
   sortBy, reflectDimensions }) => {
+  const { valuesFormat } = chartProperties;
   const dataMap = {};
   const existingColors = {};
   let total = 0;
   (data || []).forEach((item) => {
-    item.value = item.value || item.data;
+    item.value = item.value || getFormattedGroup(item, valuesFormat);
     if (isArray(item.value) && item.value.length > 0) {
       item.value = item.value[0];
     }
@@ -36,7 +38,6 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
   let preparedData = [];
 
   const formatValue = (v) => {
-    const { valuesFormat } = chartProperties;
     return formatNumberValue(v, valuesFormat);
   };
 
