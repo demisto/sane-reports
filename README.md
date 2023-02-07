@@ -6,7 +6,7 @@ Reports library that will keep you sane and not pulling your hair out
 
 ## Quick start
 
-Works with Node v11.15.0 (https://tecadmin.net/install-nvm-macos-with-homebrew/)
+Tested with Node v11.15.0 and with v10.24.1 on Mac with Apple Silicon (https://tecadmin.net/install-nvm-macos-with-homebrew/)
 
 **Chromium/Chrome**
 ```sh
@@ -73,8 +73,8 @@ phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <o
 - chromiumPath: a custom chromium or chrome path. The service searches for installed chromium or chrome by order. Default usage by priority: Chromium -> Google Chrome Stable -> Google Chrome -> the default path '/usr/bin/chromium-browser'.
 
 ### Example:
-- npm run production
 - npm run make
+- npm run production
 - `./reportsServer-macos templates/incidentDailyReportTempalte.json dist/incidentDailyReportTempalte.pdf dist portrait 4000 pdf '' '' '' A4 '' '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'`
 
 ### Running on MacOS Locally:
