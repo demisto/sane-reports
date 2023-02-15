@@ -236,6 +236,7 @@ export function getSectionComponent(section, maxWidth) {
           title={section.title}
           description={section.description}
           columns={(section.layout.w / 4) * 2}
+          tableColumns={section.layout.tableColumns}
           hideItemTitleOnlyOne={section.hideItemTitleOnlyOne}
         />
       );

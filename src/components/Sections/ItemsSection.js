@@ -17,6 +17,7 @@ class ItemsSection extends Component {
   static propTypes = {
     style: PropTypes.object,
     columns: PropTypes.number,
+    tableColumns: PropTypes.array,
     title: PropTypes.string,
     description: PropTypes.string,
     titleStyle: PropTypes.object,
@@ -102,11 +103,13 @@ class ItemsSection extends Component {
   }
 
   getDisplayDataComponent = (item) => {
+    const { tableColumns } = this.props;
+
     if (Array.isArray(item.data)) {
       if (item.data.length === 0) {
         return null;
       }
-      return (<SectionTable data={item.data} />);
+      return (<SectionTable data={item.data} columns={tableColumns} />);
     }
 
     switch (item.fieldType) {
