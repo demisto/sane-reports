@@ -25,6 +25,7 @@ class ItemsSection extends Component {
       fieldId: PropTypes.string,
       fieldName: PropTypes.string,
       data: PropTypes.any,
+      tableColumns: PropTypes.array,
       startCol: PropTypes.number,
       endCol: PropTypes.number,
       index: PropTypes.number,
@@ -106,7 +107,7 @@ class ItemsSection extends Component {
       if (item.data.length === 0) {
         return null;
       }
-      return (<SectionTable data={item.data} />);
+      return (<SectionTable data={item.data} columns={item.tableColumns} />);
     }
 
     switch (item.fieldType) {
