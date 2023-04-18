@@ -47,6 +47,19 @@ const createXAxisProps = (data, dataKey, width) => {
   return props;
 };
 
+const getTimeFrame = (preparedData, chartProperties) => {
+  const allNamesAreUnformattable = preparedData.every((mainGroup) => {
+    const name = mainGroup.name;
+    return name && isNaN(name) && !moment(name).isValid();
+  });
+
+  if (allNamesAreUnformattable) {
+    return SUPPORTED_TIME_FRAMES.none;
+  }
+
+  return chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
+};
+
 const SectionLineChart = ({ data, groupBy, style, dimensions, legend, chartProperties = {}, legendStyle = null,
   referenceLineX, referenceLineY, fromDate, toDate, reflectDimensions }) => {
   const { valuesFormat } = chartProperties;
@@ -59,7 +72,7 @@ const SectionLineChart = ({ data, groupBy, style, dimensions, legend, chartPrope
   };
 
   const finalToDate = toDate || moment().utc();
-  const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
+  const timeFrame = getTimeFrame(preparedData, chartProperties);
   const lineTypes = {};
   let from = fromDate && moment(fromDate).utc();
   const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
