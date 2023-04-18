@@ -48,13 +48,15 @@ const createXAxisProps = (data, dataKey, width) => {
 };
 
 const getTimeFrame = (preparedData, chartProperties) => {
-  const allNamesAreUnformattable = preparedData.every((mainGroup) => {
-    const name = mainGroup.name;
-    return name && isNaN(name) && !moment(name).isValid();
-  });
+  if (chartProperties.timeFrame !== SUPPORTED_TIME_FRAMES.none) {
+    const allNamesAreUnformattable = preparedData.every((mainGroup) => {
+      const name = mainGroup.name;
+      return name && isNaN(name) && !moment(name).isValid();
+    });
 
-  if (allNamesAreUnformattable) {
-    return SUPPORTED_TIME_FRAMES.none;
+    if (allNamesAreUnformattable) {
+      return SUPPORTED_TIME_FRAMES.none;
+    }
   }
 
   return chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
