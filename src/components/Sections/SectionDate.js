@@ -5,7 +5,6 @@ import moment from 'moment-timezone';
 import {
   DEFAULT_DATE_TIME_FORMAT,
   PARSING_STRING_WITH_TIME_ZONE,
-  setUseServerFormattedDate,
   shouldUseServerFormattedDate
 } from '../../constants/Constants';
 
@@ -36,8 +35,7 @@ export function dateToMoment(date) {
 const SectionDate = ({ date, style, format, isPrefixRequired = true }) => {
   const dateTime = dateToMoment(date);
   let value;
-  setUseServerFormattedDate(true);
-  if (shouldUseServerFormattedDate() && moment(date).isValid()) {
+  if (shouldUseServerFormattedDate() && !isInvalidDate(date) && moment(date).isValid()) {
     value = date;
   } else {
     value = moment.isMoment(dateTime) ? dateTime.tz(moment.tz.guess())
