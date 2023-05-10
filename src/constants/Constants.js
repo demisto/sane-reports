@@ -60,6 +60,15 @@ export function setMarkdownImageServer(mdServerAddress) {
   markdownImageServer = mdServerAddress;
 }
 
+let useServerFormattedDate = false;
+export function setUseServerFormattedDate(useServerDate) {
+  useServerFormattedDate = useServerDate;
+}
+
+export function shouldUseServerFormattedDate() {
+  return useServerFormattedDate;
+}
+
 export const CHART_LAYOUT_TYPE = {
   horizontal: 'horizontal',
   vertical: 'vertical'

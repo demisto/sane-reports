@@ -73,13 +73,14 @@ const MIN_TOP_MARGIN_PX = 40;
   const forceAutoHeightLayout = process.argv[14] === true || process.argv[14] === "true";
   const markdownArtifactsServerAddress = process.argv[15] || '';
   const maxTableTextLength = process.argv[16] || 300;
+  const useServerFormattedDate = process.argv[17] || "false"
   let browser;
 
   if (process.env.NODE_ENV === 'test') {
     console.table ? console.table({
       dataFile, outputFile, distDir, orientation, resourceTimeout, reportType,
       headerLeftImage, headerRightImage, pageSize, disableHeaders, chromeExecution,
-      forceAutoHeightLayout, markdownArtifactsServerAddress
+      forceAutoHeightLayout, markdownArtifactsServerAddress, maxTableTextLength, useServerFormattedDate
     }) : console.log('args:', process.argv);
   }
 
@@ -123,7 +124,8 @@ const MIN_TOP_MARGIN_PX = 40;
             .replace('{report-dimensions}', JSON.stringify({ height: dimensions.height, width: dimensions.width }))
             .replace('{force-auto-height}', !!forceAutoHeightLayout)
             .replace('{md-server-address-to-replace}', markdownArtifactsServerAddress)
-            .replace('{max-table-text-length}', maxTableTextLength);
+            .replace('{max-table-text-length}', maxTableTextLength)
+            .replace('{use-server-formatted-date}', useServerFormattedDate);
     const loadedData = fs.readFileSync(dataFile).toString();
 
     // $ is a special character in string replace, see here: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter

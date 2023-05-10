@@ -2,7 +2,12 @@ import './SectionDate.less';
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
-import { DEFAULT_DATE_TIME_FORMAT, PARSING_STRING_WITH_TIME_ZONE } from '../../constants/Constants';
+import {
+  DEFAULT_DATE_TIME_FORMAT,
+  PARSING_STRING_WITH_TIME_ZONE,
+  setUseServerFormattedDate,
+  shouldUseServerFormattedDate
+} from '../../constants/Constants';
 
 function isInvalidDate(date) {
   return !date || (date.startsWith && date.startsWith('0001-01-01 00:00:00'));
@@ -30,12 +35,19 @@ export function dateToMoment(date) {
 
 const SectionDate = ({ date, style, format, isPrefixRequired = true }) => {
   const dateTime = dateToMoment(date);
+  let value;
+  setUseServerFormattedDate(true);
+  if (shouldUseServerFormattedDate() && moment(date).isValid()) {
+    value = date;
+  } else {
+    value = moment.isMoment(dateTime) ? dateTime.tz(moment.tz.guess())
+      .format(format || DEFAULT_DATE_TIME_FORMAT) : dateTime;
+  }
   return (
     <div className="section-date" style={style}>
       {isPrefixRequired && <span className="section-date-key">Date:</span>}
       <span className="section-date-value">
-        {moment.isMoment(dateTime) ? dateTime.tz(moment.tz.guess())
-          .format(format || DEFAULT_DATE_TIME_FORMAT) : dateTime}
+        {value}
       </span>
     </div>);
 };

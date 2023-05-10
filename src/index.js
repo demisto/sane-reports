@@ -14,7 +14,8 @@ import {
   REPORT_TYPES,
   PIXEL_SIZE,
   setDefaultMaxLength,
-  setMarkdownImageServer
+  setMarkdownImageServer,
+  setUseServerFormattedDate
 } from './constants/Constants';
 import { prepareSections, getReportType } from './utils/reports';
 import { generateOfficeReport } from './office/OfficeReport';
@@ -30,6 +31,7 @@ const sections = prepareSections(data, type);
 
 setMarkdownImageServer(markdownArtifactsServerAddress);
 setDefaultMaxLength(maxTableTextLength);
+setUseServerFormattedDate(useServerFormattedDate);
 
 let isLayout = false;
 if (sections) {
