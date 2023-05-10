@@ -73,7 +73,7 @@ const MIN_TOP_MARGIN_PX = 40;
   const forceAutoHeightLayout = process.argv[14] === true || process.argv[14] === "true";
   const markdownArtifactsServerAddress = process.argv[15] || '';
   const maxTableTextLength = process.argv[16] || 300;
-  const useServerFormattedDate = process.argv[17] || "false"
+  const useServerFormattedDate =  process.argv[17] === true || process.argv[17] === "true";
   let browser;
 
   if (process.env.NODE_ENV === 'test') {
