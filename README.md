@@ -5,9 +5,12 @@
 Reports library that will keep you sane and not pulling your hair out
 
 ## Quick start
+
+Tested with Node v11.15.0 and with v10.24.1 on Mac with Apple Silicon (https://tecadmin.net/install-nvm-macos-with-homebrew/)
+
 **Chromium/Chrome**
 ```sh
-$ npm install sane-reports
+$ npm install
 $ npm run make
 $ ./reportsServer templates/test.json dist/test.pdf # for linux users.
 $ ./reportsServer-macos templates/test.json dist/test.pdf # for macOS users.
@@ -16,7 +19,7 @@ $ ./reportsServer-win.exe templates/test.json dist/test.pdf # for windows users.
 
 **PhantomJS**
 ```sh
-$ npm install sane-reports
+$ npm install
 $ cd sane-reports
 $ phantomjs reportsServer.js templates/test.json dist/test.pdf
 ```
@@ -37,6 +40,7 @@ Now open browser at: http://localhost:8082
 $ git clone git@github.com:demisto/sane-reports.git
 $ cd sane-reports
 $ npm install
+$ npm run make
 $ npm run production
 $ npm run generate-report
 ```
@@ -69,9 +73,9 @@ phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <o
 - chromiumPath: a custom chromium or chrome path. The service searches for installed chromium or chrome by order. Default usage by priority: Chromium -> Google Chrome Stable -> Google Chrome -> the default path '/usr/bin/chromium-browser'.
 
 ### Example:
-- npm run production
 - npm run make
-- `/reportsServer-macos templates/incidentDailyReportTempalte.json dist/incidentDailyReportTempalte.pdf dist portrait 4000 pdf '' '' '' A4 '' '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'`
+- npm run production
+- `./reportsServer-macos templates/incidentDailyReportTempalte.json dist/incidentDailyReportTempalte.pdf dist portrait 4000 pdf '' '' '' A4 '' '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'`
 
 ### Running on MacOS Locally:
 You can use npm script:

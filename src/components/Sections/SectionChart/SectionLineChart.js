@@ -20,6 +20,7 @@ import { DEFAULT_LINE_STROKE_COLOR, getGraphColorByName } from '../../../utils/c
 import { formatNumberValue, getTextWidth, rightEllipsis } from '../../../utils/strings';
 import { calculateAngledTickInterval } from '../../../utils/ticks';
 import { getDateGroupName } from '../../../utils/time';
+import { getFormattedGroupValue } from '../../../utils/charts';
 
 const SINGLE_LINE_CHART_NAME = 'sum';
 
@@ -46,19 +47,34 @@ const createXAxisProps = (data, dataKey, width) => {
   return props;
 };
 
+const getTimeFrame = (preparedData, chartProperties) => {
+  if (chartProperties.timeFrame !== SUPPORTED_TIME_FRAMES.none) {
+    const allNamesAreUnformattable = preparedData.every((mainGroup) => {
+      const name = mainGroup.name;
+      return name && isNaN(name) && !moment(name).isValid();
+    });
+
+    if (allNamesAreUnformattable) {
+      return SUPPORTED_TIME_FRAMES.none;
+    }
+  }
+
+  return chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
+};
+
 const SectionLineChart = ({ data, groupBy, style, dimensions, legend, chartProperties = {}, legendStyle = null,
   referenceLineX, referenceLineY, fromDate, toDate, reflectDimensions }) => {
+  const { valuesFormat } = chartProperties;
   const existingColors = {};
   let preparedLegend = [];
   let preparedData = cloneDeep(data) || [];
 
   const formatValue = (v) => {
-    const { valuesFormat } = chartProperties;
     return formatNumberValue(v, valuesFormat);
   };
 
   const finalToDate = toDate || moment().utc();
-  const timeFrame = chartProperties.timeFrame || SUPPORTED_TIME_FRAMES.days;
+  const timeFrame = getTimeFrame(preparedData, chartProperties);
   const lineTypes = {};
   let from = fromDate && moment(fromDate).utc();
   const timeFormat = chartProperties.format || QUERIES_TIME_FORMAT;
@@ -93,19 +109,20 @@ const SectionLineChart = ({ data, groupBy, style, dimensions, legend, chartPrope
             groupName = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
           }
           const id = groupName;
-          mainObject[groupName] = group.data[0];
+          const value = getFormattedGroupValue(group, valuesFormat);
+          mainObject[groupName] = value;
           lineTypes[groupName] =
           {
             name: groupName,
             color: group.color || getGraphColorByName(groupName),
             id,
-            value: mainObject[groupName]
+            value
           };
         });
       } else {
         if (currentGroup.data && currentGroup.data.length > 0) {
           currentGroup = { name,
-            [SINGLE_LINE_CHART_NAME]: currentGroup.data[0],
+            [SINGLE_LINE_CHART_NAME]: getFormattedGroupValue(currentGroup, valuesFormat),
             color: currentGroup.color || DEFAULT_LINE_STROKE_COLOR };
         }
         Object.keys(currentGroup).filter(key => key !== 'name' && key !== 'color' &&

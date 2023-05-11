@@ -25,6 +25,7 @@ class ItemsSection extends Component {
       fieldId: PropTypes.string,
       fieldName: PropTypes.string,
       data: PropTypes.any,
+      tableColumns: PropTypes.array,
       startCol: PropTypes.number,
       endCol: PropTypes.number,
       index: PropTypes.number,
@@ -106,7 +107,7 @@ class ItemsSection extends Component {
       if (item.data.length === 0) {
         return null;
       }
-      return (<SectionTable data={item.data} />);
+      return (<SectionTable data={item.data} columns={item.tableColumns} />);
     }
 
     switch (item.fieldType) {
@@ -149,7 +150,8 @@ class ItemsSection extends Component {
     return (
       <AutoSizer disableHeight>
         {({ width }) => {
-          const lastRowIndex = maxBy(items, item => item.index).index;
+          const lastRow = maxBy(items, item => item.index);
+          const lastRowIndex = lastRow ? lastRow.index : null;
           const allItemsAreDisplayedAsCards = every(items,
             item => ItemsSection.getItemDisplayType(item) === SECTION_ITEMS_DISPLAY_LAYOUTS.card
           );

@@ -17,6 +17,7 @@ import {
   SectionHTML
 } from '../components/Sections';
 import { isNumber, isObjectLike, compact, isString, groupBy, get, isEmpty } from 'lodash';
+import moment from 'moment-timezone';
 import React from 'react';
 import { processData } from './data';
 import WidgetEmptyState from '../components/Sections/WidgetEmptyState';
@@ -140,7 +141,7 @@ export function getSectionComponent(section, maxWidth) {
     case SECTION_TYPES.date:
       sectionToRender = (
         <SectionDate
-          date={section.data}
+          date={section.data || (section.layout.useCurrentTime ? moment() : undefined)}
           style={section.layout.style}
           format={section.layout.format}
         />

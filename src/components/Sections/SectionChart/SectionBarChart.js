@@ -21,6 +21,7 @@ import { calculateAngledTickInterval } from '../../../utils/ticks';
 import LabelAxisTick from '../LabelAxisTick';
 import moment from 'moment';
 import { getDateGroupName } from '../../../utils/time';
+import { getFormattedGroupValue } from '../../../utils/charts';
 
 const createXAxisProps = (data, dataKey, width) => {
   const ticks = data.map(x => x[dataKey]);
@@ -50,13 +51,13 @@ const createXAxisProps = (data, dataKey, width) => {
 
 const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {},
   legendStyle = null, sortBy, stacked, fromDate, referenceLineY, reflectDimensions }) => {
+  const { valuesFormat } = chartProperties;
   const existingColors = {};
   const isColumnChart = chartProperties.layout === CHART_LAYOUT_TYPE.horizontal;
   let dataItems = {};
   let preparedData = data || [];
 
   const formatValue = (v) => {
-    const { valuesFormat } = chartProperties;
     return formatNumberValue(v, valuesFormat);
   };
 
@@ -140,11 +141,13 @@ const SectionBarChart = ({ data, style, dimensions, legend, chartProperties = {}
             innerItem.name = chartProperties.emptyValueName || NONE_VALUE_DEFAULT_NAME;
           }
           existingColors[innerItem.color] = true;
-          allSubGroups[innerItem.name] = allSubGroups[innerItem.name] ?
-            { ...allSubGroups[innerItem.name], sum: allSubGroups[innerItem.name].sum + innerItem.data[0] } :
-            { ...innerItem, sum: innerItem.data[0] };
 
-          item[innerItem.name] = innerItem.data[0];
+          const value = getFormattedGroupValue(innerItem, valuesFormat);
+          allSubGroups[innerItem.name] = allSubGroups[innerItem.name] ?
+            { ...allSubGroups[innerItem.name], sum: allSubGroups[innerItem.name].sum + value } :
+            { ...innerItem, sum: value };
+
+          item[innerItem.name] = value;
           item.total += item[innerItem.name];
         });
       } else {
