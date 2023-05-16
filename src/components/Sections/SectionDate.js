@@ -35,7 +35,7 @@ export function dateToMoment(date) {
 const SectionDate = ({ date, style, format, isPrefixRequired = true }) => {
   const dateTime = dateToMoment(date);
   let value;
-  if (shouldUseServerFormattedDate() && !isInvalidDate(date)) {
+  if (shouldUseServerFormattedDate() && !isInvalidDate(date) && !moment.isMoment(date)) {
     value = date;
   } else {
     value = moment.isMoment(dateTime) ? dateTime.tz(moment.tz.guess())
