@@ -1,0 +1,43 @@
+.time-ticker {
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.1px;
+
+  .sla-status {
+    &.late {
+      color: #ff1744;
+    }
+
+    &.risk {
+      color: #ff9000;
+    }
+
+    i.demisto-icon {
+      font-size: 24px;
+      display: inline-block;
+      margin: 0;
+      vertical-align: sub;
+    }
+  }
+
+  .sla-details {
+    line-height: 1;
+
+    .sla-date {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  .sla-message,
+  .duration {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .elapsed-time {
+    font-size: 12px;
+    font-weight: 400;
+    color: fade(#404142, 50%);
+  }
+}

@@ -198,6 +198,7 @@ export function getSectionComponent(section, maxWidth) {
       sectionToRender = (
         <SectionTable
           data={section.data}
+          extraData={section.extraData}
           columns={section.layout.tableColumns}
           readableHeaders={section.layout.readableHeaders}
           classes={section.layout.classes}
