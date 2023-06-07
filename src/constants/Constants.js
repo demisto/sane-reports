@@ -37,7 +37,8 @@ export const REPORT_TYPES = {
 };
 
 export const TABLE_CELL_TYPE = {
-  image: 'image'
+  image: 'image',
+  timer: 'timer'
 };
 
 let defaultMaxLength = 300;
@@ -232,3 +233,25 @@ export const MARKDOWN_IMAGES_ACC_PATH = /^\/acc_.*\/markdown\/image/;
 
 export const PARSING_STRING_WITH_TIME_ZONE = 'YYYY-MM-DD HH:mm:ss.SSSSSS Z';
 export const DEFAULT_DATE_TIME_FORMAT = 'MMMM Do YYYY, h:mm a z';
+
+export const TIME_PERIODS = {
+  MILISECONDS: 'miliseconds',
+  SECONDS: 'seconds',
+  MINUTES: 'minutes',
+  HOURS: 'hours',
+  DAYS: 'days',
+  WEEKS: 'weeks'
+};
+
+export const EXTENDED_TIME_PERIODS = {
+  ...TIME_PERIODS,
+  CALENDARMONTHS: 'calendarMonths',
+  CALENDARDAYS: 'calendarDays'
+};
+
+export const TIMER_STATUS = {
+  idle: 'idle',
+  running: 'running',
+  paused: 'paused',
+  ended: 'ended'
+};

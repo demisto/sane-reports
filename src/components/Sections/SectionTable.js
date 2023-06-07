@@ -5,6 +5,7 @@ import { getDefaultMaxLength, TABLE_CELL_TYPE } from '../../constants/Constants'
 import { isEmpty, isString, isArray, truncate, isObjectLike, map } from 'lodash';
 import WidgetEmptyState from './WidgetEmptyState';
 import SectionTitle from './SectionTitle';
+import TimerCell from '../Cells/TimerCell/TimerCell';
 
 function getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle) {
   const extraProps = {};
@@ -21,7 +22,7 @@ function getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle) {
   return extraProps;
 }
 
-const SectionTable = ({ columns, readableHeaders, data, classes, style, title, titleStyle, emptyString,
+const SectionTable = ({ columns, readableHeaders, data, extraData, classes, style, title, titleStyle, emptyString,
   maxColumns, forceRangeMessage, headerStyle }) => {
   let tableData = data || [];
 
@@ -88,10 +89,12 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
                     cell = readableHeaders && row[readableHeaders[key]];
                   }
 
+                  const cellExtraData = extraData?.[i]?.[key];
+
                   let cellToRender = '';
                   if (cell || cell === 0) {
-                    switch (cell.type) {
-                      case TABLE_CELL_TYPE.image:
+                    switch (cell.type ?? cellExtraData?.type) {
+                      case TABLE_CELL_TYPE.image: {
                         cellToRender = (
                           <img
                             src={cell.data}
@@ -101,8 +104,16 @@ const SectionTable = ({ columns, readableHeaders, data, classes, style, title, t
                           />
                         );
                         break;
-                      default:
+                      }
+                      case TABLE_CELL_TYPE.timer: {
+                        cellToRender = (
+                          <TimerCell extraData={cellExtraData} threshold={0} />
+                        );
+                        break;
+                      }
+                      default: {
                         cellToRender = truncate(cell, { length: defaultMaxLength });
+                      }
                     }
                   }
                   return (
@@ -172,6 +183,9 @@ SectionTable.propTypes = {
     PropTypes.object,
     PropTypes.string
   ]),
+  extraData: PropTypes.arrayOf(
+    PropTypes.object
+  ),
   classes: PropTypes.string,
   style: PropTypes.object,
   title: PropTypes.string,
