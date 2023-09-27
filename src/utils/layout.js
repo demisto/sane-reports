@@ -206,6 +206,7 @@ export function getSectionComponent(section, maxWidth) {
           titleStyle={section.titleStyle}
           title={section.title}
           maxColumns={section.layout.maxColumns || (maxWidth ? maxWidth / 100 : 0)}
+          reflectDimensions={section.layout.reflectDimensions}
           emptyString={section.emptyNotification || getDefaultEmptyNotification()}
           forceRangeMessage={section.layout.forceRangeMessage}
           headerStyle={section.layout.headerStyle}

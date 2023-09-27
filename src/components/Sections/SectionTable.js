@@ -23,7 +23,7 @@ function getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle) {
 }
 
 const SectionTable = ({ columns, readableHeaders, data, extraData, classes, style, title, titleStyle, emptyString,
-  maxColumns, forceRangeMessage, headerStyle }) => {
+  maxColumns, forceRangeMessage, reflectDimensions, headerStyle }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -112,7 +112,7 @@ const SectionTable = ({ columns, readableHeaders, data, extraData, classes, styl
                         break;
                       }
                       default: {
-                        cellToRender = truncate(cell, { length: defaultMaxLength });
+                        cellToRender = reflectDimensions ? cell : truncate(cell, { length: defaultMaxLength });
                       }
                     }
                   }
@@ -160,7 +160,7 @@ const SectionTable = ({ columns, readableHeaders, data, extraData, classes, styl
               <td style={{ background: 'rgb(249, 250, 251)', width: '20%', whiteSpace: 'nowrap' }}>
                 {key}
               </td>
-              <td>{truncate(val, { length: defaultMaxLength })}</td>
+              <td>{reflectDimensions ? val : truncate(val, { length: defaultMaxLength })}</td>
             </tr>
           ))}
         </tbody>
@@ -193,6 +193,7 @@ SectionTable.propTypes = {
   titleStyle: PropTypes.object,
   emptyString: PropTypes.string,
   forceRangeMessage: PropTypes.string,
+  reflectDimensions: PropTypes.bool,
   headerStyle: PropTypes.object
 };
 
