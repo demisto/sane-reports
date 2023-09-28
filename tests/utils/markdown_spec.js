@@ -1,5 +1,5 @@
 
-import { mdReact } from 'react-markdown-demisto';
+import { mdReact } from '../../src/components/ReactMarkdown/ReactMarkdown';
 import { mdTextStyle } from '../../src/utils/markdown';
 import { expect } from '../helpers/test_helper';
 
