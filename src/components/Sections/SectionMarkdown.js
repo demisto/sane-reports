@@ -3,6 +3,7 @@ import './SectionMarkdown.less';
 import '../../../assets/styles/railscasts.css';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { mdReact } from 'react-markdown-demisto';
 import Highlight from 'react-highlight';
 import isString from 'lodash/isString';
 import { uniqueId } from 'lodash';
@@ -12,7 +13,6 @@ import {
   MARKDOWN_IMAGES_PATH,
   PAGE_BREAK_KEY
 } from '../../constants/Constants';
-import { mdReact } from '../ReactMarkdown/ReactMarkdown';
 import { mdBtn, mdHyper, mdTextAlign, mdTextStyle, mdUnderline, myBackticks } from '../../utils/markdown';
 import WidgetEmptyState from './WidgetEmptyState';
 
