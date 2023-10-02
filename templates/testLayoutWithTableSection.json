@@ -1,0 +1,224 @@
+[
+  {
+    "type": "table",
+    "data": [
+      {
+        "Details": "aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaa",
+        "ID": "1",
+        "Name": "Test",
+        "Occurred": "2023-10-02 11:50:20.227634 +0300 IDT",
+        "Owner": "guest",
+        "Playbook": "Default",
+        "Roles": "Unassigned",
+        "SLA": "2023-10-12T11:50:20+03:00",
+        "Severity": "Unknown",
+        "Status": "Active",
+        "Type": "Unclassified"
+      }
+    ],
+    "extraData": [
+      {
+        "Containment SLA": {
+          "accumulatedPause": 0,
+          "breachTriggered": false,
+          "dueDate": "0001-01-01T00:00:00Z",
+          "endDate": "0001-01-01T00:00:00Z",
+          "lastPauseDate": "0001-01-01T00:00:00Z",
+          "runStatus": "idle",
+          "sla": 30,
+          "slaStatus": -1,
+          "startDate": "0001-01-01T00:00:00Z",
+          "threshold": 3,
+          "totalDuration": 0,
+          "type": "timer"
+        },
+        "Detection SLA": {
+          "accumulatedPause": 0,
+          "breachTriggered": false,
+          "dueDate": "0001-01-01T00:00:00Z",
+          "endDate": "0001-01-01T00:00:00Z",
+          "lastPauseDate": "0001-01-01T00:00:00Z",
+          "runStatus": "idle",
+          "sla": 20,
+          "slaStatus": -1,
+          "startDate": "0001-01-01T00:00:00Z",
+          "threshold": 0,
+          "totalDuration": 0,
+          "type": "timer"
+        },
+        "Remediation SLA": {
+          "accumulatedPause": 0,
+          "breachTriggered": false,
+          "dueDate": "0001-01-01T00:00:00Z",
+          "endDate": "0001-01-01T00:00:00Z",
+          "lastPauseDate": "0001-01-01T00:00:00Z",
+          "runStatus": "idle",
+          "sla": 7200,
+          "slaStatus": -1,
+          "startDate": "0001-01-01T00:00:00Z",
+          "threshold": 0,
+          "totalDuration": 0,
+          "type": "timer"
+        },
+        "Time to Assignment": {
+          "accumulatedPause": 0,
+          "breachTriggered": false,
+          "dueDate": "0001-01-01T00:00:00Z",
+          "endDate": "0001-01-01T00:00:00Z",
+          "lastPauseDate": "0001-01-01T00:00:00Z",
+          "runStatus": "idle",
+          "sla": 0,
+          "slaStatus": -1,
+          "startDate": "0001-01-01T00:00:00Z",
+          "threshold": 0,
+          "totalDuration": 0,
+          "type": "timer"
+        },
+        "Triage SLA": {
+          "accumulatedPause": 0,
+          "breachTriggered": false,
+          "dueDate": "0001-01-01T00:00:00Z",
+          "endDate": "0001-01-01T00:00:00Z",
+          "lastPauseDate": "0001-01-01T00:00:00Z",
+          "runStatus": "idle",
+          "sla": 30,
+          "slaStatus": -1,
+          "startDate": "0001-01-01T00:00:00Z",
+          "threshold": 72,
+          "totalDuration": 0,
+          "type": "timer"
+        }
+      }
+    ],
+    "layout": {
+      "classes": "striped stackable small compact",
+      "columnPos": 0,
+      "forceRangeMessage": "",
+      "h": 2,
+      "i": "c4685450-6100-11ee-a4a3-3fb9823144e0",
+      "readableHeaders": {
+        "details": "Details",
+        "dueDate": "SLA",
+        "id": "ID",
+        "name": "Name",
+        "occurred": "Occurred",
+        "owner": "Owner",
+        "playbookId": "Playbook",
+        "roles": "Roles",
+        "severity": "Severity",
+        "status": "Status",
+        "type": "Type"
+      },
+      "reflectDimensions": false,
+      "rowPos": 0,
+      "tableColumns": [
+        "id",
+        "name",
+        "details",
+        "type",
+        "severity",
+        "status",
+        "owner",
+        "roles",
+        "playbookId",
+        "occurred",
+        "dueDate"
+      ],
+      "tableColumnsMetaData": [
+        {
+          "displayed": true,
+          "isDefault": true,
+          "key": "id",
+          "width": 110
+        },
+        {
+          "displayed": true,
+          "isDefault": true,
+          "key": "name",
+          "width": 300
+        },
+        {
+          "displayed": true,
+          "key": "details",
+          "width": 300
+        },
+        {
+          "displayed": true,
+          "isDefault": true,
+          "key": "type",
+          "width": 200
+        },
+        {
+          "displayed": true,
+          "isDefault": true,
+          "key": "severity",
+          "width": 80
+        },
+        {
+          "displayed": true,
+          "isDefault": true,
+          "key": "status",
+          "width": 80
+        },
+        {
+          "displayed": true,
+          "isDefault": true,
+          "key": "owner",
+          "width": 160
+        },
+        {
+          "displayed": true,
+          "isDefault": true,
+          "key": "roles",
+          "width": 160
+        },
+        {
+          "displayed": true,
+          "isDefault": true,
+          "key": "playbookId",
+          "width": 150
+        },
+        {
+          "displayed": true,
+          "isDefault": true,
+          "key": "occurred",
+          "width": 200
+        },
+        {
+          "displayed": true,
+          "isDefault": true,
+          "key": "dueDate",
+          "width": 200
+        }
+      ],
+      "w": 12
+    },
+    "query": {
+      "type": "incident",
+      "filter": {
+        "query": "",
+        "period": {
+          "by": "",
+          "byFrom": "days",
+          "byTo": "",
+          "field": "",
+          "fromValue": 7,
+          "toValue": null
+        },
+        "fromDate": "0001-01-01T00:00:00Z",
+        "toDate": "0001-01-01T00:00:00Z"
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "fromDate": "2023-09-25T09:07:24Z",
+    "title": "Test",
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  }
+]

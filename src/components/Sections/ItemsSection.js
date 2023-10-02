@@ -26,6 +26,7 @@ class ItemsSection extends Component {
       fieldName: PropTypes.string,
       data: PropTypes.any,
       tableColumns: PropTypes.array,
+      tableColumnsMetaData: PropTypes.array,
       startCol: PropTypes.number,
       endCol: PropTypes.number,
       index: PropTypes.number,

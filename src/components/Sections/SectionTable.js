@@ -7,6 +7,24 @@ import WidgetEmptyState from './WidgetEmptyState';
 import SectionTitle from './SectionTitle';
 import TimerCell from '../Cells/TimerCell/TimerCell';
 
+function getColumnsMetaDataMap(columnsMetaData, columns) {
+  const columnsMetaDataMap = new Map();
+  if (columnsMetaData && isArray(columnsMetaData)) {
+    columnsMetaData.forEach((mData) => {
+      if (mData.key) {
+        columnsMetaDataMap.set(mData.key, mData);
+      }
+    });
+  } else if (columns && isArray(columns)) {
+    columns.forEach((mData) => {
+      if (mData.key) {
+        columnsMetaDataMap.set(mData.key, mData);
+      }
+    });
+  }
+  return columnsMetaDataMap;
+}
+
 function getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle) {
   const extraProps = {};
   const metaData = columnsMetaDataMap.get(key);
@@ -22,8 +40,8 @@ function getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle) {
   return extraProps;
 }
 
-const SectionTable = ({ columns, readableHeaders, data, extraData, classes, style, title, titleStyle, emptyString,
-  maxColumns, forceRangeMessage, reflectDimensions, headerStyle }) => {
+const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, extraData, classes, style, title, titleStyle,
+  emptyString, maxColumns, forceRangeMessage, reflectDimensions = true, headerStyle }) => {
   let tableData = data || [];
 
   if (isString(data)) {
@@ -52,12 +70,8 @@ const SectionTable = ({ columns, readableHeaders, data, extraData, classes, styl
     readyColumns = Object.keys(headerKeys);
   }
 
-  const columnsMetaDataMap = new Map();
-  if (columns && isArray(columns)) {
-    columns.forEach(mData => columnsMetaDataMap.set(mData.key, mData));
-  }
-
   let tableBody;
+  const columnsMetaDataMap = getColumnsMetaDataMap(columnsMetaData, columns);
   const defaultMaxLength = getDefaultMaxLength();
 
   if (isArray(readyColumns)) {
@@ -112,7 +126,7 @@ const SectionTable = ({ columns, readableHeaders, data, extraData, classes, styl
                         break;
                       }
                       default: {
-                        cellToRender = reflectDimensions ? cell : truncate(cell, { length: defaultMaxLength });
+                        cellToRender = reflectDimensions ? truncate(cell, { length: defaultMaxLength }) : cell;
                       }
                     }
                   }
@@ -160,7 +174,7 @@ const SectionTable = ({ columns, readableHeaders, data, extraData, classes, styl
               <td style={{ background: 'rgb(249, 250, 251)', width: '20%', whiteSpace: 'nowrap' }}>
                 {key}
               </td>
-              <td>{reflectDimensions ? val : truncate(val, { length: defaultMaxLength })}</td>
+              <td>{reflectDimensions ? truncate(val, { length: defaultMaxLength }) : val}</td>
             </tr>
           ))}
         </tbody>
@@ -177,6 +191,7 @@ const SectionTable = ({ columns, readableHeaders, data, extraData, classes, styl
 };
 SectionTable.propTypes = {
   columns: PropTypes.array,
+  columnsMetaData: PropTypes.array,
   readableHeaders: PropTypes.object,
   data: PropTypes.oneOfType([
     PropTypes.array,

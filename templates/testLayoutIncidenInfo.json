@@ -1,0 +1,1035 @@
+[
+  {
+    "type": "logo",
+    "data": "",
+    "layout": {
+      "columnPos": 6,
+      "h": 1,
+      "i": "98ad584d-2378-473c-adaf-db7780c67e10",
+      "rowPos": 1,
+      "style": {
+        "float": "right",
+        "height": 90,
+        "paddingBottom": 20,
+        "paddingTop": 20,
+        "width": "auto"
+      },
+      "w": 6
+    },
+    "query": {
+      "type": "customer"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  },
+  {
+    "type": "logo",
+    "data": "data:image/png;base64,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",
+    "layout": {
+      "columnPos": 0,
+      "h": 1,
+      "i": "fcbe99a6-b671-4939-8dbe-0fb34434419d",
+      "rowPos": 1,
+      "style": {
+        "height": 90,
+        "paddingBottom": 20,
+        "paddingTop": 20,
+        "width": "auto"
+      },
+      "w": 6
+    },
+    "query": {},
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  },
+  {
+    "type": "text",
+    "data": "Test #1",
+    "layout": {
+      "columnPos": 0,
+      "h": 1,
+      "i": "143367ca-28cc-46f9-87ea-d84a2f3220f8",
+      "rowPos": 2,
+      "style": {
+        "color": "rgb(64, 65, 66)",
+        "fontSize": 24,
+        "textAlign": "left"
+      },
+      "w": 12
+    },
+    "query": {
+      "type": "sessionData",
+      "filter": "investigation",
+      "keys": [
+        "name",
+        "id"
+      ]
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  },
+  {
+    "type": "date",
+    "data": null,
+    "layout": {
+      "columnPos": 0,
+      "format": "MMMM Do YYYY, h:mm:ss a z",
+      "h": 1,
+      "i": "9909543a-154c-425e-88bb-e9f1f4872fba",
+      "rowPos": 3,
+      "style": {
+        "color": "rgba(64, 65, 66, 0.7)",
+        "fontSize": 14,
+        "textAlign": "left"
+      },
+      "useCurrentTime": true,
+      "w": 12
+    },
+    "query": {},
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  },
+  {
+    "type": "text",
+    "data": "Generated by: Admin Dude",
+    "layout": {
+      "columnPos": 0,
+      "h": 1,
+      "i": "5537baf4-123e-4d33-9989-f2e8c09fda9d",
+      "rowPos": 4,
+      "style": {
+        "color": "rgba(64, 65, 66, 0.7)",
+        "fontSize": 14,
+        "marginTop": -12,
+        "textAlign": "left"
+      },
+      "w": 12
+    },
+    "query": {
+      "type": "sessionData",
+      "filter": "sessionUser",
+      "keys": [
+        "name"
+      ]
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "emptyNotification": "No results found",
+    "titleStyle": null,
+    "autoPageBreak": true
+  },
+  {
+    "type": "itemsSection",
+    "data": [
+      {
+        "fieldId": "type",
+        "fieldName": "Type",
+        "fieldType": "singleSelect",
+        "data": "Unclassified",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 0
+      },
+      {
+        "fieldId": "severity",
+        "fieldName": "Severity",
+        "fieldType": "singleSelect",
+        "data": "Unknown",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 1
+      },
+      {
+        "fieldId": "owner",
+        "fieldName": "Owner",
+        "fieldType": "singleSelect",
+        "data": "Guest Dude",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 2
+      },
+      {
+        "fieldId": "sourcebrand",
+        "fieldName": "Source Brand",
+        "fieldType": "shortText",
+        "data": "Manual",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 4
+      },
+      {
+        "fieldId": "sourceinstance",
+        "fieldName": "Source Instance",
+        "fieldType": "shortText",
+        "data": "admin",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 5
+      },
+      {
+        "fieldId": "playbookid",
+        "fieldName": "Playbook",
+        "fieldType": "singleSelect",
+        "data": "Default",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 6
+      }
+    ],
+    "layout": {
+      "columnPos": 0,
+      "h": 2,
+      "i": "caseinfoid-fce71720-98b0-11e9-97d7-ed26ef9e46c8",
+      "rowPos": 5,
+      "w": 4
+    },
+    "query": {
+      "type": "incident"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Case Details",
+    "emptyNotification": "No results found",
+    "displayType": "row",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  },
+  {
+    "type": "globalSection",
+    "data": [],
+    "layout": {
+      "columnPos": 8,
+      "h": 2,
+      "i": "caseinfoid-61263cc0-98b1-11e9-97d7-ed26ef9e46c8",
+      "rowPos": 5,
+      "w": 4
+    },
+    "query": {
+      "type": "entries",
+      "filter": {
+        "pageSize": 10000,
+        "categories": [
+          "notes"
+        ]
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Notes",
+    "emptyNotification": "No entries were found for the following filter: \"\"",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  },
+  {
+    "type": "globalSection",
+    "data": [
+      {
+        "type": "text",
+        "data": "Waiting for users (1)",
+        "layout": {
+          "columnPos": 0,
+          "rowPos": 0
+        },
+        "query": {},
+        "automation": {
+          "name": "",
+          "id": "",
+          "args": null,
+          "noEvent": false
+        },
+        "titleStyle": null,
+        "autoPageBreak": false
+      },
+      {
+        "type": "text",
+        "data": "Manually review the incident. (#7)",
+        "layout": {
+          "columnPos": 0,
+          "rowPos": 1,
+          "style": {
+            "color": "#FFD700",
+            "fontSize": 16,
+            "textAlign": "left"
+          }
+        },
+        "query": {},
+        "automation": {
+          "name": "",
+          "id": "",
+          "args": null,
+          "noEvent": false
+        },
+        "titleStyle": null,
+        "autoPageBreak": false
+      },
+      {
+        "type": "text",
+        "data": "Manually review and investigate this incident.",
+        "layout": {
+          "columnPos": 0,
+          "rowPos": 2,
+          "style": {
+            "fontSize": 12,
+            "textAlign": "left"
+          }
+        },
+        "query": {},
+        "automation": {
+          "name": "",
+          "id": "",
+          "args": null,
+          "noEvent": false
+        },
+        "titleStyle": null,
+        "autoPageBreak": false
+      },
+      {
+        "type": "text",
+        "data": "Tasks with errors (0)",
+        "layout": {
+          "columnPos": 0,
+          "rowPos": 3
+        },
+        "query": {},
+        "automation": {
+          "name": "",
+          "id": "",
+          "args": null,
+          "noEvent": false
+        },
+        "titleStyle": null,
+        "autoPageBreak": false
+      },
+      {
+        "type": "text",
+        "data": "No results found",
+        "layout": {
+          "columnPos": 0,
+          "rowPos": 4
+        },
+        "query": {},
+        "automation": {
+          "name": "",
+          "id": "",
+          "args": null,
+          "noEvent": false
+        },
+        "titleStyle": null,
+        "autoPageBreak": false
+      }
+    ],
+    "layout": {
+      "columnPos": 4,
+      "h": 2,
+      "i": "caseinfoid-6aabad20-98b1-11e9-97d7-ed26ef9e46c8",
+      "rowPos": 5,
+      "w": 4
+    },
+    "query": {
+      "type": "sessionData",
+      "filter": "activeTasks"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Work Plan",
+    "emptyNotification": "No results found",
+    "displayType": "row",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  },
+  {
+    "type": "table",
+    "data": [],
+    "layout": {
+      "columnPos": 4,
+      "h": 2,
+      "i": "caseinfoid-770ec200-98b1-11e9-97d7-ed26ef9e46c8",
+      "readableHeaders": {
+        "closeNotes": "Close Notes",
+        "id": "ID",
+        "name": "Name",
+        "status": "Status",
+        "type": "Type"
+      },
+      "rowPos": 11,
+      "tableColumns": [
+        {
+          "isDefault": true,
+          "key": "id"
+        },
+        {
+          "isDefault": true,
+          "key": "name"
+        },
+        {
+          "isDefault": true,
+          "key": "type"
+        },
+        {
+          "isDefault": true,
+          "key": "status"
+        },
+        {
+          "isDefault": true,
+          "key": "closeNotes"
+        }
+      ],
+      "w": 4
+    },
+    "query": {
+      "type": "linkedIncidents",
+      "filter": {}
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Linked Incidents",
+    "emptyNotification": "This incident is not linked to any other incidents.",
+    "displayType": "row",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  },
+  {
+    "type": "list",
+    "data": [],
+    "layout": {
+      "columnPos": 8,
+      "h": 2,
+      "i": "caseinfoid-842632c0-98b1-11e9-97d7-ed26ef9e46c8",
+      "rowPos": 9,
+      "tableColumns": [
+        "id",
+        "name"
+      ],
+      "w": 4
+    },
+    "query": {
+      "type": "sessionData",
+      "filter": "childInvestigation"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Child Incidents",
+    "emptyNotification": "This incident does not contain child incidents.",
+    "displayType": "row",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  },
+  {
+    "type": "table",
+    "data": [],
+    "layout": {
+      "columnPos": 8,
+      "h": 2,
+      "i": "caseinfoid-4a31afa0-98ba-11e9-a519-93a53c759fe0",
+      "readableHeaders": {
+        "description": "Description",
+        "markedBy": "Submitter",
+        "occurred": "Occurred",
+        "tags": "Tags"
+      },
+      "rowPos": 7,
+      "tableColumns": [
+        {
+          "isDefault": true,
+          "key": "occurred",
+          "position": 1,
+          "width": 200
+        },
+        {
+          "isDefault": true,
+          "key": "description",
+          "position": 2,
+          "width": 300
+        },
+        {
+          "isDefault": true,
+          "key": "markedBy",
+          "position": 3,
+          "width": 150
+        },
+        {
+          "isDefault": true,
+          "key": "tags",
+          "position": 4,
+          "width": 400
+        }
+      ],
+      "w": 4
+    },
+    "query": {
+      "type": "evidences",
+      "filter": {}
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Evidence",
+    "emptyNotification": "This incident does not contain evidence.",
+    "displayType": "row",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  },
+  {
+    "type": "list",
+    "data": {
+      "Owner": [
+        {
+          "Avatar": {
+            "alt": "Guest Dude",
+            "classes": "tiny circular avatar",
+            "data": "data:image/png;base64,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",
+            "type": "image"
+          },
+          "Email": "guest@demisto.com",
+          "Name": "Guest Dude",
+          "Phone": "+650-123456",
+          "Phone Number": "+650-123456"
+        }
+      ],
+      "Participants": [
+        {
+          "Avatar": {
+            "alt": "Admin Dude",
+            "classes": "tiny circular avatar",
+            "data": "data:image/png;base64,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",
+            "type": "image"
+          },
+          "Email": "admintest@demisto.com",
+          "Name": "Admin Dude",
+          "Phone": "+650-123456",
+          "Phone Number": "+650-123456"
+        }
+      ]
+    },
+    "layout": {
+      "columnPos": 8,
+      "h": 2,
+      "i": "caseinfoid-7717e580-9bed-11e9-9a3f-8b4b2158e260",
+      "rowPos": 11,
+      "tableColumns": [
+        "Avatar",
+        "Name",
+        "Email"
+      ],
+      "w": 4
+    },
+    "query": {
+      "type": "sessionData",
+      "filter": "investigationUsers"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Team Members",
+    "emptyNotification": "No results found",
+    "displayType": "row",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  },
+  {
+    "type": "table",
+    "data": [
+      {
+        "ASN": "13335",
+        "CustomFields": "N/A",
+        "Expiration": "2023-10-09 12:47:27.970667 +0300 IDT",
+        "Expiration Status": "active",
+        "First Seen": "2023-10-02 12:47:27.979933 +0300 IDT",
+        "Geo Country": "AU",
+        "Last Seen": "2023-10-02 12:47:27.979933 +0300 IDT",
+        "Related Incidents": "1",
+        "Source Brands": "VirusTotal",
+        "Source Instances": "VirusTotal",
+        "Source Time Stamp": "2023-10-02 12:47:27.980444 +0300 IDT",
+        "Type": "IP",
+        "Value": "1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1 1.1.1.1",
+        "Verdict": "Benign",
+        "aggregatedReliability": "C - Fairly reliable",
+        "cacheVersn": "0",
+        "calculatedTime": "2023-10-02 12:47:27.979933 +0300 IDT",
+        "comments": "map[cacheVersn:0 category:Sighting content:Created created:2023-10-02 12:47:27.969895 +0300 IDT entryId:52@1 id:694942c5-78d4-4cb8-84a0-08fb618652ec modified:0001-01-01 00:00:00 +0000 UTC source:52@1 type:IndicatorCommentTimeLine user:DBot version:0]",
+        "created": "0001-01-01 00:00:00 +0000 UTC",
+        "expirationSource": "N/A",
+        "firstSeenEntryID": "52@1",
+        "id": "1",
+        "insightCache": "N/A",
+        "investigationIDs": "1",
+        "isDetectable": "N/A",
+        "isPreventable": "N/A",
+        "lastReputationRun": "2023-10-02 12:47:27.332171 +0300 IDT",
+        "lastSeenEntryID": "52@1",
+        "modified": "2023-10-02 12:47:27.98046 +0300 IDT",
+        "modifiedTime": "2023-10-02 12:47:27.316334 +0300 IDT",
+        "moduleToFeedMap": "N/A",
+        "version": "1"
+      }
+    ],
+    "layout": {
+      "columnPos": 0,
+      "h": 2,
+      "i": "caseinfoid-7ce69dd0-a07f-11e9-936c-5395a1acf11e",
+      "readableHeaders": {
+        "expiration": "Expiration",
+        "expirationStatus": "Expiration Status",
+        "firstSeen": "First Seen",
+        "indicator_type": "Type",
+        "lastSeen": "Last Seen",
+        "relatedIncCount": "Related Incidents",
+        "score": "Verdict",
+        "sourceBrands": "Source Brands",
+        "sourceInstances": "Source Instances",
+        "timestamp": "Source Time Stamp",
+        "value": "Value"
+      },
+      "rowPos": 9,
+      "tableColumns": [
+        {
+          "isDefault": true,
+          "key": "indicator_type",
+          "position": 1,
+          "width": 120
+        },
+        {
+          "isDefault": true,
+          "key": "value",
+          "position": 2,
+          "width": 300
+        },
+        {
+          "isDefault": true,
+          "key": "score",
+          "position": 4,
+          "width": 120
+        },
+        {
+          "isDefault": true,
+          "key": "firstSeen",
+          "position": 5,
+          "width": 275
+        },
+        {
+          "isDefault": true,
+          "key": "lastSeen",
+          "position": 6,
+          "width": 275
+        },
+        {
+          "isDefault": true,
+          "key": "timestamp",
+          "position": 8,
+          "width": 190
+        },
+        {
+          "isDefault": true,
+          "key": "relatedIncCount",
+          "position": 9,
+          "width": 150
+        },
+        {
+          "isDefault": true,
+          "key": "sourceBrands",
+          "position": 12,
+          "width": 175
+        },
+        {
+          "isDefault": true,
+          "key": "sourceInstances",
+          "position": 13,
+          "width": 175
+        },
+        {
+          "isDefault": true,
+          "key": "expirationStatus",
+          "position": 14,
+          "width": 175
+        },
+        {
+          "isDefault": true,
+          "key": "expiration",
+          "position": 15,
+          "width": 190
+        }
+      ],
+      "w": 8
+    },
+    "query": {
+      "type": "indicators",
+      "filter": {
+        "query": "investigationIDs:{{.investigationID}}"
+      }
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Indicators",
+    "emptyNotification": "This incident does not contain any indicators that apply to the following filter: \"\".",
+    "displayType": "row",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  },
+  {
+    "type": "itemsSection",
+    "data": [
+      {
+        "fieldId": "occurred",
+        "fieldName": "Occurred",
+        "fieldType": "date",
+        "data": "2023-10-02 11:50:20.227634 +0300 IDT",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 1,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 0
+      },
+      {
+        "fieldId": "dbotcreated",
+        "fieldName": "Created",
+        "fieldType": "date",
+        "data": "2023-10-02 11:50:20.227635 +0300 IDT",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "card",
+        "startCol": 1,
+        "index": 0
+      },
+      {
+        "fieldId": "dbotmodified",
+        "fieldName": "Last Updated",
+        "fieldType": "date",
+        "data": "2023-10-02 11:50:21.727516 +0300 IDT",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 1,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 1
+      },
+      {
+        "fieldId": "dbotclosed",
+        "fieldName": "Closed Time",
+        "fieldType": "date",
+        "data": "N/A",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "card",
+        "startCol": 1,
+        "index": 1
+      },
+      {
+        "fieldId": "dbotduedate",
+        "fieldName": "SLA",
+        "fieldType": "date",
+        "data": "2023-10-12T11:50:20+03:00",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 2
+      }
+    ],
+    "layout": {
+      "columnPos": 0,
+      "h": 2,
+      "i": "caseinfoid-ac32f620-a0b0-11e9-b27f-13ae1773d289",
+      "rowPos": 7,
+      "w": 4
+    },
+    "query": {
+      "type": "incident"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Timeline Information",
+    "emptyNotification": "No results found",
+    "displayType": "card",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  },
+  {
+    "type": "itemsSection",
+    "data": [
+      {
+        "fieldId": "dbotclosed",
+        "fieldName": "Closed Time",
+        "fieldType": "date",
+        "data": "N/A",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 0
+      },
+      {
+        "fieldId": "closereason",
+        "fieldName": "Close Reason",
+        "fieldType": "singleSelect",
+        "data": "N/A",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 1
+      },
+      {
+        "fieldId": "closenotes",
+        "fieldName": "Close Notes",
+        "fieldType": "longText",
+        "data": "N/A",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "row",
+        "startCol": 0,
+        "index": 2
+      }
+    ],
+    "layout": {
+      "columnPos": 0,
+      "h": 2,
+      "i": "caseinfoid-88e6bf70-a0b1-11e9-b27f-13ae1773d289",
+      "rowPos": 11,
+      "w": 4
+    },
+    "query": {
+      "type": "incident"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Closing Information",
+    "emptyNotification": "No results found",
+    "displayType": "row",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  },
+  {
+    "type": "itemsSection",
+    "data": [
+      {
+        "fieldId": "details",
+        "fieldName": "Details",
+        "fieldType": "longText",
+        "data": "details",
+        "headerStyle": {
+          "color": "rgba(64, 65, 66, 0.7)",
+          "fontSize": "14px",
+          "fontWeight": 600
+        },
+        "endCol": 2,
+        "displayType": "card",
+        "startCol": 0,
+        "index": 0
+      }
+    ],
+    "layout": {
+      "columnPos": 4,
+      "h": 2,
+      "i": "caseinfoid-e54b1770-a0b1-11e9-b27f-13ae1773d289",
+      "rowPos": 7,
+      "w": 4
+    },
+    "query": {
+      "type": "incident"
+    },
+    "automation": {
+      "name": "",
+      "id": "",
+      "args": null,
+      "noEvent": false
+    },
+    "title": "Investigation Data",
+    "emptyNotification": "No results found",
+    "displayType": "card",
+    "titleStyle": {
+      "color": "rgb(64, 65, 66)",
+      "fontSize": "20px",
+      "fontWeight": 600,
+      "paddingBottom": "20px"
+    },
+    "autoPageBreak": true
+  }
+]
