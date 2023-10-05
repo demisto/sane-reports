@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10.22.1-browsers
+      - image: circleci/node:16.20.2-browsers
     resource_class: large
     working_directory: ~/sane-reports
     steps:
@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-              npm install
+              npm install --legacy-peer-deps
       - save_cache:
           key: npm-sane-reports-{{ checksum "package.json" }}
           paths:

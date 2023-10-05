@@ -66,7 +66,7 @@
     "react-virtualized": "9.16.1",
     "recharts": "1.0.0-beta.5",
     "seedrandom": "2.4.3",
-    "semantic-ui": "2.2.11",
+    "semantic-ui": "file:vendors/semantic-ui.tgz",
     "uuid": "3.3.2",
     "validator": "11.1.0",
     "whatwg-fetch": "1.0.0"
