@@ -82,7 +82,7 @@ const SectionTable = ({ columns, columnsMetaData, readableHeaders, data, extraDa
           <tr>
             {readyColumns.map((col) => {
               const key = col.key || col;
-              const extraProps = getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle);
+              const extraProps = reflectDimensions ? getExtraPropsForColumn(key, columnsMetaDataMap, headerStyle) : {};
 
               return (
                 <th key={key} {...extraProps}>
