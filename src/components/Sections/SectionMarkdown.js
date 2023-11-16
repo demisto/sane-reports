@@ -8,7 +8,6 @@ import isString from 'lodash/isString';
 import { uniqueId } from 'lodash';
 import {
   getMarkdownImageServer,
-  MARKDOWN_IMAGES_ACC_PATH,
   MARKDOWN_IMAGES_PATH,
   PAGE_BREAK_KEY
 } from '../../constants/Constants';
@@ -83,7 +82,7 @@ export default class SectionMarkdown extends Component {
       }
       case 'img': {
         const srcArr = props.src.split('=size=');
-        if (srcArr[0].startsWith(MARKDOWN_IMAGES_PATH) || MARKDOWN_IMAGES_ACC_PATH.test(srcArr[0])) {
+        if (MARKDOWN_IMAGES_PATH.test(srcArr[0])) {
           props.src = `${getMarkdownImageServer()}${srcArr[0]}`;
         } else {
           props.src = srcArr[0];
