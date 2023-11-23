@@ -57,6 +57,26 @@ h1 {
     }
   }
 
+  .section-table, .section-markdown {
+    table {
+      break-inside: auto;
+    }
+
+    tr {
+      break-inside: avoid;
+      break-after: auto;
+    }
+
+    thead {
+      display: table-header-group;
+      break-inside: avoid;
+    }
+
+    tfoot {
+      display: table-header-group;
+    }
+  }
+
   .report-section {
     display: table-cell;
 
@@ -148,27 +168,6 @@ h1 {
 
       &.slim {
         height: auto !important;
-      }
-
-      &.section-table, &.section-markdown {
-
-        table {
-          break-inside: auto;
-        }
-
-        tr {
-          break-inside: avoid;
-          break-after: auto;
-        }
-
-        thead {
-          display: table-header-group;
-          break-inside: avoid;
-        }
-
-        tfoot {
-          display: table-header-group;
-        }
       }
 
       .section-title {
