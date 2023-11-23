@@ -10,7 +10,8 @@ import SectionTitle from './SectionTitle';
 import SectionDurationIcon from './SectionDurationIcon';
 
 function formatNumber(num) {
-  return ('0' + num).slice(-2);
+  const hasTwoDigits = num / 100 >= 1;
+  return hasTwoDigits ? num.toString() : ('0' + num).slice(-2);
 }
 
 const createHeaders = (parts, style) => {
@@ -81,10 +82,10 @@ const SectionDuration = ({ data, style, chartProperties, title, titleStyle, forc
     });
   } else {
     let days = Math.floor(result / DURATION_FORMAT.days.weight);
-    result -= days * 3600 * 24;
+    result -= days * DURATION_FORMAT.days.weight;
 
     let hours = Math.floor(result / DURATION_FORMAT.hours.weight);
-    result -= hours * 3600;
+    result -= hours * DURATION_FORMAT.hours.weight;
 
     let minutes = Math.floor(result / DURATION_FORMAT.min.weight);
 
