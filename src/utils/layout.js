@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { PAGE_BREAK_KEY, SECTION_TYPES } from '../constants/Constants';
 import {
   ItemsSection,
@@ -29,7 +30,7 @@ function getDefaultEmptyNotification() {
 
 function isPageBreakSection(section) {
   return !!get(section, 'layout.style.pageBreakBefore', false) || (section.type === SECTION_TYPES.markdown &&
-      section.data && ((isString(section.data) ? section.data : section.data.text) || '').includes(PAGE_BREAK_KEY));
+    section.data && ((isString(section.data) ? section.data : section.data.text) || '').includes(PAGE_BREAK_KEY));
 }
 
 export function getSectionComponent(section, maxWidth) {
@@ -179,7 +180,7 @@ export function getSectionComponent(section, maxWidth) {
           referenceLineX={section.layout.referenceLineX}
           referenceLineY={section.layout.referenceLineY}
           stacked={get(section, 'query.groupBy.length', 0) > 1 ||
-          (Array.isArray(section.data) && section.data.some(group => get(group, 'groups.length') > 0))}
+            (Array.isArray(section.data) && section.data.some(group => get(group, 'groups.length') > 0))}
           fromDate={section.fromDate}
           toDate={section.toDate}
           reflectDimensions={section.layout.reflectDimensions}
@@ -249,20 +250,27 @@ export function getSectionComponent(section, maxWidth) {
           {section.title && <div className="section-title" style={section.titleStyle}>{section.title}</div>}
           {section.description && <div className="section-description">{section.description}</div>}
           <>
-            {compact(Object.entries(groupBy(section.data || [], s => s.layout.rowPos)).map(([rowNum, subSections]) => {
-              return (
-                <div className="global-section-row" key={`${section.i}-${rowNum}`}>
-                  {(subSections || []).map((subSection, i) => {
-                    return (
-                      <div key={`${section.i}-${rowNum}-subsection-${i}`} className="subsection-wrapper">
-                        {getSectionComponent(subSection)}
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            }))}
-            { isEmpty(section.data) &&
+            {compact(Object.entries(groupBy(section.data || [], s => s.layout.rowPos))
+              .map(([rowNum, subSections]) => {
+                const noBreakInside =
+                  subSections.every(subSection => [SECTION_TYPES.text, SECTION_TYPES.date].includes(subSection.type));
+
+                return (
+                  <div
+                    className={classNames('global-section-row', { 'no-break-inside': noBreakInside })}
+                    key={`${section.i}-${rowNum}`}
+                  >
+                    {(subSections || []).map((subSection, i) => {
+                      return (
+                        <div key={`${section.i}-${rowNum}-subsection-${i}`} className="subsection-wrapper">
+                          {getSectionComponent(subSection)}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              }))}
+            {isEmpty(section.data) &&
               <WidgetEmptyState emptyString={section.emptyNotification || getDefaultEmptyNotification()} />
             }
           </>
