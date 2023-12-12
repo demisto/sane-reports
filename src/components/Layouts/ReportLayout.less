@@ -31,6 +31,11 @@ h1 {
     flex: 1;
     flex-direction: row;
 
+    &.no-break-inside {
+      break-inside: avoid;
+      break-after: auto;
+    }
+
     .subsection-wrapper {
       flex: 1;
       width: 100%;
