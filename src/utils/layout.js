@@ -252,8 +252,10 @@ export function getSectionComponent(section, maxWidth) {
           <>
             {compact(Object.entries(groupBy(section.data || [], s => s.layout.rowPos))
               .map(([rowNum, subSections]) => {
-                const noBreakInside =
-                  subSections.every(subSection => [SECTION_TYPES.text, SECTION_TYPES.date].includes(subSection.type));
+                const noBreakInside = subSections.length === 3 &&
+                  subSections[0].type === SECTION_TYPES.text &&
+                  subSections[1].type === SECTION_TYPES.date &&
+                  subSections[2].type === SECTION_TYPES.text;
 
                 return (
                   <div
