@@ -24,7 +24,6 @@ h1 {
 .global-section {
   display: flex;
   flex-direction: column;
-  height: 100%;
 
   .global-section-row {
     flex: 1;
@@ -106,6 +105,10 @@ h1 {
       overflow: visible;
       transition: none;
       z-index: 1;
+
+      .global-section {
+        height: 100%;
+      }
 
       &:not(.section-show-overflow) {
         &:not(.section-show-empty-state) {
