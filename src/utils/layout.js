@@ -259,7 +259,10 @@ export function getSectionComponent(section, maxWidth) {
 
                 return (
                   <div
-                    className={classNames('global-section-row', { 'no-break-inside': noBreakInside })}
+                    className={classNames('global-section-row', {
+                      'multi-column': subSections.length > 1,
+                      'no-break-inside': noBreakInside
+                    })}
                     key={`${section.i}-${rowNum}`}
                   >
                     {(subSections || []).map((subSection, i) => {
