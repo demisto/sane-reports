@@ -2,11 +2,11 @@
 [![CircleCI](https://circleci.com/gh/demisto/sane-reports.svg?style=svg&circle-token=eac6cf719d42f37bfa95f8a33112970fe4799cc5)](https://circleci.com/gh/demisto/sane-reports)
 [![Coverage Status](https://coveralls.io/repos/github/demisto/sane-reports/badge.svg?branch=master&t=C6DzM5)](https://coveralls.io/github/demisto/sane-reports?branch=master)
 
-Reports library that will keep you sane and not pulling your hair out
+## Prerequisites
+- Node v10.24.1 (https://tecadmin.net/install-nvm-macos-with-homebrew/)
+- Chromium 86.0.4240.0 or closer version (https://chromium.en.uptodown.com/mac/download/3208047)
 
 ## Quick start
-
-Tested with Node v11.15.0 and with v10.24.1 on Mac with Apple Silicon (https://tecadmin.net/install-nvm-macos-with-homebrew/)
 
 **Chromium/Chrome**
 ```sh
@@ -75,7 +75,7 @@ phantomjs reportServer.js <report_template_file> [<output_file> <dist_folder> <o
 ### Example:
 - npm run make
 - npm run production
-- `./reportsServer-macos templates/incidentDailyReportTempalte.json dist/incidentDailyReportTempalte.pdf dist portrait 4000 pdf '' '' '' A4 '' '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'`
+- `./reportsServer-macos templates/incidentDailyReportTempalte.json dist/incidentDailyReportTempalte.pdf dist portrait 4000 pdf '' '' '' A4 '' '/Applications/Chromium.app/Contents/MacOS/Chromium'`
 
 ### Running on MacOS Locally:
 You can use npm script:
