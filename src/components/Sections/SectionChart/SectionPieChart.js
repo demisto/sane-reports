@@ -57,7 +57,7 @@ const SectionPieChart = ({ data, style, dimensions, legend, chartProperties = {}
   }
   Object.keys(dataMap).forEach((key) => {
     const graphItem = dataMap[key];
-    graphItem.fill = getGraphColorByName(graphItem.name, existingColors);
+    graphItem.fill = graphItem.fill || graphItem.color || getGraphColorByName(graphItem.name, existingColors);
     existingColors[graphItem.fill] = true;
     return preparedData.push(graphItem);
   });
