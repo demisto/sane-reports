@@ -201,7 +201,7 @@ const MIN_TOP_MARGIN_PX = 40;
         const csvData = await page.evaluate(evalsFunctions.getCSVData);
         if (csvData === '' || csvData) {
           fs.writeFileSync(outputFinal, csvData, { 'flag': 'w' });
-          fs.appendFileSync(outputFinal, "", "utf8")
+          fs.appendFileSync(outputFinal, "tutu", "utf8")
           console.log("CSV report was generated successfully.");
         } else {
           console.log("Failed to generate CSV report.");
