@@ -6,13 +6,14 @@ const chromePath = require('@moonandyou/chrome-path');
 const fs = require('fs');
 const path = require('path');
 const { cloneDeep } = require('lodash')
-const buffer = require("buffer");
 
 const mmPixelSize = 3.779527559055;
 
 const PAGE_MARGIN = 61;
 const BOTTOM_MARGIN = 40;
 const MIN_TOP_MARGIN_PX = 40;
+
+const utf8BOM = '\ufeff';
 
 (async() => {
   const paths = await chromePath();
@@ -198,10 +199,12 @@ const MIN_TOP_MARGIN_PX = 40;
         break;
       }
       case 'csv': {
-        const csvData = await page.evaluate(evalsFunctions.getCSVData);
+        let csvData = await page.evaluate(evalsFunctions.getCSVData);
         if (csvData === '' || csvData) {
+          if (addUTF8Bom) {
+            csvData = utf8BOM + csvData
+          }
           fs.writeFileSync(outputFinal, csvData, { 'flag': 'w' });
-          fs.appendFileSync(outputFinal, "tutu", "utf8")
           console.log("CSV report was generated successfully.");
         } else {
           console.log("Failed to generate CSV report.");
