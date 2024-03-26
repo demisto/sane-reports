@@ -13,6 +13,8 @@ const PAGE_MARGIN = 61;
 const BOTTOM_MARGIN = 40;
 const MIN_TOP_MARGIN_PX = 40;
 
+const utf8BOM = '\ufeff';
+
 (async() => {
   const paths = await chromePath();
   console.log(paths);
@@ -74,6 +76,7 @@ const MIN_TOP_MARGIN_PX = 40;
   const markdownArtifactsServerAddress = process.argv[15] || '';
   const maxTableTextLength = process.argv[16] || 300;
   const useServerFormattedDate =  process.argv[17] === true || process.argv[17] === "true";
+  const addUTF8Bom =  process.argv[18] === true || process.argv[18] === "true";
   let browser;
 
   if (process.env.NODE_ENV === 'test') {
@@ -196,8 +199,11 @@ const MIN_TOP_MARGIN_PX = 40;
         break;
       }
       case 'csv': {
-        const csvData = await page.evaluate(evalsFunctions.getCSVData);
+        let csvData = await page.evaluate(evalsFunctions.getCSVData);
         if (csvData === '' || csvData) {
+          if (addUTF8Bom) {
+            csvData = utf8BOM + csvData
+          }
           fs.writeFileSync(outputFinal, csvData, { 'flag': 'w' });
           console.log("CSV report was generated successfully.");
         } else {
