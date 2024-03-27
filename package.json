@@ -51,7 +51,7 @@
     "markdown-it-mark": "3.0.0",
     "markdown-it-sub": "1.0.0",
     "markdown-it-sup": "1.0.0",
-    "moment": "2.21.0",
+    "moment": "2.29.4",
     "moment-duration-format": "2.3.2",
     "moment-timezone": "0.5.14",
     "parse-link-header": "0.4.1",
