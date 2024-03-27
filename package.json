@@ -54,7 +54,7 @@
     "moment": "2.21.0",
     "moment-duration-format": "2.3.2",
     "moment-timezone": "0.5.14",
-    "parse-link-header": "0.4.1",
+    "parse-link-header": "2.0.0",
     "postcss-reporter": "1.4.1",
     "prop-types": "15.7.2",
     "react": "16.8.5",
