@@ -1,3 +1,5 @@
+import isString from 'lodash/isString';
+
 export function mdUnderline(md) {
   md.inline.ruler.push(
     'underline',
@@ -365,4 +367,20 @@ export function mdHyper(md) {
 
 export function hyperMarker() {
   return MD_MARKER_STR;
+}
+
+export function getChildrenText(cell) {
+  if (!cell) {
+    return '';
+  }
+
+  if (isString(cell)) {
+    return cell.replace(/<br>/g, '\n');
+  }
+
+  if (cell.props.children) {
+    return cell.props.children.map(getChildrenText).join('');
+  }
+
+  return '';
 }
