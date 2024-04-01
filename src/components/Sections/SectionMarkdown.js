@@ -12,7 +12,15 @@ import {
   PAGE_BREAK_KEY
 } from '../../constants/Constants';
 import { mdReact } from '../ReactMarkdown/ReactMarkdown';
-import { mdBtn, mdHyper, mdTextAlign, mdTextStyle, mdUnderline, myBackticks } from '../../utils/markdown';
+import {
+  getChildrenText,
+  mdBtn,
+  mdHyper,
+  mdTextAlign,
+  mdTextStyle,
+  mdUnderline,
+  myBackticks
+} from '../../utils/markdown';
 import WidgetEmptyState from './WidgetEmptyState';
 
 // plugins for react markdown component
@@ -115,11 +123,23 @@ export default class SectionMarkdown extends Component {
         const bodyRows = tbody?.props?.children;
         const headersValues = headerCells.map(cell => (cell.props.children && cell.props.children[0]) || '');
         const tableContent = [];
+
         if (headersValues && bodyRows) {
           bodyRows.forEach((row) => {
             const newRow = {};
             const cells = row.props.children;
-            const cellValue = cells.map(cell => (cell.props.children && cell.props.children[0]) || '');
+            const cellValue = cells.map((cell) => {
+              const cellChildren = cell.props.children;
+              if (!cellChildren) {
+                return '';
+              }
+
+              if (cellChildren.length === 1) {
+                return (cellChildren[0]) || '';
+              }
+
+              return getChildrenText(cell);
+            });
             headersValues.forEach((headerValue, i) => {
               newRow[i] = isString(cellValue[i]) ? cellValue[i].replace(/<br>/g, '\n') : cellValue[i];
             });
