@@ -10,9 +10,13 @@ class TimerCell extends Component {
     threshold: PropTypes.number
   };
 
+  static isEmpty(extraData) {
+    return !extraData || extraData.runStatus === TIMER_STATUS.idle;
+  }
+
   render() {
     const { extraData } = this.props;
-    if (!extraData || extraData.runStatus === TIMER_STATUS.idle) {
+    if (TimerCell.isEmpty(extraData)) {
       return 'N/A';
     }
 
