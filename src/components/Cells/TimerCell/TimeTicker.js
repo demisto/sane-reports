@@ -108,6 +108,7 @@ export class TimeTicker extends Component {
   }
 
   render() {
+    const { duration, startDate, dueDate, timePeriod, riskThreshold } = this.props;
     const {
       doesHaveDueDate,
       slaPart,
@@ -116,7 +117,7 @@ export class TimeTicker extends Component {
       dueDateStr,
       slaMessage,
       slaStatusObject
-    } = TimeTicker.getTimePickerData(this.props);
+    } = TimeTicker.getTimePickerData({ duration, startDate, dueDate, timePeriod, riskThreshold });
 
     const wrapperClass = classNames('sla-status', slaStatusObject);
     const iconClass = classNames('demisto-icon', {
