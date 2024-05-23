@@ -21,7 +21,7 @@ export class TimeTicker extends Component {
     timePeriod: TIME_PERIODS.MILISECONDS
   };
 
-  getSlaStatus = (slaStatusObject) => {
+  static getSlaStatus = (slaStatusObject) => {
     const slaStatus = Object.keys(slaStatusObject)[0];
     switch (slaStatus) {
       case 'late':
@@ -35,20 +35,26 @@ export class TimeTicker extends Component {
     }
   }
 
-  render() {
-    const { duration, startDate, dueDate, timePeriod, riskThreshold } = this.props;
+  static getTimePickerData(timerProps) {
+    const { duration, startDate, dueDate, timePeriod, riskThreshold } = timerProps;
     let finalDuration = duration;
     let durationType = timePeriod;
-    const finalDueDate = dueDate && !isZeroDateTime(dueDate) ? moment(dueDate).local() : undefined;
-    const finalStartDate = startDate && !isZeroDateTime(startDate) ? moment(startDate).local() : undefined;
+    const finalDueDate = dueDate && !isZeroDateTime(dueDate) ? moment(dueDate)
+      .local() : undefined;
+    const finalStartDate = startDate && !isZeroDateTime(startDate) ? moment(startDate)
+      .local() : undefined;
     const doesHaveDueDate = !!finalDueDate;
     const isDurationSet = !!finalDuration || finalDuration === 0;
     if (!isDurationSet) {
       durationType = TIME_PERIODS.MINUTES;
       if (finalDueDate) {
-        finalDuration = moment(finalDueDate).diff(moment().local(), durationType);
+        finalDuration = moment(finalDueDate)
+          .diff(moment()
+            .local(), durationType);
       } else {
-        finalDuration = moment().local().diff(finalStartDate, durationType);
+        finalDuration = moment()
+          .local()
+          .diff(finalStartDate, durationType);
       }
     }
 
@@ -56,21 +62,28 @@ export class TimeTicker extends Component {
     let elapsed = '';
     let isNegative = false;
     let isRisk = false;
+
     if (finalDueDate && finalStartDate) {
-      const sla = moment(finalDueDate).diff(finalStartDate, TIME_PERIODS.MINUTES);
+      const sla = moment(finalDueDate)
+        .diff(finalStartDate, TIME_PERIODS.MINUTES);
       slaPart = getDurationString(sla, TIME_PERIODS.MINUTES);
     }
+    slaPart = `SLA: ${slaPart}`;
+
     if (finalDuration < 0) {
       isNegative = true;
       finalDuration *= -1;
       if (finalDueDate) {
         if (isDurationSet) {
-          const diff = moment(finalDueDate).diff(moment(startDate), durationType);
+          const diff = moment(finalDueDate)
+            .diff(moment(startDate), durationType);
           elapsed = getDurationString(diff + finalDuration, durationType);
         } else {
-          const elapsedMinutes = moment().diff(finalStartDate, TIME_PERIODS.MINUTES);
+          const elapsedMinutes = moment()
+            .diff(finalStartDate, TIME_PERIODS.MINUTES);
           elapsed = getDurationString(elapsedMinutes, TIME_PERIODS.MINUTES);
         }
+        elapsed = `Total Elapsed: ${elapsed}`;
       }
     } else if (finalDueDate && riskThreshold > 0) {
       const durationInMinutes = durationType === TIME_PERIODS.MINUTES ? finalDuration : finalDuration / 60;
@@ -88,12 +101,30 @@ export class TimeTicker extends Component {
       },
       v => v
     );
+
+    const slaMessage = `${TimeTicker.getSlaStatus(slaStatusObject)}: `;
+
+    return { doesHaveDueDate, slaPart, elapsed, timeToRender, dueDateStr, slaMessage, slaStatusObject };
+  }
+
+  render() {
+    const { duration, startDate, dueDate, timePeriod, riskThreshold } = this.props;
+    const {
+      doesHaveDueDate,
+      slaPart,
+      elapsed,
+      timeToRender,
+      dueDateStr,
+      slaMessage,
+      slaStatusObject
+    } = TimeTicker.getTimePickerData({ duration, startDate, dueDate, timePeriod, riskThreshold });
+
     const wrapperClass = classNames('sla-status', slaStatusObject);
     const iconClass = classNames('demisto-icon', {
       'icon-field-timer-24-r': !doesHaveDueDate,
       'icon-field-sla-24-r': doesHaveDueDate
     });
-    const slaMessage = `${this.getSlaStatus(slaStatusObject)}: `;
+
     return (
       <div className="time-ticker">
         <span className={wrapperClass}>
@@ -105,12 +136,11 @@ export class TimeTicker extends Component {
         </span>
         {doesHaveDueDate && (
           <div className="sla-details">
-            <div className="sla-part">{`SLA: ${slaPart}`}</div>
+            <div className="sla-part">{slaPart}</div>
             <div className="sla-date">{dueDateStr}</div>
             {elapsed && (
               <div className="elapsed-time">
-                <span>Total Elapsed: </span>
-                <span>{elapsed}</span>
+                {elapsed}
               </div>
             )}
           </div>

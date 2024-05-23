@@ -1,6 +1,9 @@
-import { SECTION_TYPES } from '../../constants/Constants';
+import { SECTION_TYPES, TABLE_CELL_TYPE } from '../../constants/Constants';
 import moment from 'moment-timezone';
 import { isObject } from 'lodash';
+import { getSlaProps } from '../../utils/time';
+import TimerCell from '../../components/Cells/TimerCell/TimerCell';
+import { TimeTicker } from '../../components/Cells/TimerCell/TimeTicker';
 
 function storeCsvInDocument(csvData) {
   document.csvData = csvData;
@@ -48,6 +51,41 @@ function getTableColumns(columns, tableData) {
   return allColumns;
 }
 
+function getTimerCellText(cellExtraData) {
+  if (TimerCell.isEmpty(cellExtraData)) {
+    return 'N/A';
+  }
+
+  const timerProps = getSlaProps(cellExtraData);
+  const { doesHaveDueDate, slaPart, elapsed, timeToRender, dueDateStr, slaMessage } =
+    TimeTicker.getTimePickerData(timerProps);
+
+  let text = '';
+
+  if (doesHaveDueDate) {
+    text += slaMessage;
+  }
+  text += timeToRender;
+  text += '\n';
+
+  if (doesHaveDueDate) {
+    text += slaPart;
+    text += '\n';
+
+    text += dueDateStr;
+    text += '\n';
+
+    if (elapsed) {
+      text += 'Total Elapsed: ';
+      text += elapsed;
+      text += '\n';
+    }
+  }
+
+  return text;
+}
+
+
 export function generateCSVReport(sections) {
   let csv = '';
   Object
@@ -77,6 +115,7 @@ export function generateCSVReport(sections) {
               const tableData = getTableData(section.data);
               const columns = getTableColumns(section.layout.tableColumns, tableData);
               const readableHeaders = section.layout.readableHeaders;
+              const extraData = section.extraData;
 
               columns.forEach((col, i) => {
                 csv += (readableHeaders && readableHeaders[col]) || col;
@@ -84,12 +123,17 @@ export function generateCSVReport(sections) {
               });
               csv += '\n';
 
-              tableData.forEach((row) => {
+              tableData.forEach((row, i) => {
                 columns.forEach((col, j) => {
                   const cell = (readableHeaders && row[readableHeaders[col]]) || row[col];
+                  const cellExtraData =
+                    (readableHeaders && extraData?.[i]?.[readableHeaders[col]]) || extraData?.[i]?.[col];
+
                   let cellData = '';
 
-                  if (cell) {
+                  if (cellExtraData?.type === TABLE_CELL_TYPE.timer) {
+                    cellData = getTimerCellText(cellExtraData);
+                  } else if (cell) {
                     if (typeof cell === 'number') {
                       cellData = cell + '';
                     } else if (Array.isArray(cell)) {
