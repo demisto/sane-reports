@@ -53,7 +53,7 @@
     "markdown-it-sup": "1.0.0",
     "moment": "2.21.0",
     "moment-duration-format": "2.3.2",
-    "moment-timezone": "0.5.14",
+    "moment-timezone": "0.5.35",
     "parse-link-header": "0.4.1",
     "postcss-reporter": "1.4.1",
     "prop-types": "15.7.2",
