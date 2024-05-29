@@ -70,13 +70,14 @@ const utf8BOM = '\ufeff';
   let headerLeftImage = process.argv[8] || '';
   const headerRightImage = process.argv[9] || '';
   const pageSize = process.argv[11] || PAGE_SIZES.Letter;
-  const disableHeaders = process.argv[12] === true || process.argv[12] === "true";
+  const disableHeaders = false
   const chromeExecution = process.argv[13] || paths['chromium'] || paths['google-chrome-stable'] || paths['google-chrome'] || '/usr/bin/chromium-browser';
   const forceAutoHeightLayout = process.argv[14] === true || process.argv[14] === "true";
   const markdownArtifactsServerAddress = process.argv[15] || '';
   const maxTableTextLength = process.argv[16] || 300;
   const useServerFormattedDate =  process.argv[17] === true || process.argv[17] === "true";
   const addUTF8Bom =  process.argv[18] === true || process.argv[18] === "true";
+  const waitforselector = process.argv[19] ? Number(process.argv[6]) : 10000;
   let browser;
 
   if (process.env.NODE_ENV === 'test') {
@@ -92,6 +93,7 @@ const utf8BOM = '\ufeff';
 
   if (headerLeftImage && headerLeftImage.indexOf('data:image') === -1) {
     try {
+      console.log("reading logo file")
       const headerLeftImageContent = fs.readFileSync(headerLeftImage);
       headerLeftImage = headerLeftImageContent;
     } catch (ex) {
@@ -182,7 +184,7 @@ const utf8BOM = '\ufeff';
     await page.emulateMediaType('screen');
     await page._client.send('Emulation.clearDeviceMetricsOverride');
     await page.waitForSelector('#ready-doc', {
-      timeout: 10000
+      timeout: waitforselector
     }); // wait for animations
     switch (reportType) {
       case 'pdf': {
