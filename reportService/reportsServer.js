@@ -92,13 +92,12 @@ const utf8BOM = '\ufeff';
 
   if (headerLeftImage && headerLeftImage.indexOf('data:image') === -1) {
     try {
-      const headerLeftImageContent = fs.readFileSync(headerLeftImage);
-      headerLeftImage = headerLeftImageContent;
+      headerLeftImage = fs.readFileSync(headerLeftImage, "utf8");
     } catch (ex) {
       console.log('found error when reading image: ', ex);
     }
   }
-  console.log('customer logo: ', headerLeftImage);
+  console.log('customer logo:', headerLeftImage);
   try {
     const distFolder = distDir || (path.resolve(".") + '/dist');
 
